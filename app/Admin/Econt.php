@@ -1,0 +1,357 @@
+<?php
+namespace Woo_BG\Admin;
+use Woo_BG\Container\Client;
+use Woo_BG\Shipping\Econt\Address;
+
+defined( 'ABSPATH' ) || exit;
+
+class Econt {
+	private static $container = null;
+
+	public function __construct() {
+		add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
+
+		add_action( 'wp_ajax_woo_bg_econt_generate_label', array( __CLASS__, 'generate_label' ) );
+		add_action( 'wp_ajax_nopriv_woo_bg_econt_generate_label', array( __CLASS__, 'generate_label' ) );
+
+		add_action( 'wp_ajax_woo_bg_econt_delete_label', array( __CLASS__, 'delete_label' ) );
+		add_action( 'wp_ajax_nopriv_woo_bg_econt_delete_label', array( __CLASS__, 'delete_label' ) );
+	}
+
+	public static function admin_enqueue_scripts() {
+		wp_enqueue_script(
+			'woo-bg-js-econt',
+			woo_bg()->plugin_dir_url() . woo_bg_assets_bundle( 'econt-admin.js' ),
+			array( 'jquery' ), // deps
+			null, // version -- this is handled by the bundle manifest
+			true // in footer
+		);
+
+		wp_enqueue_style(
+			'woo-bg-css-econt',
+			woo_bg()->plugin_dir_url() . woo_bg_assets_bundle( 'econt-admin.css' )
+		);
+	}
+
+	public static function add_meta_boxes() {
+		add_meta_box( 'woo_bg_econt', __( 'Econt Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), array( 'shop_order', 'shop_subscription' ), 'normal', 'default' );
+	}
+
+	public static function meta_box() {
+		global $post, $theorder;
+
+		self::$container = woo_bg()->container();
+
+		if ( ! is_object( $theorder ) ) {
+			$theorder = wc_get_order( $post->ID );
+		} else {
+			$order = $theorder;
+		}
+
+		if ( !empty( $theorder->get_items( 'shipping' ) ) ) {
+			foreach ( $theorder->get_items( 'shipping' ) as $shipping ) {
+				if ( $shipping['method_id'] === 'woo_bg_econt' ) {
+					echo '<div id="woo-bg--econt-admin"></div>';
+
+					$label_data = array();
+					$cookie_data = get_post_meta( $theorder->get_id(), 'woo_bg_econt_cookie_data', 1 );;
+					$shipment_status = get_post_meta( $theorder->get_id(), 'woo_bg_econt_shipment_status', 1 );
+
+					if ( $label = get_post_meta( $theorder->get_id(), 'woo_bg_econt_label', 1 ) ) {
+						$label_data = $label;
+					}
+
+					if ( !$cookie_data ) {
+						foreach ( $shipping->get_meta_data() as $meta_data ) {
+							$data = $meta_data->get_data();
+
+							if ( $data['key'] == 'cookie_data' ) {
+								$cookie_data = $data['value'];
+							}
+						}	
+					}
+					
+					wp_localize_script( 'woo-bg-js-admin', 'wooBg_econt', array(
+						'label' => $label_data['label'],
+						'shipmentStatus' => $shipment_status,
+						'cookie_data' => $cookie_data,
+						'shipmentTypes' => self::get_shipment_types(),
+						'offices' => self::get_offices( $cookie_data ),
+						'streets' => self::get_streets( $cookie_data ),
+						'orderId' => $theorder->get_id(),
+						'i18n' => self::get_i18n(),
+					) );
+					break;
+				}
+			}
+		}
+	}
+
+	protected static function get_i18n() {
+		return array(
+			'updateLabel' => __( 'Update label', 'woo-bg' ),
+			'generateLabel' => __( 'Generate label', 'woo-bg' ),
+			'deleteLabel' => __( 'Delete label', 'woo-bg' ),
+			'label' => __( 'Label', 'woo-bg' ), 
+			'default' => __( 'Default', 'woo-bg' ),
+			'selected' => __( 'Selected', 'woo-bg' ),
+			'choose' => __( 'Choose', 'woo-bg' ),
+			'deliveryPayedBy' => __( 'Delivery is payed by', 'woo-bg' ),
+			'cd' => __( 'Cash on delivery', 'woo-bg' ), 
+			'packCount' => __( 'Pack count', 'woo-bg' ),
+			'shipmentType' => __( 'Shipment type', 'woo-bg' ),
+			'other' => __( 'Other', 'woo-bg' ),
+			'blVhEt' => __( 'bl. vh. et.', 'woo-bg' ),
+			'streetNumber' => __( 'Street number', 'woo-bg' ),
+			'streetQuarter' => __( 'Street/Quarter', 'woo-bg' ),
+			'office' => __( 'Office', 'woo-bg' ),
+			'address' => __( 'Address', 'woo-bg' ),
+			'deliveryType' => __( 'Delivery type', 'woo-bg' ),
+			'labelData' => __( 'Label data', 'woo-bg' ),
+			'buyer' => __( 'Buyer', 'woo-bg' ),
+			'sender' => __( 'Sender', 'woo-bg' ),
+			'weight' => __( 'Weight', 'woo-bg' ),
+			'fixedPrice' => __( 'Fixed price', 'woo-bg' ),
+		);
+	}
+
+	protected static function get_shipment_types() {
+		return woo_bg_return_array_for_select( array(
+			'PACK' => __('Pack', 'woo-bg'),
+			'DOCUMENT' => __('Document', 'woo-bg'),
+			'PALLET' => __('Pallet', 'woo-bg'),
+			'CARGO' => __('Cargo', 'woo-bg'),
+			'DOCUMENTPALLET' => __('Document-Pallet', 'woo-bg'),
+		) );
+	}
+
+	protected static function get_offices( $cookie_data ) {
+		$city = $cookie_data['city'];
+		$states = woo_bg_return_bg_states();
+		$state = $states[ $cookie_data['state'] ];
+
+		$cities = self::$container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
+		$city_key = array_search( $city, array_column( $cities, 'name' ) );
+
+		return self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities[ $city_key ]['id'] )['offices'];
+	}
+
+	protected static function get_streets( $cookie_data ) {
+		$city = $cookie_data['city'];
+		$states = woo_bg_return_bg_states();
+		$state = $states[ $cookie_data['state'] ];
+
+		$cities = self::$container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
+		$city_key = array_search( $city, array_column( $cities, 'name' ) );
+
+		$streets = woo_bg_return_array_for_select( Address::get_streets_for_query( '', $city_key, $cities ), 1, array( 'type'=>'streets' ) );
+		$quarters = woo_bg_return_array_for_select( Address::get_quarters_for_query( '', $city_key, $cities ), 1, array( 'type'=>'quarters' ) );
+
+		return array_merge( $streets, $quarters );
+	}
+
+	public static function delete_label() {
+		$container = woo_bg()->container();
+		$order_id = $_REQUEST['orderId'];
+		$shipment_status = $_REQUEST['shipmentStatus'];
+		
+		$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::UPDATE_LABELS_ENDPOINT, array(
+			'shipmentNumbers' => [ $shipment_status['label']['shipmentNumber'] ]
+		) );
+
+		update_post_meta( $order_id, 'woo_bg_econt_shipment_status', '' );
+		
+		wp_send_json_success( $response );
+		wp_die();
+	}
+
+	public static function generate_label() {
+		$data = [];
+		$order_id = $_REQUEST['orderId'];
+		$label = $_REQUEST['label_data'];
+
+		$label = self::update_receiver_address( $label );
+		$label = self::update_label_pay_options( $label );
+		$label = self::update_payment_by( $label );
+		$label = self::update_shipment_type( $label );
+
+		$generated_data = self::generate_response( $label );
+		$response = $generated_data['response'];
+		$request_body = $generated_data['request_body'];
+
+		if ( isset( $response['innerErrors'] ) ) {
+			$errors = woo_bg()->container()[ Client::ECONT ]::add_error_message( $response );
+
+			$data['message'] = implode('', $errors );
+		} else if ( isset( $response['label'] ) ) {
+			$request_body['label']['shipmentNumber'] = $response['label']['shipmentNumber'];
+			$data['shipmentStatus'] = $response;
+			$data['label'] = $request_body['label'];
+
+			update_post_meta( $order_id, 'woo_bg_econt_label', $request_body );
+			update_post_meta( $order_id, 'woo_bg_econt_shipment_status', $response );
+
+			self::update_order_shipping_price( $response );
+		}
+
+		wp_send_json_success( $data );
+		wp_die();
+	}
+
+	protected static function update_receiver_address( $label ) {
+		$container = woo_bg()->container();
+		$order_id = $_REQUEST['orderId'];
+		$type = $_REQUEST['type'];
+		$cookie_data = $_REQUEST['cookie_data'];
+		$cookie_data['type'] = $type['id'];
+
+		unset( $label[ 'receiverOfficeCode' ] );
+		unset( $label[ 'receiverAddress' ] );
+
+		if ( $type['id'] === 'office' ) {
+			$label[ 'receiverDeliveryType' ] = 'office';
+			$office = $_REQUEST['office'];
+			$label['receiverOfficeCode'] = $office['code'];
+			$cookie_data['selectedOffice'] = $office['code'];
+		} else {
+			$label[ 'receiverDeliveryType' ] = 'door';
+			$cookie_data['selectedAddress'] = $_REQUEST['street'];
+			$cookie_data['streetNumber'] = $_REQUEST['streetNumber'];
+			$cookie_data['other'] = $_REQUEST['other'];
+
+			$country = $cookie_data['country'];
+			$state = $container[ Client::ECONT_CITIES ]->get_state_name( sanitize_text_field( $cookie_data['state'] ), $country );
+			$cities = $container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
+			$city_key = array_search( $cookie_data['city'], array_column( $cities, 'name' ) );
+			$type = ( !empty( $cookie_data['selectedAddress']['type'] ) ) ? $cookie_data['selectedAddress']['type'] :'';
+
+			$receiver_address = array(
+				'city' => $cities[ $city_key ],
+			);
+
+			if ( $type === 'streets' ) {
+				$receiver_address['street'] = $cookie_data['selectedAddress']['label'];
+				$receiver_address['num'] = $cookie_data['streetNumber'];
+				if ( $cookie_data['other'] ) {
+					$receiver_address['other'] = $cookie_data['other'];
+				}
+			} else if ( $type === 'quarters' ) {
+				$receiver_address['quarter'] = $cookie_data['selectedAddress']['label'];
+				$receiver_address['other'] = $cookie_data['other'] . " " . $cookie_data[ 'otherField' ];
+			}
+
+			$label['receiverAddress'] = $receiver_address;
+		}
+
+		update_post_meta( $order_id, 'woo_bg_econt_cookie_data', $cookie_data );
+
+		return $label;
+	}
+
+	protected static function update_label_pay_options( $label ) {
+		$cookie_data = $_REQUEST['cookie_data'];
+
+		if ( $cookie_data['payment'] === 'cod' ) {
+			$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
+			
+			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
+				$cd_pay_options = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_profile_data()['profiles'][0]['cdPayOptions'];
+				foreach ( $cd_pay_options as $option ) {
+					if ( $option['num'] === $cd_pay_option ) {
+						$label['services']['cdPayOptions'] = $option;
+					}
+				}
+			} else {
+				unset( $label['services']['cdPayOptions'] );
+			}
+		}
+		
+		return $label;
+	}
+
+	protected static function update_payment_by( $label ) {
+		$payment_by = $_REQUEST['paymentBy'];
+		$fixed_price = $label['paymentReceiverAmount'];
+		$sender_method = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_sender_payment_method();
+
+		unset( 
+			$label['paymentReceiverMethod'],
+			$label['paymentSenderMethod'],
+			$label['paymentReceiverAmount'],
+		);
+
+		if ( $payment_by['id'] == 'buyer' ) {
+			$label['paymentReceiverMethod'] = 'cash';
+		} elseif ( $payment_by['id'] == 'sender' ) {
+			$label['paymentSenderMethod'] = $sender_method;
+		} elseif ( $payment_by['id'] == 'fixed' ) {
+			$label['paymentSenderMethod'] = $sender_method;
+			$label['paymentReceiverMethod'] = 'cash';
+			$label['paymentReceiverAmount'] = $fixed_price;
+		}
+		
+		return $label;
+	}
+
+	protected static function update_shipment_type( $label ) {
+		$shipment_type = $_REQUEST['shipmentType'];
+		$label['shipmentType'] = strtolower( $shipment_type['id'] );
+		
+		return $label;
+	}
+
+	protected static function generate_response( $label ) {
+		$order_id = $_REQUEST['orderId'];
+		$container = woo_bg()->container();
+		$shipment_status = get_post_meta( $order_id, 'woo_bg_econt_shipment_status', 1 );
+
+		$label['holidayDeliveryDay'] = 'workday';
+
+		if ( $shipment_status ) {
+			if ( !$label['shipmentNumber'] ) {
+				$label['shipmentNumber'] = $shipment_status['label']['shipmentNumber'];
+			}
+
+			$request_body = apply_filters( 'woo_bg/econt/update_label', array(
+				'label' => $label,
+			) );
+
+			$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::UPDATE_LABELS_ENDPOINT, $request_body );
+		} else {
+			unset( $label['shipmentNumber'] );
+			
+			$request_body = apply_filters( 'woo_bg/econt/create_label', array(
+				'label' => $label,
+				'mode' => 'create',
+			) );
+
+			$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::LABELS_ENDPOINT, $request_body );
+		}
+
+		return [
+			'response' => $response,
+			'request_body' => $request_body,
+		];
+	}
+
+	protected static function update_order_shipping_price( $response ) {
+		$payment_by = $_REQUEST['paymentBy'];
+		$order = new \WC_Order( $_REQUEST['orderId'] );
+		$price = 0;
+
+		if ( $payment_by['id'] == 'buyer' ) {
+			$price = $response['label']['receiverDueAmount'];
+		}
+
+		foreach( $order->get_items( 'shipping' ) as $item_id => $item ) {
+			$item->set_total( $price );
+			$item->calculate_taxes();
+			$item->save();
+		}
+
+		$order->calculate_shipping();
+		$order->calculate_totals();
+		$order->save();
+	}
+}

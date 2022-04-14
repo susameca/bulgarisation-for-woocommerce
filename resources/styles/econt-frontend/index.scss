@@ -1,0 +1,47 @@
+/* ------------------------------------------------------------ *\
+	Vendor
+\* ------------------------------------------------------------ */
+@import '~@styles/econt-frontend.config.scss';
+@import '~vue-multiselect/dist/vue-multiselect.min.css';
+@import '~magnific-popup/dist/magnific-popup.css';
+
+#shipping_method .woo-bg--econt-delivery {
+	min-width: 260px;
+
+	li.multiselect__element { display:block !important }
+
+	.multiselect__option.multiselect__option--highlight:after,
+	.multiselect__option--highlight:not( .multiselect__option--selected ) {
+		background: $color-econt-blue;
+	}
+
+	.multiselect__option.multiselect__option--highlight.multiselect__option--selected:after,
+	.multiselect__option--highlight.multiselect__option--selected {
+		background: $color-red;
+	}
+
+	.multiselect__content-wrapper ul.multiselect__content { 
+		margin: 0; 
+		padding: 0; 
+	}
+
+	.woo-bg-multiselect { 
+		margin-bottom: 15px; 
+	}
+
+	.woo-bg-multiselect input.multiselect__input { 
+		border: 0; 
+	}
+
+	.multiselect__select { 
+		height: 100%; 
+	}
+
+	.woo-bg-multiselect--additional-field { 
+		width: 100%; 
+	}
+
+	button.mfp-close { 
+		background-color: initial !important; 
+	}
+}

@@ -1,0 +1,23 @@
+{
+    "type": "project",
+    "require": {
+        "pimple/pimple": "^3.3.1",
+        "escapeboy/nra-audit-generator": "^1.0.3",
+        "ext-iconv": "*",
+        "ext-mbstring": "*",
+        "ext-soap": "*",
+        "setasign/fpdf": "~1.8.1",
+        "chillerlan/php-qrcode": "^4.3",
+        "ddeboer/vatin": "^2.2"
+    },
+    "extra": {
+        "installer-paths": {
+            "vendor/{$vendor}/{$name}/": ["type:wordpress-plugin"]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Woo_BG\\": "app/"
+        }
+    }
+}

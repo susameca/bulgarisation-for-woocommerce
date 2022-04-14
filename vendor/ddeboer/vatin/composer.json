@@ -1,0 +1,37 @@
+{
+    "name": "ddeboer/vatin",
+    "description": "Validate VAT identification numbers",
+    "keywords": [ "vat", "tax", "btw", "vies" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David de Boer",
+            "email": "david@ddeboer.nl",
+            "homepage": "https://github.com/ddeboer"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/ddeboer/vatin/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "require-dev": {
+        "ext-soap": "*",
+        "phpunit/phpunit": "^5.7 || ^6.5"
+    },
+    "suggest": {
+        "ext-soap": "Required if you want to check the VAT number via VIES"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ddeboer\\Vatin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ddeboer\\Vatin\\Test\\": "tests/"
+        }
+    }
+}

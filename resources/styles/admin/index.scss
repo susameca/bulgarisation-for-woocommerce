@@ -1,0 +1,35 @@
+/* ------------------------------------------------------------ *\
+    Settings
+\* ------------------------------------------------------------ */
+
+@import '~@styles/admin.config.scss';
+@import '~vue-multiselect/dist/vue-multiselect.min.css';
+@import '~vue2-datepicker/index.css';
+
+/* ------------------------------------------------------------ *\
+    Admin
+\* ------------------------------------------------------------ */
+@import './_module.*.scss';
+
+/* ------------------------------------------------------------ *\
+    Base
+\* ------------------------------------------------------------ */
+
+.form-message { margin-left: 15px; font-size: 17px; font-weight: 500; }
+
+i.woo-bg-icon { width: 31px; height: 30px; background-size: contain; display: inline-block; margin: 0 7px; background-repeat: no-repeat; }
+i.woo-bg-icon--alert { background-image: url(../../images/alert-icon.png); }
+i.woo-bg-icon--check { background-image: url(../../images/check-icon.png); }
+i.woo-bg-icon--question { background-image: url(../../images/question-icon.png); }
+
+.woo-bg--centered-paragraph { display: flex; align-items: center; justify-content: center; }
+
+#order_data .order_data_column.order_data_column--half { width: 49%; }
+#order_data .order_data_column .customer { border: 2px dashed black; border-radius: 15px; padding: 15px; margin-bottom: 10px; }
+#order_data .order_data_column .customer p { margin: 0 0 10px 0; }
+#order_data .order_data_column .customer p:last-child { margin: 0; }
+#order_data .order_data_column .customer a.customer-reports--image img { width: auto; height: 60px; }
+
+th#nekorekten { width: 0.0001ch; }
+
+.multiselect__tags { padding: 0; }

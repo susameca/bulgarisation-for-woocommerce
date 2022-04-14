@@ -1,0 +1,14 @@
+{
+  "admin.css": "styles/admin.min.css",
+  "admin.js": "admin-60ba4fb430d78240716d.min.js",
+  "econt-admin.css": "styles/econt-admin.min.css",
+  "econt-admin.js": "econt-admin-60ba4fb430d78240716d.min.js",
+  "econt-frontend.css": "styles/econt-frontend.min.css",
+  "econt-frontend.js": "econt-frontend-60ba4fb430d78240716d.min.js",
+  "frontend.css": "styles/frontend.min.css",
+  "frontend.js": "frontend-60ba4fb430d78240716d.min.js",
+  "images/alert-icon.png": "images/alert-icon.14258bf865.png",
+  "images/check-icon.png": "images/check-icon.ee4160475b.png",
+  "images/question-icon.png": "images/question-icon.e859d4d0a0.png",
+  "images/spinner2.svg": "images/spinner2.eec4eed90a.svg"
+}

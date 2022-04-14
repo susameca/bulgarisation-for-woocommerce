@@ -1,0 +1,3 @@
+.ajax-container[data-loading='true'] { position: relative; }
+.ajax-container[data-loading='true']:before { position: absolute; content:''; background-size: contain; background-image: url(../../images/spinner2.svg);width: 150px; height: 150px; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 99; }
+.ajax-container[data-loading='true']:after { position: absolute; content:''; width: 100%; height:100%; left: 0; top: 0; z-index: 90; background-color: rgba(255,255,255, 0.6 ); }

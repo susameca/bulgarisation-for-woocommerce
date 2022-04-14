@@ -1,0 +1,37 @@
+{
+  "bundles": [
+    "frontend",
+    "admin",
+    "econt-frontend",
+    "econt-admin"
+  ],
+  "variables": {
+    "color": {
+      "red": "#d63638",
+      "econt-blue": "#234182"
+    }
+  },
+  "development": {
+    "url": "http://localhost/",
+    "port": 3000
+  },
+  "release": {
+    "configWhitelist": [
+      "variables"
+    ],
+    "include": [
+      "app/",
+      "dist/",
+      "languages/",
+      "vendor/",
+      "views/",
+      "config.json",
+      "LICENSE",
+      "README.md",
+      "readme.txt",
+      "screenshot.png",
+      "style.css",
+      "*.php"
+    ]
+  }
+}

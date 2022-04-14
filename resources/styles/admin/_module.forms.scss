@@ -1,0 +1,11 @@
+.woocommerce table.form-table .mx-datepicker input[type=text] { width: 100%; }
+
+.woocommerce table.form-table .multiselect { width: 400px; }
+.woocommerce table.form-table .multiselect .multiselect__option--highlight { background: #007cba; }
+
+.woocommerce table.form-table .field-error { color: red; }
+
+.multiselect__tags { padding: 0; }
+.multiselect__tags input{ border: 0; }
+.multiselect__tags .multiselect__single{ padding: 8px 40px 0 8px; }
+.multiselect__placeholder { padding: 10px 40px 0 12px; }

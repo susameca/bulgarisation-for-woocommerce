@@ -1,0 +1,19 @@
+.panel-wrap.woocommerce--econt .multiselect__option--highlight:not(.multiselect__option--selected){
+  background:#234182; }
+
+.panel-wrap.woocommerce--econt .multiselect__option--highlight.multiselect__option--selected{
+  background:#d63638; }
+
+.panel-wrap.woocommerce--econt #woo-bg--econt-label-print{
+  min-height:600px;
+  width:100%;
+  margin-top:30px; }
+
+.panel-wrap.woocommerce--econt .woo-bg--radio input{
+  margin:3px 0px 0px 0px; }
+
+.panel-wrap.woocommerce--econt input.multiselect__input{
+  border:0 !important; }
+
+
+/*# sourceMappingURL=econt-admin.css.map*/
