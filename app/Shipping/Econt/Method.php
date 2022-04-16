@@ -85,6 +85,9 @@ class Method extends \WC_Shipping_Method {
 				$rate['cost'] = $request_data['price'];
 			}
 
+			if ( !$rate['cost'] ) {
+				$this->free_shipping = true;
+			}
 		}
 
 		if ( $this->free_shipping ) {
@@ -192,9 +195,8 @@ class Method extends \WC_Shipping_Method {
 
 		$request = $this->container[ Client::ECONT ]->api_call( $this->container[ Client::ECONT ]::LABELS_ENDPOINT, $request_body );
 
-		//var_dump( $request );
-		if ( isset( $request['innerErrors'] ) ) {
-			$data['errors'] = $request['innerErrors'];
+		if ( isset( $request['type'] ) && $request['type'] === 'ExInvalidParam' ) {
+			$data['errors'] = $request;
 		} else if ( isset( $request['label']['receiverDueAmount'] ) ) {
 			$data['price'] = $request['label']['receiverDueAmount'];
 		}
@@ -376,11 +378,8 @@ class Method extends \WC_Shipping_Method {
 
 				if ( $data->method_id === 'woo_bg_econt' && ! $data->meta_data['validated'] ) {
 					if ( !empty( array_filter( $data->meta_data['errors'] ) ) ) {
-						foreach ( $data->meta_data['errors'] as $error ) {
-							$message = array_merge( array( __( 'Econt - ', 'woo-bg' ) ) , woo_bg()->container()[ Client::ECONT ]::add_error_message( $error ) );
-
-							$errors->add( 'validation', implode( ' ', $message ) );
-						}
+						$message = array_merge( array( __( 'Econt - ', 'woo-bg' ) ) , woo_bg()->container()[ Client::ECONT ]::add_error_message( $data->meta_data['errors'] ) );
+						$errors->add( 'validation', implode( ' ', $message ) );
 					} else {
 						$errors->add( 'validation', __( 'Please choose delivery option!', 'woo-bg' ) );
 					}

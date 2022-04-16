@@ -180,7 +180,7 @@ class Econt {
 		$response = $generated_data['response'];
 		$request_body = $generated_data['request_body'];
 
-		if ( isset( $response['innerErrors'] ) ) {
+		if ( $response['type'] === 'ExInvalidParam' ) {
 			$errors = woo_bg()->container()[ Client::ECONT ]::add_error_message( $response );
 
 			$data['message'] = implode('', $errors );
