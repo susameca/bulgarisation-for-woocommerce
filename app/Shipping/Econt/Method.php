@@ -322,11 +322,6 @@ class Method extends \WC_Shipping_Method {
 			$cart['services']['cdType'] = 'get';
 			$cart['services']['cdAmount'] = $package['cart_subtotal'];
 			$cart['services']['cdCurrency'] = get_woocommerce_currency();
-
-			$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
-			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
-				$cart['services']['cd_agreement_num'] = $cd_pay_option;
-			}
 		}
 
 		if ( $this->sms === 'yes' ) {

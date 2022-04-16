@@ -252,18 +252,23 @@ class Econt {
 	protected static function update_label_pay_options( $label ) {
 		$cookie_data = $_REQUEST['cookie_data'];
 
+		unset( $label['services']['invoiceNum'] );
+		unset( $label['services']['cdPayOptionsTemplate'] );
+
 		if ( $cookie_data['payment'] === 'cod' ) {
 			$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
-			
+
 			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
+				$label['services']['cdPayOptionsTemplate'] = $cd_pay_option;
 				$cd_pay_options = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_profile_data()['profiles'][0]['cdPayOptions'];
+
 				foreach ( $cd_pay_options as $option ) {
-					if ( $option['num'] === $cd_pay_option ) {
-						$label['services']['cdPayOptions'] = $option;
+					if ( $option['num'] === $cd_pay_option && $option['method'] != 'office' ) {
+						$order = new \WC_Order( $_REQUEST['orderId'] );
+
+						$label['services']['invoiceNum'] = $order->get_meta( 'woo_bg_order_number' ) . '/' . date( 'd.m.y', strtotime( $order->get_date_created() ) );
 					}
 				}
-			} else {
-				unset( $label['services']['cdPayOptions'] );
 			}
 		}
 		
