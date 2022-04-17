@@ -156,7 +156,7 @@ class Econt {
 		$order_id = $_REQUEST['orderId'];
 		$shipment_status = $_REQUEST['shipmentStatus'];
 		
-		$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::UPDATE_LABELS_ENDPOINT, array(
+		$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::DELETE_LABELS_ENDPOINT, array(
 			'shipmentNumbers' => [ $shipment_status['label']['shipmentNumber'] ]
 		) );
 
