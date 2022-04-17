@@ -64,12 +64,12 @@ class Method extends \WC_Shipping_Method {
 
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
 		$rate['meta_data']['validated'] = false;
-
 		if ( 
 			isset( $cookie_data['type'] ) && 
 			$cookie_data['type'] === $this->delivery_type && 
 			( 
-				( isset( $cookie_data['streetNumber']) && $cookie_data['streetNumber'] ) || 
+				( isset( $cookie_data['other'] ) && $cookie_data['other'] && $cookie_data['selectedAddress'] ) || 
+				( isset( $cookie_data['streetNumber']) && $cookie_data['streetNumber'] && $cookie_data['selectedAddress'] ) || 
 				( isset( $cookie_data['selectedOffice'] ) && $cookie_data['selectedOffice'] ) 
 			) 
 		) {
