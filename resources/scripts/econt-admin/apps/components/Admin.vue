@@ -90,7 +90,7 @@
 							<p class="form-field form-field-wide">
 								<input 
 									class="woo-bg-multiselect--additional-field"
-									:placeholder="i18n.other" 
+									:placeholder="i18n.blVhEt" 
 									type="text" 
 									v-model="other" 
 									v-if="( street.type && street.type === 'streets' )"

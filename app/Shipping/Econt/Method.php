@@ -7,6 +7,8 @@ defined( 'ABSPATH' ) || exit;
 class Method extends \WC_Shipping_Method {
 	const METHOD_ID = "woo_bg_econt";
 	private $container = '';
+	private $cookie_data = '';
+	private $package = '';
 	private $free_shipping = false;
 
 	public function __construct( $instance_id = 0 ) {
@@ -55,7 +57,8 @@ class Method extends \WC_Shipping_Method {
 	 * @return void
 	 */
 	public function calculate_shipping( $package = Array() ) {
-		$cookie_data = $this->get_cookie_data();
+		$this->cookie_data = $this->get_cookie_data();
+		$this->package = $package;
 
 		$rate = array(
 			'label' => $this->title,
@@ -65,18 +68,18 @@ class Method extends \WC_Shipping_Method {
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
 		$rate['meta_data']['validated'] = false;
 		if ( 
-			isset( $cookie_data['type'] ) && 
-			$cookie_data['type'] === $this->delivery_type && 
+			isset( $this->cookie_data['type'] ) && 
+			$this->cookie_data['type'] === $this->delivery_type && 
 			( 
-				( isset( $cookie_data['other'] ) && $cookie_data['other'] && $cookie_data['selectedAddress'] ) || 
-				( isset( $cookie_data['streetNumber']) && $cookie_data['streetNumber'] && $cookie_data['selectedAddress'] ) || 
-				( isset( $cookie_data['selectedOffice'] ) && $cookie_data['selectedOffice'] ) 
+				( isset( $this->cookie_data['other'] ) && $this->cookie_data['other'] && $this->cookie_data['selectedAddress'] ) || 
+				( isset( $this->cookie_data['streetNumber']) && $this->cookie_data['streetNumber'] && $this->cookie_data['selectedAddress'] ) || 
+				( isset( $this->cookie_data['selectedOffice'] ) && $this->cookie_data['selectedOffice'] ) 
 			) 
 		) {
-			$request_data = $this->calculate_shipping_price_from_api( $package );
+			$request_data = $this->calculate_shipping_price_from_api();
 
 			$rate['meta_data']['validated'] = true;
-			$rate['meta_data']['cookie_data'] = $cookie_data;
+			$rate['meta_data']['cookie_data'] = $this->cookie_data;
 
 			if ( isset( $request_data['errors'] ) ) {
 				$rate['meta_data']['validated'] = false;
@@ -181,13 +184,13 @@ class Method extends \WC_Shipping_Method {
 		return ( isset( $_COOKIE[ 'woo-bg--econt-address' ] ) ) ? json_decode( stripslashes( $_COOKIE[ 'woo-bg--econt-address' ] ), 1 ) : '';
 	}
 
-	public function calculate_shipping_price_from_api( $package ) {
+	public function calculate_shipping_price_from_api() {
 		$data = array(
 			'price' => '0',
 		);
 		
 		$request_body = apply_filters( 'woo_bg/econt/calculate_label', array(
-			'label' => $this->generate_label( $package ),
+			'label' => $this->generate_label(),
 			'mode' => 'calculate',
 		) );
 
@@ -204,7 +207,7 @@ class Method extends \WC_Shipping_Method {
 		return $data;
 	}
 
-	private function generate_label( $package ) {
+	private function generate_label() {
 		$label = array(
 			'senderClient' => $this->generate_sender_data(),
 			'senderAgent' => $this->generate_sender_auth(),
@@ -217,21 +220,19 @@ class Method extends \WC_Shipping_Method {
 			$label['senderOfficeCode'] = $this->generate_sender_office_code();
 		}
 
-		$cookie_data = $this->get_cookie_data();
+		if ( $this->cookie_data ) {
+			$label['receiverClient'] = $this->generate_receiver_data();
 
-		if ( isset( $_COOKIE[ 'woo-bg--econt-address' ] ) ) {
-			$label['receiverClient'] = $this->generate_receiver_data( $cookie_data );
-
-			if ( $cookie_data['type'] === 'address' ) {
-				$label['receiverAddress'] = $this->generate_receiver_address( $cookie_data );
-			} else if ( $cookie_data['type'] === 'office' ) {
-				$label['receiverOfficeCode'] = $this->generate_receiver_office_code( $cookie_data );
+			if ( $this->cookie_data['type'] === 'address' ) {
+				$label['receiverAddress'] = $this->generate_receiver_address();
+			} else if ( $this->cookie_data['type'] === 'office' ) {
+				$label['receiverOfficeCode'] = $this->generate_receiver_office_code();
 			}
 		}
 
-		$cart_data = $this->generate_cart_data( $cookie_data, $package );
-		$other_data = $this->generate_other_data( $cookie_data, $package );
-		$payment_by_data = $this->generate_payment_by_data( $cookie_data, $package );
+		$cart_data = $this->generate_cart_data();
+		$other_data = $this->generate_other_data();
+		$payment_by_data = $this->generate_payment_by_data();
 
 		return array_merge( $label, $cart_data, $other_data, $payment_by_data );
 	}
@@ -265,43 +266,53 @@ class Method extends \WC_Shipping_Method {
 		return str_replace( 'officeID-', '', $office );
 	}
 
-	private function generate_receiver_data( $cookie_data ) {
+	private function generate_receiver_data() {
 		return array(
-			'name' => $cookie_data[ 'receiver' ],
-			'phones' => array( $cookie_data[ 'phone' ] ),
+			'name' => $this->cookie_data[ 'receiver' ],
+			'phones' => array( $this->cookie_data[ 'phone' ] ),
 		);
 	}
 
-	private function generate_receiver_address( $cookie_data ) {
-		$country = $cookie_data['country'];
-		$state = $this->container[ Client::ECONT_CITIES ]->get_state_name( sanitize_text_field( $cookie_data['state'] ), $country );
+	private function generate_receiver_address() {
+		$country = $this->cookie_data['country'];
+		$state = $this->container[ Client::ECONT_CITIES ]->get_state_name( sanitize_text_field( $this->cookie_data['state'] ), $country );
 		$cities = $this->container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
-		$city_key = array_search( $cookie_data['city'], array_column( $cities, 'name' ) );
-		$type = ( !empty( $cookie_data['selectedAddress']['type'] ) ) ? $cookie_data['selectedAddress']['type'] :'';
+		$city_key = array_search( $this->cookie_data['city'], array_column( $cities, 'name' ) );
+		$type = ( !empty( $this->cookie_data['selectedAddress']['type'] ) ) ? $this->cookie_data['selectedAddress']['type'] :'';
 
 		$receiver_address = array(
 			'city' => $cities[ $city_key ],
 		);
 
 		if ( $type === 'streets' ) {
-			$receiver_address['street'] = $cookie_data['selectedAddress']['label'];
-			$receiver_address['num'] = $cookie_data['streetNumber'];
-			if ( $cookie_data['otherField'] ) {
-				$receiver_address['other'] = $cookie_data['otherField'];
+			$num_parts = explode( ' ', $this->cookie_data['streetNumber'] );
+			$receiver_address['street'] = $this->cookie_data['selectedAddress']['label'];
+			$receiver_address['num'] = array_shift( $num_parts );
+			$this->cookie_data['other'] = '';
+			$this->cookie_data['streetNumber'] = $receiver_address['num'];
+
+			if ( !empty( $num_parts ) ) {
+				$receiver_address['other'] = implode( ' ', $num_parts );
 			}
+
+			if ( $this->cookie_data['otherField'] ) {
+				$receiver_address['other'] .= $this->cookie_data['otherField'];
+			}
+
+			$this->cookie_data['other'] = $receiver_address['other'];
 		} else if ( $type === 'quarters' ) {
-			$receiver_address['quarter'] = $cookie_data['selectedAddress']['label'];
-			$receiver_address['other'] = $cookie_data['other'] . " " . $cookie_data[ 'otherField' ];
+			$receiver_address['quarter'] = $this->cookie_data['selectedAddress']['label'];
+			$receiver_address['other'] = $this->cookie_data['other'];
 		}
 		
 		return $receiver_address;
 	}
 
-	private function generate_receiver_office_code( $cookie_data ) {
-		return ( isset( $cookie_data['selectedOffice'] ) ) ? $cookie_data['selectedOffice'] : '';
+	private function generate_receiver_office_code() {
+		return ( isset( $this->cookie_data['selectedOffice'] ) ) ? $this->cookie_data['selectedOffice'] : '';
 	}
 
-	private function generate_cart_data( $cookie_data, $package ) {
+	private function generate_cart_data() {
 		global $woocommerce;
 		$names = array();
 		$cart = array(
@@ -310,7 +321,7 @@ class Method extends \WC_Shipping_Method {
 			'weight' => 0,
 		);
 
-		foreach ( $package[ 'contents' ] as $key => $item ) {
+		foreach ( $this->package[ 'contents' ] as $key => $item ) {
 			if ( $item['data']->get_weight() ) {
 				$cart['weight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
 
@@ -320,9 +331,9 @@ class Method extends \WC_Shipping_Method {
 
 		$cart['shipmentDescription'] = implode( ', ', $names );
 
-		if ( $cookie_data['payment'] === 'cod' ) {
+		if ( $this->cookie_data['payment'] === 'cod' ) {
 			$cart['services']['cdType'] = 'get';
-			$cart['services']['cdAmount'] = $package['cart_subtotal'];
+			$cart['services']['cdAmount'] = $this->package['cart_subtotal'];
 			$cart['services']['cdCurrency'] = get_woocommerce_currency();
 		}
 
@@ -333,7 +344,7 @@ class Method extends \WC_Shipping_Method {
 		return $cart;
 	}
 
-	private function generate_other_data( $cookie_data, $package ) {
+	private function generate_other_data() {
 		$other_data = [];
 
 		if ( $this->test == 'review' ) {
@@ -346,7 +357,7 @@ class Method extends \WC_Shipping_Method {
 		return $other_data;
 	}
 	
-	private function generate_payment_by_data( $cookie_data, $package ) {
+	private function generate_payment_by_data() {
 		$payment_by_data = array(
 			'paymentReceiverMethod' => 'cash',
 		);
@@ -357,7 +368,7 @@ class Method extends \WC_Shipping_Method {
 			$payment_by_data['paymentReceiverAmount'] = $this->fixed_price;
 		}
 
-		if ( !empty( $this->free_shipping_over ) && $package['cart_subtotal'] > $this->free_shipping_over ) {
+		if ( !empty( $this->free_shipping_over ) && $this->package['cart_subtotal'] > $this->free_shipping_over ) {
 			$this->free_shipping = true;
 
 			unset( $payment_by_data[ 'paymentReceiverMethod' ] );
