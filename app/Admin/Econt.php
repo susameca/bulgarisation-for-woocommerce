@@ -113,6 +113,8 @@ class Econt {
 			'sender' => __( 'Sender', 'woo-bg' ),
 			'weight' => __( 'Weight', 'woo-bg' ),
 			'fixedPrice' => __( 'Fixed price', 'woo-bg' ),
+			'copyLabelData' => __( 'Copy Label Data', 'woo-bg' ),
+			'copyLabelDataMessage' => __( 'You just copied the label data used for the Econt API.', 'woo-bg' ),
 		);
 	}
 

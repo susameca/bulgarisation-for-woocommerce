@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-13 21:07+0000\n"
+"POT-Creation-Date: 2022-04-17 21:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "%s is not found in %s region."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:91
+#: app/Shipping/Econt/Method.php:97
 #, php-format
 msgid "%s: Free shipping"
 msgstr ""
@@ -42,8 +42,8 @@ msgstr ""
 msgid "Additional API's"
 msgstr ""
 
-#: app/Admin/Econt.php:109 app/Admin/Tabs/Econt_Tab.php:95
-#: app/Front_End/Checkout/Company.php:69 app/Shipping/Econt/Method.php:118
+#: app/Admin/Econt.php:109 app/Admin/Tabs/Econt_Tab.php:94
+#: app/Front_End/Checkout/Company.php:69 app/Shipping/Econt/Method.php:124
 msgid "Address"
 msgstr ""
 
@@ -109,7 +109,7 @@ msgstr ""
 msgid "Card"
 msgstr ""
 
-#: app/Admin/Econt.php:124
+#: app/Admin/Econt.php:126
 msgid "Cargo"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgstr ""
 msgid "Cash on delivery"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:86
+#: app/Admin/Tabs/Econt_Tab.php:85
 msgid "Cash on delivery agreement"
 msgstr ""
 
@@ -138,15 +138,15 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:125
+#: app/Admin/Tabs/Econt_Tab.php:124
 msgid "Choose a city and save in order to show offices."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:86
+#: app/Admin/Tabs/Econt_Tab.php:85
 msgid "Choose cash on delivery agreement"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:118
+#: app/Admin/Tabs/Econt_Tab.php:117
 msgid "City"
 msgstr ""
 
@@ -186,11 +186,15 @@ msgstr ""
 msgid "Contact phone number of your company."
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:443
+#: app/Admin/Econt.php:116
+msgid "Copy Label Data"
+msgstr ""
+
+#: app/Admin/Invoice/Menu.php:613
 msgid "Credit Notice - Copy"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:432
+#: app/Admin/Invoice/Menu.php:602
 msgid "Credit Notice - Original"
 msgstr ""
 
@@ -219,7 +223,7 @@ msgstr ""
 msgid "Delivery is payed by"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:112
+#: app/Shipping/Econt/Method.php:118
 msgid "Delivery Type"
 msgstr ""
 
@@ -239,11 +243,11 @@ msgstr ""
 msgid "Do you want a company invoice?"
 msgstr ""
 
-#: app/Admin/Econt.php:122
+#: app/Admin/Econt.php:124
 msgid "Document"
 msgstr ""
 
-#: app/Admin/Econt.php:125
+#: app/Admin/Econt.php:127
 msgid "Document-Pallet"
 msgstr ""
 
@@ -255,21 +259,18 @@ msgstr ""
 msgid "Due date"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:85
-msgid "E-mail"
-msgstr ""
-
 #: app/Admin/Tabs/Help_Tab.php:43
 msgid "E-mail:"
 msgstr ""
 
 #: app/Admin/Invoice/Menu.php:231 app/Admin/Invoice/Menu.php:244
-#: app/Admin/Invoice/Menu.php:253
+#: app/Admin/Invoice/Menu.php:253 app/Admin/Invoice/Menu.php:362
+#: app/Admin/Invoice/Menu.php:375 app/Admin/Invoice/Menu.php:384
 #, php-format
 msgid "E-mail: %s"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:390
+#: app/Shipping/Econt/Method.php:392
 msgid "Econt - "
 msgstr ""
 
@@ -291,6 +292,7 @@ msgid "EIK"
 msgstr ""
 
 #: app/Admin/Invoice/Menu.php:224 app/Admin/Invoice/Menu.php:237
+#: app/Admin/Invoice/Menu.php:355 app/Admin/Invoice/Menu.php:368
 #, php-format
 msgid "EIK: %s"
 msgstr ""
@@ -311,7 +313,7 @@ msgstr ""
 msgid "Enable VIES validation"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:17
+#: app/Shipping/Econt/Method.php:19
 msgid "Enables econt delivery and automatically calculate shipping price."
 msgstr ""
 
@@ -319,7 +321,7 @@ msgstr ""
 msgid "Enables Econt Shipping methods."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:155
+#: app/Shipping/Econt/Method.php:161
 msgid ""
 "Enter a fixed price that the users will pay. The remaining will be payed by "
 "you."
@@ -369,7 +371,8 @@ msgstr ""
 #. Description of the plugin
 msgid ""
 "Everything necessary for your online store to work in Bulgaria and according "
-"to Bulgarian regulations. Includes a light regime for Ordinance - H-18."
+"to Bulgarian regulations. Includes a light regime for Ordinance - H-18 and "
+"Econt shipping method."
 msgstr ""
 
 #: app/Admin/Tabs/Export_Tab.php:8
@@ -391,7 +394,7 @@ msgstr ""
 msgid "First Name:"
 msgstr ""
 
-#: app/Admin/Econt.php:115 app/Shipping/Econt/Method.php:152
+#: app/Admin/Econt.php:115 app/Shipping/Econt/Method.php:158
 msgid "Fixed price"
 msgstr ""
 
@@ -419,15 +422,15 @@ msgstr ""
 msgid "Found: %s"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:144
+#: app/Shipping/Econt/Method.php:150
 msgid "Free shipping over"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:147
+#: app/Shipping/Econt/Method.php:153
 msgid "Free shipping over total cart price."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:165 app/Admin/Tabs/Nekorekten_Com_Tab.php:57
+#: app/Admin/Tabs/Econt_Tab.php:164 app/Admin/Tabs/Nekorekten_Com_Tab.php:57
 msgid "General"
 msgstr ""
 
@@ -576,6 +579,7 @@ msgid "MOL"
 msgstr ""
 
 #: app/Admin/Invoice/Menu.php:226 app/Admin/Invoice/Menu.php:239
+#: app/Admin/Invoice/Menu.php:357 app/Admin/Invoice/Menu.php:370
 #, php-format
 msgid "MOL: %s"
 msgstr ""
@@ -600,12 +604,12 @@ msgstr ""
 msgid "Next Invoice Number"
 msgstr ""
 
-#: app/functions.php:62 app/Shipping/Econt/Method.php:127
-#: app/Shipping/Econt/Method.php:138
+#: app/functions.php:62 app/Shipping/Econt/Method.php:133
+#: app/Shipping/Econt/Method.php:144
 msgid "No"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:138
+#: app/Admin/Tabs/Econt_Tab.php:137
 msgid "No agreement"
 msgstr ""
 
@@ -640,8 +644,8 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: app/Admin/Econt.php:108 app/Admin/Tabs/Econt_Tab.php:91
-#: app/Admin/Tabs/Econt_Tab.php:122 app/Shipping/Econt/Method.php:117
+#: app/Admin/Econt.php:108 app/Admin/Tabs/Econt_Tab.php:90
+#: app/Admin/Tabs/Econt_Tab.php:121 app/Shipping/Econt/Method.php:123
 msgid "Office"
 msgstr ""
 
@@ -653,7 +657,7 @@ msgstr ""
 msgid "On a payment account"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:308
+#: app/Admin/Invoice/Menu.php:461
 msgid "Order - Original"
 msgstr ""
 
@@ -673,7 +677,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: app/Admin/Econt.php:121
+#: app/Admin/Econt.php:123
 msgid "Pack"
 msgstr ""
 
@@ -685,7 +689,7 @@ msgstr ""
 msgid "Page"
 msgstr ""
 
-#: app/Admin/Econt.php:123
+#: app/Admin/Econt.php:125
 msgid "Pallet"
 msgstr ""
 
@@ -719,7 +723,8 @@ msgid "Phone:"
 msgstr ""
 
 #: app/Admin/Invoice/Menu.php:230 app/Admin/Invoice/Menu.php:243
-#: app/Admin/Invoice/Menu.php:252
+#: app/Admin/Invoice/Menu.php:252 app/Admin/Invoice/Menu.php:361
+#: app/Admin/Invoice/Menu.php:374 app/Admin/Invoice/Menu.php:383
 #, php-format
 msgid "Phone: %s"
 msgstr ""
@@ -775,7 +780,7 @@ msgstr ""
 msgid "Refunded Invoice PDF"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:402
+#: app/Admin/Invoice/Menu.php:563
 msgid "Refunded Order - Original"
 msgstr ""
 
@@ -783,7 +788,7 @@ msgstr ""
 msgid "Refunded Order PDF"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:495
+#: app/Admin/Invoice/Menu.php:669
 msgid "Regenerate PDF's"
 msgstr ""
 
@@ -799,19 +804,19 @@ msgstr ""
 msgid "Return method"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:122 app/Shipping/Econt/Method.php:129
+#: app/Shipping/Econt/Method.php:128 app/Shipping/Econt/Method.php:135
 msgid "Review and test"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:128
+#: app/Shipping/Econt/Method.php:134
 msgid "Review only"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:344
+#: app/Admin/Invoice/Menu.php:497
 msgid "Sale Invoice - Copy"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:335
+#: app/Admin/Invoice/Menu.php:488
 msgid "Sale Invoice - Original"
 msgstr ""
 
@@ -831,11 +836,11 @@ msgstr ""
 msgid "Select a month for the report"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:115
+#: app/Admin/Tabs/Econt_Tab.php:114
 msgid "Select Address"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:97
+#: app/Admin/Tabs/Econt_Tab.php:96
 msgid ""
 "Select from where you will send the packages and save to show more options."
 msgstr ""
@@ -853,11 +858,11 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:141
+#: app/Shipping/Econt/Method.php:147
 msgid "Send customer notification for delivery."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:175
+#: app/Admin/Tabs/Econt_Tab.php:96 app/Admin/Tabs/Econt_Tab.php:174
 msgid "Send From"
 msgstr ""
 
@@ -890,7 +895,8 @@ msgstr ""
 msgid "Shipment type"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:278 app/Admin/Tabs/Export_Tab.php:183
+#: app/Admin/Invoice/Menu.php:289 app/Admin/Invoice/Menu.php:427
+#: app/Admin/Tabs/Export_Tab.php:199
 #, php-format
 msgid "Shipping: %s"
 msgstr ""
@@ -899,7 +905,7 @@ msgstr ""
 msgid "Should we include the delivery in the invoice?"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:133
+#: app/Shipping/Econt/Method.php:139
 msgid "SMS notification"
 msgstr ""
 
@@ -976,7 +982,7 @@ msgstr ""
 msgid "There was some error in one of the reports."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:107
+#: app/Shipping/Econt/Method.php:113
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
@@ -1002,7 +1008,7 @@ msgstr ""
 msgid "This order is out of scope for EU VAT."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:105
+#: app/Shipping/Econt/Method.php:111
 msgid "Title"
 msgstr ""
 
@@ -1010,11 +1016,12 @@ msgstr ""
 msgid "To invoice №"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:293 app/Admin/Invoice/Printer.php:567
+#: app/Admin/Invoice/Menu.php:304 app/Admin/Invoice/Menu.php:446
+#: app/Admin/Invoice/Printer.php:567
 msgid "Total"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:299
+#: app/Admin/Invoice/Menu.php:311 app/Admin/Invoice/Menu.php:452
 msgid "Total due"
 msgstr ""
 
@@ -1043,7 +1050,7 @@ msgstr ""
 msgid "Vat"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:296
+#: app/Admin/Invoice/Menu.php:307 app/Admin/Invoice/Menu.php:449
 #, php-format
 msgid "VAT %s"
 msgstr ""
@@ -1066,6 +1073,7 @@ msgid "VAT number required on checkout?"
 msgstr ""
 
 #: app/Admin/Invoice/Menu.php:225 app/Admin/Invoice/Menu.php:238
+#: app/Admin/Invoice/Menu.php:356 app/Admin/Invoice/Menu.php:369
 #: app/Front_End/Checkout/EU_Vat.php:284
 #, php-format
 msgid "VAT Number: %s"
@@ -1100,7 +1108,7 @@ msgstr ""
 msgid "Weight"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:16
+#: app/Shipping/Econt/Method.php:18
 msgid "Woo BG - Econt"
 msgstr ""
 
@@ -1111,7 +1119,7 @@ msgid ""
 "plugin is currently NOT RUNNING."
 msgstr ""
 
-#: app/functions.php:66 app/Shipping/Econt/Method.php:139
+#: app/functions.php:66 app/Shipping/Econt/Method.php:145
 msgid "Yes"
 msgstr ""
 
@@ -1139,6 +1147,10 @@ msgstr ""
 msgid ""
 "You have entered an invalid VAT number (%1$s) for your billing country (%2$s)"
 "."
+msgstr ""
+
+#: app/Admin/Econt.php:117
+msgid "You just copied the label data used for the Econt API."
 msgstr ""
 
 #: app/Admin/Tabs/Settings_Tab.php:42

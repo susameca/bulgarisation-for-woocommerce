@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2022-04-13 21:07+0000\n"
+"PO-Revision-Date: 2022-04-17 21:07+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "%s is not found in %s region."
 msgstr "%s не е намерен в %s регион."
 
-#: app/Shipping/Econt/Method.php:91
+#: app/Shipping/Econt/Method.php:97
 #, php-format
 msgid "%s: Free shipping"
 msgstr "%s: Безплатна доставка"
@@ -41,8 +41,8 @@ msgstr "Добавяне на доставките към фактурата"
 msgid "Additional API's"
 msgstr "Допълнителни API"
 
-#: app/Admin/Econt.php:109 app/Admin/Tabs/Econt_Tab.php:95
-#: app/Front_End/Checkout/Company.php:69 app/Shipping/Econt/Method.php:118
+#: app/Admin/Econt.php:109 app/Admin/Tabs/Econt_Tab.php:94
+#: app/Front_End/Checkout/Company.php:69 app/Shipping/Econt/Method.php:124
 msgid "Address"
 msgstr "Адрес"
 
@@ -110,7 +110,7 @@ msgstr "По телефон ( %s )"
 msgid "Card"
 msgstr "По карта"
 
-#: app/Admin/Econt.php:124
+#: app/Admin/Econt.php:126
 msgid "Cargo"
 msgstr "Карго"
 
@@ -122,7 +122,7 @@ msgstr "В кеш"
 msgid "Cash on delivery"
 msgstr "Наложен платеж"
 
-#: app/Admin/Tabs/Econt_Tab.php:86
+#: app/Admin/Tabs/Econt_Tab.php:85
 msgid "Cash on delivery agreement"
 msgstr "Споразумение за наложен платеж"
 
@@ -139,15 +139,15 @@ msgstr "Настройки на \"Страница за поръчка\""
 msgid "Choose"
 msgstr "Избери"
 
-#: app/Admin/Tabs/Econt_Tab.php:125
+#: app/Admin/Tabs/Econt_Tab.php:124
 msgid "Choose a city and save in order to show offices."
 msgstr "Избери град и запази за да се покажат офиси."
 
-#: app/Admin/Tabs/Econt_Tab.php:86
+#: app/Admin/Tabs/Econt_Tab.php:85
 msgid "Choose cash on delivery agreement"
 msgstr "Избери споразумение за наложен платеж"
 
-#: app/Admin/Tabs/Econt_Tab.php:118
+#: app/Admin/Tabs/Econt_Tab.php:117
 msgid "City"
 msgstr "Град"
 
@@ -190,11 +190,15 @@ msgstr "Имейл за контакти"
 msgid "Contact phone number of your company."
 msgstr "Телефон за контакти на вашата фирма."
 
-#: app/Admin/Invoice/Menu.php:443
+#: app/Admin/Econt.php:116
+msgid "Copy Label Data"
+msgstr "Копирай данните на товарителницата"
+
+#: app/Admin/Invoice/Menu.php:613
 msgid "Credit Notice - Copy"
 msgstr "Кредитно известие - Копие"
 
-#: app/Admin/Invoice/Menu.php:432
+#: app/Admin/Invoice/Menu.php:602
 msgid "Credit Notice - Original"
 msgstr "Кредитно известие - Оригинал"
 
@@ -223,7 +227,7 @@ msgstr "Изтрий товарителница"
 msgid "Delivery is payed by"
 msgstr "Доставката се поема от"
 
-#: app/Shipping/Econt/Method.php:112
+#: app/Shipping/Econt/Method.php:118
 msgid "Delivery Type"
 msgstr "Доставка до"
 
@@ -243,11 +247,11 @@ msgstr "Изключи полетата в Чекаут."
 msgid "Do you want a company invoice?"
 msgstr "Искате ли фактура за фирма?"
 
-#: app/Admin/Econt.php:122
+#: app/Admin/Econt.php:124
 msgid "Document"
 msgstr "Документ"
 
-#: app/Admin/Econt.php:125
+#: app/Admin/Econt.php:127
 msgid "Document-Pallet"
 msgstr "Документ-палет"
 
@@ -259,21 +263,18 @@ msgstr "Име на домейна"
 msgid "Due date"
 msgstr "Дата на падеж"
 
-#: app/Admin/Tabs/Econt_Tab.php:85
-msgid "E-mail"
-msgstr "Имейл"
-
 #: app/Admin/Tabs/Help_Tab.php:43
 msgid "E-mail:"
 msgstr "Имейл"
 
 #: app/Admin/Invoice/Menu.php:231 app/Admin/Invoice/Menu.php:244
-#: app/Admin/Invoice/Menu.php:253
+#: app/Admin/Invoice/Menu.php:253 app/Admin/Invoice/Menu.php:362
+#: app/Admin/Invoice/Menu.php:375 app/Admin/Invoice/Menu.php:384
 #, php-format
 msgid "E-mail: %s"
 msgstr "Имейл: %s"
 
-#: app/Shipping/Econt/Method.php:390
+#: app/Shipping/Econt/Method.php:392
 msgid "Econt - "
 msgstr "Еконт - "
 
@@ -295,6 +296,7 @@ msgid "EIK"
 msgstr "ЕИК на фирмата"
 
 #: app/Admin/Invoice/Menu.php:224 app/Admin/Invoice/Menu.php:237
+#: app/Admin/Invoice/Menu.php:355 app/Admin/Invoice/Menu.php:368
 #, php-format
 msgid "EIK: %s"
 msgstr "ЕИК: %s"
@@ -315,7 +317,7 @@ msgstr "Включи nekorekten.com API?"
 msgid "Enable VIES validation"
 msgstr "Включи VIES валидация"
 
-#: app/Shipping/Econt/Method.php:17
+#: app/Shipping/Econt/Method.php:19
 msgid "Enables econt delivery and automatically calculate shipping price."
 msgstr "Включва доставки с Еконт и автоматично пресмятане на доставка.."
 
@@ -323,7 +325,7 @@ msgstr "Включва доставки с Еконт и автоматично 
 msgid "Enables Econt Shipping methods."
 msgstr "Включва Еконт начин на доставка."
 
-#: app/Shipping/Econt/Method.php:155
+#: app/Shipping/Econt/Method.php:161
 msgid ""
 "Enter a fixed price that the users will pay. The remaining will be payed by "
 "you."
@@ -377,12 +379,18 @@ msgid "EU VAT"
 msgstr "ДДС номер"
 
 #. Description of the plugin
+#| msgid ""
+#| "Everything necessary for your online store to work in Bulgaria and "
+#| "according to Bulgarian regulations. Includes a light regime for Ordinance "
+#| "- H-18."
 msgid ""
 "Everything necessary for your online store to work in Bulgaria and according "
-"to Bulgarian regulations. Includes a light regime for Ordinance - H-18."
+"to Bulgarian regulations. Includes a light regime for Ordinance - H-18 and "
+"Econt shipping method."
 msgstr ""
 "Всичко необходимо за вашият онлайн магазин да работи в България и според "
-"Българските разпоредби. Включва облекчен режим за Наредба - H-18."
+"Българските разпоредби. Включва облекчен режим за Наредба - H-18 и метод на "
+"доставка с Еконт."
 
 #: app/Admin/Tabs/Export_Tab.php:8
 msgid "Export"
@@ -405,7 +413,7 @@ msgstr ""
 msgid "First Name:"
 msgstr "Име:"
 
-#: app/Admin/Econt.php:115 app/Shipping/Econt/Method.php:152
+#: app/Admin/Econt.php:115 app/Shipping/Econt/Method.php:158
 msgid "Fixed price"
 msgstr "Фиксирана цена"
 
@@ -435,15 +443,15 @@ msgstr "За еднократна помощ като подкрепа за ра
 msgid "Found: %s"
 msgstr "Намерени: %s"
 
-#: app/Shipping/Econt/Method.php:144
+#: app/Shipping/Econt/Method.php:150
 msgid "Free shipping over"
 msgstr "Безплатна доставна над"
 
-#: app/Shipping/Econt/Method.php:147
+#: app/Shipping/Econt/Method.php:153
 msgid "Free shipping over total cart price."
 msgstr "Безплатна доставка над сума на количката "
 
-#: app/Admin/Tabs/Econt_Tab.php:165 app/Admin/Tabs/Nekorekten_Com_Tab.php:57
+#: app/Admin/Tabs/Econt_Tab.php:164 app/Admin/Tabs/Nekorekten_Com_Tab.php:57
 msgid "General"
 msgstr "Главни"
 
@@ -599,6 +607,7 @@ msgid "MOL"
 msgstr "МОЛ на фирмата"
 
 #: app/Admin/Invoice/Menu.php:226 app/Admin/Invoice/Menu.php:239
+#: app/Admin/Invoice/Menu.php:357 app/Admin/Invoice/Menu.php:370
 #, php-format
 msgid "MOL: %s"
 msgstr "МОЛ: %s"
@@ -624,12 +633,12 @@ msgstr "Настройки за nekorekten.com"
 msgid "Next Invoice Number"
 msgstr "Следващ номер на документ"
 
-#: app/functions.php:62 app/Shipping/Econt/Method.php:127
-#: app/Shipping/Econt/Method.php:138
+#: app/functions.php:62 app/Shipping/Econt/Method.php:133
+#: app/Shipping/Econt/Method.php:144
 msgid "No"
 msgstr "Не"
 
-#: app/Admin/Tabs/Econt_Tab.php:138
+#: app/Admin/Tabs/Econt_Tab.php:137
 msgid "No agreement"
 msgstr "Без споразумение"
 
@@ -667,8 +676,8 @@ msgstr "Уникален номер на магазина издаден ви о
 msgid "of"
 msgstr "от"
 
-#: app/Admin/Econt.php:108 app/Admin/Tabs/Econt_Tab.php:91
-#: app/Admin/Tabs/Econt_Tab.php:122 app/Shipping/Econt/Method.php:117
+#: app/Admin/Econt.php:108 app/Admin/Tabs/Econt_Tab.php:90
+#: app/Admin/Tabs/Econt_Tab.php:121 app/Shipping/Econt/Method.php:123
 msgid "Office"
 msgstr "Офис"
 
@@ -680,7 +689,7 @@ msgstr "Офис локатор"
 msgid "On a payment account"
 msgstr "По платежна сметка"
 
-#: app/Admin/Invoice/Menu.php:308
+#: app/Admin/Invoice/Menu.php:461
 msgid "Order - Original"
 msgstr "Поръчка - Оригинал"
 
@@ -700,7 +709,7 @@ msgstr "Поръчка PDF"
 msgid "Other"
 msgstr "Друг"
 
-#: app/Admin/Econt.php:121
+#: app/Admin/Econt.php:123
 msgid "Pack"
 msgstr "Пакет"
 
@@ -712,7 +721,7 @@ msgstr "Брой пакети"
 msgid "Page"
 msgstr "Страница"
 
-#: app/Admin/Econt.php:123
+#: app/Admin/Econt.php:125
 msgid "Pallet"
 msgstr "Палет"
 
@@ -746,7 +755,8 @@ msgid "Phone:"
 msgstr "Телефон:"
 
 #: app/Admin/Invoice/Menu.php:230 app/Admin/Invoice/Menu.php:243
-#: app/Admin/Invoice/Menu.php:252
+#: app/Admin/Invoice/Menu.php:252 app/Admin/Invoice/Menu.php:361
+#: app/Admin/Invoice/Menu.php:374 app/Admin/Invoice/Menu.php:383
 #, php-format
 msgid "Phone: %s"
 msgstr "Телефон: %s"
@@ -804,7 +814,7 @@ msgstr "Обнови данните"
 msgid "Refunded Invoice PDF"
 msgstr "Кредитно известие PDF"
 
-#: app/Admin/Invoice/Menu.php:402
+#: app/Admin/Invoice/Menu.php:563
 msgid "Refunded Order - Original"
 msgstr "Отказана Поръчка - Оригинал"
 
@@ -812,7 +822,7 @@ msgstr "Отказана Поръчка - Оригинал"
 msgid "Refunded Order PDF"
 msgstr "Отказана Поръчка PDF"
 
-#: app/Admin/Invoice/Menu.php:495
+#: app/Admin/Invoice/Menu.php:669
 msgid "Regenerate PDF's"
 msgstr "Регенерирай PDF"
 
@@ -828,19 +838,19 @@ msgstr "Отзиви"
 msgid "Return method"
 msgstr "Начин на връщане на сумата"
 
-#: app/Shipping/Econt/Method.php:122 app/Shipping/Econt/Method.php:129
+#: app/Shipping/Econt/Method.php:128 app/Shipping/Econt/Method.php:135
 msgid "Review and test"
 msgstr "Преглед и тест"
 
-#: app/Shipping/Econt/Method.php:128
+#: app/Shipping/Econt/Method.php:134
 msgid "Review only"
 msgstr "Само преглед"
 
-#: app/Admin/Invoice/Menu.php:344
+#: app/Admin/Invoice/Menu.php:497
 msgid "Sale Invoice - Copy"
 msgstr "Фактура - Копие"
 
-#: app/Admin/Invoice/Menu.php:335
+#: app/Admin/Invoice/Menu.php:488
 msgid "Sale Invoice - Original"
 msgstr "Фактура - Оригинал"
 
@@ -860,11 +870,11 @@ msgstr "Избери"
 msgid "Select a month for the report"
 msgstr "Изберете месец на извлечението"
 
-#: app/Admin/Tabs/Econt_Tab.php:115
+#: app/Admin/Tabs/Econt_Tab.php:114
 msgid "Select Address"
 msgstr "Изберете адрес"
 
-#: app/Admin/Tabs/Econt_Tab.php:97
+#: app/Admin/Tabs/Econt_Tab.php:96
 msgid ""
 "Select from where you will send the packages and save to show more options."
 msgstr ""
@@ -888,11 +898,11 @@ msgstr ""
 msgid "Selected"
 msgstr "Избрано"
 
-#: app/Shipping/Econt/Method.php:141
+#: app/Shipping/Econt/Method.php:147
 msgid "Send customer notification for delivery."
 msgstr "Изпратете известие на клиента за доставка."
 
-#: app/Admin/Tabs/Econt_Tab.php:175
+#: app/Admin/Tabs/Econt_Tab.php:96 app/Admin/Tabs/Econt_Tab.php:174
 msgid "Send From"
 msgstr "Изпрати от"
 
@@ -926,7 +936,8 @@ msgstr "Населено място"
 msgid "Shipment type"
 msgstr "Тип на товарителницата"
 
-#: app/Admin/Invoice/Menu.php:278 app/Admin/Tabs/Export_Tab.php:183
+#: app/Admin/Invoice/Menu.php:289 app/Admin/Invoice/Menu.php:427
+#: app/Admin/Tabs/Export_Tab.php:199
 #, php-format
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
@@ -935,7 +946,7 @@ msgstr "Доставка: %s"
 msgid "Should we include the delivery in the invoice?"
 msgstr "Да включим ли доставката към фактурата?"
 
-#: app/Shipping/Econt/Method.php:133
+#: app/Shipping/Econt/Method.php:139
 msgid "SMS notification"
 msgstr "SMS известия"
 
@@ -1016,7 +1027,7 @@ msgstr "Адресът на регистрация на вашата фирма.
 msgid "There was some error in one of the reports."
 msgstr "Имаше грешка в някой от отзивите."
 
-#: app/Shipping/Econt/Method.php:107
+#: app/Shipping/Econt/Method.php:113
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 "Това контролира заглавието, което потребителят вижда по време на плащане."
@@ -1050,7 +1061,7 @@ msgstr "Тази опция ще скрие полетата от плъгина
 msgid "This order is out of scope for EU VAT."
 msgstr "Тази поръчка е извън обхвата на ДДС в ЕС."
 
-#: app/Shipping/Econt/Method.php:105
+#: app/Shipping/Econt/Method.php:111
 msgid "Title"
 msgstr "Заглавие"
 
@@ -1058,11 +1069,12 @@ msgstr "Заглавие"
 msgid "To invoice №"
 msgstr "Към фактура №"
 
-#: app/Admin/Invoice/Menu.php:293 app/Admin/Invoice/Printer.php:567
+#: app/Admin/Invoice/Menu.php:304 app/Admin/Invoice/Menu.php:446
+#: app/Admin/Invoice/Printer.php:567
 msgid "Total"
 msgstr "Данъчна основа"
 
-#: app/Admin/Invoice/Menu.php:299
+#: app/Admin/Invoice/Menu.php:311 app/Admin/Invoice/Menu.php:452
 msgid "Total due"
 msgstr "Всичко"
 
@@ -1093,7 +1105,7 @@ msgstr "Валидирането не беше възможно"
 msgid "Vat"
 msgstr "ДДС"
 
-#: app/Admin/Invoice/Menu.php:296
+#: app/Admin/Invoice/Menu.php:307 app/Admin/Invoice/Menu.php:449
 #, php-format
 msgid "VAT %s"
 msgstr "ДДС %s"
@@ -1116,6 +1128,7 @@ msgid "VAT number required on checkout?"
 msgstr "ДДС номер да бъде ли задължително поле?"
 
 #: app/Admin/Invoice/Menu.php:225 app/Admin/Invoice/Menu.php:238
+#: app/Admin/Invoice/Menu.php:356 app/Admin/Invoice/Menu.php:369
 #: app/Front_End/Checkout/EU_Vat.php:284
 #, php-format
 msgid "VAT Number: %s"
@@ -1152,7 +1165,7 @@ msgstr "Уеб адрес на електронния магазин."
 msgid "Weight"
 msgstr "Тегло"
 
-#: app/Shipping/Econt/Method.php:16
+#: app/Shipping/Econt/Method.php:18
 msgid "Woo BG - Econt"
 msgstr "Woo BG - Еконт"
 
@@ -1165,7 +1178,7 @@ msgstr ""
 "WooCommerce - Българизация изисква PHP версия %s+ и WP версия %s+, плъгина "
 "за сега НЕ РАБОТИ."
 
-#: app/functions.php:66 app/Shipping/Econt/Method.php:139
+#: app/functions.php:66 app/Shipping/Econt/Method.php:145
 msgid "Yes"
 msgstr "Да"
 
@@ -1201,6 +1214,10 @@ msgid ""
 "."
 msgstr ""
 "Въвели сте невалиден ДДС номер (%1$s) за държавата си за фактуриране (%2$s)."
+
+#: app/Admin/Econt.php:117
+msgid "You just copied the label data used for the Econt API."
+msgstr "Копирахте данните използвани за връзка с Еконт."
 
 #: app/Admin/Tabs/Settings_Tab.php:42
 msgid "Your company EIK."

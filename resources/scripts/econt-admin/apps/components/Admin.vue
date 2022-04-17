@@ -182,6 +182,8 @@
 						<p v-else class="form-field form-field-wide">
 							<button @click="updateLabel" name="save" type="submit" :value="i18n.generateLabel" class="button-primary woocommerce-save-button">{{i18n.generateLabel}}</button>
 						</p>
+
+						<p class="form-field form-field-wide"> <a v-clipboard:copy="labelJSON" v-clipboard:success="onCopy" class="button-secondary">{{i18n.copyLabelData}}</a> </p>
 					</form>
 
 					<div class="clear"></div>
@@ -282,6 +284,9 @@ export default {
 		iframeUrl() {
 			return this.shipmentStatus.label.pdfURL.replace(/^https?:/, '') + '&label=' + this.size;
 		},
+		labelJSON() {
+			return JSON.stringify( this.labelData );
+		},
 	},
 	mounted() {
 		let _this = this;
@@ -331,6 +336,9 @@ export default {
 		}
 	},
 	methods: {
+		onCopy: function (e) {
+	      alert( this.i18n.copyLabelDataMessage );
+	    },
 		updateLabel( e ) {
 			e.preventDefault();
 
