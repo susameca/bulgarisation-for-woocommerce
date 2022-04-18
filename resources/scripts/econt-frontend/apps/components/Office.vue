@@ -7,9 +7,9 @@
 				v-model="selectedOffice" 
 				id="ajax" 
 				class="woo-bg-multiselect"
-				:placeholder="i18n.searchOffice"
 				:selectedLabel="i18n.selected" 
 			  	:selectLabel="i18n.select"
+			  	deselect-label=""
 				open-direction="bottom" 
 				track-by="id"
 				label="name"
@@ -27,6 +27,7 @@
 
 				<span slot="noResult">{{i18n.noResult}}</span>
 				<span slot="noOptions">{{i18n.noOptions}}</span>
+				<span slot="placeholder">{{i18n.searchOffice}}</span>
 			</multiselect>
 
 			<a id="woo-bg--econt-office-locator" :href="officeLocatorUrl">{{i18n.officeLocator}}</a>

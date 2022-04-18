@@ -22,7 +22,7 @@ class Address {
 			if ( $method->meta_data['delivery_type'] === 'address' ) {
 				echo '<div id="woo-bg-econt-shipping-to--address" class="woo-bg-additional-fields" data-type="address"></div>';
 
-				wp_localize_script( 'woo-bg-js-econt', 'wooBg_econt', array(
+				wp_localize_script( 'woo-bg-js-econt', 'wooBg_econt_address', array(
 					'i18n' => self::get_i18n(),
 				) );
 			}

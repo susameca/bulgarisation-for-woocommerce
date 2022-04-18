@@ -4,9 +4,9 @@
 	  	v-model="selectedAddress" 
 	  	id="ajax" 
 	  	class="woo-bg-multiselect"
-	  	:selectedLabel="i18n.selected" 
-		:placeholder="i18n.searchAddress"
+	  	:selectedLabel="i18n.selected"
 	  	:selectLabel="i18n.select"
+	  	deselect-label=""
 	  	open-direction="bottom" 
 	  	track-by="id"
 	  	label="label"
@@ -28,6 +28,7 @@
 
 	    <span slot="noResult">{{i18n.noResult}}</span>
 	    <span slot="noOptions">{{i18n.noOptions}}</span>
+	    <span slot="placeholder">{{i18n.searchAddress}}</span>
 	  </multiselect>
 
 	  <input 
@@ -75,7 +76,7 @@ export default {
 			other: '',
 			isLoading: false,
 			document: $( document.body ),
-			i18n: wooBg_econt.i18n,
+			i18n: wooBg_econt_address.i18n,
 		}
 	},
 	computed: {
