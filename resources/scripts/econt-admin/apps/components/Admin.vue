@@ -128,7 +128,7 @@
 							<input v-model="labelData.packCount" type="number">
 						</p>
 
-						<p v-if="labelData.services.cdAmount" class="form-field form-field-wide">
+						<p v-if="( labelData.services && labelData.services.cdAmount )" class="form-field form-field-wide">
 							<label>
 								{{i18n.cd}}:
 							</label>
