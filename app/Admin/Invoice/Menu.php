@@ -12,14 +12,21 @@ class Menu {
 	private $invoice, $order, $parent_order, $refunded_order, $qr_png, $document_number, $currency_symbol;
 
 	function __construct() {
+		$order_documents_trigger = woo_bg_get_option( 'invoice', 'trigger' );
+
+		if ( !$order_documents_trigger || $order_documents_trigger === "order_created" ) {
+			add_action( 'woocommerce_checkout_order_processed', array( $this, 'generate_documents' ) );
+		} else if ( $order_documents_trigger === "order_completed" ) {
+			add_action( 'woocommerce_order_status_completed', array( $this, 'generate_documents' ) );
+		}
+
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'woocommerce_checkout_order_processed', array( $this, 'set_payment_method' ) );
-		add_action( 'woocommerce_checkout_order_processed', array( $this, 'generate_documents' ) );
 		add_action( 'woocommerce_order_refunded', array( $this, 'refunded_items' ), 15, 2 );
-		add_filter( 'woocommerce_email_attachments', array( $this, 'attach_invoice_to_mail' ), 10, 4 );
 		add_action( 'woocommerce_order_actions', array( $this, 'add_order_meta_box_actions' ) );
 		add_action( 'woocommerce_order_action_woo_bg_regenerate_pdfs', array( $this, 'process_order_meta_box_actions' ) );
 		add_action( 'woocommerce_order_details_after_customer_details', array( $this, 'add_invoice_to_customer_order' ) );
+		add_filter( 'woocommerce_email_attachments', array( $this, 'attach_invoice_to_mail' ), 10, 4 );
 
 		//subscriptions
 		add_action( 'woocommerce_checkout_subscription_created', array( $this, 'subscriptions_created' ), 20, 2 );
@@ -650,8 +657,19 @@ class Menu {
 	}
 
 	public function attach_invoice_to_mail( $attachments, $email_id, $order, $email ) {
+		if ( !is_object( $order ) ) {
+			return;
+		}
+
+		$order_documents_trigger = woo_bg_get_option( 'invoice', 'trigger' );
+
+		if ( !$order_documents_trigger || $order_documents_trigger === 'order_created' ) {
+			$email_ids = array( 'customer_processing_order' );
+		} else if ( $order_documents_trigger === 'order_completed' ) {
+			$email_ids = array( 'customer_completed_order' );
+		}
+
 		$attach_invoice = get_post_meta( $order->get_id(), 'woo_bg_attach_invoice', 1 );
-		$email_ids = array( 'new_order', 'customer_processing_order' );
 
 		if ( $attach_invoice == 'yes' && in_array ( $email_id, $email_ids ) ) {
 			if ( $invoice_id = get_post_meta( $order->get_id(), 'woo_bg_invoice_document', 1 ) ) {

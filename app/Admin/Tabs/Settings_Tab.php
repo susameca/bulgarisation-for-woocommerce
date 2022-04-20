@@ -55,6 +55,16 @@ class Settings_Tab extends Base_Tab {
 				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'enable_econt', __( 'Enable Econt Delivery? ', 'woo-bg' ), null, null, __( 'Enables Econt Shipping methods.', 'woo-bg' ) ),
 			),
 			'invoice' => array(
+				new Fields\Select_Field( array(
+					'order_created' => array(
+						'id' => 'order_created',
+						'label' => __( 'Order created', 'woo-bg' ),
+					),
+					'order_completed' => array(
+						'id' => 'order_completed',
+						'label' => __( 'Order completed', 'woo-bg' ),
+					),
+				), 'trigger', __( 'When to generate documents?', 'woo-bg' ) ),
 				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'invoices', __( 'Generating Invoices?', 'woo-bg' ), null, null, __( 'By default, the plugin generates documents - "Order" and "Rejected Order", if you want the plugin to issue documents "Invoice" and "Credit notification", select "Yes".', 'woo-bg' ) ),
 				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'add_shipping', __( 'Add Shipping to the invoice', 'woo-bg' ), null, null, __( 'Should we include the delivery in the invoice?', 'woo-bg' ) ),
 				new Fields\Text_Field( 'next_invoice_number', __( 'Next Invoice Number', 'woo-bg' ), __( 'The invoice number of the next order.', 'woo-bg' ), 'required' ),
