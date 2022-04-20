@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-17 21:05+0000\n"
+"POT-Creation-Date: 2022-04-20 20:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -34,11 +34,11 @@ msgstr ""
 msgid "Add column on orders list."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:59
+#: app/Admin/Tabs/Settings_Tab.php:69
 msgid "Add Shipping to the invoice"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:126
+#: app/Admin/Tabs/Settings_Tab.php:136
 msgid "Additional API's"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:58
+#: app/Admin/Tabs/Settings_Tab.php:68
 msgid ""
 "By default, the plugin generates documents - \"Order\" and \"Rejected "
 "Order\", if you want the plugin to issue documents \"Invoice\" and \"Credit "
@@ -109,7 +109,7 @@ msgstr ""
 msgid "Card"
 msgstr ""
 
-#: app/Admin/Econt.php:126
+#: app/Admin/Econt.php:130
 msgid "Cargo"
 msgstr ""
 
@@ -190,11 +190,11 @@ msgstr ""
 msgid "Copy Label Data"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:613
+#: app/Admin/Invoice/Menu.php:620
 msgid "Credit Notice - Copy"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:602
+#: app/Admin/Invoice/Menu.php:609
 msgid "Credit Notice - Original"
 msgstr ""
 
@@ -235,6 +235,10 @@ msgstr ""
 msgid "Demo"
 msgstr ""
 
+#: app/Admin/Econt.php:121
+msgid "Details:"
+msgstr ""
+
 #: app/Admin/Tabs/Settings_Tab.php:51
 msgid "Disable Checkout fields"
 msgstr ""
@@ -243,11 +247,11 @@ msgstr ""
 msgid "Do you want a company invoice?"
 msgstr ""
 
-#: app/Admin/Econt.php:124
+#: app/Admin/Econt.php:128
 msgid "Document"
 msgstr ""
 
-#: app/Admin/Econt.php:127
+#: app/Admin/Econt.php:131
 msgid "Document-Pallet"
 msgstr ""
 
@@ -263,9 +267,9 @@ msgstr ""
 msgid "E-mail:"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:231 app/Admin/Invoice/Menu.php:244
-#: app/Admin/Invoice/Menu.php:253 app/Admin/Invoice/Menu.php:362
-#: app/Admin/Invoice/Menu.php:375 app/Admin/Invoice/Menu.php:384
+#: app/Admin/Invoice/Menu.php:238 app/Admin/Invoice/Menu.php:251
+#: app/Admin/Invoice/Menu.php:260 app/Admin/Invoice/Menu.php:369
+#: app/Admin/Invoice/Menu.php:382 app/Admin/Invoice/Menu.php:391
 #, php-format
 msgid "E-mail: %s"
 msgstr ""
@@ -291,8 +295,8 @@ msgstr ""
 msgid "EIK"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:224 app/Admin/Invoice/Menu.php:237
-#: app/Admin/Invoice/Menu.php:355 app/Admin/Invoice/Menu.php:368
+#: app/Admin/Invoice/Menu.php:231 app/Admin/Invoice/Menu.php:244
+#: app/Admin/Invoice/Menu.php:362 app/Admin/Invoice/Menu.php:375
 #, php-format
 msgid "EIK: %s"
 msgstr ""
@@ -327,7 +331,7 @@ msgid ""
 "you."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:63
+#: app/Admin/Tabs/Settings_Tab.php:73
 msgid ""
 "Enter an ID in the invoices and credit memos that replace the compiler's "
 "signature."
@@ -337,7 +341,7 @@ msgstr ""
 msgid "Enter the generated API key."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:62
+#: app/Admin/Tabs/Settings_Tab.php:72
 msgid ""
 "Enter the name of the compiler of the automatically generated documents, "
 "which will be displayed in them."
@@ -366,6 +370,10 @@ msgstr ""
 
 #: app/Admin/EU_Vat.php:64
 msgid "EU VAT"
+msgstr ""
+
+#: app/Admin/Econt.php:120
+msgid "Event:"
 msgstr ""
 
 #. Description of the plugin
@@ -398,7 +406,7 @@ msgstr ""
 msgid "Fixed price"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:64
+#: app/Admin/Tabs/Settings_Tab.php:74
 msgid "Footer text"
 msgstr ""
 
@@ -446,15 +454,15 @@ msgstr ""
 msgid "Generate label"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:58
+#: app/Admin/Tabs/Settings_Tab.php:68
 msgid "Generating Invoices?"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:132
+#: app/Admin/Tabs/Settings_Tab.php:142
 msgid "Global Shop Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:80
+#: app/Admin/Tabs/Settings_Tab.php:90
 msgid ""
 "group \"A\" - for goods and services, the sales of which are exempt from "
 "taxation, for goods and services, the sales of which are subject to 0% VAT, "
@@ -465,15 +473,15 @@ msgid ""
 "separately."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:70
+#: app/Admin/Tabs/Settings_Tab.php:80
 msgid "Group - A"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:74
+#: app/Admin/Tabs/Settings_Tab.php:84
 msgid "Group - B"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:78
+#: app/Admin/Tabs/Settings_Tab.php:88
 msgid "Group - G"
 msgstr ""
 
@@ -481,7 +489,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:81
+#: app/Admin/Tabs/Settings_Tab.php:91
 msgid "How to return the amount when the client cancel the order."
 msgstr ""
 
@@ -489,11 +497,11 @@ msgstr ""
 msgid "https://autopolis.bg/"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:63
+#: app/Admin/Tabs/Settings_Tab.php:73
 msgid "Identification code"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:151
+#: app/Admin/Tabs/Settings_Tab.php:161
 msgid "Identifier"
 msgstr ""
 
@@ -529,15 +537,15 @@ msgstr ""
 msgid "Invalid identifier: %s has already been set."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:61
+#: app/Admin/Tabs/Settings_Tab.php:71
 msgid "Invoice Color"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:43 app/Admin/Invoice/Menu.php:86
+#: app/Admin/Invoice/Menu.php:50 app/Admin/Invoice/Menu.php:93
 msgid "Invoice PDF"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:129
+#: app/Admin/Tabs/Settings_Tab.php:139
 msgid "Invoice Settings"
 msgstr ""
 
@@ -565,7 +573,7 @@ msgstr ""
 msgid "Live"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:149
+#: app/Admin/Tabs/Settings_Tab.php:159
 msgid "Manner of payment of the order according to the NRA system."
 msgstr ""
 
@@ -578,8 +586,8 @@ msgstr ""
 msgid "MOL"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:226 app/Admin/Invoice/Menu.php:239
-#: app/Admin/Invoice/Menu.php:357 app/Admin/Invoice/Menu.php:370
+#: app/Admin/Invoice/Menu.php:233 app/Admin/Invoice/Menu.php:246
+#: app/Admin/Invoice/Menu.php:364 app/Admin/Invoice/Menu.php:377
 #, php-format
 msgid "MOL: %s"
 msgstr ""
@@ -600,7 +608,7 @@ msgstr ""
 msgid "nekorekten.com Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:60
+#: app/Admin/Tabs/Settings_Tab.php:70
 msgid "Next Invoice Number"
 msgstr ""
 
@@ -657,8 +665,16 @@ msgstr ""
 msgid "On a payment account"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:461
+#: app/Admin/Invoice/Menu.php:468
 msgid "Order - Original"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:65
+msgid "Order completed"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:61
+msgid "Order created"
 msgstr ""
 
 #: app/Admin/Invoice/Printer.php:403
@@ -669,7 +685,7 @@ msgstr ""
 msgid "Order Number"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:80
+#: app/Admin/Invoice/Menu.php:87
 msgid "Order PDF"
 msgstr ""
 
@@ -677,7 +693,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: app/Admin/Econt.php:123
+#: app/Admin/Econt.php:127
 msgid "Pack"
 msgstr ""
 
@@ -689,7 +705,7 @@ msgstr ""
 msgid "Page"
 msgstr ""
 
-#: app/Admin/Econt.php:125
+#: app/Admin/Econt.php:129
 msgid "Pallet"
 msgstr ""
 
@@ -697,7 +713,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: app/Admin/Invoice/Printer.php:725 app/Admin/Tabs/Settings_Tab.php:101
+#: app/Admin/Invoice/Printer.php:725 app/Admin/Tabs/Settings_Tab.php:111
 #, php-format
 msgid "Payment method: %s"
 msgstr ""
@@ -706,11 +722,11 @@ msgstr ""
 msgid "Payment service provider"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:149
+#: app/Admin/Tabs/Settings_Tab.php:159
 msgid "Payment Type"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:62
+#: app/Admin/Invoice/Menu.php:69
 msgid "PDF Files"
 msgstr ""
 
@@ -722,9 +738,9 @@ msgstr ""
 msgid "Phone:"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:230 app/Admin/Invoice/Menu.php:243
-#: app/Admin/Invoice/Menu.php:252 app/Admin/Invoice/Menu.php:361
-#: app/Admin/Invoice/Menu.php:374 app/Admin/Invoice/Menu.php:383
+#: app/Admin/Invoice/Menu.php:237 app/Admin/Invoice/Menu.php:250
+#: app/Admin/Invoice/Menu.php:259 app/Admin/Invoice/Menu.php:368
+#: app/Admin/Invoice/Menu.php:381 app/Admin/Invoice/Menu.php:390
 #, php-format
 msgid "Phone: %s"
 msgstr ""
@@ -747,7 +763,7 @@ msgstr ""
 msgid "Plugin Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:62
+#: app/Admin/Tabs/Settings_Tab.php:72
 msgid "Prepared by"
 msgstr ""
 
@@ -776,19 +792,19 @@ msgstr ""
 msgid "Refresh data"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:51 app/Admin/Invoice/Menu.php:98
+#: app/Admin/Invoice/Menu.php:58 app/Admin/Invoice/Menu.php:105
 msgid "Refunded Invoice PDF"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:563
+#: app/Admin/Invoice/Menu.php:570
 msgid "Refunded Order - Original"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:92
+#: app/Admin/Invoice/Menu.php:99
 msgid "Refunded Order PDF"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:669
+#: app/Admin/Invoice/Menu.php:687
 msgid "Regenerate PDF's"
 msgstr ""
 
@@ -800,7 +816,7 @@ msgstr ""
 msgid "Reports"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:81
+#: app/Admin/Tabs/Settings_Tab.php:91
 msgid "Return method"
 msgstr ""
 
@@ -812,11 +828,11 @@ msgstr ""
 msgid "Review only"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:497
+#: app/Admin/Invoice/Menu.php:504
 msgid "Sale Invoice - Copy"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:488
+#: app/Admin/Invoice/Menu.php:495
 msgid "Sale Invoice - Original"
 msgstr ""
 
@@ -878,11 +894,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:123
+#: app/Admin/Tabs/Settings_Tab.php:133
 msgid "Settings for generating an XML file - Ordinance H-18 light mode"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:184
+#: app/Admin/Tabs/Settings_Tab.php:194
 msgid "Settings saved successfully!"
 msgstr ""
 
@@ -891,17 +907,21 @@ msgstr ""
 msgid "Settlement"
 msgstr ""
 
+#: app/Admin/Econt.php:118
+msgid "Shipment status"
+msgstr ""
+
 #: app/Admin/Econt.php:103
 msgid "Shipment type"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:289 app/Admin/Invoice/Menu.php:427
+#: app/Admin/Invoice/Menu.php:296 app/Admin/Invoice/Menu.php:434
 #: app/Admin/Tabs/Export_Tab.php:199
 #, php-format
 msgid "Shipping: %s"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:59
+#: app/Admin/Tabs/Settings_Tab.php:69
 msgid "Should we include the delivery in the invoice?"
 msgstr ""
 
@@ -956,11 +976,11 @@ msgstr ""
 msgid "Thank you for your message! We'll contact you shortly."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:60
+#: app/Admin/Tabs/Settings_Tab.php:70
 msgid "The invoice number of the next order."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:61
+#: app/Admin/Tabs/Settings_Tab.php:71
 msgid "The main color of the invoice in hex format - #000000 for black."
 msgstr ""
 
@@ -1008,6 +1028,10 @@ msgstr ""
 msgid "This order is out of scope for EU VAT."
 msgstr ""
 
+#: app/Admin/Econt.php:119
+msgid "Time:"
+msgstr ""
+
 #: app/Shipping/Econt/Method.php:111
 msgid "Title"
 msgstr ""
@@ -1016,12 +1040,12 @@ msgstr ""
 msgid "To invoice №"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:304 app/Admin/Invoice/Menu.php:446
+#: app/Admin/Invoice/Menu.php:311 app/Admin/Invoice/Menu.php:453
 #: app/Admin/Invoice/Printer.php:567
 msgid "Total"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:311 app/Admin/Invoice/Menu.php:452
+#: app/Admin/Invoice/Menu.php:318 app/Admin/Invoice/Menu.php:459
 msgid "Total due"
 msgstr ""
 
@@ -1050,12 +1074,12 @@ msgstr ""
 msgid "Vat"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:307 app/Admin/Invoice/Menu.php:449
+#: app/Admin/Invoice/Menu.php:314 app/Admin/Invoice/Menu.php:456
 #, php-format
 msgid "VAT %s"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:80
+#: app/Admin/Tabs/Settings_Tab.php:90
 msgid "Vat Group"
 msgstr ""
 
@@ -1072,8 +1096,8 @@ msgstr ""
 msgid "VAT number required on checkout?"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:225 app/Admin/Invoice/Menu.php:238
-#: app/Admin/Invoice/Menu.php:356 app/Admin/Invoice/Menu.php:369
+#: app/Admin/Invoice/Menu.php:232 app/Admin/Invoice/Menu.php:245
+#: app/Admin/Invoice/Menu.php:363 app/Admin/Invoice/Menu.php:376
 #: app/Front_End/Checkout/EU_Vat.php:284
 #, php-format
 msgid "VAT Number: %s"
@@ -1083,7 +1107,7 @@ msgstr ""
 msgid "Virtual POS terminal"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:150
+#: app/Admin/Tabs/Settings_Tab.php:160
 msgid "Virtual POS №"
 msgstr ""
 
@@ -1106,6 +1130,10 @@ msgstr ""
 
 #: app/Admin/Econt.php:114
 msgid "Weight"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:67
+msgid "When to generate documents?"
 msgstr ""
 
 #: app/Shipping/Econt/Method.php:18

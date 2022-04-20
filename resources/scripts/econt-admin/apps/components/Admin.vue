@@ -216,6 +216,27 @@
 					</div>
 				</div><!-- /.order_data_column order_data_column-/-half -->
 			</div><!-- /.order_data_column_container -->
+
+			<div class="woocommerce_order_status" v-if="statuses.length">
+				<h3>{{i18n.shipmentStatus}}</h3>
+
+				<table>
+					<thead>
+						<tr>
+							<th> {{i18n.time}} </th>
+							<th> {{i18n.event}} </th>
+							<th> {{i18n.details}} </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(status, key) in statuses">
+							<th> {{status.time}} </th>
+							<th> <img :src="status.image"> </th>
+							<th> {{status.destination}} </th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 
 		<div class="clear"></div>
@@ -287,12 +308,176 @@ export default {
 		labelJSON() {
 			return JSON.stringify( this.labelData );
 		},
+		statuses() {
+			let statuses = [];
+			if ( this.shipmentStatus && this.shipmentStatus.label.trackingEvents.length ) {
+				this.shipmentStatus.label.trackingEvents.forEach( function ( status ) {
+					let image = '';
+					let time = new Date( status.time );
+					let destination = status.destinationDetails;
+					time = time.getDate() + "/" + ( time.getMonth() + 1 ) + "/" + time.getFullYear() + " " + time.getHours() + ":" + ('0'  + time.getMinutes() ).slice(-2) + ":" + ('0'  + time.getSeconds() ).slice(-2);
+
+					if ( status.destinationType === 'office' ) {
+						image = "//ee.econt.com/images/icons/trace_office.png";
+					} else if ( status.destinationType === 'courier_direction' ) {
+						image = "//ee.econt.com/images/icons/trace_line.png";
+					} else if ( status.destinationType === 'courier' ) {
+						image = "//ee.econt.com/images/icons/trace_courier.png";
+					} else if ( status.destinationType === 'client' ) {
+						image = "//ee.econt.com/images/icons/trace_ok.png";
+					} else if ( status.destinationType === 'return' ) {
+						image = "//ee.econt.com/images/icons/trace_return.png";
+					}
+
+					statuses.push({
+						time,
+						image,
+						destination,
+					} );
+				});
+
+				statuses.reverse();
+			}
+			return statuses;
+		}
 	},
 	mounted() {
 		let _this = this;
 
 		if ( wooBg_econt.shipmentStatus ) {
 			this.shipmentStatus = wooBg_econt.shipmentStatus;
+			this.shipmentStatus.label.trackingEvents = [
+                    {
+                        "isReceipt": false,
+                        "destinationType": "office",
+                        "destinationDetails": "Пазарджик Запад",
+                        "destinationDetailsEn": "Pazardzhik Zapad",
+                        "officeName": "Пазарджик Запад",
+                        "officeNameEn": "Pazardzhik Zapad",
+                        "cityName": "Пазарджик",
+                        "cityNameEn": "Pazardzhik",
+                        "countryCode": null,
+                        "officeCode": "4406",
+                        "time": 1648735080000
+                    },
+                    {
+                        "isReceipt": false,
+                        "destinationType": "courier_direction",
+                        "destinationDetails": "Пазарджик - Пазарджик",
+                        "destinationDetailsEn": "Pazardzhik - Pazardzhik",
+                        "officeName": "Пазарджик Запад",
+                        "officeNameEn": "Pazardzhik Zapad",
+                        "cityName": "Пазарджик",
+                        "cityNameEn": "Pazardzhik",
+                        "countryCode": null,
+                        "officeCode": null,
+                        "time": 1648735273000
+                    },
+                    {
+                        "isReceipt": false,
+                        "destinationType": "office",
+                        "destinationDetails": "Пазарджик ЛЛЦ",
+                        "destinationDetailsEn": "Pazardjik LTS",
+                        "officeName": "Пазарджик ЛЛЦ",
+                        "officeNameEn": "Pazardjik LTS",
+                        "cityName": "Пазарджик",
+                        "cityNameEn": "Pazardzhik",
+                        "countryCode": null,
+                        "officeCode": "44111",
+                        "time": 1648740991000
+                    },
+                    {
+                        "isReceipt": false,
+                        "destinationType": "courier_direction",
+                        "destinationDetails": "Пазарджик - Лясковец",
+                        "destinationDetailsEn": "Pazardzhik - Lyaskovets",
+                        "officeName": "Пазарджик ЛЛЦ",
+                        "officeNameEn": "Pazardjik LTS",
+                        "cityName": "Пазарджик",
+                        "cityNameEn": "Pazardzhik",
+                        "countryCode": null,
+                        "officeCode": null,
+                        "time": 1648746431000
+                    },
+                    {
+                        "isReceipt": false,
+                        "destinationType": "office",
+                        "destinationDetails": "Лясковец НЛЦ",
+                        "destinationDetailsEn": "Lyaskovets NLC",
+                        "officeName": "Лясковец НЛЦ",
+                        "officeNameEn": "Lyaskovets NLC",
+                        "cityName": "Лясковец",
+                        "cityNameEn": "Lyaskovets",
+                        "countryCode": null,
+                        "officeCode": "5141",
+                        "time": 1648760169000
+                    },
+                    {
+                        "isReceipt": false,
+                        "destinationType": "courier_direction",
+                        "destinationDetails": "Габрово - Лясковец - Варна",
+                        "destinationDetailsEn": "Gabrovo - Lyaskovets - Varna",
+                        "officeName": "Лясковец НЛЦ",
+                        "officeNameEn": "Lyaskovets NLC",
+                        "cityName": "Лясковец",
+                        "cityNameEn": "Lyaskovets",
+                        "countryCode": null,
+                        "officeCode": null,
+                        "time": 1648760252000
+                    },
+                    {
+                        "isReceipt": false,
+                        "destinationType": "office",
+                        "destinationDetails": "Варна НЛЦ",
+                        "destinationDetailsEn": "Varna NLC",
+                        "officeName": "Варна НЛЦ",
+                        "officeNameEn": "Varna NLC",
+                        "cityName": "Варна",
+                        "cityNameEn": "Varna",
+                        "countryCode": null,
+                        "officeCode": "9000",
+                        "time": 1648775889000
+                    },
+                    {
+                        "isReceipt": false,
+                        "destinationType": "office",
+                        "destinationDetails": "Варна - Димитър Димитров",
+                        "destinationDetailsEn": "Varna - Dimitar Dimitar",
+                        "officeName": "Варна НЛЦ",
+                        "officeNameEn": "Varna NLC",
+                        "cityName": "Варна",
+                        "cityNameEn": "Varna",
+                        "countryCode": null,
+                        "officeCode": "90038",
+                        "time": 1648777017000
+                    },
+                    {
+                        "isReceipt": false,
+                        "destinationType": "courier",
+                        "destinationDetails": "Радослав Петров",
+                        "destinationDetailsEn": "Radoslav Petrov",
+                        "officeName": "Варна - Димитър Димитров",
+                        "officeNameEn": "Varna - Dimitar Dimitar",
+                        "cityName": "Варна",
+                        "cityNameEn": "Varna",
+                        "countryCode": null,
+                        "officeCode": "90038",
+                        "time": 1648790903000
+                    },
+                    {
+                        "isReceipt": false,
+                        "destinationType": "client",
+                        "destinationDetails": "Тихомир Петров Парушев",
+                        "destinationDetailsEn": "Тихомир Петров Парушев",
+                        "officeName": "Варна - Димитър Димитров",
+                        "officeNameEn": "Varna - Dimitar Dimitar",
+                        "cityName": "Варна",
+                        "cityNameEn": "Varna",
+                        "countryCode": null,
+                        "officeCode": null,
+                        "time": 1648806142000
+                    }
+                ];
 		}
 
 	  	this.document.on('change', 'input[name="label_size"]', function () {

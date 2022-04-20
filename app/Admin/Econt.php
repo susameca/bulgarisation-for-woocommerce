@@ -115,6 +115,10 @@ class Econt {
 			'fixedPrice' => __( 'Fixed price', 'woo-bg' ),
 			'copyLabelData' => __( 'Copy Label Data', 'woo-bg' ),
 			'copyLabelDataMessage' => __( 'You just copied the label data used for the Econt API.', 'woo-bg' ),
+			'shipmentStatus' => __( 'Shipment status', 'woo-bg' ),
+			'time' => __( 'Time:', 'woo-bg' ),
+			'event' => __( 'Event:', 'woo-bg' ),
+			'details' => __( 'Details:', 'woo-bg' ),
 		);
 	}
 
