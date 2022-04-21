@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-20 20:35+0000\n"
+"POT-Creation-Date: 2022-04-21 09:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Additional API's"
 msgstr ""
 
-#: app/Admin/Econt.php:109 app/Admin/Tabs/Econt_Tab.php:94
+#: app/Admin/Econt.php:113 app/Admin/Tabs/Econt_Tab.php:94
 #: app/Front_End/Checkout/Company.php:69 app/Shipping/Econt/Method.php:124
 msgid "Address"
 msgstr ""
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Billing to"
 msgstr ""
 
-#: app/Admin/Econt.php:105 app/Shipping/Econt/Address.php:41
+#: app/Admin/Econt.php:109 app/Shipping/Econt/Address.php:41
 msgid "bl. vh. et."
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 msgid "Bulgarisation for WooCommerce - Please enable WooCommerce first."
 msgstr ""
 
-#: app/Admin/Econt.php:112
+#: app/Admin/Econt.php:116
 msgid "Buyer"
 msgstr ""
 
@@ -109,7 +109,7 @@ msgstr ""
 msgid "Card"
 msgstr ""
 
-#: app/Admin/Econt.php:130
+#: app/Admin/Econt.php:134
 msgid "Cargo"
 msgstr ""
 
@@ -117,7 +117,7 @@ msgstr ""
 msgid "Cash"
 msgstr ""
 
-#: app/Admin/Econt.php:101
+#: app/Admin/Econt.php:105
 msgid "Cash on delivery"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Checkout Settings"
 msgstr ""
 
-#: app/Admin/Econt.php:99 app/Shipping/Econt/Address.php:35
+#: app/Admin/Econt.php:103 app/Shipping/Econt/Address.php:35
 #: app/Shipping/Econt/Office.php:32
 msgid "Choose"
 msgstr ""
@@ -186,7 +186,7 @@ msgstr ""
 msgid "Contact phone number of your company."
 msgstr ""
 
-#: app/Admin/Econt.php:116
+#: app/Admin/Econt.php:120
 msgid "Copy Label Data"
 msgstr ""
 
@@ -211,15 +211,15 @@ msgstr ""
 msgid "Date: %s"
 msgstr ""
 
-#: app/Admin/Econt.php:97
+#: app/Admin/Econt.php:101
 msgid "Default"
 msgstr ""
 
-#: app/Admin/Econt.php:95
+#: app/Admin/Econt.php:99
 msgid "Delete label"
 msgstr ""
 
-#: app/Admin/Econt.php:100
+#: app/Admin/Econt.php:104
 msgid "Delivery is payed by"
 msgstr ""
 
@@ -227,7 +227,7 @@ msgstr ""
 msgid "Delivery Type"
 msgstr ""
 
-#: app/Admin/Econt.php:110
+#: app/Admin/Econt.php:114
 msgid "Delivery type"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgstr ""
 msgid "Demo"
 msgstr ""
 
-#: app/Admin/Econt.php:121
+#: app/Admin/Econt.php:125
 msgid "Details:"
 msgstr ""
 
@@ -247,11 +247,11 @@ msgstr ""
 msgid "Do you want a company invoice?"
 msgstr ""
 
-#: app/Admin/Econt.php:128
+#: app/Admin/Econt.php:132
 msgid "Document"
 msgstr ""
 
-#: app/Admin/Econt.php:131
+#: app/Admin/Econt.php:135
 msgid "Document-Pallet"
 msgstr ""
 
@@ -278,7 +278,7 @@ msgstr ""
 msgid "Econt - "
 msgstr ""
 
-#: app/Admin/Econt.php:38
+#: app/Admin/Econt.php:41
 msgid "Econt Delivery"
 msgstr ""
 
@@ -372,7 +372,7 @@ msgstr ""
 msgid "EU VAT"
 msgstr ""
 
-#: app/Admin/Econt.php:120
+#: app/Admin/Econt.php:124
 msgid "Event:"
 msgstr ""
 
@@ -402,7 +402,7 @@ msgstr ""
 msgid "First Name:"
 msgstr ""
 
-#: app/Admin/Econt.php:115 app/Shipping/Econt/Method.php:158
+#: app/Admin/Econt.php:119 app/Shipping/Econt/Method.php:158
 msgid "Fixed price"
 msgstr ""
 
@@ -450,7 +450,7 @@ msgstr ""
 msgid "Generate documents for orders before the plugin was installed?"
 msgstr ""
 
-#: app/Admin/Econt.php:94
+#: app/Admin/Econt.php:98
 msgid "Generate label"
 msgstr ""
 
@@ -557,11 +557,11 @@ msgstr ""
 msgid "IP Country"
 msgstr ""
 
-#: app/Admin/Econt.php:96
+#: app/Admin/Econt.php:100
 msgid "Label"
 msgstr ""
 
-#: app/Admin/Econt.php:111
+#: app/Admin/Econt.php:115
 msgid "Label data"
 msgstr ""
 
@@ -652,7 +652,7 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: app/Admin/Econt.php:108 app/Admin/Tabs/Econt_Tab.php:90
+#: app/Admin/Econt.php:112 app/Admin/Tabs/Econt_Tab.php:90
 #: app/Admin/Tabs/Econt_Tab.php:121 app/Shipping/Econt/Method.php:123
 msgid "Office"
 msgstr ""
@@ -689,15 +689,15 @@ msgstr ""
 msgid "Order PDF"
 msgstr ""
 
-#: app/functions.php:53 app/functions.php:91 app/Admin/Econt.php:104
+#: app/functions.php:53 app/functions.php:91 app/Admin/Econt.php:108
 msgid "Other"
 msgstr ""
 
-#: app/Admin/Econt.php:127
+#: app/Admin/Econt.php:131
 msgid "Pack"
 msgstr ""
 
-#: app/Admin/Econt.php:102
+#: app/Admin/Econt.php:106
 msgid "Pack count"
 msgstr ""
 
@@ -705,7 +705,7 @@ msgstr ""
 msgid "Page"
 msgstr ""
 
-#: app/Admin/Econt.php:129
+#: app/Admin/Econt.php:133
 msgid "Pallet"
 msgstr ""
 
@@ -869,7 +869,7 @@ msgid ""
 "com/register/\">Econt Delivery</a>"
 msgstr ""
 
-#: app/Admin/Econt.php:98 app/Shipping/Econt/Address.php:34
+#: app/Admin/Econt.php:102 app/Shipping/Econt/Address.php:34
 #: app/Shipping/Econt/Office.php:31
 msgid "Selected"
 msgstr ""
@@ -886,7 +886,7 @@ msgstr ""
 msgid "Send Request"
 msgstr ""
 
-#: app/Admin/Econt.php:113
+#: app/Admin/Econt.php:117
 msgid "Sender"
 msgstr ""
 
@@ -907,11 +907,11 @@ msgstr ""
 msgid "Settlement"
 msgstr ""
 
-#: app/Admin/Econt.php:118
+#: app/Admin/Econt.php:122
 msgid "Shipment status"
 msgstr ""
 
-#: app/Admin/Econt.php:103
+#: app/Admin/Econt.php:107
 msgid "Shipment type"
 msgstr ""
 
@@ -952,11 +952,11 @@ msgstr ""
 msgid "Start typing street or quarter"
 msgstr ""
 
-#: app/Admin/Econt.php:106 app/Shipping/Econt/Address.php:40
+#: app/Admin/Econt.php:110 app/Shipping/Econt/Address.php:40
 msgid "Street number"
 msgstr ""
 
-#: app/Admin/Econt.php:107
+#: app/Admin/Econt.php:111
 msgid "Street/Quarter"
 msgstr ""
 
@@ -1028,7 +1028,7 @@ msgstr ""
 msgid "This order is out of scope for EU VAT."
 msgstr ""
 
-#: app/Admin/Econt.php:119
+#: app/Admin/Econt.php:123
 msgid "Time:"
 msgstr ""
 
@@ -1053,8 +1053,12 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: app/Admin/Econt.php:93
+#: app/Admin/Econt.php:97
 msgid "Update label"
+msgstr ""
+
+#: app/Admin/Econt.php:96
+msgid "Update shipment status"
 msgstr ""
 
 #: app/Admin/Tabs/Econt_Tab.php:70
@@ -1128,7 +1132,7 @@ msgid ""
 "for electronic services of the NRA."
 msgstr ""
 
-#: app/Admin/Econt.php:114
+#: app/Admin/Econt.php:118
 msgid "Weight"
 msgstr ""
 
@@ -1177,7 +1181,7 @@ msgid ""
 "."
 msgstr ""
 
-#: app/Admin/Econt.php:117
+#: app/Admin/Econt.php:121
 msgid "You just copied the label data used for the Econt API."
 msgstr ""
 

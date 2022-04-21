@@ -176,14 +176,19 @@
 						<p class="form-field form-field-wide" v-if="shipmentStatus">
 							<button @click="updateLabel" name="save" type="submit" :value="i18n.updateLabel" class="button-primary woocommerce-save-button">{{i18n.updateLabel}}</button>
 
-							<button @click="deleteLabel" name="save" type="submit" :value="i18n.deleteLabel" class="button-secondary">{{i18n.deleteLabel}}</button>
+							<button @click="updateShipmentStatus" name="save" type="submit" :value="i18n.updateShipmentStatus" class="button-primary woocommerce-save-button">{{i18n.updateShipmentStatus}}</button>
+
 						</p>
 
 						<p v-else class="form-field form-field-wide">
 							<button @click="updateLabel" name="save" type="submit" :value="i18n.generateLabel" class="button-primary woocommerce-save-button">{{i18n.generateLabel}}</button>
 						</p>
 
-						<p class="form-field form-field-wide"> <a v-clipboard:copy="labelJSON" v-clipboard:success="onCopy" class="button-secondary">{{i18n.copyLabelData}}</a> </p>
+						<p class="form-field form-field-wide"> 
+							<button @click="deleteLabel" name="save" type="submit" :value="i18n.deleteLabel" class="button-secondary">{{i18n.deleteLabel}}</button>
+
+							<a v-clipboard:copy="labelJSON" v-clipboard:success="onCopy" class="button-secondary">{{i18n.copyLabelData}}</a> 
+						</p>
 					</form>
 
 					<div class="clear"></div>
@@ -317,7 +322,7 @@ export default {
 					let destination = status.destinationDetails;
 					time = time.getDate() + "/" + ( time.getMonth() + 1 ) + "/" + time.getFullYear() + " " + time.getHours() + ":" + ('0'  + time.getMinutes() ).slice(-2) + ":" + ('0'  + time.getSeconds() ).slice(-2);
 
-					if ( status.destinationType === 'office' ) {
+					if ( status.destinationType === 'office' || status.destinationType === 'prepared' ) {
 						image = "//ee.econt.com/images/icons/trace_office.png";
 					} else if ( status.destinationType === 'courier_direction' ) {
 						image = "//ee.econt.com/images/icons/trace_line.png";
@@ -429,6 +434,37 @@ export default {
 					}
 				});
 		},
+		updateShipmentStatus( e ) {
+			e.preventDefault();
+
+			this.loading = true;
+			let _this = this;
+			_this.message = '';
+
+			let data = {
+				orderId: wooBg_econt.orderId,
+				shipmentStatus: this.shipmentStatus,
+				action: 'woo_bg_econt_update_shipment_status',
+			};
+
+			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
+				.then(function( response ) {
+					_this.loading = false;
+
+					console.log( response );
+
+					if ( response.data.data.message ) {
+						_this.message = response.data.data.message;
+					} else {
+						_this.shipmentStatus.label = _.cloneDeep( response.data.data.shipmentStatus, true );
+						_this.size = 'refresh';
+
+						setTimeout(function() {
+							_this.document.find('input[name="label_size"]:checked').trigger('change');
+						}, 10);
+					}
+				});
+		},
 		deleteLabel( e ) {
 			e.preventDefault();
 
@@ -444,7 +480,6 @@ export default {
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
 				.then(function( response ) {
-					console.log( response );
 
 					_this.shipmentStatus = '';
 					_this.loading = false;
@@ -453,11 +488,6 @@ export default {
 					setTimeout(function() {
 						_this.document.find('input[name="label_size"]:checked').trigger('change');
 					}, 10);
-
-					/*if ( response.data.data.errors ) {
-						_this.message = response.data.data.message;
-					} else {
-					}*/
 				});
 		},
 	}

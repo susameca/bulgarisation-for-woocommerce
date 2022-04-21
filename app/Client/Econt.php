@@ -9,6 +9,7 @@ class Econt {
     const LABELS_ENDPOINT = 'Shipments/LabelService.createLabel.json';
     const UPDATE_LABELS_ENDPOINT = 'Shipments/LabelService.updateLabel.json';
     const DELETE_LABELS_ENDPOINT = 'Shipments/LabelService.deleteLabels.json';
+    const SHIPMENT_STATUS_ENDPOINT = 'Shipments/ShipmentService.getShipmentStatuses.json';
     const CACHE_FOLDER = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'woo-bg' . DIRECTORY_SEPARATOR;
 
     private $env = '';

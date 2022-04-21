@@ -17,6 +17,9 @@ class Econt {
 
 		add_action( 'wp_ajax_woo_bg_econt_delete_label', array( __CLASS__, 'delete_label' ) );
 		add_action( 'wp_ajax_nopriv_woo_bg_econt_delete_label', array( __CLASS__, 'delete_label' ) );
+
+		add_action( 'wp_ajax_woo_bg_econt_update_shipment_status', array( __CLASS__, 'update_shipment_status' ) );
+		add_action( 'wp_ajax_nopriv_woo_bg_econt_update_shipment_status', array( __CLASS__, 'update_shipment_status' ) );
 	}
 
 	public static function admin_enqueue_scripts() {
@@ -90,6 +93,7 @@ class Econt {
 
 	protected static function get_i18n() {
 		return array(
+			'updateShipmentStatus' => __( 'Update shipment status', 'woo-bg' ),
 			'updateLabel' => __( 'Update label', 'woo-bg' ),
 			'generateLabel' => __( 'Generate label', 'woo-bg' ),
 			'deleteLabel' => __( 'Delete label', 'woo-bg' ),
@@ -169,6 +173,25 @@ class Econt {
 		update_post_meta( $order_id, 'woo_bg_econt_shipment_status', '' );
 		
 		wp_send_json_success( $response );
+		wp_die();
+	}
+
+	public static function update_shipment_status() {
+		$container = woo_bg()->container();
+		$order_id = $_REQUEST['orderId'];
+		$shipment_status = $_REQUEST['shipmentStatus'];
+		$data = array();
+		$order_shipment_status = get_post_meta( $order_id, 'woo_bg_econt_shipment_status', 1 );
+
+		$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::SHIPMENT_STATUS_ENDPOINT, array(
+			'shipmentNumbers' => [ $shipment_status['label']['shipmentNumber'] ]
+		) );
+
+		$data['shipmentStatus'] = array_shift( array_shift( $response ) )['status'];
+		$order_shipment_status['label'] = $data['shipmentStatus'];
+		update_post_meta( $order_id, 'woo_bg_econt_shipment_status', $order_shipment_status );
+		
+		wp_send_json_success( $data );
 		wp_die();
 	}
 
