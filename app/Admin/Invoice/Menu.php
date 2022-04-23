@@ -211,7 +211,7 @@ class Menu {
 		}
 
 		if ( empty( $items ) ) {
-			$items = $this->order->get_items();
+			$items = array_merge( $this->order->get_items(), $this->order->get_items( 'fee' ) );
 		}
 
 		/* Header settings */
@@ -541,10 +541,10 @@ class Menu {
 		$this->currency_symbol = html_entity_decode( get_woocommerce_currency_symbol( $this->order->get_currency() ) );
 		$this->return_methods = woo_bg_get_return_methods();
 		$this->return_method = woo_bg_get_option( 'shop', 'return_method' );
-		$items = $this->order->get_items();
+		$items = array_merge( $this->order->get_items(), $this->order->get_items( 'fee' ) );
 
 		if ( empty( $items ) ) {
-			$items = $this->parent_order->get_items();
+			$items = array_merge( $this->parent_order->get_items(), $this->parent_order->get_items( 'fee' ) );
 		}
 
 		$order_document_number = get_post_meta( $post, 'woo_bg_refunded_order_number', 1 );
@@ -598,11 +598,12 @@ class Menu {
 			$order_document_number = get_post_meta( $this->order->get_id(), 'woo_bg_order_number', 1 );
 		}
 		
-		$items = $this->order->get_items();
+		$items = array_merge( $this->order->get_items(), $this->order->get_items( 'fee' ) );
 
 		if ( empty( $items ) ) {
-			$items = $this->parent_order->get_items();
+			$items = array_merge( $this->parent_order->get_items(), $this->parent_order->get_items( 'fee' ) );
 		}
+		
 		//Original credit notice
 		$this->invoice = new Printer( 'A4', $this->currency_symbol );
 		$this->generate_refunded_invoice( $items );

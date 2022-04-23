@@ -64,6 +64,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 2.2.2 =
+Fix invoices to include order fees
+
 = 2.2.1 =
 Add option to choose when to generate documents
 Econt: Add shipment status 
