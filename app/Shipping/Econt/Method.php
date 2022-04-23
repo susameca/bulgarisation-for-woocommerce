@@ -299,7 +299,9 @@ class Method extends \WC_Shipping_Method {
 				$receiver_address['other'] .= $this->cookie_data['otherField'];
 			}
 
-			$this->cookie_data['other'] = $receiver_address['other'];
+			if ( isset( $receiver_address['other'] ) ) {
+				$this->cookie_data['other'] = $receiver_address['other'];
+			}
 		} else if ( $type === 'quarters' ) {
 			$receiver_address['quarter'] = $this->cookie_data['selectedAddress']['label'];
 			$receiver_address['other'] = $this->cookie_data['other'];
