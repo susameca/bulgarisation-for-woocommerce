@@ -1,6 +1,6 @@
 === Bulgarisation for WooCommerce ===
 Contributors: autopolisbg
-Tags: e-commerce,nra,nap,nekorekten.com,bulgaria,bulgarisation,invoice,woo
+Tags: e-commerce, nra, nap, nekorekten.com, bulgaria, bulgarisation, invoice, woocommerce, econt
 Requires at least: 5.3
 Tested up to: 5.9.3
 Donate link: https://pay.revolut.com/profile/tihomi9gj5
@@ -67,6 +67,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 = 2.2.1 =
 Add option to choose when to generate documents
 Econt: Add shipment status 
+Econt: Fix checkout when `other` is missing
 
 = 2.2.0 =
 Fix generation of refunded documents
