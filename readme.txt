@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 5.9.3
 Donate link: https://pay.revolut.com/profile/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 2.1.3
+Stable tag: 2.2.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,10 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 2.2.1 =
+Add option to choose when to generate documents
+Econt: Add shipment status 
 
 = 2.2.0 =
 Fix generation of refunded documents
