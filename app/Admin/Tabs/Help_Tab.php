@@ -27,7 +27,7 @@ class Help_Tab extends Base_Tab {
 		<div id="woo-bg-contact-form"></div>
 		<?php
 
-		echo wpautop( _e('You can find more help in the Bulgarian WordPress Community in the Facebook Group: <a target="_blank" href="https://www.facebook.com/groups/wordpressbg">WordPress Bulgaria</a>', 'woo-bg' ) );
+		echo wpautop( _e('You can find more help in the official Facebook Group for the plugin: <a target="_blank" href="https://www.facebook.com/groups/bulgarisationforwoocommerce/">Bulgarisation For WooCommerce</a>.', 'woo-bg' ) );
 	}
 
 	public function admin_localize() {
