@@ -326,9 +326,13 @@ class Method extends \WC_Shipping_Method {
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
 			if ( $item['data']->get_weight() ) {
 				$cart['weight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
-
-				$names[] = $item['data']->get_name();
 			}
+
+			$names[] = $item['data']->get_name();
+		}
+
+		if ( !$cart['weight'] ) {
+			$cart['weight'] = apply_filters( 'woo_bg/econt/label/weight', 1, $this->package );
 		}
 
 		$cart['shipmentDescription'] = implode( ', ', $names );
