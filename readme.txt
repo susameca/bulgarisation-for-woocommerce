@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 5.9.3
 Donate link: https://pay.revolut.com/profile/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,7 +65,11 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 == Changelog ==
 
 = 2.2.2 =
-Fix invoices to include order fees
+Invoice: Fix default vat
+invoice: Include order fees
+Econt: Fix calculation on iOS
+Econt: Add default weight to label
+Econt: Add option to force variation data in label print
 
 = 2.2.1 =
 Add option to choose when to generate documents
