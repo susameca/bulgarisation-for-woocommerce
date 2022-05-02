@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-21 09:35+0000\n"
+"POT-Creation-Date: 2022-05-02 16:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -28,6 +28,12 @@ msgstr ""
 
 #: app/Admin/EU_Vat.php:116
 msgid "(self-declared)"
+msgstr ""
+
+#: app/Admin/Tabs/Econt_Tab.php:84
+msgid ""
+"Add additional variations information. Please use this option only if you "
+"want the variation data to be available in the label print and it's missing."
 msgstr ""
 
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:39
@@ -190,11 +196,11 @@ msgstr ""
 msgid "Copy Label Data"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:620
+#: app/Admin/Invoice/Menu.php:621
 msgid "Credit Notice - Copy"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:609
+#: app/Admin/Invoice/Menu.php:610
 msgid "Credit Notice - Original"
 msgstr ""
 
@@ -274,7 +280,7 @@ msgstr ""
 msgid "E-mail: %s"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:392
+#: app/Shipping/Econt/Method.php:398
 msgid "Econt - "
 msgstr ""
 
@@ -423,6 +429,10 @@ msgstr ""
 
 #: app/functions.php:207
 msgid "For single donation as development support you can send at "
+msgstr ""
+
+#: app/Admin/Tabs/Econt_Tab.php:84
+msgid "Force variations in label"
 msgstr ""
 
 #: app/Admin/Nekorekten_Com.php:135
@@ -592,7 +602,7 @@ msgstr ""
 msgid "MOL: %s"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:83
+#: app/Admin/Tabs/Econt_Tab.php:82
 msgid "Name"
 msgstr ""
 
@@ -730,7 +740,7 @@ msgstr ""
 msgid "PDF Files"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:84
+#: app/Admin/Tabs/Econt_Tab.php:83
 msgid "Phone"
 msgstr ""
 
@@ -749,7 +759,7 @@ msgstr ""
 msgid "Place of transaction"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:395
+#: app/Shipping/Econt/Method.php:401
 msgid "Please choose delivery option!"
 msgstr ""
 
@@ -804,7 +814,7 @@ msgstr ""
 msgid "Refunded Order PDF"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:687
+#: app/Admin/Invoice/Menu.php:688
 msgid "Regenerate PDF's"
 msgstr ""
 
@@ -1163,9 +1173,9 @@ msgstr ""
 
 #: app/Admin/Tabs/Help_Tab.php:30
 msgid ""
-"You can find more help in the Bulgarian WordPress Community in the Facebook "
-"Group: <a target=\"_blank\" href=\"https://www.facebook."
-"com/groups/wordpressbg\">WordPress Bulgaria</a>"
+"You can find more help in the official Facebook Group for the plugin: <a "
+"target=\"_blank\" href=\"https://www.facebook."
+"com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
 msgstr ""
 
 #: app/Front_End/Checkout/EU_Vat.php:222

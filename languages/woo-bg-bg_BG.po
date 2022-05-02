@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2022-04-21 09:36+0000\n"
+"PO-Revision-Date: 2022-05-02 16:43+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -28,6 +28,15 @@ msgstr "%s: Безплатна доставка"
 #: app/Admin/EU_Vat.php:116
 msgid "(self-declared)"
 msgstr "(самодеклариран)"
+
+#: app/Admin/Tabs/Econt_Tab.php:84
+msgid ""
+"Add additional variations information. Please use this option only if you "
+"want the variation data to be available in the label print and it's missing."
+msgstr ""
+"Допълнително добавя информация за избраната варияция. Моля използвайте тази "
+"опция само, ако искате да добавите инфомацията за избраната варияция в пдф-а "
+"на товарителницата. ( фикс за някои теми )"
 
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:39
 msgid "Add column on orders list."
@@ -194,11 +203,11 @@ msgstr "Телефон за контакти на вашата фирма."
 msgid "Copy Label Data"
 msgstr "Копирай данните на товарителницата"
 
-#: app/Admin/Invoice/Menu.php:620
+#: app/Admin/Invoice/Menu.php:621
 msgid "Credit Notice - Copy"
 msgstr "Кредитно известие - Копие"
 
-#: app/Admin/Invoice/Menu.php:609
+#: app/Admin/Invoice/Menu.php:610
 msgid "Credit Notice - Original"
 msgstr "Кредитно известие - Оригинал"
 
@@ -278,7 +287,7 @@ msgstr "Имейл"
 msgid "E-mail: %s"
 msgstr "Имейл: %s"
 
-#: app/Shipping/Econt/Method.php:392
+#: app/Shipping/Econt/Method.php:398
 msgid "Econt - "
 msgstr "Еконт - "
 
@@ -445,6 +454,10 @@ msgstr ""
 #: app/functions.php:207
 msgid "For single donation as development support you can send at "
 msgstr "За еднократна помощ като подкрепа за развитие, можете да дарите в "
+
+#: app/Admin/Tabs/Econt_Tab.php:84
+msgid "Force variations in label"
+msgstr "Принудително добавяне на варияцията в товарителницата"
 
 #: app/Admin/Nekorekten_Com.php:135
 #, php-format
@@ -620,7 +633,7 @@ msgstr "МОЛ на фирмата"
 msgid "MOL: %s"
 msgstr "МОЛ: %s"
 
-#: app/Admin/Tabs/Econt_Tab.php:83
+#: app/Admin/Tabs/Econt_Tab.php:82
 msgid "Name"
 msgstr "Име"
 
@@ -762,7 +775,7 @@ msgstr "Начин на плащане"
 msgid "PDF Files"
 msgstr "PDF документи"
 
-#: app/Admin/Tabs/Econt_Tab.php:84
+#: app/Admin/Tabs/Econt_Tab.php:83
 msgid "Phone"
 msgstr "Телефон"
 
@@ -781,7 +794,7 @@ msgstr "Телефон: %s"
 msgid "Place of transaction"
 msgstr "Място на сделката"
 
-#: app/Shipping/Econt/Method.php:395
+#: app/Shipping/Econt/Method.php:401
 msgid "Please choose delivery option!"
 msgstr "Моля изберете начин на доставка!"
 
@@ -838,7 +851,7 @@ msgstr "Отказана Поръчка - Оригинал"
 msgid "Refunded Order PDF"
 msgstr "Отказана Поръчка PDF"
 
-#: app/Admin/Invoice/Menu.php:687
+#: app/Admin/Invoice/Menu.php:688
 msgid "Regenerate PDF's"
 msgstr "Регенерирай PDF"
 
@@ -1224,13 +1237,13 @@ msgstr ""
 
 #: app/Admin/Tabs/Help_Tab.php:30
 msgid ""
-"You can find more help in the Bulgarian WordPress Community in the Facebook "
-"Group: <a target=\"_blank\" href=\"https://www.facebook."
-"com/groups/wordpressbg\">WordPress Bulgaria</a>"
+"You can find more help in the official Facebook Group for the plugin: <a "
+"target=\"_blank\" href=\"https://www.facebook."
+"com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
 msgstr ""
-"Можете да намерите повече помощ в Българската Facebook група за WordPress: "
-"<a target=\"_blank\" href=\"https://www.facebook.com/groups/wordpressbg\">"
-"WordPress България</a>"
+"Можете да намерите повече помощ в официалната Facebook група на плъгина: <a "
+"target=\"_blank\" href=\"https://www.facebook."
+"com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
 
 #: app/Front_End/Checkout/EU_Vat.php:222
 #, php-format
