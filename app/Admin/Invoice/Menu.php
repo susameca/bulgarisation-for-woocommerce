@@ -203,7 +203,7 @@ class Menu {
 		$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
 		$vat_percentages     = woo_bg_get_vat_groups();
 		$_tax = new \WC_Tax();
-		$vat = ( $enabled_taxes === 'yes' ) ? $vat_percentages[ $vat_group ] : null;
+		$vat = $vat_percentages[ $vat_group ];
 		$this->invoice->setNumberFormat( '.', ',', str_replace( '_space', '', get_option( 'woocommerce_currency_pos' ) ), true, false );
 
 		if( ! preg_match('/^#[a-f0-9]{6}$/i', $color) ){
@@ -314,7 +314,6 @@ class Menu {
 			$this->invoice->addTotal( sprintf( __( 'VAT %s', 'woo-bg' ), $vat_percentages[ $vat_group ] . "%" ), $total_vat );
 		}
 
-
 		$this->invoice->addTotal( __( "Total due", 'woo-bg' ), abs( $total_due ), true);
 		$this->invoice->addParagraph( $footer_text );
 		$this->invoice->setFooternote( get_bloginfo( 'name' ) );
@@ -338,7 +337,7 @@ class Menu {
 		$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
 		$vat_percentages     = woo_bg_get_vat_groups();
 		$_tax = new \WC_Tax();
-		$vat = ( $enabled_taxes === 'yes' ) ? $vat_percentages[ $vat_group ] : null;
+		$vat = $vat_percentages[ $vat_group ];
 		$this->invoice->setNumberFormat( '.', ',', str_replace( '_space', '', get_option( 'woocommerce_currency_pos' ) ), true, false );
 
 		if( ! preg_match('/^#[a-f0-9]{6}$/i', $color) ){
