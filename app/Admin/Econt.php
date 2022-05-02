@@ -205,10 +205,7 @@ class Econt {
 		$label = self::update_label_pay_options( $label );
 		$label = self::update_payment_by( $label );
 		$label = self::update_shipment_type( $label );
-
-		if ( woo_bg_get_option( 'econt', 'force_variations_in_desc' ) === 'yes' ) {
-			$label = self::update_shipment_description( $label );
-		}
+		$label = self::update_shipment_description( $label );
 
 		$generated_data = self::generate_response( $label );
 		$response = $generated_data['response'];
@@ -341,15 +338,17 @@ class Econt {
 	}
 
 	protected static function update_shipment_description( $label ) {
+		$force = woo_bg_get_option( 'econt', 'force_variations_in_desc' );
 		$order = new \WC_Order( $_REQUEST['orderId'] );
 		$names = [];
 
 		foreach ( $order->get_items() as $item ) {
-
 			$name = $item->get_name();
 
-			if ( $attributes = $item->get_meta_data() ) {
-				$name .= ' - ' .implode( ',', wp_list_pluck( $attributes, 'value' ) );
+			if ( $force === 'yes' ) {
+				if ( $attributes = $item->get_meta_data() ) {
+					$name .= ' - ' .implode( ',', wp_list_pluck( $attributes, 'value' ) );
+				}
 			}
 
 			$names[] = $name;
