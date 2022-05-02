@@ -200,6 +200,7 @@ class Econt {
 		$order_id = $_REQUEST['orderId'];
 		$label = $_REQUEST['label_data'];
 
+
 		$label = self::update_receiver_address( $label );
 		$label = self::update_label_pay_options( $label );
 		$label = self::update_payment_by( $label );
@@ -209,7 +210,7 @@ class Econt {
 		$response = $generated_data['response'];
 		$request_body = $generated_data['request_body'];
 
-		if ( isset( $response['type'] ) && $response['type'] === 'ExInvalidParam' ) {
+		if ( isset( $response['type'] ) && strpos( $response['type'], 'ExInvalid' ) !== false ) {
 			$errors = woo_bg()->container()[ Client::ECONT ]::add_error_message( $response );
 
 			$data['message'] = implode('', $errors );
