@@ -181,7 +181,7 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	public function get_cookie_data() {
-		return ( isset( $_COOKIE[ 'woo-bg--econt-address' ] ) ) ? json_decode( stripslashes( $_COOKIE[ 'woo-bg--econt-address' ] ), 1 ) : '';
+		return ( isset( $_COOKIE[ 'woo-bg--econt-address' ] ) ) ? json_decode( stripslashes( urldecode( $_COOKIE[ 'woo-bg--econt-address' ] ) ), 1 ) : '';
 	}
 
 	public function calculate_shipping_price_from_api() {

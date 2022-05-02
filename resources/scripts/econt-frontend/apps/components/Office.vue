@@ -222,7 +222,9 @@ export default {
 				payment: $('input[name="payment_method"]:checked').val(),
 			};
 
-			setCookie( 'woo-bg--econt-address', JSON.stringify( cookie ), 1 );
+			cookie = encodeURIComponent( JSON.stringify( cookie ) );
+
+			setCookie( 'woo-bg--econt-address', cookie, 1 );
 		},
 		setLocalStorageData() {
 			let localStorageData = {
