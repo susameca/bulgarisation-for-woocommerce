@@ -206,6 +206,10 @@ class Econt {
 		$label = self::update_payment_by( $label );
 		$label = self::update_shipment_type( $label );
 
+		if ( woo_bg_get_option( 'econt', 'force_variations_in_desc' ) === 'yes' ) {
+			$label = self::update_shipment_description( $label );
+		}
+
 		$generated_data = self::generate_response( $label );
 		$response = $generated_data['response'];
 		$request_body = $generated_data['request_body'];
@@ -336,6 +340,46 @@ class Econt {
 		return $label;
 	}
 
+	protected static function update_shipment_description( $label ) {
+		$order = new \WC_Order( $_REQUEST['orderId'] );
+		$names = [];
+
+		foreach ( $order->get_items() as $item ) {
+
+			$name = $item->get_name();
+
+			if ( $attributes = $item->get_meta_data() ) {
+				$name .= ' - ' .implode( ',', wp_list_pluck( $attributes, 'value' ) );
+			}
+
+			$names[] = $name;
+		}
+
+		$label[ 'shipmentDescription' ] = implode( ', ', $names );
+
+		return $label;
+	}
+
+	protected static function update_order_shipping_price( $response ) {
+		$payment_by = $_REQUEST['paymentBy'];
+		$order = new \WC_Order( $_REQUEST['orderId'] );
+		$price = 0;
+
+		if ( $payment_by['id'] == 'buyer' ) {
+			$price = $response['label']['receiverDueAmount'];
+		}
+
+		foreach( $order->get_items( 'shipping' ) as $item_id => $item ) {
+			$item->set_total( $price );
+			$item->calculate_taxes();
+			$item->save();
+		}
+
+		$order->calculate_shipping();
+		$order->calculate_totals();
+		$order->save();
+	}
+
 	protected static function generate_response( $label ) {
 		$order_id = $_REQUEST['orderId'];
 		$container = woo_bg()->container();
@@ -368,25 +412,5 @@ class Econt {
 			'response' => $response,
 			'request_body' => $request_body,
 		];
-	}
-
-	protected static function update_order_shipping_price( $response ) {
-		$payment_by = $_REQUEST['paymentBy'];
-		$order = new \WC_Order( $_REQUEST['orderId'] );
-		$price = 0;
-
-		if ( $payment_by['id'] == 'buyer' ) {
-			$price = $response['label']['receiverDueAmount'];
-		}
-
-		foreach( $order->get_items( 'shipping' ) as $item_id => $item ) {
-			$item->set_total( $price );
-			$item->calculate_taxes();
-			$item->save();
-		}
-
-		$order->calculate_shipping();
-		$order->calculate_totals();
-		$order->save();
 	}
 }

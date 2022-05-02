@@ -120,7 +120,7 @@
 							</multiselect>
 						</p>
 
-						<p class="form-field form-field-wide">
+						<p v-if="labelData.packCount" class="form-field form-field-wide">
 							<label>
 								{{i18n.packCount}}:
 							</label>

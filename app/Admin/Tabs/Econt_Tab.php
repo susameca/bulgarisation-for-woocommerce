@@ -79,9 +79,9 @@ class Econt_Tab extends Base_Tab {
 
 	public function add_profile_data_fields( $fields ) {
 		if ( $this->container[ Client::ECONT_PROFILE ]->is_valid_profile( true ) ) {
-
 			$fields[ 'econt' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ) );
 			$fields[ 'econt' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ) );
+			$fields[ 'econt' ][] = new Fields\Select_Field( woo_bg_get_yes_no_options(), 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) );
 			$fields[ 'econt' ][] = new Fields\Select_Field( $this->generate_pay_options(), 'pay_options', __( 'Cash on delivery agreement', 'woo-bg' ), null, null, __( 'Choose cash on delivery agreement', 'woo-bg' ) );
 			$fields[ 'econt' ][] = new Fields\Select_Field( 
 				array(
