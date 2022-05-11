@@ -204,5 +204,5 @@ function woo_bg_support_text() {
 	<?php
 	echo wpautop( __( 'Consider that for better maintenance and work of the plugin or adding new features we need your help in form of donations. Also, this will help keep the plugin free.', 'woo-bg' ) );
 	echo wpautop( __( 'For monthly development support or need a premium plugin support you can donate at ', 'woo-bg' ) . '<a target="_blank" href="https://www.patreon.com/tparushev">Patreon</a>.' );
-	echo wpautop( __( 'For single donation as development support you can send at ', 'woo-bg' ) . '<a target="_blank" href="https://pay.revolut.com/profile/tihomi9gj5">Revolute</a>.' );
+	echo wpautop( __( 'For single donation as development support you can send at ', 'woo-bg' ) . '<a target="_blank" href="https://revolut.me/tihomi9gj5">Revolute</a>.' );
 }

@@ -3,7 +3,7 @@ Contributors: autopolisbg
 Tags: e-commerce, nra, nap, nekorekten.com, bulgaria, bulgarisation, invoice, woocommerce, econt
 Requires at least: 5.3
 Tested up to: 5.9.3
-Donate link: https://pay.revolut.com/profile/tihomi9gj5
+Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
 Stable tag: 2.2.2
 License: GPLv3
@@ -38,6 +38,8 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 *   При нужда свържете се с вашият счетоводител, ако не сте сигурни за някое от полетата.
 *   За да използвате отзивите от nekorekten.com трябва да включите опцията в главните настройки на плъгина и да добавите API ключ в новопоявилия се таб.
 *   За да използвате методи на доставка с Еконт, трябва да включите опцията в главните настройки на плъгина. След запазване и презареждане на страницата ще се появи нов таб с настройките за Еконт. След това добавете желаните методи за доставка ( за адрес и офис трябва да имате 2 метода за доставка ) в зоните за доставка - WooCommerce >> Настройки >> Доставка >> Зони за доставка.
+
+[Facebook група](https://www.facebook.com/groups/bulgarisationforwoocommerce/)
 
 == Frequently Asked Questions ==
 
