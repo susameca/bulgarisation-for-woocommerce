@@ -22,11 +22,12 @@ class Menu {
 
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'woocommerce_checkout_order_processed', array( $this, 'set_payment_method' ) );
-		add_action( 'woocommerce_order_refunded', array( $this, 'refunded_items' ), 15, 2 );
+		add_action( 'woocommerce_create_refund', array( $this, 'refunded_items' ), 5, 2 );
 		add_action( 'woocommerce_order_actions', array( $this, 'add_order_meta_box_actions' ) );
 		add_action( 'woocommerce_order_action_woo_bg_regenerate_pdfs', array( $this, 'process_order_meta_box_actions' ) );
 		add_action( 'woocommerce_order_details_after_customer_details', array( $this, 'add_invoice_to_customer_order' ) );
-		add_filter( 'woocommerce_email_attachments', array( $this, 'attach_invoice_to_mail' ), 10, 4 );
+		add_filter( 'woocommerce_email_attachments', array( __CLASS__, 'attach_invoice_to_mail' ), 10, 4 );
+		add_filter( 'woocommerce_email_attachments', array( __CLASS__, 'attach_refund_pdfs_to_mail' ), 10, 4 );
 
 		//subscriptions
 		add_action( 'woocommerce_checkout_subscription_created', array( $this, 'subscriptions_created' ), 20, 2 );
@@ -112,7 +113,7 @@ class Menu {
 	}
 
 	public function refunded_items( $order_get_id, $refund_get_id ) {
-		$this->generate_refunded_documents( $refund_get_id );
+        $this->generate_refunded_documents( $order_get_id->get_id() );
 	}
 
 	public function set_payment_method( $post ) {
@@ -536,7 +537,6 @@ class Menu {
 	public function generate_refunded_documents( $post ) {
 		$this->order = new \Automattic\WooCommerce\Admin\Overrides\OrderRefund( $post );
 		$this->parent_order = new \WC_Order( $this->order->get_parent_id() );
-
 		$this->currency_symbol = html_entity_decode( get_woocommerce_currency_symbol( $this->order->get_currency() ) );
 		$this->return_methods = woo_bg_get_return_methods();
 		$this->return_method = woo_bg_get_option( 'shop', 'return_method' );
@@ -555,7 +555,6 @@ class Menu {
 
 		$this->document_number = $order_document_number;
 
-
 		$this->save_refunded_order_document( $items );
 
 		if ( woo_bg_get_option( 'invoice', 'invoices' ) === 'yes' ) {
@@ -568,7 +567,7 @@ class Menu {
 		$this->generate_refunded_invoice( $items );
 		$this->invoice->setType( __( 'Refunded Order - Original', 'woo-bg' ) );
 		$this->invoice->setPaymentType( $this->return_methods[ $this->return_method ]['label'] );
-		$this->invoice->setOrderNumber( $this->order->get_id() );
+		$this->invoice->setOrderNumber( $this->parent_order->get_order_number() );
 		
 		$name = uniqid( rand(), true );
 		$pdf = wp_upload_bits( $name . '.pdf', null, $this->invoice->render( $name . '.pdf', 'S' ) );
@@ -656,7 +655,7 @@ class Menu {
 		update_post_meta( $this->order->get_id(), 'woo_bg_refunded_invoice_document', $attach_id );
 	}
 
-	public function attach_invoice_to_mail( $attachments, $email_id, $order, $email ) {
+	public static function attach_invoice_to_mail( $attachments, $email_id, $order, $email ) {
 		if ( !is_object( $order ) ) {
 			return;
 		}
@@ -669,11 +668,46 @@ class Menu {
 			$email_ids = array( 'customer_completed_order' );
 		}
 
-		$attach_invoice = get_post_meta( $order->get_id(), 'woo_bg_attach_invoice', 1 );
+		$email_ids[] = 'customer_invoice';
 
-		if ( $attach_invoice == 'yes' && in_array ( $email_id, $email_ids ) ) {
+		if ( in_array ( $email_id, $email_ids ) ) {
+			if ( $invoice_id = get_post_meta( $order->get_id(), 'woo_bg_order_document', 1 ) ) {
+	            $attachments[] = get_attached_file( $invoice_id );
+	        }
+
 			if ( $invoice_id = get_post_meta( $order->get_id(), 'woo_bg_invoice_document', 1 ) ) {
 				$attachments[] = get_attached_file( $invoice_id );
+			}
+		}
+
+		return $attachments;
+	}
+
+	public static function attach_refund_pdfs_to_mail( $attachments, $email_id, $order, $email ) {
+		if ( !is_object( $order ) ) {
+			return;
+		}
+
+		$email_ids = array( 'customer_refunded_order', 'customer_invoice' );
+
+
+		if ( in_array ( $email_id, $email_ids ) ) {
+			$ids = [ $order->get_id() ];
+
+			if ( $refunds = $order->get_refunds() ) {
+				foreach ( $refunds as $refund ) {
+					$ids[] = $refund->get_id();
+				}
+			}
+
+			foreach ( $ids as $id ) {
+				if ( $invoice_id = get_post_meta( $id, 'woo_bg_refunded_order_document', 1 ) ) {
+		            $attachments[] = get_attached_file( $invoice_id );
+		        }
+
+				if ( $invoice_id = get_post_meta( $id, 'woo_bg_refunded_invoice_document', 1 ) ) {
+					$attachments[] = get_attached_file( $invoice_id );
+				}
 			}
 		}
 
