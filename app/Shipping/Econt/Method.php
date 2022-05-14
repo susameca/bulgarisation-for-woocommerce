@@ -275,7 +275,8 @@ class Method extends \WC_Shipping_Method {
 
 	private function generate_receiver_address() {
 		$country = $this->cookie_data['country'];
-		$state = $this->container[ Client::ECONT_CITIES ]->get_state_name( sanitize_text_field( $this->cookie_data['state'] ), $country );
+		$states = woo_bg_return_bg_states();
+		$state = $states[ $this->cookie_data['state'] ];
 		$cities = $this->container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
 		$city_key = array_search( $this->cookie_data['city'], array_column( $cities, 'name' ) );
 		$type = ( !empty( $this->cookie_data['selectedAddress']['type'] ) ) ? $this->cookie_data['selectedAddress']['type'] :'';

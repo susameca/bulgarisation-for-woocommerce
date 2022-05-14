@@ -47,7 +47,9 @@ class Address {
 		$args = [];
 		$query = explode( ' ', sanitize_text_field( $_POST['query'] ) );
 		$country = sanitize_text_field( $_POST['country'] );
-		$state = self::$container[ Client::ECONT_CITIES ]->get_state_name( sanitize_text_field( $_POST['state'] ), $country );
+		$raw_state = sanitize_text_field( $_POST['state'] );
+		$states = woo_bg_return_bg_states();
+		$state = $states[ $raw_state ];
 		$city = sanitize_text_field( $_POST['city'] );
 		$cities = self::$container[ Client::ECONT_CITIES ]->get_cities_by_region( $state, $country );
 		$cities_only_names = [];
@@ -78,7 +80,9 @@ class Address {
 		self::$container = woo_bg()->container();
 		$args = [];
 		$country = sanitize_text_field( $_POST['country'] );
-		$state = self::$container[ Client::ECONT_CITIES ]->get_state_name( sanitize_text_field( $_POST['state'] ), $country );
+		$raw_state = sanitize_text_field( $_POST['state'] );
+		$states = woo_bg_return_bg_states();
+		$state = $states[ $raw_state ];
 		$city = sanitize_text_field( $_POST['city'] );
 		$cities = self::$container[ Client::ECONT_CITIES ]->get_cities_by_region( $state, $country );
 		$cities_only_names = [];
