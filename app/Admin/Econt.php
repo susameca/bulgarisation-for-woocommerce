@@ -252,7 +252,8 @@ class Econt {
 			$cookie_data['other'] = $_REQUEST['other'];
 
 			$country = $cookie_data['country'];
-			$state = $container[ Client::ECONT_CITIES ]->get_state_name( sanitize_text_field( $cookie_data['state'] ), $country );
+			$states = woo_bg_return_bg_states();
+			$state = $states[ $cookie_data['state'] ];
 			$cities = $container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
 			$city_key = array_search( $cookie_data['city'], array_column( $cities, 'name' ) );
 			$type = ( !empty( $cookie_data['selectedAddress']['type'] ) ) ? $cookie_data['selectedAddress']['type'] :'';
