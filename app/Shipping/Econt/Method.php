@@ -340,7 +340,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( $this->cookie_data['payment'] === 'cod' ) {
 			$cart['services']['cdType'] = 'get';
-			$cart['services']['cdAmount'] = $this->package['cart_subtotal'];
+			$cart['services']['cdAmount'] = $this->get_package_total();
 			$cart['services']['cdCurrency'] = get_woocommerce_currency();
 		}
 
@@ -385,6 +385,18 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		return $payment_by_data;
+	}
+
+	private function get_package_total() {
+		$cd = 0;
+
+		if ( !empty( $this->package['contents'] ) ) {
+			foreach ( $this->package['contents'] as $product ) {
+				$cd += $product[ 'line_total' ] + $product[ 'line_tax' ];
+			}
+		}
+
+		return $cd;
 	}
 
 	public static function validate_econt_method( $fields, $errors ){
