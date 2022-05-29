@@ -66,6 +66,11 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 2.2.4 =
+Invoice: Change PDF printer functionality to use .ttf font
+Econt: Update checkout when change payment method
+Econt: Fix calculation on checkout when sender address is in different town from the selected office of sending
+
 = 2.2.3 =
 Econt: Fix calculation and generation for София-Град
 Econt: Fix cd amount when taxes are enabled
