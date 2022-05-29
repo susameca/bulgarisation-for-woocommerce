@@ -97,7 +97,6 @@ class Method extends \WC_Shipping_Method {
 			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
 		}
 
-
 		// Register the rate
 		$this->add_rate( $rate );
 	}
@@ -193,6 +192,10 @@ class Method extends \WC_Shipping_Method {
 			'label' => $this->generate_label(),
 			'mode' => 'calculate',
 		) );
+
+		if ( isset( $request_body['label']['senderOfficeCode'] ) ) {
+			unset( $request_body['label']['senderAddress'] );
+		}
 
 		WC()->session->set( 'woo-bg-econt-label' , $request_body );
 
@@ -441,3 +444,4 @@ class Method extends \WC_Shipping_Method {
 		);
 	}
 }
+
