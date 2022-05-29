@@ -6,7 +6,7 @@
         "ext-iconv": "*",
         "ext-mbstring": "*",
         "ext-soap": "*",
-        "setasign/fpdf": "~1.8.1",
+        "setasign/tfpdf": "1.32",
         "chillerlan/php-qrcode": "^4.3",
         "ddeboer/vatin": "^2.2"
     },
