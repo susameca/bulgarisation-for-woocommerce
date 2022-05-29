@@ -2,10 +2,10 @@
 Contributors: autopolisbg
 Tags: e-commerce, nra, nap, nekorekten.com, bulgaria, bulgarisation, invoice, woocommerce, econt
 Requires at least: 5.3
-Tested up to: 5.9.3
+Tested up to: 6
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 2.2.2
+Stable tag: 2.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,6 +65,12 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 2.2.3 =
+Econt: Fix calculation and generation for София-Град
+Econt: Fix cd amount when taxes are enabled
+Invoice: Force order documents to be attached to mails
+Change revolute link
 
 = 2.2.2 =
 Invoice: Fix default vat
