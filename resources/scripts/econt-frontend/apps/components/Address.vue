@@ -98,7 +98,6 @@ export default {
 
 		this.loadCity();
 
-
 		$('form.checkout').on('checkout_place_order', function (e) {
 			$('#billing_address_1').attr('disabled', false );
 			$('#shipping_address_1').attr('disabled', false );

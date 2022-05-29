@@ -4,6 +4,7 @@ import config from '@config';
 import '@styles/econt-frontend';
 
 let econt = import('./apps/app.js');
+
 econt.then( function ( promise ) {
 	let instance;
 
@@ -19,6 +20,10 @@ econt.then( function ( promise ) {
 		}
 		
 		if ( $shipping_method.length && $shipping_method.val().includes('woo_bg_econt') ) {
+			$('form.checkout').on('change', 'input[name="payment_method"]', function(){
+				$(document.body).trigger('update_checkout');
+			});
+			
 			window.wooBgEcontDoUpdate = true;
 			let $parent = $shipping_method.parent();
 			let $target = $parent.find('.woo-bg-additional-fields');
