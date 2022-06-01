@@ -18,15 +18,11 @@ class Office {
 		if ( $method->get_method_id() === Method::METHOD_ID ) {
 			if ( $method->meta_data['delivery_type'] === 'office' ) {
 				echo '<div id="woo-bg-econt-shipping-to--office" class="woo-bg-additional-fields" data-type="office"></div>';
-
-				wp_localize_script( 'woo-bg-js-econt', 'wooBg_econt', array(
-					'i18n' => self::get_i18n(),
-				) );
 			}
 		}
 	}
 
-	protected static function get_i18n() {
+	public static function get_i18n() {
 		return array(
 			'selected' => __( 'Selected', 'woo-bg' ),
 			'choose' => __( 'Choose', 'woo-bg' ),

@@ -37,12 +37,20 @@ econt.then( function ( promise ) {
 			}
 
 			if ( type === 'address' ) {
+				if ( typeof wooBg_econt_address === "undefined") {
+					window.location = window.location;
+				}
+
 				if ( typeof instance === 'object' ) {
 					instance.$destroy();
 				}
 
 				instance = new promise.address({ el: '#' + $target.attr('id') });
 			} else if ( type === 'office' ) {
+				if ( typeof wooBg_econt === "undefined") {
+					window.location = window.location;
+				}
+
 				if ( typeof instance === 'object' ) {
 					instance.$destroy();
 				}

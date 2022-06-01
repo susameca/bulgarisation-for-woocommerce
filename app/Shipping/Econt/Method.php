@@ -437,11 +437,20 @@ class Method extends \WC_Shipping_Method {
 			null, // version -- this is handled by the bundle manifest
 			true // in footer
 		);
+		
+		wp_localize_script( 'woo-bg-js-econt', 'wooBg_econt_address', array(
+			'i18n' => Address::get_i18n(),
+		) );
+
+		wp_localize_script( 'woo-bg-js-econt', 'wooBg_econt', array(
+			'i18n' => Office::get_i18n(),
+		) );
 
 		wp_enqueue_style(
 			'woo-bg-css-econt',
 			woo_bg()->plugin_dir_url() . woo_bg_assets_bundle( 'econt-frontend.css' )
 		);
+
 	}
 }
 

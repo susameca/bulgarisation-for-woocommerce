@@ -21,15 +21,11 @@ class Address {
 		if ( $method->get_method_id() === Method::METHOD_ID ) {
 			if ( $method->meta_data['delivery_type'] === 'address' ) {
 				echo '<div id="woo-bg-econt-shipping-to--address" class="woo-bg-additional-fields" data-type="address"></div>';
-
-				wp_localize_script( 'woo-bg-js-econt', 'wooBg_econt_address', array(
-					'i18n' => self::get_i18n(),
-				) );
 			}
 		}
 	}
 
-	protected static function get_i18n() {
+	public static function get_i18n() {
 		return array(
 			'selected' => __( 'Selected', 'woo-bg' ),
 			'choose' => __( 'Choose', 'woo-bg' ),
