@@ -93,7 +93,7 @@ class Method extends \WC_Shipping_Method {
 			}
 		}
 
-		if ( $this->free_shipping ) {
+		if ( $this->free_shipping && $rate['meta_data']['validated'] ) {
 			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
 		}
 
@@ -410,8 +410,10 @@ class Method extends \WC_Shipping_Method {
 				$data = WC()->session->get( 'shipping_for_package_' . $key )['rates'][ $shipping ];
 
 				if ( $data->method_id === 'woo_bg_econt' && ! $data->meta_data['validated'] ) {
-					if ( isset( $data->meta_data['errors'] ) && !empty( array_filter( $data->meta_data['errors'] ) ) ) {
-						$message = array_merge( array( __( 'Econt - ', 'woo-bg' ) ) , woo_bg()->container()[ Client::ECONT ]::add_error_message( $data->meta_data['errors'] ) );
+					$method_errors = $data->meta_data['errors'];
+
+					if ( !empty( $method_errors ) && !empty( array_filter( $method_errors ) ) ) {
+						$message = array_merge( array( __( 'Econt - ', 'woo-bg' ) ) , woo_bg()->container()[ Client::ECONT ]::add_error_message( $method_errors ) );
 						$errors->add( 'validation', implode( ' ', $message ) );
 					} else {
 						$errors->add( 'validation', __( 'Please choose delivery option!', 'woo-bg' ) );
