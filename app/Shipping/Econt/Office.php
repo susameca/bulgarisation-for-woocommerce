@@ -42,23 +42,14 @@ class Office {
 		$states = woo_bg_return_bg_states();
 		$state = $states[ $raw_state ];
 		$raw_city = sanitize_text_field( $_POST['city'] );
-		$city = mb_strtolower( Transliteration::latin2cyrillic( $raw_city ) );
-		$cities = self::$container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
-		$cities_only_names = [];
-		
-		if ( !empty( $cities ) ) {
-			$cities_only_names = array_map( function( $city ) {
-				return mb_strtolower( $city['name'] );
-			}, $cities );
-		}
 
-		if ( !in_array( mb_strtolower( $city ), $cities_only_names ) ) {
+		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $raw_city, $state );
+
+		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
 			$args[ 'status' ] = 'invalid-city';
-			$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'woo-bg' ), $city, $state );
+			$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'woo-bg' ), $raw_city, $state );
 		} else {
-			$city_key = array_search( $city, array_column( $cities, 'name' ) );
-
-			$args[ 'offices' ] = self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities[ $city_key ]['id'] )['offices'];
+			$args[ 'offices' ] = self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] )['offices'];
 			$args[ 'status' ] = 'valid-city';
 		}
 
