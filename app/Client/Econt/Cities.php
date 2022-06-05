@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Client\Econt;
 use Woo_BG\Container\Client;
+use Woo_BG\Transliteration;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -105,5 +106,33 @@ class Cities {
 	//Setters
 	private function set_cities( $cities, $country_code = 'BG' ) {
 		$this->cities[ $country_code ] = $cities;
+	}
+
+	public function get_filtered_cities( $city, $state ) {
+		$city = mb_strtolower( Transliteration::latin2cyrillic( $city ) );
+		$cities = self::get_cities_by_region( $state );
+		$cities_only_names = [];
+		$cities_search_names = [];
+		$cities_only_names_dropdowns = [];
+		
+		if ( !empty( $cities ) ) {
+			foreach ( $cities as $temp_city ) {
+				$cities_only_names_dropdowns[] = $temp_city['name'];
+				$temp_city['name'] = mb_strtolower( $temp_city['name'] );
+				$cities_only_names[] = $temp_city['name'];
+				$cities_search_names[] = $temp_city;
+			}
+		}
+
+		$city_key = array_search( $city, array_column( $cities_search_names, 'name' ) );
+
+		return [
+			'city' => $city,
+			'cities' => $cities,
+			'cities_only_names' => $cities_only_names,
+			'cities_search_names' => $cities_search_names,
+			'cities_only_names_dropdowns' => $cities_only_names_dropdowns,
+			'city_key' => $city_key,
+		];
 	}
 }

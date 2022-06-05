@@ -1,5 +1,4 @@
 <?php
-
 function woo_bg_assets_bundle( $path ) {
 	static $manifest = null;
 
