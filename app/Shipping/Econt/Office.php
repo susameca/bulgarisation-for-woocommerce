@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Shipping\Econt;
 use Woo_BG\Container\Client;
+use Woo_BG\Transliteration;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -40,13 +41,14 @@ class Office {
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$states = woo_bg_return_bg_states();
 		$state = $states[ $raw_state ];
-
-		$city = sanitize_text_field( $_POST['city'] );
+		$raw_city = sanitize_text_field( $_POST['city'] );
+		$city = mb_strtolower( Transliteration::latin2cyrillic( $raw_city ) );
 		$cities = self::$container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
+		$cities_only_names = [];
 		
 		if ( !empty( $cities ) ) {
 			$cities_only_names = array_map( function( $city ) {
-				return mb_strtolower($city['name']);
+				return mb_strtolower( $city['name'] );
 			}, $cities );
 		}
 

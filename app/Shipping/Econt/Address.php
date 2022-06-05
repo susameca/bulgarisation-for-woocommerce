@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Shipping\Econt;
 use Woo_BG\Container\Client;
+use Woo_BG\Transliteration;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -41,30 +42,30 @@ class Address {
 	public static function search_address() {
 		self::$container = woo_bg()->container();
 		$args = [];
-		$query = explode( ' ', sanitize_text_field( $_POST['query'] ) );
+		$query = Transliteration::latin2cyrillic( explode( ' ', sanitize_text_field( $_POST['query'] ) ) );
 		$country = sanitize_text_field( $_POST['country'] );
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$states = woo_bg_return_bg_states();
 		$state = $states[ $raw_state ];
-		$city = sanitize_text_field( $_POST['city'] );
-		$cities = self::$container[ Client::ECONT_CITIES ]->get_cities_by_region( $state, $country );
-		$cities_only_names = [];
-		
-		if ( !empty( $cities ) ) {
-			$cities_only_names = array_map( function( $city ) {
-				return $city['name'];
-			}, $cities );
-		}
+		$raw_city = sanitize_text_field( $_POST['city'] );
+		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $raw_city, $state );
 
-		if ( in_array( $city, $cities_only_names ) ) {
-			$city_key = array_search( $city, array_column( $cities, 'name' ) );
+		if ( in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
+			$streets = woo_bg_return_array_for_select( 
+				self::get_streets_for_query( $query, $cities_data['city_key'], $cities_data['cities'] ), 
+				1, 
+				array( 'type'=>'streets' ) 
+			);
 
-			$streets = woo_bg_return_array_for_select( self::get_streets_for_query( $query, $city_key, $cities ), 1, array( 'type'=>'streets' ) );
-			$quarters = woo_bg_return_array_for_select( self::get_quarters_for_query( $query, $city_key, $cities ), 1, array( 'type'=>'quarters' ) );
+			$quarters = woo_bg_return_array_for_select( 
+				self::get_quarters_for_query( $query, $cities_data['city_key'], $cities_data['cities'] ), 
+				1, 
+				array( 'type'=>'quarters' ) 
+			);
 
 			$args[ 'streets' ] = array_merge( $streets, $quarters );
 		} else {
-			$args[ 'cities' ] = woo_bg_return_array_for_select( self::get_cities_for_query( $query, $cities_only_names ), 1 );
+			$args[ 'cities' ] = woo_bg_return_array_for_select( self::get_cities_for_query( $query, $cities_data['cities_only_names'] ), 1 );
 		}
 
 		wp_send_json_success( $args );
@@ -76,28 +77,29 @@ class Address {
 		self::$container = woo_bg()->container();
 		$args = [];
 		$country = sanitize_text_field( $_POST['country'] );
+
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$states = woo_bg_return_bg_states();
 		$state = $states[ $raw_state ];
-		$city = sanitize_text_field( $_POST['city'] );
-		$cities = self::$container[ Client::ECONT_CITIES ]->get_cities_by_region( $state, $country );
-		$cities_only_names = [];
 
-		if ( !empty( $cities ) ) {
-			$cities_only_names = array_map( function( $city ) {
-				return $city['name'];
-			}, $cities );
-		}
+		$raw_city = sanitize_text_field( $_POST['city'] );
+		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $raw_city, $state );
 
-
-		if ( !in_array( $city, $cities_only_names ) ) {
-			$args[ 'cities' ] = woo_bg_return_array_for_select( $cities_only_names, 1, array( 'type'=>'city' ) );
+		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
+			$args[ 'cities' ] = woo_bg_return_array_for_select( $cities_data['cities_only_names_dropdowns'], 1, array( 'type'=>'city' ) );
 			$args[ 'status' ] = 'invalid-city';
 		} else {
-			$city_key = array_search( $city, array_column( $cities, 'name' ) );
+			$streets = woo_bg_return_array_for_select( 
+				self::get_streets_for_query( '', $cities_data['city_key'], $cities_data['cities'] ), 
+				1, 
+				array( 'type' => 'streets' ) 
+			);
 
-			$streets = woo_bg_return_array_for_select( self::get_streets_for_query( '', $city_key, $cities ), 1, array( 'type' => 'streets' ) );
-			$quarters = woo_bg_return_array_for_select( self::get_quarters_for_query( '', $city_key, $cities ), 1, array( 'type' => 'quarters' ) );
+			$quarters = woo_bg_return_array_for_select( 
+				self::get_quarters_for_query( '', $cities_data['city_key'], $cities_data['cities'] ), 
+				1, 
+				array( 'type' => 'quarters' ) 
+			);
 
 			$args[ 'streets' ] = array_merge( $streets, $quarters );
 			$args[ 'status' ] = 'valid-city';

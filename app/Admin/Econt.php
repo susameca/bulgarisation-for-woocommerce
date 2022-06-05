@@ -137,26 +137,30 @@ class Econt {
 	}
 
 	protected static function get_offices( $cookie_data ) {
-		$city = $cookie_data['city'];
 		$states = woo_bg_return_bg_states();
 		$state = $states[ $cookie_data['state'] ];
+		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $cookie_data['city'], $state );
 
-		$cities = self::$container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
-		$city_key = array_search( $city, array_column( $cities, 'name' ) );
-
-		return self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities[ $city_key ]['id'] )['offices'];
+		return self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] )['offices'];
 	}
 
 	protected static function get_streets( $cookie_data ) {
-		$city = $cookie_data['city'];
 		$states = woo_bg_return_bg_states();
 		$state = $states[ $cookie_data['state'] ];
 
-		$cities = self::$container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
-		$city_key = array_search( $city, array_column( $cities, 'name' ) );
+		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $cookie_data['city'], $state );
 
-		$streets = woo_bg_return_array_for_select( Address::get_streets_for_query( '', $city_key, $cities ), 1, array( 'type'=>'streets' ) );
-		$quarters = woo_bg_return_array_for_select( Address::get_quarters_for_query( '', $city_key, $cities ), 1, array( 'type'=>'quarters' ) );
+		$streets = woo_bg_return_array_for_select( 
+			Address::get_streets_for_query( '', $cities_data['city_key'], $cities_data['cities'] ), 
+			1, 
+			array( 'type' => 'streets' ) 
+		);
+
+		$quarters = woo_bg_return_array_for_select( 
+			Address::get_quarters_for_query( '', $cities_data['city_key'], $cities_data['cities'] ), 
+			1, 
+			array( 'type' => 'quarters' ) 
+		);
 
 		return array_merge( $streets, $quarters );
 	}
@@ -254,8 +258,11 @@ class Econt {
 			$country = $cookie_data['country'];
 			$states = woo_bg_return_bg_states();
 			$state = $states[ $cookie_data['state'] ];
-			$cities = $container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
-			$city_key = array_search( $cookie_data['city'], array_column( $cities, 'name' ) );
+
+			$cities_data = $container[ Client::ECONT_CITIES ]->get_filtered_cities( $cookie_data['city'], $state );
+			$cities = $cities_data['cities'];
+			$city_key = $cities_data['city_key'];
+
 			$type = ( !empty( $cookie_data['selectedAddress']['type'] ) ) ? $cookie_data['selectedAddress']['type'] :'';
 
 			$receiver_address = array(
