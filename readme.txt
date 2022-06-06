@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 2.2.4
+Stable tag: 2.2.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,6 +65,12 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 2.2.5 =
+Econt: Fix shipping methods not loading initially
+Econt: Fix error reporting on checkout
+Econt: Change matching cities and addresses
+Econt: Add transliteration from latin to cyrillic
 
 = 2.2.4 =
 Invoice: Change PDF printer functionality to use .ttf font
