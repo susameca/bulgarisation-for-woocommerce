@@ -89,6 +89,10 @@ function woo_bg_get_payment_types() {
 			'id' => 5,
 			'label' => __( 'Other', 'woo-bg' ),
 		),
+		6 => array(
+			'id' => 6,
+			'label' => __( 'Reflected with receipt', 'woo-bg' ),
+		),
 	);
 }
 
@@ -99,6 +103,7 @@ function woo_bg_get_payment_types_for_meta() {
 		'3' => \Audit\PaymentTypes\WithPostPayment::class, //3
 		'4' => \Audit\PaymentTypes\PaymentService::class, //4
 		'5' => \Audit\PaymentTypes\Other::class, //5
+		'6' => \Audit\PaymentTypes\ReflectedWithReceipt::class, //5
 	);
 }
 
