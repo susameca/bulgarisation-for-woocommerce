@@ -2,7 +2,7 @@
 Contributors: autopolisbg
 Tags: e-commerce, nra, nap, nekorekten.com, bulgaria, bulgarisation, invoice, woocommerce, econt
 Requires at least: 5.3
-Tested up to: 6
+Tested up to: 6.0.0
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
 Stable tag: 2.2.5
