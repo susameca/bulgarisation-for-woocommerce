@@ -104,16 +104,15 @@ export default {
 		});
 
 		this.document.on( 'update_checkout.onUpdate', this.onUpdate );
+		this.phoneField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
+		this.firstNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
+		this.lastNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 
 		if ( window.wooBgEcontDoUpdate ) {
 			this.document.trigger('update_checkout');
 		}
 	},
 	methods: {
-		onUpdate() {
-			this.Address1Field.attr('disabled', true);
-			this.setCookieData();
-		},
 		checkFields() {
 			$('#billing_address_1').attr('disabled', false);
 			$('#shipping_address_1').attr('disabled', false);
@@ -298,9 +297,19 @@ export default {
 
 			this.Address1Field.val( shippingAddress );
 		},
+		triggerUpdateCheckout() {
+			this.document.trigger('update_checkout');
+		},
+		onUpdate() {
+			this.Address1Field.attr('disabled', true);
+			this.setCookieData();
+		},
 	},
 	beforeDestroy() {
 		this.document.off( 'update_checkout.onUpdate');
+		this.phoneField.off( 'change.triggerUpdate' );
+		this.firstNameField.off( 'change.triggerUpdate' );
+		this.lastNameField.off( 'change.triggerUpdate' );
 
 		//setCookie( 'woo-bg--econt-address', '', 1 );
 		$('#billing_address_1').attr('disabled', false);

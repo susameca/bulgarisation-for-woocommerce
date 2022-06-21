@@ -86,6 +86,9 @@ export default {
 		this.initOfficeLocator();
 
 		this.document.on( 'update_checkout.setCookieOffice', this.setCookieData );
+		this.phoneField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
+		this.firstNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
+		this.lastNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		
 		if ( window.wooBgEcontDoUpdate ) {
 			this.document.trigger('update_checkout');
@@ -243,12 +246,17 @@ export default {
 			this.other = '';
 			localStorage.removeItem( 'woo-bg--econt-office' );
 		},
+		triggerUpdateCheckout() {
+			this.document.trigger('update_checkout');
+		},
 	},
 	beforeDestroy() {
 		this.document.off( 'update_checkout.setCookieOffice');
+		this.phoneField.off( 'change.triggerUpdate' );
+		this.firstNameField.off( 'change.triggerUpdate' );
+		this.lastNameField.off( 'change.triggerUpdate' );
+		
 		window.removeEventListener( 'message', this.setOfficeFromLocator, false );
-
-		//setCookie( 'woo-bg--econt-address', '', 1 );
 	}
 }
 </script>
