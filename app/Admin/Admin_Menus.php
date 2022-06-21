@@ -18,8 +18,9 @@ class Admin_Menus {
 
 	public function __construct() {
 		add_filter( 'woocommerce_navigation_is_connected_page', array( __CLASS__, 'is_connect_woo_bg_pages' ), 9, 2 );
-		add_action( 'wp_loaded', array( $this, 'after_setup_theme' ) );
+		add_action( 'wp_loaded', array(  __CLASS__, 'after_setup_theme' ) );
 		add_action( 'woocommerce_screen_ids', array( __CLASS__, 'add_screen_id' ), 0);
+		add_filter( 'upload_mimes', array( __CLASS__, 'allow_upload_xml' ) );
 	}
 
 	public static function add_screen_id( $screen_ids ) {
@@ -28,23 +29,23 @@ class Admin_Menus {
 		return $screen_ids;
 	}
 
-	public function after_setup_theme() {
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+	public static function after_setup_theme() {
+		new Ajax();
 
-		self::set_tabs();
+		add_action( 'admin_menu', array( __CLASS__, 'admin_menu' ) );
 	}
 
 	/**
 	 * Add menu items.
 	 */
-	public function admin_menu() {
+	public static function admin_menu() {
 		add_submenu_page( 
 			'woocommerce', 
 			__( 'Bulgarisation', 'woo-bg' ), 
 			__( 'Bulgarisation', 'woo-bg' ), 
 			'edit_others_shop_orders', 
 			'woo-bg', 
-			array( $this, 'settings_page_init' ) 
+			array( __CLASS__, 'settings_page_init' ) 
 		);
 	}
 
@@ -70,7 +71,6 @@ class Admin_Menus {
 	}
 
 	public static function connect_to_breadcrumbs( $breadcrumbs ) {
-		//$added_breadcrumbs = 
 		return apply_filters( 'woo_bg/admin/register_breadcrumbs', array(
 			array(
 				'admin.php?page=wc-admin',
@@ -84,9 +84,9 @@ class Admin_Menus {
 	/**
 	 * Loads gateways and shipping methods into memory for use within settings.
 	 */
-	public function settings_page_init() {
+	public static function settings_page_init() {
 		self::render_fragment( 'tabs', array(
-			'tabs' => $this->get_tabs(),
+			'tabs' => self::get_tabs(),
 		) );
 	}
 
@@ -95,11 +95,7 @@ class Admin_Menus {
 	 *
 	 * @return array
 	 */
-	public function get_tabs() {
-		return $this->tabs;
-	}
-
-	public function set_tabs() {
+	public static function get_tabs() {
 		$tabs = array(
 			new Tabs\Export_Tab(),
 			new Tabs\Settings_Tab(),
@@ -109,6 +105,10 @@ class Admin_Menus {
 			$tabs[] = new Tabs\Econt_Tab();
 		}
 
+		if ( woo_bg_get_option( 'apis', 'enable_cvc' ) === 'yes' ) {
+			$tabs[] = new Tabs\CVC_Tab();
+		}
+
 		if ( woo_bg_get_option( 'apis', 'enable_nekorekten' ) === 'yes' ) {
 			$tabs[] = new Tabs\Nekorekten_Com_Tab();
 		}
@@ -116,7 +116,7 @@ class Admin_Menus {
 		$tabs = apply_filters( 'woo_bg/admin/get_tabs_items', $tabs );
 		$tabs[] = new Tabs\Help_Tab();
 
-		$this->tabs = $tabs;
+		return $tabs;
 	}
 
 	public static function render_fragment( $fragment, $atts = array() ) {
@@ -129,5 +129,11 @@ class Admin_Menus {
 		extract( $atts );
 
 		include( $fragment_dir );
+	}
+
+	public static function allow_upload_xml( $mimes ) {
+	    $mimes = array_merge( $mimes, array( 'xml' => 'application/xml' ) );
+
+	    return $mimes;
 	}
 }

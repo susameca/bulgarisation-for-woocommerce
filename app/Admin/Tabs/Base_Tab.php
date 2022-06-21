@@ -17,6 +17,10 @@ abstract class Base_Tab {
 		return $this->description;
 	}
 
+	public function get_tab_slug() {
+		return $this->tab_slug;
+	}
+
 	//Setters
 	public function set_name( $name ) {
 		return $this->name = esc_html( $name );
