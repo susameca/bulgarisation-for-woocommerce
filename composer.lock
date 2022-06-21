@@ -214,16 +214,16 @@
         },
         {
             "name": "escapeboy/nra-audit-generator",
-            "version": "1.0.6",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/escapeboy/nra-audit-generator.git",
-                "reference": "7b59eca3c5001203b549b1b644b618623919074d"
+                "reference": "fa5515007d8bbad6aad150d0de417ec2a829a553"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/escapeboy/nra-audit-generator/zipball/7b59eca3c5001203b549b1b644b618623919074d",
-                "reference": "7b59eca3c5001203b549b1b644b618623919074d",
+                "url": "https://api.github.com/repos/escapeboy/nra-audit-generator/zipball/fa5515007d8bbad6aad150d0de417ec2a829a553",
+                "reference": "fa5515007d8bbad6aad150d0de417ec2a829a553",
                 "shasum": ""
             },
             "require": {
@@ -252,9 +252,9 @@
             "description": "NRA Orders Audit XML File Generator",
             "support": {
                 "issues": "https://github.com/escapeboy/nra-audit-generator/issues",
-                "source": "https://github.com/escapeboy/nra-audit-generator/tree/1.0.6"
+                "source": "https://github.com/escapeboy/nra-audit-generator/tree/1.1.0"
             },
-            "time": "2021-01-04T20:45:36+00:00"
+            "time": "2022-06-07T10:53:45+00:00"
         },
         {
             "name": "pimple/pimple",

@@ -8,8 +8,6 @@ class Help_Tab extends Base_Tab {
 		$this->set_name( __( 'Help', 'woo-bg' ) );
 		$this->set_description( __( 'If you need help', 'woo-bg' ) );
 		$this->set_tab_slug( "help" );
-
-		add_action( 'wp_ajax_woo_bg_send_request', array( $this, 'woo_bg_send_request_callback' ) );
 	}
 
 	public function render_tab_html() {
@@ -46,7 +44,7 @@ class Help_Tab extends Base_Tab {
 		);
 	}
 
-	public function woo_bg_send_request_callback() {
+	public static function woo_bg_send_request_callback() {
 		if ( !wp_verify_nonce( $_REQUEST['nonce'], 'woo_bg_contact' ) ) {
 			wp_send_json_error();
 			wp_die();

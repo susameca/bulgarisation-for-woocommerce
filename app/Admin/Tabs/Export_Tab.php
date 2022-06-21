@@ -8,10 +8,6 @@ class Export_Tab extends Base_Tab {
 		$this->set_name( __( 'Export', 'woo-bg' ) );
 		$this->set_description( __( 'Exporting XML', 'woo-bg' ) );
 		$this->set_tab_slug( "export" );
-
-		add_action( 'wp_ajax_woo_bg_export_nap', array( $this, 'woo_bg_export_nap_callback' ) );
-
-		add_filter( 'upload_mimes', array( __CLASS__, 'allow_upload_xml' ) );
 	}
 
 	public function render_tab_html() {
@@ -48,12 +44,12 @@ class Export_Tab extends Base_Tab {
 		return ob_get_clean();
 	}
 
-	public function woo_bg_export_nap_callback() {
+	public static function woo_bg_export_nap_callback() {
 		if ( !wp_verify_nonce( $_REQUEST['nonce'], 'woo_bg_export_nap' ) ) {
 			wp_send_json_error();
 		}
 
-		$generated_file = $this->generate_xml_file( sanitize_text_field( $_REQUEST[ 'year' ] ), sanitize_text_field( $_REQUEST[ 'generate_files' ] ) );
+		$generated_file = self::generate_xml_file( sanitize_text_field( $_REQUEST[ 'year' ] ), sanitize_text_field( $_REQUEST[ 'generate_files' ] ) );
 
 		if ( !$generated_file ) {
 			wp_send_json_success( array(
@@ -74,7 +70,7 @@ class Export_Tab extends Base_Tab {
 		) );
 	}
 
-	public function generate_xml_file( $date, $generate_files ) {
+	public static function generate_xml_file( $date, $generate_files ) {
 		$invoices = new \Woo_BG\Admin\Invoice\Menu();
 		$orders = wc_get_orders( array(
 			'date_created' => strtotime( 'first day of ' . $date ) . '...' . strtotime( 'last day of ' . $date . ' 23:59' ),
@@ -94,8 +90,9 @@ class Export_Tab extends Base_Tab {
 			'3' => \Audit\ReturnMethods\Cash::class, //3
 			'4' => \Audit\ReturnMethods\Other::class, //4
 		);
-
+		
 		$settings = new Settings_Tab();
+		$settings->load_fields();
 		$options = $settings->get_localized_fields();
 		$payment_methods = woo_bg_get_payment_types_for_meta();
 
@@ -207,13 +204,6 @@ class Export_Tab extends Base_Tab {
 			}
 
 			$shop->addOrder( $xml_order );
-
-			/*if ( ! is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) ) {
-				
-			} else if( !in_array( $order->get_id(), $refunded_orders ) ) {
-				
-				$refunded_orders[] = $order->get_id();
-			}*/
 		}
 
 		$name = uniqid( rand(), true );
@@ -238,11 +228,5 @@ class Export_Tab extends Base_Tab {
 			'file' => wp_get_attachment_url( $attach_id ),
 			'not_included_orders' => $not_included_orders,
 		);
-	}
-
-	public static function allow_upload_xml( $mimes ) {
-	    $mimes = array_merge( $mimes, array( 'xml' => 'application/xml' ) );
-
-	    return $mimes;
 	}
 }

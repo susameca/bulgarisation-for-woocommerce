@@ -22,7 +22,9 @@ class Econt_Tab extends Base_Tab {
 		add_filter( 'woo_bg/admin/settings/econt/fields', array( $this, 'add_send_from_fields' ), 20 );
 		add_filter( 'woo_bg/admin/settings/econt/groups_titles', array( $this, 'add_send_from_group_title' ) );
 
-		$this->load_fields();
+		if ( !empty( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] === $this->get_tab_slug() ) {
+			$this->load_fields();
+		}
 	}
 
 	private function maybe_clear_cache() {

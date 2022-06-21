@@ -210,6 +210,7 @@ class Econt {
 		$label = self::update_payment_by( $label );
 		$label = self::update_shipment_type( $label );
 		$label = self::update_shipment_description( $label );
+		$label = self::update_phone_and_names( $label );
 
 		$generated_data = self::generate_response( $label );
 		$response = $generated_data['response'];
@@ -363,6 +364,29 @@ class Econt {
 		}
 
 		$label[ 'shipmentDescription' ] = implode( ', ', $names );
+
+		return $label;
+	}
+
+	protected static function update_phone_and_names( $label ) {
+		$order = new \WC_Order( $_REQUEST['orderId'] );
+		$phone = [];
+		$name = '';
+
+		if ( $order->get_shipping_first_name() && $order->get_shipping_last_name() ) {
+			$name = $order->get_shipping_first_name() . " " . $order->get_shipping_last_name();
+		} else {
+			$name = $order->get_billing_first_name() . " " . $order->get_billing_last_name();
+		}
+
+		if ( $order->get_shipping_phone() ) {
+			$phone = [ $order->get_shipping_phone() ];
+		} else {
+			$phone = [ $order->get_billing_phone() ];
+		}
+
+		$label['receiverClient']['name'] = $name;
+		$label['receiverClient']['phones'] = $phone;
 
 		return $label;
 	}

@@ -10,9 +10,10 @@ class Settings_Tab extends Base_Tab {
 		$this->set_name( __( 'Settings', 'woo-bg' ) );
 		$this->set_description( __( 'Plugin Settings', 'woo-bg' ) );
 		$this->set_tab_slug( "settings" );
-		$this->load_fields();
 
-		add_action( 'wp_ajax_woo_bg_save_settings', array( $this, 'woo_bg_save_settings_callback' ) );
+		if ( !empty( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] === $this->get_tab_slug() ) {
+			$this->load_fields();
+		}
 	}
 
 	public function render_tab_html() {
@@ -53,6 +54,7 @@ class Settings_Tab extends Base_Tab {
 			'apis' => array(
 				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'enable_nekorekten', __( 'Enable nekorekten.com API? ', 'woo-bg' ), null, null, __( 'If yes, you will receive information about the customer from nekorekten.com.', 'woo-bg' ) ),
 				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'enable_econt', __( 'Enable Econt Delivery? ', 'woo-bg' ), null, null, __( 'Enables Econt Shipping methods.', 'woo-bg' ) ),
+				//new Fields\Select_Field( woo_bg_get_yes_no_options(), 'enable_cvc', __( 'Enable CVC Delivery? ', 'woo-bg' ), null, null, __( 'Enables CVC Shipping methods.', 'woo-bg' ) ),
 			),
 			'invoice' => array(
 				new Fields\Select_Field( array(
@@ -145,8 +147,6 @@ class Settings_Tab extends Base_Tab {
 
 		return $titles;
 	}
-
-	
 
 	public function add_payment_methods_fields( $fields ) {
 		$gateways = WC()->payment_gateways->payment_gateways();

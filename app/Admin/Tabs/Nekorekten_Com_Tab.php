@@ -10,7 +10,10 @@ class Nekorekten_Com_Tab extends Base_Tab {
 		$this->set_name( __( 'nekorekten.com Settings', 'woo-bg' ) );
 		$this->set_description( __( 'nekorekten.com API Settings', 'woo-bg' ) );
 		$this->set_tab_slug( "nekorekten" );
-		$this->load_fields();
+
+		if ( !empty( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] === $this->get_tab_slug() ) {
+			$this->load_fields();
+		}
 	}
 
 	public function render_tab_html() {
