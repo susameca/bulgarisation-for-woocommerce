@@ -210,3 +210,11 @@ function woo_bg_support_text() {
 	echo wpautop( __( 'For monthly development support or need a premium plugin support you can donate at ', 'woo-bg' ) . '<a target="_blank" href="https://www.patreon.com/tparushev">Patreon</a>.' );
 	echo wpautop( __( 'For single donation as development support you can send at ', 'woo-bg' ) . '<a target="_blank" href="https://revolut.me/tihomi9gj5">Revolute</a>.' );
 }
+
+function woo_bg_get_shipping_tests_options() {
+	return array(
+		'no' => __( 'No', 'woo-bg' ),
+		'review' => __( 'Review only', 'woo-bg' ),
+		'test' => __( 'Review and test', 'woo-bg' ),
+	);
+}

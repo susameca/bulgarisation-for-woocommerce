@@ -50,6 +50,7 @@ class Settings_Tab extends Base_Tab {
 				new Fields\Text_Field( 'nap_number', __( 'NRA unique number', 'woo-bg' ), __( 'The number received by the NRA when submitting information under Art. 52p according to Annex № 33.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'domain', __( 'Domain Name', 'woo-bg' ), __( 'Web address of the e-shop. It is introduced in the same way as when submitting information under Art. 52p according to Annex № 33 in the portal for electronic services of the NRA.', 'woo-bg' ), 'required' ),
 				new Fields\Select_Field( woo_bg_get_yes_no_options() , 'disable_fields', __( 'Disable Checkout fields', 'woo-bg' ), null, null, __( 'This option will hide the plugin fields on the checkout page.', 'woo-bg' ) ),
+				new Fields\Select_Field( woo_bg_get_yes_no_options() , 'alternative_shipping_table', __( 'Alternative shipping options layout ( checkout )', 'woo-bg' ), null, null, __( 'Make shipping options on 2 rows and full width in the checkout table.', 'woo-bg' ) ),
 			),
 			'apis' => array(
 				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'enable_nekorekten', __( 'Enable nekorekten.com API? ', 'woo-bg' ), null, null, __( 'If yes, you will receive information about the customer from nekorekten.com.', 'woo-bg' ) ),
@@ -65,6 +66,10 @@ class Settings_Tab extends Base_Tab {
 					'order_completed' => array(
 						'id' => 'order_completed',
 						'label' => __( 'Order completed', 'woo-bg' ),
+					),
+					'disable' => array(
+						'id' => 'disable',
+						'label' => __( 'Disable documents generation', 'woo-bg' ),
 					),
 				), 'trigger', __( 'When to generate documents?', 'woo-bg' ) ),
 				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'invoices', __( 'Generating Invoices?', 'woo-bg' ), null, null, __( 'By default, the plugin generates documents - "Order" and "Rejected Order", if you want the plugin to issue documents "Invoice" and "Credit notification", select "Yes".', 'woo-bg' ) ),

@@ -47,6 +47,7 @@ class Plugin {
 		new Admin\Admin_Menus();
 		new Admin\Invoice\Menu();
 		new Shipping\Register( $this->container );
+		new Shipping\CheckoutLayout();
 
 		if ( woo_bg_get_option( 'nap', 'disable_fields' ) !== 'yes' ) {
 			new Front_End\Checkout\Company();

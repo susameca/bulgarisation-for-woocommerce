@@ -165,6 +165,27 @@
 							</multiselect>
 						</p>
 
+						<p class="form-field form-field-wide">
+							<label>
+								{{i18n.reviewAndTest}}:
+							</label>
+
+							<multiselect 
+								v-model="testOption" 
+								deselect-label="" 
+								selectLabel="" 
+								track-by="id" 
+								label="label" 
+								:selectedLabel="i18n.selected" 
+								:placeholder="i18n.choose" 
+								:options="Object.values( testsOptions )" 
+								:searchable="true" 
+								:allow-empty="false"
+							>
+								<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
+							</multiselect>
+						</p>
+
 						<p v-if="( paymentBy.id === 'fixed' )" class="form-field form-field-wide">
 							<label>
 								{{i18n.fixedPrice}}:
@@ -295,6 +316,8 @@ export default {
 			offices: _.cloneDeep( wooBg_econt.offices ),
 			street: '',
 			streets: _.cloneDeep( wooBg_econt.streets ),
+			testOption: '',
+			testsOptions: _.cloneDeep( wooBg_econt.testsOptions ),
 			streetNumber: '',
 			other: '',
 			message: '',
@@ -369,6 +392,12 @@ export default {
 			}
 		});
 
+		this.testsOptions.forEach( function ( option ) {
+			if ( option.id == wooBg_econt.testOption ) {
+				_this.testOption = option;
+			}
+		});
+
 		if ( wooBg_econt.cookie_data.type == 'office' ) {
 			this.offices.forEach( function ( office ) {
 				if ( office.code == wooBg_econt.cookie_data.selectedOffice ) {
@@ -413,6 +442,7 @@ export default {
 				streetNumber: this.streetNumber,
 				other: this.other,
 				paymentBy: this.paymentBy,
+				testOption: this.testOption,
 				cookie_data: wooBg_econt.cookie_data,
 				orderId: wooBg_econt.orderId,
 				action: 'woo_bg_econt_generate_label',
