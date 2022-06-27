@@ -128,11 +128,7 @@ class Method extends \WC_Shipping_Method {
 				'type'              => 'select',
 				'css'               => 'width: 400px;',
 				'default'           => 'no',
-				'options'           => array(
-					'no' => __( 'No', 'woo-bg' ),
-					'review' => __( 'Review only', 'woo-bg' ),
-					'test' => __( 'Review and test', 'woo-bg' ),
-				),
+				'options'           => woo_bg_get_shipping_tests_options(),
 			),
 			'sms'    => array(
 				'title'             => __( 'SMS notification', 'woo-bg' ),

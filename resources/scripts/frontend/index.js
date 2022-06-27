@@ -13,5 +13,4 @@ $doc.on('update_checkout', function() {
 
 $('#woo-billing-to-company').on( 'change', function() {
 	$doc.trigger("update_checkout");
-})
-
+});

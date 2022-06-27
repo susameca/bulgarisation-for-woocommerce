@@ -18,6 +18,8 @@ class Menu {
 			add_action( 'woocommerce_checkout_order_processed', array( $this, 'generate_documents' ) );
 		} else if ( $order_documents_trigger === "order_completed" ) {
 			add_action( 'woocommerce_order_status_completed', array( $this, 'generate_documents' ) );
+		} else if ( $order_documents_trigger === "disable" ) {
+			return;
 		}
 
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );

@@ -83,6 +83,8 @@ class Econt {
 						'offices' => self::get_offices( $cookie_data ),
 						'streets' => self::get_streets( $cookie_data ),
 						'orderId' => $theorder->get_id(),
+						'testsOptions' => woo_bg_return_array_for_select( woo_bg_get_shipping_tests_options() ),
+						'testOption' => self::get_test_option( $label_data['label'] ),
 						'i18n' => self::get_i18n(),
 					) );
 					break;
@@ -123,6 +125,7 @@ class Econt {
 			'time' => __( 'Time:', 'woo-bg' ),
 			'event' => __( 'Event:', 'woo-bg' ),
 			'details' => __( 'Details:', 'woo-bg' ),
+			'reviewAndTest' => __( 'Review and test', 'woo-bg' ),
 		);
 	}
 
@@ -163,6 +166,18 @@ class Econt {
 		);
 
 		return array_merge( $streets, $quarters );
+	}
+
+	protected static function get_test_option( $label ) {
+		$option = 'no';
+
+		if ( !empty( $label['payAfterAccept'] ) && !empty( $label['payAfterTest'] ) ) {
+			$option = 'test';
+		} else if ( !empty( $label['payAfterAccept'] ) ) {
+			$option = 'review';
+		}
+
+		return $option;
 	}
 
 	public static function delete_label() {
@@ -208,6 +223,7 @@ class Econt {
 		$label = self::update_receiver_address( $label );
 		$label = self::update_label_pay_options( $label );
 		$label = self::update_payment_by( $label );
+		$label = self::update_test_options( $label );
 		$label = self::update_shipment_type( $label );
 		$label = self::update_shipment_description( $label );
 		$label = self::update_phone_and_names( $label );
@@ -334,6 +350,21 @@ class Econt {
 			$label['paymentSenderMethod'] = $sender_method;
 			$label['paymentReceiverMethod'] = 'cash';
 			$label['paymentReceiverAmount'] = $fixed_price;
+		}
+		
+		return $label;
+	}
+
+	protected static function update_test_options( $label ) {
+		$payment_by = $_REQUEST['testOption'];
+		$label['payAfterAccept'] = false;
+		$label['payAfterTest'] = false;
+
+		if ( $payment_by['id'] == 'review' ) {
+			$label['payAfterAccept'] = true;
+		} else if ( $payment_by['id'] == 'test' ) {
+			$label['payAfterAccept'] = true;
+			$label['payAfterTest'] = true;
 		}
 		
 		return $label;

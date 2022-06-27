@@ -152,7 +152,7 @@ class EU_Vat {
 		$vat_number = str_replace( array( ' ', '.', '-', ',', ', ' ), '', trim( $vat_number ) );
 
 		if ( ! isset( self::$country_codes_patterns[ $vat_prefix ] ) ) {
-			return new WP_Error( 'api', __( 'Invalid country code', 'woo-bg' ) );
+			return new \WP_Error( 'api', __( 'Invalid country code', 'woo-bg' ) );
 		}
 
 		try {
@@ -163,7 +163,7 @@ class EU_Vat {
 			set_transient( $transient_name, $is_valid ? 'yes' : 'no', 7 * DAY_IN_SECONDS );
 			return $is_valid;
 		} catch( SoapFault $e ) {
-			return new WP_Error( 'api', __( 'Error communicating with the VAT validation server - please try again', 'woo-bg' ) );
+			return new \WP_Error( 'api', __( 'Error communicating with the VAT validation server - please try again', 'woo-bg' ) );
 		}
 
 		return false;
