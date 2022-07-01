@@ -172,7 +172,7 @@ class Settings_Tab extends Base_Tab {
 		return $fields;
 	}
 
-	public function woo_bg_save_settings_callback() {
+	public static function woo_bg_save_settings_callback() {
 		if ( !wp_verify_nonce( $_REQUEST['nonce'], 'woo_bg_settings' ) ) {
 			wp_send_json_error();
 			wp_die();
