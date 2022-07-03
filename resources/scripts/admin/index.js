@@ -10,9 +10,15 @@ if ( $('#woo-bg-settings').length ) {
 }
 
 if ( $('#woo-bg-exports').length ) {
-	let exportTab = () => import('./apps/export/app.js');
+	let exportTab = () => import('./apps/export/nra/app.js');
 
 	exportTab();
+}
+
+if ( $('#woo-bg-exports--microinvest').length ) {
+	let exportTabMicroinvest = () => import('./apps/export/microinvest/app.js');
+
+	exportTabMicroinvest();
 }
 
 if ( $('#woo-bg-contact-form').length ) {
