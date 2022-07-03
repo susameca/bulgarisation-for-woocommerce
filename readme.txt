@@ -66,6 +66,15 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 2.2.6 =
+Econt: Add new option to change shipping options layout in checkout
+Econt: Add option to change review and test in order page
+Econt: Fix label phone and names
+Invoice: Add option to disable document generations
+Invoice: Add new payment type for NRA
+Fix error on eu vat at checkout
+Optimize tabs functionality
+
 = 2.2.5 =
 Econt: Fix shipping methods not loading initially
 Econt: Fix error reporting on checkout

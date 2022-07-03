@@ -321,8 +321,13 @@ class Econt {
 				foreach ( $cd_pay_options as $option ) {
 					if ( $option['num'] === $cd_pay_option && $option['method'] != 'office' ) {
 						$order = new \WC_Order( $_REQUEST['orderId'] );
+						$document_number = $order->get_meta( 'woo_bg_order_number' );
 
-						$label['services']['invoiceNum'] = $order->get_meta( 'woo_bg_order_number' ) . '/' . date( 'd.m.y', strtotime( $order->get_date_created() ) );
+						if ( !$document_number ) {
+							$document_number = str_pad( $order->get_id(), 10, '0', STR_PAD_LEFT );
+						}
+
+						$label['services']['invoiceNum'] = $document_number . '/' . date( 'd.m.y', strtotime( $order->get_date_created() ) );
 					}
 				}
 			}

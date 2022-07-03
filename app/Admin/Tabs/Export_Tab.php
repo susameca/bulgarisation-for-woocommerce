@@ -16,6 +16,7 @@ class Export_Tab extends Base_Tab {
 		woo_bg_support_text();
 		?>
 		<div id="woo-bg-exports"></div><!-- /#woo-bg-export -->
+		<div id="woo-bg-exports--microinvest"></div><!-- /#woo-bg-export -->
 		<?php
 	}
 
@@ -30,10 +31,20 @@ class Export_Tab extends Base_Tab {
 	public function get_i18n() {
 		return array(
 			'description' => $this->get_description(),
+			'microinvestDescription' => $this->get_microinvest_description(),
 			'choose_month' => __( 'Select a month for the report', 'woo-bg' ),
 			'generated_files' => __( 'Generate documents for orders before the plugin was installed?', 'woo-bg' ),
 			'download' => __( 'Generate an XML file', 'woo-bg' ),
+			'export_documents' => __( 'Export documents', 'woo-bg' ),
 		);
+	}
+
+	public function get_microinvest_description() {
+		ob_start();
+		?>
+		<h2><?php _e('Export documents for Microinvest', 'woo-bg' ) ?></h2>
+		<?php
+		return ob_get_clean();
 	}
 
 	public function get_description() {
@@ -215,18 +226,132 @@ class Export_Tab extends Base_Tab {
 		}
 
 		$attachment = array(
-             'guid' => $xml[ 'file' ], 
-             'post_mime_type' => $xml['type'],
-             'post_title' => $name,
-             'post_content' => '',
-             'post_status' => 'inherit'
-        );
+			 'guid' => $xml[ 'file' ], 
+			 'post_mime_type' => $xml['type'],
+			 'post_title' => $name,
+			 'post_content' => '',
+			 'post_status' => 'inherit'
+		);
 
 		$attach_id = wp_insert_attachment( $attachment, $xml[ 'file' ] );
 
 		return array(
 			'file' => wp_get_attachment_url( $attach_id ),
 			'not_included_orders' => $not_included_orders,
+		);
+	}
+
+	public static function woo_bg_export_microinvest_callback() {
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], 'woo_bg_export_nap' ) ) {
+			wp_send_json_error();
+		}
+
+		$generated_file = self::generate_microinvest_file( sanitize_text_field( $_REQUEST[ 'year' ] ) );
+
+		if ( !$generated_file ) {
+			wp_send_json_success( array(
+				"message" => __( 'No orders found for this month.', 'woo-bg' ),
+			) );
+		}
+
+		$additional_message = '';
+
+		if ( !empty( $generated_file['not_included_orders'] ) ) {
+			$additional_message = '. ' . sprintf( 
+				__( 'Some of the orders was not included because the payment method options was not found or the payment method was disabled. List of orders id\'s: %s', 'woo-bg' ), 
+				implode(', ', $generated_file['not_included_orders'] ) 
+			);
+		}
+		wp_send_json_success( array(
+			"message" => sprintf( __( 'File generated successfully! <a href="%s" download target="_blank">Download</a>', 'woo-bg' ), $generated_file['file'] ) . $additional_message,
+		) );
+	}
+
+	public static function generate_microinvest_file( $date ) {
+		$orders = wc_get_orders( array(
+			'date_created' => strtotime( 'first day of ' . $date ) . '...' . strtotime( 'last day of ' . $date . ' 23:59' ),
+			'limit' => -1,
+		) );
+		
+		$refunded_orders = [];
+
+		$orders_ids = wp_list_pluck( $orders, 'id' );
+
+		$documents = [];
+
+		foreach ( $orders as $key => $order ) {
+			if ( get_post_meta( $order->get_id(), 'woo_bg_invoice_document', 1 ) ) {
+
+				$total_due = $order->get_total();
+
+				if ( $add_shipping === 'no' ) {	
+					$total_due = number_format( $order->get_total() - $order->get_shipping_total() - $order->get_shipping_tax(), 2 );
+				}
+
+				$documents[] = array(
+					'2', 
+					date_i18n( 'd.m.Y', strtotime( $order->get_date_created() ) ),
+					get_post_meta( $order->get_id(), 'woo_bg_order_number', 1 ),
+					'Ф-ра',
+					$total_due,
+					'16',
+					woo_bg_get_option( 'nap', 'company_name' ),
+					woo_bg_get_option( 'nap', 'mol' ),
+					woo_bg_get_option( 'nap', 'city' ),
+					woo_bg_get_option( 'nap', 'address' ),
+					woo_bg_get_option( 'nap', 'dds_number' ),
+					woo_bg_get_option( 'nap', 'eik' ),
+					'',
+					'Издадена фактура',
+					'',
+					'-1'
+				);
+			}
+
+			if ( get_post_meta( $order->get_id(), 'woo_bg_refunded_invoice_document', 1 ) ) {
+				$documents[] = array(
+					'2', 
+					date_i18n( 'd.m.Y', strtotime( $order->get_date_created() ) ),
+					get_post_meta( $order->get_id(), 'woo_bg_refunded_order_number', 1 ),
+					'КИ',
+					$total_due,
+					'16',
+					woo_bg_get_option( 'nap', 'company_name' ),
+					woo_bg_get_option( 'nap', 'mol' ),
+					woo_bg_get_option( 'nap', 'city' ),
+					woo_bg_get_option( 'nap', 'address' ),
+					woo_bg_get_option( 'nap', 'dds_number' ),
+					woo_bg_get_option( 'nap', 'eik' ),
+					'',
+					'Издадена фактура',
+					'',
+					'-1'
+				);
+			}
+		}
+
+		$rows = array_map( function ( $document ) {
+			return implode('|', $document );
+		}, $documents );
+
+		$txt = wp_upload_bits( 'import.txt', null, implode( "\n", $rows ) );
+
+		if ( is_wp_error( $txt ) ) {
+			return;
+		}
+
+		$attachment = array(
+			'guid' => $txt[ 'file' ], 
+			'post_mime_type' => $txt['type'],
+			'post_title' => $name,
+			'post_content' => '',
+			'post_status' => 'inherit'
+		);
+
+		$attach_id = wp_insert_attachment( $attachment, $txt[ 'file' ] );
+
+		return array(
+			'file' => wp_get_attachment_url( $attach_id ),
 		);
 	}
 }

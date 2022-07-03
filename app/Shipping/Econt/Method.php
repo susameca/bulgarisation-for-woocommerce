@@ -374,7 +374,7 @@ class Method extends \WC_Shipping_Method {
 			$payment_by_data['paymentReceiverAmount'] = $this->fixed_price;
 		}
 
-		if ( !empty( $this->free_shipping_over ) && $this->package['cart_subtotal'] > $this->free_shipping_over ) {
+		if ( !empty( $this->free_shipping_over ) && $this->get_package_total() > $this->free_shipping_over ) {
 			$this->free_shipping = true;
 
 			unset( $payment_by_data[ 'paymentReceiverMethod' ] );
@@ -387,15 +387,13 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function get_package_total() {
-		$cd = 0;
+		$total = WC()->cart->total;
 
-		if ( !empty( $this->package['contents'] ) ) {
-			foreach ( $this->package['contents'] as $product ) {
-				$cd += $product[ 'line_total' ] + $product[ 'line_tax' ];
-			}
+		if ( WC()->cart->shipping_total ) {
+			$total -= WC()->cart->shipping_total;
 		}
 
-		return $cd;
+		return $total;
 	}
 
 	public static function validate_econt_method( $fields, $errors ){
