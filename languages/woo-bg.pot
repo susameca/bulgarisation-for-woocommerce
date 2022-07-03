@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-26 20:16+0000\n"
+"POT-Creation-Date: 2022-07-03 08:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -303,7 +303,7 @@ msgstr ""
 msgid "E-mail: %s"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:412
+#: app/Shipping/Econt/Method.php:410
 msgid "Econt - "
 msgstr ""
 
@@ -428,11 +428,19 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
+#: app/Admin/Tabs/Export_Tab.php:38
+msgid "Export documents"
+msgstr ""
+
+#: app/Admin/Tabs/Export_Tab.php:45
+msgid "Export documents for Microinvest"
+msgstr ""
+
 #: app/Admin/Tabs/Export_Tab.php:9
 msgid "Exporting XML"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:69
+#: app/Admin/Tabs/Export_Tab.php:80 app/Admin/Tabs/Export_Tab.php:266
 #, php-format
 msgid ""
 "File generated successfully! <a href=\"%s\" download target=\"_blank\">"
@@ -489,11 +497,11 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:35
+#: app/Admin/Tabs/Export_Tab.php:37
 msgid "Generate an XML file"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:34
+#: app/Admin/Tabs/Export_Tab.php:36
 msgid "Generate documents for orders before the plugin was installed?"
 msgstr ""
 
@@ -672,7 +680,7 @@ msgstr ""
 msgid "No agreement"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:56
+#: app/Admin/Tabs/Export_Tab.php:67 app/Admin/Tabs/Export_Tab.php:253
 msgid "No orders found for this month."
 msgstr ""
 
@@ -802,7 +810,7 @@ msgstr ""
 msgid "Place of transaction"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:415 app/Shipping/Econt/Method.php:415
+#: app/Shipping/CVC/Method.php:415 app/Shipping/Econt/Method.php:413
 msgid "Please choose delivery option!"
 msgstr ""
 
@@ -908,7 +916,7 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:33
+#: app/Admin/Tabs/Export_Tab.php:35
 msgid "Select a month for the report"
 msgstr ""
 
@@ -978,7 +986,7 @@ msgid "Shipment type"
 msgstr ""
 
 #: app/Admin/Invoice/Menu.php:299 app/Admin/Invoice/Menu.php:436
-#: app/Admin/Tabs/Export_Tab.php:196
+#: app/Admin/Tabs/Export_Tab.php:207
 #, php-format
 msgid "Shipping: %s"
 msgstr ""
@@ -991,7 +999,7 @@ msgstr ""
 msgid "SMS notification"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:64
+#: app/Admin/Tabs/Export_Tab.php:75 app/Admin/Tabs/Export_Tab.php:261
 #, php-format
 msgid ""
 "Some of the orders was not included because the payment method options was "
@@ -1002,7 +1010,7 @@ msgstr ""
 msgid "Standard"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:42
+#: app/Admin/Tabs/Export_Tab.php:53
 msgid "Standardized audit file according to Annex № 38"
 msgstr ""
 
