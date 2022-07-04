@@ -88,7 +88,6 @@ class Export_Tab extends Base_Tab {
 			'status' => array( 'wc-completed' ),
 			'limit' => -1,
 		) );
-		$refunded_orders = [];
 
 		$not_included_orders = array();
 		$add_shipping = woo_bg_get_option( 'invoice', 'add_shipping' );
@@ -273,60 +272,86 @@ class Export_Tab extends Base_Tab {
 			'limit' => -1,
 		) );
 		
-		$refunded_orders = [];
-
-		$orders_ids = wp_list_pluck( $orders, 'id' );
-
+		$add_shipping = woo_bg_get_option( 'invoice', 'add_shipping' );
 		$documents = [];
 
 		foreach ( $orders as $key => $order ) {
-			if ( get_post_meta( $order->get_id(), 'woo_bg_invoice_document', 1 ) ) {
+			$names = [];
+			foreach ( $order->get_items() as $item ) {
+				$names[] = $item->get_name();
+			}
 
+			$temp_order = $order;
+			$company = '';
+			$eik = '';
+			$vat_number = '';
+			$mol = '';
+			$address = '';
+			$city = '';
+
+			if ( is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) ) {
+				$temp_order = new \WC_Order( $order->get_parent_id() );
+			}
+
+			if ( $temp_order->get_meta('_billing_to_company') === '1' ) {
+				$company = $temp_order->get_billing_company();
+				$eik = $temp_order->get_meta('_billing_company_eik');
+				$vat_number = $temp_order->get_meta('_billing_vat_number');
+				$mol = $temp_order->get_meta('_billing_company_mol');
+				$city = $temp_order->get_meta('_billing_company_settlement');
+				$address = $temp_order->get_meta('_billing_company_address');
+			} else {
+				$company = $temp_order->get_billing_first_name() . ' ' . $temp_order->get_billing_last_name();
+				$address = $temp_order->get_billing_address_1() . " " . $temp_order->get_billing_address_2();
+				$city = $temp_order->get_billing_city();
+			}
+
+			if ( get_post_meta( $order->get_id(), 'woo_bg_invoice_document', 1 ) ) {
 				$total_due = $order->get_total();
 
 				if ( $add_shipping === 'no' ) {	
 					$total_due = number_format( $order->get_total() - $order->get_shipping_total() - $order->get_shipping_tax(), 2 );
 				}
 
-				$documents[] = array(
+				$documents[] = apply_filters( 'woo_bg/admin/export/microinvest-order', array(
 					'2', 
 					date_i18n( 'd.m.Y', strtotime( $order->get_date_created() ) ),
 					get_post_meta( $order->get_id(), 'woo_bg_order_number', 1 ),
 					'Ф-ра',
 					$total_due,
 					'16',
-					woo_bg_get_option( 'nap', 'company_name' ),
-					woo_bg_get_option( 'nap', 'mol' ),
-					woo_bg_get_option( 'nap', 'city' ),
-					woo_bg_get_option( 'nap', 'address' ),
-					woo_bg_get_option( 'nap', 'dds_number' ),
-					woo_bg_get_option( 'nap', 'eik' ),
+					$company,
+					$mol,
+					$city,
+					$address,
+					$vat_number,
+					$eik,
 					'',
-					'Издадена фактура',
-					'',
+					'Продажба',
+					implode( ', ', $names ),
 					'-1'
-				);
+				), $order, $temp_order );
 			}
 
 			if ( get_post_meta( $order->get_id(), 'woo_bg_refunded_invoice_document', 1 ) ) {
-				$documents[] = array(
+				$documents[] = apply_filters( 'woo_bg/admin/export/microinvest-order', array(
 					'2', 
 					date_i18n( 'd.m.Y', strtotime( $order->get_date_created() ) ),
 					get_post_meta( $order->get_id(), 'woo_bg_refunded_order_number', 1 ),
 					'КИ',
 					$total_due,
 					'16',
-					woo_bg_get_option( 'nap', 'company_name' ),
-					woo_bg_get_option( 'nap', 'mol' ),
-					woo_bg_get_option( 'nap', 'city' ),
-					woo_bg_get_option( 'nap', 'address' ),
-					woo_bg_get_option( 'nap', 'dds_number' ),
-					woo_bg_get_option( 'nap', 'eik' ),
+					$company,
+					$mol,
+					$city,
+					$address,
+					$vat_number,
+					$eik,
 					'',
-					'Издадена фактура',
-					'',
+					'Продажба',
+					implode( ', ', $names ),
 					'-1'
-				);
+				), $order, $temp_order );
 			}
 		}
 
