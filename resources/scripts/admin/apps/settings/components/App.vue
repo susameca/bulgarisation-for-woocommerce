@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import axios from 'axios';
 import Multiselect from 'vue-multiselect';
 import { extend, localize } from 'vee-validate';
@@ -84,8 +84,8 @@ export default {
 	data() {
 		return {
 			loading: false,
-			fields: _.cloneDeep( wooBg_settings.fields ),
-			groups_titles: _.cloneDeep( wooBg_settings.groups_titles ),
+			fields: cloneDeep( wooBg_settings.fields ),
+			groups_titles: cloneDeep( wooBg_settings.groups_titles ),
 			message: '',
 		}
 	},
@@ -124,8 +124,8 @@ export default {
 					if ( response.data.data.fields ) {
 						_this.fields = {};
 						_this.groups_titles = {};
-						_this.fields = _.cloneDeep( response.data.data.fields );
-						_this.groups_titles = _.cloneDeep( response.data.data.groups_titles );
+						_this.fields = cloneDeep( response.data.data.fields );
+						_this.groups_titles = cloneDeep( response.data.data.groups_titles );
 					}
 
 					_this.loading = false;

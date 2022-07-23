@@ -38,7 +38,7 @@
 
 <script>
 import { getCookie,setCookie } from '../../../utils';
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import axios from 'axios';
 import Qs from 'qs';
 import Multiselect from 'vue-multiselect';
@@ -165,11 +165,11 @@ export default {
 			let localStorageData = localStorage.getItem( 'woo-bg--econt-office' );
 			if ( localStorageData ) {
 				localStorageData = JSON.parse( localStorageData );
-				this.selectedOffice = _.cloneDeep( localStorageData.selectedOffice );
-				this.offices = _.cloneDeep( localStorageData.offices );
-				this.state = _.cloneDeep( localStorageData.state );
-				this.city = _.cloneDeep( localStorageData.city );
-				this.type = _.cloneDeep( localStorageData.type );
+				this.selectedOffice = cloneDeep( localStorageData.selectedOffice );
+				this.offices = cloneDeep( localStorageData.offices );
+				this.state = cloneDeep( localStorageData.state );
+				this.city = cloneDeep( localStorageData.city );
+				this.type = cloneDeep( localStorageData.type );
 			}
 		},
 		loadOffices() {
@@ -190,9 +190,9 @@ export default {
 					if ( response.data.data.status === 'invalid-city' ) {
 						_this.error = response.data.data.error;
 						_this.resetData();
-						_this.offices = _.cloneDeep( [] );
+						_this.offices = cloneDeep( [] );
 					} else {
-						_this.offices = _.cloneDeep( response.data.data.offices );
+						_this.offices = cloneDeep( response.data.data.offices );
 						_this.error = false;
 					}
 
