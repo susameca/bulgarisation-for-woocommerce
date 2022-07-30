@@ -314,7 +314,7 @@ class Menu {
 		$this->invoice->addTotal( __( "Total", 'woo-bg'), abs( $total ) );
 
 		if ( $enabled_taxes === 'yes' ) {
-			$this->invoice->addTotal( sprintf( __( 'VAT %s', 'woo-bg' ), $vat_percentages[ $vat_group ] . "%" ), $total_vat );
+			$this->invoice->addTotal( sprintf( __( 'VAT %s', 'woo-bg' ), '' ), $total_vat );
 		}
 
 		$this->invoice->addTotal( __( "Total due", 'woo-bg' ), abs( $total_due ), true);
