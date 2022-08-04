@@ -44,6 +44,7 @@ class Method extends \WC_Shipping_Method {
 		$this->fixed_price          = $this->get_option( 'fixed_price' );
 		$this->test                 = $this->get_option( 'test' );
 		$this->sms                  = $this->get_option( 'sms' );
+		$this->tax_status           = 'none';
 
 		// Save settings in admin if you have any defined
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
@@ -475,7 +476,7 @@ class Method extends \WC_Shipping_Method {
 		if ( $email->id !== 'customer_processing_order' ) {
 			return;
 		}
-		
+
 		$label = get_post_meta( $order->get_id(), 'woo_bg_econt_label', 1 );
 
 		if ( !isset( $label['label']['shipmentNumber'] ) ) {

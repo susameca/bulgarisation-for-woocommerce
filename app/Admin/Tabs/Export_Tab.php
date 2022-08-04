@@ -216,10 +216,14 @@ class Export_Tab extends Base_Tab {
 				$shipping_vat = woo_bg_get_order_shipping_vat( $order );
 
 				foreach ($order->get_items( 'shipping' ) as $item ) {
-					$item_vat = 0;
+					$item_vat = $vat_groups[ $vat_group ];
+				
+					if ( wc_tax_enabled() ) {
+						$item_vat = 0;
 
-					if ( $item->get_total_tax() ) {
-						$item_vat = $shipping_vat;
+						if ( $item->get_total_tax() ) {
+							$item_vat = $shipping_vat;
+						}
 					}
 
 					$xml_item = new \Audit\Item( 

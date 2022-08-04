@@ -296,10 +296,14 @@ class Menu {
 
 			foreach ($this->order->get_items( 'shipping' ) as $item ) {
 				$item_price = $item->get_total() / $item->get_quantity();
-				$item_vat = 0;
+				$item_vat = $vat_percentages[ $vat_group ];
+				
+				if ( wc_tax_enabled() ) {
+					$item_vat = 0;
 
-				if ( $item->get_total_tax() ) {
-					$item_vat = $shipping_vat;
+					if ( $item->get_total_tax() ) {
+						$item_vat = $shipping_vat;
+					}
 				}
 
 				$this->invoice->addItem( 
@@ -437,10 +441,14 @@ class Menu {
 
 			foreach ($this->parent_order->get_items( 'shipping' ) as $item ) {
 				$item_price = abs( number_format( $item->get_total() / $item->get_quantity(), 2 ) );
-				$item_vat = 0;
+				$item_vat = $vat_percentages[ $vat_group ];
+				
+				if ( wc_tax_enabled() ) {
+					$item_vat = 0;
 
-				if ( $item->get_total_tax() ) {
-					$item_vat = $shipping_vat;
+					if ( $item->get_total_tax() ) {
+						$item_vat = $shipping_vat;
+					}
 				}
 
 				$this->invoice->addItem( 
