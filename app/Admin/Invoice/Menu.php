@@ -122,7 +122,7 @@ class Menu {
 		$this->order = new \WC_Order( $post );
 		$settings = new Settings_Tab();
 		$options = $settings->get_localized_fields();
-		
+
 		if ( !isset( $options[ $this->order->get_payment_method() ] ) ) {
 			return;
 		}
@@ -292,19 +292,21 @@ class Menu {
 		$total_due = number_format( $this->order->get_total(), 2 );
 
 		if ( $add_shipping === 'yes' ) {
+			$shipping_vat = woo_bg_get_order_shipping_vat( $this->order );
+
 			foreach ($this->order->get_items( 'shipping' ) as $item ) {
 				$item_price = $item->get_total() / $item->get_quantity();
-				$shipping_vat = $vat;
+				$item_vat = 0;
 
-				if ( ! $item->get_total_tax() ) {
-					$shipping_vat = 0;
+				if ( $item->get_total_tax() ) {
+					$item_vat = $shipping_vat;
 				}
 
 				$this->invoice->addItem( 
 					sprintf( __('Shipping: %s', 'woo-bg'), $item->get_name() ), 
 					'',
 					$item->get_quantity(), 
-					$shipping_vat . "%", 
+					$item_vat . "%", 
 					abs( number_format( $item_price, 2 ) ),
 					false,
 					number_format( $item->get_total(), 2)
@@ -427,21 +429,25 @@ class Menu {
 		}
 
 
+		
+
+
 		if ( $add_shipping === 'yes' ) {
+			$shipping_vat = woo_bg_get_order_shipping_vat( $this->parent_order );
+
 			foreach ($this->parent_order->get_items( 'shipping' ) as $item ) {
 				$item_price = abs( number_format( $item->get_total() / $item->get_quantity(), 2 ) );
+				$item_vat = 0;
 
-				$shipping_vat = $vat;
-
-				if ( ! $item->get_total_tax() ) {
-					$shipping_vat = 0;
+				if ( $item->get_total_tax() ) {
+					$item_vat = $shipping_vat;
 				}
 
 				$this->invoice->addItem( 
 					sprintf( __('Shipping: %s', 'woo-bg'), $item->get_name() ), 
 					'',
 					$item->get_quantity(), 
-					$shipping_vat . "%", 
+					$item_vat . "%", 
 					$item_price,
 					false,
 					number_format( $item->get_total(), 2)
