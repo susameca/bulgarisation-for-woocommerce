@@ -270,7 +270,7 @@
 </template>
 
 <script>
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import axios from 'axios';
 import Qs from 'qs';
 import Multiselect from 'vue-multiselect';
@@ -311,13 +311,13 @@ export default {
 			labelData : wooBg_econt.label,
 			document: $( document.body ),
 			shipmentType:'',
-			shipmentTypes: _.cloneDeep( wooBg_econt.shipmentTypes ),
+			shipmentTypes: cloneDeep( wooBg_econt.shipmentTypes ),
 			office: '',
-			offices: _.cloneDeep( wooBg_econt.offices ),
+			offices: cloneDeep( wooBg_econt.offices ),
 			street: '',
-			streets: _.cloneDeep( wooBg_econt.streets ),
+			streets: cloneDeep( wooBg_econt.streets ),
 			testOption: '',
-			testsOptions: _.cloneDeep( wooBg_econt.testsOptions ),
+			testsOptions: cloneDeep( wooBg_econt.testsOptions ),
 			streetNumber: '',
 			other: '',
 			message: '',
@@ -454,8 +454,8 @@ export default {
 					if ( response.data.data.message ) {
 						_this.message = response.data.data.message;
 					} else {
-						_this.shipmentStatus = _.cloneDeep( response.data.data.shipmentStatus, true );
-						_this.labelData = _.cloneDeep( response.data.data.label, true );
+						_this.shipmentStatus = cloneDeep( response.data.data.shipmentStatus, true );
+						_this.labelData = cloneDeep( response.data.data.label, true );
 						_this.size = 'refresh';
 
 						setTimeout(function() {
@@ -486,7 +486,7 @@ export default {
 					if ( response.data.data.message ) {
 						_this.message = response.data.data.message;
 					} else {
-						_this.shipmentStatus.label = _.cloneDeep( response.data.data.shipmentStatus, true );
+						_this.shipmentStatus.label = cloneDeep( response.data.data.shipmentStatus, true );
 						_this.size = 'refresh';
 
 						setTimeout(function() {

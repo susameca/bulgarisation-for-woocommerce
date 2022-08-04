@@ -43,7 +43,6 @@ class Address {
 		self::$container = woo_bg()->container();
 		$args = [];
 		$query = Transliteration::latin2cyrillic( explode( ' ', sanitize_text_field( $_POST['query'] ) ) );
-		$country = sanitize_text_field( $_POST['country'] );
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$states = woo_bg_return_bg_states();
 		$state = $states[ $raw_state ];
@@ -76,7 +75,6 @@ class Address {
 	public static function load_streets() {
 		self::$container = woo_bg()->container();
 		$args = [];
-		$country = sanitize_text_field( $_POST['country'] );
 
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$states = woo_bg_return_bg_states();

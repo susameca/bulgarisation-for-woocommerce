@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import _ from 'lodash';
 import axios from 'axios';
 import { extend, localize } from 'vee-validate';
 import { required } from 'vee-validate/dist/rules';

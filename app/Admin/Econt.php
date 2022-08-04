@@ -58,7 +58,7 @@ class Econt {
 					echo '<div id="woo-bg--econt-admin"></div>';
 
 					$label_data = array();
-					$cookie_data = get_post_meta( $theorder->get_id(), 'woo_bg_econt_cookie_data', 1 );;
+					$cookie_data = get_post_meta( $theorder->get_id(), 'woo_bg_econt_cookie_data', 1 );
 					$shipment_status = get_post_meta( $theorder->get_id(), 'woo_bg_econt_shipment_status', 1 );
 
 					if ( $label = get_post_meta( $theorder->get_id(), 'woo_bg_econt_label', 1 ) ) {
@@ -215,20 +215,41 @@ class Econt {
 	}
 
 	public static function generate_label() {
-		$data = [];
 		$order_id = $_REQUEST['orderId'];
 		$label = $_REQUEST['label_data'];
 
-
 		$label = self::update_receiver_address( $label );
-		$label = self::update_label_pay_options( $label );
+		$label = self::update_label_pay_options( $label, $order_id );
 		$label = self::update_payment_by( $label );
 		$label = self::update_test_options( $label );
 		$label = self::update_shipment_type( $label );
-		$label = self::update_shipment_description( $label );
+		$label = self::update_shipment_description( $label, $order_id );
 		$label = self::update_phone_and_names( $label );
 
-		$generated_data = self::generate_response( $label );
+		$data = self::send_label_to_econt( $label, $order_id );
+
+		wp_send_json_success( $data );
+		wp_die();
+	}
+
+	public static function generate_label_after_order_generated( $order_id ) {
+		$label = get_post_meta( $order_id, 'woo_bg_econt_label', 1 );
+
+		if ( !$label ) {
+			return;
+		}
+
+		$label = $label['label'];
+		$label = self::update_label_pay_options( $label, $order_id );
+		$label = self::update_shipment_description( $label, $order_id );
+
+		self::send_label_to_econt( $label, $order_id );
+	}
+
+	public static function send_label_to_econt( $label, $order_id ) {
+		$data = [];
+
+		$generated_data = self::generate_response( $label, $order_id );
 		$response = $generated_data['response'];
 		$request_body = $generated_data['request_body'];
 
@@ -244,11 +265,10 @@ class Econt {
 			update_post_meta( $order_id, 'woo_bg_econt_label', $request_body );
 			update_post_meta( $order_id, 'woo_bg_econt_shipment_status', $response );
 
-			self::update_order_shipping_price( $response );
+			self::update_order_shipping_price( $response, $order_id );
 		}
 
-		wp_send_json_success( $data );
-		wp_die();
+		return $data;
 	}
 
 	protected static function update_receiver_address( $label ) {
@@ -305,12 +325,12 @@ class Econt {
 		return $label;
 	}
 
-	protected static function update_label_pay_options( $label ) {
-		$cookie_data = $_REQUEST['cookie_data'];
+	protected static function update_label_pay_options( $label, $order_id ) {
+		$cookie_data = get_post_meta( $order_id, 'woo_bg_econt_cookie_data', 1 );
 
 		unset( $label['services']['invoiceNum'] );
 		unset( $label['services']['cdPayOptionsTemplate'] );
-
+		
 		if ( $cookie_data['payment'] === 'cod' ) {
 			$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
 
@@ -320,7 +340,7 @@ class Econt {
 
 				foreach ( $cd_pay_options as $option ) {
 					if ( $option['num'] === $cd_pay_option && $option['method'] != 'office' ) {
-						$order = new \WC_Order( $_REQUEST['orderId'] );
+						$order = new \WC_Order( $order_id );
 						$document_number = $order->get_meta( 'woo_bg_order_number' );
 
 						if ( !$document_number ) {
@@ -382,9 +402,9 @@ class Econt {
 		return $label;
 	}
 
-	protected static function update_shipment_description( $label ) {
+	protected static function update_shipment_description( $label, $order_id ) {
 		$force = woo_bg_get_option( 'econt', 'force_variations_in_desc' );
-		$order = new \WC_Order( $_REQUEST['orderId'] );
+		$order = new \WC_Order( $order_id );
 		$names = [];
 
 		foreach ( $order->get_items() as $item ) {
@@ -427,9 +447,13 @@ class Econt {
 		return $label;
 	}
 
-	protected static function update_order_shipping_price( $response ) {
+	protected static function update_order_shipping_price( $response, $order_id ) {
+		if ( !isset( $_REQUEST['paymentBy'] ) ) {
+			return;
+		}
+
 		$payment_by = $_REQUEST['paymentBy'];
-		$order = new \WC_Order( $_REQUEST['orderId'] );
+		$order = new \WC_Order( $order_id );
 		$price = 0;
 
 		if ( $payment_by['id'] == 'buyer' ) {
@@ -447,8 +471,7 @@ class Econt {
 		$order->save();
 	}
 
-	protected static function generate_response( $label ) {
-		$order_id = $_REQUEST['orderId'];
+	protected static function generate_response( $label, $order_id ) {
 		$container = woo_bg()->container();
 		$shipment_status = get_post_meta( $order_id, 'woo_bg_econt_shipment_status', 1 );
 

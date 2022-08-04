@@ -93,6 +93,7 @@ class Export_Tab extends Base_Tab {
 		$add_shipping = woo_bg_get_option( 'invoice', 'add_shipping' );
 		$vat_group = woo_bg_get_option( 'shop', 'vat_group' );
 		$vat_groups = woo_bg_get_vat_groups();
+		$_tax = new \WC_Tax();
 
 		$return_methods = array(
 			'1' => \Audit\ReturnMethods\IBAN::class, //1
@@ -190,11 +191,22 @@ class Export_Tab extends Base_Tab {
 			);
 
 			foreach ( $order->get_items() as $key => $item ) {
+				$price = $item->get_total() / $item->get_quantity();
+				$item_vat = $vat_groups[ $vat_group ];
+				$item_tax_class = $_tax->get_rates( $item->get_tax_class() );
+
+				if ( !empty( $item_tax_class ) ) {
+					$item_vat = array_shift( $item_tax_class )['rate'];
+				}
+
+				$price = apply_filters( 'woo_bg/admin/export/item_price', $price, $item );
+				$item_vat = apply_filters( 'woo_bg/admin/export/item_vat', $item_vat, $item );
+
 				$xml_item = new \Audit\Item( 
 					$item->get_name(), 
 					$item->get_quantity(), 
-					$item->get_total() / $item->get_quantity(), 
-					$vat_groups[ $vat_group ]
+					$price, 
+					$item_vat,
 				);
 
 				$xml_order->addItem( $xml_item );
@@ -202,6 +214,7 @@ class Export_Tab extends Base_Tab {
 
 			if ( $add_shipping === 'yes' ) {
 				foreach ($order->get_items( 'shipping' ) as $item ) {
+
 					$xml_item = new \Audit\Item( 
 						sprintf( __( 'Shipping: %s', 'woo-bg' ), $item->get_name() ), 
 						$item->get_quantity(), 

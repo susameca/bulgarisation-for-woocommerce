@@ -69,7 +69,6 @@
 </template>
 
 <script>
-import _ from 'lodash';
 import axios from 'axios';
 import Qs from 'qs';
 import bg from 'vee-validate/dist/locale/bg.json';

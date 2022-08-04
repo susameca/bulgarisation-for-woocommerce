@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-03 08:07+0000\n"
+"POT-Creation-Date: 2022-08-04 19:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Loco-Version: 2.5.0; wp-5.6\n"
 "X-Domain: woo-bg"
 
-#: app/Shipping/CVC/Office.php:60 app/Shipping/Econt/Office.php:50
+#: app/Shipping/CVC/Office.php:55 app/Shipping/Econt/Office.php:49
 #, php-format
 msgid "%s is not found in %s region."
 msgstr ""
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Additional API's"
 msgstr ""
 
-#: app/Admin/Econt.php:115 app/Admin/Tabs/Econt_Tab.php:96
+#: app/Admin/Econt.php:115 app/Admin/Tabs/Econt_Tab.php:97
 #: app/Front_End/Checkout/Company.php:69 app/Shipping/CVC/Method.php:126
 #: app/Shipping/Econt/Method.php:123
 msgid "Address"
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Billing to"
 msgstr ""
 
-#: app/Admin/Econt.php:111 app/Shipping/CVC/Address.php:42
+#: app/Admin/Econt.php:111 app/Shipping/CVC/Address.php:38
 #: app/Shipping/Econt/Address.php:38
 msgid "bl. vh. et."
 msgstr ""
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Cash on delivery"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:87
+#: app/Admin/Tabs/Econt_Tab.php:88
 msgid "Cash on delivery agreement"
 msgstr ""
 
@@ -145,21 +145,21 @@ msgstr ""
 msgid "Checkout Settings"
 msgstr ""
 
-#: app/Admin/Econt.php:105 app/Shipping/CVC/Address.php:36
-#: app/Shipping/CVC/Office.php:32 app/Shipping/Econt/Address.php:32
-#: app/Shipping/Econt/Office.php:29
+#: app/Admin/Econt.php:105 app/Shipping/CVC/Address.php:32
+#: app/Shipping/CVC/Office.php:28 app/Shipping/Econt/Address.php:32
+#: app/Shipping/Econt/Office.php:28
 msgid "Choose"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:126
+#: app/Admin/Tabs/Econt_Tab.php:127
 msgid "Choose a city and save in order to show offices."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:87
+#: app/Admin/Tabs/Econt_Tab.php:88
 msgid "Choose cash on delivery agreement"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:119
+#: app/Admin/Tabs/Econt_Tab.php:120
 msgid "City"
 msgstr ""
 
@@ -203,11 +203,11 @@ msgstr ""
 msgid "Copy Label Data"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:621
+#: app/Admin/Invoice/Menu.php:626
 msgid "Credit Notice - Copy"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:610
+#: app/Admin/Invoice/Menu.php:615
 msgid "Credit Notice - Original"
 msgstr ""
 
@@ -296,9 +296,9 @@ msgstr ""
 msgid "E-mail:"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:241 app/Admin/Invoice/Menu.php:254
-#: app/Admin/Invoice/Menu.php:263 app/Admin/Invoice/Menu.php:371
-#: app/Admin/Invoice/Menu.php:384 app/Admin/Invoice/Menu.php:393
+#: app/Admin/Invoice/Menu.php:246 app/Admin/Invoice/Menu.php:259
+#: app/Admin/Invoice/Menu.php:268 app/Admin/Invoice/Menu.php:376
+#: app/Admin/Invoice/Menu.php:389 app/Admin/Invoice/Menu.php:398
 #, php-format
 msgid "E-mail: %s"
 msgstr ""
@@ -324,8 +324,8 @@ msgstr ""
 msgid "EIK"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:234 app/Admin/Invoice/Menu.php:247
-#: app/Admin/Invoice/Menu.php:364 app/Admin/Invoice/Menu.php:377
+#: app/Admin/Invoice/Menu.php:239 app/Admin/Invoice/Menu.php:252
+#: app/Admin/Invoice/Menu.php:369 app/Admin/Invoice/Menu.php:382
 #, php-format
 msgid "EIK: %s"
 msgstr ""
@@ -440,7 +440,7 @@ msgstr ""
 msgid "Exporting XML"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:80 app/Admin/Tabs/Export_Tab.php:266
+#: app/Admin/Tabs/Export_Tab.php:80 app/Admin/Tabs/Export_Tab.php:278
 #, php-format
 msgid ""
 "File generated successfully! <a href=\"%s\" download target=\"_blank\">"
@@ -492,7 +492,7 @@ msgstr ""
 msgid "Free shipping over total cart price."
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:90 app/Admin/Tabs/Econt_Tab.php:166
+#: app/Admin/Tabs/CVC_Tab.php:90 app/Admin/Tabs/Econt_Tab.php:167
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:60
 msgid "General"
 msgstr ""
@@ -507,6 +507,10 @@ msgstr ""
 
 #: app/Admin/Econt.php:100
 msgid "Generate label"
+msgstr ""
+
+#: app/Admin/Tabs/Econt_Tab.php:87
+msgid "Generate label after checkout"
 msgstr ""
 
 #: app/Admin/Tabs/Settings_Tab.php:75
@@ -620,6 +624,11 @@ msgstr ""
 msgid "Label data"
 msgstr ""
 
+#: app/Shipping/Econt/Method.php:489
+#, php-format
+msgid "Label number: %s. %s"
+msgstr ""
+
 #: app/Admin/Nekorekten_Com.php:149
 msgid "Last Name:"
 msgstr ""
@@ -645,8 +654,8 @@ msgstr ""
 msgid "MOL"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:236 app/Admin/Invoice/Menu.php:249
-#: app/Admin/Invoice/Menu.php:366 app/Admin/Invoice/Menu.php:379
+#: app/Admin/Invoice/Menu.php:241 app/Admin/Invoice/Menu.php:254
+#: app/Admin/Invoice/Menu.php:371 app/Admin/Invoice/Menu.php:384
 #, php-format
 msgid "MOL: %s"
 msgstr ""
@@ -676,11 +685,11 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:139
+#: app/Admin/Tabs/Econt_Tab.php:140
 msgid "No agreement"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:67 app/Admin/Tabs/Export_Tab.php:253
+#: app/Admin/Tabs/Export_Tab.php:67 app/Admin/Tabs/Export_Tab.php:265
 msgid "No orders found for this month."
 msgstr ""
 
@@ -692,8 +701,8 @@ msgstr ""
 msgid "No reports was found."
 msgstr ""
 
-#: app/Shipping/CVC/Address.php:39 app/Shipping/CVC/Office.php:35
-#: app/Shipping/Econt/Address.php:35 app/Shipping/Econt/Office.php:32
+#: app/Shipping/CVC/Address.php:35 app/Shipping/CVC/Office.php:31
+#: app/Shipping/Econt/Address.php:35 app/Shipping/Econt/Office.php:31
 msgid "No results was found for this city"
 msgstr ""
 
@@ -712,13 +721,13 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: app/Admin/Econt.php:114 app/Admin/Tabs/Econt_Tab.php:92
-#: app/Admin/Tabs/Econt_Tab.php:123 app/Shipping/CVC/Method.php:125
+#: app/Admin/Econt.php:114 app/Admin/Tabs/Econt_Tab.php:93
+#: app/Admin/Tabs/Econt_Tab.php:124 app/Shipping/CVC/Method.php:125
 #: app/Shipping/Econt/Method.php:122
 msgid "Office"
 msgstr ""
 
-#: app/Shipping/CVC/Office.php:37 app/Shipping/Econt/Office.php:34
+#: app/Shipping/CVC/Office.php:33 app/Shipping/Econt/Office.php:33
 msgid "Office locator"
 msgstr ""
 
@@ -726,7 +735,7 @@ msgstr ""
 msgid "On a payment account"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:470
+#: app/Admin/Invoice/Menu.php:475
 msgid "Order - Original"
 msgstr ""
 
@@ -799,9 +808,9 @@ msgstr ""
 msgid "Phone:"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:240 app/Admin/Invoice/Menu.php:253
-#: app/Admin/Invoice/Menu.php:262 app/Admin/Invoice/Menu.php:370
-#: app/Admin/Invoice/Menu.php:383 app/Admin/Invoice/Menu.php:392
+#: app/Admin/Invoice/Menu.php:245 app/Admin/Invoice/Menu.php:258
+#: app/Admin/Invoice/Menu.php:267 app/Admin/Invoice/Menu.php:375
+#: app/Admin/Invoice/Menu.php:388 app/Admin/Invoice/Menu.php:397
 #, php-format
 msgid "Phone: %s"
 msgstr ""
@@ -861,7 +870,7 @@ msgstr ""
 msgid "Refunded Invoice PDF"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:570
+#: app/Admin/Invoice/Menu.php:575
 msgid "Refunded Order - Original"
 msgstr ""
 
@@ -869,7 +878,7 @@ msgstr ""
 msgid "Refunded Order PDF"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:723
+#: app/Admin/Invoice/Menu.php:728
 msgid "Regenerate PDF's"
 msgstr ""
 
@@ -895,24 +904,24 @@ msgstr ""
 msgid "Review only"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:506
+#: app/Admin/Invoice/Menu.php:511
 msgid "Sale Invoice - Copy"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:497
+#: app/Admin/Invoice/Menu.php:502
 msgid "Sale Invoice - Original"
 msgstr ""
 
-#: app/Shipping/CVC/Address.php:37 app/Shipping/Econt/Address.php:33
+#: app/Shipping/CVC/Address.php:33 app/Shipping/Econt/Address.php:33
 msgid "Search address"
 msgstr ""
 
-#: app/Shipping/CVC/Office.php:33 app/Shipping/Econt/Office.php:30
+#: app/Shipping/CVC/Office.php:29 app/Shipping/Econt/Office.php:29
 msgid "Search office"
 msgstr ""
 
-#: app/Shipping/CVC/Address.php:38 app/Shipping/CVC/Office.php:34
-#: app/Shipping/Econt/Address.php:34 app/Shipping/Econt/Office.php:31
+#: app/Shipping/CVC/Address.php:34 app/Shipping/CVC/Office.php:30
+#: app/Shipping/Econt/Address.php:34 app/Shipping/Econt/Office.php:30
 msgid "Select"
 msgstr ""
 
@@ -920,11 +929,11 @@ msgstr ""
 msgid "Select a month for the report"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:116
+#: app/Admin/Tabs/Econt_Tab.php:117
 msgid "Select Address"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:98
+#: app/Admin/Tabs/Econt_Tab.php:99
 msgid ""
 "Select from where you will send the packages and save to show more options."
 msgstr ""
@@ -937,9 +946,9 @@ msgid ""
 "com/register/\">Econt Delivery</a>"
 msgstr ""
 
-#: app/Admin/Econt.php:104 app/Shipping/CVC/Address.php:35
-#: app/Shipping/CVC/Office.php:31 app/Shipping/Econt/Address.php:31
-#: app/Shipping/Econt/Office.php:28
+#: app/Admin/Econt.php:104 app/Shipping/CVC/Address.php:31
+#: app/Shipping/CVC/Office.php:27 app/Shipping/Econt/Address.php:31
+#: app/Shipping/Econt/Office.php:27
 msgid "Selected"
 msgstr ""
 
@@ -947,8 +956,8 @@ msgstr ""
 msgid "Send customer notification for delivery."
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:100 app/Admin/Tabs/Econt_Tab.php:98
-#: app/Admin/Tabs/Econt_Tab.php:176
+#: app/Admin/Tabs/CVC_Tab.php:100 app/Admin/Tabs/Econt_Tab.php:99
+#: app/Admin/Tabs/Econt_Tab.php:177
 msgid "Send From"
 msgstr ""
 
@@ -985,8 +994,8 @@ msgstr ""
 msgid "Shipment type"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:299 app/Admin/Invoice/Menu.php:436
-#: app/Admin/Tabs/Export_Tab.php:207
+#: app/Admin/Invoice/Menu.php:304 app/Admin/Invoice/Menu.php:441
+#: app/Admin/Tabs/Export_Tab.php:219
 #, php-format
 msgid "Shipping: %s"
 msgstr ""
@@ -999,7 +1008,7 @@ msgstr ""
 msgid "SMS notification"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:75 app/Admin/Tabs/Export_Tab.php:261
+#: app/Admin/Tabs/Export_Tab.php:75 app/Admin/Tabs/Export_Tab.php:273
 #, php-format
 msgid ""
 "Some of the orders was not included because the payment method options was "
@@ -1014,15 +1023,15 @@ msgstr ""
 msgid "Standardized audit file according to Annex № 38"
 msgstr ""
 
-#: app/Shipping/CVC/Office.php:36 app/Shipping/Econt/Office.php:33
+#: app/Shipping/CVC/Office.php:32 app/Shipping/Econt/Office.php:32
 msgid "Start typing office"
 msgstr ""
 
-#: app/Shipping/CVC/Address.php:40 app/Shipping/Econt/Address.php:36
+#: app/Shipping/CVC/Address.php:36 app/Shipping/Econt/Address.php:36
 msgid "Start typing street or quarter"
 msgstr ""
 
-#: app/Admin/Econt.php:112 app/Shipping/CVC/Address.php:41
+#: app/Admin/Econt.php:112 app/Shipping/CVC/Address.php:37
 #: app/Shipping/Econt/Address.php:37
 msgid "Street number"
 msgstr ""
@@ -1095,6 +1104,12 @@ msgstr ""
 msgid "This option will hide the plugin fields on the checkout page."
 msgstr ""
 
+#: app/Admin/Tabs/Econt_Tab.php:87
+msgid ""
+"This option will try to generate your label immediately after user checkout. "
+"Also, will add the tracking number in the order email."
+msgstr ""
+
 #: app/Admin/EU_Vat.php:80
 msgid "This order is out of scope for EU VAT."
 msgstr ""
@@ -1115,13 +1130,17 @@ msgstr ""
 msgid "Token"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:314 app/Admin/Invoice/Menu.php:455
+#: app/Admin/Invoice/Menu.php:319 app/Admin/Invoice/Menu.php:460
 #: app/Admin/Invoice/Printer.php:567
 msgid "Total"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:320 app/Admin/Invoice/Menu.php:461
+#: app/Admin/Invoice/Menu.php:325 app/Admin/Invoice/Menu.php:466
 msgid "Total due"
+msgstr ""
+
+#: app/Shipping/Econt/Method.php:493
+msgid "Track your order."
 msgstr ""
 
 #: app/Admin/EU_Vat.php:104 app/Admin/EU_Vat.php:121 app/Admin/EU_Vat.php:127
@@ -1153,7 +1172,7 @@ msgstr ""
 msgid "Vat"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:317 app/Admin/Invoice/Menu.php:458
+#: app/Admin/Invoice/Menu.php:322 app/Admin/Invoice/Menu.php:463
 #, php-format
 msgid "VAT %s"
 msgstr ""
@@ -1175,8 +1194,8 @@ msgstr ""
 msgid "VAT number required on checkout?"
 msgstr ""
 
-#: app/Admin/Invoice/Menu.php:235 app/Admin/Invoice/Menu.php:248
-#: app/Admin/Invoice/Menu.php:365 app/Admin/Invoice/Menu.php:378
+#: app/Admin/Invoice/Menu.php:240 app/Admin/Invoice/Menu.php:253
+#: app/Admin/Invoice/Menu.php:370 app/Admin/Invoice/Menu.php:383
 #: app/Front_End/Checkout/EU_Vat.php:284
 #, php-format
 msgid "VAT Number: %s"

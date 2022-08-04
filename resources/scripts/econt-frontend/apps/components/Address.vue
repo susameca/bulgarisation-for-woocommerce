@@ -52,7 +52,8 @@
 
 <script>
 import { getCookie,setCookie } from '../../../utils';
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import debounce from 'lodash/debounce';
 import axios from 'axios';
 import Qs from 'qs';
 import Multiselect from 'vue-multiselect';
@@ -165,15 +166,15 @@ export default {
 
 			if ( localStorageData ) {
 				localStorageData = JSON.parse( localStorageData );
-				this.selectedAddress = _.cloneDeep( localStorageData.selectedAddress );
-				this.addresses = _.cloneDeep( localStorageData.addresses );
-				this.state = _.cloneDeep( localStorageData.state );
-				this.city = _.cloneDeep( localStorageData.city );
-				this.streetNumber = _.cloneDeep( localStorageData.streetNumber );
-				this.other = _.cloneDeep( localStorageData.other );
+				this.selectedAddress = cloneDeep( localStorageData.selectedAddress );
+				this.addresses = cloneDeep( localStorageData.addresses );
+				this.state = cloneDeep( localStorageData.state );
+				this.city = cloneDeep( localStorageData.city );
+				this.streetNumber = cloneDeep( localStorageData.streetNumber );
+				this.other = cloneDeep( localStorageData.other );
 			}
 		},
-		asyncFind: _.debounce( function( query ) {
+		asyncFind: debounce( function( query ) {
 			if ( !query ) {
 				return;
 			}
@@ -190,9 +191,9 @@ export default {
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
 				.then( response => {
 					if ( response.data.data.cities ) {
-						this.addresses = _.cloneDeep( response.data.data.cities );
+						this.addresses = cloneDeep( response.data.data.cities );
 					} else if ( response.data.data.streets ) {
-						this.addresses = _.cloneDeep( response.data.data.streets );
+						this.addresses = cloneDeep( response.data.data.streets );
 					}
 
 					this.isLoading = false
@@ -217,10 +218,10 @@ export default {
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
 				.then(function( response ) {
 					if ( response.data.data.status === 'invalid-city' ) {
-						_this.addresses = _.cloneDeep( response.data.data.cities );
+						_this.addresses = cloneDeep( response.data.data.cities );
 						_this.resetData();
 					} else {
-						_this.addresses = _.cloneDeep( response.data.data.streets );
+						_this.addresses = cloneDeep( response.data.data.streets );
 					}
 
 					_this.loading = false;
@@ -235,10 +236,10 @@ export default {
 				this.city = option.label;
 				this.cityField.val( option.label );
 				this.addresses = [];
-				this.selectedAddress = _.cloneDeep([]);
+				this.selectedAddress = cloneDeep([]);
 			}
 		},
-		streetNumberChanged: _.debounce( function () {
+		streetNumberChanged: debounce( function () {
 			this.setAddress1FieldData();
 			this.setLocalStorageData();
 
