@@ -2,10 +2,10 @@
 Contributors: autopolisbg
 Tags: woocommerce, e-commerce, invoice, shipping, bulgaria, bulgarisation, nra
 Requires at least: 5.3
-Tested up to: 6.0
+Tested up to: 6.0.1
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 2.2.6
+Stable tag: 2.2.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,6 +19,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 *   Генериране на документ за поръчката. 
 *   Генериране на фактури за поръчката. 
 *   Генериране на кредитно известие при върната поръчка.
+*   Генериране на експорт файл с фактури и кредитни известия за Microninvest Invoice Pro
 *   Добавя полета за фактуриране към фирма.
 *   Проверка на ДДС номер с европейската система VIES.
 *   Проверка за отзиви от nekorekten.com
@@ -65,6 +66,17 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 2.2.7 =
+Econt: Add option to generate label after checkout
+Econt: Fix CD if there is discounts
+Invoice: Remove vat number from documents
+Invoice: Add filter for items names
+NRA Export: Fix VAT for items with different VAT
+NRA Export: Add filters for item price and VAT
+Fix issue with media-views.min.js
+Add documents export for Microinvest Invoice Pro
+Fix settings tab callback
 
 = 2.2.6 =
 Econt: Add new option to change shipping options layout in checkout
