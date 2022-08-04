@@ -215,7 +215,8 @@ class Export_Tab extends Base_Tab {
 			if ( $add_shipping === 'yes' ) {
 				$shipping_vat = woo_bg_get_order_shipping_vat( $order );
 
-				foreach ($order->get_items( 'shipping' ) as $item ) {
+				foreach ( $order->get_items( 'shipping' ) as $item ) {
+					$price = $item->get_total() / $item->get_quantity();
 					$item_vat = $vat_groups[ $vat_group ];
 				
 					if ( wc_tax_enabled() ) {
@@ -226,10 +227,13 @@ class Export_Tab extends Base_Tab {
 						}
 					}
 
+					$price = apply_filters( 'woo_bg/admin/export/item_price', $price, $item );
+					$item_vat = apply_filters( 'woo_bg/admin/export/item_vat', $item_vat, $item );
+
 					$xml_item = new \Audit\Item( 
 						sprintf( __( 'Shipping: %s', 'woo-bg' ), $item->get_name() ), 
 						$item->get_quantity(), 
-						$item->get_total() / $item->get_quantity(),
+						$price,
 						$item_vat
 					);
 
