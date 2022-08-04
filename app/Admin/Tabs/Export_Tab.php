@@ -213,12 +213,13 @@ class Export_Tab extends Base_Tab {
 			}
 
 			if ( $add_shipping === 'yes' ) {
+				$shipping_vat = woo_bg_get_order_shipping_vat( $order );
+
 				foreach ($order->get_items( 'shipping' ) as $item ) {
 					$item_vat = 0;
-					$item_tax_class = $_tax->get_rates( $item->get_tax_class() );
 
-					if ( !empty( $item_tax_class ) ) {
-						$vat = array_shift( $item_tax_class )['rate'];
+					if ( $item->get_total_tax() ) {
+						$item_vat = $shipping_vat;
 					}
 
 					$xml_item = new \Audit\Item( 

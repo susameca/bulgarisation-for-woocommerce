@@ -218,3 +218,18 @@ function woo_bg_get_shipping_tests_options() {
 		'test' => __( 'Review and test', 'woo-bg' ),
 	);
 }
+
+function woo_bg_get_order_shipping_vat( $order ) {
+	$shipping_vat = 0;
+
+	if ( wc_tax_enabled() && !empty( $order->get_items( 'tax' ) ) ) {
+		foreach ( $order->get_items( 'tax' ) as $tax_item ) {
+			if ( $tax_item->get_shipping_tax_total() ) {
+				$shipping_vat = $tax_item->get_rate_percent();
+				break;
+			}
+		}
+	}
+
+	return $shipping_vat;
+}
