@@ -122,6 +122,11 @@ class Menu {
 		$this->order = new \WC_Order( $post );
 		$settings = new Settings_Tab();
 		$options = $settings->get_localized_fields();
+		
+		if ( !isset( $options[ $this->order->get_payment_method() ] ) ) {
+			return;
+		}
+
 		$payment_method = $options[ $this->order->get_payment_method() ];
 		$payment_methods = woo_bg_get_payment_types_for_meta();
 
@@ -272,7 +277,7 @@ class Menu {
 			}
 
 			$this->invoice->addItem( 
-				$item->get_name(), 
+				apply_filters( 'woo_bg/admin/invoice/item_name', $item->get_name(), $item ),
 				'',
 				abs( $item->get_quantity() ), 
 				$vat . "%", 
@@ -408,7 +413,7 @@ class Menu {
 			}
 
 			$this->invoice->addItem( 
-				$item->get_name(), 
+				apply_filters( 'woo_bg/admin/invoice/item_name', $item->get_name(), $item ), 
 				'',
 				abs( $item->get_quantity() ), 
 				$item_vat . "%", 

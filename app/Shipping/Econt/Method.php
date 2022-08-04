@@ -417,11 +417,34 @@ class Method extends \WC_Shipping_Method {
 		}
 	}
 
-	public static function save_label_data_to_order( $post ) {
+	public static function save_label_data_to_order( $order_id ) {
 		if ( WC()->session->get( 'woo-bg-econt-label' ) ) {
-			update_post_meta( $post, 'woo_bg_econt_label', WC()->session->get( 'woo-bg-econt-label' ) );
+			update_post_meta( $order_id, 'woo_bg_econt_label', WC()->session->get( 'woo-bg-econt-label' ) );
 			
 			WC()->session->__unset( 'woo-bg-econt-label' );
+		}
+
+		$order = new \WC_Order( $order_id );
+
+		if ( !empty( $order->get_items( 'shipping' ) ) ) {
+			foreach ( $order->get_items( 'shipping' ) as $shipping ) {
+				if ( $shipping['method_id'] === 'woo_bg_econt' ) {
+					$cookie_data = '';
+
+					foreach ( $shipping->get_meta_data() as $meta_data ) {
+						$data = $meta_data->get_data();
+
+						if ( $data['key'] == 'cookie_data' ) {
+							$cookie_data = $data['value'];
+						}
+					}
+
+					if ( $cookie_data ) {
+						update_post_meta( $order_id, 'woo_bg_econt_cookie_data', $cookie_data );
+					}
+					break;
+				}
+			}
 		}
 	}
 
@@ -446,7 +469,34 @@ class Method extends \WC_Shipping_Method {
 			'woo-bg-css-econt',
 			woo_bg()->plugin_dir_url() . woo_bg_assets_bundle( 'econt-frontend.css' )
 		);
+	}
 
+	public static function add_label_number_to_email( $order, $sent_to_admin, $plain_text, $email ) {
+		if ( $email->id !== 'customer_processing_order' ) {
+			return;
+		}
+		
+		$label = get_post_meta( $order->get_id(), 'woo_bg_econt_label', 1 );
+
+		if ( !isset( $label['label']['shipmentNumber'] ) ) {
+			return;
+		}
+
+		$number = $label['label']['shipmentNumber'];
+		$url = 'https://www.econt.com/services/track-shipment/' . $number;
+
+		$track_number_text = sprintf( 
+			__( 'Label number: %s. %s', 'woo-bg' ), 
+			$number, 
+			sprintf( '<a href="%s" target="_blank">%s</a>',
+				$url,
+				__( 'Track your order.' , 'woo-bg' )
+			)
+		);
+
+		$track_number_text = apply_filters( 'woo_bg/econt/track_number_text_in_email', $track_number_text, $url );
+
+		echo wpautop( $track_number_text );
 	}
 }
 
