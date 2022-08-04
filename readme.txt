@@ -19,7 +19,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 *   Генериране на документ за поръчката. 
 *   Генериране на фактури за поръчката. 
 *   Генериране на кредитно известие при върната поръчка.
-*   Генериране на експорт файл с фактури и кредитни известия за Microninvest Invoice Pro
+*   Генериране на експорт файл с фактури и кредитни известия за Microinvest Delta
 *   Добавя полета за фактуриране към фирма.
 *   Проверка на ДДС номер с европейската система VIES.
 *   Проверка за отзиви от nekorekten.com
@@ -75,7 +75,7 @@ Invoice: Add filter for items names
 NRA Export: Fix VAT for items with different VAT
 NRA Export: Add filters for item price and VAT
 Fix issue with media-views.min.js
-Add documents export for Microinvest Invoice Pro
+Add documents export for Microinvest Delta
 Fix settings tab callback
 
 = 2.2.6 =

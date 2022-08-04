@@ -214,12 +214,18 @@ class Export_Tab extends Base_Tab {
 
 			if ( $add_shipping === 'yes' ) {
 				foreach ($order->get_items( 'shipping' ) as $item ) {
+					$item_vat = 0;
+					$item_tax_class = $_tax->get_rates( $item->get_tax_class() );
+
+					if ( !empty( $item_tax_class ) ) {
+						$vat = array_shift( $item_tax_class )['rate'];
+					}
 
 					$xml_item = new \Audit\Item( 
 						sprintf( __( 'Shipping: %s', 'woo-bg' ), $item->get_name() ), 
 						$item->get_quantity(), 
-						$item->get_total()  / $item->get_quantity(),
-						$vat_groups[ $vat_group ]
+						$item->get_total() / $item->get_quantity(),
+						$item_vat
 					);
 
 					$xml_order->addItem( $xml_item );
