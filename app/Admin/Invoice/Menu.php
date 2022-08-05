@@ -297,14 +297,21 @@ class Menu {
 			foreach ($this->order->get_items( 'shipping' ) as $item ) {
 				$item_price = $item->get_total() / $item->get_quantity();
 				$item_vat = $vat_percentages[ $vat_group ];
-				
-				if ( wc_tax_enabled() ) {
-					$item_vat = 0;
+				$item_tax = $item->get_total_tax();
 
+				if ( wc_tax_enabled() ) {
 					if ( $item->get_total_tax() ) {
 						$item_vat = $shipping_vat;
+					} else {
+						$item_tax = $_tax::calc_tax(  $item_price, array( array('compound' => 'yes', 'rate' => $item_vat ) ), true )[0];
+						$item_price = $item_price - $item_tax;
+
+						$total -= abs( number_format( $item_tax, 2) );
+						$total_vat += abs( number_format( $item_tax, 2) );
 					}
 				}
+
+				$item_total = $item_price * $item->get_quantity();
 
 				$this->invoice->addItem( 
 					sprintf( __('Shipping: %s', 'woo-bg'), $item->get_name() ), 
@@ -313,7 +320,7 @@ class Menu {
 					$item_vat . "%", 
 					abs( number_format( $item_price, 2 ) ),
 					false,
-					number_format( $item->get_total(), 2)
+					number_format( $item_total, 2)
 				);
 			}
 		} else {
@@ -432,37 +439,37 @@ class Menu {
 			$total_vat += abs( $item->get_total_tax() );
 		}
 
-
-		
-
-
 		if ( $add_shipping === 'yes' ) {
 			$shipping_vat = woo_bg_get_order_shipping_vat( $this->parent_order );
 
 			foreach ($this->parent_order->get_items( 'shipping' ) as $item ) {
 				$item_price = abs( number_format( $item->get_total() / $item->get_quantity(), 2 ) );
 				$item_vat = $vat_percentages[ $vat_group ];
-				
-				if ( wc_tax_enabled() ) {
-					$item_vat = 0;
+				$item_tax = $item->get_total_tax();
 
+				if ( wc_tax_enabled() ) {
 					if ( $item->get_total_tax() ) {
 						$item_vat = $shipping_vat;
+					} else {
+						$item_tax = $_tax::calc_tax(  $item_price, array( array('compound' => 'yes', 'rate' => $item_vat ) ), true )[0];
+						$item_price = $item_price - $item_tax;
 					}
 				}
+
+				$item_total = $item_price * $item->get_quantity();
 
 				$this->invoice->addItem( 
 					sprintf( __('Shipping: %s', 'woo-bg'), $item->get_name() ), 
 					'',
 					$item->get_quantity(), 
 					$item_vat . "%", 
-					$item_price,
+					abs( number_format( $item_price, 2 ) ),
 					false,
-					number_format( $item->get_total(), 2)
+					number_format( $item_total, 2)
 				);
 
-				$total += abs( number_format( $item->get_total(), 2) );
-				$total_vat += abs( number_format( $item->get_total_tax(), 2) );
+				$total += abs( number_format( $item_total, 2) );
+				$total_vat += abs( number_format( $item_tax, 2) );
 			}
 		}
 
