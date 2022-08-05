@@ -218,12 +218,13 @@ class Export_Tab extends Base_Tab {
 				foreach ( $order->get_items( 'shipping' ) as $item ) {
 					$price = $item->get_total() / $item->get_quantity();
 					$item_vat = $vat_groups[ $vat_group ];
-				
-					if ( wc_tax_enabled() ) {
-						$item_vat = 0;
 
+					if ( wc_tax_enabled() ) {
 						if ( $item->get_total_tax() ) {
 							$item_vat = $shipping_vat;
+						} else {
+							$item_tax = $_tax::calc_tax(  $price, array( array('compound' => 'yes', 'rate' => $item_vat ) ), true )[0];
+							$price = $price - $item_tax;
 						}
 					}
 
