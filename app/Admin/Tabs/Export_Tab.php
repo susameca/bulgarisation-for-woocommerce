@@ -245,9 +245,11 @@ class Export_Tab extends Base_Tab {
 			$shop->addOrder( $xml_order );
 		}
 
-		$name = uniqid( rand(), true );
 
+		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
+		$name = uniqid( rand(), true );
 		$xml = wp_upload_bits( $name . '.xml', null, \Audit\XmlConverter::convert( $shop ) );
+		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 
 		if ( is_wp_error( $xml ) ) {
 			return;
@@ -388,7 +390,9 @@ class Export_Tab extends Base_Tab {
 			return implode('|', $document );
 		}, $documents );
 
+		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 		$txt = wp_upload_bits( 'import.txt', null, implode( "\n", $rows ) );
+		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 
 		if ( is_wp_error( $txt ) ) {
 			return;
