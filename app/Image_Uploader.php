@@ -71,4 +71,14 @@ class Image_Uploader {
 		
 		return 'data:' . $filetype['type'] . ';base64,' . base64_encode( $img_binary );
 	}
+
+	public static function change_upload_dir( $args ) {
+		$new_folder = "/woo-bg";
+
+		$args[ 'path' ] = $args['basedir'] . $new_folder;
+		$args[ 'url' ] = $args['baseurl'] . $new_folder;
+		$args[ 'subdir' ] = $new_folder;
+
+		return $args;
+	}
 }

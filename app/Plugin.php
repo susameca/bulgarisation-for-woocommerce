@@ -41,6 +41,8 @@ class Plugin {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
 		add_action( 'wp_footer', array( __CLASS__, 'set_webpack_path' ), 0);
 		add_action( 'admin_footer', array( __CLASS__, 'set_webpack_path' ), 0);
+
+		add_filter( 'robots_txt', array( __CLASS__, 'robots_txt' ), 99, 2 );
 	}
 
 	private function load_classes() {
@@ -175,5 +177,14 @@ class Plugin {
 			window.__webpack_public_path__ = '<?php echo $dir ?>';
 		</script>
 		<?php
+	}
+
+	public static function robots_txt( $output, $public ) {
+		$upload_dir = wp_upload_dir();
+		$output .= "\nUser-agent: *\n"
+		$output .= "Disallow: " . woo_bg()->plugin_dir_url() . "\n";
+		$output .= "Disallow: { $upload_dir['baseurl'] }/woo-bg/\n";
+	 
+		return $output;
 	}
 }

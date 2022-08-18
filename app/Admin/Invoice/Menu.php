@@ -186,10 +186,12 @@ class Menu {
 
 		$qr_code = new QRCode();
 
+		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 		$this->qr_png = Image_Uploader::upload_image_from_base64( array(
 			'data' => $qr_code->render( implode( '*', $qr_code_pieces ) ),
 			'type' => 'image/png',
 		), 'qrcode' );
+		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 	}
 
 	public function generate_basic_invoice( $items = '' ) {
@@ -495,8 +497,10 @@ class Menu {
 		$this->invoice->setLogo( wp_get_original_image_path( $this->qr_png ) );
 		$this->invoice->setType( __( 'Order - Original', 'woo-bg' ) );    // Invoice Type
 
+		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 		$name = uniqid( rand(), true );
 		$pdf = wp_upload_bits( $name . '.pdf', null, $this->invoice->render( $name . '.pdf', 'S' ) );
+		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 
 		if ( is_wp_error( $pdf ) ) {
 			return;
@@ -539,9 +543,11 @@ class Menu {
 		$merger->add( $original_invoice );
 		$merger->add( $copy_invoice );
 
+		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 		//Upload single document
 		$name = uniqid( rand(), true );
 		$pdf = wp_upload_bits( $name . '.pdf', null, $merger->output( true ) );
+		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 
 		//Delete both PDF files
 		unlink( $original_invoice );
@@ -596,9 +602,11 @@ class Menu {
 		$this->invoice->setType( __( 'Refunded Order - Original', 'woo-bg' ) );
 		$this->invoice->setPaymentType( $this->return_methods[ $this->return_method ]['label'] );
 		$this->invoice->setOrderNumber( $this->parent_order->get_order_number() );
-		
+
+		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 		$name = uniqid( rand(), true );
 		$pdf = wp_upload_bits( $name . '.pdf', null, $this->invoice->render( $name . '.pdf', 'S' ) );
+		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 
 		if ( is_wp_error( $pdf ) ) {
 			return;
@@ -656,9 +664,11 @@ class Menu {
 		$merger->add( $original_invoice );
 		$merger->add( $copy_invoice );
 
+		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 		//Upload single document
 		$name = uniqid( rand(), true );
 		$pdf = wp_upload_bits( $name . '.pdf', null, $merger->output( true ) );
+		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 
 		//Delete both PDF files
 		unlink( $original_invoice );
