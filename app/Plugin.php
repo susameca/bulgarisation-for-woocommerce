@@ -181,9 +181,9 @@ class Plugin {
 
 	public static function robots_txt( $output, $public ) {
 		$upload_dir = wp_upload_dir();
-		$output .= "\nUser-agent: *\n"
+		$output .= "\nUser-agent: *\n";
 		$output .= "Disallow: " . woo_bg()->plugin_dir_url() . "\n";
-		$output .= "Disallow: { $upload_dir['baseurl'] }/woo-bg/\n";
+		$output .= "Disallow: {$upload_dir['baseurl']}/woo-bg/\n";
 	 
 		return $output;
 	}
