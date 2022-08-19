@@ -191,7 +191,7 @@ class Plugin {
 	}
 
 	public static function exclude_pdf_from_rest( $args, $request ) {
-		$unsupported_mimes = array( 'application/pdf' );
+		$unsupported_mimes = array( 'application/pdf', 'application/xml', 'text/plain' );
 		$all_mimes = get_allowed_mime_types();
 		$accepted_mimes = array_diff( $all_mimes, $unsupported_mimes );
 		$args[ 'post_mime_type' ] = $accepted_mimes;
