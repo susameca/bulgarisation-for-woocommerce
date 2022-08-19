@@ -41,8 +41,8 @@ class Plugin {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
 		add_action( 'wp_footer', array( __CLASS__, 'set_webpack_path' ), 0);
 		add_action( 'admin_footer', array( __CLASS__, 'set_webpack_path' ), 0);
-
 		add_filter( 'robots_txt', array( __CLASS__, 'robots_txt' ), 99, 2 );
+		add_filter( 'rest_attachment_query', array( __CLASS__, 'exclude_pdf_from_rest' ), 10, 2);
 	}
 
 	private function load_classes() {
@@ -186,7 +186,16 @@ class Plugin {
 
 		$output .= "Disallow: " . $plugin_dir_url . "\n";
 		$output .= "Disallow: " . $upload_dir . "/woo-bg/\n";
-	 
+	
 		return $output;
+	}
+
+	public static function exclude_pdf_from_rest( $args, $request ) {
+		$unsupported_mimes = array( 'application/pdf' );
+		$all_mimes = get_allowed_mime_types();
+		$accepted_mimes = array_diff( $all_mimes, $unsupported_mimes );
+		$args[ 'post_mime_type' ] = $accepted_mimes;
+
+		return $args;
 	}
 }
