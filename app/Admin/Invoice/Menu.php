@@ -9,7 +9,7 @@ use chillerlan\QRCode\QRCode;
 defined( 'ABSPATH' ) || exit;
 
 class Menu {
-	private $invoice, $order, $parent_order, $refunded_order, $qr_png, $document_number, $currency_symbol;
+	protected $invoice, $order, $parent_order, $refunded_order, $qr_png, $document_number, $currency_symbol;
 
 	function __construct() {
 		$order_documents_trigger = woo_bg_get_option( 'invoice', 'trigger' );
@@ -249,7 +249,7 @@ class Menu {
 		) );
 
 		if ( $this->order->get_meta('_billing_to_company') === '1' ) {
-			$this->invoice->setTo( array(
+			$set_to = apply_filters( 'woo_bg/admin/invoice/set_to_company', array(
 				$this->order->get_billing_company(),
 				sprintf( __('EIK: %s', 'woo-bg' ), $this->order->get_meta('_billing_company_eik') ),
 				sprintf( __('VAT Number: %s', 'woo-bg' ), $this->order->get_meta('_billing_vat_number') ),
@@ -259,17 +259,19 @@ class Menu {
 				'',
 				sprintf( __('Phone: %s', 'woo-bg' ), $this->order->get_billing_phone() ),
 				sprintf( __('E-mail: %s', 'woo-bg' ), $this->order->get_billing_email() ),
-			) );
+			), $this->order );
 		} else {
-			$this->invoice->setTo( array(
+			$set_to = apply_filters( 'woo_bg/admin/invoice/set_to_person', array(
 				$this->order->get_billing_first_name() . ' ' . $this->order->get_billing_last_name(),
 				$this->order->get_billing_address_1() . " " . $this->order->get_billing_address_2(),
 				$this->order->get_billing_city() .", " . $this->order->get_billing_postcode(),
 				'',
 				sprintf( __('Phone: %s', 'woo-bg' ), $this->order->get_billing_phone() ),
 				sprintf( __('E-mail: %s', 'woo-bg' ), $this->order->get_billing_email() ),
-			) );
+			), $this->order );
 		}
+
+		$this->invoice->setTo( $set_to );
 		
 		foreach ( $items as $key => $item ) {
 			$item_tax_class = $_tax->get_rates( $item->get_tax_class() );
@@ -392,7 +394,7 @@ class Menu {
 		) );
 
 		if ( $this->parent_order->get_meta('_billing_to_company') === '1' ) {
-			$this->invoice->setTo( array(
+			$set_to = apply_filters( 'woo_bg/admin/invoice/set_to_company', array(
 				$this->parent_order->get_billing_company(),
 				sprintf( __('EIK: %s', 'woo-bg' ), $this->parent_order->get_meta('_billing_company_eik') ),
 				sprintf( __('VAT Number: %s', 'woo-bg' ), $this->parent_order->get_meta('_billing_vat_number') ),
@@ -402,17 +404,19 @@ class Menu {
 				'',
 				sprintf( __('Phone: %s', 'woo-bg' ), $this->parent_order->get_billing_phone() ),
 				sprintf( __('E-mail: %s', 'woo-bg' ), $this->parent_order->get_billing_email() ),
-			) );
+			), $this->parent_order );
 		} else {
-			$this->invoice->setTo( array(
+			$set_to = apply_filters( 'woo_bg/admin/invoice/set_to_person', array(
 				$this->parent_order->get_billing_first_name() . ' ' . $this->parent_order->get_billing_last_name(),
 				$this->parent_order->get_billing_address_1() . " " . $this->parent_order->get_billing_address_2(),
 				$this->parent_order->get_billing_city() .", " . $this->parent_order->get_billing_postcode(),
 				'',
 				sprintf( __('Phone: %s', 'woo-bg' ), $this->parent_order->get_billing_phone() ),
 				sprintf( __('E-mail: %s', 'woo-bg' ), $this->parent_order->get_billing_email() ),
-			) );
+			), $this->parent_order );
 		}
+
+		$this->invoice->setTo( $set_to );
 
 		$total = 0;
 		$total_vat = 0;
