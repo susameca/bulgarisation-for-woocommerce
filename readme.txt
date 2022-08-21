@@ -2,7 +2,7 @@
 Contributors: autopolisbg
 Tags: woocommerce, e-commerce, invoice, shipping, bulgaria, bulgarisation, nra
 Requires at least: 5.3
-Tested up to: 6.0.1
+Tested up to: 6.1
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
 Stable tag: 2.2.7
@@ -66,6 +66,12 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 2.2.8 =
+Improve extending
+Move generated files by the plugin in separate folder
+Minor fixes
+Invoice: Add filters for setTo fields
 
 = 2.2.7 =
 Econt: Add option to generate label after checkout
