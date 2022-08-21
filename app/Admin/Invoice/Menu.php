@@ -698,7 +698,7 @@ class Menu {
 	}
 
 	public static function attach_invoice_to_mail( $attachments, $email_id, $order, $email ) {
-		if ( !is_object( $order ) ) {
+		if ( !is_object( $order ) || !is_a( $order, 'WC_Order' ) ) {
 			return;
 		}
 
