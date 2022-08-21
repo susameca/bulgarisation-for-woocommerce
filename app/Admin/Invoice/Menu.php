@@ -499,7 +499,7 @@ class Menu {
 		$this->invoice = new Printer( 'A4', $this->currency_symbol );
 		$this->generate_basic_invoice();
 		$this->invoice->setLogo( wp_get_original_image_path( $this->qr_png ) );
-		$this->invoice->setType( __( 'Order - Original', 'woo-bg' ) );    // Invoice Type
+		$this->invoice->setType( apply_filters( 'woo_bg/admin/invoice/order_document_title', __( 'Order - Original', 'woo-bg' ) ) );    // Invoice Type
 
 		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 		$name = uniqid( rand(), true );
@@ -528,7 +528,7 @@ class Menu {
 		$this->invoice = new Printer( 'A4', $this->currency_symbol );
 		$this->generate_basic_invoice();
 		$this->invoice->setLogo( wp_get_original_image_path( $this->qr_png ) );
-		$this->invoice->setType( __( 'Sale Invoice - Original', 'woo-bg' ) );    // Invoice Type
+		$this->invoice->setType( apply_filters( 'woo_bg/admin/invoice/invoice_title', __( 'Sale Invoice - Original', 'woo-bg' ) ) );    // Invoice Type
 
 		$original_invoice = $upload_dir['path'] . '/original.pdf';
 		$this->invoice->render( $original_invoice, 'F' );
@@ -537,7 +537,7 @@ class Menu {
 		$this->invoice = new Printer( 'A4', $this->currency_symbol );
 		$this->generate_basic_invoice();
 		$this->invoice->setLogo( wp_get_original_image_path( $this->qr_png ) );
-		$this->invoice->setType( __( 'Sale Invoice - Copy', 'woo-bg' ) );    // Invoice Type
+		$this->invoice->setType( apply_filters( 'woo_bg/admin/invoice/invoice_title_copy', __( 'Sale Invoice - Copy', 'woo-bg' ) ) );    // Invoice Type
 
 		$copy_invoice = $upload_dir['path'] . '/copy.pdf';
 		$this->invoice->render( $copy_invoice, 'F' );
@@ -603,7 +603,7 @@ class Menu {
 	public function save_refunded_order_document( $items ) {
 		$this->invoice = new Printer( 'A4', $this->currency_symbol );
 		$this->generate_refunded_invoice( $items );
-		$this->invoice->setType( __( 'Refunded Order - Original', 'woo-bg' ) );
+		$this->invoice->setType( apply_filters( 'woo_bg/admin/invoice/order_document_title_refunded', __( 'Refunded Order - Original', 'woo-bg' ) ) );
 		$this->invoice->setPaymentType( $this->return_methods[ $this->return_method ]['label'] );
 		$this->invoice->setOrderNumber( $this->parent_order->get_order_number() );
 
@@ -645,7 +645,7 @@ class Menu {
 		//Original credit notice
 		$this->invoice = new Printer( 'A4', $this->currency_symbol );
 		$this->generate_refunded_invoice( $items );
-		$this->invoice->setType( __( 'Credit Notice - Original', 'woo-bg' ) );
+		$this->invoice->setType( apply_filters( 'woo_bg/admin/invoice/credit_notice_title', __( 'Credit Notice - Original', 'woo-bg' ) ) );
 		$this->invoice->setOriginalInvoiceNumber( $order_document_number );
 		$this->invoice->setPaymentType( $this->return_methods[ $this->return_method ]['label'] );
 		$this->invoice->setOrderNumber( $this->parent_order->get_order_number() );
@@ -656,7 +656,7 @@ class Menu {
 		//Invoice credit notice
 		$this->invoice = new Printer( 'A4', $this->currency_symbol );
 		$this->generate_refunded_invoice( $items  );
-		$this->invoice->setType( __( 'Credit Notice - Copy', 'woo-bg' ) );
+		$this->invoice->setType( apply_filters( 'woo_bg/admin/invoice/credit_notice_title_copy', __( 'Credit Notice - Copy', 'woo-bg' ) ) );
 		$this->invoice->setOriginalInvoiceNumber( $order_document_number );
 		$this->invoice->setPaymentType( $this->return_methods[ $this->return_method ]['label'] );
 

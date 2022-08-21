@@ -72,6 +72,7 @@ Improve extending
 Move generated files by the plugin in separate folder
 Minor fixes
 Invoice: Add filters for setTo fields
+Invoice: Add filters for document titles
 
 = 2.2.7 =
 Econt: Add option to generate label after checkout
