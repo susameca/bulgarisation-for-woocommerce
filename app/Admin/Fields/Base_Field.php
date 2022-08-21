@@ -63,6 +63,7 @@ abstract class Base_Field {
 		$option = woo_bg_get_option( $group, $this->get_name() );
 
 		return array(
+			'name' => $this->get_name(),
 			'title' => $this->get_title(),
 			'help_text' => $this->get_help_text(),
 			'description' => $this->get_desc(),
