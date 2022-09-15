@@ -285,15 +285,15 @@ class Menu {
 				'',
 				abs( $item->get_quantity() ), 
 				$vat . "%", 
-				abs( number_format( $item->get_total() / $item->get_quantity(), 2 ) ),
+				number_format( $item->get_subtotal() / $item->get_quantity(), 2, '.', '' ),
 				false,
-				abs( number_format( $item->get_total(), 2) )
+				number_format( $item->get_subtotal(), 2, '.', '')
 			);
 		}
 
-		$total = number_format( $this->order->get_total() - $this->order->get_total_tax(), 2 );
-		$total_vat = number_format( $this->order->get_total_tax(), 2 );
-		$total_due = number_format( $this->order->get_total(), 2 );
+		$total = number_format( $this->order->get_total() - $this->order->get_total_tax(), 2, '.', '' );
+		$total_vat = number_format( $this->order->get_total_tax(), 2, '.', '' );
+		$total_due = number_format( $this->order->get_total(), 2, '.', '' );
 
 		if ( $add_shipping === 'yes' ) {
 			$shipping_vat = woo_bg_get_order_shipping_vat( $this->order );
@@ -310,8 +310,8 @@ class Menu {
 						$item_tax = $_tax::calc_tax(  $item_price, array( array('compound' => 'yes', 'rate' => $item_vat ) ), true )[0];
 						$item_price = $item_price - $item_tax;
 
-						$total -= abs( number_format( $item_tax, 2) );
-						$total_vat += abs( number_format( $item_tax, 2) );
+						$total -= number_format( $item_tax, 2, '.', '');
+						$total_vat += number_format( $item_tax, 2, '.', '');
 					}
 				}
 
@@ -322,24 +322,28 @@ class Menu {
 					'',
 					$item->get_quantity(), 
 					$item_vat . "%", 
-					abs( number_format( $item_price, 2 ) ),
+					number_format( $item_price, 2, '.', '' ),
 					false,
-					number_format( $item_total, 2)
+					number_format( $item_total, 2, '.', '' )
 				);
 			}
 		} else {
-			$total = number_format( $this->order->get_total() - $this->order->get_total_tax() - $this->order->get_shipping_total(), 2 );
+			$total = number_format( $this->order->get_total() - $this->order->get_total_tax() - $this->order->get_shipping_total(), 2, '.', '' );
 			$total_vat = number_format( $this->order->get_total_tax() - $this->order->get_shipping_tax(), 2 );
-			$total_due = number_format( $this->order->get_total() - $this->order->get_shipping_total() - $this->order->get_shipping_tax(), 2 );
+			$total_due = number_format( $this->order->get_total() - $this->order->get_shipping_total() - $this->order->get_shipping_tax(), 2, '.', '' );
 		}
 
-		$this->invoice->addTotal( __( "Total", 'woo-bg'), abs( $total ) );
+		if ( $this->order->get_discount_total() ) {
+			$this->invoice->addTotal( __( "Отстъпка", 'woo-bg'), abs( $this->order->get_discount_total() ) );
+		}
+
+		$this->invoice->addTotal( __( "Total", 'woo-bg'), number_format( $total, 2, '.', '' ) );
 
 		if ( $enabled_taxes === 'yes' ) {
 			$this->invoice->addTotal( sprintf( __( 'VAT %s', 'woo-bg' ), '' ), $total_vat );
 		}
-
-		$this->invoice->addTotal( __( "Total due", 'woo-bg' ), abs( $total_due ), true);
+		
+		$this->invoice->addTotal( __( "Total due", 'woo-bg' ), number_format( $total_due, 2, '.', '' ), true);
 		$this->invoice->addParagraph( $footer_text );
 		$this->invoice->setFooternote( get_bloginfo( 'name' ) );
 	}
@@ -423,7 +427,7 @@ class Menu {
 
 		foreach ( $items as $key => $item ) {
 			$item_vat = $vat;
-			$item_total = abs( number_format( $item->get_total(), 2) );
+			$item_total = number_format( $item->get_total(), 2, '.', '');
 
 			$item_tax_class = $_tax->get_rates( $item->get_tax_class() );
 
@@ -436,7 +440,7 @@ class Menu {
 				'',
 				abs( $item->get_quantity() ), 
 				$item_vat . "%", 
-				abs( number_format( $item->get_total() / $item->get_quantity(), 2 ) ),
+				number_format( $item->get_total() / $item->get_quantity(), 2, '.', '' ),
 				false,
 				$item_total
 			);
@@ -449,7 +453,7 @@ class Menu {
 			$shipping_vat = woo_bg_get_order_shipping_vat( $this->parent_order );
 
 			foreach ($this->parent_order->get_items( 'shipping' ) as $item ) {
-				$item_price = abs( number_format( $item->get_total() / $item->get_quantity(), 2 ) );
+				$item_price = number_format( $item->get_total() / $item->get_quantity(), 2, '.', '' );
 				$item_vat = $vat_percentages[ $vat_group ];
 				$item_tax = $item->get_total_tax();
 
@@ -469,28 +473,28 @@ class Menu {
 					'',
 					$item->get_quantity(), 
 					$item_vat . "%", 
-					abs( number_format( $item_price, 2 ) ),
+					number_format( $item_price, 2, '.', '' ),
 					false,
-					number_format( $item_total, 2)
+					number_format( $item_total, 2, '.', '' )
 				);
 
-				$total += abs( number_format( $item_total, 2) );
-				$total_vat += abs( number_format( $item_tax, 2) );
+				$total += number_format( $item_total, 2, '.', '');
+				$total_vat += number_format( $item_tax, 2, '.', '');
 			}
 		}
 
-		$total = number_format( $total, 2 );
-		$total_vat = number_format( $total_vat, 2 );
-		$total_due = number_format( $total + $total_vat, 2 );
+		$total = number_format( $total, 2, '.', '' );
+		$total_vat = number_format( $total_vat, 2, '.', '' );
+		$total_due = number_format( $total + $total_vat, 2, '.', '' );
 
 
-		$this->invoice->addTotal( __( "Total", 'woo-bg'), abs( $total ) );
+		$this->invoice->addTotal( __( "Total", 'woo-bg'), number_format( $total, 2, '.', '' ) );
 
 		if ( $enabled_taxes === 'yes' ) {
 			$this->invoice->addTotal( sprintf( __( 'VAT %s', 'woo-bg' ), '' ), $total_vat );
 		}
 
-		$this->invoice->addTotal( __( "Total due", 'woo-bg' ), abs( $total_due ), true);
+		$this->invoice->addTotal( __( "Total due", 'woo-bg' ), number_format( $total_due, 2, '.', '' ), true);
 		$this->invoice->addParagraph( $footer_text );
 		$this->invoice->setFooternote( get_bloginfo( 'name' ) );
 	}
