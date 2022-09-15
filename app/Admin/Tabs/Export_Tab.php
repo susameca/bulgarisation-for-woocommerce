@@ -191,7 +191,7 @@ class Export_Tab extends Base_Tab {
 			);
 
 			foreach ( $order->get_items() as $key => $item ) {
-				$price = $item->get_total() / $item->get_quantity();
+				$price = $item->get_subtotal() / $item->get_quantity();
 				$item_vat = $vat_groups[ $vat_group ];
 				$item_tax_class = $_tax->get_rates( $item->get_tax_class() );
 

@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.1
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 2.2.7
+Stable tag: 2.2.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,6 +66,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 2.2.9 =
+Invoice: Improve functionality
 
 = 2.2.8 =
 Improve extending
