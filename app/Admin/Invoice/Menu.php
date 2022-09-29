@@ -221,7 +221,7 @@ class Menu {
 		}
 
 		if ( empty( $items ) ) {
-			$items = array_merge( $this->order->get_items(), $this->order->get_items( 'fee' ) );
+			$items = $this->order->get_items();
 		}
 
 		/* Header settings */
@@ -335,6 +335,12 @@ class Menu {
 
 		if ( $this->order->get_discount_total() ) {
 			$this->invoice->addTotal( __( "Отстъпка", 'woo-bg'), abs( $this->order->get_discount_total() ) );
+		}
+
+		if ( $fees = $this->order->get_items( 'fee' ) ) {
+			foreach ( $fees as $fee ) {
+				$this->invoice->addTotal( $fee->get_name(), number_format( $fee->get_total(), 2, '.', '' ) );
+			}
 		}
 
 		$this->invoice->addTotal( __( "Total", 'woo-bg'), number_format( $total, 2, '.', '' ) );
