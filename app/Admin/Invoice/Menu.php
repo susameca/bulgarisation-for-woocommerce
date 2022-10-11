@@ -233,6 +233,7 @@ class Menu {
 		$this->invoice->setAddress( $city );
 		$this->invoice->setOrderNumber( $this->order->get_order_number() );
 		$this->invoice->setPaymentType( $this->order->get_payment_method_title() );
+		$this->invoice->setTransactionId( $this->order->get_transaction_id() );
 		$this->invoice->setCompiledBy( $prepared_by . " " . $identification_code );
 		$this->invoice->setReceivedBy( $this->order->get_billing_first_name() . ' ' . $this->order->get_billing_last_name() );
 
@@ -388,6 +389,7 @@ class Menu {
 		$this->invoice->setAddress( $city );
 		$this->invoice->setOrderNumber( $this->parent_order->get_order_number() );
 		$this->invoice->setPaymentType( $this->parent_order->get_payment_method_title() );
+		$this->invoice->setTransactionId( $this->parent_order->get_transaction_id() );
 		$this->invoice->setCompiledBy( $prepared_by . " " . $identification_code );
 		$this->invoice->setReceivedBy( $this->parent_order->get_billing_first_name() . ' ' . $this->parent_order->get_billing_last_name() );
 
