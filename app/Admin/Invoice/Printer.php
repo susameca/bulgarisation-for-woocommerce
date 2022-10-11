@@ -43,6 +43,7 @@ class Printer extends tFPDF {
 	public $footernote;
 	public $dimensions;
 	public $paymentType;
+	public $transaction_id;
 	public $display_tofrom = true;
 	public $customHeaders = [];
 	protected $displayToFromHeaders = true;
@@ -162,6 +163,10 @@ class Printer extends tFPDF {
 
 	public function setPaymentType($paymentType) {
 		$this->paymentType = $paymentType;
+	}
+
+	public function setTransactionId($transaction_id) {
+		$this->transaction_id = $transaction_id;
 	}
 
 	public function setReceivedBy($receivedBy) {
@@ -715,6 +720,14 @@ class Printer extends tFPDF {
 			$this->SetTextColor(0, 0, 0);
 			$this->SetFont($this->font, '', 10);
 			$this->Cell( $payment_width, $lineheight, sprintf( __( 'Payment method: %s', 'woo-bg' ), $this->paymentType ), 0, 1, 'L');
+
+			if ( !empty( $this->transaction_id ) ) {
+				$payment_width = ($this->document['w'] - $this->margins['l'] - $this->margins['r']) / 2;
+				$this->SetTextColor(0, 0, 0);
+				$this->SetFont($this->font, '', 10);
+				$this->Cell( $payment_width, $lineheight, sprintf( __( 'Transaction ID: %s', 'woo-bg' ), $this->transaction_id ), 0, 1, 'L');
+			}
+
 			$this->Ln(15);
 		}
 

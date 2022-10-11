@@ -221,7 +221,7 @@ class Menu {
 		}
 
 		if ( empty( $items ) ) {
-			$items = array_merge( $this->order->get_items(), $this->order->get_items( 'fee' ) );
+			$items = $this->order->get_items();
 		}
 
 		/* Header settings */
@@ -233,6 +233,7 @@ class Menu {
 		$this->invoice->setAddress( $city );
 		$this->invoice->setOrderNumber( $this->order->get_order_number() );
 		$this->invoice->setPaymentType( $this->order->get_payment_method_title() );
+		$this->invoice->setTransactionId( $this->order->get_transaction_id() );
 		$this->invoice->setCompiledBy( $prepared_by . " " . $identification_code );
 		$this->invoice->setReceivedBy( $this->order->get_billing_first_name() . ' ' . $this->order->get_billing_last_name() );
 
@@ -337,6 +338,12 @@ class Menu {
 			$this->invoice->addTotal( __( "Отстъпка", 'woo-bg'), abs( $this->order->get_discount_total() ) );
 		}
 
+		if ( $fees = $this->order->get_items( 'fee' ) ) {
+			foreach ( $fees as $fee ) {
+				$this->invoice->addTotal( $fee->get_name(), number_format( $fee->get_total(), 2, '.', '' ) );
+			}
+		}
+
 		$this->invoice->addTotal( __( "Total", 'woo-bg'), number_format( $total, 2, '.', '' ) );
 
 		if ( $enabled_taxes === 'yes' ) {
@@ -382,6 +389,7 @@ class Menu {
 		$this->invoice->setAddress( $city );
 		$this->invoice->setOrderNumber( $this->parent_order->get_order_number() );
 		$this->invoice->setPaymentType( $this->parent_order->get_payment_method_title() );
+		$this->invoice->setTransactionId( $this->parent_order->get_transaction_id() );
 		$this->invoice->setCompiledBy( $prepared_by . " " . $identification_code );
 		$this->invoice->setReceivedBy( $this->parent_order->get_billing_first_name() . ' ' . $this->parent_order->get_billing_last_name() );
 
