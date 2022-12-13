@@ -117,7 +117,9 @@ class Export_Tab extends Base_Tab {
 			date('m', strtotime( $date ) )
 		);
 
-		$orders_ids = wp_list_pluck( $orders, 'id' );
+		foreach ( $orders as $order ) {
+			$orders_ids[] = $order->get_id();
+		}
 
 		foreach ( $orders as $key => $order ) {
 			if ( is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) ) {
