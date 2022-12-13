@@ -193,7 +193,8 @@ class Export_Tab extends Base_Tab {
 			);
 
 			foreach ( $order->get_items() as $key => $item ) {
-				$price = $item->get_subtotal() / $item->get_quantity();
+				$sub_price = $item->get_subtotal() / $item->get_quantity();
+				$price = $item->get_total() / $item->get_quantity();
 				$item_vat = $vat_groups[ $vat_group ];
 				$item_tax_class = $_tax->get_rates( $item->get_tax_class() );
 
@@ -204,9 +205,10 @@ class Export_Tab extends Base_Tab {
 				$price = apply_filters( 'woo_bg/admin/export/item_price', $price, $item );
 				$item_vat = apply_filters( 'woo_bg/admin/export/item_vat', $item_vat, $item );
 
-				$xml_item = new \Audit\Item( 
+				$xml_item = new Export_Tab\Item( 
 					$item->get_name(), 
 					$item->get_quantity(), 
+					$sub_price, 
 					$price, 
 					$item_vat,
 				);
@@ -233,9 +235,10 @@ class Export_Tab extends Base_Tab {
 					$price = apply_filters( 'woo_bg/admin/export/item_price', $price, $item );
 					$item_vat = apply_filters( 'woo_bg/admin/export/item_vat', $item_vat, $item );
 
-					$xml_item = new \Audit\Item( 
+					$xml_item = new Export_Tab\Item( 
 						sprintf( __( 'Shipping: %s', 'woo-bg' ), $item->get_name() ), 
 						$item->get_quantity(), 
+						$price,
 						$price,
 						$item_vat
 					);
@@ -250,7 +253,7 @@ class Export_Tab extends Base_Tab {
 
 		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 		$name = uniqid( rand(), true );
-		$xml = wp_upload_bits( $name . '.xml', null, \Audit\XmlConverter::convert( $shop ) );
+		$xml = wp_upload_bits( $name . '.xml', null, Export_Tab\XmlConverter::convert( $shop ) );
 		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 
 		if ( is_wp_error( $xml ) ) {
