@@ -70,7 +70,7 @@ class Econt_Tab extends Base_Tab {
 						),
 					), 'env', __( 'Environment', 'woo-bg' ), null, null, __( 'Select used environment. For demo you can use Username: "iasp-dev" and Passowrd: "iasp-dev". For live environment use your credentials or create a registration at <a target="_blank" href="https://login.econt.com/register/">Econt Delivery</a>', 'woo-bg' ) ),
 				new Fields\Text_Field( 'user', __( 'Username', 'woo-bg' ), __( 'Enter your username.', 'woo-bg' ), 'required' ),
-				new Fields\Text_Field( 'password', __( 'Password', 'woo-bg' ), __( 'Enter your password.', 'woo-bg' ), 'required' ),
+				new Fields\Text_Field( 'password', __( 'Password', 'woo-bg' ), __( 'Enter your password.', 'woo-bg' ), 'required', null, 'password' ),
 			)
 		);
 
