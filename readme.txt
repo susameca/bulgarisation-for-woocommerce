@@ -67,6 +67,10 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 2.2.11 =
+NRA Export: Improve functionality
+Improve options
+
 = 2.2.10 =
 Invoice: Improve functionality
 NRA Export: Improve functionality
