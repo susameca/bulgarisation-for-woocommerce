@@ -206,7 +206,7 @@ function woo_bg_support_text() {
 	?> 
 	<h3><?php _e( 'Supporting the development', 'woo-bg' ) ?></h3> 
 	<?php
-	echo wpautop( __( 'For single donation as development support you can send at ', 'woo-bg' ) . '<a target="_blank" href="https://revolut.me/tihomi9gj5">Revolut</a>.' );
+	echo wpautop( __( 'For single donation as development support you can send at ', 'woo-bg' ) . '<a target="_blank" href="https://revolut.me/tihomi9gj5">Revolut</a>' );
 }
 
 function woo_bg_get_shipping_tests_options() {
