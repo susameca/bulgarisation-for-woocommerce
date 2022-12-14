@@ -19,7 +19,7 @@
 								tag="td" :rules="field.validation_rules" class="forminp forminp-text" 
 								v-slot="{ errors }"
 							>
-								<input v-model="fields[group_slug][field_slug].value" :name="`woo-bg-` + field.name" type="text" :placeholder="field.title">
+								<input v-model="fields[group_slug][field_slug].value" :name="`woo-bg-` + field.name" :type="field.subtype" :placeholder="field.title">
 								<p v-if="field.description" class="description">
 									{{field.description}}
 								</p>
