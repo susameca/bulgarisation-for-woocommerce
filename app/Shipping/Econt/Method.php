@@ -251,11 +251,14 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_sender_address() {
+		$address = '';
 		$id = woo_bg_get_option( 'econt_send_from', 'address' );
 
-		$profile_addresses = $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['profiles'][0]['addresses'];
+		if ( $id !== '' ) {
+			$profile_addresses = $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['profiles'][0]['addresses'];
 
-		$address = $profile_addresses[ $id ];
+			$address = $profile_addresses[ $id ];
+		}
 
 		return $address;
 	}
@@ -419,13 +422,13 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	public static function save_label_data_to_order( $order_id ) {
+		$order = wc_get_order( $order_id );
+
 		if ( WC()->session->get( 'woo-bg-econt-label' ) ) {
-			update_post_meta( $order_id, 'woo_bg_econt_label', WC()->session->get( 'woo-bg-econt-label' ) );
-			
+			$order->update_meta_data( 'woo_bg_econt_label', WC()->session->get( 'woo-bg-econt-label' ) );
+			$order->save();
 			WC()->session->__unset( 'woo-bg-econt-label' );
 		}
-
-		$order = new \WC_Order( $order_id );
 
 		if ( !empty( $order->get_items( 'shipping' ) ) ) {
 			foreach ( $order->get_items( 'shipping' ) as $shipping ) {
@@ -441,7 +444,8 @@ class Method extends \WC_Shipping_Method {
 					}
 
 					if ( $cookie_data ) {
-						update_post_meta( $order_id, 'woo_bg_econt_cookie_data', $cookie_data );
+						$order->update_meta_data( 'woo_bg_econt_cookie_data', $cookie_data );
+						$order->save();
 					}
 					break;
 				}
@@ -477,7 +481,7 @@ class Method extends \WC_Shipping_Method {
 			return;
 		}
 
-		$label = get_post_meta( $order->get_id(), 'woo_bg_econt_label', 1 );
+		$label = $order->get_meta( 'woo_bg_econt_label' );
 
 		if ( !isset( $label['label']['shipmentNumber'] ) ) {
 			return;

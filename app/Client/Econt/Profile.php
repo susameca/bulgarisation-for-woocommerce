@@ -40,7 +40,7 @@ class Profile {
 		return $profile_data;
 	}
 
-	public function check_credentials( $forced = false ) {
+	public function check_credentials() {
 		$profile_data = $this->fetch_profile_data();
 
 		return $this->container[ Client::ECONT ]::validate_access( $profile_data );

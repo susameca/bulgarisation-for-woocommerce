@@ -123,7 +123,7 @@ class Export_Tab extends Base_Tab {
 
 		foreach ( $orders as $key => $order ) {
 			if ( is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) ) {
-				$parent_order = new \WC_Order( $order->get_parent_id() );
+				$parent_order = wc_get_order( $order->get_parent_id() );
 
 				$order_id_to_show = apply_filters( 'woo_bg/admin/export/refunded_order_id', $parent_order->get_order_number(), $order );
 
@@ -142,20 +142,20 @@ class Export_Tab extends Base_Tab {
 						$orders_ids[] = $order->get_parent_id(); 
 					}
 
-					$order = new \WC_Order( $order->get_parent_id() );
+					$order = wc_get_order( $order->get_parent_id() );
 				} else {
 					continue;
 				}
 			}
 
-			$order_document_number = get_post_meta( $order->get_id(), 'woo_bg_order_number', 1 );
+			$order_document_number = $order->get_meta( 'woo_bg_order_number' );
 
 			if (  $generate_files == 'true' && !$order_document_number ) {
 				$invoices->generate_documents( $order->get_id() );
-				$order_document_number = get_post_meta( $order->get_id(), 'woo_bg_order_number', 1 );
+				$order_document_number = $order->get_meta( 'woo_bg_order_number' );
 			}
 
-			$payment_method = get_post_meta( $order->get_id(), 'woo_bg_payment_method', 1 );
+			$payment_method = $order->get_meta( 'woo_bg_payment_method' );
 			$payment_method_type = null;
 			$order_id_to_show = apply_filters( 'woo_bg/admin/export/order_id', $order->get_order_number(), $order );
 
@@ -326,7 +326,7 @@ class Export_Tab extends Base_Tab {
 			$city = '';
 
 			if ( is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) ) {
-				$temp_order = new \WC_Order( $order->get_parent_id() );
+				$temp_order = wc_get_order( $order->get_parent_id() );
 			}
 
 			if ( $temp_order->get_meta('_billing_to_company') === '1' ) {
@@ -342,7 +342,7 @@ class Export_Tab extends Base_Tab {
 				$city = $temp_order->get_billing_city();
 			}
 
-			if ( get_post_meta( $order->get_id(), 'woo_bg_invoice_document', 1 ) ) {
+			if ( $order->get_meta( 'woo_bg_invoice_document' ) ) {
 				$total_due = $order->get_total();
 
 				if ( $add_shipping === 'no' ) {	
@@ -352,7 +352,7 @@ class Export_Tab extends Base_Tab {
 				$documents[] = apply_filters( 'woo_bg/admin/export/microinvest-order', array(
 					'2', 
 					date_i18n( 'd.m.Y', strtotime( $order->get_date_created() ) ),
-					get_post_meta( $order->get_id(), 'woo_bg_order_number', 1 ),
+					$order->get_meta( 'woo_bg_order_number' ),
 					'Ф-ра',
 					$total_due,
 					'16',
@@ -369,11 +369,11 @@ class Export_Tab extends Base_Tab {
 				), $order, $temp_order );
 			}
 
-			if ( get_post_meta( $order->get_id(), 'woo_bg_refunded_invoice_document', 1 ) ) {
+			if ( $order->get_meta( 'woo_bg_refunded_invoice_document' ) ) {
 				$documents[] = apply_filters( 'woo_bg/admin/export/microinvest-order', array(
 					'2', 
 					date_i18n( 'd.m.Y', strtotime( $order->get_date_created() ) ),
-					get_post_meta( $order->get_id(), 'woo_bg_refunded_order_number', 1 ),
+					$order->get_meta( 'woo_bg_refunded_order_number' ),
 					'КИ',
 					$total_due,
 					'16',

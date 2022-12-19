@@ -2,6 +2,7 @@
 namespace Woo_BG\Admin;
 use Woo_BG\Container\Client;
 use Woo_BG\Shipping\Econt\Address;
+use Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -38,7 +39,11 @@ class Econt {
 	}
 
 	public static function add_meta_boxes() {
-		add_meta_box( 'woo_bg_econt', __( 'Econt Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), array( 'shop_order', 'shop_subscription' ), 'normal', 'default' );
+		$screen = wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+		? array( wc_get_page_screen_id( 'shop-order' ), wc_get_page_screen_id( 'shop_subscription' ) )
+		: array( 'shop_order', 'shop_subscription' );
+
+		add_meta_box( 'woo_bg_econt', __( 'Econt Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
 	}
 
 	public static function meta_box() {
@@ -58,10 +63,10 @@ class Econt {
 					echo '<div id="woo-bg--econt-admin"></div>';
 
 					$label_data = array();
-					$cookie_data = get_post_meta( $theorder->get_id(), 'woo_bg_econt_cookie_data', 1 );
-					$shipment_status = get_post_meta( $theorder->get_id(), 'woo_bg_econt_shipment_status', 1 );
+					$cookie_data = $theorder->get_meta( 'woo_bg_econt_cookie_data' );
+					$shipment_status = $theorder->get_meta( 'woo_bg_econt_shipment_status' );
 
-					if ( $label = get_post_meta( $theorder->get_id(), 'woo_bg_econt_label', 1 ) ) {
+					if ( $label = $theorder->get_meta( 'woo_bg_econt_label' ) ) {
 						$label_data = $label;
 					}
 
@@ -184,12 +189,14 @@ class Econt {
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
 		$shipment_status = $_REQUEST['shipmentStatus'];
+		$order = wc_get_order( $order_id );
 		
 		$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::DELETE_LABELS_ENDPOINT, array(
 			'shipmentNumbers' => [ $shipment_status['label']['shipmentNumber'] ]
 		) );
 
-		update_post_meta( $order_id, 'woo_bg_econt_shipment_status', '' );
+		$order->update_meta_data( 'woo_bg_econt_shipment_status', '' );
+		$order->save();
 		
 		wp_send_json_success( $response );
 		wp_die();
@@ -198,9 +205,10 @@ class Econt {
 	public static function update_shipment_status() {
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
+		$order = wc_get_order( $order_id );
 		$shipment_status = $_REQUEST['shipmentStatus'];
 		$data = array();
-		$order_shipment_status = get_post_meta( $order_id, 'woo_bg_econt_shipment_status', 1 );
+		$order_shipment_status = $order->get_meta( 'woo_bg_econt_shipment_status' );
 
 		$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::SHIPMENT_STATUS_ENDPOINT, array(
 			'shipmentNumbers' => [ $shipment_status['label']['shipmentNumber'] ]
@@ -208,8 +216,9 @@ class Econt {
 
 		$data['shipmentStatus'] = array_shift( array_shift( $response ) )['status'];
 		$order_shipment_status['label'] = $data['shipmentStatus'];
-		update_post_meta( $order_id, 'woo_bg_econt_shipment_status', $order_shipment_status );
-		
+		$order->update_meta_data( 'woo_bg_econt_shipment_status', $order_shipment_status );
+		$order->save();
+
 		wp_send_json_success( $data );
 		wp_die();
 	}
@@ -233,7 +242,8 @@ class Econt {
 	}
 
 	public static function generate_label_after_order_generated( $order_id ) {
-		$label = get_post_meta( $order_id, 'woo_bg_econt_label', 1 );
+		$order = wc_get_order( $order_id );
+		$label = $order->get_meta( 'woo_bg_econt_label' );
 
 		if ( !$label ) {
 			return;
@@ -248,6 +258,7 @@ class Econt {
 
 	public static function send_label_to_econt( $label, $order_id ) {
 		$data = [];
+		$order = wc_get_order( $order_id );
 
 		$generated_data = self::generate_response( $label, $order_id );
 		$response = $generated_data['response'];
@@ -262,8 +273,9 @@ class Econt {
 			$data['shipmentStatus'] = $response;
 			$data['label'] = $request_body['label'];
 
-			update_post_meta( $order_id, 'woo_bg_econt_label', $request_body );
-			update_post_meta( $order_id, 'woo_bg_econt_shipment_status', $response );
+			$order->update_meta_data( 'woo_bg_econt_label', $request_body );
+			$order->update_meta_data( 'woo_bg_econt_shipment_status', $response );
+			$order->save();
 
 			self::update_order_shipping_price( $response, $order_id );
 		}
@@ -274,6 +286,7 @@ class Econt {
 	protected static function update_receiver_address( $label ) {
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
+		$order = wc_get_order( $order_id );
 		$type = $_REQUEST['type'];
 		$cookie_data = $_REQUEST['cookie_data'];
 		$cookie_data['type'] = $type['id'];
@@ -320,13 +333,15 @@ class Econt {
 			$label['receiverAddress'] = $receiver_address;
 		}
 
-		update_post_meta( $order_id, 'woo_bg_econt_cookie_data', $cookie_data );
+		$order->update_meta_data( 'woo_bg_econt_cookie_data', $cookie_data );
+		$order->save();
 
 		return $label;
 	}
 
 	protected static function update_label_pay_options( $label, $order_id ) {
-		$cookie_data = get_post_meta( $order_id, 'woo_bg_econt_cookie_data', 1 );
+		$order = wc_get_order( $order_id );
+		$cookie_data = $order->get_meta( 'woo_bg_econt_cookie_data' );
 
 		unset( $label['services']['invoiceNum'] );
 		unset( $label['services']['cdPayOptionsTemplate'] );
@@ -340,7 +355,7 @@ class Econt {
 
 				foreach ( $cd_pay_options as $option ) {
 					if ( $option['num'] === $cd_pay_option && $option['method'] != 'office' ) {
-						$order = new \WC_Order( $order_id );
+						$order = wc_get_order( $order_id );
 						$document_number = $order->get_meta( 'woo_bg_order_number' );
 
 						if ( !$document_number ) {
@@ -404,7 +419,7 @@ class Econt {
 
 	protected static function update_shipment_description( $label, $order_id ) {
 		$force = woo_bg_get_option( 'econt', 'force_variations_in_desc' );
-		$order = new \WC_Order( $order_id );
+		$order = wc_get_order( $order_id );
 		$names = [];
 
 		foreach ( $order->get_items() as $item ) {
@@ -425,7 +440,7 @@ class Econt {
 	}
 
 	protected static function update_phone_and_names( $label ) {
-		$order = new \WC_Order( $_REQUEST['orderId'] );
+		$order = wc_get_order( $_REQUEST['orderId'] );
 		$phone = [];
 		$name = '';
 
@@ -453,7 +468,7 @@ class Econt {
 		}
 
 		$payment_by = $_REQUEST['paymentBy'];
-		$order = new \WC_Order( $order_id );
+		$order = wc_get_order( $order_id );
 		$price = 0;
 
 		if ( $payment_by['id'] == 'buyer' ) {
@@ -473,7 +488,8 @@ class Econt {
 
 	protected static function generate_response( $label, $order_id ) {
 		$container = woo_bg()->container();
-		$shipment_status = get_post_meta( $order_id, 'woo_bg_econt_shipment_status', 1 );
+		$order = wc_get_order( $order_id );
+		$shipment_status = $order->get_meta( 'woo_bg_econt_shipment_status' );
 
 		$label['holidayDeliveryDay'] = 'workday';
 

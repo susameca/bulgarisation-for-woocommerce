@@ -1,5 +1,7 @@
 <?php
 namespace Woo_BG\Admin;
+use Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController;
+use Automattic\WooCommerce\Utilities\OrderUtil;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -19,7 +21,11 @@ class Nekorekten_Com {
 	}
 
 	public static function add_meta_boxes() {
-		add_meta_box( 'woo_bg_nekorekten_reports', __( 'Reports', 'woo-bg' ), array( __CLASS__, 'meta_box' ), array( 'shop_order', 'shop_subscription' ), 'normal', 'default' );
+		$screen = wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+		? array( wc_get_page_screen_id( 'shop-order' ), wc_get_page_screen_id( 'shop_subscription' ) )
+		: array( 'shop_order', 'shop_subscription' );
+
+		add_meta_box( 'woo_bg_nekorekten_reports', __( 'Reports', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
 	}
 
 	public static function customer_status_info( $order ) {
@@ -49,14 +55,19 @@ class Nekorekten_Com {
 	}
 
 	public static function meta_box() {
-		global $post, $theorder;
+		global $theorder;
+
+		if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			$post = get_post( $_GET['id'] );
+		} else {
+			global $post;
+		}
 
 		if ( ! is_object( $theorder ) ) {
 			$theorder = wc_get_order( $post->ID );
 		} else {
 			$order = $theorder;
 		}
-
 		$phone = ( $theorder->get_shipping_phone() ) ? $theorder->get_shipping_phone() : $theorder->get_billing_phone();
 		$email = $theorder->get_billing_email();
 		$title = __( 'There was some error in one of the reports.', 'woo-bg' );

@@ -1,6 +1,8 @@
 <?php
 namespace Woo_BG\Admin\Invoice;
 
+use Automattic\WooCommerce\Utilities\OrderUtil;
+use Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController;
 use Woo_BG\Admin\Tabs\Settings_Tab;
 use Woo_BG\Admin\Invoice\Printer;
 use Woo_BG\Image_Uploader;
@@ -46,8 +48,10 @@ class Menu {
 		}
 		?>
 		<div class="woo-bg--files">
-			<?php foreach ($ids as $id ): ?>
-				<?php if ( $invoice_pdf = get_post_meta( $id, 'woo_bg_invoice_document', 1 ) ): ?>
+			<?php foreach ($ids as $id ): 
+				$order = wc_get_order( $id );
+			?>
+				<?php if ( $invoice_pdf = $order->get_meta( 'woo_bg_invoice_document' ) ): ?>
 					<p>
 						<a target="_blank" href="<?php echo wp_get_attachment_url( $invoice_pdf ); ?>" class="woo-bg button button--pdf">
 							<?php _e('Invoice PDF', 'woo-bg') ?>
@@ -55,7 +59,7 @@ class Menu {
 					</p>
 				<?php endif ?>
 
-				<?php if ( $refunded_invoice_pdf = get_post_meta( $id, 'woo_bg_refunded_invoice_document', 1 ) ): ?>
+				<?php if ( $refunded_invoice_pdf = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ): ?>
 					<p>
 						<a target="_blank" href="<?php echo wp_get_attachment_url( $refunded_invoice_pdf ); ?>" class="woo-bg button button--pdf">
 							<?php _e('Refunded Invoice PDF', 'woo-bg') ?>
@@ -68,13 +72,21 @@ class Menu {
 	}
 
 	public function add_meta_boxes() {
-		// create PDF buttons
-		add_meta_box( 'woo_bg_pdf-box', __( 'PDF Files', 'woo-bg' ), array( $this, 'pdf_actions_meta_box' ), array( 'shop_order' ), 'side', 'high' );
+		$screen = wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+		? array( wc_get_page_screen_id( 'shop-order' ) )
+		: array( 'shop_order' );
+
+		add_meta_box( 'woo_bg_pdf-box', __( 'PDF Files', 'woo-bg' ), array( $this, 'pdf_actions_meta_box' ), $screen, 'side', 'high' );
 	}
 
 	public function pdf_actions_meta_box( $post ) {
-		$ids = [ $post->ID ];
-		$order = new \WC_Order( $post->ID );
+		if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			$order = $post;
+			$ids = [ $order->get_id() ];
+		} else {
+			$ids = [ $post->ID ];
+			$order = wc_get_order( $post->ID );
+		}
 
 		if ( $refunds = $order->get_refunds() ) {
 			foreach ( $refunds as $refund ) {
@@ -83,27 +95,29 @@ class Menu {
 		}
 		?>
 		<ul class="wpo_wcpdf-actions">
-			<?php foreach ( $ids as $id ): ?>
+			<?php foreach ( $ids as $id ): 
+				$order = wc_get_order( $id );
+			?>
 				<li>
-					<?php if ( $order_pdf = get_post_meta( $id, 'woo_bg_order_document', 1 ) ): ?>
+					<?php if ( $order_pdf = $order->get_meta( 'woo_bg_order_document' ) ): ?>
 						<a target="_blank" href="<?php echo wp_get_attachment_url( $order_pdf ); ?>" class="button">
 							<?php _e('Order PDF', 'woo-bg') ?>
 						</a>
 					<?php endif ?>
 
-					<?php if ( $invoice_pdf = get_post_meta( $id, 'woo_bg_invoice_document', 1 ) ): ?>
+					<?php if ( $invoice_pdf = $order->get_meta( 'woo_bg_invoice_document' ) ): ?>
 						<a target="_blank" href="<?php echo wp_get_attachment_url( $invoice_pdf ); ?>" class="button">
 							<?php _e('Invoice PDF', 'woo-bg') ?>
 						</a>
 					<?php endif ?>
 
-					<?php if ( $refunded_order_pdf = get_post_meta( $id, 'woo_bg_refunded_order_document', 1 ) ): ?>
+					<?php if ( $refunded_order_pdf = $order->get_meta( 'woo_bg_refunded_order_document' ) ): ?>
 						<a target="_blank" href="<?php echo wp_get_attachment_url( $refunded_order_pdf ); ?>" class="button">
 							<?php _e('Refunded Order PDF', 'woo-bg') ?>
 						</a>
 					<?php endif ?>
 
-					<?php if ( $refunded_invoice_pdf = get_post_meta( $id, 'woo_bg_refunded_invoice_document', 1 ) ): ?>
+					<?php if ( $refunded_invoice_pdf = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ): ?>
 						<a target="_blank" href="<?php echo wp_get_attachment_url( $refunded_invoice_pdf ); ?>" class="button">
 							<?php _e('Refunded Invoice PDF', 'woo-bg') ?>
 						</a>
@@ -119,7 +133,7 @@ class Menu {
 	}
 
 	public function set_payment_method( $post ) {
-		$this->order = new \WC_Order( $post );
+		$this->order = wc_get_order( $post );
 		$settings = new Settings_Tab();
 		$options = $settings->get_localized_fields();
 
@@ -137,19 +151,21 @@ class Menu {
 		);
 
 		if ( $payment_methods[ $payment_method[ 'payment_type' ]['value']['id'] ] ) {
-			update_post_meta( $post, 'woo_bg_payment_method', $args );
+			$this->order->update_meta_data( 'woo_bg_payment_method', $args );
+			$this->order->save();
 		}
 	}
 
 	public function generate_documents( $post ) {
-		$this->order = new \WC_Order( $post );
+		$this->order = wc_get_order( $post );
 		$this->currency_symbol = html_entity_decode( get_woocommerce_currency_symbol( $this->order->get_currency() ) );
 
-		$order_document_number = get_post_meta( $post, 'woo_bg_order_number', 1 );
+		$order_document_number = $this->order->get_meta( 'woo_bg_order_number' );
 		if ( !$order_document_number ) {
 			$order_document_number = woo_bg_get_option( 'invoice', 'next_invoice_number' );
 			woo_bg_set_option( 'invoice', 'next_invoice_number', str_pad( $order_document_number + 1, 10, '0', STR_PAD_LEFT ) );
-			update_post_meta( $post, 'woo_bg_order_number', str_pad( $order_document_number, 10, '0', STR_PAD_LEFT ) );
+			$this->order->update_meta_data( 'woo_bg_order_number', str_pad( $order_document_number, 10, '0', STR_PAD_LEFT ) );
+			$this->order->save();
 		}
 
 		$this->document_number = $order_document_number;
@@ -162,7 +178,8 @@ class Menu {
 		}
 
 		if ( $this->order->get_meta('_billing_to_company') ) {
-			update_post_meta( $this->order->get_id(), 'woo_bg_attach_invoice', 'yes' );
+			$this->order->update_meta_data( 'woo_bg_attach_invoice', 'yes' );
+			$this->order->save();
 		}
 
 		if ( $refunds = $this->order->get_refunds() ) {
@@ -530,7 +547,8 @@ class Menu {
 			'post_status' => 'inherit'
 		), $pdf[ 'file' ] );
 
-		update_post_meta( $this->order->get_id(), 'woo_bg_order_document', $attach_id );
+		$this->order->update_meta_data( 'woo_bg_order_document', $attach_id );
+		$this->order->save();
 	}
 
 	public function save_invoice_document() {
@@ -581,12 +599,13 @@ class Menu {
 			 'post_status' => 'inherit'
 		), $pdf[ 'file' ] );
 
-		update_post_meta( $this->order->get_id(), 'woo_bg_invoice_document', $attach_id );
+		$this->order->update_meta_data( 'woo_bg_invoice_document', $attach_id );
+		$this->order->save();
 	}
 
 	public function generate_refunded_documents( $post ) {
 		$this->order = new \Automattic\WooCommerce\Admin\Overrides\OrderRefund( $post );
-		$this->parent_order = new \WC_Order( $this->order->get_parent_id() );
+		$this->parent_order = wc_get_order( $this->order->get_parent_id() );
 		$this->currency_symbol = html_entity_decode( get_woocommerce_currency_symbol( $this->order->get_currency() ) );
 		$this->return_methods = woo_bg_get_return_methods();
 		$this->return_method = woo_bg_get_option( 'shop', 'return_method' );
@@ -596,11 +615,12 @@ class Menu {
 			$items = array_merge( $this->parent_order->get_items(), $this->parent_order->get_items( 'fee' ) );
 		}
 
-		$order_document_number = get_post_meta( $post, 'woo_bg_refunded_order_number', 1 );
+		$order_document_number = $this->order->get_meta( 'woo_bg_refunded_order_number' );
 		if ( !$order_document_number ) {
 			$order_document_number = woo_bg_get_option( 'invoice', 'next_invoice_number' );
 			woo_bg_set_option( 'invoice', 'next_invoice_number', str_pad( $order_document_number + 1, 10, '0', STR_PAD_LEFT ) );
-			update_post_meta( $post, 'woo_bg_refunded_order_number', str_pad( $order_document_number, 10, '0', STR_PAD_LEFT ) );
+			$this->order->update_meta_data( 'woo_bg_refunded_order_number', str_pad( $order_document_number, 10, '0', STR_PAD_LEFT ) );
+			$this->order->save();
 		}
 
 		$this->document_number = $order_document_number;
@@ -636,16 +656,18 @@ class Menu {
 			'post_status' => 'inherit'
 		), $pdf[ 'file' ] );
 
-		update_post_meta( $this->order->get_id(), 'woo_bg_refunded_order_document', $attach_id );
+		$this->order->update_meta_data( 'woo_bg_refunded_order_document', $attach_id );
+		$this->order->save();
 	}
 
 	public function save_credit_notice_document() {
 		$upload_dir = wp_upload_dir();
 
 		if ( $this->order->get_parent_id() ) {
-			$order_document_number = get_post_meta( $this->order->get_parent_id(), 'woo_bg_order_number', 1 );
+			$parent_order = wc_get_order( $this->order->get_parent_id() );
+			$order_document_number = $parent_order->get_meta( 'woo_bg_order_number' );
 		} else {
-			$order_document_number = get_post_meta( $this->order->get_id(), 'woo_bg_order_number', 1 );
+			$order_document_number = $this->order->get_meta( 'woo_bg_order_number' );
 		}
 		
 		$items = array_merge( $this->order->get_items(), $this->order->get_items( 'fee' ) );
@@ -706,7 +728,8 @@ class Menu {
 			 'post_status' => 'inherit'
 		), $pdf[ 'file' ] );
 
-		update_post_meta( $this->order->get_id(), 'woo_bg_refunded_invoice_document', $attach_id );
+		$this->order->update_meta_data( 'woo_bg_refunded_invoice_document', $attach_id );
+		$this->order->save();
 	}
 
 	public static function attach_invoice_to_mail( $attachments, $email_id, $order, $email ) {
@@ -725,11 +748,11 @@ class Menu {
 		$email_ids[] = 'customer_invoice';
 
 		if ( in_array ( $email_id, $email_ids ) ) {
-			if ( $invoice_id = get_post_meta( $order->get_id(), 'woo_bg_order_document', 1 ) ) {
+			if ( $invoice_id = $order->get_meta( 'woo_bg_order_document' ) ) {
 	            $attachments[] = get_attached_file( $invoice_id );
 	        }
 
-			if ( $invoice_id = get_post_meta( $order->get_id(), 'woo_bg_invoice_document', 1 ) ) {
+			if ( $invoice_id = $order->get_meta( 'woo_bg_invoice_document' ) ) {
 				$attachments[] = get_attached_file( $invoice_id );
 			}
 		}
@@ -755,11 +778,12 @@ class Menu {
 			}
 
 			foreach ( $ids as $id ) {
-				if ( $invoice_id = get_post_meta( $id, 'woo_bg_refunded_order_document', 1 ) ) {
+				$order = wc_get_order( $id );
+				if ( $invoice_id = $order->get_meta( 'woo_bg_refunded_order_document' ) ) {
 		            $attachments[] = get_attached_file( $invoice_id );
 		        }
 
-				if ( $invoice_id = get_post_meta( $id, 'woo_bg_refunded_invoice_document', 1 ) ) {
+				if ( $invoice_id = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ) {
 					$attachments[] = get_attached_file( $invoice_id );
 				}
 			}
@@ -769,7 +793,11 @@ class Menu {
 	}
 
 	public function add_order_meta_box_actions( $actions ) {
-		global $post;
+		if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			$post = get_post( $_GET['id'] );
+		} else {
+			global $post;
+		}
 
 		if ( get_post_type( $post ) !== 'shop_subscription' ) {
 			$actions[ 'woo_bg_regenerate_pdfs' ] = __( 'Regenerate PDF\'s', 'woo-bg' );
@@ -789,12 +817,14 @@ class Menu {
 	}
 
 	public function increase_order_doc_number( $order_id ) {
-		$order_document_number = get_post_meta( $order_id, 'woo_bg_order_number', 1 );
+		$order = wc_get_order( $order_id );
+		$order_document_number = $order->get_meta( 'woo_bg_order_number' );
 
 		if ( $order_document_number ) {
 			$order_document_number = woo_bg_get_option( 'invoice', 'next_invoice_number' );
 			woo_bg_set_option( 'invoice', 'next_invoice_number', str_pad( $order_document_number + 1, 10, '0', STR_PAD_LEFT ) );
-			update_post_meta( $order_id, 'woo_bg_order_number', str_pad( $order_document_number, 10, '0', STR_PAD_LEFT ) );
+			$order->update_meta_data( 'woo_bg_order_number', str_pad( $order_document_number, 10, '0', STR_PAD_LEFT ) );
+			$order->save();
 		}
 	}
 }

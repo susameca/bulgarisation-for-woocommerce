@@ -2,6 +2,7 @@
 namespace Woo_BG\Admin;
 use Woo_BG\Admin\Fields;
 use Woo_BG\Front_End\Checkout\EU_Vat as Front_End_EU_Vat;
+use Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -61,6 +62,10 @@ class EU_Vat {
 	}
 
 	public static function add_meta_boxes() {
+		$screen = wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+		? array( wc_get_page_screen_id( 'shop-order' ), wc_get_page_screen_id( 'shop_subscription' ) )
+		: array( 'shop_order', 'shop_subscription' );
+
 		add_meta_box( 'woo_bg_eu_vat', __( 'EU VAT', 'woo-bg' ), array( __CLASS__, 'output_meta_box' ), array( 'shop_order', 'shop_subscription' ), 'side' );
 	}
 
