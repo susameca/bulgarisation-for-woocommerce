@@ -2,7 +2,7 @@
 Contributors: autopolisbg
 Tags: woocommerce, e-commerce, invoice, shipping, bulgaria, bulgarisation, nra
 Requires at least: 5.3
-Tested up to: 6.1
+Tested up to: 6.1.1
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
 Stable tag: 2.2.12
@@ -69,6 +69,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 = 2.2.12 =
 Add support for HPOS
+Econt: Add credentials validation message
+Econt: Change dev password
+Econt: Fix shipping title on alternative layout
 
 = 2.2.11 =
 NRA Export: Improve functionality

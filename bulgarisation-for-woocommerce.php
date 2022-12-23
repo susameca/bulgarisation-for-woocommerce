@@ -7,7 +7,7 @@ Version:      2.2.12
 Author URI:   https://autopolis.bg/
 Requires PHP: 7.4.0
 WC requires at least: 4.0
-WC tested up to: 7.2.0
+WC tested up to: 7.2.2
 Text Domain:  woo-bg
 License:      GPLv3 or later
 */
