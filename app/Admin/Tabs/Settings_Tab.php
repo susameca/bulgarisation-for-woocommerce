@@ -196,7 +196,8 @@ class Settings_Tab extends Base_Tab {
 		wp_send_json_success( array(
 			'fields' => $tab->get_localized_fields(),
 			'groups_titles' => $tab->get_groups_titles(),
-			"message" => __( 'Settings saved successfully!', 'woo-bg' ),
+			'message' => __( 'Settings saved successfully!', 'woo-bg' ),
+			'auth_errors' => $tab->auth_test(),
 		) );
 
 		wp_die();

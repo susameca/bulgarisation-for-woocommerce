@@ -56,4 +56,8 @@ abstract class Base_Tab {
 	
 	//abstract methods
 	abstract public function render_tab_html();
+
+	public function auth_test() {
+		return;
+	}
 }

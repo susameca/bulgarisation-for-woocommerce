@@ -51,6 +51,7 @@ class Econt_Tab extends Base_Tab {
 		wp_localize_script( 'woo-bg-js-admin', 'wooBg_settings', array(
 			'fields' => $this->get_localized_fields(),
 			'groups_titles' => $this->get_groups_titles(),
+			'auth_errors' => $this->auth_test(),
 			'tab' => $this->tab_name,
 			'nonce' => wp_create_nonce( 'woo_bg_settings' ),
 		) );
@@ -68,7 +69,7 @@ class Econt_Tab extends Base_Tab {
 							'id' => 'live',
 							'label' => __( 'Live', 'woo-bg' ),
 						),
-					), 'env', __( 'Environment', 'woo-bg' ), null, null, __( 'Select used environment. For demo you can use Username: "iasp-dev" and Passowrd: "iasp-dev". For live environment use your credentials or create a registration at <a target="_blank" href="https://login.econt.com/register/">Econt Delivery</a>', 'woo-bg' ) ),
+					), 'env', __( 'Environment', 'woo-bg' ), null, null, __( 'Select used environment. For demo you can use Username: "iasp-dev" and Password: "1Asp-dev". For live environment use your credentials or create a registration at <a target="_blank" href="https://login.econt.com/register/">Econt Delivery</a>', 'woo-bg' ) ),
 				new Fields\Text_Field( 'user', __( 'Username', 'woo-bg' ), __( 'Enter your username.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'password', __( 'Password', 'woo-bg' ), __( 'Enter your password.', 'woo-bg' ), 'required', null, 'password' ),
 			)
@@ -203,5 +204,18 @@ class Econt_Tab extends Base_Tab {
 		if ( !$phone ) {
 			woo_bg_set_option( 'econt', 'phone', $profile_data['profiles'][0]['client']['phones'][0] );
 		}
+	}
+
+	public function auth_test() {
+		$error = '';
+
+		if ( !$this->container[ Client::ECONT_PROFILE ]->is_valid_profile( true ) ) {
+			ob_start();
+			$tooltip = '<span class="woocommerce-help-tip woocommerce-help-tip--with-image" data-tip="<img src=\'' . woo_bg()->plugin_dir_url() . '/app/Admin/Tabs/Econt_Tab/images/econt-help.png\'>"></span>';
+			echo wpautop( sprintf( __( 'Username and password are incorrect. Please generate API keys from "Integration for online shops" %s', 'woo-bg' ), $tooltip ) );
+			$error = ob_get_clean(); 
+		}
+
+		return $error;
 	}
 }

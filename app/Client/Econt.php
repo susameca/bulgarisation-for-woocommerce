@@ -51,7 +51,7 @@ class Econt {
 
 	public function load_password() {
 		if ( ! woo_bg_get_option( 'econt', 'password' ) ) {
-			woo_bg_set_option( 'econt', 'password', 'iasp-dev' );
+			woo_bg_set_option( 'econt', 'password', '1Asp-dev' );
 		}
 
 		$this->set_password( woo_bg_get_option( 'econt', 'password' ) );
