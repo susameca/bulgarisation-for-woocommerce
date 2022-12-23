@@ -2,6 +2,8 @@
   <div class="ajax-container" :data-loading="loading">
   	<ValidationObserver ref="form" v-slot="{ handleSubmit }">
 		<form @submit.prevent="handleSubmit( runSubmit )">
+			<div v-if="auth_errors" v-html="auth_errors" class="notice notice-error"> </div>
+
 			<div v-for="(group, group_slug) in fields">
 	  		<h2>{{ groups_titles[ group_slug ].title }}</h2>
 
@@ -87,6 +89,7 @@ export default {
 			fields: cloneDeep( wooBg_settings.fields ),
 			groups_titles: cloneDeep( wooBg_settings.groups_titles ),
 			message: '',
+			auth_errors: cloneDeep( wooBg_settings.auth_errors ),
 		}
 	},
 	mounted() {
@@ -121,12 +124,18 @@ export default {
 						_this.message = response.data.data.message;
 					}
 
+					_this.auth_errors = response.data.data.auth_errors;
+
 					if ( response.data.data.fields ) {
 						_this.fields = {};
 						_this.groups_titles = {};
 						_this.fields = cloneDeep( response.data.data.fields );
 						_this.groups_titles = cloneDeep( response.data.data.groups_titles );
 					}
+
+					setTimeout(function() {
+						$( document.body ).trigger( 'init_tooltips' );
+					}, 50);
 
 					_this.loading = false;
 				} )
