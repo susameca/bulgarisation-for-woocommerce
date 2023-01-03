@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.1.1
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 2.2.12
+Stable tag: 2.2.13
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,6 +66,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 2.2.13 =
+Econt: Optimize label filters
 
 = 2.2.12 =
 Add support for HPOS
