@@ -6,10 +6,10 @@ defined( 'ABSPATH' ) || exit;
 
 class Method extends \WC_Shipping_Method {
 	const METHOD_ID = "woo_bg_econt";
-	private $container = '';
-	private $cookie_data = '';
-	private $package = '';
-	private $free_shipping = false;
+	public $container = '';
+	public $cookie_data = '';
+	public $package = '';
+	public $free_shipping = false;
 
 	public function __construct( $instance_id = 0 ) {
 		$this->container          = woo_bg()->container();
@@ -97,6 +97,8 @@ class Method extends \WC_Shipping_Method {
 		if ( $this->free_shipping && $rate['meta_data']['validated'] ) {
 			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
 		}
+
+		$rate = apply_filters( 'woo_bg/econt/rate', $rate, $this );
 
 		// Register the rate
 		$this->add_rate( $rate );
@@ -188,7 +190,7 @@ class Method extends \WC_Shipping_Method {
 		$request_body = apply_filters( 'woo_bg/econt/calculate_label', array(
 			'label' => $this->generate_label(),
 			'mode' => 'calculate',
-		) );
+		), $this );
 
 		if ( isset( $request_body['label']['senderOfficeCode'] ) ) {
 			unset( $request_body['label']['senderAddress'] );
@@ -336,7 +338,7 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		if ( !$cart['weight'] ) {
-			$cart['weight'] = apply_filters( 'woo_bg/econt/label/weight', 1, $this->package );
+			$cart['weight'] = apply_filters( 'woo_bg/econt/label/weight', 1, $this->package, $this );
 		}
 
 		$cart['shipmentDescription'] = implode( ', ', $names );
@@ -499,7 +501,7 @@ class Method extends \WC_Shipping_Method {
 			)
 		);
 
-		$track_number_text = apply_filters( 'woo_bg/econt/track_number_text_in_email', $track_number_text, $url );
+		$track_number_text = apply_filters( 'woo_bg/econt/track_number_text_in_email', $track_number_text, $url, $order );
 
 		echo wpautop( $track_number_text );
 	}

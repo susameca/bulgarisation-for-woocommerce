@@ -500,7 +500,7 @@ class Econt {
 
 			$request_body = apply_filters( 'woo_bg/econt/update_label', array(
 				'label' => $label,
-			) );
+			), $order );
 
 			$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::UPDATE_LABELS_ENDPOINT, $request_body );
 		} else {
@@ -509,7 +509,7 @@ class Econt {
 			$request_body = apply_filters( 'woo_bg/econt/create_label', array(
 				'label' => $label,
 				'mode' => 'create',
-			) );
+			), $order );
 
 			$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::LABELS_ENDPOINT, $request_body );
 		}
