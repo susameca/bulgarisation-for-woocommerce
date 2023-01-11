@@ -302,7 +302,7 @@ class Menu {
 				apply_filters( 'woo_bg/admin/invoice/item_name', $item->get_name(), $item ),
 				'',
 				abs( $item->get_quantity() ), 
-				$vat . "%", 
+				woo_bg_get_order_item_vat_rate( $item, $this->order ) . "%", 
 				number_format( $item->get_subtotal() / $item->get_quantity(), 2, '.', '' ),
 				false,
 				number_format( $item->get_subtotal(), 2, '.', '')
@@ -464,7 +464,7 @@ class Menu {
 				apply_filters( 'woo_bg/admin/invoice/item_name', $item->get_name(), $item ), 
 				'',
 				abs( $item->get_quantity() ), 
-				$item_vat . "%", 
+				woo_bg_get_order_item_vat_rate( $item, $this->parent_order ) . "%", 
 				number_format( $item->get_total() / $item->get_quantity(), 2, '.', '' ),
 				false,
 				$item_total

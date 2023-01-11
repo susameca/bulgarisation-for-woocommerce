@@ -195,15 +195,10 @@ class Export_Tab extends Base_Tab {
 			foreach ( $order->get_items() as $key => $item ) {
 				$sub_price = $item->get_subtotal() / $item->get_quantity();
 				$price = $item->get_total() / $item->get_quantity();
-				$item_vat = $vat_groups[ $vat_group ];
-				$item_tax_class = $_tax->get_rates( $item->get_tax_class() );
+				$item_vat = woo_bg_get_order_item_vat_rate( $item, $order );
 
-				if ( !empty( $item_tax_class ) ) {
-					$item_vat = array_shift( $item_tax_class )['rate'];
-				}
-
-				$price = apply_filters( 'woo_bg/admin/export/item_price', $price, $item );
-				$item_vat = apply_filters( 'woo_bg/admin/export/item_vat', $item_vat, $item );
+				$price = apply_filters( 'woo_bg/admin/export/item_price', $price, $item, $order );
+				$item_vat = apply_filters( 'woo_bg/admin/export/item_vat', $item_vat, $item, $order );
 
 				$xml_item = new Export_Tab\Item( 
 					$item->get_name(), 
