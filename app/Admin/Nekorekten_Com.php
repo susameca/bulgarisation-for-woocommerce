@@ -25,6 +25,8 @@ class Nekorekten_Com {
 		? array( wc_get_page_screen_id( 'shop-order' ), wc_get_page_screen_id( 'shop_subscription' ) )
 		: array( 'shop_order', 'shop_subscription' );
 
+		$screen = array_filter( $screen );
+
 		add_meta_box( 'woo_bg_nekorekten_reports', __( 'Reports', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
 	}
 
