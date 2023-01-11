@@ -392,7 +392,7 @@ class Method extends \WC_Shipping_Method {
 		return $payment_by_data;
 	}
 
-	private function get_package_total() {
+	protected function get_package_total() {
 		$total = WC()->cart->total;
 
 		if ( WC()->cart->shipping_total ) {
