@@ -215,7 +215,7 @@ class EU_Vat {
 		$billing_country  = wc_clean( $_POST['billing_country'] );
 		$shipping_country = wc_clean( ! empty( $_POST['shipping_country'] ) && ! empty( $_POST['ship_to_different_address'] ) ? $_POST['shipping_country'] : $_POST['billing_country'] );
 
-		if ( woo_bg_get_option('nap', 'dds_number_required' ) !== 'no' ) {
+		if ( woo_bg_get_option('nap', 'dds_number_required' ) !== 'no' && !empty( $_POST[ 'billing_to_company' ] ) ) {
 			self::validate( wc_clean( $_POST['billing_vat_number'] ), $billing_country );
 
 			if ( false === self::$data['validation']['valid'] && isset( $_REQUEST[ 'billing_to_company' ] ) && sanitize_text_field( $_REQUEST[ 'billing_to_company' ] ) ) {
