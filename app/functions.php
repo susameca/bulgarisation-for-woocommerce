@@ -235,6 +235,9 @@ function woo_bg_get_order_shipping_vat( $order ) {
 
 function woo_bg_get_order_item_vat_rate( $item, $order ) {
 	$tax_data = wc_tax_enabled() ? $item->get_taxes() : false;
+	$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
+	$vat_percentages     = woo_bg_get_vat_groups();
+	$rate = $vat_percentages[ $vat_group ];
 
 	if ( $tax_data ) {
 		$order_taxes = $order->get_taxes();
@@ -243,15 +246,11 @@ function woo_bg_get_order_item_vat_rate( $item, $order ) {
 			$tax_item_id       = $tax_item->get_rate_id();
 			$tax_item_total    = isset( $tax_data['total'][ $tax_item_id ] ) ? $tax_data['total'][ $tax_item_id ] : '';
 				
-			if ( $tax_item_total ) {
+			if ( $tax_item_total && $tax_item->get_rate_percent() ) {
 				$rate = $tax_item->get_rate_percent();
 				break;
 			}
 		}
-	} else {
-		$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
-		$vat_percentages     = woo_bg_get_vat_groups();
-		$rate = $vat_percentages[ $vat_group ];
 	}
 
 	return $rate;
