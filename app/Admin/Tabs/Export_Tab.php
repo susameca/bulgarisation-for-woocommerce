@@ -83,9 +83,11 @@ class Export_Tab extends Base_Tab {
 
 	public static function generate_xml_file( $date, $generate_files ) {
 		$invoices = new \Woo_BG\Admin\Invoice\Menu();
+		$status = apply_filters( 'woo_bg/admin/export/orders_statuses', array( 'wc-completed' ) );
+
 		$orders = wc_get_orders( array(
 			'date_created' => strtotime( 'first day of ' . $date ) . '...' . strtotime( 'last day of ' . $date . ' 23:59' ),
-			'status' => array( 'wc-completed' ),
+			'status' => $status,
 			'limit' => -1,
 		) );
 
@@ -179,7 +181,7 @@ class Export_Tab extends Base_Tab {
 				continue;
 			}
 
-			$xml_order = new \Audit\Order(
+			$xml_order = new Export_Tab\Order(
 				$order_id_to_show,
 				new \DateTime( $order->get_date_created() ), 
 				$order_document_number,

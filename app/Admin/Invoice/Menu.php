@@ -352,7 +352,7 @@ class Menu {
 		}
 
 		if ( $this->order->get_discount_total() ) {
-			$this->invoice->addTotal( __( "Отстъпка", 'woo-bg'), abs( $this->order->get_discount_total() ) );
+			$this->invoice->addTotal( __( "Discount", 'woo-bg' ), abs( $this->order->get_discount_total() ) );
 		}
 
 		if ( $fees = $this->order->get_items( 'fee' ) ) {
