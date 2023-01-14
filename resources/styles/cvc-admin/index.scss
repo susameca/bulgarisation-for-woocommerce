@@ -1,0 +1,31 @@
+/* ------------------------------------------------------------ *\
+	Vendor
+\* ------------------------------------------------------------ */
+
+@import '~@styles/cvc-admin.config.scss';
+
+.panel-wrap.woocommerce--cvc {
+	.multiselect__option--highlight:not( .multiselect__option--selected ) {
+		background: $color-cvc-blue;
+	}
+	.multiselect__option--highlight.multiselect__option--selected {
+		background: $color-red;
+	}
+
+	#woo-bg--cvc-label-print { 
+		min-height: 600px; 
+		width: 100%; 
+		margin-top: 30px;
+	}
+
+	.woo-bg--radio input { 
+		margin: 3px 0px 0px 0px; 
+	}
+
+	input.multiselect__input { 
+		border: 0!important; 
+	}
+
+	.woocommerce_order_status table { width:440px; text-align:left; }
+}
+

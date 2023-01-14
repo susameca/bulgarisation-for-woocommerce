@@ -1,7 +1,9 @@
 <?php
 namespace Woo_BG\Shipping;
 use Woo_BG\Admin\Econt as Econt_Admin;
+use Woo_BG\Cron\Econt as Econt_Cron;
 use Woo_BG\Admin\CVC as CVC_Admin;
+use Woo_BG\Cron\CVC as CVC_Cron;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,6 +24,7 @@ class Register {
 
 	public static function maybe_register_econt() {
 		if ( woo_bg_get_option( 'apis', 'enable_econt' ) === 'yes' ) {
+			new Econt_Cron();
 			new Econt\Address();
 			new Econt\Office();
 			new Econt_Admin();
@@ -41,6 +44,7 @@ class Register {
 
 	public static function maybe_register_cvc() {
 		if ( woo_bg_get_option( 'apis', 'enable_cvc' ) === 'yes' ) {
+			new CVC_Cron();
 			new CVC\Address();
 			new CVC\Office();
 			new CVC_Admin();
@@ -48,6 +52,11 @@ class Register {
 			add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'register_cvc_method') );
 			add_action( 'woocommerce_after_checkout_validation', array( 'Woo_BG\Shipping\CVC\Method', 'validate_cvc_method' ), 20, 2 );
 			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\CVC\Method', 'save_label_data_to_order' ), 20, 2 );
+
+			if ( woo_bg_get_option( 'cvc_sender', 'label_after_checkout' ) === 'yes' ) {
+				add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\CVC', 'generate_label_after_order_generated' ), 25 );
+				add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\CVC\Method', 'add_label_number_to_email' ), 1, 4 );
+			}
 
 			add_action( 'wp_enqueue_scripts', array( 'Woo_BG\Shipping\CVC\Method', 'enqueue_scripts' ) );
 		}

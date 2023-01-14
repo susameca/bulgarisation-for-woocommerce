@@ -2,13 +2,16 @@
   "bundles": [
     "frontend",
     "admin",
+    "cvc-frontend",
+    "cvc-admin",
     "econt-frontend",
     "econt-admin"
   ],
   "variables": {
     "color": {
       "red": "#d63638",
-      "econt-blue": "#234182"
+      "econt-blue": "#234182",
+      "cvc-blue": "#234182"
     }
   },
   "development": {

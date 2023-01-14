@@ -64,8 +64,6 @@ class Plugin {
 			new Admin\Nekorekten_Com();
 		}
 
-		new Cron\Econt();
-
 		do_action( 'woo_bg/init-classes');
 	}
 
