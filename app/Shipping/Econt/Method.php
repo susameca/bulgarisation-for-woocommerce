@@ -329,7 +329,15 @@ class Method extends \WC_Shipping_Method {
 			'weight' => 0,
 		);
 
+		$os_value = 0;
+
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
+			$_product = wc_get_product( $item[ 'product_id' ] );
+
+			if ( $product_os_value = $_product->get_meta( '_woo_bg_os_value' ) ) {
+				$os_value += $product_os_value * $item['quantity'];
+			}
+			
 			if ( $item['data']->get_weight() ) {
 				$cart['weight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
 			}
@@ -347,6 +355,11 @@ class Method extends \WC_Shipping_Method {
 			$cart['services']['cdType'] = 'get';
 			$cart['services']['cdAmount'] = $this->get_package_total();
 			$cart['services']['cdCurrency'] = get_woocommerce_currency();
+		}
+
+		if ( $os_value ) {
+			$cart[ 'services' ]['declaredValueAmount'] = $os_value;
+			$cart[ 'services' ]['declaredValueCurrency'] = 'BGN';
 		}
 
 		if ( $this->sms === 'yes' ) {
