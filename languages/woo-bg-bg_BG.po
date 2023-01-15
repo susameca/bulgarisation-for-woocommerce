@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2023-01-14 22:43+0000\n"
+"PO-Revision-Date: 2023-01-15 10:59+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -345,7 +345,7 @@ msgstr "Имейл"
 msgid "E-mail: %s"
 msgstr "Имейл: %s"
 
-#: app/Shipping/Econt/Method.php:416
+#: app/Shipping/Econt/Method.php:429
 msgid "Econt - "
 msgstr "Еконт - "
 
@@ -493,15 +493,15 @@ msgstr "Събитие:"
 #| msgid ""
 #| "Everything necessary for your online store to work in Bulgaria and "
 #| "according to Bulgarian regulations. Includes a light regime for Ordinance "
-#| "- H-18."
+#| "- H-18 and Econt shipping method."
 msgid ""
 "Everything necessary for your online store to work in Bulgaria and according "
 "to Bulgarian regulations. Includes a light regime for Ordinance - H-18 and "
-"Econt shipping method."
+"Econt + CVC shipping method."
 msgstr ""
 "Всичко необходимо за вашият онлайн магазин да работи в България и според "
 "Българските разпоредби. Включва облекчен режим за Наредба - H-18 и метод на "
-"доставка с Еконт."
+"доставка с Еконт и CVC."
 
 #: app/Admin/Tabs/Export_Tab.php:8
 msgid "Export"
@@ -702,7 +702,7 @@ msgstr "Товарителница"
 msgid "Label data"
 msgstr "Данни за товарителница"
 
-#: app/Shipping/CVC/Method.php:524 app/Shipping/Econt/Method.php:496
+#: app/Shipping/CVC/Method.php:524 app/Shipping/Econt/Method.php:509
 #, php-format
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
@@ -908,7 +908,7 @@ msgstr "Телефон: %s"
 msgid "Place of transaction"
 msgstr "Място на сделката"
 
-#: app/Shipping/CVC/Method.php:447 app/Shipping/Econt/Method.php:419
+#: app/Shipping/CVC/Method.php:447 app/Shipping/Econt/Method.php:432
 msgid "Please choose delivery option!"
 msgstr "Моля изберете начин на доставка!"
 
@@ -1079,7 +1079,7 @@ msgstr "Изпратете запитване"
 msgid "Sender"
 msgstr "Изпращач"
 
-#: app/Plugin.php:132 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:130 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1261,7 +1261,7 @@ msgstr "Данъчна основа"
 msgid "Total due"
 msgstr "Всичко"
 
-#: app/Shipping/CVC/Method.php:528 app/Shipping/Econt/Method.php:500
+#: app/Shipping/CVC/Method.php:528 app/Shipping/Econt/Method.php:513
 msgid "Track your order."
 msgstr "Проследи пратката."
 

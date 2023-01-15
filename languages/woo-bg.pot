@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 22:42+0000\n"
+"POT-Creation-Date: 2023-01-15 10:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -341,7 +341,7 @@ msgstr ""
 msgid "E-mail: %s"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:416
+#: app/Shipping/Econt/Method.php:429
 msgid "Econt - "
 msgstr ""
 
@@ -481,7 +481,7 @@ msgstr ""
 msgid ""
 "Everything necessary for your online store to work in Bulgaria and according "
 "to Bulgarian regulations. Includes a light regime for Ordinance - H-18 and "
-"Econt shipping method."
+"Econt + CVC shipping method."
 msgstr ""
 
 #: app/Admin/Tabs/Export_Tab.php:8
@@ -676,7 +676,7 @@ msgstr ""
 msgid "Label data"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:524 app/Shipping/Econt/Method.php:496
+#: app/Shipping/CVC/Method.php:524 app/Shipping/Econt/Method.php:509
 #, php-format
 msgid "Label number: %s. %s"
 msgstr ""
@@ -878,7 +878,7 @@ msgstr ""
 msgid "Place of transaction"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:447 app/Shipping/Econt/Method.php:419
+#: app/Shipping/CVC/Method.php:447 app/Shipping/Econt/Method.php:432
 msgid "Please choose delivery option!"
 msgstr ""
 
@@ -1036,7 +1036,7 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: app/Plugin.php:132 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:130 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
@@ -1202,7 +1202,7 @@ msgstr ""
 msgid "Total due"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:528 app/Shipping/Econt/Method.php:500
+#: app/Shipping/CVC/Method.php:528 app/Shipping/Econt/Method.php:513
 msgid "Track your order."
 msgstr ""
 
