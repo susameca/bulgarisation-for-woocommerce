@@ -99,12 +99,20 @@ class CVC_Tab extends Base_Tab {
 
 			switch ( $send_from ) {
 				case 'address':
-					$fields[ 'cvc_sender' ][] = new Fields\Select_Field( $addresses, 'address', __( 'Select Address', 'woo-bg' ) );
+					if ( !empty( $addresses ) ) {
+						$fields[ 'cvc_sender' ][] = new Fields\Select_Field( $addresses, 'address', __( 'Select Address', 'woo-bg' ) );
+					}
+
 					break;
 				case 'office':
-					$city = woo_bg_get_option( 'cvc_sender', 'city' );
-					$offices = $this->container[ Client::CVC_OFFICES ]->get_formatted_offices( $city );
-					$fields[ 'cvc_sender' ][] = new Fields\Select_Field( $offices, 'office', __( 'Office', 'woo-bg' ) );
+					if ( $city = woo_bg_get_option( 'cvc_sender', 'city' ) ) {
+						$offices = $this->container[ Client::CVC_OFFICES ]->get_formatted_offices( $city );
+
+						if ( !empty( $offices ) ) {
+							$fields[ 'cvc_sender' ][] = new Fields\Select_Field( $offices, 'office', __( 'Office', 'woo-bg' ) );
+						}
+					}
+					
 					break;
 			}
 		}

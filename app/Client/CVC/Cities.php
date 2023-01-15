@@ -116,11 +116,15 @@ class Cities {
 			}
 		}
 
-		$city = $this->search_for_city( $founded_city['name_bg'], $founded_city['id'], $country_id );
+		if ( !empty( $founded_city ) ) {
+			$city = $this->search_for_city( $founded_city['name_bg'], $founded_city['id'], $country_id );
 
-		if ( $city ) {
-			return $city[0]['zip'];
+			if ( $city ) {
+				return $city[0]['zip'];
+			}
 		}
+
+		return;
 	}
 
 	//Setters
