@@ -30,8 +30,6 @@
 				<span slot="noOptions">{{i18n.noOptions}}</span>
 				<span slot="placeholder">{{i18n.searchOffice}}</span>
 			</multiselect>
-
-			<a id="woo-bg--cvc-office-locator" :href="officeLocatorUrl">{{i18n.officeLocator}}</a>
 		</div>
 	</div><!-- /.section__contact -->
 </template>
@@ -62,13 +60,6 @@ export default {
 			document: $( document.body ),
 			i18n: wooBg_cvc.i18n,
 		}
-	},
-	computed: {
-		officeLocatorUrl() {
-			let url = 'https://bgmaps.com/templates/cvc?address=' + this.city + '&office_type=to_office_courier&shop_url=' + window.location.href;
-
-			return url;
-		},
 	},
 	mounted() {
 		window.cvcOfficeIsMounted = true;
