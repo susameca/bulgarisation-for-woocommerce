@@ -114,6 +114,14 @@
 							<input v-model="labelData.cod_amount" type="number">
 						</p>
 
+						<p  class="form-field form-field-wide">
+							<label>
+								{{i18n.declaredValue}}:
+							</label>
+
+							<input v-model="declaredValue" type="number">
+						</p>
+
 						<p v-if="labelData.total_kgs" class="form-field form-field-wide">
 							<label>
 								{{i18n.weight}}:
@@ -275,6 +283,7 @@ export default {
 			message: '',
 			i18n: wooBg_cvc.i18n,
 			cookie_data: cloneDeep( wooBg_cvc.cookie_data ),
+			declaredValue: '',
 		}
 	},
 	watch: {
@@ -361,6 +370,10 @@ export default {
 		} else if ( wooBg_cvc.fixedPrice ) {
 			this.paymentBy = this.paymentByTypes[2];
 		}
+
+		if ( wooBg_cvc.label.os_value ) {
+			this.declaredValue = wooBg_cvc.label.os_value;
+		}
 	},
 	methods: {
 		onCopy: function (e) {
@@ -384,6 +397,7 @@ export default {
 				testOption: this.testOption,
 				cookie_data: this.cookie_data,
 				orderId: wooBg_cvc.orderId,
+				declaredValue: this.declaredValue,
 				action: 'woo_bg_cvc_generate_label',
 			};
 

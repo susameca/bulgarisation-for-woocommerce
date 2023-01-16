@@ -133,6 +133,7 @@ class Econt {
 			'event' => __( 'Event:', 'woo-bg' ),
 			'details' => __( 'Details:', 'woo-bg' ),
 			'reviewAndTest' => __( 'Review and test', 'woo-bg' ),
+			'declaredValue' => __( 'Declared value', 'woo-bg' ),
 		);
 	}
 
@@ -236,6 +237,7 @@ class Econt {
 		$label = self::update_shipment_type( $label );
 		$label = self::update_shipment_description( $label, $order_id );
 		$label = self::update_phone_and_names( $label );
+		$label = self::update_os_value( $label );
 
 		$data = self::send_label_to_econt( $label, $order_id );
 
@@ -460,6 +462,20 @@ class Econt {
 
 		$label['receiverClient']['name'] = $name;
 		$label['receiverClient']['phones'] = $phone;
+
+		return $label;
+	}
+
+	protected static function update_os_value( $label ) {
+		if ( isset( $label[ 'services' ]['declaredValueAmount'] ) ) {
+			unset( $label[ 'services' ]['declaredValueAmount'] );
+			unset( $label[ 'services' ]['declaredValueCurrency'] );
+		}
+
+		if ( $_REQUEST['declaredValue'] ) {
+			$label[ 'services' ]['declaredValueAmount'] = $_REQUEST['declaredValue'];
+			$label[ 'services' ]['declaredValueCurrency'] = 'BGN';
+		}
 
 		return $label;
 	}

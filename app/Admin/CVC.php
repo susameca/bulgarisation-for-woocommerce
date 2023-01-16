@@ -130,6 +130,7 @@ class CVC {
 			'event' => __( 'Event:', 'woo-bg' ),
 			'details' => __( 'Details:', 'woo-bg' ),
 			'reviewAndTest' => __( 'Review and test', 'woo-bg' ),
+			'declaredValue' => __( 'Declared value', 'woo-bg' ),
 		);
 	}
 
@@ -196,6 +197,7 @@ class CVC {
 		$label = self::update_test_options( $label );
 		$label = self::update_shipment_description( $label, $order_id );
 		$label = self::update_phone_and_names( $label );
+		$label = self::update_os_value( $label );
 
 		$data = self::send_label_to_cvc( $label, $order_id );
 
@@ -373,6 +375,18 @@ class CVC {
 		return $label;
 	}
 
+	protected static function update_os_value( $label ) {
+		if ( isset( $label[ 'os_value' ] ) ) {
+			unset( $label[ 'os_value' ] );
+		}
+
+		if ( $_REQUEST['declaredValue'] ) {
+			$label[ 'os_value' ] = $_REQUEST['declaredValue'];
+		}
+
+		return $label;
+	}
+	
 	protected static function update_order_shipping_price( $response, $order_id, $request_body = [] ) {
 		if ( !isset( $_REQUEST['paymentBy'] ) ) {
 			return;

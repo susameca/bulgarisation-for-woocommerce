@@ -136,6 +136,14 @@
 							<input v-model="labelData.services.cdAmount" type="number">
 						</p>
 
+						<p  class="form-field form-field-wide">
+							<label>
+								{{i18n.declaredValue}}:
+							</label>
+
+							<input v-model="declaredValue" type="number">
+						</p>
+
 						<p v-if="labelData.weight" class="form-field form-field-wide">
 							<label>
 								{{i18n.weight}}:
@@ -322,6 +330,7 @@ export default {
 			other: '',
 			message: '',
 			i18n: wooBg_econt.i18n,
+			declaredValue: '',
 		}
 	},
 	watch: {
@@ -421,6 +430,10 @@ export default {
 		} else if ( wooBg_econt.label.paymentReceiverMethod ) {
 			this.paymentBy = this.paymentByTypes[0];
 		}
+
+		if ( wooBg_econt.label.services.declaredValueAmount ) {
+			this.declaredValue = wooBg_econt.label.services.declaredValueAmount;
+		}
 	},
 	methods: {
 		onCopy: function (e) {
@@ -445,6 +458,7 @@ export default {
 				testOption: this.testOption,
 				cookie_data: wooBg_econt.cookie_data,
 				orderId: wooBg_econt.orderId,
+				declaredValue: this.declaredValue,
 				action: 'woo_bg_econt_generate_label',
 			};
 

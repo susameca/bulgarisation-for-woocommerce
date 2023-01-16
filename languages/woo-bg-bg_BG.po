@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2023-01-15 10:59+0000\n"
+"PO-Revision-Date: 2023-01-16 21:01+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.1; wp-5.9.3\n"
+"X-Loco-Version: 2.6.3; wp-6.2-alpha-55065\n"
 "X-Domain: woo-bg"
 
 #: app/Shipping/CVC/Office.php:48 app/Shipping/Econt/Office.php:49
@@ -268,7 +268,7 @@ msgstr "Дата: %s"
 
 #: app/Shipping/ProductAdditionalFields.php:28
 msgid "Declared value"
-msgstr "Декларирана стойност"
+msgstr "Обявена стойност"
 
 #: app/Admin/CVC.php:106 app/Admin/Econt.php:110
 msgid "Default"
