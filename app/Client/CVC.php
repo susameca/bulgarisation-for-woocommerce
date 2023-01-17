@@ -8,6 +8,7 @@ class CVC {
 	const CALC_LABELS_ENDPOINT = 'calculate_wb';
 	const CREATE_LABELS_ENDPOINT = 'create_wb';
 	const CANCEL_LABELS_ENDPOINT = 'cancel_wb';
+	const ACTIONS_ENDPOINT = 'get_status_history';
     const CACHE_FOLDER = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'woo-bg' . DIRECTORY_SEPARATOR . 'cvc' . DIRECTORY_SEPARATOR;
 
     private $token = '';

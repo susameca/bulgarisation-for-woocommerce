@@ -184,6 +184,10 @@
 							<button @click="updateLabel" name="save" type="submit" :value="i18n.generateLabel" class="button-primary woocommerce-save-button">{{i18n.generateLabel}}</button>
 						</p>
 
+						<p v-else class="form-field form-field-wide">
+							<button @click="updateActions" name="save" type="submit" :value="i18n.updateShipmentStatus" class="button-primary woocommerce-save-button">{{i18n.updateShipmentStatus}}</button>
+						</p>
+
 						<p class="form-field form-field-wide"> 
 							<button @click="deleteLabel" name="save" type="submit" :value="i18n.deleteLabel" class="button-secondary">{{i18n.deleteLabel}}</button>
 
@@ -205,26 +209,24 @@
 				</div><!-- /.order_data_column order_data_column-/-half -->
 			</div><!-- /.order_data_column_container -->
 
-			<!-- <div class="woocommerce_order_status" v-if="statuses.length">
+			<div class="woocommerce_order_status" v-if="statuses.length">
 				<h3>{{i18n.shipmentStatus}}</h3>
 
 				<table>
 					<thead>
 						<tr>
 							<th> {{i18n.time}} </th>
-							<th> {{i18n.event}} </th>
 							<th> {{i18n.details}} </th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="(status, key) in statuses">
 							<th> {{status.time}} </th>
-							<th> <img :src="status.image"> </th>
-							<th> {{status.destination}} </th>
+							<th> {{status.details}} </th>
 						</tr>
 					</tbody>
 				</table>
-			</div> -->
+			</div>
 		</div>
 
 		<div class="clear"></div>
@@ -284,6 +286,7 @@ export default {
 			i18n: wooBg_cvc.i18n,
 			cookie_data: cloneDeep( wooBg_cvc.cookie_data ),
 			declaredValue: '',
+			shipmentActions : [],
 		}
 	},
 	watch: {
@@ -295,38 +298,26 @@ export default {
 		labelJSON() {
 			return JSON.stringify( this.labelData );
 		},
-		/*statuses() {
+		statuses() {
 			let statuses = [];
-			if ( this.shipmentStatus && this.shipmentStatus.trackingEvents.length ) {
-				this.shipmentStatus.trackingEvents.forEach( function ( status ) {
-					let image = '';
-					let time = new Date( status.time );
-					let destination = status.destinationDetails;
-					time = time.getDate() + "/" + ( time.getMonth() + 1 ) + "/" + time.getFullYear() + " " + time.getHours() + ":" + ('0'  + time.getMinutes() ).slice(-2) + ":" + ('0'  + time.getSeconds() ).slice(-2);
-
-					if ( status.destinationType === 'office' || status.destinationType === 'prepared' ) {
-						image = "//ee.cvc.com/images/icons/trace_office.png";
-					} else if ( status.destinationType === 'courier_direction' ) {
-						image = "//ee.cvc.com/images/icons/trace_line.png";
-					} else if ( status.destinationType === 'courier' ) {
-						image = "//ee.cvc.com/images/icons/trace_courier.png";
-					} else if ( status.destinationType === 'client' ) {
-						image = "//ee.cvc.com/images/icons/trace_ok.png";
-					} else if ( status.destinationType === 'return' ) {
-						image = "//ee.cvc.com/images/icons/trace_return.png";
+			if ( this.shipmentActions.length ) {
+				this.shipmentActions.forEach( function ( status ) {
+					let details = status.status
+					if ( status.by_person ) {
+						details += ' : ' + status.by_person;
 					}
 
 					statuses.push({
-						time,
-						image,
-						destination,
+						time: status.status_date,
+						details,
 					} );
 				});
 
 				statuses.reverse();
 			}
+
 			return statuses;
-		}*/
+		}
 	},
 	mounted() {
 		let _this = this;
@@ -374,6 +365,10 @@ export default {
 		if ( wooBg_cvc.label.os_value ) {
 			this.declaredValue = wooBg_cvc.label.os_value;
 		}
+
+		if ( wooBg_cvc.actions ) {
+			this.shipmentActions = wooBg_cvc.actions;
+		}
 	},
 	methods: {
 		onCopy: function (e) {
@@ -410,6 +405,30 @@ export default {
 						_this.shipmentStatus = cloneDeep( response.data.data.shipmentStatus, true );
 						_this.labelData = cloneDeep( response.data.data.label, true );
 						_this.size = 'refresh';
+					}
+				});
+		},
+		updateActions( e ) {
+			e.preventDefault();
+
+			this.loading = true;
+			let _this = this;
+			_this.message = '';
+
+			let data = {
+				orderId: wooBg_cvc.orderId,
+				shipmentStatus: this.shipmentStatus,
+				action: 'woo_bg_cvc_update_actions',
+			};
+
+			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
+				.then(function( response ) {
+					_this.loading = false;
+
+					if ( response.data.data.message ) {
+						_this.message = response.data.data.message;
+					} else {
+						_this.shipmentActions = cloneDeep( response.data.data.actions, true );
 					}
 				});
 		},

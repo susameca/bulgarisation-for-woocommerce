@@ -18,6 +18,9 @@ class CVC {
 
 		add_action( 'wp_ajax_woo_bg_cvc_delete_label', array( __CLASS__, 'delete_label' ) );
 		add_action( 'wp_ajax_nopriv_woo_bg_cvc_delete_label', array( __CLASS__, 'delete_label' ) );
+
+		add_action( 'wp_ajax_woo_bg_cvc_update_actions', array( __CLASS__, 'update_actions' ) );
+		add_action( 'wp_ajax_nopriv_woo_bg_cvc_update_actions', array( __CLASS__, 'update_actions' ) );
 	}
 
 	public static function admin_enqueue_scripts() {
@@ -64,6 +67,7 @@ class CVC {
 					$label_data = array();
 					$cookie_data = $theorder->get_meta( 'woo_bg_cvc_cookie_data' );
 					$shipment_status = $theorder->get_meta( 'woo_bg_cvc_shipment_status' );
+					$actions = $theorder->get_meta( 'woo_bg_cvc_actions' );
 
 					if ( $label = $theorder->get_meta( 'woo_bg_cvc_label' ) ) {
 						$label_data = $label;
@@ -82,6 +86,7 @@ class CVC {
 					wp_localize_script( 'woo-bg-js-admin', 'wooBg_cvc', array(
 						'label' => $label_data,
 						'shipmentStatus' => $shipment_status,
+						'actions' => $actions,
 						'cookie_data' => $cookie_data,
 						'offices' => self::get_offices( $cookie_data ),
 						'streets' => self::get_streets( $cookie_data ),
@@ -185,6 +190,26 @@ class CVC {
 		$order->save();
 		
 		wp_send_json_success( $response );
+		wp_die();
+	}
+
+	public static function update_actions() {
+		$container = woo_bg()->container();
+		$order_id = $_REQUEST['orderId'];
+		$order = wc_get_order( $order_id );
+		$shipment_status = $_REQUEST['shipmentStatus'];
+		$data = array();
+
+		$response = $container[ Client::CVC ]->api_call( $container[ Client::CVC ]::ACTIONS_ENDPOINT, array(
+			'wb' => $shipment_status['wb'],
+		), 'GET' );
+
+		$order->update_meta_data( 'woo_bg_cvc_actions', $response['history'] );
+		$order->save();
+
+		wp_send_json_success( array(
+			'actions' => $response['history'],
+		) );
 		wp_die();
 	}
 
@@ -386,7 +411,7 @@ class CVC {
 
 		return $label;
 	}
-	
+
 	protected static function update_order_shipping_price( $response, $order_id, $request_body = [] ) {
 		if ( !isset( $_REQUEST['paymentBy'] ) ) {
 			return;
