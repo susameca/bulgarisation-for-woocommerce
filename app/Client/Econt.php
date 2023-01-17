@@ -42,18 +42,10 @@ class Econt {
 
 	//Loaders
 	public function load_user() {
-		if ( ! woo_bg_get_option( 'econt', 'user' ) ) {
-			woo_bg_set_option( 'econt', 'user', 'iasp-dev' );
-		}
-
 		$this->set_user( woo_bg_get_option( 'econt', 'user' ) );
 	}
 
 	public function load_password() {
-		if ( ! woo_bg_get_option( 'econt', 'password' ) ) {
-			woo_bg_set_option( 'econt', 'password', '1Asp-dev' );
-		}
-
 		$this->set_password( woo_bg_get_option( 'econt', 'password' ) );
 	}
 

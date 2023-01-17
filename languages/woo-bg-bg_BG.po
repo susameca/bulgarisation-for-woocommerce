@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2023-01-16 21:01+0000\n"
+"PO-Revision-Date: 2023-01-17 21:48+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -29,7 +29,7 @@ msgstr "%s: Безплатна доставка"
 msgid "(self-declared)"
 msgstr "(самодеклариран)"
 
-#: app/Admin/Tabs/CVC_Tab.php:83 app/Admin/Tabs/Econt_Tab.php:87
+#: app/Admin/Tabs/CVC_Tab.php:83 app/Admin/Tabs/Econt_Tab.php:98
 msgid ""
 "Add additional variations information. Please use this option only if you "
 "want the variation data to be available in the label print and it's missing."
@@ -50,8 +50,8 @@ msgstr "Добавяне на доставките към фактурата"
 msgid "Additional API's"
 msgstr "Допълнителни API"
 
-#: app/Admin/CVC.php:118 app/Admin/Econt.php:122 app/Admin/Tabs/CVC_Tab.php:94
-#: app/Admin/Tabs/Econt_Tab.php:98 app/Front_End/Checkout/Company.php:69
+#: app/Admin/CVC.php:123 app/Admin/Econt.php:122 app/Admin/Tabs/CVC_Tab.php:94
+#: app/Admin/Tabs/Econt_Tab.php:109 app/Front_End/Checkout/Company.php:69
 #: app/Shipping/CVC/Method.php:136 app/Shipping/Econt/Method.php:126
 msgid "Address"
 msgstr "Адрес"
@@ -68,7 +68,7 @@ msgstr "API ключ"
 msgid "API Token"
 msgstr "API ключ"
 
-#: app/Admin/Tabs/CVC_Tab.php:159
+#: app/Admin/Tabs/CVC_Tab.php:167
 msgid "API Token is incorrect."
 msgstr "Невалиден API ключ."
 
@@ -88,7 +88,7 @@ msgstr "Доставчик"
 msgid "Billing to"
 msgstr "Клиент"
 
-#: app/Admin/CVC.php:114 app/Admin/Econt.php:118
+#: app/Admin/CVC.php:119 app/Admin/Econt.php:118
 #: app/Shipping/CVC/Address.php:38 app/Shipping/Econt/Address.php:38
 msgid "bl. vh. et."
 msgstr "бл. вх. ет. ап."
@@ -106,7 +106,7 @@ msgstr "Българизация за WooCommerce"
 msgid "Bulgarisation for WooCommerce - Please enable WooCommerce first."
 msgstr "Българизация за WooCommerce - Моля активирайте първо WooCommerce."
 
-#: app/Admin/CVC.php:121 app/Admin/Econt.php:125
+#: app/Admin/CVC.php:126 app/Admin/Econt.php:125
 msgid "Buyer"
 msgstr "Купувач"
 
@@ -137,7 +137,7 @@ msgstr "Неуспешно калкулиране. Моля опитайте о�
 msgid "Card"
 msgstr "По карта"
 
-#: app/Admin/Econt.php:144
+#: app/Admin/Econt.php:145
 msgid "Cargo"
 msgstr "Карго"
 
@@ -145,11 +145,11 @@ msgstr "Карго"
 msgid "Cash"
 msgstr "В кеш"
 
-#: app/Admin/CVC.php:110 app/Admin/Econt.php:114
+#: app/Admin/CVC.php:115 app/Admin/Econt.php:114
 msgid "Cash on delivery"
 msgstr "Наложен платеж"
 
-#: app/Admin/Tabs/Econt_Tab.php:89
+#: app/Admin/Tabs/Econt_Tab.php:100
 msgid "Cash on delivery agreement"
 msgstr "Споразумение за наложен платеж"
 
@@ -173,21 +173,21 @@ msgstr "Отбележете ако искате продукта да бъде 
 msgid "Checkout Settings"
 msgstr "Настройки на \"Страница за поръчка\""
 
-#: app/Admin/CVC.php:108 app/Admin/Econt.php:112
+#: app/Admin/CVC.php:113 app/Admin/Econt.php:112
 #: app/Shipping/CVC/Address.php:32 app/Shipping/CVC/Office.php:28
 #: app/Shipping/Econt/Address.php:32 app/Shipping/Econt/Office.php:28
 msgid "Choose"
 msgstr "Избери"
 
-#: app/Admin/Tabs/Econt_Tab.php:128
+#: app/Admin/Tabs/Econt_Tab.php:146
 msgid "Choose a city and save in order to show offices."
 msgstr "Избери град и запази за да се покажат офиси."
 
-#: app/Admin/Tabs/Econt_Tab.php:89
+#: app/Admin/Tabs/Econt_Tab.php:100
 msgid "Choose cash on delivery agreement"
 msgstr "Избери споразумение за наложен платеж"
 
-#: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:121
+#: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:139
 msgid "City"
 msgstr "Град"
 
@@ -220,11 +220,11 @@ msgstr "Имейл за контакти"
 msgid "Contact phone number of your company."
 msgstr "Телефон за контакти на вашата фирма."
 
-#: app/Admin/CVC.php:123
+#: app/Admin/CVC.php:128
 msgid "Contract"
 msgstr "По договор"
 
-#: app/Admin/CVC.php:126 app/Admin/Econt.php:129
+#: app/Admin/CVC.php:131 app/Admin/Econt.php:129
 msgid "Copy Label Data"
 msgstr "Копирай данните на товарителницата"
 
@@ -241,7 +241,7 @@ msgstr "Кредитно известие - Оригинал"
 msgid "CVC - %s"
 msgstr "CVC - %s"
 
-#: app/Admin/CVC.php:45
+#: app/Admin/CVC.php:48
 msgid "CVC Delivery"
 msgstr "Доставки със CVC "
 
@@ -266,19 +266,20 @@ msgstr "Дата:"
 msgid "Date: %s"
 msgstr "Дата: %s"
 
+#: app/Admin/CVC.php:138 app/Admin/Econt.php:136
 #: app/Shipping/ProductAdditionalFields.php:28
 msgid "Declared value"
 msgstr "Обявена стойност"
 
-#: app/Admin/CVC.php:106 app/Admin/Econt.php:110
+#: app/Admin/CVC.php:111 app/Admin/Econt.php:110
 msgid "Default"
 msgstr "По подразбиране"
 
-#: app/Admin/CVC.php:104 app/Admin/Econt.php:108
+#: app/Admin/CVC.php:109 app/Admin/Econt.php:108
 msgid "Delete label"
 msgstr "Изтрий товарителница"
 
-#: app/Admin/CVC.php:109 app/Admin/Econt.php:113
+#: app/Admin/CVC.php:114 app/Admin/Econt.php:113
 msgid "Delivery is payed by"
 msgstr "Доставката се поема от"
 
@@ -286,7 +287,7 @@ msgstr "Доставката се поема от"
 msgid "Delivery Type"
 msgstr "Доставка до"
 
-#: app/Admin/CVC.php:119 app/Admin/Econt.php:123
+#: app/Admin/CVC.php:124 app/Admin/Econt.php:123
 msgid "Delivery type"
 msgstr "Доставка до"
 
@@ -294,7 +295,7 @@ msgstr "Доставка до"
 msgid "Demo"
 msgstr "Демо"
 
-#: app/Admin/CVC.php:131 app/Admin/Econt.php:134
+#: app/Admin/CVC.php:136 app/Admin/Econt.php:134
 msgid "Details:"
 msgstr "Детайли:"
 
@@ -314,11 +315,11 @@ msgstr "Отстъпка"
 msgid "Do you want a company invoice?"
 msgstr "Искате ли фактура за фирма?"
 
-#: app/Admin/Econt.php:142
+#: app/Admin/Econt.php:143
 msgid "Document"
 msgstr "Документ"
 
-#: app/Admin/Econt.php:145
+#: app/Admin/Econt.php:146
 msgid "Document-Pallet"
 msgstr "Документ-палет"
 
@@ -485,7 +486,7 @@ msgstr "Грешка: \"%s\""
 msgid "EU VAT"
 msgstr "ДДС номер"
 
-#: app/Admin/CVC.php:130 app/Admin/Econt.php:133
+#: app/Admin/CVC.php:135 app/Admin/Econt.php:133
 msgid "Event:"
 msgstr "Събитие:"
 
@@ -532,7 +533,7 @@ msgstr ""
 msgid "First Name:"
 msgstr "Име:"
 
-#: app/Admin/CVC.php:125 app/Admin/Econt.php:128
+#: app/Admin/CVC.php:130 app/Admin/Econt.php:128
 #: app/Shipping/CVC/Method.php:192 app/Shipping/Econt/Method.php:156
 msgid "Fixed price"
 msgstr "Фиксирана цена"
@@ -550,7 +551,7 @@ msgstr "За генериране на API ключ използвайте то�
 msgid "For single donation as development support you can send at "
 msgstr "За еднократна помощ като подкрепа за развитие, можете да дарите в "
 
-#: app/Admin/Tabs/CVC_Tab.php:83 app/Admin/Tabs/Econt_Tab.php:87
+#: app/Admin/Tabs/CVC_Tab.php:83 app/Admin/Tabs/Econt_Tab.php:98
 msgid "Force variations in label"
 msgstr "Принудително добавяне на варияцията в товарителницата"
 
@@ -571,7 +572,7 @@ msgstr "Безплатна доставна над"
 msgid "Free shipping over total cart price."
 msgstr "Безплатна доставка над сума на количката "
 
-#: app/Admin/Tabs/CVC_Tab.php:126 app/Admin/Tabs/Econt_Tab.php:168
+#: app/Admin/Tabs/CVC_Tab.php:134 app/Admin/Tabs/Econt_Tab.php:187
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:60
 msgid "General"
 msgstr "Главни"
@@ -584,11 +585,11 @@ msgstr "Генерирай XML файл"
 msgid "Generate documents for orders before the plugin was installed?"
 msgstr "Генериране на докумени за поръчки преди плъгина да бъде инсталиран?"
 
-#: app/Admin/CVC.php:103 app/Admin/Econt.php:107
+#: app/Admin/CVC.php:108 app/Admin/Econt.php:107
 msgid "Generate label"
 msgstr "Генерирай товарителница."
 
-#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:88
+#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:99
 msgid "Generate label after checkout"
 msgstr "Генерирай товарителница след чекаут"
 
@@ -694,11 +695,11 @@ msgstr "IP Адрес"
 msgid "IP Country"
 msgstr "IP Държава"
 
-#: app/Admin/CVC.php:105 app/Admin/Econt.php:109
+#: app/Admin/CVC.php:110 app/Admin/Econt.php:109
 msgid "Label"
 msgstr "Товарителница"
 
-#: app/Admin/CVC.php:120 app/Admin/Econt.php:124
+#: app/Admin/CVC.php:125 app/Admin/Econt.php:124
 msgid "Label data"
 msgstr "Данни за товарителница"
 
@@ -738,7 +739,7 @@ msgstr "МОЛ на фирмата"
 msgid "MOL: %s"
 msgstr "МОЛ: %s"
 
-#: app/Admin/Tabs/CVC_Tab.php:79 app/Admin/Tabs/Econt_Tab.php:85
+#: app/Admin/Tabs/CVC_Tab.php:79 app/Admin/Tabs/Econt_Tab.php:96
 msgid "Name"
 msgstr "Име"
 
@@ -765,7 +766,7 @@ msgstr "Следващ номер на документ"
 msgid "No"
 msgstr "Не"
 
-#: app/Admin/Tabs/Econt_Tab.php:141
+#: app/Admin/Tabs/Econt_Tab.php:160
 msgid "No agreement"
 msgstr "Без споразумение"
 
@@ -804,9 +805,9 @@ msgstr "Уникален номер на магазина издаден ви о
 msgid "of"
 msgstr "от"
 
-#: app/Admin/CVC.php:117 app/Admin/Econt.php:121 app/Admin/Tabs/CVC_Tab.php:90
-#: app/Admin/Tabs/CVC_Tab.php:107 app/Admin/Tabs/Econt_Tab.php:94
-#: app/Admin/Tabs/Econt_Tab.php:125 app/Shipping/CVC/Method.php:135
+#: app/Admin/CVC.php:122 app/Admin/Econt.php:121 app/Admin/Tabs/CVC_Tab.php:90
+#: app/Admin/Tabs/CVC_Tab.php:112 app/Admin/Tabs/Econt_Tab.php:105
+#: app/Admin/Tabs/Econt_Tab.php:143 app/Shipping/CVC/Method.php:135
 #: app/Shipping/Econt/Method.php:125
 msgid "Office"
 msgstr "Офис"
@@ -843,16 +844,16 @@ msgstr "Номер на поръчка"
 msgid "Order PDF"
 msgstr "Поръчка PDF"
 
-#: app/functions.php:52 app/functions.php:90 app/Admin/CVC.php:113
+#: app/functions.php:52 app/functions.php:90 app/Admin/CVC.php:118
 #: app/Admin/Econt.php:117
 msgid "Other"
 msgstr "Друг"
 
-#: app/Admin/Econt.php:141
+#: app/Admin/Econt.php:142
 msgid "Pack"
 msgstr "Пакет"
 
-#: app/Admin/CVC.php:111 app/Admin/Econt.php:115
+#: app/Admin/CVC.php:116 app/Admin/Econt.php:115
 msgid "Pack count"
 msgstr "Брой пакети"
 
@@ -860,7 +861,7 @@ msgstr "Брой пакети"
 msgid "Page"
 msgstr "Страница"
 
-#: app/Admin/Econt.php:143
+#: app/Admin/Econt.php:144
 msgid "Pallet"
 msgstr "Палет"
 
@@ -889,7 +890,7 @@ msgstr "Начин на плащане"
 msgid "PDF Files"
 msgstr "PDF документи"
 
-#: app/Admin/Tabs/CVC_Tab.php:80 app/Admin/Tabs/Econt_Tab.php:86
+#: app/Admin/Tabs/CVC_Tab.php:80 app/Admin/Tabs/Econt_Tab.php:97
 msgid "Phone"
 msgstr "Телефон"
 
@@ -985,7 +986,7 @@ msgstr "Отзиви"
 msgid "Return method"
 msgstr "Начин на връщане на сумата"
 
-#: app/functions.php:217 app/Admin/CVC.php:132 app/Admin/Econt.php:135
+#: app/functions.php:217 app/Admin/CVC.php:137 app/Admin/Econt.php:135
 #: app/Shipping/CVC/Method.php:140 app/Shipping/CVC/Method.php:147
 #: app/Shipping/Econt/Method.php:130
 msgid "Review and test"
@@ -1028,16 +1029,28 @@ msgstr "Избери"
 msgid "Select a month for the report"
 msgstr "Изберете месец на извлечението"
 
-#: app/Admin/Tabs/CVC_Tab.php:102 app/Admin/Tabs/Econt_Tab.php:118
+#: app/Admin/Tabs/CVC_Tab.php:103 app/Admin/Tabs/Econt_Tab.php:136
 msgid "Select Address"
 msgstr "Изберете адрес"
 
-#: app/Admin/Tabs/CVC_Tab.php:96 app/Admin/Tabs/Econt_Tab.php:100
+#: app/Admin/Tabs/CVC_Tab.php:96 app/Admin/Tabs/Econt_Tab.php:111
 msgid ""
 "Select from where you will send the packages and save to show more options."
 msgstr ""
 "Изберете от къде ще се изпращат пратките и запазете за да се покажат повече "
 "настройки."
+
+#: app/Admin/Tabs/Econt_Tab.php:88
+msgid "Select profile"
+msgstr "Изберете профил"
+
+#: app/Admin/Tabs/Econt_Tab.php:88
+msgid ""
+"Select the profile you want to use and save to show or update the other "
+"options."
+msgstr ""
+"Изберете профила който искате да ползвате и запазете настройките за да се "
+"обновят по-долните опции."
 
 #: app/Admin/Tabs/Econt_Tab.php:72
 #| msgid ""
@@ -1056,7 +1069,7 @@ msgstr ""
 "потребителско име и парола или създайте от <a target=\"_blank\" href=\"https:"
 "//login.econt.com/register/\">Еконт доставки</a>."
 
-#: app/Admin/CVC.php:107 app/Admin/Econt.php:111
+#: app/Admin/CVC.php:112 app/Admin/Econt.php:111
 #: app/Shipping/CVC/Address.php:31 app/Shipping/CVC/Office.php:27
 #: app/Shipping/Econt/Address.php:31 app/Shipping/Econt/Office.php:27
 msgid "Selected"
@@ -1066,8 +1079,8 @@ msgstr "Избрано"
 msgid "Send customer notification for delivery."
 msgstr "Изпратете известие на клиента за доставка."
 
-#: app/Admin/Tabs/CVC_Tab.php:96 app/Admin/Tabs/CVC_Tab.php:136
-#: app/Admin/Tabs/Econt_Tab.php:100 app/Admin/Tabs/Econt_Tab.php:178
+#: app/Admin/Tabs/CVC_Tab.php:96 app/Admin/Tabs/CVC_Tab.php:144
+#: app/Admin/Tabs/Econt_Tab.php:111 app/Admin/Tabs/Econt_Tab.php:197
 msgid "Send From"
 msgstr "Изпрати от"
 
@@ -1075,7 +1088,7 @@ msgstr "Изпрати от"
 msgid "Send Request"
 msgstr "Изпратете запитване"
 
-#: app/Admin/CVC.php:122 app/Admin/Econt.php:126
+#: app/Admin/CVC.php:127 app/Admin/Econt.php:126
 msgid "Sender"
 msgstr "Изпращач"
 
@@ -1097,11 +1110,11 @@ msgstr "Настройките са запазени успешно!"
 msgid "Settlement"
 msgstr "Населено място"
 
-#: app/Admin/CVC.php:128 app/Admin/Econt.php:131
+#: app/Admin/CVC.php:133 app/Admin/Econt.php:131
 msgid "Shipment status"
 msgstr "Статус на пратката"
 
-#: app/Admin/CVC.php:112 app/Admin/Econt.php:116
+#: app/Admin/CVC.php:117 app/Admin/Econt.php:116
 msgid "Shipment type"
 msgstr "Тип на товарителницата"
 
@@ -1144,12 +1157,12 @@ msgstr "Започнете да търсите офис"
 msgid "Start typing street or quarter"
 msgstr "Започнете да търсите квартал или улица"
 
-#: app/Admin/CVC.php:115 app/Admin/Econt.php:119
+#: app/Admin/CVC.php:120 app/Admin/Econt.php:119
 #: app/Shipping/CVC/Address.php:37 app/Shipping/Econt/Address.php:37
 msgid "Street number"
 msgstr "Номер на улица"
 
-#: app/Admin/CVC.php:116 app/Admin/Econt.php:120
+#: app/Admin/CVC.php:121 app/Admin/Econt.php:120
 msgid "Street/Quarter"
 msgstr "Улица/Квартал"
 
@@ -1227,7 +1240,7 @@ msgstr ""
 msgid "This option will hide the plugin fields on the checkout page."
 msgstr "Тази опция ще скрие полетата от плъгина на чекаут страницата."
 
-#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:88
+#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:99
 msgid ""
 "This option will try to generate your label immediately after user checkout. "
 "Also, will add the tracking number in the order email."
@@ -1240,7 +1253,7 @@ msgstr ""
 msgid "This order is out of scope for EU VAT."
 msgstr "Тази поръчка е извън обхвата на ДДС в ЕС."
 
-#: app/Admin/CVC.php:129 app/Admin/Econt.php:132
+#: app/Admin/CVC.php:134 app/Admin/Econt.php:132
 msgid "Time:"
 msgstr "Време:"
 
@@ -1274,11 +1287,11 @@ msgstr "Номер на транзакцията: %s"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: app/Admin/CVC.php:102 app/Admin/Econt.php:106
+#: app/Admin/CVC.php:107 app/Admin/Econt.php:106
 msgid "Update label"
 msgstr "Обнови товарителницата"
 
-#: app/Admin/CVC.php:101 app/Admin/Econt.php:105
+#: app/Admin/CVC.php:106 app/Admin/Econt.php:105
 msgid "Update shipment status"
 msgstr "Обнови статуса на пратката"
 
@@ -1286,7 +1299,7 @@ msgstr "Обнови статуса на пратката"
 msgid "Username"
 msgstr "Потребителско име"
 
-#: app/Admin/Tabs/Econt_Tab.php:215
+#: app/Admin/Tabs/Econt_Tab.php:234
 #, php-format
 msgid ""
 "Username and password are incorrect. Please generate API keys from "
@@ -1366,7 +1379,7 @@ msgid ""
 "for electronic services of the NRA."
 msgstr "Уеб адрес на електронния магазин."
 
-#: app/Admin/CVC.php:124 app/Admin/Econt.php:127
+#: app/Admin/CVC.php:129 app/Admin/Econt.php:127
 msgid "Weight"
 msgstr "Тегло"
 
@@ -1430,7 +1443,7 @@ msgid ""
 msgstr ""
 "Въвели сте невалиден ДДС номер (%1$s) за държавата си за фактуриране (%2$s)."
 
-#: app/Admin/CVC.php:127
+#: app/Admin/CVC.php:132
 msgid "You just copied the label data used for the cvc API."
 msgstr "Копирахте данните използвани за връзка със CVC."
 

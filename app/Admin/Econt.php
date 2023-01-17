@@ -355,7 +355,7 @@ class Econt {
 
 			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
 				$label['services']['cdPayOptionsTemplate'] = $cd_pay_option;
-				$cd_pay_options = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_profile_data()['profiles'][0]['cdPayOptions'];
+				$cd_pay_options = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_profile_data()['cdPayOptions'];
 
 				foreach ( $cd_pay_options as $option ) {
 					if ( $option['num'] === $cd_pay_option && $option['method'] != 'office' ) {

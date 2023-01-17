@@ -240,7 +240,7 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_sender_auth() {
-		$client = $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['profiles'][0]['client'];
+		$client = $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['client'];
 
 		return array(
 			'name' => woo_bg_get_option( 'econt', 'name' ),
@@ -249,7 +249,7 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_sender_data() {
-		return $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['profiles'][0]['client'];
+		return $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['client'];
 	}
 
 	private function generate_sender_address() {
@@ -257,7 +257,7 @@ class Method extends \WC_Shipping_Method {
 		$id = woo_bg_get_option( 'econt_send_from', 'address' );
 
 		if ( $id !== '' ) {
-			$profile_addresses = $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['profiles'][0]['addresses'];
+			$profile_addresses = $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['addresses'];
 
 			$address = $profile_addresses[ $id ];
 		}

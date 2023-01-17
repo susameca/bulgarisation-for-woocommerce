@@ -82,23 +82,35 @@ class Econt_Tab extends Base_Tab {
 
 	public function add_profile_data_fields( $fields ) {
 		if ( $this->container[ Client::ECONT_PROFILE ]->is_valid_profile( true ) ) {
-			$fields[ 'econt' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ) );
-			$fields[ 'econt' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ) );
-			$fields[ 'econt' ][] = new Fields\Select_Field( woo_bg_get_yes_no_options(), 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) );
-			$fields[ 'econt' ][] = new Fields\Select_Field( woo_bg_get_yes_no_options(), 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) );
-			$fields[ 'econt' ][] = new Fields\Select_Field( $this->generate_pay_options(), 'pay_options', __( 'Cash on delivery agreement', 'woo-bg' ), null, null, __( 'Choose cash on delivery agreement', 'woo-bg' ) );
-			$fields[ 'econt' ][] = new Fields\Select_Field( 
-				array(
-					'office' => array(
-						'id' => 'office',
-						'label' => __( 'Office', 'woo-bg' ),
-					),
-					'address' => array(
-						'id' => 'address',
-						'label' => __( 'Address', 'woo-bg' ),
-					),
-				), 'send_from', __( 'Send From', 'woo-bg' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'woo-bg' ) 
-			);
+			$all_profiles = $this->container[ Client::ECONT_PROFILE ]->get_profiles_for_settings();
+
+			if ( count( $all_profiles ) > 1 ) {
+				$fields[ 'econt' ][] = new Fields\Select_Field( $all_profiles, 'profile_key', __( 'Select profile', 'woo-bg' ), null, null, __( 'Select the profile you want to use and save to show or update the other options.', 'woo-bg' )
+				);
+			}
+
+			if ( 
+				( count( $all_profiles ) > 1 && woo_bg_get_option( 'econt', 'profile_key' ) !== false ) ||
+				count( $all_profiles ) === 1
+			 ) {
+				$fields[ 'econt' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ) );
+				$fields[ 'econt' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ) );
+				$fields[ 'econt' ][] = new Fields\Select_Field( woo_bg_get_yes_no_options(), 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) );
+				$fields[ 'econt' ][] = new Fields\Select_Field( woo_bg_get_yes_no_options(), 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) );
+				$fields[ 'econt' ][] = new Fields\Select_Field( $this->generate_pay_options(), 'pay_options', __( 'Cash on delivery agreement', 'woo-bg' ), null, null, __( 'Choose cash on delivery agreement', 'woo-bg' ) );
+				$fields[ 'econt' ][] = new Fields\Select_Field( 
+					array(
+						'office' => array(
+							'id' => 'office',
+							'label' => __( 'Office', 'woo-bg' ),
+						),
+						'address' => array(
+							'id' => 'address',
+							'label' => __( 'Address', 'woo-bg' ),
+						),
+					), 'send_from', __( 'Send From', 'woo-bg' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'woo-bg' ) 
+				);
+			}
 
 		}
 
@@ -107,27 +119,34 @@ class Econt_Tab extends Base_Tab {
 
 	public function add_send_from_fields( $fields ) {
 		if ( $this->container[ Client::ECONT_PROFILE ]->is_valid_profile( true ) ) {
-			$send_from = ( woo_bg_get_option( 'econt', 'send_from' ) ) ? woo_bg_get_option( 'econt', 'send_from' ) : 'office';
-			$addresses = $this->container[ Client::ECONT_PROFILE ]->get_formatted_addresses();
-			$cities = $this->container[ Client::ECONT_CITIES ]->get_formatted_cities();
-			$offices = $this->container[ Client::ECONT_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'econt_send_from', 'office_city' ) );
-			$fields[ 'econt_send_from' ] = [];
+			$all_profiles = $this->container[ Client::ECONT_PROFILE ]->get_profiles_for_settings();
 
-			switch ( $send_from ) {
-				case 'address':
-					$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $addresses, 'address', __( 'Select Address', 'woo-bg' ) );
-					break;
-				case 'office':
-					$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $cities, 'office_city', __( 'City', 'woo-bg' ) );
-					$fields[ 'econt_send_from' ][] = new Fields\Select_Field( 
-						$offices['shops'], 
-						'office', 
-						__( 'Office', 'woo-bg' ), 
-						null, 
-						null, 
-						__('Choose a city and save in order to show offices.', 'woo-bg' ) 
-					);
-					break;
+			if (
+				( count( $all_profiles ) > 1 && woo_bg_get_option( 'econt', 'profile_key' ) !== false ) ||
+				count( $all_profiles ) === 1
+			) {
+				$send_from = ( woo_bg_get_option( 'econt', 'send_from' ) ) ? woo_bg_get_option( 'econt', 'send_from' ) : 'office';
+				$addresses = $this->container[ Client::ECONT_PROFILE ]->get_formatted_addresses();
+				$cities = $this->container[ Client::ECONT_CITIES ]->get_formatted_cities();
+				$offices = $this->container[ Client::ECONT_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'econt_send_from', 'office_city' ) );
+				$fields[ 'econt_send_from' ] = [];
+
+				switch ( $send_from ) {
+					case 'address':
+						$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $addresses, 'address', __( 'Select Address', 'woo-bg' ) );
+						break;
+					case 'office':
+						$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $cities, 'office_city', __( 'City', 'woo-bg' ) );
+						$fields[ 'econt_send_from' ][] = new Fields\Select_Field( 
+							$offices['shops'], 
+							'office', 
+							__( 'Office', 'woo-bg' ), 
+							null, 
+							null, 
+							__('Choose a city and save in order to show offices.', 'woo-bg' ) 
+						);
+						break;
+				}
 			}
 		}
 
@@ -142,8 +161,8 @@ class Econt_Tab extends Base_Tab {
 			),
 		];
 
-		if ( !empty( $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['profiles'][0]['cdPayOptions'] ) ) {
-			foreach ( $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['profiles'][0]['cdPayOptions'] as $option ) {
+		if ( !empty( $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['cdPayOptions'] ) ) {
+			foreach ( $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['cdPayOptions'] as $option ) {
 				$pay_options[ $option[ 'num' ] ] = array(
 					'id' => $option[ 'num' ],
 					'label' => $option[ 'num' ],
@@ -192,17 +211,17 @@ class Econt_Tab extends Base_Tab {
 	}
 
 	public function update_profile_fields() {
-		$profile_data = $this->container[ Client::ECONT_PROFILE ]->get_profile_data();
+		$profile_data = $this->container[ Client::ECONT_PROFILE ]->get_profile_data( 1 );
 
 		$name = woo_bg_get_option( 'econt', 'name' );
 		$phone = woo_bg_get_option( 'econt', 'phone' );
 
 		if ( !$name ) {
-			woo_bg_set_option( 'econt', 'name', $profile_data['profiles'][0]['client']['molName'] );
+			woo_bg_set_option( 'econt', 'name', $profile_data['client']['molName'] );
 		}
 		
 		if ( !$phone ) {
-			woo_bg_set_option( 'econt', 'phone', $profile_data['profiles'][0]['client']['phones'][0] );
+			woo_bg_set_option( 'econt', 'phone', $profile_data['client']['phones'][0] );
 		}
 	}
 
