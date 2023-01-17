@@ -188,8 +188,8 @@
 							<button @click="updateActions" name="save" type="submit" :value="i18n.updateShipmentStatus" class="button-primary woocommerce-save-button">{{i18n.updateShipmentStatus}}</button>
 						</p>
 
-						<p class="form-field form-field-wide"> 
-							<button @click="deleteLabel" name="save" type="submit" :value="i18n.deleteLabel" class="button-secondary">{{i18n.deleteLabel}}</button>
+						<p class="form-field form-field-wide" > 
+							<button v-if="shipmentStatus" @click="deleteLabel" name="save" type="submit" :value="i18n.deleteLabel" class="button-secondary">{{i18n.deleteLabel}}</button>
 
 							<a v-clipboard:copy="labelJSON" v-clipboard:success="onCopy" class="button-secondary">{{i18n.copyLabelData}}</a> 
 						</p>
@@ -448,7 +448,8 @@ export default {
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
 				.then(function( response ) {
 
-					_this.shipmentStatus = '';
+					_this.shipmentStatus = null;
+					_this.shipmentActions = [];
 					_this.loading = false;
 					_this.size = 'refresh';
 

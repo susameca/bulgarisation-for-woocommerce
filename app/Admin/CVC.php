@@ -187,6 +187,7 @@ class CVC {
 		) );
 
 		$order->update_meta_data( 'woo_bg_cvc_shipment_status', '' );
+		$order->update_meta_data( 'woo_bg_cvc_actions', '' );
 		$order->save();
 		
 		wp_send_json_success( $response );
