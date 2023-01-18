@@ -217,8 +217,11 @@ class Econt {
 			'shipmentNumbers' => [ $shipment_status['label']['shipmentNumber'] ]
 		) );
 
-		$data['shipmentStatus'] = array_shift( array_shift( $response ) )['status'];
+		$status = array_shift( $response );
+		$status = array_shift( $status );
+		$data['shipmentStatus'] = $status['status'];
 		$order_shipment_status['label'] = $data['shipmentStatus'];
+		
 		$order->update_meta_data( 'woo_bg_econt_shipment_status', $order_shipment_status );
 		$order->save();
 
