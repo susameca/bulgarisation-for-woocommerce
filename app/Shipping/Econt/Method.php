@@ -439,16 +439,15 @@ class Method extends \WC_Shipping_Method {
 	public static function save_label_data_to_order( $order_id ) {
 		$order = wc_get_order( $order_id );
 
-		if ( WC()->session->get( 'woo-bg-econt-label' ) ) {
-			$order->update_meta_data( 'woo_bg_econt_label', WC()->session->get( 'woo-bg-econt-label' ) );
-			$order->save();
-			WC()->session->__unset( 'woo-bg-econt-label' );
-		}
-
 		if ( !empty( $order->get_items( 'shipping' ) ) ) {
 			foreach ( $order->get_items( 'shipping' ) as $shipping ) {
 				if ( $shipping['method_id'] === 'woo_bg_econt' ) {
 					$cookie_data = '';
+					
+					if ( WC()->session->get( 'woo-bg-econt-label' ) ) {
+						$order->update_meta_data( 'woo_bg_econt_label', WC()->session->get( 'woo-bg-econt-label' ) );
+						WC()->session->__unset( 'woo-bg-econt-label' );
+					}
 
 					foreach ( $shipping->get_meta_data() as $meta_data ) {
 						$data = $meta_data->get_data();
@@ -460,8 +459,9 @@ class Method extends \WC_Shipping_Method {
 
 					if ( $cookie_data ) {
 						$order->update_meta_data( 'woo_bg_econt_cookie_data', $cookie_data );
-						$order->save();
 					}
+
+					$order->save();
 					break;
 				}
 			}

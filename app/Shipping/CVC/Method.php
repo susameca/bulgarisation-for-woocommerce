@@ -454,16 +454,15 @@ class Method extends \WC_Shipping_Method {
 	public static function save_label_data_to_order( $order_id ) {
 		$order = wc_get_order( $order_id );
 
-		if ( WC()->session->get( 'woo-bg-cvc-label' ) ) {
-			$order->update_meta_data( 'woo_bg_cvc_label', WC()->session->get( 'woo-bg-cvc-label' ) );
-			$order->save();
-			WC()->session->__unset( 'woo-bg-cvc-label' );
-		}
-
 		if ( !empty( $order->get_items( 'shipping' ) ) ) {
 			foreach ( $order->get_items( 'shipping' ) as $shipping ) {
 				if ( $shipping['method_id'] === 'woo_bg_cvc' ) {
 					$cookie_data = '';
+
+					if ( WC()->session->get( 'woo-bg-cvc-label' ) ) {
+						$order->update_meta_data( 'woo_bg_cvc_label', WC()->session->get( 'woo-bg-cvc-label' ) );
+						WC()->session->__unset( 'woo-bg-cvc-label' );
+					}
 
 					foreach ( $shipping->get_meta_data() as $meta_data ) {
 						$data = $meta_data->get_data();
@@ -475,8 +474,9 @@ class Method extends \WC_Shipping_Method {
 
 					if ( $cookie_data ) {
 						$order->update_meta_data( $order_id, 'woo_bg_cvc_cookie_data', $cookie_data );
-						$order->save();
 					}
+
+					$order->save();
 					break;
 				}
 			}
