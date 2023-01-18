@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.1.1
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -67,6 +67,15 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 2.3.1 =
+Econt: Add support for multiple profiles
+Econt: Add field for declared value 
+CVC: Add field for declared value 
+CVC: Change offices functionality
+CVC: Fix send from hub
+CVC: Add status information
+CVC: Remove office locator button for cvc
 
 = 2.3.0 =
 Econt: Add declared value functionality
