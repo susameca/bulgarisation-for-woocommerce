@@ -322,9 +322,14 @@ class EU_Vat {
 	}
 
 	public static function set_order_data( $order ) {
-		$order->update_meta_data( '_billing_vat_number', self::$data['vat_number'] );
-		$order->update_meta_data( '_vat_number_is_validated', ! is_null( self::$data['validation']['valid'] ) ? 'true' : 'false' );
-		$order->update_meta_data( '_vat_number_is_valid', true === self::$data['validation']['valid'] ? 'true' : 'false' );
+		if ( isset( self::$data['vat_number'] ) ) {
+			$order->update_meta_data( '_billing_vat_number', self::$data['vat_number'] );
+		}
+
+		if ( isset( self::$data['validation']['valid'] ) ) {
+			$order->update_meta_data( '_vat_number_is_validated', ! is_null( self::$data['validation']['valid'] ) ? 'true' : 'false' );
+			$order->update_meta_data( '_vat_number_is_valid', true === self::$data['validation']['valid'] ? 'true' : 'false' );
+		}
 
 		if ( false !== self::get_ip_country() ) {
 			$order->update_meta_data( '_customer_ip_country', self::get_ip_country() );
