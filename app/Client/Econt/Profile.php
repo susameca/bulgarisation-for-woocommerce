@@ -92,11 +92,9 @@ class Profile {
 
 	protected function return_single_profile() {
 		$profile_id = 0;
-		$selected_id = woo_bg_get_option( 'econt', 'profile_key' );
-		$profile = '';
 
 		if ( !empty( $this->profile_data[ 'profiles' ] ) ) {
-			if ( count( $this->profile_data[ 'profiles' ] ) > 1 && $selected_id !== false && $selected_id !== '' ) {
+			if ( $selected_id = woo_bg_get_option( 'econt', 'profile_key' ) ) {
 				$profile_id = $selected_id;
 			}
 
