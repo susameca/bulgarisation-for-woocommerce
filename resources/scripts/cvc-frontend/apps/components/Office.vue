@@ -47,15 +47,11 @@ export default {
 	data() {
 		return {
 			countryField: $('#billing_country'),
-			stateField: $('#billing_state'),
-			cityField: $('#billing_city'),
 			firstNameField: $('#billing_first_name'),
 			lastNameField: $('#billing_last_name'),
 			phoneField: $('#billing_phone'),
 			selectedOffice: [],
       		offices: [],
-			state: '',
-			city: '',
 			error: '',
 			document: $( document.body ),
 			i18n: wooBg_cvc.i18n,
@@ -93,35 +89,15 @@ export default {
 
 			if ( $('#ship-to-different-address-checkbox').is(":checked") ) {
 				this.countryField = $( '#shipping_country' );
-				this.stateField = $( '#shipping_state' );
-				this.cityField = $( '#shipping_city' );
 				this.firstNameField = $( '#shipping_first_name' );
 				this.lastNameField = $( '#shipping_last_name' );
 			} else {
 				this.countryField = $( '#billing_country' );
-				this.stateField = $( '#billing_state' );
-				this.cityField = $( '#billing_city' );
 				this.firstNameField = $( '#billing_first_name' );
 				this.lastNameField = $( '#billing_last_name' );
 			}
 
-			this.state = this.stateField.val();
-
-			if ( this.cityField.val() ) {
-				this.city = this.cityField.val();
-			}
-
 			let _this = this;
-
-			this.cityField.on('change', function () {
-				_this.city = $(this).val();
-				_this.loadOffices();
-			});
-
-			this.stateField.on('change', function () {
-				_this.state = $(this).val();
-				_this.loadOffices();
-			});
 		},
 		loadLocalStorage(){
 			let localStorageData = localStorage.getItem( 'woo-bg--cvc-office' );
@@ -129,35 +105,22 @@ export default {
 				localStorageData = JSON.parse( localStorageData );
 				this.selectedOffice = cloneDeep( localStorageData.selectedOffice );
 				this.offices = cloneDeep( localStorageData.offices );
-				this.state = cloneDeep( localStorageData.state );
-				this.city = cloneDeep( localStorageData.city );
 				this.type = cloneDeep( localStorageData.type );
 			}
 		},
 		loadOffices() {
-			this.state = this.stateField.val();
-			this.city = this.cityField.val();
 			this.loading = true;
 
 			let _this = this;
 			let data = {
 				action: 'woo_bg_cvc_load_offices',
-				state: this.state,
-				city: this.city,
 				country: this.countryField.val()
 			}
 
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
 				.then(function( response ) {
-					console.log(response);
-					if ( response.data.data.status === 'invalid-city' ) {
-						_this.error = response.data.data.error;
-						_this.resetData();
-						_this.offices = cloneDeep( [] );
-					} else {
-						_this.offices = cloneDeep( response.data.data.offices );
-						_this.error = false;
-					}
+					_this.offices = cloneDeep( response.data.data.offices );
+					_this.error = false;
 
 					_this.loading = false;
 				} )
@@ -177,14 +140,13 @@ export default {
 			let last_name = this.lastNameField.val();
 			let phone = this.phoneField.val();
 
-			console.log( this.selectedOffice );
 			let cookie = {
 				type: 'office',
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
 				selectedOffice: this.selectedOffice.id,
-				state: this.state,
-				city: this.city,
+				state: '',
+				city: '',
 				country: this.countryField.val(),
 				payment: $('input[name="payment_method"]:checked').val(),
 			};
@@ -197,8 +159,6 @@ export default {
 			let localStorageData = {
 				selectedOffice: this.selectedOffice,
 				offices: this.offices,
-				state: this.state,
-				city: this.city,
 			}
 
 			localStorage.setItem( 'woo-bg--cvc-office', JSON.stringify( localStorageData ) );
@@ -206,8 +166,6 @@ export default {
 		resetData() {
 			this.offices = [];
 			this.selectedOffice = '';
-			this.streetNumber = '';
-			this.other = '';
 			localStorage.removeItem( 'woo-bg--cvc-office' );
 		},
 		triggerUpdateCheckout() {

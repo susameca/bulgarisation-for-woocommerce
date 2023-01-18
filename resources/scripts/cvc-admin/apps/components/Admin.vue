@@ -6,27 +6,6 @@
 					<h3>{{i18n.labelData}}</h3>
 
 					<form>
-						<p v-if="!shipmentStatus" class="form-field form-field-wide">
-							<label>
-								{{i18n.deliveryType}}:
-							</label>
-
-							<multiselect 
-								v-model="type" 
-								deselect-label="" 
-								selectLabel="" 
-								track-by="id" 
-								label="label" 
-								:selectedLabel="i18n.selected" 
-								:placeholder="i18n.choose"
-								:options="Object.values( types )" 
-								:searchable="true" 
-								:allow-empty="false"
-							>
-								<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
-							</multiselect>
-						</p>
-
 						<p v-if="( type.id == 'office' )" class="form-field form-field-wide">
 							<label>
 								{{i18n.office}}:

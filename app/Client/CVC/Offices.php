@@ -78,6 +78,14 @@ class Offices {
 		return $this->offices[ $city_zip ];
 	}
 
+	public function get_all_offices( $country_id ) {
+		if ( empty( $this->all_offices ) ) {
+			$this->load_all_offices( $country_id );
+		}
+
+		return $this->all_offices;
+	}
+
 	//Setters
 	private function set_offices( $city_zip, $offices ) {
 		$this->offices[ $city_zip ] = $offices;

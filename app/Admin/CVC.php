@@ -140,19 +140,20 @@ class CVC {
 	}
 
 	protected static function get_offices( $cookie_data ) {
-		$country = sanitize_text_field( $cookie_data['country'] );
-		$country_id = self::$container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
-		$raw_city = sanitize_text_field( $cookie_data['city'] );
-		$state_id = self::$container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $cookie_data['state'] ), $country_id );
-		$city = self::$container[ Client::CVC_CITIES ]->search_for_city( $raw_city, $state_id, $country_id );
+		$country_id = self::$container[ Client::CVC_COUNTRIES ]->get_country_id( $cookie_data['country'] );
 
-		return self::$container[ Client::CVC_OFFICES ]->get_offices( $city[0]['zip'] );
+		return self::$container[ Client::CVC_OFFICES ]->get_all_offices( $country_id ); 
 	}
 
 	protected static function get_streets( $cookie_data ) {
 		$country = sanitize_text_field( $cookie_data['country'] );
 		$country_id = self::$container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
 		$raw_city = sanitize_text_field( $cookie_data['city'] );
+		
+		if ( empty( $raw_city ) ) {
+			return [];
+		}
+
 		$state_id = self::$container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $cookie_data['state'] ), $country_id );
 		$cities_data = self::$container[ Client::CVC_CITIES ]->get_filtered_cities( $raw_city, $state_id, $country_id );
 

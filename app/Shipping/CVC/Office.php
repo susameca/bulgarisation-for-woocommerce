@@ -39,17 +39,8 @@ class Office {
 		$args = [];
 		$country = sanitize_text_field( $_POST['country'] );
 		$country_id = self::$container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
-		$raw_city = sanitize_text_field( $_POST['city'] );
-		$state_id = self::$container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $_POST['state'] ), $country_id );
-		$city = self::$container[ Client::CVC_CITIES ]->search_for_city( $raw_city, $state_id, $country_id );
-
-		if ( empty( $city ) ) {
-			$args[ 'status' ] = 'invalid-city';
-			$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'woo-bg' ), $raw_city, woo_bg_return_bg_states()[ $_POST['state'] ] );
-		} else {
-			$args[ 'offices' ] = self::$container[ Client::CVC_OFFICES ]->get_offices( $city[0]['zip'] );
-			$args[ 'status' ] = 'valid-city';
-		}
+		$args[ 'offices' ] = self::$container[ Client::CVC_OFFICES ]->get_all_offices( $country_id );
+		$args[ 'status' ] = 'valid-city';
 
 		wp_send_json_success( $args );
 
