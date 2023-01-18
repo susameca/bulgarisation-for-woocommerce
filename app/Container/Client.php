@@ -15,6 +15,7 @@ use Woo_BG\Client\CVC\Countries as CVC_Countries;
 use Woo_BG\Client\CVC\Streets as CVC_Streets;
 use Woo_BG\Client\CVC\Quarters as CVC_Quarters;
 use Woo_BG\Client\CVC\Offices as CVC_Offices;
+use Woo_BG\Client\CVC\Hubs as CVC_Hubs;
 use Pimple\Container;
 
 class Client extends Provider {
@@ -33,6 +34,7 @@ class Client extends Provider {
 	const CVC_STREETS      = 'client.cvc.streets';
 	const CVC_QUARTERS     = 'client.cvc.quarters';
 	const CVC_OFFICES      = 'client.cvc.offices';
+	const CVC_HUBS         = 'client.cvc.hubs';
 
 	public function register( Container $container ) {
 		$container[ self::ECONT_PROFILE ] = function ( Container $container ) {
@@ -89,6 +91,10 @@ class Client extends Provider {
 		
 		$container[ self::CVC_OFFICES ] = function ( Container $container ) {
 			return new CVC_Offices( $container );
+		};
+
+		$container[ self::CVC_HUBS ] = function ( Container $container ) {
+			return new CVC_Hubs( $container );
 		};
 	}
 }

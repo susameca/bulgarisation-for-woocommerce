@@ -106,7 +106,7 @@ class CVC_Tab extends Base_Tab {
 					break;
 				case 'office':
 					if ( $city = woo_bg_get_option( 'cvc_sender', 'city' ) ) {
-						$offices = $this->container[ Client::CVC_OFFICES ]->get_formatted_offices( $city );
+						$offices = $this->container[ Client::CVC_HUBS ]->get_formatted_hubs( $city );
 
 						if ( !empty( $offices ) ) {
 							$fields[ 'cvc_sender' ][] = new Fields\Select_Field( $offices, 'office', __( 'Office', 'woo-bg' ) );

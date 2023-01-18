@@ -268,7 +268,7 @@ class Method extends \WC_Shipping_Method {
 	private function generate_sender_office_code() {
 		$office = woo_bg_get_option( 'econt_send_from', 'office' );
 		
-		return str_replace( 'officeID-', '', $office );
+		return str_replace( 'hubID-', '', $office );
 	}
 
 	private function generate_receiver_data() {

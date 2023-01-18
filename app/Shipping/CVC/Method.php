@@ -277,7 +277,7 @@ class Method extends \WC_Shipping_Method {
 		if ( $send_from === 'address' ) {
 			$sender_data[ "custom_location_id" ] = woo_bg_get_option( 'cvc_sender', 'address' );
 		} else if ( $send_from === 'office' ) {
-			$sender_data[ "hub_id" ] = str_replace( 'officeID-', '', woo_bg_get_option( 'cvc_sender', 'office' ) );
+			$sender_data[ "hub_id" ] = str_replace( 'hubID-', '', woo_bg_get_option( 'cvc_sender', 'office' ) );
 		}
 
 		return $sender_data;
