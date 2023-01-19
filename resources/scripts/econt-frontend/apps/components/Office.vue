@@ -89,6 +89,15 @@ export default {
 		this.phoneField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.firstNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.lastNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
+		this.cityField.on('change.loadOffices', function () {
+			_this.city = $(this).val();
+			_this.loadOffices();
+		});
+
+		this.stateField.on('change.loadOffices', function () {
+			_this.state = $(this).val();
+			_this.loadOffices();
+		});
 		
 		if ( window.wooBgEcontDoUpdate ) {
 			this.document.trigger('update_checkout');
@@ -148,18 +157,6 @@ export default {
 			if ( this.cityField.val() ) {
 				this.city = this.cityField.val();
 			}
-
-			let _this = this;
-
-			this.cityField.on('change', function () {
-				_this.city = $(this).val();
-				_this.loadOffices();
-			});
-
-			this.stateField.on('change', function () {
-				_this.state = $(this).val();
-				_this.loadOffices();
-			});
 		},
 		loadLocalStorage(){
 			let localStorageData = localStorage.getItem( 'woo-bg--econt-office' );
@@ -255,6 +252,8 @@ export default {
 		this.phoneField.off( 'change.triggerUpdate' );
 		this.firstNameField.off( 'change.triggerUpdate' );
 		this.lastNameField.off( 'change.triggerUpdate' );
+		this.cityField.off('change.loadOffices' );
+		this.stateField.off('change.loadOffices' );
 		
 		window.removeEventListener( 'message', this.setOfficeFromLocator, false );
 	}
