@@ -224,7 +224,7 @@ class Method extends \WC_Shipping_Method {
 		);
 		
 		$request_body = apply_filters( 'woo_bg/cvc/calculate_label', $this->generate_label(), $this );
-		
+
 		WC()->session->set( 'woo-bg-cvc-label' , $request_body );
 
 		$request = $this->container[ Client::CVC ]->api_call( $this->container[ Client::CVC ]::CALC_LABELS_ENDPOINT, $request_body );
@@ -308,13 +308,35 @@ class Method extends \WC_Shipping_Method {
 		);
 
 		if ( $this->cookie_data['type'] === 'address' ) {
-			$rec["street"] = $this->cookie_data['selectedAddress']['label'] . ' ' . $this->cookie_data['streetNumber'] . ' ' . $this->cookie_data[ 'other' ]; 
-
 			if ( $this->cookie_data['selectedAddress']['type'] === 'streets' ) {
 				$rec["street_id"] = str_replace('street-', '', $this->cookie_data['selectedAddress']['orig_key'] ); 
 				$rec["num"] = $this->cookie_data['streetNumber'];
 			} else if ( $this->cookie_data['selectedAddress']['type'] === 'quarters' ) {
 				$rec["qt_id"] = str_replace('qtr-', '', $this->cookie_data['selectedAddress']['orig_key'] );
+
+				if ( !empty( $this->cookie_data[ 'other' ] ) ) {
+					$parts = explode( ' ', $this->cookie_data[ 'other' ] );
+
+					$rec["block"] = $parts[0];
+
+					if ( isset( $parts[1] ) ) {
+						$rec["entr"] = $parts[1];
+					}
+
+					if ( isset( $parts[2] ) ) {
+						$rec["floor"] = $parts[2];
+					}
+
+					if ( isset( $parts[3] ) ) {
+						$rec["ap"] = $parts[3];
+					}
+
+					if ( isset( $parts[4] ) ) {
+						unset( $parts[0], $parts[1], $parts[2], $parts[3] );
+
+						$rec["notes"] = implode( ' ', $parts ) ;
+					}
+				}
 			}
 		} else if ( $this->cookie_data['type'] === 'office' ) {
 			$rec["office_id"] = $this->cookie_data['selectedOffice'];
