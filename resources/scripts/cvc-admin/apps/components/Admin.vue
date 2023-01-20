@@ -327,7 +327,7 @@ export default {
 			this.streetNumber = wooBg_cvc.cookie_data.streetNumber;
 			this.other = wooBg_cvc.cookie_data.other;
 			this.streets.forEach( function ( street ) {
-				if ( street.id == wooBg_cvc.cookie_data.selectedAddress.id ) {
+				if ( street.orig_key == wooBg_cvc.cookie_data.selectedAddress.orig_key ) {
 					_this.street = street;
 				}
 			});

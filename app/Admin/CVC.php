@@ -278,6 +278,28 @@ class CVC {
 		$cookie_data = $_REQUEST['cookie_data'];
 		$cookie_data['type'] = $type['id'];
 
+		$label = self::unset_rec_address_fields( $label );
+
+		if ( $type['id'] === 'address' ) {
+			if ( $_REQUEST['street']['type'] === 'streets' ) {
+				$label['rec']["street_id"] = str_replace('street-', '', $_REQUEST['street']['orig_key'] ); 
+				$label['rec']["num"] = $_REQUEST['streetNumber'];
+			} else if ( $_REQUEST['street']['type'] === 'quarters' ) {
+				$label['rec']["qt_id"] = str_replace('qtr-', '', $_REQUEST['street']['orig_key'] );
+			}
+
+			$label = self::update_rec_other_fields( $label );
+		} else if ( $type['id'] === 'office' ) {
+			$label['rec']["office_id"] = $_REQUEST['office']['id'];
+		}
+
+		$order->update_meta_data( 'woo_bg_cvc_cookie_data', $cookie_data );
+		$order->save();
+
+		return $label;
+	}
+
+	protected static function unset_rec_address_fields( $label ) {
 		if ( isset( $label['rec'][ 'office_id' ] ) ) {
 			unset( $label['rec'][ 'office_id' ] );
 		}
@@ -298,22 +320,53 @@ class CVC {
 			unset( $label['rec'][ 'qt_id' ] );
 		}
 
-
-		if ( $type['id'] === 'address' ) {
-			$label['rec']["street"] = $_REQUEST['street']['label'] . ' ' . $_REQUEST['streetNumber'] . ' ' . $_REQUEST[ 'other' ]; 
-
-			if ( $_REQUEST['street']['type'] === 'streets' ) {
-				$label['rec']["street_id"] = str_replace('street-', '', $_REQUEST['street']['orig_key'] ); 
-				$label['rec']["num"] = $_REQUEST['streetNumber'];
-			} else if ( $_REQUEST['street']['type'] === 'quarters' ) {
-				$label['rec']["qt_id"] = str_replace('qtr-', '', $_REQUEST['street']['orig_key'] );
-			}
-		} else if ( $type['id'] === 'office' ) {
-			$label['rec']["office_id"] = $_REQUEST['office']['id'];
+		if ( isset( $label['rec']["block"] ) ) {
+			unset( $label['rec']["block"] );
 		}
 
-		$order->update_meta_data( 'woo_bg_cvc_cookie_data', $cookie_data );
-		$order->save();
+		if ( isset( $label['rec']["entr"] ) ) {
+			unset( $label['rec']["entr"] );
+		}
+
+		if ( isset( $label['rec']["floor"] ) ) {
+			unset( $label['rec']["floor"] );
+		}
+
+		if ( isset( $label['rec']["ap"] ) ) {
+			unset( $label['rec']["ap"] );
+		}
+
+		if ( isset( $label['rec']["notes"] ) ) {
+			unset( $label['rec']["notes"] );
+		}
+
+		return $label;
+	}
+
+	protected static function update_rec_other_fields( $label ) {
+		if ( !empty( $_REQUEST[ 'other' ] ) ) {
+			$parts = explode( ' ', $_REQUEST[ 'other' ] );
+
+			$label['rec']["block"] = $parts[0];
+
+			if ( isset( $parts[1] ) ) {
+				$label['rec']["entr"] = $parts[1];
+			}
+
+			if ( isset( $parts[2] ) ) {
+				$label['rec']["floor"] = $parts[2];
+			}
+
+			if ( isset( $parts[3] ) ) {
+				$label['rec']["ap"] = $parts[3];
+			}
+
+			if ( isset( $parts[4] ) ) {
+				unset( $parts[0], $parts[1], $parts[2], $parts[3] );
+
+				$label['rec']["notes"] = implode( ' ', $parts ) ;
+			}
+		}
 
 		return $label;
 	}
