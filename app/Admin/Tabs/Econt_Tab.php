@@ -87,8 +87,8 @@ class Econt_Tab extends Base_Tab {
 			$fields[ 'econt' ][] = new Fields\Select_Field( $all_profiles, 'profile_key', __( 'Select profile', 'woo-bg' ), null, null, __( 'Select the profile you want to use and save to show or update the other options.', 'woo-bg' )
 			);
 
-			$fields[ 'econt' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ), null, 'required' );
-			$fields[ 'econt' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ), null, 'required' );
+			$fields[ 'econt' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ) );
+			$fields[ 'econt' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ) );
 			$fields[ 'econt' ][] = new Fields\Select_Field( woo_bg_get_yes_no_options(), 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) );
 			$fields[ 'econt' ][] = new Fields\Select_Field( woo_bg_get_yes_no_options(), 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) );
 			$fields[ 'econt' ][] = new Fields\Select_Field( $this->generate_pay_options(), 'pay_options', __( 'Cash on delivery agreement', 'woo-bg' ), null, null, __( 'Choose cash on delivery agreement', 'woo-bg' ) );
