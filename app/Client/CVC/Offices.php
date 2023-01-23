@@ -11,7 +11,7 @@ class Offices {
     private $all_offices = [];
     private $offices = [];
     private $hubs = [];
-    private $client, $container;
+    private $container;
     private $method = 'GET';
 
 	public function __construct( $container ) {

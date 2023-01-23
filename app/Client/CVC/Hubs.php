@@ -9,7 +9,7 @@ class Hubs {
 
     private $all_hubs = [];
     private $hubs = [];
-    private $client, $container;
+    private $container;
     private $method = 'GET';
 
 	public function __construct( $container ) {

@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit;
 class Profile {
     const PROFILE_ENDPOINT = 'get_custom_locations';
 
-    private $is_valid_profile, $client, $profile_data;
+    private $is_valid_profile, $profile_data;
 
 	public function __construct( $container ) {
 		$this->container = $container;
