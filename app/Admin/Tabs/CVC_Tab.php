@@ -15,13 +15,13 @@ class CVC_Tab extends Base_Tab {
 		$this->set_name( __( 'CVC Settings', 'woo-bg' ) );
 		$this->set_description( __( 'cvc.com API Settings', 'woo-bg' ) );
 		$this->set_tab_slug( "cvc" );
-		$this->maybe_clear_cache();
 
 		add_action( 'woo_bg/admin/settings/afte_save_fields/'. $this->tab_name, array( $this, 'after_save_fields' ) );
 		add_filter( 'woo_bg/admin/settings/cvc/fields', array( $this, 'add_send_from_fields' ), 20 );
 		add_filter( 'woo_bg/admin/settings/cvc/groups_titles', array( $this, 'add_send_from_group_title' ) );
 		
 		if ( !empty( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] === $this->get_tab_slug() ) {
+			$this->maybe_clear_cache();
 			$this->load_fields();
 		}
 	}

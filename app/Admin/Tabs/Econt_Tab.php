@@ -15,7 +15,6 @@ class Econt_Tab extends Base_Tab {
 		$this->set_name( __( 'Econt Settings', 'woo-bg' ) );
 		$this->set_description( __( 'econt.com API Settings', 'woo-bg' ) );
 		$this->set_tab_slug( "econt" );
-		$this->maybe_clear_cache();
 
 		add_action( 'woo_bg/admin/settings/afte_save_fields/'. $this->tab_name, array( $this, 'after_save_fields' ) );
 		add_filter( 'woo_bg/admin/settings/econt/fields', array( $this, 'add_profile_data_fields' ), 10 );
@@ -23,6 +22,7 @@ class Econt_Tab extends Base_Tab {
 		add_filter( 'woo_bg/admin/settings/econt/groups_titles', array( $this, 'add_send_from_group_title' ) );
 
 		if ( !empty( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] === $this->get_tab_slug() ) {
+			$this->maybe_clear_cache();
 			$this->load_fields();
 		}
 	}
