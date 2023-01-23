@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.1.1
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 2.3.1
+Stable tag: 2.3.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -67,6 +67,17 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 2.3.3 =
+Econt: Fix receiver city
+Econt: Fix save office after choose from the office locator
+Econt: Optimize shipping to office method
+Admin: Fix clearing correct cache
+CVC: Optimize to address delivery
+CVC: Update send to address
+
+= 2.3.2 =
+Econt: Fix send from office
 
 = 2.3.1 =
 Econt: Add support for multiple profiles

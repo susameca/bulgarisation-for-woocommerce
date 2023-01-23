@@ -4,7 +4,7 @@ namespace Woo_BG;
 defined( 'ABSPATH' ) || exit;
 
 class Plugin {
-	const VERSION = '2.3.1';
+	const VERSION = '2.3.3';
 
 	protected static $_instance;
 
