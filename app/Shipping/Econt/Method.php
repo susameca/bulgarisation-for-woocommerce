@@ -282,12 +282,12 @@ class Method extends \WC_Shipping_Method {
 		$country = $this->cookie_data['country'];
 		$states = woo_bg_return_bg_states();
 		$state = $states[ $this->cookie_data['state'] ];
-		$cities = $this->container[ Client::ECONT_CITIES ]->get_cities_by_region( $state );
-		$city_key = array_search( $this->cookie_data['city'], array_column( $cities, 'name' ) );
+		$cities = $this->container[ Client::ECONT_CITIES ]->get_filtered_cities( $this->cookie_data['city'], $state );
+		$city_key = $cities['city_key'];
 		$type = ( !empty( $this->cookie_data['selectedAddress']['type'] ) ) ? $this->cookie_data['selectedAddress']['type'] :'';
 
 		$receiver_address = array(
-			'city' => $cities[ $city_key ],
+			'city' => $cities['cities'][ $city_key ],
 		);
 
 		if ( $type === 'streets' ) {
@@ -312,7 +312,7 @@ class Method extends \WC_Shipping_Method {
 			$receiver_address['quarter'] = $this->cookie_data['selectedAddress']['label'];
 			$receiver_address['other'] = $this->cookie_data['other'];
 		}
-		
+
 		return $receiver_address;
 	}
 
