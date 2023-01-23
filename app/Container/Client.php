@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Container;
 
+//Econt Classes
 use Woo_BG\Client\Econt;
 use Woo_BG\Client\Econt\Profile as Econt_Profile;
 use Woo_BG\Client\Econt\Countries as Econt_Countries;
@@ -8,6 +9,16 @@ use Woo_BG\Client\Econt\Cities as Econt_Cities;
 use Woo_BG\Client\Econt\Offices as Econt_Offices;
 use Woo_BG\Client\Econt\Streets as Econt_Streets;
 use Woo_BG\Client\Econt\Quarters as Econt_Quarters;
+
+//Speedy Classes
+use Woo_BG\Client\Speedy;
+use Woo_BG\Client\Speedy\Profile as Speedy_Profile;
+use Woo_BG\Client\Speedy\Cities as Speedy_Cities;
+use Woo_BG\Client\Speedy\Offices as Speedy_Offices;
+use Woo_BG\Client\Speedy\Streets as Speedy_Streets;
+use Woo_BG\Client\Speedy\Quarters as Speedy_Quarters;
+
+//CVC Classes
 use Woo_BG\Client\CVC;
 use Woo_BG\Client\CVC\Cities as CVC_Cities;
 use Woo_BG\Client\CVC\Profile as CVC_Profile;
@@ -16,6 +27,7 @@ use Woo_BG\Client\CVC\Streets as CVC_Streets;
 use Woo_BG\Client\CVC\Quarters as CVC_Quarters;
 use Woo_BG\Client\CVC\Offices as CVC_Offices;
 use Woo_BG\Client\CVC\Hubs as CVC_Hubs;
+
 use Pimple\Container;
 
 class Client extends Provider {
@@ -27,6 +39,13 @@ class Client extends Provider {
 	const ECONT_STREETS    = 'client.econt.streets';
 	const ECONT_QUARTERS   = 'client.econt.quarters';
 
+	const SPEEDY           = 'client.speedy';
+	const SPEEDY_PROFILE   = 'client.speedy.profile';
+	const SPEEDY_CITIES   = 'client.speedy.cities';
+	const SPEEDY_OFFICES   = 'client.speedy.offices';
+	const SPEEDY_STREETS   = 'client.speedy.streets';
+	const SPEEDY_QUARTERS   = 'client.speedy.quarters';
+
 	const CVC              = 'client.cvc';
 	const CVC_PROFILE      = 'client.cvc.profile';
 	const CVC_CITIES       = 'client.cvc.cities';
@@ -37,6 +56,10 @@ class Client extends Provider {
 	const CVC_HUBS         = 'client.cvc.hubs';
 
 	public function register( Container $container ) {
+		$container[ self::ECONT ] = function ( Container $container ) {
+			return new Econt();
+		};
+
 		$container[ self::ECONT_PROFILE ] = function ( Container $container ) {
 			return new Econt_Profile( $container );
 		};
@@ -61,8 +84,28 @@ class Client extends Provider {
 			return new Econt_Quarters( $container );
 		};
 
-		$container[ self::ECONT ] = function ( Container $container ) {
-			return new ECONT();
+		$container[ self::SPEEDY ] = function ( Container $container ) {
+			return new Speedy();
+		};
+
+		$container[ self::SPEEDY_PROFILE ] = function ( Container $container ) {
+			return new Speedy_Profile( $container );
+		};
+
+		$container[ self::SPEEDY_CITIES ] = function ( Container $container ) {
+			return new Speedy_Cities( $container );
+		};
+
+		$container[ self::SPEEDY_OFFICES ] = function ( Container $container ) {
+			return new Speedy_Offices( $container );
+		};
+
+		$container[ self::SPEEDY_STREETS ] = function ( Container $container ) {
+			return new Speedy_Streets( $container );
+		};
+
+		$container[ self::SPEEDY_QUARTERS ] = function ( Container $container ) {
+			return new Speedy_Quarters( $container );
 		};
 		
 		$container[ self::CVC ] = function ( Container $container ) {

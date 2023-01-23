@@ -105,6 +105,10 @@ class Admin_Menus {
 			$tabs[] = new Tabs\Econt_Tab();
 		}
 
+		if ( woo_bg_get_option( 'apis', 'enable_speedy' ) === 'yes' ) {
+			$tabs[] = new Tabs\Speedy_Tab();
+		}
+
 		if ( woo_bg_get_option( 'apis', 'enable_cvc' ) === 'yes' ) {
 			$tabs[] = new Tabs\CVC_Tab();
 		}

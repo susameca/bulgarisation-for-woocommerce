@@ -55,6 +55,7 @@ class Settings_Tab extends Base_Tab {
 			'apis' => array(
 				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'enable_nekorekten', __( 'Enable nekorekten.com API? ', 'woo-bg' ), null, null, __( 'If yes, you will receive information about the customer from nekorekten.com.', 'woo-bg' ) ),
 				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'enable_econt', __( 'Enable Econt Delivery? ', 'woo-bg' ), null, null, __( 'Enables Econt Shipping methods.', 'woo-bg' ) ),
+				//new Fields\Select_Field( woo_bg_get_yes_no_options(), 'enable_speedy', __( 'Enable Speedy Delivery? ', 'woo-bg' ), null, null, __( 'Enables Speedy Shipping methods.', 'woo-bg' ) ),
 				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'enable_cvc', __( 'Enable CVC Delivery? ', 'woo-bg' ), null, null, __( 'Enables CVC Shipping methods.', 'woo-bg' ) ),
 			),
 			'invoice' => array(
