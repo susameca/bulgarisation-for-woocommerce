@@ -117,7 +117,7 @@ export default {
 				this.offices.forEach( function ( office ) {
 					if ( office.code == officeID ) {
 						_this.selectedOffice = office;
-						_this.document.trigger('update_checkout');
+						_this.setOffice();
 					}
 				});
 			}
