@@ -8,7 +8,7 @@ class Offices {
     const OFFICES_ENDPOINT = 'Nomenclatures/NomenclaturesService.getOffices.json';
 
     private $offices = [];
-    private $client, $container;
+    private $container;
 
 	public function __construct( $container ) {
 		$this->container = $container;
