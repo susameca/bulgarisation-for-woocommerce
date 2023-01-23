@@ -93,12 +93,12 @@ class Address {
 		wp_die();
 	}
 
-	public static function get_streets_for_query( $query, $city_id ) {
+	public static function get_streets_for_query( $city_id, $query ) {
 		if ( !self::$container ) {
 			self::$container = woo_bg()->container();
 		}
 		
-		$streets = self::$container[ Client::CVC_STREETS ]->get_streets_by_city( $query, $city_id );
+		$streets = self::$container[ Client::CVC_STREETS ]->get_streets_by_city( $city_id, $query );
 
 		if ( !empty( $streets['streets'] ) ) {
 			$streets = self::$container[ Client::CVC_STREETS ]->format_streets( $streets['streets'] );
@@ -107,12 +107,12 @@ class Address {
 		return $streets;
 	}
 
-	public static function get_quarters_for_query( $query, $city_id ) {
+	public static function get_quarters_for_query( $city_id, $query ) {
 		if ( !self::$container ) {
 			self::$container = woo_bg()->container();
 		}
 		
-		$quarters = self::$container[ Client::CVC_QUARTERS ]->get_quarters_by_city( $query, $city_id );
+		$quarters = self::$container[ Client::CVC_QUARTERS ]->get_quarters_by_city( $city_id, $query );
 		
 		if ( !empty( $quarters['qts'] ) ) {
 			$quarters = self::$container[ Client::CVC_QUARTERS ]->format_quarters( $quarters['qts'] );
