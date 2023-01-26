@@ -196,10 +196,9 @@ class Menu {
 		$qr_code_pieces = array(
 			$nap_number,
 			$this->order->get_id(),
-			$this->order->get_transaction_id(),
 			$this->order->get_date_created()->date_i18n('Y-m-d'),
 			$this->order->get_date_created()->date_i18n('g:i:s'),
-			$this->order->get_total()
+			$this->order->get_total(),
 		);
 
 		$qr_code = new QRCode();
