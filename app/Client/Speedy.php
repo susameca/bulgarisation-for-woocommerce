@@ -5,9 +5,9 @@ defined( 'ABSPATH' ) || exit;
 
 class Speedy {
 	const BASE_ENDPOINT = 'https://api.speedy.bg/v1/';
-    const LABELS_ENDPOINT = 'Shipments/LabelService.createLabel.json';
-    const UPDATE_LABELS_ENDPOINT = 'Shipments/LabelService.updateLabel.json';
-    const DELETE_LABELS_ENDPOINT = 'Shipments/LabelService.deleteLabels.json';
+    const CALC_LABELS_ENDPOINT = 'calculate';
+	const CREATE_LABELS_ENDPOINT = 'create_wb';
+	const CANCEL_LABELS_ENDPOINT = 'cancel_wb';
     const SHIPMENT_STATUS_ENDPOINT = 'Shipments/ShipmentService.getShipmentStatuses.json';
     const CACHE_FOLDER = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'woo-bg' . DIRECTORY_SEPARATOR . 'speedy' . DIRECTORY_SEPARATOR;
 

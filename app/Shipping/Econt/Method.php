@@ -321,7 +321,6 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_cart_data() {
-		global $woocommerce;
 		$names = array();
 		$cart = array(
 			'packCount' => 1,

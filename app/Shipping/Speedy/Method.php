@@ -43,7 +43,6 @@ class Method extends \WC_Shipping_Method {
 		$this->free_shipping_over   = $this->get_option( 'free_shipping_over' );
 		$this->fixed_price          = $this->get_option( 'fixed_price' );
 		$this->test                 = $this->get_option( 'test' );
-		$this->sms                  = $this->get_option( 'sms' );
 		$this->tax_status           = 'none';
 
 		// Save settings in admin if you have any defined
@@ -68,7 +67,9 @@ class Method extends \WC_Shipping_Method {
 
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
 		$rate['meta_data']['validated'] = false;
-		/*if ( 
+		$payment_by_data = $this->generate_payment_by_data();
+
+		if ( 
 			isset( $this->cookie_data['type'] ) && 
 			$this->cookie_data['type'] === $this->delivery_type && 
 			( 
@@ -77,28 +78,34 @@ class Method extends \WC_Shipping_Method {
 				( isset( $this->cookie_data['selectedOffice'] ) && $this->cookie_data['selectedOffice'] ) 
 			) 
 		) {
+			$this->cookie_data['fixed_price'] = $this->fixed_price;
 			$request_data = $this->calculate_shipping_price_from_api();
-
 			$rate['meta_data']['validated'] = true;
 			$rate['meta_data']['cookie_data'] = $this->cookie_data;
 
 			if ( isset( $request_data['errors'] ) ) {
 				$rate['meta_data']['validated'] = false;
 				$rate['meta_data']['errors'] = $request_data['errors'];
-			} elseif ( $request_data['price']  ) {
+			} elseif ( isset( $request_data['price'] )  ) {
 				$rate['cost'] = $request_data['price'];
 			}
 
-			if ( !$rate['cost'] ) {
+			if ( 
+				( !$rate['cost'] && !isset( $request_data['errors'] ) ) || 
+				( empty( $this->fixed_price ) && $payment_by_data['payment'][ 'courierServicePayer' ] !== 'RECIPIENT' )
+			) {
 				$this->free_shipping = true;
 			}
-		}*/
-
-		if ( $this->free_shipping && $rate['meta_data']['validated'] ) {
-			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
 		}
 
-		$rate = apply_filters( 'woo_bg/speedy/rate', $rate, $this );
+		if ( $this->free_shipping ) {
+			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
+			$rate[ 'cost' ] = 0;
+		} 
+
+		if ( !$this->free_shipping && !empty( $this->fixed_price ) ) {
+			$rate[ 'cost' ] = $this->fixed_price;
+		}
 
 		// Register the rate
 		$this->add_rate( $rate );
@@ -132,17 +139,6 @@ class Method extends \WC_Shipping_Method {
 				'css'               => 'width: 400px;',
 				'default'           => 'no',
 				'options'           => woo_bg_get_shipping_tests_options(),
-			),
-			'sms'    => array(
-				'title'             => __( 'SMS notification', 'woo-bg' ),
-				'type'              => 'select',
-				'css'               => 'width: 400px;',
-				'default'           => 'no',
-				'options'           => array(
-					'no' => __( 'No', 'woo-bg' ),
-					'yes' => __( 'Yes', 'woo-bg' ),
-				),
-				'description' => __( 'Send customer notification for delivery.', 'woo-bg' ),
 			),
 			'free_shipping_over' => array(
 				'title'       => __( 'Free shipping over', 'woo-bg' ),
@@ -187,10 +183,8 @@ class Method extends \WC_Shipping_Method {
 			'price' => '0',
 		);
 		
-		$request_body = apply_filters( 'woo_bg/speedy/calculate_label', array(
-			'label' => $this->generate_label(),
-			'mode' => 'calculate',
-		), $this );
+		$request_body = apply_filters( 'woo_bg/speedy/calculate_label', $this->generate_label(), $this );
+
 
 		if ( isset( $request_body['label']['senderOfficeCode'] ) ) {
 			unset( $request_body['label']['senderAddress'] );
@@ -198,12 +192,20 @@ class Method extends \WC_Shipping_Method {
 
 		WC()->session->set( 'woo-bg-speedy-label' , $request_body );
 
-		$request = $this->container[ Client::SPEEDY ]->api_call( $this->container[ Client::SPEEDY ]::LABELS_ENDPOINT, $request_body );
+		$request = $this->container[ Client::SPEEDY ]->api_call( $this->container[ Client::SPEEDY ]::CALC_LABELS_ENDPOINT, $request_body );
 
-		if ( isset( $request['type'] ) && $request['type'] === 'ExInvalidParam' ) {
-			$data['errors'] = $request;
-		} else if ( isset( $request['label']['receiverDueAmount'] ) ) {
-			$data['price'] = $request['label']['receiverDueAmount'];
+		//var_dump( $request );
+
+
+		if ( !isset( $request ) ) {
+			$data['errors'] = __( 'Calculation failed. Please try again.', 'woo-bg' );
+		} else if ( isset( $request['error'] ) ) {
+			$data['errors'] = $request['error']['message'];
+		} else if ( isset( $request['calculations'] ) ) {
+			$calc_data = $request['calculations'][0];
+			$data['price'] = $calc_data['price']['total'];
+			$data['price_without_vat'] = $calc_data['price']['amount'];
+			$data['vat'] = $calc_data['price']['vat'];
 		}
 
 		return $data;
@@ -211,58 +213,35 @@ class Method extends \WC_Shipping_Method {
 
 	private function generate_label() {
 		$label = array(
-			'senderClient' => $this->generate_sender_data(),
-			'senderAgent' => $this->generate_sender_auth(),
-			'senderAddress' => $this->generate_sender_address(),
+			'sender' => $this->generate_sender_data(),
 		);
-
-		$send_from = woo_bg_get_option( 'speedy', 'send_from' );
-
-		if ( $send_from == 'office' ) {
-			$label['senderOfficeCode'] = $this->generate_sender_office_code();
-		}
 
 		if ( $this->cookie_data ) {
-			$label['receiverClient'] = $this->generate_receiver_data();
-
-			if ( $this->cookie_data['type'] === 'address' ) {
-				$label['receiverAddress'] = $this->generate_receiver_address();
-			} else if ( $this->cookie_data['type'] === 'office' ) {
-				$label['receiverOfficeCode'] = $this->generate_receiver_office_code();
-			}
+			$label['recipient'] = $this->generate_recipient_data();
 		}
 
-		$cart_data = $this->generate_cart_data();
-		$other_data = $this->generate_other_data();
+		$content_data = $this->generate_content_data();
+		$services_data = $this->generate_services_data();
 		$payment_by_data = $this->generate_payment_by_data();
 
-		return array_merge( $label, $cart_data, $other_data, $payment_by_data );
-	}
-
-	private function generate_sender_auth() {
-		$client = $this->container[ Client::SPEEDY_PROFILE ]->get_profile_data()['client'];
-
-		return array(
-			'name' => woo_bg_get_option( 'speedy', 'name' ),
-			'phones' => [ woo_bg_get_option( 'speedy', 'phone' ) ],
-		);
+		return array_merge( $label, $content_data, $services_data, $payment_by_data );
 	}
 
 	private function generate_sender_data() {
-		return $this->container[ Client::SPEEDY_PROFILE ]->get_profile_data()['client'];
-	}
+		$send_from = woo_bg_get_option( 'speedy', 'send_from' );
+		$sender = array(
+			'clientId' => $this->container[ Client::SPEEDY_PROFILE ]->get_profile_data()['clientId'],
+			'contactName' => woo_bg_get_option( 'speedy', 'name' ),
+			'phone1' => array(
+				'number' => woo_bg_get_option( 'speedy', 'phone' ),
+			),
+		);
 
-	private function generate_sender_address() {
-		$address = '';
-		$id = woo_bg_get_option( 'speedy_send_from', 'address' );
-
-		if ( $id !== '' ) {
-			$profile_addresses = $this->container[ Client::SPEEDY_PROFILE ]->get_profile_data()['addresses'];
-
-			$address = $profile_addresses[ $id ];
+		if ( $send_from === 'office' ) {
+			$sender['dropoffOfficeId'] = $this->generate_sender_office_code();
 		}
 
-		return $address;
+		return $sender;
 	}
 
 	private function generate_sender_office_code() {
@@ -271,142 +250,188 @@ class Method extends \WC_Shipping_Method {
 		return str_replace( 'officeID-', '', $office );
 	}
 
-	private function generate_receiver_data() {
-		return array(
-			'name' => $this->cookie_data[ 'receiver' ],
-			'phones' => array( $this->cookie_data[ 'phone' ] ),
-		);
-	}
-
-	private function generate_receiver_address() {
-		$country = $this->cookie_data['country'];
-		$states = woo_bg_return_bg_states();
-		$state = $states[ $this->cookie_data['state'] ];
-		$cities = $this->container[ Client::SPEEDY_CITIES ]->get_cities_by_region( $state );
-		$city_key = array_search( $this->cookie_data['city'], array_column( $cities, 'name' ) );
-		$type = ( !empty( $this->cookie_data['selectedAddress']['type'] ) ) ? $this->cookie_data['selectedAddress']['type'] :'';
-
-		$receiver_address = array(
-			'city' => $cities[ $city_key ],
+	private function generate_recipient_data() {
+		$recipient = array(
+			'privatePerson' => true,
+			'clientName' => $this->cookie_data[ 'receiver' ],
+			'phone1' => array(
+				'number' => $this->cookie_data[ 'phone' ],
+			)
 		);
 
-		if ( $type === 'streets' ) {
-			$num_parts = explode( ' ', $this->cookie_data['streetNumber'] );
-			$receiver_address['street'] = $this->cookie_data['selectedAddress']['label'];
-			$receiver_address['num'] = array_shift( $num_parts );
-			$this->cookie_data['other'] = '';
-			$this->cookie_data['streetNumber'] = $receiver_address['num'];
-
-			if ( !empty( $num_parts ) ) {
-				$receiver_address['other'] = implode( ' ', $num_parts );
-			}
-
-			if ( $this->cookie_data['otherField'] ) {
-				$receiver_address['other'] .= $this->cookie_data['otherField'];
-			}
-
-			if ( isset( $receiver_address['other'] ) ) {
-				$this->cookie_data['other'] = $receiver_address['other'];
-			}
-		} else if ( $type === 'quarters' ) {
-			$receiver_address['street'] = $this->cookie_data['selectedAddress']['label'];
-			$receiver_address['quarter'] = $this->cookie_data['selectedAddress']['label'];
-			$receiver_address['num'] = $this->cookie_data['other'];
-			$receiver_address['other'] = $this->cookie_data['other'];
+		if ( $this->cookie_data['type'] === 'address' ) {
+			$recipient[ 'addressLocation' ] = $this->generate_recipient_address();
+			$recipient[ 'address' ] = $this->generate_recipient_address();
+		} else if ( $this->cookie_data['type'] === 'office' ) {
+			$recipient[ 'pickupOfficeId' ] = $this->generate_recipient_office_code();
 		}
-		
-		//var_dump( $receiver_address );
 
-		return $receiver_address;
+		return $recipient;
 	}
 
-	private function generate_receiver_office_code() {
+	private function generate_recipient_address() {
+		if ( !isset( $_POST['country'] ) ) {
+			return( [] );
+		}
+
+		$raw_city = sanitize_text_field( $this->cookie_data['city'] );
+		$raw_state = sanitize_text_field( $this->cookie_data['state'] );
+		$cities_data = $this->container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state );
+
+		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
+			return( [] );
+		}
+
+		$address = array(
+			'siteId' => $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ],
+		);
+
+		if ( $this->cookie_data['selectedAddress']['type'] === 'streets' ) {
+			$address["streetId"] = str_replace('street-', '', $this->cookie_data['selectedAddress']['orig_key'] ); 
+			$address["streetNo"] = $this->cookie_data['streetNumber'];
+		} else if ( $this->cookie_data['selectedAddress']['type'] === 'quarters' ) {
+			$address["complexId"] = str_replace('qtr-', '', $this->cookie_data['selectedAddress']['orig_key'] );
+
+			if ( !empty( $this->cookie_data[ 'other' ] ) ) {
+				$parts = explode( ' ', $this->cookie_data[ 'other' ] );
+
+				$address["blockNo"] = $parts[0];
+
+				if ( isset( $parts[1] ) ) {
+					$address["entranceNo"] = $parts[1];
+				}
+
+				if ( isset( $parts[2] ) ) {
+					$address["floorNo"] = $parts[2];
+				}
+
+				if ( isset( $parts[3] ) ) {
+					$address["apartmentNo"] = $parts[3];
+				}
+
+				if ( isset( $parts[4] ) ) {
+					unset( $parts[0], $parts[1], $parts[2], $parts[3] );
+
+					$address["addressNote"] = implode( ' ', $parts ) ;
+				}
+			}
+		}
+
+		return $address;
+	}
+
+	private function generate_recipient_office_code() {
 		return ( isset( $this->cookie_data['selectedOffice'] ) ) ? $this->cookie_data['selectedOffice'] : '';
 	}
 
-	private function generate_cart_data() {
-		global $woocommerce;
+	private function generate_content_data() {
 		$names = array();
-		$cart = array(
-			'packCount' => 1,
-			'shipmentType' => 'PACK',
-			'weight' => 0,
+		$content = array(
+			'parcelsCount' => 1,
+			'totalWeight' => 0,
 		);
-
-		$os_value = 0;
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
 			$_product = wc_get_product( $item[ 'product_id' ] );
-
-			if ( $product_os_value = $_product->get_meta( '_woo_bg_os_value' ) ) {
-				$os_value += $product_os_value * $item['quantity'];
-			}
 			
 			if ( $item['data']->get_weight() ) {
-				$cart['weight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
+				$content['totalWeight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
 			}
 
 			$names[] = $item['data']->get_name();
 		}
 
-		if ( !$cart['weight'] ) {
-			$cart['weight'] = apply_filters( 'woo_bg/speedy/label/weight', 1, $this->package, $this );
+		if ( !$content['totalWeight'] ) {
+			$content['totalWeight'] = apply_filters( 'woo_bg/speedy/label/weight', 1, $this->package, $this );
 		}
 
-		$cart['shipmentDescription'] = implode( ', ', $names );
+		$content['contents'] = $names;
 
-		if ( $this->cookie_data['payment'] === 'cod' ) {
-			$cart['services']['cdType'] = 'get';
-			$cart['services']['cdAmount'] = $this->get_package_total();
-			$cart['services']['cdCurrency'] = get_woocommerce_currency();
+		return array(
+			'content' => $content,
+		);
+	}
+
+	private function generate_services_data() {
+		$services = array(
+			'autoAdjustPickupDate' => true, 
+			'serviceIds' => array( 505 ),
+			'additionalServices' => [],
+		);
+
+		$os_value = 0;
+		$is_fragile = false;
+
+		foreach ( $this->package[ 'contents' ] as $key => $item ) {
+			$_product = wc_get_product( $item[ 'product_id' ] );
+			
+			if ( $product_os_value = $_product->get_meta( '_woo_bg_os_value' ) ) {
+				$os_value += $product_os_value * $item['quantity'];
+
+				if ( $_product->get_meta( '_woo_bg_fragile' ) === 'on' ) {
+					$is_fragile = true;
+				}
+			}
 		}
 
 		if ( $os_value ) {
-			$cart[ 'services' ]['declaredValueAmount'] = $os_value;
-			$cart[ 'services' ]['declaredValueCurrency'] = 'BGN';
+			$services['additionalServices']['declaredValue'] = array(
+				'amount' => $os_value, 
+				'fragile' => $is_fragile, 
+				"ignoreIfNotApplicable" => true 
+			);
 		}
 
-		if ( $this->sms === 'yes' ) {
-			$cart['services']['smsNotification'] = true;
+		if ( $this->cookie_data['payment'] === 'cod' ) {
+			$services['additionalServices']['cod'] = array(
+				'amount' => $this->get_package_total(), 
+				'processingType' => 'CASH' 
+			);
 		}
 
-		return $cart;
-	}
+		if ( $this->test !== 'no' ) {
+			if ( $this->test == 'review' ) {
+				$test = 'OPEN';
+			} else if ( $this->test == 'test' ) {
+				$test = 'TEST';
+			}
 
-	private function generate_other_data() {
-		$other_data = [];
-
-		if ( $this->test == 'review' ) {
-			$other_data['payAfterAccept'] = true;
-		} else if ( $this->test == 'test' ) {
-			$other_data['payAfterAccept'] = true;
-			$other_data['payAfterTest'] = true;
+			$services['additionalServices']['obpd'] = array(
+				'option' => $test, 
+				'returnShipmentServiceId' => 505, 
+				'returnShipmentPayer' => 'RECIPIENT' 
+			);
 		}
 
-		return $other_data;
+		return array(
+			'service' => $services,
+		);
 	}
 	
 	private function generate_payment_by_data() {
-		$payment_by_data = array(
-			'paymentReceiverMethod' => 'cash',
+		$payment = array(
+			"courierServicePayer" => "RECIPIENT",
 		);
 
-		if ( !empty( $this->fixed_price ) ) {
-			$payment_by_data['paymentSenderMethod'] = $this->container[ Client::SPEEDY_PROFILE ]->get_sender_payment_method();
-			$payment_by_data['paymentReceiverMethod'] = 'cash';
-			$payment_by_data['paymentReceiverAmount'] = $this->fixed_price;
+		if ( !empty( $this->fixed_price ) && $payment[ 'courierServicePayer' ] === 'RECIPIENT' ) {
+			$payment[ 'courierServicePayer' ] = 'SENDER';
 		}
 
 		if ( !empty( $this->free_shipping_over ) && $this->get_package_total() > $this->free_shipping_over ) {
 			$this->free_shipping = true;
 
-			unset( $payment_by_data[ 'paymentReceiverMethod' ] );
-			unset( $payment_by_data[ 'paymentReceiverAmount' ] );
-
-			$payment_by_data['paymentSenderMethod'] = $this->container[ Client::SPEEDY_PROFILE ]->get_sender_payment_method();
+			if ( $payment[ 'courierServicePayer' ] === 'RECIPIENT' ) {
+				$payment[ 'courierServicePayer' ] = 'SENDER';
+			}
 		}
 
-		return $payment_by_data;
+		/*if ( $payment[ 'courierServicePayer' ] === 'SENDER' && woo_bg_get_option( 'speedy_sender', 'contract_pay' ) === 'yes' ) {
+			$payment[ 'courierServicePayer' ] = 'contract';
+		}*/
+
+		return array(
+			'payment' => $payment,
+		);
 	}
 
 	protected function get_package_total() {
@@ -427,11 +452,10 @@ class Method extends \WC_Shipping_Method {
 				$data = WC()->session->get( 'shipping_for_package_' . $key )['rates'][ $shipping ];
 
 				if ( $data->method_id === 'woo_bg_speedy' && ! $data->meta_data['validated'] ) {
-					$method_errors = $data->meta_data['errors'];
+					$meta_data = $data->get_meta_data();
 
-					if ( !empty( $method_errors ) && !empty( array_filter( $method_errors ) ) ) {
-						$message = array_merge( array( __( 'Speedy - ', 'woo-bg' ) ) , woo_bg()->container()[ Client::SPEEDY ]::add_error_message( $method_errors ) );
-						$errors->add( 'validation', implode( ' ', $message ) );
+					if ( !empty( $meta_data['errors'] ) ) {
+						$errors->add( 'validation', sprintf( __( 'Speedy - %s', 'woo-bg' ), $meta_data['errors'] ) );
 					} else {
 						$errors->add( 'validation', __( 'Please choose delivery option!', 'woo-bg' ) );
 					}
