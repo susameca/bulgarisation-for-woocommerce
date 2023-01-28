@@ -42,7 +42,7 @@ class Address {
 	public static function search_address() {
 		self::$container = woo_bg()->container();
 		$args = [];
-		$query = Transliteration::latin2cyrillic( explode( ' ', sanitize_text_field( $_POST['query'] ) ) );
+		$query = Transliteration::latin2cyrillic( sanitize_text_field( $_POST['query'] ) );
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$states = woo_bg_return_bg_states();
 		$state = $states[ $raw_state ];
@@ -127,10 +127,8 @@ class Address {
 
 		if ( !empty( $query ) ) {
 			$streets_only_names = array_filter( $streets_only_names, function( $street ) use ( $query ) {
-				foreach ( $query as $query_part ) {
-					if ( strpos( mb_strtolower( $street ), mb_strtolower( $query_part ) ) !== false ) {
-						return true;
-					}
+				if ( strpos( mb_strtolower( $street ), mb_strtolower( $query ) ) !== false ) {
+					return true;
 				}
 			} );
 
@@ -152,10 +150,8 @@ class Address {
 
 		if ( !empty( $query ) ) {
 			$quarters_only_names = array_filter( $quarters_only_names, function( $quarter ) use ( $query ) {
-				foreach ( $query as $query_part ) {
-					if ( strpos( mb_strtolower( $quarter ), mb_strtolower( $query_part ) ) !== false ) {
-						return true;
-					}
+				if ( strpos( mb_strtolower( $quarter ), mb_strtolower( $query ) ) !== false ) {
+					return true;
 				}
 			} );
 
