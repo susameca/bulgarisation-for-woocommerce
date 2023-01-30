@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2023-01-30 20:48+0000\n"
+"PO-Revision-Date: 2023-01-30 20:50+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -398,6 +398,10 @@ msgstr "Включи доставки с Еконт?"
 msgid "Enable nekorekten.com API? "
 msgstr "Включи nekorekten.com API?"
 
+#: app/Admin/Tabs/Settings_Tab.php:58
+msgid "Enable Speedy Delivery? "
+msgstr "Включи Спиди API?"
+
 #: app/Admin/EU_Vat.php:35
 msgid "Enable VIES validation"
 msgstr "Включи VIES валидация"
@@ -421,6 +425,11 @@ msgstr "Включва Еконт начин на доставка."
 #: app/Shipping/Speedy/Method.php:19
 msgid "Enables Speedy delivery and automatically calculate shipping price."
 msgstr "Включва доставки със Спиди и автоматично пресмятане на доставка."
+
+#: app/Admin/Tabs/Settings_Tab.php:58
+msgid "Enables Speedy Shipping methods."
+msgstr ""
+"Включва Спиди начин на доставка.\n"
 
 #: app/Shipping/Econt/Method.php:159 app/Shipping/Speedy/Method.php:155
 msgid ""

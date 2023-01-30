@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-30 20:45+0000\n"
+"POT-Creation-Date: 2023-01-30 20:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -394,6 +394,10 @@ msgstr ""
 msgid "Enable nekorekten.com API? "
 msgstr ""
 
+#: app/Admin/Tabs/Settings_Tab.php:58
+msgid "Enable Speedy Delivery? "
+msgstr ""
+
 #: app/Admin/EU_Vat.php:35
 msgid "Enable VIES validation"
 msgstr ""
@@ -416,6 +420,10 @@ msgstr ""
 
 #: app/Shipping/Speedy/Method.php:19
 msgid "Enables Speedy delivery and automatically calculate shipping price."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:58
+msgid "Enables Speedy Shipping methods."
 msgstr ""
 
 #: app/Shipping/Econt/Method.php:159 app/Shipping/Speedy/Method.php:155
