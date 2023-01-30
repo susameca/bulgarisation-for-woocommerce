@@ -329,6 +329,7 @@ class Method extends \WC_Shipping_Method {
 		$content = array(
 			'parcelsCount' => 1,
 			'totalWeight' => 0,
+			'package' => 'BOX',
 		);
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
@@ -345,7 +346,7 @@ class Method extends \WC_Shipping_Method {
 			$content['totalWeight'] = apply_filters( 'woo_bg/speedy/label/weight', 1, $this->package, $this );
 		}
 
-		$content['contents'] = $names;
+		$content['contents'] = implode( ',', $names );
 
 		return array(
 			'content' => $content,
@@ -355,6 +356,7 @@ class Method extends \WC_Shipping_Method {
 	private function generate_services_data() {
 		$services = array(
 			'autoAdjustPickupDate' => true, 
+			'serviceId' => 505,
 			'serviceIds' => array( 505 ),
 			'additionalServices' => [],
 		);
@@ -411,7 +413,14 @@ class Method extends \WC_Shipping_Method {
 	private function generate_payment_by_data() {
 		$payment = array(
 			"courierServicePayer" => "RECIPIENT",
+			"declaredValuePayer" => "RECIPIENT",
+			"packagePayer" => "RECIPIENT",
 		);
+
+		if ( isset( $this->cookie_data['payment'] ) && $this->cookie_data['payment'] !== 'cod' ) {
+			$payment[ 'declaredValuePayer' ] = 'SENDER';
+			$payment[ 'packagePayer' ] = 'SENDER';
+		}
 
 		if ( !empty( $this->fixed_price ) && $payment[ 'courierServicePayer' ] === 'RECIPIENT' ) {
 			$payment[ 'courierServicePayer' ] = 'SENDER';
@@ -424,10 +433,6 @@ class Method extends \WC_Shipping_Method {
 				$payment[ 'courierServicePayer' ] = 'SENDER';
 			}
 		}
-
-		/*if ( $payment[ 'courierServicePayer' ] === 'SENDER' && woo_bg_get_option( 'speedy_sender', 'contract_pay' ) === 'yes' ) {
-			$payment[ 'courierServicePayer' ] = 'contract';
-		}*/
 
 		return array(
 			'payment' => $payment,
@@ -526,12 +531,12 @@ class Method extends \WC_Shipping_Method {
 
 		$label = $order->get_meta( 'woo_bg_speedy_label' );
 
-		if ( !isset( $label['label']['shipmentNumber'] ) ) {
+		if ( !isset( $label['id'] ) ) {
 			return;
 		}
 
-		$number = $label['label']['shipmentNumber'];
-		$url = 'https://www.econt.com/services/track-shipment/' . $number;
+		$number = $label['id'];
+		$url = 'https://www.speedy.bg/bg/track-shipment?shipmentNumber=' . $number;
 
 		$track_number_text = sprintf( 
 			__( 'Label number: %s. %s', 'woo-bg' ), 

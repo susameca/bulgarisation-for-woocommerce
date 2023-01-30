@@ -2,19 +2,19 @@
 	Vendor
 \* ------------------------------------------------------------ */
 
-@import '~@styles/cvc-admin.config.scss';
+@import '~@styles/speedy-admin.config.scss';
 
-#woo_bg_cvc #order_data { padding: 0 }
+#woo_bg_speedy #order_data { padding: 0 }
 
-.panel-wrap.woocommerce--cvc {
+.panel-wrap.woocommerce--speedy {
 	.multiselect__option--highlight:not( .multiselect__option--selected ) {
-		background: $color-cvc-blue;
+		background: $color-speedy-blue;
 	}
 	.multiselect__option--highlight.multiselect__option--selected {
 		background: $color-red;
 	}
 
-	#woo-bg--cvc-label-print { 
+	#woo-bg--speedy-label-print { 
 		min-height: 600px; 
 		width: 100%; 
 		margin-top: 30px;

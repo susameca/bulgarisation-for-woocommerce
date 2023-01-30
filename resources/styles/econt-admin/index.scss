@@ -4,6 +4,8 @@
 
 @import '~@styles/econt-admin.config.scss';
 
+#woo_bg_econt #order_data { padding: 0 }
+
 .panel-wrap.woocommerce--econt {
 	.multiselect__option--highlight:not( .multiselect__option--selected ) {
 		background: $color-econt-blue;

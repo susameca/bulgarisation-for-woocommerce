@@ -1,5 +1,5 @@
 <template>
-	<div class="panel-wrap woocommerce woocommerce--econt ajax-container" :data-loading="loading">
+	<div class="panel-wrap woocommerce woocommerce--speedy ajax-container" :data-loading="loading">
 		<div id="order_data" class="panel woocommerce-order-data">
 			<div class="order_data_column_container">
 				<div class="order_data_column order_data_column--half">
@@ -65,6 +65,7 @@
 									:options="Object.values( streets )" 
 									:searchable="true" 
 									:allow-empty="false"
+									@search-change="asyncFind"
 								>
 									<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
 								</multiselect>
@@ -98,42 +99,20 @@
 							</p>
 						</div>
 
-
-						<p class="form-field form-field-wide">
-							<label>
-								{{i18n.shipmentType}}:
-							</label>
-
-							<multiselect 
-								v-model="shipmentType" 
-								deselect-label="" 
-								selectLabel="" 
-								track-by="id" 
-								label="label" 
-								:selectedLabel="i18n.selected" 
-								:placeholder="i18n.choose" 
-								:options="Object.values( shipmentTypes )" 
-								:searchable="true" 
-								:allow-empty="false"
-							>
-								<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
-							</multiselect>
-						</p>
-
-						<p v-if="labelData.packCount" class="form-field form-field-wide">
+						<p v-if="labelData.content" class="form-field form-field-wide">
 							<label>
 								{{i18n.packCount}}:
 							</label>
 
-							<input v-model="labelData.packCount" type="number">
+							<input v-model="labelData.content.parcelsCount" type="number">
 						</p>
 
-						<p v-if="( labelData.services && labelData.services.cdAmount )" class="form-field form-field-wide">
+						<p v-if="( typeof( labelData.service.additionalServices ) !== 'undefined' && typeof( labelData.service.additionalServices.cod) !== 'undefined' )" class="form-field form-field-wide">
 							<label>
 								{{i18n.cd}}:
 							</label>
 
-							<input v-model="labelData.services.cdAmount" type="number">
+							<input v-model="labelData.service.additionalServices.cod.amount" type="number">
 						</p>
 
 						<p  class="form-field form-field-wide">
@@ -173,6 +152,14 @@
 							</multiselect>
 						</p>
 
+						<p v-if="( paymentBy.id === 'fixed' )" class="form-field form-field-wide">
+							<label>
+								{{i18n.fixedPrice}}:
+							</label>
+
+							<input v-model="cookie_data.fixed_price" type="number">
+						</p>
+
 						<p class="form-field form-field-wide">
 							<label>
 								{{i18n.reviewAndTest}}:
@@ -192,14 +179,6 @@
 							>
 								<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
 							</multiselect>
-						</p>
-
-						<p v-if="( paymentBy.id === 'fixed' )" class="form-field form-field-wide">
-							<label>
-								{{i18n.fixedPrice}}:
-							</label>
-
-							<input v-model="labelData.paymentReceiverAmount" type="number">
 						</p>
 
 						<p class="form-field form-field-wide" v-if="shipmentStatus">
@@ -227,26 +206,9 @@
 
 				<div class="order_data_column order_data_column--half">
 					<div class="generated-label" v-if="shipmentStatus">
-						<h3>{{i18n.label}}: {{shipmentStatus.label.shipmentNumber}}</h3> <br>
+						<h3>{{i18n.label}}: {{shipmentStatus.id}}</h3>
 
-						<div>
-							<span class="woo-bg--radio">
-					  			<input id="label_size_default" type="radio" name="label_size" value="" checked>
-					  			<label for="label_size_default"> {{i18n.default}}</label>
-							</span>
-
-							<span class="woo-bg--radio">
-					  			<input id="label_size_10x9" type="radio" name="label_size" value="10x9" >
-					  			<label for="label_size_10x9">10x9</label>
-							</span>
-
-							<span class="woo-bg--radio">
-					  			<input id="label_size_10x15" type="radio" name="label_size" value="10x15" >
-					  			<label for="label_size_10x15"> 10x15</label>
-							</span>
-						</div>
-
-						<iframe id="woo-bg--econt-label-print" :src="iframeUrl"></iframe>
+						<iframe id="woo-bg--speedy-label-print" :src="iframeUrl"></iframe>
 					</div>
 				</div><!-- /.order_data_column order_data_column-/-half -->
 			</div><!-- /.order_data_column_container -->
@@ -279,6 +241,7 @@
 
 <script>
 import cloneDeep from 'lodash/cloneDeep';
+import debounce from 'lodash/debounce';
 import axios from 'axios';
 import Qs from 'qs';
 import Multiselect from 'vue-multiselect';
@@ -292,78 +255,84 @@ export default {
 			types: [
 				{
 					id: 'office',
-					label: wooBg_econt.i18n.office
+					label: wooBg_speedy.i18n.office
 				},
 				{
 					id: 'address',
-					label: wooBg_econt.i18n.address
+					label: wooBg_speedy.i18n.address
 				}
 			],
 			paymentBy: '',
 			paymentByTypes: [
 				{
-					id: 'buyer',
-					label: wooBg_econt.i18n.buyer
+					id: 'RECIPIENT',
+					label: wooBg_speedy.i18n.buyer
 				},
 				{
-					id: 'sender',
-					label: wooBg_econt.i18n.sender
+					id: 'SENDER',
+					label: wooBg_speedy.i18n.sender
 				},
 				{
 					id: 'fixed',
-					label: wooBg_econt.i18n.fixedPrice
+					label: wooBg_speedy.i18n.fixedPrice
 				}
 			],
 			size: '',
 			shipmentStatus : '',
-			labelData : wooBg_econt.label,
+			labelData : wooBg_speedy.label,
 			document: $( document.body ),
-			shipmentType:'',
-			shipmentTypes: cloneDeep( wooBg_econt.shipmentTypes ),
 			office: '',
-			offices: cloneDeep( wooBg_econt.offices ),
+			offices: cloneDeep( wooBg_speedy.offices ),
 			street: '',
-			streets: cloneDeep( wooBg_econt.streets ),
+			streets: cloneDeep( wooBg_speedy.streets ),
 			testOption: '',
-			testsOptions: cloneDeep( wooBg_econt.testsOptions ),
+			testsOptions: cloneDeep( wooBg_speedy.testsOptions ),
 			streetNumber: '',
 			other: '',
 			message: '',
-			i18n: wooBg_econt.i18n,
+			i18n: wooBg_speedy.i18n,
+			cookie_data: cloneDeep( wooBg_speedy.cookie_data ),
 			declaredValue: '',
-		}
-	},
-	watch: {
-		shipmentType( newValue, oldValue ){
-			this.labelData.shipmentType = newValue.id;
+			shipmentActions : [],
 		}
 	},
 	computed: {
 		iframeUrl() {
-			return this.shipmentStatus.label.pdfURL.replace(/^https?:/, '') + '&label=' + this.size;
+			let parcels = [];
+			let link = '';
+
+			if ( this.shipmentStatus.id !== "undefined" ) {
+				this.shipmentStatus.parcels.forEach( function ( parcel ) {
+					parcels.push( parcel.id );
+				});
+
+				link = woocommerce_admin.ajax_url + '?cache-buster=' + Math.random()  + '&action=woo_bg_speedy_print_labels&parcels=' + parcels.join('|');
+			}
+
+			return ( parcels.length ) ? link : '';
 		},
 		labelJSON() {
 			return JSON.stringify( this.labelData );
 		},
 		statuses() {
 			let statuses = [];
-			if ( this.shipmentStatus && this.shipmentStatus.label.trackingEvents.length ) {
-				this.shipmentStatus.label.trackingEvents.forEach( function ( status ) {
+			/*if ( this.shipmentStatus && this.shipmentStatus.trackingEvents.length ) {
+				this.shipmentStatus.trackingEvents.forEach( function ( status ) {
 					let image = '';
 					let time = new Date( status.time );
 					let destination = status.destinationDetails;
 					time = time.getDate() + "/" + ( time.getMonth() + 1 ) + "/" + time.getFullYear() + " " + time.getHours() + ":" + ('0'  + time.getMinutes() ).slice(-2) + ":" + ('0'  + time.getSeconds() ).slice(-2);
 
 					if ( status.destinationType === 'office' || status.destinationType === 'prepared' ) {
-						image = "//ee.econt.com/images/icons/trace_office.png";
+						image = "//ee.speedy.com/images/icons/trace_office.png";
 					} else if ( status.destinationType === 'courier_direction' ) {
-						image = "//ee.econt.com/images/icons/trace_line.png";
+						image = "//ee.speedy.com/images/icons/trace_line.png";
 					} else if ( status.destinationType === 'courier' ) {
-						image = "//ee.econt.com/images/icons/trace_courier.png";
+						image = "//ee.speedy.com/images/icons/trace_courier.png";
 					} else if ( status.destinationType === 'client' ) {
-						image = "//ee.econt.com/images/icons/trace_ok.png";
+						image = "//ee.speedy.com/images/icons/trace_ok.png";
 					} else if ( status.destinationType === 'return' ) {
-						image = "//ee.econt.com/images/icons/trace_return.png";
+						image = "//ee.speedy.com/images/icons/trace_return.png";
 					}
 
 					statuses.push({
@@ -374,15 +343,15 @@ export default {
 				});
 
 				statuses.reverse();
-			}
+			}*/
 			return statuses;
 		}
 	},
 	mounted() {
 		let _this = this;
 
-		if ( wooBg_econt.shipmentStatus ) {
-			this.shipmentStatus = wooBg_econt.shipmentStatus;
+		if ( wooBg_speedy.shipmentStatus ) {
+			this.shipmentStatus = wooBg_speedy.shipmentStatus;
 		}
 
 	  	this.document.on('change', 'input[name="label_size"]', function () {
@@ -390,52 +359,71 @@ export default {
 		});
 
 		this.types.forEach( function ( type ) {
-			if ( type.id == wooBg_econt.cookie_data.type ) {
+			if ( type.id == wooBg_speedy.cookie_data.type ) {
 				_this.type = type;
 			}
 		});
 
-		this.shipmentTypes.forEach( function ( type ) {
-			if ( type.id.toLowerCase() == wooBg_econt.label.shipmentType.toLowerCase() ) {
-				_this.shipmentType = type;
-			}
-		});
-
 		this.testsOptions.forEach( function ( option ) {
-			if ( option.id == wooBg_econt.testOption ) {
+			if ( option.id == wooBg_speedy.testOption ) {
 				_this.testOption = option;
 			}
 		});
 
-		if ( wooBg_econt.cookie_data.type == 'office' ) {
+		if ( wooBg_speedy.cookie_data.type == 'office' ) {
 			this.offices.forEach( function ( office ) {
-				if ( office.code == wooBg_econt.cookie_data.selectedOffice ) {
+				if ( office.id == wooBg_speedy.cookie_data.selectedOffice ) {
 					_this.office = office;
 				}
 			});
 		} else {
-			this.streetNumber = wooBg_econt.cookie_data.streetNumber;
-			this.other = wooBg_econt.cookie_data.other;
+			this.streetNumber = wooBg_speedy.cookie_data.streetNumber;
+			this.other = wooBg_speedy.cookie_data.other;
 			this.streets.forEach( function ( street ) {
-				if ( street.id == wooBg_econt.cookie_data.selectedAddress.id ) {
+				if ( street.orig_key == wooBg_speedy.cookie_data.selectedAddress.orig_key ) {
 					_this.street = street;
 				}
 			});
 		}
 
-		this.paymentBy = this.paymentByTypes[1];
+		this.paymentBy = this.paymentByTypes[0];
 
-		if ( wooBg_econt.label.paymentReceiverAmount ) {
+		if ( wooBg_speedy.cookie_data.fixed_price ) {
 			this.paymentBy = this.paymentByTypes[2];
-		} else if ( wooBg_econt.label.paymentReceiverMethod ) {
-			this.paymentBy = this.paymentByTypes[0];
+		} else if (  wooBg_speedy.label.payment.courierServicePayer === 'SENDER'  ) {
+			this.paymentBy = this.paymentByTypes[1];
 		}
 
-		if ( wooBg_econt.label.services.declaredValueAmount ) {
-			this.declaredValue = wooBg_econt.label.services.declaredValueAmount;
+		if ( typeof( wooBg_speedy.label.service.additionalServices.declaredValue ) !== 'undefined' ) {
+			this.declaredValue = wooBg_speedy.label.service.additionalServices.declaredValue.amount;
 		}
 	},
 	methods: {
+		asyncFind: debounce( function( query ) {
+			if ( !query ) {
+				return;
+			}
+
+			this.isLoading = true;
+			let data = {
+				query,
+				action: 'woo_bg_speedy_search_address',
+				country: wooBg_speedy.cookie_data.country,
+				state: wooBg_speedy.cookie_data.state,
+				city: wooBg_speedy.cookie_data.city
+			}
+
+			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
+				.then( response => {
+					if ( response.data.data.cities ) {
+						this.streets = cloneDeep( response.data.data.cities );
+					} else if ( response.data.data.streets ) {
+						this.streets = cloneDeep( response.data.data.streets );
+					}
+
+					this.isLoading = false
+				});
+		}, 200 ),
 		onCopy: function (e) {
 	      alert( this.i18n.copyLabelDataMessage );
 	    },
@@ -449,17 +437,16 @@ export default {
 			let data = {
 				type: this.type,
 				label_data: this.labelData,
-				shipmentType: this.shipmentType,
 				office: this.office,
 				street: this.street,
 				streetNumber: this.streetNumber,
 				other: this.other,
 				paymentBy: this.paymentBy,
 				testOption: this.testOption,
-				cookie_data: wooBg_econt.cookie_data,
-				orderId: wooBg_econt.orderId,
+				cookie_data: this.cookie_data,
+				orderId: wooBg_speedy.orderId,
 				declaredValue: this.declaredValue,
-				action: 'woo_bg_econt_generate_label',
+				action: 'woo_bg_speedy_generate_label',
 			};
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
@@ -486,9 +473,9 @@ export default {
 			_this.message = '';
 
 			let data = {
-				orderId: wooBg_econt.orderId,
+				orderId: wooBg_speedy.orderId,
 				shipmentStatus: this.shipmentStatus,
-				action: 'woo_bg_econt_update_shipment_status',
+				action: 'woo_bg_speedy_update_shipment_status',
 			};
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
@@ -498,7 +485,7 @@ export default {
 					if ( response.data.data.message ) {
 						_this.message = response.data.data.message;
 					} else {
-						_this.shipmentStatus.label = cloneDeep( response.data.data.shipmentStatus, true );
+						_this.shipmentStatus = cloneDeep( response.data.data.shipmentStatus, true );
 						_this.size = 'refresh';
 
 						setTimeout(function() {
@@ -515,9 +502,9 @@ export default {
 			_this.message = '';
 
 			let data = {
-				orderId: wooBg_econt.orderId,
+				orderId: wooBg_speedy.orderId,
 				shipmentStatus: this.shipmentStatus,
-				action: 'woo_bg_econt_delete_label',
+				action: 'woo_bg_speedy_delete_label',
 			};
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )

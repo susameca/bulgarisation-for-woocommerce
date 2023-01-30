@@ -17,10 +17,8 @@ class Econt {
 		add_action( 'wp_ajax_nopriv_woo_bg_econt_generate_label', array( __CLASS__, 'generate_label' ) );
 
 		add_action( 'wp_ajax_woo_bg_econt_delete_label', array( __CLASS__, 'delete_label' ) );
-		add_action( 'wp_ajax_nopriv_woo_bg_econt_delete_label', array( __CLASS__, 'delete_label' ) );
 
 		add_action( 'wp_ajax_woo_bg_econt_update_shipment_status', array( __CLASS__, 'update_shipment_status' ) );
-		add_action( 'wp_ajax_nopriv_woo_bg_econt_update_shipment_status', array( __CLASS__, 'update_shipment_status' ) );
 	}
 
 	public static function admin_enqueue_scripts() {

@@ -5,27 +5,29 @@ defined( 'ABSPATH' ) || exit;
 
 class Speedy {
 	const BASE_ENDPOINT = 'https://api.speedy.bg/v1/';
-    const CALC_LABELS_ENDPOINT = 'calculate';
-	const CREATE_LABELS_ENDPOINT = 'create_wb';
-	const CANCEL_LABELS_ENDPOINT = 'cancel_wb';
-    const SHIPMENT_STATUS_ENDPOINT = 'Shipments/ShipmentService.getShipmentStatuses.json';
-    const CACHE_FOLDER = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'woo-bg' . DIRECTORY_SEPARATOR . 'speedy' . DIRECTORY_SEPARATOR;
+	const CALC_LABELS_ENDPOINT = 'calculate';
+	const CREATE_LABELS_ENDPOINT = 'shipment';
+	const UPDATE_LABELS_ENDPOINT = 'shipment/update';
+	const DELETE_LABELS_ENDPOINT = 'shipment/cancel';
+	const PRINT_LABELS_ENDPOINT = 'print';
+	const SHIPMENT_STATUS_ENDPOINT = 'Shipments/ShipmentService.getShipmentStatuses.json';
+	const CACHE_FOLDER = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'woo-bg' . DIRECTORY_SEPARATOR . 'speedy' . DIRECTORY_SEPARATOR;
 
-    private $env = '';
-    private $user = '';
-    private $password = '';
-    private $base_endpoint;
+	private $env = '';
+	private $user = '';
+	private $password = '';
+	private $base_endpoint;
 
 	public function __construct() {
 		$this->load_user();
 		$this->load_password();
 	}
 
-	public function api_call( $endpoint, $args ) {
+	public function api_call( $endpoint, $args, $return_plain = false ) {
 		$args = array_merge(
 			array(
 				"userName" => $this->get_user(),
-    			"password" => $this->get_password(),
+				"password" => $this->get_password(),
 			),
 			$args
 		);
@@ -37,6 +39,10 @@ class Speedy {
 			'body' => json_encode( $args ),
 		) );
 
+		if ( $return_plain ) {
+			return wp_remote_retrieve_body( $request );
+		}
+		
 		return json_decode( wp_remote_retrieve_body( $request ), 1 );
 	}
 

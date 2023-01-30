@@ -17,10 +17,8 @@ class CVC {
 		add_action( 'wp_ajax_nopriv_woo_bg_cvc_generate_label', array( __CLASS__, 'generate_label' ) );
 
 		add_action( 'wp_ajax_woo_bg_cvc_delete_label', array( __CLASS__, 'delete_label' ) );
-		add_action( 'wp_ajax_nopriv_woo_bg_cvc_delete_label', array( __CLASS__, 'delete_label' ) );
 
 		add_action( 'wp_ajax_woo_bg_cvc_update_actions', array( __CLASS__, 'update_actions' ) );
-		add_action( 'wp_ajax_nopriv_woo_bg_cvc_update_actions', array( __CLASS__, 'update_actions' ) );
 	}
 
 	public static function admin_enqueue_scripts() {
@@ -377,7 +375,7 @@ class CVC {
 		if ( $payment_by['id'] === 'fixed'  ) {
 			$label['payer'] = 'sender';
 
-			$label = self::update_order_shipping_price( $label, $order_id, $label );
+			self::update_order_shipping_price( '', $order_id, $label );
 		} else {
 			$label['payer'] = $payment_by['id'];
 		}

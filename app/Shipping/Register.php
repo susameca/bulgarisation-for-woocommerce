@@ -4,6 +4,8 @@ use Woo_BG\Admin\Econt as Econt_Admin;
 use Woo_BG\Cron\Econt as Econt_Cron;
 use Woo_BG\Admin\CVC as CVC_Admin;
 use Woo_BG\Cron\CVC as CVC_Cron;
+use Woo_BG\Admin\Speedy as Speedy_Admin;
+use Woo_BG\Cron\Speedy as Speedy_Cron;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -50,19 +52,19 @@ class Register {
 			return;
 		}
 
-		//new Econt_Cron();
+		new Speedy_Cron();
 		new Speedy\Address();
 		new Speedy\Office();
-		//new Econt_Admin();
+		new Speedy_Admin();
 
 		add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'register_speedy_method' ) );
 		add_action( 'woocommerce_after_checkout_validation', array( 'Woo_BG\Shipping\Speedy\Method', 'validate_speedy_method' ), 20, 2 );
 		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\Speedy\Method', 'save_label_data_to_order' ), 20, 2 );
 
-		/*if ( woo_bg_get_option( 'speedy', 'label_after_checkout' ) === 'yes' ) {
-			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\Econt', 'generate_label_after_order_generated' ), 25 );
-			add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\Econt\Method', 'add_label_number_to_email' ), 1, 4 );
-		}*/
+		if ( woo_bg_get_option( 'speedy', 'label_after_checkout' ) === 'yes' ) {
+			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\Speedy', 'generate_label_after_order_generated' ), 25 );
+			add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\Speedy\Method', 'add_label_number_to_email' ), 1, 4 );
+		}
 
 		add_action( 'wp_enqueue_scripts', array( 'Woo_BG\Shipping\Speedy\Method', 'enqueue_scripts' ) );
 	}

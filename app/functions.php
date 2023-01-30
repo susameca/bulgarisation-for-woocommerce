@@ -146,24 +146,26 @@ function woo_bg_get_vat_from_order( $order ) {
 function woo_bg_return_array_for_select( $array, $user_value_for_id = false, $additional_attributes = array() ) {
 	$new_array = [];
 
-	foreach ( $array as $key => $value ) {
-		$id = $key;
+	if ( !empty( $array ) ) {
+		foreach ( $array as $key => $value ) {
+			$id = $key;
 
-		if ( $user_value_for_id ) {
-			$id = $value;
+			if ( $user_value_for_id ) {
+				$id = $value;
+			}
+
+			$item = array(
+				'id' => $id,
+				'orig_key' => $key,
+				'label' => $value,
+			);
+
+			if ( !empty( $additional_attributes ) ) {
+				$item = array_merge( $item, $additional_attributes );
+			}
+
+			$new_array[] = $item;
 		}
-
-		$item = array(
-			'id' => $id,
-			'orig_key' => $key,
-			'label' => $value,
-		);
-
-		if ( !empty( $additional_attributes ) ) {
-			$item = array_merge( $item, $additional_attributes );
-		}
-
-		$new_array[] = $item;
 	}
 
 	return $new_array;

@@ -6,7 +6,8 @@
     "cvc-admin",
     "econt-frontend",
     "econt-admin",
-    "speedy-frontend"
+    "speedy-frontend",
+    "speedy-admin"
   ],
   "variables": {
     "color": {
