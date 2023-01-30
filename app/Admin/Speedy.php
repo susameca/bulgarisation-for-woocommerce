@@ -17,9 +17,7 @@ class Speedy {
 		add_action( 'wp_ajax_nopriv_woo_bg_speedy_generate_label', array( __CLASS__, 'generate_label' ) );
 
 		add_action( 'wp_ajax_woo_bg_speedy_delete_label', array( __CLASS__, 'delete_label' ) );
-
 		add_action( 'wp_ajax_woo_bg_speedy_update_shipment_status', array( __CLASS__, 'update_shipment_status' ) );
-
 		add_action( 'wp_ajax_woo_bg_speedy_print_labels', array( __CLASS__, 'print_labels_endpoint' ) );
 	}
 
@@ -67,6 +65,7 @@ class Speedy {
 					$label_data = array();
 					$cookie_data = $theorder->get_meta( 'woo_bg_speedy_cookie_data' );
 					$shipment_status = $theorder->get_meta( 'woo_bg_speedy_shipment_status' );
+					$operations = $theorder->get_meta( 'woo_bg_speedy_operations' );
 
 					if ( $label = $theorder->get_meta( 'woo_bg_speedy_label' ) ) {
 						$label_data = $label;
@@ -85,6 +84,7 @@ class Speedy {
 					wp_localize_script( 'woo-bg-js-admin', 'wooBg_speedy', array(
 						'label' => $label_data,
 						'shipmentStatus' => $shipment_status,
+						'operations' => $operations,
 						'cookie_data' => $cookie_data,
 						'offices' => self::get_offices( $cookie_data ),
 						'streets' => self::get_streets( $cookie_data ),
@@ -186,6 +186,7 @@ class Speedy {
 		) );
 
 		$order->update_meta_data( 'woo_bg_speedy_shipment_status', '' );
+		$order->update_meta_data( 'woo_bg_speedy_operations', '' );
 		$order->save();
 		
 		wp_send_json_success( $response );
@@ -198,21 +199,17 @@ class Speedy {
 		$order = wc_get_order( $order_id );
 		$shipment_status = $_REQUEST['shipmentStatus'];
 		$data = array();
-		$order_shipment_status = $order->get_meta( 'woo_bg_speedy_shipment_status' );
 
-		$response = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::SHIPMENT_STATUS_ENDPOINT, array(
-			'shipmentNumbers' => [ $shipment_status['label']['shipmentNumber'] ]
+		$response = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::TRACK_ENDPOINT, array(
+			'parcels' => [ [ 'id' => $shipment_status['id'] ] ]
 		) );
 
-		$status = array_shift( $response );
-		$status = array_shift( $status );
-		$data['shipmentStatus'] = $status['status'];
-		$order_shipment_status['label'] = $data['shipmentStatus'];
+		$order_shipment_status = $response['parcels'][0]['operations'];
 		
-		$order->update_meta_data( 'woo_bg_speedy_shipment_status', $order_shipment_status );
+		$order->update_meta_data( 'woo_bg_speedy_operations', $order_shipment_status );
 		$order->save();
 
-		wp_send_json_success( $data );
+		wp_send_json_success( array( 'operations' => $order_shipment_status ) );
 		wp_die();
 	}
 
@@ -235,7 +232,7 @@ class Speedy {
 	public static function generate_label_after_order_generated( $order_id ) {
 		$order = wc_get_order( $order_id );
 		$label = $order->get_meta( 'woo_bg_speedy_label' );
-		
+
 		if ( !$label ) {
 			return;
 		}

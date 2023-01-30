@@ -10,7 +10,7 @@ class Speedy {
 	const UPDATE_LABELS_ENDPOINT = 'shipment/update';
 	const DELETE_LABELS_ENDPOINT = 'shipment/cancel';
 	const PRINT_LABELS_ENDPOINT = 'print';
-	const SHIPMENT_STATUS_ENDPOINT = 'Shipments/ShipmentService.getShipmentStatuses.json';
+	const TRACK_ENDPOINT = 'track';
 	const CACHE_FOLDER = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'woo-bg' . DIRECTORY_SEPARATOR . 'speedy' . DIRECTORY_SEPARATOR;
 
 	private $env = '';
@@ -42,7 +42,7 @@ class Speedy {
 		if ( $return_plain ) {
 			return wp_remote_retrieve_body( $request );
 		}
-		
+
 		return json_decode( wp_remote_retrieve_body( $request ), 1 );
 	}
 

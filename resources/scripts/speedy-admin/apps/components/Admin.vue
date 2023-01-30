@@ -193,7 +193,7 @@
 						</p>
 
 						<p class="form-field form-field-wide"> 
-							<button @click="deleteLabel" name="save" type="submit" :value="i18n.deleteLabel" class="button-secondary">{{i18n.deleteLabel}}</button>
+							<button v-if="shipmentStatus" @click="deleteLabel" name="save" type="submit" :value="i18n.deleteLabel" class="button-secondary">{{i18n.deleteLabel}}</button>
 
 							<a v-clipboard:copy="labelJSON" v-clipboard:success="onCopy" class="button-secondary">{{i18n.copyLabelData}}</a> 
 						</p>
@@ -220,15 +220,13 @@
 					<thead>
 						<tr>
 							<th> {{i18n.time}} </th>
-							<th> {{i18n.event}} </th>
 							<th> {{i18n.details}} </th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="(status, key) in statuses">
 							<th> {{status.time}} </th>
-							<th> <img :src="status.image"> </th>
-							<th> {{status.destination}} </th>
+							<th> {{status.details}} </th>
 						</tr>
 					</tbody>
 				</table>
@@ -293,7 +291,7 @@ export default {
 			i18n: wooBg_speedy.i18n,
 			cookie_data: cloneDeep( wooBg_speedy.cookie_data ),
 			declaredValue: '',
-			shipmentActions : [],
+			operations : [],
 		}
 	},
 	computed: {
@@ -316,34 +314,21 @@ export default {
 		},
 		statuses() {
 			let statuses = [];
-			/*if ( this.shipmentStatus && this.shipmentStatus.trackingEvents.length ) {
-				this.shipmentStatus.trackingEvents.forEach( function ( status ) {
-					let image = '';
-					let time = new Date( status.time );
-					let destination = status.destinationDetails;
-					time = time.getDate() + "/" + ( time.getMonth() + 1 ) + "/" + time.getFullYear() + " " + time.getHours() + ":" + ('0'  + time.getMinutes() ).slice(-2) + ":" + ('0'  + time.getSeconds() ).slice(-2);
 
-					if ( status.destinationType === 'office' || status.destinationType === 'prepared' ) {
-						image = "//ee.speedy.com/images/icons/trace_office.png";
-					} else if ( status.destinationType === 'courier_direction' ) {
-						image = "//ee.speedy.com/images/icons/trace_line.png";
-					} else if ( status.destinationType === 'courier' ) {
-						image = "//ee.speedy.com/images/icons/trace_courier.png";
-					} else if ( status.destinationType === 'client' ) {
-						image = "//ee.speedy.com/images/icons/trace_ok.png";
-					} else if ( status.destinationType === 'return' ) {
-						image = "//ee.speedy.com/images/icons/trace_return.png";
-					}
+			if ( this.operations.length ) {
+				this.operations.forEach( function ( status ) {
+					let details = status.description + ' - ' + status.comment;
+					let time = new Date( status.dateTime ).toLocaleString();
 
 					statuses.push({
 						time,
-						image,
-						destination,
+						details,
 					} );
 				});
 
 				statuses.reverse();
-			}*/
+			}
+
 			return statuses;
 		}
 	},
@@ -396,6 +381,10 @@ export default {
 
 		if ( typeof( wooBg_speedy.label.service.additionalServices.declaredValue ) !== 'undefined' ) {
 			this.declaredValue = wooBg_speedy.label.service.additionalServices.declaredValue.amount;
+		}
+
+		if ( wooBg_speedy.operations ) {
+			this.operations = wooBg_speedy.operations;
 		}
 	},
 	methods: {
@@ -457,11 +446,6 @@ export default {
 					} else {
 						_this.shipmentStatus = cloneDeep( response.data.data.shipmentStatus, true );
 						_this.labelData = cloneDeep( response.data.data.label, true );
-						_this.size = 'refresh';
-
-						setTimeout(function() {
-							_this.document.find('input[name="label_size"]:checked').trigger('change');
-						}, 10);
 					}
 				});
 		},
@@ -485,12 +469,7 @@ export default {
 					if ( response.data.data.message ) {
 						_this.message = response.data.data.message;
 					} else {
-						_this.shipmentStatus = cloneDeep( response.data.data.shipmentStatus, true );
-						_this.size = 'refresh';
-
-						setTimeout(function() {
-							_this.document.find('input[name="label_size"]:checked').trigger('change');
-						}, 10);
+						_this.operations = cloneDeep( response.data.data.operations, true );
 					}
 				});
 		},
@@ -511,12 +490,8 @@ export default {
 				.then(function( response ) {
 
 					_this.shipmentStatus = '';
+					_this.operations = '';
 					_this.loading = false;
-					_this.size = 'refresh';
-
-					setTimeout(function() {
-						_this.document.find('input[name="label_size"]:checked').trigger('change');
-					}, 10);
 				});
 		},
 	}
