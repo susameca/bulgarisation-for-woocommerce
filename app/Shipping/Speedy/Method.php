@@ -194,9 +194,6 @@ class Method extends \WC_Shipping_Method {
 
 		$request = $this->container[ Client::SPEEDY ]->api_call( $this->container[ Client::SPEEDY ]::CALC_LABELS_ENDPOINT, $request_body );
 
-		//var_dump( $request );
-
-
 		if ( !isset( $request ) ) {
 			$data['errors'] = __( 'Calculation failed. Please try again.', 'woo-bg' );
 		} else if ( isset( $request['error'] ) ) {
@@ -405,6 +402,10 @@ class Method extends \WC_Shipping_Method {
 			);
 		}
 
+		if ( empty( $services['additionalServices'] ) ) {
+		    unset( $services['additionalServices'] );
+		}
+
 		return array(
 			'service' => $services,
 		);
@@ -476,7 +477,7 @@ class Method extends \WC_Shipping_Method {
 			foreach ( $order->get_items( 'shipping' ) as $shipping ) {
 				if ( $shipping['method_id'] === 'woo_bg_speedy' ) {
 					$cookie_data = '';
-					
+
 					if ( WC()->session->get( 'woo-bg-speedy-label' ) ) {
 						$order->update_meta_data( 'woo_bg_speedy_label', WC()->session->get( 'woo-bg-speedy-label' ) );
 						WC()->session->__unset( 'woo-bg-speedy-label' );

@@ -405,6 +405,10 @@ class Speedy {
 				'returnShipmentPayer' => 'RECIPIENT' 
 			);
 		}
+
+		if ( empty( $label['service']['additionalServices'] ) ) {
+		    unset( $label['service']['additionalServices'] );
+		}
 			
 		return $label;
 	}
