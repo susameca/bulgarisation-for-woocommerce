@@ -72,6 +72,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Add Speedy shipping method
 Econt: Optimize address search
 
+= 2.3.4 =
+Invoice: Fix generation
+
 = 2.3.3 =
 Econt: Fix receiver city
 Econt: Fix save office after choose from the office locator
