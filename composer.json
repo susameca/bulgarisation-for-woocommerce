@@ -8,7 +8,8 @@
         "ext-soap": "*",
         "setasign/tfpdf": "1.32",
         "chillerlan/php-qrcode": "^4.3",
-        "ddeboer/vatin": "^2.2"
+        "ddeboer/vatin": "^2.2",
+        "htmlburger/carbon-csv": "^1.0"
     },
     "extra": {
         "installer-paths": {

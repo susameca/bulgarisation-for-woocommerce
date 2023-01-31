@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2023-01-30 20:50+0000\n"
+"PO-Revision-Date: 2023-01-31 00:09+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -54,7 +54,7 @@ msgstr "Допълнителни API"
 
 #: app/Admin/CVC.php:121 app/Admin/Econt.php:120 app/Admin/Speedy.php:121
 #: app/Admin/Tabs/CVC_Tab.php:94 app/Admin/Tabs/Econt_Tab.php:103
-#: app/Admin/Tabs/Speedy_Tab.php:92 app/Front_End/Checkout/Company.php:69
+#: app/Admin/Tabs/Speedy_Tab.php:91 app/Front_End/Checkout/Company.php:69
 #: app/Shipping/CVC/Method.php:136 app/Shipping/Econt/Method.php:126
 #: app/Shipping/Speedy/Method.php:133
 msgid "Address"
@@ -134,7 +134,7 @@ msgstr "По еmail ( %s )"
 msgid "By Phone ( %s )"
 msgstr "По телефон ( %s )"
 
-#: app/Shipping/CVC/Method.php:233 app/Shipping/Speedy/Method.php:201
+#: app/Shipping/CVC/Method.php:233 app/Shipping/Speedy/Method.php:198
 msgid "Calculation failed. Please try again."
 msgstr "Неуспешно калкулиране. Моля опитайте отново."
 
@@ -185,7 +185,7 @@ msgstr "Настройки на \"Страница за поръчка\""
 msgid "Choose"
 msgstr "Избери"
 
-#: app/Admin/Tabs/Econt_Tab.php:135 app/Admin/Tabs/Speedy_Tab.php:120
+#: app/Admin/Tabs/Econt_Tab.php:135 app/Admin/Tabs/Speedy_Tab.php:119
 msgid "Choose a city and save in order to show offices."
 msgstr "Избери град и запази за да се покажат офиси."
 
@@ -194,7 +194,7 @@ msgid "Choose cash on delivery agreement"
 msgstr "Избери споразумение за наложен платеж"
 
 #: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:128
-#: app/Admin/Tabs/Speedy_Tab.php:113
+#: app/Admin/Tabs/Speedy_Tab.php:112
 msgid "City"
 msgstr "Град"
 
@@ -516,15 +516,15 @@ msgstr "Събитие:"
 #| msgid ""
 #| "Everything necessary for your online store to work in Bulgaria and "
 #| "according to Bulgarian regulations. Includes a light regime for Ordinance "
-#| "- H-18 and Econt shipping method."
+#| "- H-18 and Econt + CVC shipping method."
 msgid ""
 "Everything necessary for your online store to work in Bulgaria and according "
 "to Bulgarian regulations. Includes a light regime for Ordinance - H-18 and "
-"Econt + CVC shipping method."
+"Econt,CVC and Speedy shipping method."
 msgstr ""
 "Всичко необходимо за вашият онлайн магазин да работи в България и според "
 "Българските разпоредби. Включва облекчен режим за Наредба - H-18 и метод на "
-"доставка с Еконт и CVC."
+"доставка с Еконт, CVC и Спиди."
 
 #: app/Admin/Tabs/Export_Tab.php:8
 msgid "Export"
@@ -599,7 +599,7 @@ msgid "Free shipping over total cart price."
 msgstr "Безплатна доставка над сума на количката "
 
 #: app/Admin/Tabs/CVC_Tab.php:134 app/Admin/Tabs/Econt_Tab.php:175
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:60 app/Admin/Tabs/Speedy_Tab.php:160
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:60 app/Admin/Tabs/Speedy_Tab.php:159
 msgid "General"
 msgstr "Главни"
 
@@ -731,7 +731,7 @@ msgid "Label data"
 msgstr "Данни за товарителница"
 
 #: app/Shipping/CVC/Method.php:545 app/Shipping/Econt/Method.php:508
-#: app/Shipping/Speedy/Method.php:542
+#: app/Shipping/Speedy/Method.php:543
 #, php-format
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
@@ -838,7 +838,7 @@ msgstr "от"
 #: app/Admin/CVC.php:120 app/Admin/Econt.php:119 app/Admin/Speedy.php:120
 #: app/Admin/Tabs/CVC_Tab.php:90 app/Admin/Tabs/CVC_Tab.php:112
 #: app/Admin/Tabs/Econt_Tab.php:99 app/Admin/Tabs/Econt_Tab.php:132
-#: app/Admin/Tabs/Speedy_Tab.php:88 app/Admin/Tabs/Speedy_Tab.php:117
+#: app/Admin/Tabs/Speedy_Tab.php:87 app/Admin/Tabs/Speedy_Tab.php:116
 #: app/Shipping/CVC/Method.php:135 app/Shipping/Econt/Method.php:125
 #: app/Shipping/Speedy/Method.php:132
 msgid "Office"
@@ -944,7 +944,7 @@ msgid "Place of transaction"
 msgstr "Място на сделката"
 
 #: app/Shipping/CVC/Method.php:468 app/Shipping/Econt/Method.php:431
-#: app/Shipping/Speedy/Method.php:465
+#: app/Shipping/Speedy/Method.php:466
 msgid "Please choose delivery option!"
 msgstr "Моля изберете начин на доставка!"
 
@@ -1073,7 +1073,7 @@ msgid "Select Address"
 msgstr "Изберете адрес"
 
 #: app/Admin/Tabs/CVC_Tab.php:96 app/Admin/Tabs/Econt_Tab.php:105
-#: app/Admin/Tabs/Speedy_Tab.php:94
+#: app/Admin/Tabs/Speedy_Tab.php:93
 msgid ""
 "Select from where you will send the packages and save to show more options."
 msgstr ""
@@ -1122,7 +1122,7 @@ msgstr "Изпратете известие на клиента за доста�
 
 #: app/Admin/Tabs/CVC_Tab.php:96 app/Admin/Tabs/CVC_Tab.php:144
 #: app/Admin/Tabs/Econt_Tab.php:105 app/Admin/Tabs/Econt_Tab.php:185
-#: app/Admin/Tabs/Speedy_Tab.php:94 app/Admin/Tabs/Speedy_Tab.php:170
+#: app/Admin/Tabs/Speedy_Tab.php:93 app/Admin/Tabs/Speedy_Tab.php:169
 msgid "Send From"
 msgstr "Изпрати от"
 
@@ -1183,7 +1183,7 @@ msgstr ""
 "Някои от поръчките не бяха добавени, защото метода на плащане не беше "
 "намерен или е изключен. Списък с ид на поръчките: %s"
 
-#: app/Shipping/Speedy/Method.php:463
+#: app/Shipping/Speedy/Method.php:464
 #, php-format
 msgid "Speedy - %s"
 msgstr "Спиди - %s"
@@ -1340,7 +1340,7 @@ msgid "Total due"
 msgstr "Всичко"
 
 #: app/Shipping/CVC/Method.php:549 app/Shipping/Econt/Method.php:512
-#: app/Shipping/Speedy/Method.php:546
+#: app/Shipping/Speedy/Method.php:547
 msgid "Track your order."
 msgstr "Проследи пратката."
 
@@ -1365,7 +1365,7 @@ msgstr "Обнови статуса на пратката"
 msgid "Username"
 msgstr "Потребителско име"
 
-#: app/Admin/Tabs/Speedy_Tab.php:208
+#: app/Admin/Tabs/Speedy_Tab.php:207
 msgid "Username and password are incorrect."
 msgstr "Потребителско име и парола са невалидни."
 

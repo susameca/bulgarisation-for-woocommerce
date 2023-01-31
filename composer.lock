@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62412db4022e6d90c01f4054e4b42c08",
+    "content-hash": "b68d35d967ace53d868aae8fab83e62a",
     "packages": [
         {
             "name": "chillerlan/php-qrcode",
@@ -255,6 +255,42 @@
                 "source": "https://github.com/escapeboy/nra-audit-generator/tree/1.1.1"
             },
             "time": "2022-10-11T15:02:43+00:00"
+        },
+        {
+            "name": "htmlburger/carbon-csv",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/htmlburger/carbon-csv.git",
+                "reference": "a101dc01363e19b2bd0b14ed627f1d34b8b55566"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/htmlburger/carbon-csv/zipball/a101dc01363e19b2bd0b14ed627f1d34b8b55566",
+                "reference": "a101dc01363e19b2bd0b14ed627f1d34b8b55566",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4.0 || ^7.0"
+            },
+            "require-dev": {
+                "illuminate/support": "^5.4",
+                "phpunit/phpunit": "^6.1",
+                "symfony/var-dumper": "^3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Carbon_CSV\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Simple CSV file parser",
+            "support": {
+                "issues": "https://github.com/htmlburger/carbon-csv/issues",
+                "source": "https://github.com/htmlburger/carbon-csv/tree/master"
+            },
+            "time": "2018-05-09T12:03:27+00:00"
         },
         {
             "name": "pimple/pimple",

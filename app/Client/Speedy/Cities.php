@@ -2,11 +2,13 @@
 namespace Woo_BG\Client\Speedy;
 use Woo_BG\Container\Client;
 use Woo_BG\Transliteration;
+use \Carbon_CSV\CsvFile;
+use \Carbon_CSV\Exception as CsvException;
 
 defined( 'ABSPATH' ) || exit;
 
 class Cities {
-    const CITIES_ENDPOINT = 'location/site/';
+    const CITIES_ENDPOINT = 'location/site/csv/';
 
     private $cities = [];
     private $container;
@@ -20,31 +22,42 @@ class Cities {
 			wp_mkdir_p( $this->container[ Client::SPEEDY ]::CACHE_FOLDER );
 		}
 
-		$cities_file = $this->container[ Client::SPEEDY ]::CACHE_FOLDER . 'cities-' . $country_id . "-" . $region . '.json';
-		$cities = '';
+		$cities_by_region_file = $this->container[ Client::SPEEDY ]::CACHE_FOLDER . 'cities-' . $country_id . '-' . $region . '.json';
 
-		if ( file_exists( $cities_file ) ) {
-			$cities = file_get_contents( $cities_file );
-		}
+		if ( file_exists( $cities_by_region_file ) ) {
+			$cities_by_region = file_get_contents( $cities_by_region_file );
+		} else {
+			$cities_file = $this->container[ Client::SPEEDY ]::CACHE_FOLDER . 'cities-' . $country_id . '.csv';
+			$cities = '';
 
-		if ( !$cities ) {
-			$api_call = $this->container[ Client::SPEEDY ]->api_call( self::CITIES_ENDPOINT, array( 
-				'countryId' => $country_id, 
-				'region' => $region, 
-			) );
-
-			if ( is_array( $api_call ) ) {
-				if ( $this->container[ Client::SPEEDY ]::validate_access( $api_call ) ) {
-					if ( !empty( $api_call['sites'] ) ) {
-						$cities = json_encode( $api_call['sites'] );
-						
-						file_put_contents( $cities_file, $cities );
-					}
-				}
+			if ( file_exists( $cities_file ) ) {
+				$csv = new CsvFile( $cities_file );
 			}
+
+			$api_call = $this->container[ Client::SPEEDY ]->api_call( self::CITIES_ENDPOINT . $country_id, array(), 1 );
+
+			file_put_contents( $cities_file, $api_call );
+
+			try {
+			    $csv = new CsvFile( $cities_file );
+			} catch (CsvException $e) { 
+				$this->container[ Client::SPEEDY ]::clear_cache_folder();
+
+				return [];
+			}
+
+			$csv->use_first_row_as_header();
+
+			$cities_by_region = array_filter( $csv->to_array(), function( $city ) use ( $region ) {
+				return ( $city['regionEn'] === $region );
+			} );
+
+			$cities_by_region = json_encode( $cities_by_region );
+
+			file_put_contents( $cities_by_region_file, $cities_by_region );
 		}
 
-		$cities = json_decode( $cities, 1 );
+		$cities = json_decode( $cities_by_region, 1 );
 
 		$this->set_cities( $region, $cities );
 
