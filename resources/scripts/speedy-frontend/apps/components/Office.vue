@@ -218,6 +218,7 @@ export default {
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
 				selectedOffice: this.selectedOffice.id,
+				selectedOfficeType: this.selectedOffice.type,
 				state: this.state,
 				city: this.city,
 				country: this.countryField.val(),

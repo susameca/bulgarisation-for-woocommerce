@@ -39,6 +39,8 @@ class Office {
 		$args = [];
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$raw_city = sanitize_text_field( $_POST['city'] );
+		$states = woo_bg_return_bg_states();
+		$state = $states[ $raw_state ];
 
 		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state );
 

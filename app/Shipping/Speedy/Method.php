@@ -185,10 +185,7 @@ class Method extends \WC_Shipping_Method {
 		
 		$request_body = apply_filters( 'woo_bg/speedy/calculate_label', $this->generate_label(), $this );
 
-
-		if ( isset( $request_body['label']['senderOfficeCode'] ) ) {
-			unset( $request_body['label']['senderAddress'] );
-		}
+		//var_dump( $request_body );
 
 		WC()->session->set( 'woo-bg-speedy-label' , $request_body );
 
@@ -388,7 +385,10 @@ class Method extends \WC_Shipping_Method {
 			);
 		}
 
-		if ( $this->test !== 'no' ) {
+		if ( 
+			$this->test !== 'no' &&  
+			! ( isset( $this->cookie_data['selectedOfficeType'] ) && $this->cookie_data['selectedOfficeType'] == 'APT' ) 
+		) {
 			if ( $this->test == 'review' ) {
 				$test = 'OPEN';
 			} else if ( $this->test == 'test' ) {
