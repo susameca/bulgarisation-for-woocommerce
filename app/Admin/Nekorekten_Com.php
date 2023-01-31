@@ -74,10 +74,13 @@ class Nekorekten_Com {
 		$email = $theorder->get_billing_email();
 		$title = __( 'There was some error in one of the reports.', 'woo-bg' );
 		$reports = self::get_all_reports( $theorder );
-
+		
 		if ( $reports[ 'count' ] ) {
 			$title = __( 'We have found negative reports about this customer.', 'woo-bg' );
-		} else if ( $reports['reports_by_phone'][ 'server' ]['httpCode'] === 200 && $reports['reports_by_email'][ 'server' ]['httpCode'] === 200 ) {
+		} else if ( 
+			( !empty( $reports['reports_by_phone'] ) && $reports['reports_by_phone'][ 'server' ]['httpCode'] === 200 ) && 
+			( !empty( $reports['reports_by_email'] ) && $reports['reports_by_email'][ 'server' ]['httpCode'] === 200)
+		) {
 			$title = __( 'No reports was found.', 'woo-bg' );
 		} 
 		?>
@@ -96,7 +99,7 @@ class Nekorekten_Com {
 						<h3><?php printf( __( 'By Phone ( %s )', 'woo-bg' ), $phone ) ?></h3>
 
 						<?php
-						if ( $reports['reports_by_phone'][ 'server' ][ 'httpCode' ] == 200 ) {
+						if ( !empty( $reports['reports_by_phone'] ) && $reports['reports_by_phone'][ 'server' ][ 'httpCode' ] == 200 ) {
 							self::meta_box_success( $reports['reports_by_phone'] );
 						} else {
 							self::meta_box_error( $reports['reports_by_phone'] );
@@ -108,7 +111,7 @@ class Nekorekten_Com {
 						<h3><?php printf( __( 'By Email ( %s )', 'woo-bg' ), $email ) ?></h3>
 
 						<?php  
-						if ( $reports['reports_by_email'][ 'server' ][ 'httpCode' ] == 200 ) {
+						if ( !empty( $reports['reports_by_email'] ) && $reports['reports_by_email'][ 'server' ][ 'httpCode' ] == 200 ) {
 							self::meta_box_success( $reports['reports_by_email'] );
 						} else {
 							self::meta_box_error( $reports['reports_by_email'] );
@@ -133,7 +136,11 @@ class Nekorekten_Com {
 			<span><?php printf( __( 'Date: %s', 'woo-bg' ), $report[ 'server' ][ 'date' ] ) ?></span>
 		<?php endif ?>
 
-		<h3><?php printf( __( 'Error: "%s"', 'woo-bg' ), $report['message'] ) ?></h3>
+		<?php if ( !empty( $report['message'] ) ): ?>
+			<h3><?php printf( __( 'Error: "%s"', 'woo-bg' ), $report['message'] ) ?></h3>
+		<?php else: ?>
+			<h3><?php printf( __( 'Invalid access.', 'woo-bg' ) ) ?></h3>
+		<?php endif ?>
 		<?php
 	}
 
@@ -202,7 +209,7 @@ class Nekorekten_Com {
 
 		$body = json_decode( wp_remote_retrieve_body( $request ), 1 );
 
-		if ( $body[ 'server' ]['httpCode'] === 200) {
+		if ( !empty( $body ) && $body[ 'server' ]['httpCode'] === 200) {
 			$order->update_meta_data( $meta_key, $body );
 			$order->save();
 		}
