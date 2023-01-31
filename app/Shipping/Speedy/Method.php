@@ -275,7 +275,9 @@ class Method extends \WC_Shipping_Method {
 		$raw_state = sanitize_text_field( $this->cookie_data['state'] );
 		$cities_data = $this->container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state );
 
-		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
+		var_dump( $cities_data );
+		
+		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) || !isset( $cities_data['cities'][ $cities_data['city_key'] ] ) ) {
 			return( [] );
 		}
 
