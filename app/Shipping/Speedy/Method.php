@@ -200,7 +200,7 @@ class Method extends \WC_Shipping_Method {
 			$data['errors'] = $request['error']['message'];
 		} else if ( isset( $request['calculations'] ) ) {
 			$calc_data = $request['calculations'][0];
-			$data['price'] = $calc_data['price']['total'];
+			$data['price'] = number_format( $calc_data['price']['total'], 2 );
 			$data['price_without_vat'] = $calc_data['price']['amount'];
 			$data['vat'] = $calc_data['price']['vat'];
 		}
@@ -447,7 +447,7 @@ class Method extends \WC_Shipping_Method {
 			$total -= WC()->cart->shipping_total;
 		}
 
-		return $total;
+		return number_format( $total, 2 );
 	}
 
 	public static function validate_speedy_method( $fields, $errors ){

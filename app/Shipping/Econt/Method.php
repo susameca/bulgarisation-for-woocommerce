@@ -411,7 +411,7 @@ class Method extends \WC_Shipping_Method {
 			$total -= WC()->cart->shipping_total;
 		}
 
-		return $total;
+		return number_format( $total, 2 );
 	}
 
 	public static function validate_econt_method( $fields, $errors ){
