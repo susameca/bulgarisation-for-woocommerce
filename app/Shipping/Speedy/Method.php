@@ -185,7 +185,6 @@ class Method extends \WC_Shipping_Method {
 		
 		$request_body = apply_filters( 'woo_bg/speedy/calculate_label', $this->generate_label(), $this );
 
-		//var_dump( $request_body );
 
 		WC()->session->set( 'woo-bg-speedy-label' , $request_body );
 
@@ -193,8 +192,12 @@ class Method extends \WC_Shipping_Method {
 
 		if ( !isset( $request ) ) {
 			$data['errors'] = __( 'Calculation failed. Please try again.', 'woo-bg' );
-		} else if ( isset( $request['error'] ) ) {
-			$data['errors'] = $request['error']['message'];
+		} else if ( isset( $request['error'] ) || isset( $request['calculations'][0]['error'] ) ) {
+			if ( isset( $request['calculations'][0]['error'] ) ) {
+				$data['errors'] = $request['calculations'][0]['error']['message'];
+			} else {
+				$data['errors'] = $request['error']['message'];
+			}
 		} else if ( isset( $request['calculations'] ) ) {
 			$calc_data = $request['calculations'][0];
 			$data['price'] = number_format( $calc_data['price']['total'], 2 );
@@ -386,8 +389,8 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		if ( 
-			$this->test !== 'no' &&  
-			! ( isset( $this->cookie_data['selectedOfficeType'] ) && $this->cookie_data['selectedOfficeType'] == 'APT' ) 
+			$this->test !== 'no' && 
+			! ( isset( $this->cookie_data['selectedOfficeType'] ) && $this->cookie_data['selectedOfficeType'] == 'APT' )
 		) {
 			if ( $this->test == 'review' ) {
 				$test = 'OPEN';
