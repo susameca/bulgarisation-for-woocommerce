@@ -386,24 +386,25 @@ class Method extends \WC_Shipping_Method {
 				'amount' => $this->get_package_total(), 
 				'processingType' => 'CASH' 
 			);
-		}
+			
+			if ( 
+				$this->test !== 'no' && 
+				! ( isset( $this->cookie_data['selectedOfficeType'] ) && $this->cookie_data['selectedOfficeType'] == 'APT' )
+			) {
+				if ( $this->test == 'review' ) {
+					$test = 'OPEN';
+				} else if ( $this->test == 'test' ) {
+					$test = 'TEST';
+				}
 
-		if ( 
-			$this->test !== 'no' && 
-			! ( isset( $this->cookie_data['selectedOfficeType'] ) && $this->cookie_data['selectedOfficeType'] == 'APT' )
-		) {
-			if ( $this->test == 'review' ) {
-				$test = 'OPEN';
-			} else if ( $this->test == 'test' ) {
-				$test = 'TEST';
+				$services['additionalServices']['obpd'] = array(
+					'option' => $test, 
+					'returnShipmentServiceId' => 505, 
+					'returnShipmentPayer' => 'RECIPIENT' 
+				);
 			}
-
-			$services['additionalServices']['obpd'] = array(
-				'option' => $test, 
-				'returnShipmentServiceId' => 505, 
-				'returnShipmentPayer' => 'RECIPIENT' 
-			);
 		}
+
 
 		if ( empty( $services['additionalServices'] ) ) {
 		    unset( $services['additionalServices'] );
