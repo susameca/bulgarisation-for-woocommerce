@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.1.1
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 2.4.1
+Stable tag: 2.4.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -68,6 +68,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 2.4.2 =
+Econt/Speedy/CVC: Optimize widgets rendering
+Econt/Speedy/CVC: Fix calculation if country is disabled
+Econt/Speedy: Fix shipping to APS
+Econt/Speedy: Fix calculation with services ( with payment different from COD )
+Speedy: Optimize shipping to small towns with no streets in API
 
 = 2.4.1 =
 Speedy: Fix returning all cities by region
