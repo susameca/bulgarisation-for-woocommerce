@@ -53,11 +53,13 @@ class Office {
 				$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'woo-bg' ), $raw_city, $state );
 			}
 		} else {
-			$offices = self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] )['offices'];
+			$offices = self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] );
 
 			if ( empty( $offices ) ) {
 				$offices = [];
 				$args[ 'error' ] = sprintf( __( 'No offices were found at %s.', 'woo-bg' ), $raw_city );
+			} else {
+				$offices = $offices['offices'];
 			}
 
 			$args[ 'offices' ] = $offices;
