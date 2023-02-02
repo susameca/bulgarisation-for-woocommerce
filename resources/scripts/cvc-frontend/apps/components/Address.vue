@@ -87,7 +87,6 @@ export default {
 		},
 	},
 	mounted() {
-		window.cvcAddressIsMounted = true;
 		let _this = this;
 		this.loadLocalStorage();
 
@@ -109,8 +108,9 @@ export default {
 		this.firstNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.lastNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 
-		if ( window.wooBgCvcDoUpdate ) {
+		if ( window.cvcAddressInitialUpdate ) {
 			this.document.trigger('update_checkout');
+			window.cvcAddressInitialUpdate = false;
 		}
 	},
 	methods: {

@@ -58,7 +58,7 @@ class Method extends \WC_Shipping_Method {
 	 * @return void
 	 */
 	public function calculate_shipping( $package = Array() ) {
-		$this->cookie_data = $this->get_cookie_data();
+		$this->cookie_data = self::get_cookie_data();
 		$this->package = $package;
 
 		$rate = array(
@@ -68,7 +68,9 @@ class Method extends \WC_Shipping_Method {
 
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
 		$rate['meta_data']['validated'] = false;
+
 		if ( 
+			( WC()->session->get( 'chosen_shipping_methods' )[0] === $this->id . ':' . $this->instance_id ) &&
 			isset( $this->cookie_data['type'] ) && 
 			$this->cookie_data['type'] === $this->delivery_type && 
 			( 
@@ -178,7 +180,7 @@ class Method extends \WC_Shipping_Method {
 		return parent::get_instance_form_fields();
 	}
 
-	public function get_cookie_data() {
+	public static function get_cookie_data() {
 		return ( isset( $_COOKIE[ 'woo-bg--econt-address' ] ) ) ? json_decode( stripslashes( urldecode( $_COOKIE[ 'woo-bg--econt-address' ] ) ), 1 ) : '';
 	}
 
@@ -279,12 +281,15 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_receiver_address() {
-		$country = $this->cookie_data['country'];
 		$states = woo_bg_return_bg_states();
 		$state = $states[ $this->cookie_data['state'] ];
 		$cities = $this->container[ Client::ECONT_CITIES ]->get_filtered_cities( $this->cookie_data['city'], $state );
 		$city_key = $cities['city_key'];
 		$type = ( !empty( $this->cookie_data['selectedAddress']['type'] ) ) ? $this->cookie_data['selectedAddress']['type'] :'';
+
+		if ( empty( $cities['cities'][ $city_key ] ) ) {
+			return [];
+		}
 
 		$receiver_address = array(
 			'city' => $cities['cities'][ $city_key ],
@@ -356,7 +361,7 @@ class Method extends \WC_Shipping_Method {
 			$cart['services']['cdCurrency'] = get_woocommerce_currency();
 		}
 
-		if ( $os_value ) {
+		if ( $os_value && empty( $this->cookie_data['selectedOfficeIsAPS'] ) ) {
 			$cart[ 'services' ]['declaredValueAmount'] = $os_value;
 			$cart[ 'services' ]['declaredValueCurrency'] = 'BGN';
 		}
@@ -370,12 +375,14 @@ class Method extends \WC_Shipping_Method {
 
 	private function generate_other_data() {
 		$other_data = [];
-
-		if ( $this->test == 'review' ) {
-			$other_data['payAfterAccept'] = true;
-		} else if ( $this->test == 'test' ) {
-			$other_data['payAfterAccept'] = true;
-			$other_data['payAfterTest'] = true;
+		
+		if ( empty( $this->cookie_data['selectedOfficeIsAPS'] ) ) {
+			if ( $this->test == 'review' ) {
+				$other_data['payAfterAccept'] = true;
+			} else if ( $this->test == 'test' ) {
+				$other_data['payAfterAccept'] = true;
+				$other_data['payAfterTest'] = true;
+			}
 		}
 
 		return $other_data;
@@ -430,6 +437,12 @@ class Method extends \WC_Shipping_Method {
 					} else {
 						$errors->add( 'validation', __( 'Please choose delivery option!', 'woo-bg' ) );
 					}
+				}
+
+				$cookie_data = self::get_cookie_data();
+
+				if ( $cookie_data['type'] === 'office' && empty( $cookie_data['selectedOffice'] ) ) {
+					$errors->add( 'validation', __( 'Please choose a office.', 'woo-bg' ) );
 				}
 			}
 		}

@@ -138,13 +138,14 @@ class CVC {
 	}
 
 	protected static function get_offices( $cookie_data ) {
-		$country_id = self::$container[ Client::CVC_COUNTRIES ]->get_country_id( $cookie_data['country'] );
+		$country = ( !empty( $cookie_data['country'] ) ) ? $cookie_data['country'] : 100;
+		$country_id = self::$container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
 
 		return self::$container[ Client::CVC_OFFICES ]->get_all_offices( $country_id ); 
 	}
 
 	protected static function get_streets( $cookie_data ) {
-		$country = sanitize_text_field( $cookie_data['country'] );
+		$country = $country = ( !empty( $cookie_data['country'] ) ) ? $cookie_data['country'] : 100;
 		$country_id = self::$container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
 		$raw_city = sanitize_text_field( $cookie_data['city'] );
 		

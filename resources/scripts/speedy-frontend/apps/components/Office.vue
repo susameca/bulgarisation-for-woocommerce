@@ -1,4 +1,4 @@
-<template>
+ <template>
 	<div class="woo-bg--speedy-delivery">
 		<div v-if="error">{{error}}</div>
 
@@ -73,7 +73,6 @@ export default {
 		},
 	},
 	mounted() {
-		window.speedyOfficeIsMounted = true;
 		let _this = this;
 		this.loadLocalStorage();
 
@@ -100,9 +99,10 @@ export default {
 			_this.state = $(this).val();
 			_this.loadOffices();
 		});
-		
-		if ( window.wooBgSpeedyDoUpdate ) {
+
+		if ( window.speedyOfficeInitialUpdate ) {
 			this.document.trigger('update_checkout');
+			window.speedyOfficeInitialUpdate = false;
 		}
 	},
 	methods: {
@@ -186,13 +186,18 @@ export default {
 
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
 				.then(function( response ) {
+					_this.error = '';
+
 					if ( response.data.data.status === 'invalid-city' ) {
 						_this.error = response.data.data.error;
 						_this.resetData();
-						_this.offices = cloneDeep( [] );
 					} else {
-						_this.offices = cloneDeep( response.data.data.offices );
-						_this.error = false;
+						if ( response.data.data.offices.length ) {
+							_this.offices = cloneDeep( response.data.data.offices );
+						} else {
+							_this.error = response.data.data.error;
+							_this.resetData();
+						}
 					}
 
 					_this.loading = false;
@@ -240,11 +245,12 @@ export default {
 			localStorage.setItem( 'woo-bg--speedy-office', JSON.stringify( localStorageData ) );
 		},
 		resetData() {
-			this.offices = [];
+			this.offices = cloneDeep( [] );
 			this.selectedOffice = '';
 			this.streetNumber = '';
 			this.other = '';
 			localStorage.removeItem( 'woo-bg--speedy-office' );
+			this.setCookieData();
 		},
 		triggerUpdateCheckout() {
 			this.document.trigger('update_checkout');

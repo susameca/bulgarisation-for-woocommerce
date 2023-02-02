@@ -17,7 +17,7 @@ class Office {
 	public static function delivery_with_econt_render_form_button( $method, $index ) {
 		if ( $method->get_method_id() === Method::METHOD_ID ) {
 			if ( $method->meta_data['delivery_type'] === 'office' ) {
-				echo '<div id="woo-bg-econt-shipping-to--office" class="woo-bg-additional-fields" data-type="office"></div>';
+				echo '<div data-cache="' . rand() . '" id="woo-bg-econt-shipping-to--office" class="woo-bg-additional-fields" data-type="office"></div>';
 			}
 		}
 	}
@@ -46,9 +46,21 @@ class Office {
 
 		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
 			$args[ 'status' ] = 'invalid-city';
-			$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'woo-bg' ), $raw_city, $state );
+			
+			if ( !$state ) {
+				$args[ 'error' ] = __( 'Please select region.', 'woo-bg' );
+			} else {
+				$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'woo-bg' ), $raw_city, $state );
+			}
 		} else {
-			$args[ 'offices' ] = self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] )['offices'];
+			$offices = self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] )['offices'];
+
+			if ( empty( $offices ) ) {
+				$offices = [];
+				$args[ 'error' ] = sprintf( __( 'No offices were found at %s.', 'woo-bg' ), $raw_city );
+			}
+
+			$args[ 'offices' ] = $offices;
 			$args[ 'status' ] = 'valid-city';
 		}
 

@@ -82,10 +82,18 @@
 								
 								<input 
 									class="woo-bg-multiselect--additional-field"
+									:placeholder="i18n.mysticQuarter" 
+									type="text" 
+									v-model="cookie_data.mysticQuarter" 
+									v-if="!streets.length"
+								>
+
+								<input 
+									class="woo-bg-multiselect--additional-field"
 									:placeholder="i18n.blVhEt" 
 									type="text" 
 									v-model="other" 
-									v-if="( street.type && street.type === 'quarters' )"
+									v-if="( street.type && street.type === 'quarters' || !streets.length )"
 								>
 							</p>
 							<p class="form-field form-field-wide">

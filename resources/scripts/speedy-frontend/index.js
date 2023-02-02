@@ -7,10 +7,10 @@ let speedy = import('./apps/app.js');
 
 speedy.then( function ( promise ) {
 	let instance;
+	window.speedyAddressInitialUpdate = true;
+	window.speedyOfficeInitialUpdate = true;
 
 	$( document.body ).on( 'updated_checkout', function( data ){
-		
-
 		let $shipping_method = $( 'input[name^="shipping_method"]:checked' );
 
 		if ( !$shipping_method.length ) {
@@ -26,40 +26,25 @@ speedy.then( function ( promise ) {
 				$(document.body).trigger('update_checkout');
 			});
 			
-			window.wooBgSpeedyDoUpdate = true;
 			let $parent = $shipping_method.parent();
 			let $target = $parent.find('.woo-bg-additional-fields');
 			let type = $target.data('type');
 
 			if ( typeof instance === 'object' ) {
-				if ( '#' + $target.attr('id') == instance.$options.el ) {
-					window.wooBgSpeedyDoUpdate = false;
-					instance.$destroy();
-				}
+				instance.$destroy();
 			}
 
 			if ( type === 'address' ) {
-				if ( typeof wooBg_speedy_address === "undefined") {
-					window.location = window.location;
-				}
-
-				if ( typeof instance === 'object' ) {
-					instance.$destroy();
-				}
-
+				window.speedyOfficeInitialUpdate = true;
 				instance = new promise.address({ el: '#' + $target.attr('id') });
 			} else if ( type === 'office' ) {
-				if ( typeof wooBg_speedy === "undefined") {
-					window.location = window.location;
-				}
-
-				if ( typeof instance === 'object' ) {
-					instance.$destroy();
-				}
-
+				window.speedyAddressInitialUpdate = true;
 				instance = new promise.office({ el: '#' + $target.attr('id') });
 			}
 		} else if ( typeof instance === 'object' ) {
+			window.speedyAddressInitialUpdate = true;
+			window.speedyOfficeInitialUpdate = true;
+			
 			instance.$destroy();
 		}
 	});

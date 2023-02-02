@@ -1,6 +1,7 @@
 <template>
 	<div class="woo-bg--speedy-delivery">
 	  <multiselect 
+	 	v-if="hasAny"
 	  	id="ajax" 
 	  	class="woo-bg-multiselect"
 	  	v-model="selectedAddress" 
@@ -34,17 +35,27 @@
 
 	  <input 
 	  	class="woo-bg-multiselect--additional-field"
+	  	:placeholder="i18n.mysticQuarter" 
+	  	type="text" 
+	  	v-model="mysticQuarter" 
+	  	v-if="!hasAny"
+	  	@keyup="mysticQuarterChanged"
+	  >
+
+	  <input 
+	  	class="woo-bg-multiselect--additional-field"
 	  	:placeholder="i18n.streetNumber" 
 	  	type="text" 
 	  	v-model="streetNumber" 
 	  	v-if="( selectedAddress.type && selectedAddress.type === 'streets' )"
 	  	@keyup="streetNumberChanged"
 	  >
+
 	  <input 
 	  	class="woo-bg-multiselect--additional-field"
 	  	:placeholder="i18n.blVhEt" 
 	  	type="text" v-model="other" 
-	  	v-if="( selectedAddress.type && selectedAddress.type === 'quarters' )"
+	  	v-if="( selectedAddress.type && selectedAddress.type === 'quarters' ) || mysticQuarter"
 	  	@keyup="streetNumberChanged"
 	  >
 	</div>
@@ -75,8 +86,10 @@ export default {
 			state: '',
 			city: '',
 			streetNumber: '',
+			mysticQuarter: '',
 			other: '',
 			isLoading: false,
+			hasAny: true,
 			document: $( document.body ),
 			i18n: wooBg_speedy_address.i18n,
 		}
@@ -87,7 +100,6 @@ export default {
 		},
 	},
 	mounted() {
-		window.speedyAddressIsMounted = true;
 		let _this = this;
 		this.loadLocalStorage();
 
@@ -109,8 +121,9 @@ export default {
 		this.firstNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.lastNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 
-		if ( window.wooBgSpeedyDoUpdate ) {
+		if ( window.speedyAddressInitialUpdate ) {
 			this.document.trigger('update_checkout');
+			window.speedyAddressInitialUpdate = false;
 		}
 	},
 	methods: {
@@ -171,6 +184,7 @@ export default {
 				this.state = cloneDeep( localStorageData.state );
 				this.city = cloneDeep( localStorageData.city );
 				this.streetNumber = cloneDeep( localStorageData.streetNumber );
+				this.mysticQuarter = cloneDeep( localStorageData.mysticQuarter );
 				this.other = cloneDeep( localStorageData.other );
 			}
 		},
@@ -190,9 +204,11 @@ export default {
 
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
 				.then( response => {
+
 					if ( response.data.data.cities ) {
 						this.addresses = cloneDeep( response.data.data.cities );
 					} else if ( response.data.data.streets ) {
+						this.hasAny = response.data.data.has_any;
 						this.addresses = cloneDeep( response.data.data.streets );
 					}
 
@@ -221,7 +237,14 @@ export default {
 						_this.addresses = cloneDeep( response.data.data.cities );
 						_this.resetData();
 					} else {
-						_this.addresses = cloneDeep( response.data.data.streets );
+						_this.hasAny = response.data.data.has_any;
+
+						if ( response.data.data.has_any ) {
+							_this.addresses = cloneDeep( response.data.data.streets );
+							_this.mysticQuarter = '';
+						} else {
+							_this.selectedAddress = [];
+						}
 					}
 
 					_this.loading = false;
@@ -242,13 +265,18 @@ export default {
 		streetNumberChanged: debounce( function () {
 			this.setAddress1FieldData();
 			this.setLocalStorageData();
-
+			
 			this.document.trigger('update_checkout');
+		}, 500 ),
+		mysticQuarterChanged: debounce( function () {
+			this.setAddress1FieldData();
+			this.setLocalStorageData();
 		}, 500 ),
 		resetData() {
 			this.city = '';
 			this.selectedAddress = '';
 			this.streetNumber = '';
+			this.mysticQuarter = '';
 			this.other = '';
 			localStorage.removeItem( 'woo-bg--speedy-address' );
 		},
@@ -265,6 +293,7 @@ export default {
 				state: this.state,
 				city: this.city,
 				streetNumber: this.streetNumber,
+				mysticQuarter: this.mysticQuarter,
 				other: this.other,
 				otherField: this.Address2Field.val(),
 				country: this.countryField.val(),
@@ -282,6 +311,7 @@ export default {
 				state: this.state,
 				city: this.city,
 				streetNumber: this.streetNumber,
+				mysticQuarter: this.mysticQuarter,
 				other: this.other,
 			}
 
@@ -294,6 +324,8 @@ export default {
 				shippingAddress = this.selectedAddress.label + ' ' + this.streetNumber;
 			} else if ( this.selectedAddress.type === 'quarters' ) {
 				shippingAddress = this.selectedAddress.label + ' ' + this.other;
+			} else {
+				shippingAddress = this.mysticQuarter + ' ' + this.other;
 			}
 
 			this.Address1Field.val( shippingAddress );
@@ -315,6 +347,7 @@ export default {
 		//setCookie( 'woo-bg--speedy-address', '', 1 );
 		$('#billing_address_1').attr('disabled', false);
 		$('#shipping_address_1').attr('disabled', false);
+		window.speedyAddressIsMounted = false;
 	}
 }
 </script>

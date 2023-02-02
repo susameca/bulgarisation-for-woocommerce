@@ -73,6 +73,7 @@ class Method extends \WC_Shipping_Method {
 		$payment_by_data = $this->generate_payment_by_data();
 
 		if ( 
+			( WC()->session->get( 'chosen_shipping_methods' )[0] === $this->id . ':' . $this->instance_id ) &&
 			isset( $this->cookie_data['type'] ) && 
 			$this->cookie_data['type'] === $this->delivery_type && 
 			( 
@@ -234,9 +235,9 @@ class Method extends \WC_Shipping_Method {
 		} else if ( !$request['success'] ) {
 			$data['errors'] = $request['error'];
 		} else if ( isset( $request['price'] ) ) {
-			$data['price'] = $request['price_with_vat'];
-			$data['price_without_vat'] = $request['price'];
-			$data['vat'] = $request['price_with_vat'] - $request['price'];
+			$data['price'] = number_format( $request['price_with_vat'], 2 );
+			$data['price_without_vat'] = number_format( $request['price'], 2 );
+			$data['vat'] = number_format( $request['price_with_vat'] - $request['price'], 2 );
 		}
 
 		return $data;
@@ -284,11 +285,7 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_receiver_data() {
-		if ( !isset( $_POST['country'] ) ) {
-			return( [] );
-		}
-
-		$country = sanitize_text_field( $_POST['country'] );
+		$country = ( !empty( $_POST['country'] ) ) ? sanitize_text_field( $_POST['country'] ) : 100;
 		$country_id = $this->container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
 		$raw_city = sanitize_text_field( $_POST['city'] );
 		$state_id = $this->container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $_POST['state'] ), $country_id );

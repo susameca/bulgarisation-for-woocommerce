@@ -71,7 +71,6 @@ export default {
 		},
 	},
 	mounted() {
-		window.econtOfficeIsMounted = true;
 		let _this = this;
 		this.loadLocalStorage();
 
@@ -99,8 +98,9 @@ export default {
 			_this.loadOffices();
 		});
 		
-		if ( window.wooBgEcontDoUpdate ) {
+		if ( window.econtOfficeInitialUpdate ) {
 			this.document.trigger('update_checkout');
+			window.econtOfficeInitialUpdate = false;
 		}
 	},
 	methods: {
@@ -184,13 +184,18 @@ export default {
 
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
 				.then(function( response ) {
+					_this.error = '';
+
 					if ( response.data.data.status === 'invalid-city' ) {
 						_this.error = response.data.data.error;
 						_this.resetData();
-						_this.offices = cloneDeep( [] );
 					} else {
-						_this.offices = cloneDeep( response.data.data.offices );
-						_this.error = false;
+						if ( response.data.data.offices.length ) {
+							_this.offices = cloneDeep( response.data.data.offices );
+						} else {
+							_this.error = response.data.data.error;
+							_this.resetData();
+						}
 					}
 
 					_this.loading = false;
@@ -216,6 +221,7 @@ export default {
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
 				selectedOffice: this.selectedOffice.code,
+				selectedOfficeIsAPS: this.selectedOffice.isAPS,
 				state: this.state,
 				city: this.city,
 				country: this.countryField.val(),
@@ -242,6 +248,7 @@ export default {
 			this.streetNumber = '';
 			this.other = '';
 			localStorage.removeItem( 'woo-bg--econt-office' );
+			this.setCookieData();
 		},
 		triggerUpdateCheckout() {
 			this.document.trigger('update_checkout');

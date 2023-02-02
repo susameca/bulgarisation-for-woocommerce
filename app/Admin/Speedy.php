@@ -133,19 +133,20 @@ class Speedy {
 			'details' => __( 'Details:', 'woo-bg' ),
 			'reviewAndTest' => __( 'Review and test', 'woo-bg' ),
 			'declaredValue' => __( 'Declared value', 'woo-bg' ),
+			'mysticQuarter' => __( 'Street or quarter', 'woo-bg' ),
 		);
 	}
 
 	protected static function get_offices( $cookie_data ) {
 		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $cookie_data['city'], $cookie_data['state'] );
-
-		return self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] )['offices'];
+		$offices = ( !empty( self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] ) ) ) ? self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] )['offices'] : [];
+		return $offices;
 	}
 
 	protected static function get_streets( $cookie_data ) {
 		$query = ' ';
 
-		if ( isset( $cookie_data['selectedAddress'] ) ) {
+		if ( !empty( $cookie_data['selectedAddress'] ) ) {
 			$query = explode(' ', $cookie_data['selectedAddress']['label'] );
 			unset( $query[0] );
 			$query = implode( ' ', $query );
@@ -299,34 +300,41 @@ class Speedy {
 		$cities_data = $container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $cookie_data['city'], $cookie_data['state'] );
 		$address['siteId'] = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
 
-		if ( $_REQUEST['street']['type'] === 'streets' ) {
+		if ( !empty( $_REQUEST['street']['type'] ) && $_REQUEST['street']['type'] === 'streets' ) {
 			$address["streetId"] = str_replace('street-', '', $_REQUEST['street']['orig_key'] ); 
 			$address["streetNo"] = $_REQUEST['streetNumber'];
-		} else if ( $_REQUEST['street']['type'] === 'quarters' ) {
-			$address["complexId"] = str_replace('qtr-', '', $_REQUEST['street']['orig_key'] );
-		}
+		} else if ( 
+			!empty( $_REQUEST['street']['type'] ) && $_REQUEST['street']['type'] === 'quarters' || 
+			!empty( $_REQUEST['cookie_data']['mysticQuarter'] )
+		) {
+			if ( !empty( $_REQUEST['cookie_data']['mysticQuarter'] ) ) {
+				$address["addressNote"] = $_REQUEST['cookie_data']['mysticQuarter'] . ' ' . $_REQUEST[ 'other' ];
+			} else {
+				$address["complexId"] = str_replace('qtr-', '', $_REQUEST['street']['orig_key'] );
 
-		if ( !empty( $_REQUEST[ 'other' ] ) ) {
-			$parts = explode( ' ', $_REQUEST[ 'other' ] );
+				if ( !empty( $_REQUEST[ 'other' ] ) ) {
+					$parts = explode( ' ', $_REQUEST[ 'other' ] );
 
-			$address["blockNo"] = $parts[0];
+					$address["blockNo"] = $parts[0];
 
-			if ( isset( $parts[1] ) ) {
-				$address["entranceNo"] = $parts[1];
-			}
+					if ( isset( $parts[1] ) ) {
+						$address["entranceNo"] = $parts[1];
+					}
 
-			if ( isset( $parts[2] ) ) {
-				$address["floorNo"] = $parts[2];
-			}
+					if ( isset( $parts[2] ) ) {
+						$address["floorNo"] = $parts[2];
+					}
 
-			if ( isset( $parts[3] ) ) {
-				$address["apartmentNo"] = $parts[3];
-			}
+					if ( isset( $parts[3] ) ) {
+						$address["apartmentNo"] = $parts[3];
+					}
 
-			if ( isset( $parts[4] ) ) {
-				unset( $parts[0], $parts[1], $parts[2], $parts[3] );
+					if ( isset( $parts[4] ) ) {
+						unset( $parts[0], $parts[1], $parts[2], $parts[3] );
 
-				$address["addressNote"] = implode( ' ', $parts ) ;
+						$address["addressNote"] = implode( ' ', $parts ) ;
+					}
+				}
 			}
 		}
 

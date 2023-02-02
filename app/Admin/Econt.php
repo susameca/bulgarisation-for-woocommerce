@@ -310,7 +310,6 @@ class Econt {
 			$cookie_data['streetNumber'] = $_REQUEST['streetNumber'];
 			$cookie_data['other'] = $_REQUEST['other'];
 
-			$country = $cookie_data['country'];
 			$states = woo_bg_return_bg_states();
 			$state = $states[ $cookie_data['state'] ];
 

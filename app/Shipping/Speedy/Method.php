@@ -57,12 +57,15 @@ class Method extends \WC_Shipping_Method {
 	 * @return void
 	 */
 	public function calculate_shipping( $package = Array() ) {
-		$this->cookie_data = $this->get_cookie_data();
+		$this->cookie_data = self::get_cookie_data();
 		$this->package = $package;
 
 		$rate = array(
 			'label' => $this->title,
 			'cost' => 0,
+			'meta_data' => array(
+				'cookie_data' => $this->cookie_data,
+			),
 		);
 
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
@@ -70,18 +73,19 @@ class Method extends \WC_Shipping_Method {
 		$payment_by_data = $this->generate_payment_by_data();
 
 		if ( 
+			( WC()->session->get( 'chosen_shipping_methods' )[0] === $this->id . ':' . $this->instance_id ) &&
 			isset( $this->cookie_data['type'] ) && 
 			$this->cookie_data['type'] === $this->delivery_type && 
 			( 
 				( isset( $this->cookie_data['other'] ) && $this->cookie_data['other'] && $this->cookie_data['selectedAddress'] ) || 
 				( isset( $this->cookie_data['streetNumber']) && $this->cookie_data['streetNumber'] && $this->cookie_data['selectedAddress'] ) || 
-				( isset( $this->cookie_data['selectedOffice'] ) && $this->cookie_data['selectedOffice'] ) 
+				( isset( $this->cookie_data['selectedOffice'] ) && $this->cookie_data['selectedOffice'] ) ||
+				( isset( $this->cookie_data['mysticQuarter'] ) && $this->cookie_data['other'] )
 			) 
 		) {
 			$this->cookie_data['fixed_price'] = $this->fixed_price;
 			$request_data = $this->calculate_shipping_price_from_api();
 			$rate['meta_data']['validated'] = true;
-			$rate['meta_data']['cookie_data'] = $this->cookie_data;
 
 			if ( isset( $request_data['errors'] ) ) {
 				$rate['meta_data']['validated'] = false;
@@ -174,7 +178,7 @@ class Method extends \WC_Shipping_Method {
 		return parent::get_instance_form_fields();
 	}
 
-	public function get_cookie_data() {
+	public static function get_cookie_data() {
 		return ( isset( $_COOKIE[ 'woo-bg--speedy-address' ] ) ) ? json_decode( stripslashes( urldecode( $_COOKIE[ 'woo-bg--speedy-address' ] ) ), 1 ) : '';
 	}
 
@@ -184,7 +188,6 @@ class Method extends \WC_Shipping_Method {
 		);
 		
 		$request_body = apply_filters( 'woo_bg/speedy/calculate_label', $this->generate_label(), $this );
-
 
 		WC()->session->set( 'woo-bg-speedy-label' , $request_body );
 
@@ -201,8 +204,8 @@ class Method extends \WC_Shipping_Method {
 		} else if ( isset( $request['calculations'] ) ) {
 			$calc_data = $request['calculations'][0];
 			$data['price'] = number_format( $calc_data['price']['total'], 2 );
-			$data['price_without_vat'] = $calc_data['price']['amount'];
-			$data['vat'] = $calc_data['price']['vat'];
+			$data['price_without_vat'] = number_format( $calc_data['price']['amount'], 2 );
+			$data['vat'] = number_format( $calc_data['price']['vat'], 2 );
 		}
 
 		return $data;
@@ -267,10 +270,6 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_recipient_address() {
-		if ( !isset( $_POST['country'] ) ) {
-			return( [] );
-		}
-
 		$raw_city = sanitize_text_field( $this->cookie_data['city'] );
 		$raw_state = sanitize_text_field( $this->cookie_data['state'] );
 		$cities_data = $this->container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state );
@@ -283,33 +282,40 @@ class Method extends \WC_Shipping_Method {
 			'siteId' => $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ],
 		);
 
-		if ( $this->cookie_data['selectedAddress']['type'] === 'streets' ) {
+		if ( !empty( $this->cookie_data['selectedAddress']['type'] ) && $this->cookie_data['selectedAddress']['type'] === 'streets' ) {
 			$address["streetId"] = str_replace('street-', '', $this->cookie_data['selectedAddress']['orig_key'] ); 
 			$address["streetNo"] = $this->cookie_data['streetNumber'];
-		} else if ( $this->cookie_data['selectedAddress']['type'] === 'quarters' ) {
-			$address["complexId"] = str_replace('qtr-', '', $this->cookie_data['selectedAddress']['orig_key'] );
+		} else if ( 
+			!empty( $this->cookie_data['selectedAddress']['type'] ) && $this->cookie_data['selectedAddress']['type'] === 'quarters' || 
+			$this->cookie_data['mysticQuarter'] 
+		) {
+			if ( !empty( $this->cookie_data['mysticQuarter'] ) ) {
+				$address["addressNote"] = $this->cookie_data['mysticQuarter'] . ' ' . $this->cookie_data[ 'other' ];
+			} else {
+				$address["complexId"] = str_replace('qtr-', '', $this->cookie_data['selectedAddress']['orig_key'] );
 
-			if ( !empty( $this->cookie_data[ 'other' ] ) ) {
-				$parts = explode( ' ', $this->cookie_data[ 'other' ] );
+				if ( !empty( $this->cookie_data[ 'other' ] ) ) {
+					$parts = explode( ' ', $this->cookie_data[ 'other' ] );
 
-				$address["blockNo"] = $parts[0];
+					$address["blockNo"] = $parts[0];
 
-				if ( isset( $parts[1] ) ) {
-					$address["entranceNo"] = $parts[1];
-				}
+					if ( isset( $parts[1] ) ) {
+						$address["entranceNo"] = $parts[1];
+					}
 
-				if ( isset( $parts[2] ) ) {
-					$address["floorNo"] = $parts[2];
-				}
+					if ( isset( $parts[2] ) ) {
+						$address["floorNo"] = $parts[2];
+					}
 
-				if ( isset( $parts[3] ) ) {
-					$address["apartmentNo"] = $parts[3];
-				}
+					if ( isset( $parts[3] ) ) {
+						$address["apartmentNo"] = $parts[3];
+					}
 
-				if ( isset( $parts[4] ) ) {
-					unset( $parts[0], $parts[1], $parts[2], $parts[3] );
+					if ( isset( $parts[4] ) ) {
+						unset( $parts[0], $parts[1], $parts[2], $parts[3] );
 
-					$address["addressNote"] = implode( ' ', $parts ) ;
+						$address["addressNote"] = implode( ' ', $parts ) ;
+					}
 				}
 			}
 		}
@@ -386,7 +392,7 @@ class Method extends \WC_Shipping_Method {
 				'amount' => $this->get_package_total(), 
 				'processingType' => 'CASH' 
 			);
-			
+
 			if ( 
 				$this->test !== 'no' && 
 				! ( isset( $this->cookie_data['selectedOfficeType'] ) && $this->cookie_data['selectedOfficeType'] == 'APT' )
@@ -460,7 +466,7 @@ class Method extends \WC_Shipping_Method {
 		foreach ( $chosen_shippings as $key => $shipping ) {
 			if ( strpos( $shipping, 'bg_speedy' ) !== false ) {
 				$data = WC()->session->get( 'shipping_for_package_' . $key )['rates'][ $shipping ];
-
+				
 				if ( $data->method_id === 'woo_bg_speedy' && ! $data->meta_data['validated'] ) {
 					$meta_data = $data->get_meta_data();
 
@@ -469,6 +475,12 @@ class Method extends \WC_Shipping_Method {
 					} else {
 						$errors->add( 'validation', __( 'Please choose delivery option!', 'woo-bg' ) );
 					}
+				}
+
+				$cookie_data = self::get_cookie_data();
+
+				if ( $cookie_data['type'] === 'office' &&  empty( $cookie_data['selectedOffice'] ) ) {
+					$errors->add( 'validation', __( 'Please choose a office.', 'woo-bg' ) );
 				}
 			}
 		}

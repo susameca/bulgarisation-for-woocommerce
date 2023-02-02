@@ -21,7 +21,7 @@ class Address {
 	public static function delivery_with_speedy_render_form_button( $method, $index ) {
 		if ( $method->get_method_id() === Method::METHOD_ID ) {
 			if ( $method->meta_data['delivery_type'] === 'address' ) {
-				echo '<div id="woo-bg-speedy-shipping-to--address" class="woo-bg-additional-fields" data-type="address"></div>';
+				echo '<div data-cache="' . rand() . '" id="woo-bg-speedy-shipping-to--address" class="woo-bg-additional-fields" data-type="address"></div>';
 			}
 		}
 	}
@@ -36,6 +36,7 @@ class Address {
 			'noOptions' => __( 'Start typing street or quarter', 'woo-bg' ), 
 			'streetNumber' => __( 'Street number', 'woo-bg' ), 
 			'blVhEt' => __( 'bl. vh. et.', 'woo-bg' ),
+			'mysticQuarter' => __( 'Street or quarter', 'woo-bg' ),
 		);
 	}
 
@@ -55,6 +56,7 @@ class Address {
 			$quarters = woo_bg_return_array_for_select( self::get_quarters_for_query( $city_id, $query ), 0, array( 'type' => 'quarters' ) );
 
 			$args[ 'streets' ] = self::merge_options( $streets, $quarters );
+			$args[ 'has_any' ] = !empty( array_merge( self::get_quarters_for_query( $city_id, ' ' ), self::get_streets_for_query( $city_id, ' ' ) ) );
 		} else {
 			$args[ 'cities' ] = woo_bg_return_array_for_select( $cities_only_names, 1, array( 'type' => 'city' ) );
 		}
@@ -81,6 +83,7 @@ class Address {
 			$quarters = woo_bg_return_array_for_select( self::get_quarters_for_query( $city_id, ' ' ), 1, array( 'type' => 'quarters' ) );
 
 			$args[ 'streets' ] = self::merge_options( $streets, $quarters );
+			$args[ 'has_any' ] = ( !empty( self::get_quarters_for_query( $city_id, ' ' ) ) || !empty( self::get_streets_for_query( $city_id, ' ' ) ) );
 			$args[ 'status' ] = 'valid-city';
 		}
 
