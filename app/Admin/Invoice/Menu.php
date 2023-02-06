@@ -638,7 +638,17 @@ class Menu {
 
 		$this->save_refunded_order_document( $items );
 
-		if ( woo_bg_get_option( 'invoice', 'invoices' ) === 'yes' ) {
+		$generate_invoice = ( woo_bg_get_option( 'invoice', 'invoices' ) === 'yes' );
+
+		if ( $generate_invoice && woo_bg_get_option( 'invoice', 'invoice_only_to_company' ) === 'yes' ) {
+			$generate_invoice = false;
+
+			if ( $this->order->get_meta('_billing_to_company') ) {
+				$generate_invoice = true;
+			}
+		}
+
+		if ( apply_filters('woo_bg/admin/invoice/generate_invoice', $generate_invoice, $this ) ) {
 			$this->save_credit_notice_document();
 		}
 	}
@@ -758,12 +768,16 @@ class Menu {
 
 		$email_ids[] = 'customer_invoice';
 
+
 		if ( in_array ( $email_id, $email_ids ) ) {
 			if ( $invoice_id = $order->get_meta( 'woo_bg_order_document' ) ) {
 	            $attachments[] = get_attached_file( $invoice_id );
 	        }
 
-			if ( $invoice_id = $order->get_meta( 'woo_bg_invoice_document' ) ) {
+	        $invoice_id = $order->get_meta( 'woo_bg_invoice_document' );
+			$attach_invoice = $order->get_meta( 'woo_bg_attach_invoice' );
+
+			if ( $attach_invoice == 'yes' && $invoice_id ) {
 				$attachments[] = get_attached_file( $invoice_id );
 			}
 		}
