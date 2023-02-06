@@ -47,6 +47,21 @@
 								<p v-if="field.description" class="description" v-html="field.description"></p>
 							</td><!-- /.forminp forminp-text -->
 						</tr>
+						<tr v-else-if="field.type === 'true_false'" valign="top">
+							<th scope="row" class="titledesc">
+								<label :for="`woo-bg-gateway-${group_slug}-${field_slug}`">
+									{{field.title}} 
+
+									<span v-if="field.help_text" class="woocommerce-help-tip" :data-tip="field.help_text"></span>
+								</label>
+							</th>
+
+							<td class="forminp forminp-text">
+								<toggle-button v-model="fields[group_slug][field_slug].value" color="#007cba" />
+
+								<p v-if="field.description" class="description" v-html="field.description"></p>
+							</td><!-- /.forminp forminp-text -->
+						</tr>
 					</tbody>
 				</table>
 			</div><!-- /.div -->

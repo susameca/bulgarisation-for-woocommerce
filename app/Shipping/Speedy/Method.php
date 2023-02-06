@@ -73,9 +73,9 @@ class Method extends \WC_Shipping_Method {
 		$payment_by_data = $this->generate_payment_by_data();
 
 		if ( 
-			( WC()->session->get( 'chosen_shipping_methods' )[0] === $this->id . ':' . $this->instance_id ) &&
 			isset( $this->cookie_data['type'] ) && 
 			$this->cookie_data['type'] === $this->delivery_type && 
+			( WC()->session->get( 'chosen_shipping_methods' )[0] === $this->id . ':' . $this->instance_id ) &&
 			( 
 				( isset( $this->cookie_data['other'] ) && $this->cookie_data['other'] && $this->cookie_data['selectedAddress'] ) || 
 				( isset( $this->cookie_data['streetNumber']) && $this->cookie_data['streetNumber'] && $this->cookie_data['selectedAddress'] ) || 
@@ -245,9 +245,7 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_sender_office_code() {
-		$office = woo_bg_get_option( 'speedy_send_from', 'office' );
-		
-		return str_replace( 'officeID-', '', $office );
+		return str_replace( 'officeID-', '', woo_bg_get_option( 'speedy_send_from', 'office' ) );
 	}
 
 	private function generate_recipient_data() {
@@ -390,7 +388,7 @@ class Method extends \WC_Shipping_Method {
 		if ( $this->cookie_data['payment'] === 'cod' ) {
 			$services['additionalServices']['cod'] = array(
 				'amount' => $this->get_package_total(), 
-				'processingType' => 'CASH' 
+				'processingType' => ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'ppp' ) ) ) ? 'POSTAL_MONEY_TRANSFER' : 'CASH',
 			);
 
 			if ( 

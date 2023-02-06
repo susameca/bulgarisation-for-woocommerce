@@ -70,9 +70,9 @@ class Method extends \WC_Shipping_Method {
 		$rate['meta_data']['validated'] = false;
 
 		if ( 
-			( WC()->session->get( 'chosen_shipping_methods' )[0] === $this->id . ':' . $this->instance_id ) &&
 			isset( $this->cookie_data['type'] ) && 
 			$this->cookie_data['type'] === $this->delivery_type && 
+			( WC()->session->get( 'chosen_shipping_methods' )[0] === $this->id . ':' . $this->instance_id ) &&
 			( 
 				( isset( $this->cookie_data['other'] ) && $this->cookie_data['other'] && $this->cookie_data['selectedAddress'] ) || 
 				( isset( $this->cookie_data['streetNumber']) && $this->cookie_data['streetNumber'] && $this->cookie_data['selectedAddress'] ) || 

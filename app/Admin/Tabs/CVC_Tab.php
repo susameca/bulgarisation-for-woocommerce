@@ -79,9 +79,9 @@ class CVC_Tab extends Base_Tab {
 				new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ), __( 'Enter sender name.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ), __( 'Enter sender phone.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'email', __( 'E-mail', 'woo-bg' ), __( 'Enter sender email.', 'woo-bg' ), 'required|email' ),
-				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'contract_pay', __( 'Pay by contract', 'woo-bg' ) ),
-				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) ),
-				new Fields\Select_Field( woo_bg_get_yes_no_options(), 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'contract_pay', __( 'Pay by contract', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) ),
 				new Fields\Select_Field( $cities, 'city', __( 'City', 'woo-bg' ) ),
 				new Fields\Select_Field( 
 					array(
