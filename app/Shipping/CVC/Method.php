@@ -110,6 +110,8 @@ class Method extends \WC_Shipping_Method {
 			$rate[ 'cost' ] = $this->fixed_price;
 		}
 
+		$rate = apply_filters( 'woo_bg/cvc/rate', $rate, $this );
+
 		// Register the rate
 		$this->add_rate( $rate );
 	}
