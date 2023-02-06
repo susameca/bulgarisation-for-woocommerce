@@ -173,7 +173,9 @@ class Menu {
 		$this->generate_QR_code();
 		$this->save_order_document();
 
-		if ( woo_bg_get_option( 'invoice', 'invoices' ) === 'yes' ) {
+		$generate_invoice = ( woo_bg_get_option( 'invoice', 'invoices' ) === 'yes' );
+
+		if ( apply_filters('woo_bg/admin/invoice/generate_invoice', $generate_invoice, $this ) ) {
 			$this->save_invoice_document();
 		}
 
