@@ -175,6 +175,14 @@ class Menu {
 
 		$generate_invoice = ( woo_bg_get_option( 'invoice', 'invoices' ) === 'yes' );
 
+		if ( $generate_invoice && woo_bg_get_option( 'invoice', 'invoice_only_to_company' ) === 'yes' ) {
+			$generate_invoice = false;
+
+			if ( $this->order->get_meta('_billing_to_company') ) {
+				$generate_invoice = true;
+			}
+		}
+
 		if ( apply_filters('woo_bg/admin/invoice/generate_invoice', $generate_invoice, $this ) ) {
 			$this->save_invoice_document();
 		}

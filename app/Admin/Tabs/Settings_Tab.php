@@ -74,6 +74,7 @@ class Settings_Tab extends Base_Tab {
 					),
 				), 'trigger', __( 'When to generate documents?', 'woo-bg' ) ),
 				new Fields\TrueFalse_Field( 'invoices', __( 'Generating Invoices?', 'woo-bg' ), null, null, __( 'By default, the plugin generates documents - "Order" and "Rejected Order", if you want the plugin to issue documents "Invoice" and "Credit notification", select "Yes".', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'invoice_only_to_company', __( 'Generating Invoices only if wanted?', 'woo-bg' ), null, null, __( 'Generate the invoices only if client wanted it ( for companies only ).', 'woo-bg' ) ),
 				new Fields\TrueFalse_Field( 'add_shipping', __( 'Add Shipping to the invoice', 'woo-bg' ), null, null, __( 'Should we include the delivery in the invoice?', 'woo-bg' ) ),
 				new Fields\Text_Field( 'next_invoice_number', __( 'Next Invoice Number', 'woo-bg' ), __( 'The invoice number of the next order.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'color', __( 'Invoice Color', 'woo-bg' ), __( 'The main color of the invoice in hex format - #000000 for black.', 'woo-bg' ) ),
