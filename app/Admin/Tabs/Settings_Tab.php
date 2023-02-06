@@ -42,7 +42,7 @@ class Settings_Tab extends Base_Tab {
 				new Fields\Text_Field( 'mol', __( 'MOL', 'woo-bg' ), __( 'Your company MOL.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'eik', __( 'EIK', 'woo-bg' ), __( 'Your company EIK.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'dds_number', __( 'VAT Number', 'woo-bg' ), __( 'Your company VAT Number. To be filled in if you have a VAT registration.', 'woo-bg' ) ),
-				new Fields\Select_Field( array_reverse( woo_bg_get_yes_no_options() ) , 'dds_number_required', __( 'VAT number required on checkout?', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'dds_number_required', __( 'VAT number required on checkout?', 'woo-bg' ) ),
 				new Fields\Text_Field( 'phone_number', __( 'Company phone Number', 'woo-bg' ), __( 'Contact phone number of your company.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'city', __( 'Settlement', 'woo-bg' ), __( 'The place of registration of your company.', 'woo-bg' ) ),
 				new Fields\Text_Field( 'address', __( 'Company Address', 'woo-bg' ), __( 'The registration address of your company.', 'woo-bg' ), 'required' ),

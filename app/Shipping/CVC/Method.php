@@ -44,7 +44,6 @@ class Method extends \WC_Shipping_Method {
 		$this->fixed_price          = $this->get_option( 'fixed_price' );
 		$this->test                 = $this->get_option( 'test' );
 		$this->is_sat               = $this->get_option( 'is_sat' );
-		$this->is_ppp               = $this->get_option( 'is_ppp' );
 		$this->sms                  = $this->get_option( 'sms' );
 		$this->tax_status           = 'none';
 
@@ -158,17 +157,6 @@ class Method extends \WC_Shipping_Method {
 					'yes' => __( 'Yes', 'woo-bg' ),
 				),
 				'description' => __( 'Saturday delivery/pickup.', 'woo-bg' ),
-			),
-			'is_ppp'    => array(
-				'title'             => __( 'Cash on delivery as PPP.', 'woo-bg' ),
-				'type'              => 'select',
-				'css'               => 'width: 400px;',
-				'default'           => 'no',
-				'options'           => array(
-					'no' => __( 'No', 'woo-bg' ),
-					'yes' => __( 'Yes', 'woo-bg' ),
-				),
-				'description' => __( 'Cash on delivery to be paid with PPP.', 'woo-bg' ),
 			),
 			'sms'    => array(
 				'title'             => __( 'SMS notification', 'woo-bg' ),
@@ -367,7 +355,7 @@ class Method extends \WC_Shipping_Method {
 		if ( $this->cookie_data['payment'] === 'cod' ) {
 			$cart['cod_amount'] = $this->get_package_total();
 
-			if ( $this->is_ppp === 'yes' ) {
+			if ( woo_bg_get_option( 'cvc', 'ppp' ) === 'yes' ) {
 				$cart['is_cod_ppp'] = 1;
 			}
 		}
