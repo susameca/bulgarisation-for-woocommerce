@@ -773,11 +773,8 @@ class Menu {
 			if ( $invoice_id = $order->get_meta( 'woo_bg_order_document' ) ) {
 	            $attachments[] = get_attached_file( $invoice_id );
 	        }
-
-	        $invoice_id = $order->get_meta( 'woo_bg_invoice_document' );
-			$attach_invoice = $order->get_meta( 'woo_bg_attach_invoice' );
-
-			if ( $attach_invoice == 'yes' && $invoice_id ) {
+	        
+			if ( $invoice_id = $order->get_meta( 'woo_bg_invoice_document' ) ) {
 				$attachments[] = get_attached_file( $invoice_id );
 			}
 		}
