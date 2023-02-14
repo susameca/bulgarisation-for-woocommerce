@@ -126,26 +126,6 @@ class Speedy_Tab extends Base_Tab {
 		return $fields;
 	}
 
-	/*public function generate_pay_options() {
-		$pay_options = [
-			'no' => array(
-				'id' => 'no',
-				'label' => __( 'No agreement', 'woo-bg' )
-			),
-		];
-
-		if ( !empty( $this->container[ Client::SPEEDY_PROFILE ]->get_profile_data()['cdPayOptions'] ) ) {
-			foreach ( $this->container[ Client::SPEEDY_PROFILE ]->get_profile_data()['cdPayOptions'] as $option ) {
-				$pay_options[ $option[ 'num' ] ] = array(
-					'id' => $option[ 'num' ],
-					'label' => $option[ 'num' ],
-				);
-			}
-		}
-		
-		return $pay_options;
-	}*/
-
 	public function get_fields() {
 		return $this->fields;
 	}

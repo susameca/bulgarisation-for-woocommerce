@@ -335,10 +335,10 @@ export default {
 
 		this.paymentBy = this.paymentByTypes[0];
 
-		if ( wooBg_cvc.label.payment_by == 'sender' ) {
-			this.paymentBy = this.paymentByTypes[1];
-		} else if ( wooBg_cvc.fixedPrice ) {
+		if ( wooBg_cvc.cookie_data.fixed_price ) {
 			this.paymentBy = this.paymentByTypes[2];
+		} else if ( wooBg_cvc.label.payer == 'sender' || wooBg_cvc.label.payer == 'contract' ) {
+			this.paymentBy = this.paymentByTypes[1];
 		}
 
 		if ( wooBg_cvc.label.os_value ) {

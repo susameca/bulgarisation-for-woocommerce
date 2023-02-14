@@ -257,3 +257,13 @@ function woo_bg_get_order_item_vat_rate( $item, $order ) {
 
 	return $rate;
 }
+
+function woo_bg_tax_based_price( $price, $rate = 20 ) {
+	if ( wc_tax_enabled() ) {
+		$tax = (new \WC_Tax)::calc_tax( $price, array( array('compound' => 'yes', 'rate' => $rate ) ), true )[0];
+		$tax = round( $tax, 3, PHP_ROUND_HALF_DOWN );
+		$price = round( $price - $tax, 2, PHP_ROUND_HALF_DOWN );
+	}
+
+	return number_format( $price, 2 );
+}

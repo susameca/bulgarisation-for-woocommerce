@@ -233,7 +233,7 @@ class Econt {
 
 		$label = self::update_receiver_address( $label );
 		$label = self::update_label_pay_options( $label, $order_id );
-		$label = self::update_payment_by( $label );
+		$label = self::update_payment_by( $label, $order_id );
 		$label = self::update_test_options( $label );
 		$label = self::update_shipment_type( $label );
 		$label = self::update_shipment_description( $label, $order_id );
@@ -282,7 +282,7 @@ class Econt {
 			$order->update_meta_data( 'woo_bg_econt_shipment_status', $response );
 			$order->save();
 
-			self::update_order_shipping_price( $response, $order_id );
+			self::update_order_shipping_price( $response, $order_id, $label );
 		}
 
 		return $data;
@@ -375,7 +375,7 @@ class Econt {
 		return $label;
 	}
 
-	protected static function update_payment_by( $label ) {
+	protected static function update_payment_by( $label, $order_id ) {
 		$payment_by = $_REQUEST['paymentBy'];
 		$fixed_price = $label['paymentReceiverAmount'];
 		$sender_method = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_sender_payment_method();
@@ -394,6 +394,8 @@ class Econt {
 			$label['paymentSenderMethod'] = $sender_method;
 			$label['paymentReceiverMethod'] = 'cash';
 			$label['paymentReceiverAmount'] = $fixed_price;
+
+			self::update_order_shipping_price( $label, $order_id, $label );
 		}
 		
 		return $label;
@@ -480,17 +482,20 @@ class Econt {
 		return $label;
 	}
 
-	protected static function update_order_shipping_price( $response, $order_id ) {
+	protected static function update_order_shipping_price( $response, $order_id, $request_body = [] ) {
 		if ( !isset( $_REQUEST['paymentBy'] ) ) {
 			return;
 		}
 
-		$payment_by = $_REQUEST['paymentBy'];
 		$order = wc_get_order( $order_id );
 		$price = 0;
 
-		if ( $payment_by['id'] == 'buyer' ) {
-			$price = $response['label']['receiverDueAmount'];
+		if ( $payment_by = $_REQUEST['paymentBy'] ) {
+			if ( $payment_by['id'] == 'buyer' ) {
+				$price = woo_bg_tax_based_price( $response['label']['receiverDueAmount'] );
+			} else if ( $payment_by['id'] == 'fixed' && !empty( $request_body['paymentReceiverAmount'] ) ) {
+				$price = woo_bg_tax_based_price( $request_body['paymentReceiverAmount'] );
+			}
 		}
 
 		foreach( $order->get_items( 'shipping' ) as $item_id => $item ) {

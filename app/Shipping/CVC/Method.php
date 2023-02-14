@@ -45,7 +45,7 @@ class Method extends \WC_Shipping_Method {
 		$this->test                 = $this->get_option( 'test' );
 		$this->is_sat               = $this->get_option( 'is_sat' );
 		$this->sms                  = $this->get_option( 'sms' );
-		$this->tax_status           = 'none';
+		$this->tax_status           = ( wc_tax_enabled() ) ? 'taxable' : 'none' ;
 
 		// Save settings in admin if you have any defined
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
@@ -61,6 +61,9 @@ class Method extends \WC_Shipping_Method {
 	public function calculate_shipping( $package = Array() ) {
 		$this->cookie_data = $this->get_cookie_data();
 		$this->package = $package;
+		if ( is_array( $this->cookie_data ) ) {
+			$this->cookie_data['fixed_price'] = $this->fixed_price;
+		}
 
 		$rate = array(
 			'label' => $this->title,
@@ -70,34 +73,30 @@ class Method extends \WC_Shipping_Method {
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
 		$rate['meta_data']['validated'] = false;
 		$payment_by_data = $this->generate_payment_by_data();
+		$chosen_shippings = WC()->session->get('chosen_shipping_methods');
 
 		if ( 
 			isset( $this->cookie_data['type'] ) && 
 			$this->cookie_data['type'] === $this->delivery_type && 
-			( WC()->session->get( 'chosen_shipping_methods' )[0] === $this->id . ':' . $this->instance_id ) &&
+			( !empty( $chosen_shippings ) && ( $chosen_shippings[0] === $this->id . ':' . $this->instance_id ) ) &&
 			( 
 				( isset( $this->cookie_data['other'] ) && $this->cookie_data['other'] && $this->cookie_data['selectedAddress'] ) || 
 				( isset( $this->cookie_data['streetNumber']) && $this->cookie_data['streetNumber'] && $this->cookie_data['selectedAddress'] ) || 
 				( isset( $this->cookie_data['selectedOffice'] ) && $this->cookie_data['selectedOffice'] ) 
 			) 
 		) {
-			$this->cookie_data['fixed_price'] = $this->fixed_price;
+			if ( empty( $this->fixed_price ) && $payment_by_data[ 'payer' ] !== 'rec') {
+				$this->free_shipping = true;
+			}
+
 			$request_data = $this->calculate_shipping_price_from_api();
 			$rate['meta_data']['validated'] = true;
-			$rate['meta_data']['cookie_data'] = $this->cookie_data;
 
 			if ( isset( $request_data['errors'] ) ) {
 				$rate['meta_data']['validated'] = false;
 				$rate['meta_data']['errors'] = $request_data['errors'];
 			} elseif ( isset( $request_data['price'] )  ) {
 				$rate['cost'] = $request_data['price'];
-			}
-
-			if ( 
-				( !$rate['cost'] && !isset( $request_data['errors'] ) ) || 
-				( empty( $this->fixed_price ) && $payment_by_data[ 'payer' ] !== 'rec' )
-			) {
-				$this->free_shipping = true;
 			}
 		}
 
@@ -107,9 +106,10 @@ class Method extends \WC_Shipping_Method {
 		} 
 
 		if ( !$this->free_shipping && !empty( $this->fixed_price ) ) {
-			$rate[ 'cost' ] = $this->fixed_price;
+			$rate[ 'cost' ] = woo_bg_tax_based_price( $this->fixed_price );
 		}
-
+		
+		$rate['meta_data']['cookie_data'] = $this->cookie_data;
 		$rate = apply_filters( 'woo_bg/cvc/rate', $rate, $this );
 
 		// Register the rate
@@ -225,9 +225,10 @@ class Method extends \WC_Shipping_Method {
 		} else if ( !$request['success'] ) {
 			$data['errors'] = $request['error'];
 		} else if ( isset( $request['price'] ) ) {
-			$data['price'] = number_format( $request['price_with_vat'], 2 );
+			$data['price_with_vat'] = number_format( $request['price_with_vat'], 2 );
 			$data['price_without_vat'] = number_format( $request['price'], 2 );
 			$data['vat'] = number_format( $request['price_with_vat'] - $request['price'], 2 );
+			$data['price'] = ( wc_tax_enabled() ) ? $data['price_without_vat'] : $data['price_with_vat'];
 		}
 
 		return $data;
@@ -277,7 +278,7 @@ class Method extends \WC_Shipping_Method {
 	private function generate_receiver_data() {
 		$country = ( !empty( $_POST['country'] ) ) ? sanitize_text_field( $_POST['country'] ) : 100;
 		$country_id = $this->container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
-		$raw_city = sanitize_text_field( $_POST['city'] );
+		$raw_city = ( !empty( $_POST['city'] ) ) ? sanitize_text_field( $_POST['city'] ) : '';
 		$state_id = $this->container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $_POST['state'] ), $country_id );
 		$city = $this->container[ Client::CVC_CITIES ]->search_for_city( $raw_city, $state_id, $country_id );
 
@@ -377,7 +378,7 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		if ( $os_value ) {
-			$cart[ 'os_value' ] = $os_value;
+			$cart[ 'os_value' ] = number_format( $os_value, 2 );
 		}
 
 		return $cart;
@@ -416,6 +417,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( !empty( $this->free_shipping_over ) && $this->get_package_total() > $this->free_shipping_over ) {
 			$this->free_shipping = true;
+			unset( $this->cookie_data['fixed_price'] );
 
 			if ( $payment_by_data[ 'payer' ] === 'rec' ) {
 				$payment_by_data[ 'payer' ] = 'sender';
@@ -432,8 +434,8 @@ class Method extends \WC_Shipping_Method {
 	private function get_package_total() {
 		$total = WC()->cart->total;
 
-		if ( WC()->cart->shipping_total ) {
-			$total -= WC()->cart->shipping_total;
+		if ( !$this->free_shipping && WC()->cart->shipping_total ) {
+			$total -= ( WC()->cart->shipping_total + WC()->cart->shipping_tax_total );
 		}
 
 		return number_format( $total, 2 );

@@ -223,7 +223,7 @@ class CVC {
 		$label = self::update_test_options( $label );
 		$label = self::update_shipment_description( $label, $order_id );
 		$label = self::update_phone_and_names( $label );
-		$label = self::update_os_value( $label );
+		$label = self::update_os_value_and_cod( $label );
 
 		$data = self::send_label_to_cvc( $label, $order_id );
 
@@ -454,7 +454,23 @@ class CVC {
 		return $label;
 	}
 
-	protected static function update_os_value( $label ) {
+	protected static function update_os_value_and_cod( $label ) {
+		$cookie_data = $_REQUEST['cookie_data'];
+		$payment_by = $_REQUEST['paymentBy'];
+
+		if ( isset( $label['cod_amount'] ) ) {
+			if ( !$label['cod_amount'] ) {
+				unset( $label['cod_amount'] );
+			} else if ( 
+				isset( $label['cod_amount'] ) && 
+				$cookie_data['fixed_price'] && 
+				$payment_by['id'] == 'fixed'
+			) {
+				$label['cod_amount'] += number_format( $cookie_data['fixed_price'], 2 );
+				$label['cod_amount'] = number_format( $label['cod_amount'], 2 );
+			}
+		}
+
 		if ( isset( $label[ 'os_value' ] ) ) {
 			unset( $label[ 'os_value' ] );
 		}
@@ -478,12 +494,14 @@ class CVC {
 			$cookie_data = $_REQUEST['cookie_data'];
 
 			if ( $payment_by['id'] == 'rec' ) {
-				$price = $response['price_with_vat'];
-			} else if ( $payment_by['id'] == 'fixed' ) {
-				$price = $cookie_data['fixed_price'];
+				$price = ( wc_tax_enabled() ) ? $response['price'] : $response['price_with_vat'];
+			} else if ( $payment_by['id'] == 'fixed' && $cookie_data['fixed_price'] ) {
 				$request_body['cod_amount'] += $cookie_data['fixed_price'];
+				$price = woo_bg_tax_based_price( $cookie_data['fixed_price'] );
 			}
 		}
+
+		$price = number_format( $price, 2 );
 
 		foreach( $order->get_items( 'shipping' ) as $item_id => $item ) {
 			$item->set_total( $price );

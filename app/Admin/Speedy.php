@@ -223,7 +223,6 @@ class Speedy {
 		$label = self::update_services( $label );
 		$label = self::update_shipment_description( $label, $order_id );
 
-
 		$data = self::send_label_to_speedy( $label, $order_id );
 
 		wp_send_json_success( $data );
@@ -384,7 +383,8 @@ class Speedy {
 				$cookie_data['fixed_price'] && 
 				$payment_by['id'] == 'fixed'
 			) {
-				$label['service']['additionalServices']['cod']['amount'] += number_format( $cookie_data['fixed_price'] );
+				$label['service']['additionalServices']['cod']['amount'] += number_format( $cookie_data['fixed_price'], 2 );
+				$label['service']['additionalServices']['cod']['amount'] = number_format( $label['service']['additionalServices']['cod']['amount'], 2 );
 			}
 		}
 
@@ -471,7 +471,6 @@ class Speedy {
 			return;
 		}
 
-		$payment_by = $_REQUEST['paymentBy'];
 		$order = wc_get_order( $order_id );
 		$price = 0;
 
@@ -479,11 +478,13 @@ class Speedy {
 			$cookie_data = $_REQUEST['cookie_data'];
 
 			if ( $payment_by['id'] == 'RECIPIENT' ) {
-				$price = $response['price']['total'];
+				$price = ( wc_tax_enabled() ) ? $response['price']['amount'] : $response['price']['total'];
 			} else if ( $payment_by['id'] == 'fixed' && $cookie_data['fixed_price'] ) {
-				$price = $cookie_data['fixed_price'];
+				$price = woo_bg_tax_based_price( $cookie_data['fixed_price'] );
 			}
 		}
+
+		$price = number_format( $price, 2 );
 
 		foreach( $order->get_items( 'shipping' ) as $item_id => $item ) {
 			$item->set_total( $price );

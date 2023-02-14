@@ -44,7 +44,7 @@ class Method extends \WC_Shipping_Method {
 		$this->fixed_price          = $this->get_option( 'fixed_price' );
 		$this->test                 = $this->get_option( 'test' );
 		$this->sms                  = $this->get_option( 'sms' );
-		$this->tax_status           = 'none';
+		$this->tax_status           = ( wc_tax_enabled() ) ? 'taxable' : 'none' ;
 
 		// Save settings in admin if you have any defined
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
@@ -68,11 +68,12 @@ class Method extends \WC_Shipping_Method {
 
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
 		$rate['meta_data']['validated'] = false;
+		$chosen_shippings = WC()->session->get('chosen_shipping_methods');
 
 		if ( 
 			isset( $this->cookie_data['type'] ) && 
 			$this->cookie_data['type'] === $this->delivery_type && 
-			( WC()->session->get( 'chosen_shipping_methods' )[0] === $this->id . ':' . $this->instance_id ) &&
+			( !empty( $chosen_shippings ) && ( $chosen_shippings[0] === $this->id . ':' . $this->instance_id ) ) &&
 			( 
 				( isset( $this->cookie_data['other'] ) && $this->cookie_data['other'] && $this->cookie_data['selectedAddress'] ) || 
 				( isset( $this->cookie_data['streetNumber']) && $this->cookie_data['streetNumber'] && $this->cookie_data['selectedAddress'] ) || 
@@ -205,7 +206,7 @@ class Method extends \WC_Shipping_Method {
 		if ( isset( $request['type'] ) && $request['type'] === 'ExInvalidParam' ) {
 			$data['errors'] = $request;
 		} else if ( isset( $request['label']['receiverDueAmount'] ) ) {
-			$data['price'] = $request['label']['receiverDueAmount'];
+			$data['price'] = woo_bg_tax_based_price( $request['label']['receiverDueAmount'] );
 		}
 
 		return $data;
@@ -362,7 +363,7 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		if ( $os_value && empty( $this->cookie_data['selectedOfficeIsAPS'] ) ) {
-			$cart[ 'services' ]['declaredValueAmount'] = $os_value;
+			$cart[ 'services' ]['declaredValueAmount'] = number_format( $os_value, 2 );
 			$cart[ 'services' ]['declaredValueCurrency'] = 'BGN';
 		}
 
@@ -415,7 +416,7 @@ class Method extends \WC_Shipping_Method {
 		$total = WC()->cart->total;
 
 		if ( WC()->cart->shipping_total ) {
-			$total -= WC()->cart->shipping_total;
+			$total -= ( WC()->cart->shipping_total + WC()->cart->shipping_tax_total );
 		}
 
 		return number_format( $total, 2 );
