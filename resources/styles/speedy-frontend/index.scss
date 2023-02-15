@@ -52,3 +52,7 @@ button.mfp-close {
 
 #main tr.woo-bg--shipping-methods ul#shipping_method { margin: 0; }
 #main tr.woo-bg--shipping-methods ul#shipping_method li { display:block; }
+
+@media ( max-width: 768px ) {
+	.mfp-iframe-holder .mfp-content { height: 100% }
+}
