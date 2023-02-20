@@ -111,6 +111,7 @@ export default {
 		if ( window.econtAddressInitialUpdate ) {
 			this.document.trigger('update_checkout');
 			window.econtAddressInitialUpdate = false;
+			this.setAddress1FieldData();
 		}
 	},
 	methods: {
@@ -312,7 +313,6 @@ export default {
 		this.firstNameField.off( 'change.triggerUpdate' );
 		this.lastNameField.off( 'change.triggerUpdate' );
 
-		//setCookie( 'woo-bg--econt-address', '', 1 );
 		$('#billing_address_1').attr('disabled', false);
 		$('#shipping_address_1').attr('disabled', false);
 	}
