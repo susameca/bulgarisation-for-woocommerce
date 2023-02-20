@@ -108,12 +108,14 @@ class Profile {
 		$all_profiles = woo_bg_get_option( 'econt', 'profile_data' );
 		$options = array();
 
-		foreach ( $all_profiles['profiles'] as $key => $profile ) {
-			$options[ $key ] = array(
-				'id' => $key,
-				'label' => $profile['client']['name'],
-			);
+		if ( !empty( $all_profiles['profiles'] ) ) {
+			foreach ( $all_profiles['profiles'] as $key => $profile ) {
+				$options[ $key ] = array(
+					'id' => $key,
+					'label' => $profile['client']['name'],
+				);
 
+			}
 		}
 
 		return $options;

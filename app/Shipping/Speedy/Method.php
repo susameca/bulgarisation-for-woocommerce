@@ -439,7 +439,10 @@ class Method extends \WC_Shipping_Method {
 
 		if ( !empty( $this->free_shipping_over ) && $this->get_package_total() > $this->free_shipping_over ) {
 			$this->free_shipping = true;
-			unset( $this->cookie_data['fixed_price'] );
+			
+			if ( isset( $this->cookie_data['fixed_price'] ) ) {
+				unset( $this->cookie_data['fixed_price'] );
+			}
 
 			if ( $payment[ 'courierServicePayer' ] === 'RECIPIENT' ) {
 				$payment[ 'courierServicePayer' ] = 'SENDER';
