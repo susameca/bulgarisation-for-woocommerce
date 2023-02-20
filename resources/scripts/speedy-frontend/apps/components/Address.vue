@@ -124,6 +124,7 @@ export default {
 		if ( window.speedyAddressInitialUpdate ) {
 			this.document.trigger('update_checkout');
 			window.speedyAddressInitialUpdate = false;
+			this.setAddress1FieldData();
 		}
 	},
 	methods: {
