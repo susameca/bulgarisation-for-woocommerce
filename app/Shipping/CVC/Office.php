@@ -31,6 +31,7 @@ class Office {
 			'noResult' => __( 'No results was found for this city', 'woo-bg' ),
 			'noOptions' => __( 'Start typing office', 'woo-bg' ), 
 			'officeLocator' => __( 'Office locator', 'woo-bg' ),
+			'toOffice' => __( 'To Office: ', 'woo-bg' ),
 		);
 	}
 

@@ -111,6 +111,7 @@ export default {
 		if ( window.cvcAddressInitialUpdate ) {
 			this.document.trigger('update_checkout');
 			window.cvcAddressInitialUpdate = false;
+			this.setAddress1FieldData();
 		}
 	},
 	methods: {
@@ -248,7 +249,7 @@ export default {
 			this.setLocalStorageData();
 
 			this.document.trigger('update_checkout');
-		}, 500 ),
+		}, 2000 ),
 		resetData() {
 			this.city = '';
 			this.selectedAddress = '';

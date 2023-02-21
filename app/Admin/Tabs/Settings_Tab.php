@@ -78,8 +78,8 @@ class Settings_Tab extends Base_Tab {
 				new Fields\TrueFalse_Field( 'add_shipping', __( 'Add Shipping to the invoice', 'woo-bg' ), null, null, __( 'Should we include the delivery in the invoice?', 'woo-bg' ) ),
 				new Fields\Text_Field( 'next_invoice_number', __( 'Next Invoice Number', 'woo-bg' ), __( 'The invoice number of the next order.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'color', __( 'Invoice Color', 'woo-bg' ), __( 'The main color of the invoice in hex format - #000000 for black.', 'woo-bg' ) ),
-				new Fields\Text_Field( 'prepared_by', __( 'Prepared by', 'woo-bg' ), __( 'Enter the name of the compiler of the automatically generated documents, which will be displayed in them.', 'woo-bg' ), 'required' ),
-				new Fields\Text_Field( 'identification_code', __( 'Identification code', 'woo-bg' ), null, 'required', __( "Enter an ID in the invoices and credit memos that replace the compiler's signature.", 'woo-bg' ) ),
+				new Fields\Text_Field( 'prepared_by', __( 'Prepared by', 'woo-bg' ), __( 'Enter the name of the compiler of the automatically generated documents, which will be displayed in them.', 'woo-bg' ), null ),
+				new Fields\Text_Field( 'identification_code', __( 'Identification code', 'woo-bg' ), null, null, __( "Enter an ID in the invoices and credit memos that replace the compiler's signature.", 'woo-bg' ) ),
 				new Fields\Text_Field( 'footer_text', __( 'Footer text', 'woo-bg' ) ),
 			),
 			'shop' => array(

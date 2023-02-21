@@ -69,6 +69,12 @@ export default {
 
 		this.loadOffices();
 
+		$('form.checkout').on('checkout_place_order', function (e) {
+			$('#billing_address_1').attr('disabled', false );
+			$('#shipping_address_1').attr('disabled', false );
+		});
+
+		this.document.on( 'update_checkout.onUpdate', this.onUpdate );
 		this.document.on( 'update_checkout.setCookieOffice', this.setCookieData );
 		this.phoneField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.firstNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
@@ -77,6 +83,7 @@ export default {
 		if ( window.cvcOfficeInitialUpdate ) {
 			this.document.trigger('update_checkout');
 			window.cvcOfficeInitialUpdate = false;
+			this.setAddress1FieldData();
 		}
 	},
 	methods: {
@@ -88,14 +95,18 @@ export default {
 			$('#shipping_address_1').attr('disabled', false);
 
 			if ( $('#ship-to-different-address-checkbox').is(":checked") ) {
+				this.Address1Field = $( '#shipping_address_1' );
 				this.countryField = $( '#shipping_country' );
 				this.firstNameField = $( '#shipping_first_name' );
 				this.lastNameField = $( '#shipping_last_name' );
 			} else {
+				this.Address1Field = $( '#billing_address_1' );
 				this.countryField = $( '#billing_country' );
 				this.firstNameField = $( '#billing_first_name' );
 				this.lastNameField = $( '#billing_last_name' );
 			}
+
+			this.Address1Field.attr('disabled', true);
 
 			let _this = this;
 		},
@@ -132,6 +143,7 @@ export default {
 		},
 		setOffice() {
 			this.setLocalStorageData();
+			this.setAddress1FieldData();
 
 			this.document.trigger('update_checkout');
 		},
@@ -168,8 +180,21 @@ export default {
 			this.selectedOffice = '';
 			localStorage.removeItem( 'woo-bg--cvc-office' );
 		},
+		setAddress1FieldData() {
+			let shippingAddress = "";
+
+			if ( this.selectedOffice.name_bg ) {
+				shippingAddress = this.i18n.toOffice + this.selectedOffice.name_bg;
+			}
+
+			this.Address1Field.val( shippingAddress );
+		},
 		triggerUpdateCheckout() {
 			this.document.trigger('update_checkout');
+		},
+		onUpdate() {
+			this.Address1Field.attr('disabled', true);
+			this.setCookieData();
 		},
 	},
 	beforeDestroy() {
@@ -177,6 +202,9 @@ export default {
 		this.phoneField.off( 'change.triggerUpdate' );
 		this.firstNameField.off( 'change.triggerUpdate' );
 		this.lastNameField.off( 'change.triggerUpdate' );
+
+		$('#billing_address_1').attr('disabled', false);
+		$('#shipping_address_1').attr('disabled', false);
 	}
 }
 </script>

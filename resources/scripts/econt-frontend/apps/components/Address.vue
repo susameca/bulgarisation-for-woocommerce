@@ -245,7 +245,7 @@ export default {
 			this.setLocalStorageData();
 
 			this.document.trigger('update_checkout');
-		}, 500 ),
+		}, 2000 ),
 		resetData() {
 			this.city = '';
 			this.selectedAddress = '';
