@@ -284,7 +284,12 @@ class Method extends \WC_Shipping_Method {
 
 		if ( !empty( $this->cookie_data['selectedAddress']['type'] ) && $this->cookie_data['selectedAddress']['type'] === 'streets' ) {
 			$address["streetId"] = str_replace('street-', '', $this->cookie_data['selectedAddress']['orig_key'] ); 
-			$address["streetNo"] = $this->cookie_data['streetNumber'];
+			$parts = explode( ',', $this->cookie_data['streetNumber'] );
+			$address["streetNo"] = array_shift( $parts );
+
+			if ( !empty( $parts ) ) {
+				$address["addressNote"] = implode( ' ', $parts );
+			}
 		} else if ( 
 			!empty( $this->cookie_data['selectedAddress']['type'] ) && $this->cookie_data['selectedAddress']['type'] === 'quarters' || 
 			$this->cookie_data['mysticQuarter'] 

@@ -301,7 +301,12 @@ class Speedy {
 
 		if ( !empty( $_REQUEST['street']['type'] ) && $_REQUEST['street']['type'] === 'streets' ) {
 			$address["streetId"] = str_replace('street-', '', $_REQUEST['street']['orig_key'] ); 
-			$address["streetNo"] = $_REQUEST['streetNumber'];
+			$parts = explode( ',', $_REQUEST[ 'streetNumber' ] );
+			$address["streetNo"] = array_shift( $parts );
+
+			if ( !empty( $parts ) ) {
+				$address["addressNote"] = implode( ' ', $parts );
+			}
 		} else if ( 
 			!empty( $_REQUEST['street']['type'] ) && $_REQUEST['street']['type'] === 'quarters' || 
 			!empty( $_REQUEST['cookie_data']['mysticQuarter'] )
@@ -331,7 +336,7 @@ class Speedy {
 					if ( isset( $parts[4] ) ) {
 						unset( $parts[0], $parts[1], $parts[2], $parts[3] );
 
-						$address["addressNote"] = implode( ' ', $parts ) ;
+						$address["addressNote"] = implode( ' ', $parts );
 					}
 				}
 			}
