@@ -37,7 +37,9 @@ class Econt {
 	}
 
 	public static function validate_access( $api_call ) {
-		return !( isset( $api_call['type'] ) && $api_call['type'] == 'ExAccessDenied' );
+		if ( is_array( $api_call ) ) {
+			return !( isset( $api_call['type'] ) && $api_call['type'] == 'ExAccessDenied' );
+		}
 	}
 
 	//Loaders
