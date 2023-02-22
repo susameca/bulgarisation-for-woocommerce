@@ -442,8 +442,8 @@ class Speedy {
 
 			$names[] = $name;
 		}
-
-		$label['content']['contents'] = implode( ', ', $names );
+		
+		$label['content']['contents'] =  mb_substr( implode( ',', $names ), 0, 100 );
 
 		return $label;
 	}

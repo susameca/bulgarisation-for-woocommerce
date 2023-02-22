@@ -354,7 +354,7 @@ class Method extends \WC_Shipping_Method {
 			$content['totalWeight'] = apply_filters( 'woo_bg/speedy/label/weight', 1, $this->package, $this );
 		}
 
-		$content['contents'] = implode( ',', $names );
+		$content['contents'] = mb_substr( implode( ',', $names ), 0, 100 );
 
 		return array(
 			'content' => $content,
