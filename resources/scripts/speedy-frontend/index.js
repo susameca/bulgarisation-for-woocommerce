@@ -26,7 +26,7 @@ speedy.then( function ( promise ) {
 				$(document.body).trigger('update_checkout');
 			});
 			
-			let $parent = $shipping_method.parent();
+			let $parent = $shipping_method.closest('li');
 			let $target = $parent.find('.woo-bg-additional-fields');
 			let type = $target.data('type');
 
