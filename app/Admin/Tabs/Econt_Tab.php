@@ -84,8 +84,10 @@ class Econt_Tab extends Base_Tab {
 		if ( $this->container[ Client::ECONT_PROFILE ]->is_valid_profile( true ) ) {
 			$all_profiles = $this->container[ Client::ECONT_PROFILE ]->get_profiles_for_settings();
 
-			$fields[ 'econt' ][] = new Fields\Select_Field( $all_profiles, 'profile_key', __( 'Select profile', 'woo-bg' ), null, null, __( 'Select the profile you want to use and save to show or update the other options.', 'woo-bg' )
-			);
+			if ( !empty( $all_profiles ) ) {
+				$fields[ 'econt' ][] = new Fields\Select_Field( $all_profiles, 'profile_key', __( 'Select profile', 'woo-bg' ), null, null, __( 'Select the profile you want to use and save to show or update the other options.', 'woo-bg' )
+				);
+			}
 
 			$fields[ 'econt' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ) );
 			$fields[ 'econt' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ) );
@@ -122,18 +124,25 @@ class Econt_Tab extends Base_Tab {
 
 			switch ( $send_from ) {
 				case 'address':
-					$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $addresses, 'address', __( 'Select Address', 'woo-bg' ) );
+					if ( !empty( $addresses ) ) {
+						$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $addresses, 'address', __( 'Select Address', 'woo-bg' ) );
+					}
 					break;
 				case 'office':
-					$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $cities, 'office_city', __( 'City', 'woo-bg' ) );
-					$fields[ 'econt_send_from' ][] = new Fields\Select_Field( 
-						$offices['shops'], 
-						'office', 
-						__( 'Office', 'woo-bg' ), 
-						null, 
-						null, 
-						__('Choose a city and save in order to show offices.', 'woo-bg' ) 
-					);
+					if ( !empty( $cities ) ) {
+						$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $cities, 'office_city', __( 'City', 'woo-bg' ) );
+					}
+
+					if ( !empty( $offices['shops'] ) ) {
+						$fields[ 'econt_send_from' ][] = new Fields\Select_Field( 
+							$offices['shops'], 
+							'office', 
+							__( 'Office', 'woo-bg' ), 
+							null, 
+							null, 
+							__('Choose a city and save in order to show offices.', 'woo-bg' ) 
+						);
+					}
 					break;
 			}
 		}

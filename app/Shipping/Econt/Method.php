@@ -413,11 +413,7 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	protected function get_package_total() {
-		$total = WC()->cart->total;
-
-		if ( WC()->cart->shipping_total ) {
-			$total -= ( WC()->cart->shipping_total + WC()->cart->shipping_tax_total );
-		}
+		$total = floatval( WC()->cart->get_cart_contents_total() ) + floatval( WC()->cart->get_cart_contents_tax() );
 
 		return number_format( $total, 2 );
 	}

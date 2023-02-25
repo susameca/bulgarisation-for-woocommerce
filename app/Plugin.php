@@ -63,8 +63,8 @@ class Plugin {
 		if ( woo_bg_get_option( 'apis', 'enable_nekorekten' ) === 'yes' ) {
 			new Admin\Nekorekten_Com();
 		}
-
-		do_action( 'woo_bg/init-classes');
+		
+		do_action( 'woo_bg/init-classes' );
 	}
 
 	private function load_functions() {
