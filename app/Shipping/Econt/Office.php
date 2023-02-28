@@ -50,6 +50,8 @@ class Office {
 			
 			if ( !$state ) {
 				$args[ 'error' ] = __( 'Please select region.', 'woo-bg' );
+			} elseif ( empty( $raw_city ) ) {
+				$args[ 'error' ] = sprintf( __( 'Please enter a city.', 'woo-bg' ), $raw_city, $state );
 			} else {
 				$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'woo-bg' ), $raw_city, $state );
 			}

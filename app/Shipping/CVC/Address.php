@@ -58,7 +58,7 @@ class Address {
 
 			$args[ 'streets' ] = self::merge_options( $streets, $quarters );
 		} else {
-			$args[ 'cities' ] = woo_bg_return_array_for_select( $cities_only_names, 1, array( 'type' => 'city' ) );
+			$args[ 'cities' ] = woo_bg_return_array_for_select( $cities_data['cities_only_names'], 1, array( 'type' => 'city' ) );
 		}
 
 		wp_send_json_success( $args );

@@ -34,7 +34,7 @@
 	  </multiselect>
 
 	  <input 
-	  	class="woo-bg-multiselect--additional-field"
+	  	class="woo-bg-multiselect--additional-field input-text"
 	  	:placeholder="i18n.mysticQuarter" 
 	  	type="text" 
 	  	v-model="mysticQuarter" 
@@ -43,7 +43,7 @@
 	  >
 
 	  <input 
-	  	class="woo-bg-multiselect--additional-field"
+	  	class="woo-bg-multiselect--additional-field input-text"
 	  	:placeholder="i18n.streetNumber" 
 	  	type="text" 
 	  	v-model="streetNumber" 
@@ -52,7 +52,7 @@
 	  >
 
 	  <input 
-	  	class="woo-bg-multiselect--additional-field"
+	  	class="woo-bg-multiselect--additional-field input-text"
 	  	:placeholder="i18n.blVhEt" 
 	  	type="text" v-model="other" 
 	  	v-if="( selectedAddress.type && selectedAddress.type === 'quarters' ) || mysticQuarter"
@@ -234,6 +234,9 @@ export default {
 
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
 				.then(function( response ) {
+					let selectedAddress = [];
+					let clearAdditionaFields = true;
+
 					if ( response.data.data.status === 'invalid-city' ) {
 						_this.addresses = cloneDeep( response.data.data.cities );
 						_this.resetData();
@@ -244,8 +247,21 @@ export default {
 							_this.addresses = cloneDeep( response.data.data.streets );
 							_this.mysticQuarter = '';
 						} else {
-							_this.selectedAddress = [];
+							
 						}
+					}
+
+					_this.addresses.forEach( function ( address ) {
+						if ( _this.selectedAddress.id == address.id ) {
+							selectedAddress = address;
+							clearAdditionaFields = false;
+						}
+					});
+
+					_this.selectedAddress = cloneDeep( selectedAddress );
+					if ( clearAdditionaFields ) {
+						_this.streetNumber = '';
+						_this.other = '';
 					}
 
 					_this.loading = false;

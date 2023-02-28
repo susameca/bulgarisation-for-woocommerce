@@ -1,6 +1,6 @@
 <template>
 	<div class="woo-bg--econt-delivery">
-		<div v-if="error">{{error}}</div>
+		<div class="woo-bg--office-error" v-if="error">{{error}}</div>
 
 		<div v-else>
 			<multiselect 
@@ -196,6 +196,7 @@ export default {
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
 				.then(function( response ) {
 					_this.error = '';
+					let selectedOffice = [];
 
 					if ( response.data.data.status === 'invalid-city' ) {
 						_this.error = response.data.data.error;
@@ -208,6 +209,14 @@ export default {
 							_this.resetData();
 						}
 					}
+
+					_this.offices.forEach( function ( office ) {
+						if ( _this.selectedOffice.code == office.code ) {
+							selectedOffice = office;
+						}
+					});
+
+					_this.selectedOffice = cloneDeep( selectedOffice );
 
 					_this.loading = false;
 				} )
