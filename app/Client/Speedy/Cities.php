@@ -134,7 +134,7 @@ class Cities {
 		];
 	}
 
-	protected function get_regions() {
+	public function get_regions() {
 		return array(
 			'BG-01' => 'BLAGOEVGRAD',
 			'BG-02' => 'BURGAS',

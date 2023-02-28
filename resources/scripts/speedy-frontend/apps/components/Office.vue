@@ -1,6 +1,6 @@
  <template>
 	<div class="woo-bg--speedy-delivery">
-		<div v-if="error">{{error}}</div>
+		<div class="woo-bg--office-error" v-if="error">{{error}}</div>
 
 		<div v-else>
 			<multiselect 
@@ -174,8 +174,8 @@ export default {
 			let localStorageData = localStorage.getItem( 'woo-bg--speedy-office' );
 			if ( localStorageData ) {
 				localStorageData = JSON.parse( localStorageData );
-				this.selectedOffice = cloneDeep( localStorageData.selectedOffice );
 				this.offices = cloneDeep( localStorageData.offices );
+				this.selectedOffice = cloneDeep( localStorageData.selectedOffice );
 				this.state = cloneDeep( localStorageData.state );
 				this.city = cloneDeep( localStorageData.city );
 				this.type = cloneDeep( localStorageData.type );
@@ -197,6 +197,7 @@ export default {
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
 				.then(function( response ) {
 					_this.error = '';
+					let selectedOffice = [];
 
 					if ( response.data.data.status === 'invalid-city' ) {
 						_this.error = response.data.data.error;
@@ -209,6 +210,14 @@ export default {
 							_this.resetData();
 						}
 					}
+
+					_this.offices.forEach( function ( office ) {
+						if ( _this.selectedOffice.id == office.id ) {
+							selectedOffice = office;
+						}
+					});
+
+					_this.selectedOffice = cloneDeep( selectedOffice );
 
 					_this.loading = false;
 				} )
@@ -282,6 +291,7 @@ export default {
 	},
 	beforeDestroy() {
 		this.document.off( 'update_checkout.setCookieOffice');
+		this.document.off( 'update_checkout.onUpdate');
 		this.phoneField.off( 'change.triggerUpdate' );
 		this.firstNameField.off( 'change.triggerUpdate' );
 		this.lastNameField.off( 'change.triggerUpdate' );
