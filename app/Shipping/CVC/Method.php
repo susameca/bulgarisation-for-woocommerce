@@ -279,9 +279,8 @@ class Method extends \WC_Shipping_Method {
 		$country = ( !empty( $_POST['country'] ) ) ? sanitize_text_field( $_POST['country'] ) : 100;
 		$country_id = $this->container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
 		$raw_city = ( !empty( $_POST['city'] ) ) ? sanitize_text_field( $_POST['city'] ) : '';
-		$state_id = $this->container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $_POST['state'] ), $country_id );
+		$state_id = ( !empty( $_POST['state'] ) ) ? $this->container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $_POST['state'] ), $country_id ) : '';
 		$city = $this->container[ Client::CVC_CITIES ]->search_for_city( $raw_city, $state_id, $country_id );
-
 
 		if ( empty( $city ) ) {
 			return( [] );
