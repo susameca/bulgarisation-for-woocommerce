@@ -69,6 +69,12 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 2.4.6 =
+Shipping: Optimize widgets init
+Shipping: Optimize package totals
+Shipping: Optimize office widgets
+Shipping: Optimize address widgets
+
 = 2.4.5 =
 Speedy: Fix max contents length
 Speedy: Optimize address generation
