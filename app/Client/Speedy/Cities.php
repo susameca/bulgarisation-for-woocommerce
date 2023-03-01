@@ -106,9 +106,7 @@ class Cities {
 
 	public function get_filtered_cities( $city, $state ) {
 		$city = mb_strtolower( Transliteration::latin2cyrillic( $city ) );
-		$cities = self::get_cities_by_region( $state );
-
-
+		$cities = $this->get_cities_by_region( $state );
 		$cities_only_names = [];
 		$cities_search_names = [];
 		$cities_only_names_dropdowns = [];

@@ -252,7 +252,7 @@ export default {
 					}
 
 					_this.addresses.forEach( function ( address ) {
-						if ( _this.selectedAddress.id == address.id ) {
+						if ( _this.selectedAddress.orig_key == address.orig_key ) {
 							selectedAddress = address;
 							clearAdditionaFields = false;
 						}
