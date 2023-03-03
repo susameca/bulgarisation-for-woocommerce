@@ -45,7 +45,8 @@ class Office {
 
 		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $raw_city, $state );
 
-		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
+
+		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) || !$raw_city ) {
 			$args[ 'status' ] = 'invalid-city';
 			
 			if ( !$state ) {
