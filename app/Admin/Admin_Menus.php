@@ -97,9 +97,13 @@ class Admin_Menus {
 	 */
 	public static function get_tabs() {
 		$tabs = array(
-			new Tabs\Export_Tab(),
 			new Tabs\Settings_Tab(),
 		);
+
+		if ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' ) {
+			$tabs[] = new Tabs\Nra_Tab();
+			$tabs[] = new Tabs\Export_Tab();
+		}
 
 		if ( woo_bg_get_option( 'apis', 'enable_econt' ) === 'yes' ) {
 			$tabs[] = new Tabs\Econt_Tab();

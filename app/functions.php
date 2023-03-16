@@ -1,4 +1,6 @@
 <?php
+use Woo_BG\Export\Nra\Xml\PaymentTypes;
+
 function woo_bg_assets_bundle( $path ) {
 	static $manifest = null;
 
@@ -98,12 +100,12 @@ function woo_bg_get_payment_types() {
 
 function woo_bg_get_payment_types_for_meta() {
 	return array(
-		'1' => \Audit\PaymentTypes\WithoutPostPayment::class, //1
-		'2' => \Audit\PaymentTypes\VirtualPOSTerminal::class, //2
-		'3' => \Audit\PaymentTypes\WithPostPayment::class, //3
-		'4' => \Audit\PaymentTypes\PaymentService::class, //4
-		'5' => \Audit\PaymentTypes\Other::class, //5
-		'6' => \Audit\PaymentTypes\ReflectedWithReceipt::class, //5
+		'1' => PaymentTypes\WithoutPostPayment::class, //1
+		'2' => PaymentTypes\VirtualPOSTerminal::class, //2
+		'3' => PaymentTypes\WithPostPayment::class, //3
+		'4' => PaymentTypes\PaymentService::class, //4
+		'5' => PaymentTypes\Other::class, //5
+		'6' => PaymentTypes\ReflectedWithReceipt::class, //5
 	);
 }
 

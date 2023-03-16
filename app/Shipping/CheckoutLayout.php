@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 class CheckoutLayout {
 	public function __construct() {
-		if ( woo_bg_get_option( 'nap', 'alternative_shipping_table' ) === 'yes' ) {
+		if ( woo_bg_get_option( 'checkout', 'alternative_shipping_table' ) === 'yes' ) {
 			add_filter( 'woocommerce_locate_template', array( __CLASS__, 'intercept_shipping_table_template' ), 10, 3 );
 		}
 	}

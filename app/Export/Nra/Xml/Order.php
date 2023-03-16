@@ -1,7 +1,7 @@
 <?php
-namespace Woo_BG\Admin\Tabs\Export_Tab;
+namespace Woo_BG\Export\Nra\Xml;
 
-class Order extends \Audit\Order {
+class Order {
     private string $orderUniqueNumber;
 
     private \DateTime $orderDate;

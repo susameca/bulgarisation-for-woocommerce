@@ -1,22 +1,20 @@
 <?php
-namespace Woo_BG\Admin\Tabs\Export_Tab;
+namespace Woo_BG\Export\Nra\Xml;
 
 class XmlConverter {
-	private \XMLWriter $xml;
+    private \XMLWriter $xml;
 
-    private function __construct(\XMLWriter $xml)
-    {
+    private function __construct( \XMLWriter $xml ) {
         $this->xml = $xml;
     }
 
-    public static function convert( $shop ): self
-    {
+    public static function convert( $shop ): self {
         $xml = new \XMLWriter();
         $xml->openMemory();
         $xml->setIndent(true);
         $xml->startDocument('1.0', 'windows-1251');
         $xml->startElement('audit');
-        $xml->writeElement('eik', $shop->getEik());
+        $xml->writeElement('eik', $shop->getEik() );
         $xml->writeElement('e_shop_n', $shop->getShopUniqueNumber());
         $xml->writeElement('domain_name', $shop->getDomain());
         $xml->writeElement('creation_date', $shop->getFileCreatedAt()->format('Y-m-d'));
@@ -24,6 +22,7 @@ class XmlConverter {
         $xml->writeElement('god', (string)$shop->getYear());
         $xml->writeElement('e_shop_type', $shop->isMarketplace() ? '2' : '1');
         $xml->startElement('order');
+        
         foreach ($shop->getOrders() as $order) {
             $xml->startElement('orderenum');
             $xml->writeElement('ord_n', $order->getOrderUniqueNumber());
@@ -84,13 +83,11 @@ class XmlConverter {
         return new self($xml);
     }
 
-    public function getXml(): \XMLWriter
-    {
+    public function getXml(): \XMLWriter {
         return $this->xml;
     }
 
-    public function __toString()
-    {
+    public function __toString() {
         return $this->xml->outputMemory(true);
     }
 }

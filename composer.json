@@ -2,13 +2,12 @@
     "type": "project",
     "require": {
         "pimple/pimple": "^3.3.1",
-        "escapeboy/nra-audit-generator": "^1.0.3",
-        "ext-iconv": "*",
         "ext-mbstring": "*",
         "ext-soap": "*",
-        "setasign/tfpdf": "1.32",
         "chillerlan/php-qrcode": "^4.3",
         "ddeboer/vatin": "^2.2",
+        "dompdf/dompdf": "^2.0",
+        "clegginabox/pdf-merger": "dev-master",
         "htmlburger/carbon-csv": "^1.0"
     },
     "extra": {
