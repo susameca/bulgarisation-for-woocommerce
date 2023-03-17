@@ -4,7 +4,7 @@ namespace Woo_BG;
 defined( 'ABSPATH' ) || exit;
 
 class Plugin {
-	const VERSION = '2.4.7';
+	const VERSION = '3.0.0';
 
 	protected static $_instance;
 
@@ -33,6 +33,7 @@ class Plugin {
 
 	public function init() {
 		$this->load_functions();
+		$this->load_default_options();
 		$this->load_classes();
 		$this->load_service_providers();
 
@@ -43,6 +44,23 @@ class Plugin {
 		add_action( 'admin_footer', array( __CLASS__, 'set_webpack_path' ), 0);
 		add_filter( 'robots_txt', array( __CLASS__, 'robots_txt' ), 99, 2 );
 		add_filter( 'rest_attachment_query', array( __CLASS__, 'exclude_pdf_from_rest' ), 10, 2);
+	}
+
+	private function load_default_options() {
+		if ( ! woo_bg_get_option( 'apis', 'enable_documents' ) ) {
+			$order_documents_trigger = woo_bg_get_option( 'invoice', 'trigger' );
+
+			if ( $order_documents_trigger !== 'disabled' ) {
+				woo_bg_set_option( 'apis', 'enable_documents', 'yes' );
+				woo_bg_set_option( 'invoice', 'nra_n18', 'yes' );
+				woo_bg_set_option( 'invoice', 'trigger', $order_documents_trigger );
+			} else {
+				woo_bg_set_option( 'apis', 'enable_documents', 'no' );
+				woo_bg_set_option( 'invoice', 'nra_n18', 'no' );
+			}
+
+			woo_bg_set_option( 'checkout', 'alternative_shipping_table', woo_bg_get_option( 'nap', 'alternative_shipping_table' ) );
+		}
 	}
 
 	private function load_classes() {

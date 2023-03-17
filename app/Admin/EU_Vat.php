@@ -14,11 +14,6 @@ class EU_Vat {
 		add_action( 'woocommerce_admin_billing_fields', array( __CLASS__, 'admin_billing_fields' ) );
 		add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ) );
 
-
-		if ( ! woo_bg_get_option( 'checkout', 'enable_company_billing' ) ) {
-			woo_bg_set_option( 'checkout', 'enable_company_billing', 'no' );
-		}
-
 		if ( ! woo_bg_get_option( 'checkout', 'digital_tax_classes' ) ) {
 			woo_bg_set_option( 'checkout', 'digital_tax_classes', 'standard' );
 		}
