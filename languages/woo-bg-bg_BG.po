@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2023-03-16 19:49+0000\n"
+"PO-Revision-Date: 2023-03-17 20:39+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -26,7 +26,7 @@ msgstr "%s не е намерен в %s регион."
 msgid "%s: Free shipping"
 msgstr "%s: Безплатна доставка"
 
-#: app/Admin/EU_Vat.php:109
+#: app/Admin/EU_Vat.php:104
 msgid "(self-declared)"
 msgstr "(самодеклариран)"
 
@@ -43,10 +43,6 @@ msgstr ""
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:42
 msgid "Add column on orders list."
 msgstr "Добавете колона в списъка с поръчки."
-
-#: app/Admin/Tabs/Settings_Tab.php:69
-msgid "Additional API's"
-msgstr "Допълнителни API"
 
 #: app/Admin/CVC.php:121 app/Admin/Econt.php:120 app/Admin/Speedy.php:121
 #: app/Admin/Tabs/CVC_Tab.php:95 app/Admin/Tabs/Econt_Tab.php:105
@@ -80,7 +76,7 @@ msgstr "Невалиден API ключ."
 msgid "Autopolis.bg"
 msgstr "Autopolis.bg"
 
-#: app/Admin/EU_Vat.php:119
+#: app/Admin/EU_Vat.php:114
 msgid "Billing Country"
 msgstr "Държава на фактуриране"
 
@@ -388,10 +384,9 @@ msgid "Enable CVC Delivery? "
 msgstr "Включи доставки със CVC?"
 
 #: app/Admin/Tabs/Settings_Tab.php:44
-#, fuzzy
 #| msgid "Disable documents generation"
 msgid "Enable Documents Generation"
-msgstr "Спри генерирането на документи"
+msgstr "Включи генерирането на документи"
 
 #: app/Admin/Tabs/Settings_Tab.php:45
 msgid "Enable Econt Delivery? "
@@ -414,9 +409,9 @@ msgstr ""
 
 #: app/Admin/Tabs/Settings_Tab.php:46
 msgid "Enable Speedy Delivery? "
-msgstr "Включи Спиди API?"
+msgstr "Включи доставки със Спиди?"
 
-#: app/Admin/EU_Vat.php:29
+#: app/Admin/EU_Vat.php:24
 msgid "Enable VIES validation"
 msgstr "Включи VIES валидация"
 
@@ -518,7 +513,7 @@ msgstr ""
 msgid "Error: \"%s\""
 msgstr "Грешка: \"%s\""
 
-#: app/Admin/EU_Vat.php:57
+#: app/Admin/EU_Vat.php:52
 msgid "EU VAT"
 msgstr "ДДС номер"
 
@@ -626,10 +621,9 @@ msgid "Generate documents for orders before the plugin was installed?"
 msgstr "Генериране на докумени за поръчки преди плъгина да бъде инсталиран?"
 
 #: app/Admin/Order/Actions.php:96
-#, fuzzy
 #| msgid "Generating Invoices?"
 msgid "Generate Invoice"
-msgstr "Да генерираме ли фактури?"
+msgstr "Генерирай фактура"
 
 #: app/Admin/CVC.php:106 app/Admin/Econt.php:105 app/Admin/Speedy.php:106
 msgid "Generate label"
@@ -730,11 +724,11 @@ msgstr "Невалиден идентификатор: %s вече е задад
 msgid "Invoice PDF"
 msgstr "Фактура PDF"
 
-#: app/Admin/EU_Vat.php:96
+#: app/Admin/EU_Vat.php:91
 msgid "IP Address"
 msgstr "IP Адрес"
 
-#: app/Admin/EU_Vat.php:101
+#: app/Admin/EU_Vat.php:96
 msgid "IP Country"
 msgstr "IP Държава"
 
@@ -763,6 +757,10 @@ msgstr "Реална"
 #: app/Admin/Tabs/Nra_Tab.php:140
 msgid "Main Company Settings"
 msgstr "Главни настройки на фирмата"
+
+#: app/Admin/Tabs/Settings_Tab.php:69
+msgid "Main functionalities"
+msgstr "Главни функционалности"
 
 #: app/Admin/Tabs/Settings_Tab.php:51
 msgid "Make shipping options on 2 rows and full width in the checkout table."
@@ -1184,7 +1182,7 @@ msgstr "Изпратете запитване"
 msgid "Sender"
 msgstr "Изпращач"
 
-#: app/Plugin.php:137 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:155 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1276,7 +1274,7 @@ msgstr "Улица/Квартал"
 msgid "Supporting the development"
 msgstr "Подкрепете разработката"
 
-#: app/Admin/EU_Vat.php:32
+#: app/Admin/EU_Vat.php:27
 msgid "Tax Classes for Digital Goods"
 msgstr "Данъчни класове за цифрови стоки"
 
@@ -1318,7 +1316,7 @@ msgid "This controls the title which the user sees during checkout."
 msgstr ""
 "Това контролира заглавието, което потребителят вижда по време на плащане."
 
-#: app/Admin/EU_Vat.php:32
+#: app/Admin/EU_Vat.php:27
 msgid ""
 "This option tells the plugin which of your tax classes are for digital goods."
 " This affects the taxable location of the user as of 1st Jan 2015."
@@ -1349,7 +1347,7 @@ msgstr ""
 "клиента приключи поръчката си. Също ще добави номера на товарителницата в e-"
 "mail-а на поръчката."
 
-#: app/Admin/EU_Vat.php:73
+#: app/Admin/EU_Vat.php:68
 msgid "This order is out of scope for EU VAT."
 msgstr "Тази поръчка е извън обхвата на ДДС в ЕС."
 
@@ -1388,7 +1386,7 @@ msgstr "Проследи пратката."
 msgid "Transaction ID"
 msgstr "Номер на транзакцията"
 
-#: app/Admin/EU_Vat.php:97 app/Admin/EU_Vat.php:114 app/Admin/EU_Vat.php:120
+#: app/Admin/EU_Vat.php:92 app/Admin/EU_Vat.php:109 app/Admin/EU_Vat.php:115
 msgid "Unknown"
 msgstr "Неизвестно"
 
@@ -1417,14 +1415,14 @@ msgstr ""
 "Грешно потребителско име или парола. Моля генерирайте достъп до API от "
 "\"Интеграция за онлайн магазини\" %s"
 
-#: app/Admin/EU_Vat.php:29
+#: app/Admin/EU_Vat.php:24
 msgid ""
 "Validate the VAT number with the European VIES system or only with regex."
 msgstr ""
 "Потвърдете номера на ДДС с европейската система VIES или само с регулярния "
 "израз."
 
-#: app/Admin/EU_Vat.php:88
+#: app/Admin/EU_Vat.php:83
 msgid "Validation was not possible"
 msgstr "Валидирането не беше възможно"
 
@@ -1440,7 +1438,7 @@ msgstr "ДДС група"
 msgid "VAT Number"
 msgstr "ДДС номер"
 
-#: app/Admin/EU_Vat.php:43 app/Admin/EU_Vat.php:84
+#: app/Admin/EU_Vat.php:38 app/Admin/EU_Vat.php:79
 #: app/Front_End/Checkout/EU_Vat.php:91 app/Front_End/Checkout/EU_Vat.php:222
 msgid "VAT number"
 msgstr "ДДС номер"

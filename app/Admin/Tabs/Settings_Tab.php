@@ -66,7 +66,7 @@ class Settings_Tab extends Base_Tab {
 	public function get_groups_titles() {
 		$titles = apply_filters( 'woo_bg/admin/settings/groups_titles', array(
 			'apis' => array(
-				'title' => __( 'Additional API\'s', 'woo-bg' ),
+				'title' => __( 'Main functionalities', 'woo-bg' ),
 			),
 			'checkout' => array(
 				'title' => __( 'Checkout Settings', 'woo-bg' ),

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-16 19:46+0000\n"
+"POT-Creation-Date: 2023-03-17 20:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "%s: Free shipping"
 msgstr ""
 
-#: app/Admin/EU_Vat.php:109
+#: app/Admin/EU_Vat.php:104
 msgid "(self-declared)"
 msgstr ""
 
@@ -40,10 +40,6 @@ msgstr ""
 
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:42
 msgid "Add column on orders list."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:69
-msgid "Additional API's"
 msgstr ""
 
 #: app/Admin/CVC.php:121 app/Admin/Econt.php:120 app/Admin/Speedy.php:121
@@ -78,7 +74,7 @@ msgstr ""
 msgid "Autopolis.bg"
 msgstr ""
 
-#: app/Admin/EU_Vat.php:119
+#: app/Admin/EU_Vat.php:114
 msgid "Billing Country"
 msgstr ""
 
@@ -410,7 +406,7 @@ msgstr ""
 msgid "Enable Speedy Delivery? "
 msgstr ""
 
-#: app/Admin/EU_Vat.php:29
+#: app/Admin/EU_Vat.php:24
 msgid "Enable VIES validation"
 msgstr ""
 
@@ -503,7 +499,7 @@ msgstr ""
 msgid "Error: \"%s\""
 msgstr ""
 
-#: app/Admin/EU_Vat.php:57
+#: app/Admin/EU_Vat.php:52
 msgid "EU VAT"
 msgstr ""
 
@@ -699,11 +695,11 @@ msgstr ""
 msgid "Invoice PDF"
 msgstr ""
 
-#: app/Admin/EU_Vat.php:96
+#: app/Admin/EU_Vat.php:91
 msgid "IP Address"
 msgstr ""
 
-#: app/Admin/EU_Vat.php:101
+#: app/Admin/EU_Vat.php:96
 msgid "IP Country"
 msgstr ""
 
@@ -731,6 +727,10 @@ msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:140
 msgid "Main Company Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:69
+msgid "Main functionalities"
 msgstr ""
 
 #: app/Admin/Tabs/Settings_Tab.php:51
@@ -1134,7 +1134,7 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: app/Plugin.php:137 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:155 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
@@ -1224,7 +1224,7 @@ msgstr ""
 msgid "Supporting the development"
 msgstr ""
 
-#: app/Admin/EU_Vat.php:32
+#: app/Admin/EU_Vat.php:27
 msgid "Tax Classes for Digital Goods"
 msgstr ""
 
@@ -1263,7 +1263,7 @@ msgstr ""
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: app/Admin/EU_Vat.php:32
+#: app/Admin/EU_Vat.php:27
 msgid ""
 "This option tells the plugin which of your tax classes are for digital goods."
 " This affects the taxable location of the user as of 1st Jan 2015."
@@ -1284,7 +1284,7 @@ msgid ""
 "Also, will add the tracking number in the order email."
 msgstr ""
 
-#: app/Admin/EU_Vat.php:73
+#: app/Admin/EU_Vat.php:68
 msgid "This order is out of scope for EU VAT."
 msgstr ""
 
@@ -1323,7 +1323,7 @@ msgstr ""
 msgid "Transaction ID"
 msgstr ""
 
-#: app/Admin/EU_Vat.php:97 app/Admin/EU_Vat.php:114 app/Admin/EU_Vat.php:120
+#: app/Admin/EU_Vat.php:92 app/Admin/EU_Vat.php:109 app/Admin/EU_Vat.php:115
 msgid "Unknown"
 msgstr ""
 
@@ -1350,12 +1350,12 @@ msgid ""
 "\"Integration for online shops\" %s"
 msgstr ""
 
-#: app/Admin/EU_Vat.php:29
+#: app/Admin/EU_Vat.php:24
 msgid ""
 "Validate the VAT number with the European VIES system or only with regex."
 msgstr ""
 
-#: app/Admin/EU_Vat.php:88
+#: app/Admin/EU_Vat.php:83
 msgid "Validation was not possible"
 msgstr ""
 
@@ -1371,7 +1371,7 @@ msgstr ""
 msgid "VAT Number"
 msgstr ""
 
-#: app/Admin/EU_Vat.php:43 app/Admin/EU_Vat.php:84
+#: app/Admin/EU_Vat.php:38 app/Admin/EU_Vat.php:79
 #: app/Front_End/Checkout/EU_Vat.php:91 app/Front_End/Checkout/EU_Vat.php:222
 msgid "VAT number"
 msgstr ""
