@@ -35,7 +35,7 @@ class Nra_Tab extends Base_Tab {
 	}
 
 	public function load_fields() {
-		$fields = array(
+		$fields = apply_filters( 'woo_bg/admin/nra/fields', array(
 			'nap' => array(
 				new Fields\Text_Field( 'company_name', __( 'Company Name', 'woo-bg' ), __( 'Your company name.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'mol', __( 'MOL', 'woo-bg' ), __( 'Your company MOL.', 'woo-bg' ), 'required' ),
@@ -97,7 +97,7 @@ class Nra_Tab extends Base_Tab {
 				), 'vat_group', __( 'Vat Group', 'woo-bg' ), null, null, __( 'group "A" - for goods and services, the sales of which are exempt from taxation, for goods and services, the sales of which are subject to 0% VAT, as well as for sales, for which VAT is not charged; group "B" - for goods and services, the sales of which are subject to 20% value added tax; group "D" - for goods and services, the sales of which are subject to 9% value added tax; combined - the group is determined for each product in the store separately.', 'woo-bg' ) ),
 				new Fields\Select_Field( woo_bg_get_return_methods(), 'return_method', __( 'Return method', 'woo-bg' ), __( 'How to return the amount when the client cancel the order.', 'woo-bg' ) ),
 			)
-		);
+		) );
 
 		$fields = $this->add_payment_methods_fields( $fields );
 

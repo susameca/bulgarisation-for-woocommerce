@@ -55,6 +55,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Upgrade Notice ==
 
+= 3.0.0 =
 След ъпдейт от версия 2.х.х до версия над 3.0.0 трябва да настроите плъгина наново поради промени в настройките.
 
 == Screenshots ==

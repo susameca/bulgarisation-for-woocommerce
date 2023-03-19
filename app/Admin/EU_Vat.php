@@ -10,21 +10,21 @@ class EU_Vat {
 	protected $tax_classes, $eu_countries;
 
 	public function __construct() {
-		add_filter( 'woo_bg/admin/settings/fields', array( __CLASS__, 'add_fields_in_settings' ) );
+		add_filter( 'woo_bg/admin/nra/fields', array( __CLASS__, 'add_fields_in_settings' ) );
 		add_action( 'woocommerce_admin_billing_fields', array( __CLASS__, 'admin_billing_fields' ) );
 		add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ) );
 
-		if ( ! woo_bg_get_option( 'checkout', 'digital_tax_classes' ) ) {
-			woo_bg_set_option( 'checkout', 'digital_tax_classes', 'standard' );
+		if ( ! woo_bg_get_option( 'invoice', 'digital_tax_classes' ) ) {
+			woo_bg_set_option( 'invoice', 'digital_tax_classes', 'standard' );
 		}
 	}
 
 	public static function add_fields_in_settings( $fields ) {
 		if ( extension_loaded( 'soap' ) ) {
-			$fields[ 'checkout' ][] = new Fields\TrueFalse_Field( 'enable_vies', __( 'Enable VIES validation', 'woo-bg' ), null, null, __( 'Validate the VAT number with the European VIES system or only with regex.', 'woo-bg' ) );
+			$fields[ 'invoice' ][] = new Fields\TrueFalse_Field( 'enable_vies', __( 'Enable VIES validation', 'woo-bg' ), null, null, __( 'Validate the VAT number with the European VIES system or only with regex.', 'woo-bg' ) );
 		}
 
-		$fields[ 'checkout' ][] = new Fields\Select_Field( woo_bg_get_tax_classes(), 'digital_tax_classes', __( 'Tax Classes for Digital Goods', 'woo-bg' ), null, null, __( 'This option tells the plugin which of your tax classes are for digital goods. This affects the taxable location of the user as of 1st Jan 2015.', 'woo-bg' ) );
+		$fields[ 'invoice' ][] = new Fields\Select_Field( woo_bg_get_tax_classes(), 'digital_tax_classes', __( 'Tax Classes for Digital Goods', 'woo-bg' ), null, null, __( 'This option tells the plugin which of your tax classes are for digital goods. This affects the taxable location of the user as of 1st Jan 2015.', 'woo-bg' ) );
 
 		return $fields;
 	}

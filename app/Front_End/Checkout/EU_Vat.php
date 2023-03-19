@@ -156,7 +156,7 @@ class EU_Vat {
 		}
 
 		try {
-			$maybe_vies_validation = ( woo_bg_get_option( 'checkout', 'enable_vies' ) === 'yes' ); 
+			$maybe_vies_validation = ( woo_bg_get_option( 'invoice', 'enable_vies' ) === 'yes' ); 
 			
 			$is_valid = $vies->isValid( $vat_prefix . $vat_number, $maybe_vies_validation );
 
@@ -298,7 +298,7 @@ class EU_Vat {
 	}
 
 	public static function woocommerce_get_tax_location( $location, $tax_class = '' ) {
-		if ( ! empty( WC()->customer ) && sanitize_title( $tax_class ) === woo_bg_get_option( 'checkout', 'digital_tax_classes' ) ) {
+		if ( ! empty( WC()->customer ) && sanitize_title( $tax_class ) === woo_bg_get_option( 'invoice', 'digital_tax_classes' ) ) {
 			return array(
 				WC()->customer->get_billing_country(),
 				WC()->customer->get_billing_state(),

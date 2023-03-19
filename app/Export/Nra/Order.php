@@ -105,7 +105,7 @@ class Order {
 			);
 		}
 
-		return $items;
+		return apply_filters( 'woo_bg/admin/nra_export/items', $items, $this->woo_order );
 	}
 
 	public function get_xml_order() {

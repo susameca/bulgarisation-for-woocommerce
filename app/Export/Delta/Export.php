@@ -96,6 +96,8 @@ class Export {
 			}
 		}
 
+		$this->documents = apply_filters( 'woo_bg/admin/delta_export/documents', $this->documents, $this->woo_orders );
+
 		return $this->upload_file();
 	}
 
