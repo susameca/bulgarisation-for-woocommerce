@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-20 20:10+0000\n"
+"POT-Creation-Date: 2023-03-20 20:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -103,6 +103,13 @@ msgstr ""
 
 #: bulgarisation-for-woocommerce.php:45
 msgid "Bulgarisation for WooCommerce - Please enable WooCommerce first."
+msgstr ""
+
+#: app/Plugin.php:66
+#, php-format
+msgid ""
+"Bulgarisation for WooCommerce - Please review the options and save them "
+"again from \"%s\"."
 msgstr ""
 
 #: app/Admin/CVC.php:124 app/Admin/Econt.php:123 app/Admin/Speedy.php:124
@@ -1146,7 +1153,7 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: app/Plugin.php:156 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:66 app/Plugin.php:162 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
