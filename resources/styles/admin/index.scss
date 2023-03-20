@@ -33,3 +33,10 @@ i.woo-bg-icon--question { background-image: url(../../images/question-icon.png);
 th#nekorekten { width: 0.0001ch; }
 
 .multiselect__tags { padding: 0; }
+
+.wpo_wcpdf-actions {
+    li { display: inline-flex; align-items: center; }
+    a.button { display: inline-flex; align-items: center; }
+
+    div.wp-menu-image::before { color: #2271b1; }
+}

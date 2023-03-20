@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-17 20:29+0000\n"
+"POT-Creation-Date: 2023-03-20 20:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -109,12 +109,12 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:111
+#: app/Admin/Nekorekten_Com.php:115
 #, php-format
 msgid "By Email ( %s )"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:99
+#: app/Admin/Nekorekten_Com.php:103
 #, php-format
 msgid "By Phone ( %s )"
 msgstr ""
@@ -247,11 +247,11 @@ msgstr ""
 msgid "Date of tax. event"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:174
+#: app/Admin/Nekorekten_Com.php:178
 msgid "Date:"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:136 app/Admin/Nekorekten_Com.php:150
+#: app/Admin/Nekorekten_Com.php:140 app/Admin/Nekorekten_Com.php:154
 #, php-format
 msgid "Date: %s"
 msgstr ""
@@ -310,7 +310,7 @@ msgstr ""
 msgid "Document-Pallet"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:10
+#: app/Admin/Order/Columns.php:22 app/Admin/Tabs/Nra_Tab.php:10
 msgid "Documents"
 msgstr ""
 
@@ -373,7 +373,7 @@ msgstr ""
 msgid "EIK: %s"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:171
+#: app/Admin/Nekorekten_Com.php:175
 msgid "Email:"
 msgstr ""
 
@@ -494,7 +494,7 @@ msgstr ""
 msgid "Error communicating with the VAT validation server - please try again"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:140
+#: app/Admin/Nekorekten_Com.php:144
 #, php-format
 msgid "Error: \"%s\""
 msgstr ""
@@ -537,7 +537,7 @@ msgid ""
 "Download</a>"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:168
+#: app/Admin/Nekorekten_Com.php:172
 msgid "First Name:"
 msgstr ""
 
@@ -565,7 +565,7 @@ msgstr ""
 msgid "Force variations in label"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:155
+#: app/Admin/Nekorekten_Com.php:159
 #, php-format
 msgid "Found: %s"
 msgstr ""
@@ -678,7 +678,7 @@ msgid ""
 " go to \"Standard rates\" submenu and add your rate ( 20% or 9% )."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:142
+#: app/Admin/Nekorekten_Com.php:146
 msgid "Invalid access."
 msgstr ""
 
@@ -691,7 +691,11 @@ msgstr ""
 msgid "Invalid identifier: %s has already been set."
 msgstr ""
 
-#: app/Admin/Order/Actions.php:47 app/Admin/Order/MetaBox.php:50
+#: app/Admin/Order/Documents.php:70
+msgid "Invoice"
+msgstr ""
+
+#: app/Admin/Order/Actions.php:47
 msgid "Invoice PDF"
 msgstr ""
 
@@ -717,7 +721,7 @@ msgstr ""
 msgid "Label number: %s. %s"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:169
+#: app/Admin/Nekorekten_Com.php:173
 msgid "Last Name:"
 msgstr ""
 
@@ -766,6 +770,10 @@ msgstr ""
 msgid "Name:"
 msgstr ""
 
+#: app/Admin/Nekorekten_Com.php:269
+msgid "Nekorekten"
+msgstr ""
+
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:11
 msgid "nekorekten.com API Settings"
 msgstr ""
@@ -797,11 +805,11 @@ msgstr ""
 msgid "No orders found for this month."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:52
+#: app/Admin/Nekorekten_Com.php:56
 msgid "No reports was found for this customer!"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:84
+#: app/Admin/Nekorekten_Com.php:88
 msgid "No reports was found."
 msgstr ""
 
@@ -844,6 +852,10 @@ msgstr ""
 msgid "Only for companies"
 msgstr ""
 
+#: app/Admin/Order/Documents.php:63
+msgid "Order"
+msgstr ""
+
 #: app/Invoice/Document/NRA.php:10
 msgid "Order - Original"
 msgstr ""
@@ -866,10 +878,6 @@ msgstr ""
 #: app/Invoice/Document/CreditNotice.php:46
 #: app/Invoice/Document/NRARefunded.php:60
 msgid "Order Number"
-msgstr ""
-
-#: app/Admin/Order/MetaBox.php:44
-msgid "Order PDF"
 msgstr ""
 
 #: app/functions.php:54 app/functions.php:92 app/Admin/CVC.php:116
@@ -928,7 +936,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:170
+#: app/Admin/Nekorekten_Com.php:174
 msgid "Phone:"
 msgstr ""
 
@@ -1002,20 +1010,24 @@ msgstr ""
 msgid "Reflected with receipt"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:91
+#: app/Admin/Nekorekten_Com.php:95
 msgid "Refresh data"
 msgstr ""
 
-#: app/Admin/Order/Actions.php:55 app/Admin/Order/MetaBox.php:62
+#: app/Admin/Order/Documents.php:84
+msgid "Refunded Invoice"
+msgstr ""
+
+#: app/Admin/Order/Actions.php:55
 msgid "Refunded Invoice PDF"
+msgstr ""
+
+#: app/Admin/Order/Documents.php:77
+msgid "Refunded Order"
 msgstr ""
 
 #: app/Invoice/Document/NRARefunded.php:20
 msgid "Refunded Order - Original"
-msgstr ""
-
-#: app/Admin/Order/MetaBox.php:56
-msgid "Refunded Order PDF"
 msgstr ""
 
 #: app/Admin/Order/Actions.php:97
@@ -1026,7 +1038,7 @@ msgstr ""
 msgid "Released under Art. 3 payment without PPP"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:30
+#: app/Admin/Nekorekten_Com.php:34
 msgid "Reports"
 msgstr ""
 
@@ -1134,7 +1146,7 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: app/Plugin.php:155 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:156 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
@@ -1228,7 +1240,7 @@ msgstr ""
 msgid "Tax Classes for Digital Goods"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:176
+#: app/Admin/Nekorekten_Com.php:180
 msgid "Text:"
 msgstr ""
 
@@ -1254,7 +1266,7 @@ msgstr ""
 msgid "The registration address of your company."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:75
+#: app/Admin/Nekorekten_Com.php:79
 msgid "There was some error in one of the reports."
 msgstr ""
 
@@ -1396,11 +1408,11 @@ msgstr ""
 msgid "Virtual POS №"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:79
+#: app/Admin/Nekorekten_Com.php:83
 msgid "We have found negative reports about this customer."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:42
+#: app/Admin/Nekorekten_Com.php:46
 msgid ""
 "We have found negative reports about this customer. <br> Click for more "
 "information."
@@ -1449,7 +1461,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:128
+#: app/Admin/Nekorekten_Com.php:132
 msgid ""
 "You can add a report from <a href=\"https://nekorekten.com/\" "
 "target=\"_blank\">https://nekorekten.com/</a>"

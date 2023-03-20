@@ -44,4 +44,49 @@ class Documents {
 			( new Document\CreditNotice( $refund_id ) )->generate_file();
 		}
 	}
+
+	public static function get_order_documents( $main_order ) {
+		$files = array();
+		$ids = [ $main_order->get_id() ];
+
+		if ( $refunds = $main_order->get_refunds() ) {
+			foreach ( $refunds as $refund ) {
+				$ids[] = $refund->get_id();
+			}
+		}
+
+		foreach ( $ids as $id ) {
+			$order = wc_get_order( $id );
+
+			if ( $order_pdf = $order->get_meta( 'woo_bg_order_document' ) ) {
+				$files[] = array(
+					'name' => __( 'Order', 'woo-bg' ),
+					'file_url' => wp_get_attachment_url( $order_pdf ),
+				);
+			}
+
+			if ( $invoice_pdf = $order->get_meta( 'woo_bg_invoice_document' ) ) {
+				$files[] = array(
+					'name' => __( 'Invoice', 'woo-bg' ),
+					'file_url' => wp_get_attachment_url( $invoice_pdf ),
+				);
+			}
+
+			if ( $refunded_order_pdf = $order->get_meta( 'woo_bg_refunded_order_document' ) ) {
+				$files[] = array(
+					'name' => __( 'Refunded Order', 'woo-bg' ),
+					'file_url' => wp_get_attachment_url( $refunded_order_pdf ),
+				);
+			}
+
+			if ( $refunded_invoice_pdf = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ) {
+				$files[] = array(
+					'name' => __( 'Refunded Invoice', 'woo-bg' ),
+					'file_url' => wp_get_attachment_url( $refunded_invoice_pdf ),
+				);
+			}
+		}
+
+		return apply_filters( 'woo_bg/admin/order/documents', $files, $main_order );
+	}
 }

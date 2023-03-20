@@ -15,8 +15,12 @@ class Nekorekten_Com {
 
 		if ( woo_bg_get_option( 'nekorekten', 'column' ) === 'yes' ) {
 			add_action( 'woocommerce_checkout_order_processed', array( __CLASS__, 'set_customer_status_info' ) );
+
 			add_filter( 'manage_edit-shop_order_columns', array( __CLASS__, 'add_order_list_column' ), 11 );
 			add_filter( 'manage_shop_order_posts_custom_column', array( __CLASS__, 'add_order_list_column_content' ), 11, 2 );
+
+			add_filter( 'manage_woocommerce_page_wc-orders_columns', array( __CLASS__, 'add_order_list_column' ), 11 );
+			add_filter( 'manage_woocommerce_page_wc-orders_custom_column', array( __CLASS__, 'add_order_list_column_content' ), 11, 2 );
 		}
 	}
 
@@ -262,7 +266,7 @@ class Nekorekten_Com {
 	        $reordered_columns[ $key ] = $column;
 
 	        if( $key ==  'shipping_address' ){
-	            $reordered_columns[ 'nekorekten' ] = '';
+	            $reordered_columns[ 'order_nekorekten' ] = __( 'Nekorekten', 'woo-bg' );
 	        }
 	    }
 
@@ -271,7 +275,7 @@ class Nekorekten_Com {
 
 	public static function add_order_list_column_content( $column, $post_id ) {
 		switch ( $column ) {
-			case 'nekorekten' :
+			case 'order_nekorekten' :
 				$order = wc_get_order( $post_id );
 				$reports = self::get_all_reports_from_meta( $order );
 

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2023-03-17 20:39+0000\n"
+"PO-Revision-Date: 2023-03-20 20:11+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -111,12 +111,12 @@ msgstr "Българизация за WooCommerce - Моля активирай�
 msgid "Buyer"
 msgstr "Купувач"
 
-#: app/Admin/Nekorekten_Com.php:111
+#: app/Admin/Nekorekten_Com.php:115
 #, php-format
 msgid "By Email ( %s )"
 msgstr "По еmail ( %s )"
 
-#: app/Admin/Nekorekten_Com.php:99
+#: app/Admin/Nekorekten_Com.php:103
 #, php-format
 msgid "By Phone ( %s )"
 msgstr "По телефон ( %s )"
@@ -249,11 +249,11 @@ msgstr "cvc.com API настройки"
 msgid "Date of tax. event"
 msgstr "Дата на дан. събитие"
 
-#: app/Admin/Nekorekten_Com.php:174
+#: app/Admin/Nekorekten_Com.php:178
 msgid "Date:"
 msgstr "Дата:"
 
-#: app/Admin/Nekorekten_Com.php:136 app/Admin/Nekorekten_Com.php:150
+#: app/Admin/Nekorekten_Com.php:140 app/Admin/Nekorekten_Com.php:154
 #, php-format
 msgid "Date: %s"
 msgstr "Дата: %s"
@@ -312,7 +312,7 @@ msgstr "Документ"
 msgid "Document-Pallet"
 msgstr "Документ-палет"
 
-#: app/Admin/Tabs/Nra_Tab.php:10
+#: app/Admin/Order/Columns.php:22 app/Admin/Tabs/Nra_Tab.php:10
 msgid "Documents"
 msgstr "Документи"
 
@@ -375,7 +375,7 @@ msgstr "ЕИК на фирмата"
 msgid "EIK: %s"
 msgstr "ЕИК: %s"
 
-#: app/Admin/Nekorekten_Com.php:171
+#: app/Admin/Nekorekten_Com.php:175
 msgid "Email:"
 msgstr "Email:"
 
@@ -508,7 +508,7 @@ msgstr ""
 "Грешка при комуникацията със сървъра за валидиране на ДДС - моля, опитайте "
 "отново"
 
-#: app/Admin/Nekorekten_Com.php:140
+#: app/Admin/Nekorekten_Com.php:144
 #, php-format
 msgid "Error: \"%s\""
 msgstr "Грешка: \"%s\""
@@ -560,7 +560,7 @@ msgstr ""
 "Файла е генериран успешно! <a href=\"%s\" download target=\"_blank\">"
 "Изтегли</a>"
 
-#: app/Admin/Nekorekten_Com.php:168
+#: app/Admin/Nekorekten_Com.php:172
 msgid "First Name:"
 msgstr "Име:"
 
@@ -588,7 +588,7 @@ msgstr "За еднократна помощ като подкрепа за ра
 msgid "Force variations in label"
 msgstr "Принудително добавяне на варияцията в товарителницата"
 
-#: app/Admin/Nekorekten_Com.php:155
+#: app/Admin/Nekorekten_Com.php:159
 #, php-format
 msgid "Found: %s"
 msgstr "Намерени: %s"
@@ -707,7 +707,7 @@ msgstr ""
 "prices inclusive of tax\". Също отидете на под менюто \"Standard rates\" и "
 "добавете вашето ДДС ( 20% или 9% )."
 
-#: app/Admin/Nekorekten_Com.php:142
+#: app/Admin/Nekorekten_Com.php:146
 msgid "Invalid access."
 msgstr "Невалиден достъп."
 
@@ -720,7 +720,11 @@ msgstr "Невалиден код на държавата"
 msgid "Invalid identifier: %s has already been set."
 msgstr "Невалиден идентификатор: %s вече е зададен."
 
-#: app/Admin/Order/Actions.php:47 app/Admin/Order/MetaBox.php:50
+#: app/Admin/Order/Documents.php:70
+msgid "Invoice"
+msgstr "Фактура"
+
+#: app/Admin/Order/Actions.php:47
 msgid "Invoice PDF"
 msgstr "Фактура PDF"
 
@@ -746,7 +750,7 @@ msgstr "Данни за товарителница"
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
 
-#: app/Admin/Nekorekten_Com.php:169
+#: app/Admin/Nekorekten_Com.php:173
 msgid "Last Name:"
 msgstr "Фамилия:"
 
@@ -795,6 +799,10 @@ msgstr "Име"
 msgid "Name:"
 msgstr "Име"
 
+#: app/Admin/Nekorekten_Com.php:269
+msgid "Nekorekten"
+msgstr "Nekorekten"
+
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:11
 msgid "nekorekten.com API Settings"
 msgstr "Настройки за nekorekten.com API "
@@ -827,11 +835,11 @@ msgstr "Не бяха намерени офиси в %s."
 msgid "No orders found for this month."
 msgstr "Няма намерени поръчки за този месец."
 
-#: app/Admin/Nekorekten_Com.php:52
+#: app/Admin/Nekorekten_Com.php:56
 msgid "No reports was found for this customer!"
 msgstr "Няма намерени отзиви за този клиент."
 
-#: app/Admin/Nekorekten_Com.php:84
+#: app/Admin/Nekorekten_Com.php:88
 msgid "No reports was found."
 msgstr "Няма намерени отзиви."
 
@@ -877,6 +885,10 @@ msgstr "По платежна сметка"
 msgid "Only for companies"
 msgstr "Само за фирми"
 
+#: app/Admin/Order/Documents.php:63
+msgid "Order"
+msgstr "Поръчка"
+
 #: app/Invoice/Document/NRA.php:10
 msgid "Order - Original"
 msgstr "Поръчка - Оригинал"
@@ -900,10 +912,6 @@ msgstr "Дата на Фактура"
 #: app/Invoice/Document/NRARefunded.php:60
 msgid "Order Number"
 msgstr "Номер на поръчка"
-
-#: app/Admin/Order/MetaBox.php:44
-msgid "Order PDF"
-msgstr "Поръчка PDF"
 
 #: app/functions.php:54 app/functions.php:92 app/Admin/CVC.php:116
 #: app/Admin/Econt.php:115 app/Admin/Speedy.php:116
@@ -961,7 +969,7 @@ msgstr "PDF документи"
 msgid "Phone"
 msgstr "Телефон"
 
-#: app/Admin/Nekorekten_Com.php:170
+#: app/Admin/Nekorekten_Com.php:174
 msgid "Phone:"
 msgstr "Телефон:"
 
@@ -1037,21 +1045,26 @@ msgstr "Препоръчителни настройки"
 msgid "Reflected with receipt"
 msgstr "Отразено с касова бележка"
 
-#: app/Admin/Nekorekten_Com.php:91
+#: app/Admin/Nekorekten_Com.php:95
 msgid "Refresh data"
 msgstr "Обнови данните"
 
-#: app/Admin/Order/Actions.php:55 app/Admin/Order/MetaBox.php:62
+#: app/Admin/Order/Documents.php:84
+msgid "Refunded Invoice"
+msgstr "Кредитно Известие"
+
+#: app/Admin/Order/Actions.php:55
 msgid "Refunded Invoice PDF"
 msgstr "Кредитно известие PDF"
+
+#: app/Admin/Order/Documents.php:77
+#| msgid "Refunded Order PDF"
+msgid "Refunded Order"
+msgstr "Отказана Поръчка"
 
 #: app/Invoice/Document/NRARefunded.php:20
 msgid "Refunded Order - Original"
 msgstr "Отказана Поръчка - Оригинал"
-
-#: app/Admin/Order/MetaBox.php:56
-msgid "Refunded Order PDF"
-msgstr "Отказана Поръчка PDF"
 
 #: app/Admin/Order/Actions.php:97
 msgid "Regenerate PDF's"
@@ -1061,7 +1074,7 @@ msgstr "Регенерирай PDF"
 msgid "Released under Art. 3 payment without PPP"
 msgstr "Освободено по чл. 3 плащане без ППП"
 
-#: app/Admin/Nekorekten_Com.php:30
+#: app/Admin/Nekorekten_Com.php:34
 msgid "Reports"
 msgstr "Отзиви"
 
@@ -1182,7 +1195,7 @@ msgstr "Изпратете запитване"
 msgid "Sender"
 msgstr "Изпращач"
 
-#: app/Plugin.php:155 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:156 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1278,7 +1291,7 @@ msgstr "Подкрепете разработката"
 msgid "Tax Classes for Digital Goods"
 msgstr "Данъчни класове за цифрови стоки"
 
-#: app/Admin/Nekorekten_Com.php:176
+#: app/Admin/Nekorekten_Com.php:180
 msgid "Text:"
 msgstr "Текст:"
 
@@ -1306,7 +1319,7 @@ msgstr "Населеното място на регистрация на ваш�
 msgid "The registration address of your company."
 msgstr "Адресът на регистрация на вашата фирма."
 
-#: app/Admin/Nekorekten_Com.php:75
+#: app/Admin/Nekorekten_Com.php:79
 msgid "There was some error in one of the reports."
 msgstr "Имаше грешка в някой от отзивите."
 
@@ -1463,11 +1476,11 @@ msgstr "Виртуален ПОС терминал"
 msgid "Virtual POS №"
 msgstr "Номер на виртуален ПОС терминал"
 
-#: app/Admin/Nekorekten_Com.php:79
+#: app/Admin/Nekorekten_Com.php:83
 msgid "We have found negative reports about this customer."
 msgstr "Намерихме негативни отзиви за този клиент."
 
-#: app/Admin/Nekorekten_Com.php:42
+#: app/Admin/Nekorekten_Com.php:46
 msgid ""
 "We have found negative reports about this customer. <br> Click for more "
 "information."
@@ -1520,7 +1533,7 @@ msgstr ""
 msgid "Yes"
 msgstr "Да"
 
-#: app/Admin/Nekorekten_Com.php:128
+#: app/Admin/Nekorekten_Com.php:132
 msgid ""
 "You can add a report from <a href=\"https://nekorekten.com/\" "
 "target=\"_blank\">https://nekorekten.com/</a>"

@@ -28,40 +28,16 @@ class MetaBox {
 			$order = wc_get_order( $post->ID );
 		}
 
-		if ( $refunds = $order->get_refunds() ) {
-			foreach ( $refunds as $refund ) {
-				$ids[] = $refund->get_id();
-			}
-		}
+		$files = Documents::get_order_documents( $order );
 		?>
 		<ul class="wpo_wcpdf-actions">
-			<?php foreach ( $ids as $id ): 
-				$order = wc_get_order( $id );
-			?>
+			<?php foreach ( $files as $file ): ?>
 				<li>
-					<?php if ( $order_pdf = $order->get_meta( 'woo_bg_order_document' ) ): ?>
-						<a target="_blank" href="<?php echo wp_get_attachment_url( $order_pdf ); ?>" class="button">
-							<?php _e('Order PDF', 'woo-bg') ?>
-						</a>
-					<?php endif ?>
-
-					<?php if ( $invoice_pdf = $order->get_meta( 'woo_bg_invoice_document' ) ): ?>
-						<a target="_blank" href="<?php echo wp_get_attachment_url( $invoice_pdf ); ?>" class="button">
-							<?php _e('Invoice PDF', 'woo-bg') ?>
-						</a>
-					<?php endif ?>
-
-					<?php if ( $refunded_order_pdf = $order->get_meta( 'woo_bg_refunded_order_document' ) ): ?>
-						<a target="_blank" href="<?php echo wp_get_attachment_url( $refunded_order_pdf ); ?>" class="button">
-							<?php _e('Refunded Order PDF', 'woo-bg') ?>
-						</a>
-					<?php endif ?>
-
-					<?php if ( $refunded_invoice_pdf = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ): ?>
-						<a target="_blank" href="<?php echo wp_get_attachment_url( $refunded_invoice_pdf ); ?>" class="button">
-							<?php _e('Refunded Invoice PDF', 'woo-bg') ?>
-						</a>
-					<?php endif ?>
+					<a target="_blank" href="<?php echo $file[ 'file_url' ]; ?>" class="button">
+						<div class="wp-menu-image dashicons-before dashicons-pdf"></div>
+						
+						<?php echo $file['name'] ?>
+					</a>
 				</li>
 			<?php endforeach ?>
 		</ul>
