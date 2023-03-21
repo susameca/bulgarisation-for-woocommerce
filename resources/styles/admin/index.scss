@@ -24,11 +24,22 @@ i.woo-bg-icon--question { background-image: url(../../images/question-icon.png);
 
 .woo-bg--centered-paragraph { display: flex; align-items: center; justify-content: center; }
 
-#order_data .order_data_column.order_data_column--half { width: 49%; }
-#order_data .order_data_column .customer { border: 2px dashed black; border-radius: 15px; padding: 15px; margin-bottom: 10px; }
-#order_data .order_data_column .customer p { margin: 0 0 10px 0; }
-#order_data .order_data_column .customer p:last-child { margin: 0; }
-#order_data .order_data_column .customer a.customer-reports--image img { width: auto; height: 60px; }
+#order_data {
+    .order_data_column.order_data_column--half { width: 49%; }
+
+    .order_data_column { 
+        .customer {
+            border: 2px dashed black; border-radius: 15px; padding: 15px; margin-bottom: 10px; 
+
+            p { margin: 0 0 10px 0; }
+            p:last-child { margin: 0; }
+            a.customer-reports--image img { width: auto; height: 60px; }
+        }
+
+        .form-field._billing_to_company_field { width: 100% }
+        .form-field._billing_company_field { width: 48%; clear: initial; }
+    }
+}
 
 th#nekorekten { width: 0.0001ch; }
 
@@ -40,3 +51,4 @@ th#nekorekten { width: 0.0001ch; }
 
     div.wp-menu-image::before { color: #2271b1; }
 }
+

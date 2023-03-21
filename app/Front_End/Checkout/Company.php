@@ -83,32 +83,38 @@ class Company {
 	public static function admin_billing_fields( $fields ) {
 		unset( $fields[ 'company' ] );
 
+		$fields['to_company'] = array(
+			'label' => __( 'Do you want a company invoice?', 'woo-bg' ),
+			'show'  => false,
+		);
+
 		$fields['company'] = array(
 			'label' => __( 'Company', 'woocommerce' ),
-			'show'  => true,
+			'show'  => false,
+			'wrapper_class' => '_billing_address_2_field'
 		);
 
 		$fields['company_mol'] = array(
 			'label' => __( 'MOL', 'woo-bg' ),
-			'show'  => true,
+			'show'  => false,
 			'wrapper_class' => '_billing_address_1_field'
 		);
 
 		$fields['company_eik'] = array(
 			'label' => __( 'EIK', 'woo-bg' ),
-			'show'  => true,
+			'show'  => false,
 			'wrapper_class' => '_billing_address_2_field'
 		);
 
 		$fields['company_settlement'] = array(
 			'label' => __( 'Settlement', 'woo-bg' ),
-			'show'  => true,
+			'show'  => false,
 			'wrapper_class' => '_billing_address_1_field'
 		);
 
 		$fields['company_address'] = array(
 			'label' => __( 'Company Address', 'woo-bg' ),
-			'show'  => true,
+			'show'  => false,
 			'wrapper_class' => '_billing_address_2_field'
 		);
 
