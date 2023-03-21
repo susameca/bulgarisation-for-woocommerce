@@ -14,6 +14,8 @@ class Emails {
 			return;
 		}
 
+		$order = wc_get_order( $order->get_id() );
+
 		$order_documents_trigger = woo_bg_get_option( 'invoice', 'trigger' );
 
 		if ( !$order_documents_trigger || $order_documents_trigger === 'order_created' ) {
@@ -41,6 +43,8 @@ class Emails {
 		if ( !is_object( $order ) || !is_a( $order, 'WC_Order' ) ) {
 			return;
 		}
+		
+		$order = wc_get_order( $order->get_id() );
 
 		$email_ids = array( 'customer_refunded_order', 'customer_invoice' );
 

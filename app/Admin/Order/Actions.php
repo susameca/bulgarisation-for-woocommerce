@@ -14,7 +14,7 @@ class Actions {
 		if ( !$order_documents_trigger || $order_documents_trigger === "order_created" ) {
 			add_action( 'woocommerce_checkout_order_processed', array( '\Woo_BG\Admin\Order\Documents', 'generate_documents' ) );
 		} else if ( $order_documents_trigger === "order_completed" ) {
-			add_action( 'woocommerce_order_status_completed', array( '\Woo_BG\Admin\Order\Documents', 'generate_documents' ) );
+			add_action( 'woocommerce_order_status_completed_notification', array( '\Woo_BG\Admin\Order\Documents', 'generate_documents' ), 5 );
 		}
 
 		add_action( 'woocommerce_order_actions', array( __CLASS__, 'add_order_meta_box_actions' ) );
