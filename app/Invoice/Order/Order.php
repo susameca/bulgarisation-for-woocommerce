@@ -33,11 +33,13 @@ class Order {
 		}
 
 		foreach ( $order_items as $key => $item ) {
+			$qty = ( abs( $item->get_quantity() ) ) ? abs( $item->get_quantity() ) : 1;
+			
 			$items[] = array(
 				'name' => apply_filters( 'woo_bg/invoice/order/item_name', $item->get_name(), $item ),
-				'quantity' => abs( $item->get_quantity() ), 
+				'quantity' => $qty, 
 				'vat_rate' => $this->get_item_vat_rate( $item, $this->woo_order ) . "%", 
-				'price' => wc_price( abs( $item->get_total() / $item->get_quantity() ), array( 'currency' => $this->woo_order->get_currency() ) ),
+				'price' => wc_price( abs( $item->get_total() / $qty ), array( 'currency' => $this->woo_order->get_currency() ) ),
 				'total' => wc_price( abs( $item->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) )
 			);
 		}

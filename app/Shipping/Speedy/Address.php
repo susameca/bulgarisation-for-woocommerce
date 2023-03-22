@@ -101,6 +101,8 @@ class Address {
 
 		if ( !empty( $streets ) ) {
 			$streets = self::$container[ Client::SPEEDY_STREETS ]->format_streets( $streets );
+		} else {
+			$streets = [];
 		}
 
 		return $streets;
@@ -115,6 +117,8 @@ class Address {
 		
 		if ( !empty( $quarters ) ) {
 			$quarters = self::$container[ Client::SPEEDY_QUARTERS ]->format_quarters( $quarters );
+		} else {
+			$quarters = [];
 		}
 
 		return $quarters;

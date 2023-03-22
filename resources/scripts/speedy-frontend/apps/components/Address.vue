@@ -220,7 +220,6 @@ export default {
 			this.selectedAddress = []
 		},
 		loadCity() {
-			console.log('asffas');
 			this.state = this.stateField.val();
 			this.city = this.cityField.val();
 			this.loading = true;

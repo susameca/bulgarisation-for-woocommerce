@@ -109,7 +109,6 @@ export default {
 				.then(function( response ) {
 					_this.loading = false;
 					_this.message = response.data.data.message;
-					console.log(response.data.data.message);
 				})
 				.catch( error => {
 					_this.loading = false;
