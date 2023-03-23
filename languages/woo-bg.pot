@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-20 20:42+0000\n"
+"POT-Creation-Date: 2023-03-23 21:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -31,8 +31,8 @@ msgstr ""
 msgid "(self-declared)"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:94
-#: app/Admin/Tabs/Speedy_Tab.php:82
+#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:95
+#: app/Admin/Tabs/Speedy_Tab.php:83
 msgid ""
 "Add additional variations information. Please use this option only if you "
 "want the variation data to be available in the label print and it's missing."
@@ -43,8 +43,8 @@ msgid "Add column on orders list."
 msgstr ""
 
 #: app/Admin/CVC.php:121 app/Admin/Econt.php:120 app/Admin/Speedy.php:121
-#: app/Admin/Tabs/CVC_Tab.php:95 app/Admin/Tabs/Econt_Tab.php:105
-#: app/Admin/Tabs/Speedy_Tab.php:92 app/Front_End/Checkout/Company.php:69
+#: app/Admin/Tabs/CVC_Tab.php:95 app/Admin/Tabs/Econt_Tab.php:106
+#: app/Admin/Tabs/Speedy_Tab.php:93 app/Front_End/Checkout/Company.php:69
 #: app/Shipping/CVC/Method.php:138 app/Shipping/Econt/Method.php:129
 #: app/Shipping/Speedy/Method.php:137
 msgid "Address"
@@ -105,7 +105,7 @@ msgstr ""
 msgid "Bulgarisation for WooCommerce - Please enable WooCommerce first."
 msgstr ""
 
-#: app/Plugin.php:66
+#: app/Plugin.php:65
 #, php-format
 msgid ""
 "Bulgarisation for WooCommerce - Please review the options and save them "
@@ -146,7 +146,7 @@ msgstr ""
 msgid "Cash on delivery"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:96
+#: app/Admin/Tabs/Econt_Tab.php:97
 msgid "Cash on delivery agreement"
 msgstr ""
 
@@ -173,16 +173,16 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:143 app/Admin/Tabs/Speedy_Tab.php:120
+#: app/Admin/Tabs/Econt_Tab.php:144 app/Admin/Tabs/Speedy_Tab.php:121
 msgid "Choose a city and save in order to show offices."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:96
+#: app/Admin/Tabs/Econt_Tab.php:97
 msgid "Choose cash on delivery agreement"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Econt_Tab.php:133
-#: app/Admin/Tabs/Speedy_Tab.php:113
+#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Econt_Tab.php:134
+#: app/Admin/Tabs/Speedy_Tab.php:114
 msgid "City"
 msgstr ""
 
@@ -191,7 +191,7 @@ msgstr ""
 msgid "Clear cache"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:110
+#: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:116
 msgid "Company Address"
 msgstr ""
 
@@ -301,11 +301,11 @@ msgstr ""
 msgid "Disable invoice generation"
 msgstr ""
 
-#: app/Invoice/Order/Order.php:85
+#: app/Invoice/Order/Order.php:87
 msgid "Discount"
 msgstr ""
 
-#: app/Front_End/Checkout/Company.php:27
+#: app/Front_End/Checkout/Company.php:27 app/Front_End/Checkout/Company.php:87
 msgid "Do you want a company invoice?"
 msgstr ""
 
@@ -369,7 +369,7 @@ msgid "econt.com API Settings"
 msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:42 app/Front_End/Checkout/Company.php:47
-#: app/Front_End/Checkout/Company.php:98
+#: app/Front_End/Checkout/Company.php:104
 msgid "EIK"
 msgstr ""
 
@@ -567,8 +567,8 @@ msgstr ""
 msgid "For single donation as development support you can send at "
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:94
-#: app/Admin/Tabs/Speedy_Tab.php:82
+#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:95
+#: app/Admin/Tabs/Speedy_Tab.php:83
 msgid "Force variations in label"
 msgstr ""
 
@@ -591,8 +591,8 @@ msgstr ""
 msgid "Free shipping over total cart price."
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:135 app/Admin/Tabs/Econt_Tab.php:184
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:60 app/Admin/Tabs/Speedy_Tab.php:140
+#: app/Admin/Tabs/CVC_Tab.php:135 app/Admin/Tabs/Econt_Tab.php:185
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:60 app/Admin/Tabs/Speedy_Tab.php:141
 msgid "General"
 msgstr ""
 
@@ -612,8 +612,8 @@ msgstr ""
 msgid "Generate label"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:95
-#: app/Admin/Tabs/Speedy_Tab.php:83
+#: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:96
+#: app/Admin/Tabs/Speedy_Tab.php:84
 msgid "Generate label after checkout"
 msgstr ""
 
@@ -757,7 +757,7 @@ msgid "Message:"
 msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:41 app/Front_End/Checkout/Company.php:36
-#: app/Front_End/Checkout/Company.php:92
+#: app/Front_End/Checkout/Company.php:98
 msgid "MOL"
 msgstr ""
 
@@ -799,7 +799,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:157
+#: app/Admin/Tabs/Econt_Tab.php:158
 msgid "No agreement"
 msgstr ""
 
@@ -839,8 +839,8 @@ msgstr ""
 
 #: app/Admin/CVC.php:120 app/Admin/Econt.php:119 app/Admin/Speedy.php:120
 #: app/Admin/Tabs/CVC_Tab.php:91 app/Admin/Tabs/CVC_Tab.php:113
-#: app/Admin/Tabs/Econt_Tab.php:101 app/Admin/Tabs/Econt_Tab.php:140
-#: app/Admin/Tabs/Speedy_Tab.php:88 app/Admin/Tabs/Speedy_Tab.php:117
+#: app/Admin/Tabs/Econt_Tab.php:102 app/Admin/Tabs/Econt_Tab.php:141
+#: app/Admin/Tabs/Speedy_Tab.php:89 app/Admin/Tabs/Speedy_Tab.php:118
 #: app/Shipping/CVC/Method.php:137 app/Shipping/Econt/Method.php:128
 #: app/Shipping/Speedy/Method.php:136
 msgid "Office"
@@ -1045,6 +1045,10 @@ msgstr ""
 msgid "Released under Art. 3 payment without PPP"
 msgstr ""
 
+#: app/Admin/Tabs/Econt_Tab.php:94 app/Admin/Tabs/Speedy_Tab.php:82
+msgid "Remove APT from offices"
+msgstr ""
+
 #: app/Admin/Nekorekten_Com.php:34
 msgid "Reports"
 msgstr ""
@@ -1100,12 +1104,12 @@ msgstr ""
 msgid "Select a month for the report"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:104 app/Admin/Tabs/Econt_Tab.php:128
+#: app/Admin/Tabs/CVC_Tab.php:104 app/Admin/Tabs/Econt_Tab.php:129
 msgid "Select Address"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:97 app/Admin/Tabs/Econt_Tab.php:107
-#: app/Admin/Tabs/Speedy_Tab.php:94
+#: app/Admin/Tabs/CVC_Tab.php:97 app/Admin/Tabs/Econt_Tab.php:108
+#: app/Admin/Tabs/Speedy_Tab.php:95
 msgid ""
 "Select from where you will send the packages and save to show more options."
 msgstr ""
@@ -1140,8 +1144,8 @@ msgid "Send customer notification for delivery."
 msgstr ""
 
 #: app/Admin/Tabs/CVC_Tab.php:97 app/Admin/Tabs/CVC_Tab.php:145
-#: app/Admin/Tabs/Econt_Tab.php:107 app/Admin/Tabs/Econt_Tab.php:194
-#: app/Admin/Tabs/Speedy_Tab.php:94 app/Admin/Tabs/Speedy_Tab.php:150
+#: app/Admin/Tabs/Econt_Tab.php:108 app/Admin/Tabs/Econt_Tab.php:195
+#: app/Admin/Tabs/Speedy_Tab.php:95 app/Admin/Tabs/Speedy_Tab.php:151
 msgid "Send From"
 msgstr ""
 
@@ -1153,7 +1157,7 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: app/Plugin.php:66 app/Plugin.php:162 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:65 app/Plugin.php:162 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
@@ -1162,7 +1166,7 @@ msgid "Settings saved successfully!"
 msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:46 app/Front_End/Checkout/Company.php:58
-#: app/Front_End/Checkout/Company.php:104
+#: app/Front_End/Checkout/Company.php:110
 msgid "Settlement"
 msgstr ""
 
@@ -1174,7 +1178,7 @@ msgstr ""
 msgid "Shipment type"
 msgstr ""
 
-#: app/Export/Nra/Order.php:100 app/Invoice/Order/Order.php:64
+#: app/Export/Nra/Order.php:100 app/Invoice/Order/Order.php:66
 #, php-format
 msgid "Shipping: %s"
 msgstr ""
@@ -1296,8 +1300,8 @@ msgid ""
 " to generate the information again."
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:95
-#: app/Admin/Tabs/Speedy_Tab.php:83
+#: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:96
+#: app/Admin/Tabs/Speedy_Tab.php:84
 msgid ""
 "This option will try to generate your label immediately after user checkout. "
 "Also, will add the tracking number in the order email."
@@ -1325,11 +1329,11 @@ msgstr ""
 msgid "To Office: "
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:94 app/Invoice/Order/Order.php:78
+#: app/Invoice/Document/BaseDocument.php:94 app/Invoice/Order/Order.php:80
 msgid "Total"
 msgstr ""
 
-#: app/Invoice/Order/Order.php:100
+#: app/Invoice/Order/Order.php:102
 msgid "Total due"
 msgstr ""
 
@@ -1358,11 +1362,11 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: app/Admin/Tabs/Speedy_Tab.php:188
+#: app/Admin/Tabs/Speedy_Tab.php:189
 msgid "Username and password are incorrect."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:231
+#: app/Admin/Tabs/Econt_Tab.php:232
 #, php-format
 msgid ""
 "Username and password are incorrect. Please generate API keys from "

@@ -79,6 +79,7 @@ class Speedy_Tab extends Base_Tab {
 			$fields[ 'speedy' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ) );
 			$fields[ 'speedy' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ) );
 			$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'ppp', __( 'Cash on delivery as PPP.', 'woo-bg' ) );
+			$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'disable_apt', __( 'Remove APT from offices', 'woo-bg' ) );
 			$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) );
 			$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) );
 			$fields[ 'speedy' ][] = new Fields\Select_Field( 

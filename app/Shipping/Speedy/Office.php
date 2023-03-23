@@ -63,6 +63,12 @@ class Office {
 				$args[ 'error' ] = sprintf( __( 'No offices were found at %s.', 'woo-bg' ), $raw_city );
 			} else {
 				$offices = $offices['offices'];
+
+				if ( woo_bg_get_option( 'speedy', 'disable_apt' ) === 'yes' ) {
+					$offices = array_values( array_filter( $offices, function( $office ) {
+						return ( $office['type'] !== 'APT' );
+					} ) );
+				}
 			}
 
 			$args[ 'offices' ] = $offices;
