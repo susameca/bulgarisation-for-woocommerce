@@ -415,7 +415,7 @@ class Speedy {
 			$label['service']['additionalServices']['obpd'] = array(
 				'option' => $test, 
 				'returnShipmentServiceId' => 505, 
-				'returnShipmentPayer' => 'RECIPIENT' 
+				'returnShipmentPayer' => 'SENDER' 
 			);
 		}
 
