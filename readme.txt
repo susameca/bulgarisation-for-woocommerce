@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.2
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.0
+Stable tag: 3.0.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,11 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.1 =
+Speedy: Optimize label
+Speedy/Econt: Option for removing APT from shipping methods
+Documents: Optimize generations
 
 = 3.0.0 =
 Settings: Change main settings functionality
