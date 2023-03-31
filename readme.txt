@@ -71,10 +71,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 3.0.2 =
+Documents: Improve functionality
+
 = 3.0.1 =
 Speedy: Optimize label
 Speedy/Econt: Option for removing APT from shipping methods
-Documents: Optimize generations
+Documents: Optimizations
 
 = 3.0.0 =
 Settings: Change main settings functionality
