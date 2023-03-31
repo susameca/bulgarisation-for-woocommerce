@@ -22,6 +22,17 @@ class Order {
 	}
 
 	public function get_items() {
+		$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
+		$shipping_items = $this->woo_order->get_items( 'shipping' );
+
+		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
+			foreach ( $shipping_items as $item_id => $item ) {
+				$this->woo_order->remove_item( $item_id );
+			}
+
+			$this->woo_order->calculate_totals();
+		}
+
 		$items = array();
 		$order_items = array_merge( $this->woo_order->get_items(), $this->woo_order->get_items('fee') );
 
@@ -44,37 +55,58 @@ class Order {
 			);
 		}
 
-		$shipping_vat = woo_bg_get_order_shipping_vat( $this->woo_order );
+		if ( sizeof( $this->woo_order->get_items( 'shipping' ) ) > 0 ) {
+			$shipping_vat = woo_bg_get_order_shipping_vat( $this->woo_order );
 
-		foreach ( $this->woo_order->get_items( 'shipping' ) as $item ) {
-			$item_price = $item->get_total() / $item->get_quantity();
-			$item_vat = $this->vat;
-			$item_tax = $item->get_total_tax();
+			foreach ( $this->woo_order->get_items( 'shipping' ) as $item ) {
+				$item_price = $item->get_total() / $item->get_quantity();
+				$item_vat = $this->vat;
+				$item_tax = $item->get_total_tax();
 
-			if ( wc_tax_enabled() ) {
-				if ( $item->get_total_tax() ) {
-					$item_vat = $shipping_vat;
-				} else {
-					$item_tax = $this->_tax::calc_tax(  $item_price, array( array('compound' => 'yes', 'rate' => $this->vat ) ), true )[0];
-					$item_price = $item_price - $item_tax;
+				if ( wc_tax_enabled() ) {
+					if ( $item->get_total_tax() ) {
+						$item_vat = $shipping_vat;
+					} else {
+						$item_tax = $this->_tax::calc_tax(  $item_price, array( array('compound' => 'yes', 'rate' => $this->vat ) ), true )[0];
+						$item_price = $item_price - $item_tax;
+					}
 				}
+
+				$item_total = $item_price * $item->get_quantity();
+
+				$items[] = array(
+					'name' => apply_filters( 'woo_bg/invoice/order/item_name', sprintf( __('Shipping: %s', 'woo-bg'), $item->get_name() ), $item ),
+					'quantity' => abs( $item->get_quantity() ), 
+					'vat_rate' => $item_vat . "%", 
+					'price' => wc_price( abs( $item_price ), array( 'currency' => $this->woo_order->get_currency() ) ),
+					'total' => wc_price( abs( $item_total ), array( 'currency' => $this->woo_order->get_currency() ) )
+				);
+			}
+		}
+
+		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
+			foreach ( $shipping_items as $item_id => $item ) {
+				$this->woo_order->add_item( $item );
 			}
 
-			$item_total = $item_price * $item->get_quantity();
-
-			$items[] = array(
-				'name' => apply_filters( 'woo_bg/invoice/order/item_name', sprintf( __('Shipping: %s', 'woo-bg'), $item->get_name() ), $item ),
-				'quantity' => abs( $item->get_quantity() ), 
-				'vat_rate' => $item_vat . "%", 
-				'price' => wc_price( abs( $item_price ), array( 'currency' => $this->woo_order->get_currency() ) ),
-				'total' => wc_price( abs( $item_total ), array( 'currency' => $this->woo_order->get_currency() ) )
-			);
+			$this->woo_order->calculate_totals();
 		}
 
 		return apply_filters( 'woo_bg/invoice/order/items', $items, $this );
 	}
 
 	public function get_total_items() {
+		$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
+		$shipping_items = $this->woo_order->get_items( 'shipping' );
+
+		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
+			foreach ( $shipping_items as $item_id => $item ) {
+				$this->woo_order->remove_item( $item_id );
+			}
+
+			$this->woo_order->calculate_totals();
+		}
+
 		$items = array(
 			'subtotal' => array(
 				'label' => __( "Total", 'woo-bg' ),
@@ -102,6 +134,14 @@ class Order {
 			'label' => __( "Total due", 'woo-bg' ),
 			'value' => wc_price( abs( $this->woo_order->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) ),
 		);
+
+		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
+			foreach ( $shipping_items as $item_id => $item ) {
+				$this->woo_order->add_item( $item );
+			}
+
+			$this->woo_order->calculate_totals();
+		}
 
 		return apply_filters( 'woo_bg/invoice/order/total_items', $items, $this );
 	}

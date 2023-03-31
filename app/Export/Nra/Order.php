@@ -17,7 +17,6 @@ class Order {
 		$this->load_order_number( $generate_files );
 		$this->load_vat_groups();
 		$this->load_payment_method();
-
 	}
 
 	protected function load_vat_groups() {
@@ -64,6 +63,17 @@ class Order {
 	}
 
 	protected function get_items_from_order() {
+		$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
+		$shipping_items = $this->woo_order->get_items( 'shipping' );
+
+		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
+			foreach ( $shipping_items as $item_id => $item ) {
+				$this->woo_order->remove_item( $item_id );
+			}
+
+			$this->woo_order->calculate_totals();
+		}
+
 		$items = array();
 		$shipping_vat = woo_bg_get_order_shipping_vat( $this->woo_order );
 
@@ -103,6 +113,14 @@ class Order {
 				'price' => $price,
 				'vat' => $item_vat,
 			);
+		}
+
+		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
+			foreach ( $shipping_items as $item_id => $item ) {
+				$this->woo_order->add_item( $item );
+			}
+
+			$this->woo_order->calculate_totals();
 		}
 
 		return apply_filters( 'woo_bg/admin/nra_export/items', $items, $this->woo_order );

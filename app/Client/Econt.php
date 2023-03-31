@@ -25,6 +25,10 @@ class Econt {
 	}
 
 	public function api_call( $endpoint, $args ) {
+		if ( empty( $this->get_user() ) || empty( $this->get_password() ) ) {
+	        return;
+	    }
+	    
 		$request = wp_remote_post( $this->get_base_endpoint() . $endpoint, array(
 			'headers' => array(
 				'content-type' => 'application/json',

@@ -75,6 +75,7 @@ class Nra_Tab extends Base_Tab {
 						'label' => __( 'Order completed', 'woo-bg' ),
 					)
 				), 'trigger', __( 'When to generate documents?', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'remove_shipping', __( 'Remove delivery from documents', 'woo-bg' ), null, null, __( 'This option will remove the delivery from invoices and XML file.', 'woo-bg' ) ),
 				new Fields\Text_Field( 'next_invoice_number', __( 'Next Invoice Number', 'woo-bg' ), __( 'The invoice number of the next order.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'prepared_by', __( 'Prepared by', 'woo-bg' ), __( 'Enter the name of the compiler of the automatically generated documents, which will be displayed in them.', 'woo-bg' ), null ),
 				new Fields\Text_Field( 'identification_code', __( 'Identification code', 'woo-bg' ), null, null, __( "Enter an ID in the invoices and credit memos that replace the compiler's signature.", 'woo-bg' ) ),

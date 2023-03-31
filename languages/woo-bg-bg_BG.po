@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2023-03-23 21:47+0000\n"
+"PO-Revision-Date: 2023-03-31 19:22+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -304,7 +304,7 @@ msgstr "Детайли:"
 msgid "Disable invoice generation"
 msgstr "Изключи генерирането на фактури"
 
-#: app/Invoice/Order/Order.php:87
+#: app/Invoice/Order/Order.php:119
 msgid "Discount"
 msgstr "Отстъпка"
 
@@ -324,7 +324,7 @@ msgstr "Документ-палет"
 msgid "Documents"
 msgstr "Документи"
 
-#: app/Admin/Tabs/Nra_Tab.php:143
+#: app/Admin/Tabs/Nra_Tab.php:144
 msgid "Documents Settings"
 msgstr "Настройки на документи"
 
@@ -464,7 +464,7 @@ msgstr ""
 "Въведете фиксирана цена за доставка, която ще трябва да платите вие, и ще "
 "бъде добавена към цената на поръчката."
 
-#: app/Admin/Tabs/Nra_Tab.php:80
+#: app/Admin/Tabs/Nra_Tab.php:81
 msgid ""
 "Enter an ID in the invoices and credit memos that replace the compiler's "
 "signature."
@@ -488,7 +488,7 @@ msgstr "Въведете телефон на изпращач."
 msgid "Enter the generated API key."
 msgstr "Въведете генерирания API ключ."
 
-#: app/Admin/Tabs/Nra_Tab.php:79
+#: app/Admin/Tabs/Nra_Tab.php:80
 msgid ""
 "Enter the name of the compiler of the automatically generated documents, "
 "which will be displayed in them."
@@ -578,7 +578,7 @@ msgstr "Име:"
 msgid "Fixed price"
 msgstr "Фиксирана цена"
 
-#: app/Admin/Tabs/Nra_Tab.php:81
+#: app/Admin/Tabs/Nra_Tab.php:82
 msgid "Footer text"
 msgstr "Текст в края на документа"
 
@@ -642,11 +642,11 @@ msgstr "Генерирай товарителница."
 msgid "Generate label after checkout"
 msgstr "Генерирай товарителница след чекаут"
 
-#: app/Admin/Tabs/Nra_Tab.php:146
+#: app/Admin/Tabs/Nra_Tab.php:147
 msgid "Global Shop Settings"
 msgstr "Глобални настройки на магазина"
 
-#: app/Admin/Tabs/Nra_Tab.php:97
+#: app/Admin/Tabs/Nra_Tab.php:98
 msgid ""
 "group \"A\" - for goods and services, the sales of which are exempt from "
 "taxation, for goods and services, the sales of which are subject to 0% VAT, "
@@ -657,15 +657,15 @@ msgid ""
 "separately."
 msgstr "група \"А\" - 0 % ДДС; група \"Б\" - 20 % данък; група \"Г\" 9%. "
 
-#: app/Admin/Tabs/Nra_Tab.php:87
+#: app/Admin/Tabs/Nra_Tab.php:88
 msgid "Group - A"
 msgstr "Група - А"
 
-#: app/Admin/Tabs/Nra_Tab.php:91
+#: app/Admin/Tabs/Nra_Tab.php:92
 msgid "Group - B"
 msgstr "Група - Б"
 
-#: app/Admin/Tabs/Nra_Tab.php:95
+#: app/Admin/Tabs/Nra_Tab.php:96
 msgid "Group - G"
 msgstr "Група - Г"
 
@@ -673,7 +673,7 @@ msgstr "Група - Г"
 msgid "Help"
 msgstr "Помощ"
 
-#: app/Admin/Tabs/Nra_Tab.php:98
+#: app/Admin/Tabs/Nra_Tab.php:99
 msgid "How to return the amount when the client cancel the order."
 msgstr "Начин на връщане на сумата при отказ на поръчката."
 
@@ -681,11 +681,11 @@ msgstr "Начин на връщане на сумата при отказ на 
 msgid "https://autopolis.bg/"
 msgstr "https://autopolis.bg/"
 
-#: app/Admin/Tabs/Nra_Tab.php:80
+#: app/Admin/Tabs/Nra_Tab.php:81
 msgid "Identification code"
 msgstr "Идентификационен код"
 
-#: app/Admin/Tabs/Nra_Tab.php:163
+#: app/Admin/Tabs/Nra_Tab.php:164
 msgid "Identifier"
 msgstr "Идентификатор"
 
@@ -766,7 +766,7 @@ msgstr "Фамилия:"
 msgid "Live"
 msgstr "Реална"
 
-#: app/Admin/Tabs/Nra_Tab.php:140
+#: app/Admin/Tabs/Nra_Tab.php:141
 msgid "Main Company Settings"
 msgstr "Главни настройки на фирмата"
 
@@ -778,7 +778,7 @@ msgstr "Главни функционалности"
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr "Направете опциите за доставка на 2 реда и с пълна ширина в чекаут."
 
-#: app/Admin/Tabs/Nra_Tab.php:161
+#: app/Admin/Tabs/Nra_Tab.php:162
 msgid "Manner of payment of the order according to the NRA system."
 msgstr "Начин на плащане на поръчката според системата на НАП."
 
@@ -820,7 +820,7 @@ msgstr "Настройки за nekorekten.com API "
 msgid "nekorekten.com Settings"
 msgstr "Настройки за nekorekten.com"
 
-#: app/Admin/Tabs/Nra_Tab.php:78
+#: app/Admin/Tabs/Nra_Tab.php:79
 msgid "Next Invoice Number"
 msgstr "Следващ номер на документ"
 
@@ -955,7 +955,7 @@ msgstr "Плати по договор"
 msgid "Payment method"
 msgstr "Метод на плащане"
 
-#: app/Admin/Tabs/Nra_Tab.php:118
+#: app/Admin/Tabs/Nra_Tab.php:119
 #, php-format
 msgid "Payment method: %s"
 msgstr "Метод на плащане: %s"
@@ -964,7 +964,7 @@ msgstr "Метод на плащане: %s"
 msgid "Payment service provider"
 msgstr "Доставчик на платежни услуги"
 
-#: app/Admin/Tabs/Nra_Tab.php:161
+#: app/Admin/Tabs/Nra_Tab.php:162
 msgid "Payment Type"
 msgstr "Начин на плащане"
 
@@ -1025,7 +1025,7 @@ msgstr "Моля изберете регион."
 msgid "Plugin Settings"
 msgstr "Настройки на плъгина"
 
-#: app/Admin/Tabs/Nra_Tab.php:79
+#: app/Admin/Tabs/Nra_Tab.php:80
 msgid "Prepared by"
 msgstr "Съставил документа"
 
@@ -1086,11 +1086,15 @@ msgstr "Освободено по чл. 3 плащане без ППП"
 msgid "Remove APT from offices"
 msgstr "Премахни автоматите от списъка с офиси"
 
+#: app/Admin/Tabs/Nra_Tab.php:78
+msgid "Remove delivery from documents"
+msgstr "Премахване на доставките от документите"
+
 #: app/Admin/Nekorekten_Com.php:34
 msgid "Reports"
 msgstr "Отзиви"
 
-#: app/Admin/Tabs/Nra_Tab.php:98
+#: app/Admin/Tabs/Nra_Tab.php:99
 msgid "Return method"
 msgstr "Начин на връщане на сумата"
 
@@ -1211,7 +1215,7 @@ msgstr "Изпращач"
 msgid "Settings"
 msgstr "Настройки"
 
-#: app/Admin/Tabs/Nra_Tab.php:196 app/Admin/Tabs/Settings_Tab.php:103
+#: app/Admin/Tabs/Nra_Tab.php:197 app/Admin/Tabs/Settings_Tab.php:103
 msgid "Settings saved successfully!"
 msgstr "Настройките са запазени успешно!"
 
@@ -1228,7 +1232,7 @@ msgstr "Статус на пратката"
 msgid "Shipment type"
 msgstr "Тип на товарителницата"
 
-#: app/Export/Nra/Order.php:100 app/Invoice/Order/Order.php:66
+#: app/Export/Nra/Order.php:110 app/Invoice/Order/Order.php:78
 #, php-format
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
@@ -1313,7 +1317,7 @@ msgstr ""
 "Благодарим ви за изпратеното съобщение! Ще се свържем с вас възможно най-"
 "бързо."
 
-#: app/Admin/Tabs/Nra_Tab.php:78
+#: app/Admin/Tabs/Nra_Tab.php:79
 msgid "The invoice number of the next order."
 msgstr "Номер на документа за следващата поръчка"
 
@@ -1362,6 +1366,12 @@ msgstr ""
 "2 на порърчка ) и някоя от поръчките може да получи грешка. Ако видите \"?\" "
 "иконка, моля отворете страницата на обявата за да се обновят данните."
 
+#: app/Admin/Tabs/Nra_Tab.php:78
+msgid "This option will remove the delivery from invoices and XML file."
+msgstr ""
+"Тази опция ще премахне доставките от всички PDF документи и XML одиторски "
+"файл."
+
 #: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:96
 #: app/Admin/Tabs/Speedy_Tab.php:84
 msgid ""
@@ -1394,11 +1404,11 @@ msgstr "Към фактура №"
 msgid "To Office: "
 msgstr "До офис: "
 
-#: app/Invoice/Document/BaseDocument.php:94 app/Invoice/Order/Order.php:80
+#: app/Invoice/Document/BaseDocument.php:94 app/Invoice/Order/Order.php:112
 msgid "Total"
 msgstr "Данъчна основа"
 
-#: app/Invoice/Order/Order.php:102
+#: app/Invoice/Order/Order.php:134
 msgid "Total due"
 msgstr "Всичко"
 
@@ -1455,7 +1465,7 @@ msgstr "Валидирането не беше възможно"
 msgid "Vat"
 msgstr "ДДС"
 
-#: app/Admin/Tabs/Nra_Tab.php:97
+#: app/Admin/Tabs/Nra_Tab.php:98
 msgid "Vat Group"
 msgstr "ДДС група"
 
@@ -1484,7 +1494,7 @@ msgstr "ДДС номер: %s"
 msgid "Virtual POS terminal"
 msgstr "Виртуален ПОС терминал"
 
-#: app/Admin/Tabs/Nra_Tab.php:162
+#: app/Admin/Tabs/Nra_Tab.php:163
 msgid "Virtual POS №"
 msgstr "Номер на виртуален ПОС терминал"
 

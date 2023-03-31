@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-23 21:45+0000\n"
+"POT-Creation-Date: 2023-03-31 19:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -301,7 +301,7 @@ msgstr ""
 msgid "Disable invoice generation"
 msgstr ""
 
-#: app/Invoice/Order/Order.php:87
+#: app/Invoice/Order/Order.php:119
 msgid "Discount"
 msgstr ""
 
@@ -321,7 +321,7 @@ msgstr ""
 msgid "Documents"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:143
+#: app/Admin/Tabs/Nra_Tab.php:144
 msgid "Documents Settings"
 msgstr ""
 
@@ -453,7 +453,7 @@ msgid ""
 "order."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:80
+#: app/Admin/Tabs/Nra_Tab.php:81
 msgid ""
 "Enter an ID in the invoices and credit memos that replace the compiler's "
 "signature."
@@ -475,7 +475,7 @@ msgstr ""
 msgid "Enter the generated API key."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:79
+#: app/Admin/Tabs/Nra_Tab.php:80
 msgid ""
 "Enter the name of the compiler of the automatically generated documents, "
 "which will be displayed in them."
@@ -554,7 +554,7 @@ msgstr ""
 msgid "Fixed price"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:81
+#: app/Admin/Tabs/Nra_Tab.php:82
 msgid "Footer text"
 msgstr ""
 
@@ -617,11 +617,11 @@ msgstr ""
 msgid "Generate label after checkout"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:146
+#: app/Admin/Tabs/Nra_Tab.php:147
 msgid "Global Shop Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:97
+#: app/Admin/Tabs/Nra_Tab.php:98
 msgid ""
 "group \"A\" - for goods and services, the sales of which are exempt from "
 "taxation, for goods and services, the sales of which are subject to 0% VAT, "
@@ -632,15 +632,15 @@ msgid ""
 "separately."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:87
+#: app/Admin/Tabs/Nra_Tab.php:88
 msgid "Group - A"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:91
+#: app/Admin/Tabs/Nra_Tab.php:92
 msgid "Group - B"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:95
+#: app/Admin/Tabs/Nra_Tab.php:96
 msgid "Group - G"
 msgstr ""
 
@@ -648,7 +648,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:98
+#: app/Admin/Tabs/Nra_Tab.php:99
 msgid "How to return the amount when the client cancel the order."
 msgstr ""
 
@@ -656,11 +656,11 @@ msgstr ""
 msgid "https://autopolis.bg/"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:80
+#: app/Admin/Tabs/Nra_Tab.php:81
 msgid "Identification code"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:163
+#: app/Admin/Tabs/Nra_Tab.php:164
 msgid "Identifier"
 msgstr ""
 
@@ -736,7 +736,7 @@ msgstr ""
 msgid "Live"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:140
+#: app/Admin/Tabs/Nra_Tab.php:141
 msgid "Main Company Settings"
 msgstr ""
 
@@ -748,7 +748,7 @@ msgstr ""
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:161
+#: app/Admin/Tabs/Nra_Tab.php:162
 msgid "Manner of payment of the order according to the NRA system."
 msgstr ""
 
@@ -789,7 +789,7 @@ msgstr ""
 msgid "nekorekten.com Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:78
+#: app/Admin/Tabs/Nra_Tab.php:79
 msgid "Next Invoice Number"
 msgstr ""
 
@@ -921,7 +921,7 @@ msgstr ""
 msgid "Payment method"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:118
+#: app/Admin/Tabs/Nra_Tab.php:119
 #, php-format
 msgid "Payment method: %s"
 msgstr ""
@@ -930,7 +930,7 @@ msgstr ""
 msgid "Payment service provider"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:161
+#: app/Admin/Tabs/Nra_Tab.php:162
 msgid "Payment Type"
 msgstr ""
 
@@ -989,7 +989,7 @@ msgstr ""
 msgid "Plugin Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:79
+#: app/Admin/Tabs/Nra_Tab.php:80
 msgid "Prepared by"
 msgstr ""
 
@@ -1049,11 +1049,15 @@ msgstr ""
 msgid "Remove APT from offices"
 msgstr ""
 
+#: app/Admin/Tabs/Nra_Tab.php:78
+msgid "Remove delivery from documents"
+msgstr ""
+
 #: app/Admin/Nekorekten_Com.php:34
 msgid "Reports"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:98
+#: app/Admin/Tabs/Nra_Tab.php:99
 msgid "Return method"
 msgstr ""
 
@@ -1161,7 +1165,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:196 app/Admin/Tabs/Settings_Tab.php:103
+#: app/Admin/Tabs/Nra_Tab.php:197 app/Admin/Tabs/Settings_Tab.php:103
 msgid "Settings saved successfully!"
 msgstr ""
 
@@ -1178,7 +1182,7 @@ msgstr ""
 msgid "Shipment type"
 msgstr ""
 
-#: app/Export/Nra/Order.php:100 app/Invoice/Order/Order.php:66
+#: app/Export/Nra/Order.php:110 app/Invoice/Order/Order.php:78
 #, php-format
 msgid "Shipping: %s"
 msgstr ""
@@ -1259,7 +1263,7 @@ msgstr ""
 msgid "Thank you for your message! We'll contact you shortly."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:78
+#: app/Admin/Tabs/Nra_Tab.php:79
 msgid "The invoice number of the next order."
 msgstr ""
 
@@ -1300,6 +1304,10 @@ msgid ""
 " to generate the information again."
 msgstr ""
 
+#: app/Admin/Tabs/Nra_Tab.php:78
+msgid "This option will remove the delivery from invoices and XML file."
+msgstr ""
+
 #: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:96
 #: app/Admin/Tabs/Speedy_Tab.php:84
 msgid ""
@@ -1329,11 +1337,11 @@ msgstr ""
 msgid "To Office: "
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:94 app/Invoice/Order/Order.php:80
+#: app/Invoice/Document/BaseDocument.php:94 app/Invoice/Order/Order.php:112
 msgid "Total"
 msgstr ""
 
-#: app/Invoice/Order/Order.php:102
+#: app/Invoice/Order/Order.php:134
 msgid "Total due"
 msgstr ""
 
@@ -1386,7 +1394,7 @@ msgstr ""
 msgid "Vat"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:97
+#: app/Admin/Tabs/Nra_Tab.php:98
 msgid "Vat Group"
 msgstr ""
 
@@ -1415,7 +1423,7 @@ msgstr ""
 msgid "Virtual POS terminal"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:162
+#: app/Admin/Tabs/Nra_Tab.php:163
 msgid "Virtual POS №"
 msgstr ""
 
