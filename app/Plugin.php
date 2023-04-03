@@ -78,19 +78,19 @@ class Plugin {
 			new Admin\Order\Emails();
 			new Admin\Order\MetaBox();
 			new Admin\Order\Subscriptions();
+
+			if ( woo_bg_get_option( 'invoice', 'invoices' ) !== 'disable' ) {
+				new Front_End\Checkout\Company();
+
+				if ( ! class_exists( 'WC_EU_VAT_Number_Init' ) ) {
+					new Front_End\Checkout\EU_Vat();
+					new Admin\EU_Vat();
+				}
+			}
 		}
 
 		new Shipping\Register( $this->container );
 		new Shipping\CheckoutLayout();
-
-		if ( woo_bg_get_option( 'invoice', 'invoices' ) !== 'disable' ) {
-			new Front_End\Checkout\Company();
-
-			if ( ! class_exists( 'WC_EU_VAT_Number_Init' ) ) {
-				new Front_End\Checkout\EU_Vat();
-				new Admin\EU_Vat();
-			}
-		}
 
 		if ( woo_bg_get_option( 'apis', 'enable_nekorekten' ) === 'yes' ) {
 			new Admin\Nekorekten_Com();
