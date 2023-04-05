@@ -202,8 +202,6 @@ export default {
 						_this.error = response.data.data.error;
 						_this.resetData();
 					} else {
-						console.log(response.data.data.offices);
-						console.log(response.data.data.offices.length);
 						if ( response.data.data.offices.length ) {
 							_this.offices = cloneDeep( response.data.data.offices );
 						} else {
@@ -211,8 +209,6 @@ export default {
 							_this.resetData();
 						}
 					}
-
-					console.log(_this.offices);
 
 					_this.offices.forEach( function ( office ) {
 						if ( _this.selectedOffice.code == office.code ) {
