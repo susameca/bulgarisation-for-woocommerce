@@ -196,7 +196,7 @@ class BaseDocument {
 	public function generate_QR_code() {
 		$qr_code_pieces = array(
 			$this->nap_number,
-			$this->woo_order->get_id(),
+			$this->woo_order->get_order_number(),
 			$this->woo_order->get_transaction_id(),
 			$this->woo_order->get_date_created()->date_i18n('Y-m-d'),
 			$this->woo_order->get_date_created()->date_i18n('g:i:s'),
