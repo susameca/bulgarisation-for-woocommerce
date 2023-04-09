@@ -9,14 +9,14 @@
 				placeholder=""
 				track-by="id"
 				label="name"
-			  	deselect-label=""
+				deselect-label=""
 				open-direction="bottom" 
 				v-model="selectedOffice" 
 				:options-limit="30" 
 				:limit="6"
 				:max-height="600" 
 				:selectedLabel="i18n.selected" 
-			  	:selectLabel="i18n.select"
+				:selectLabel="i18n.select"
 				:options="offices" 
 				:custom-label="compileLabel" 
 				:multiple="false" 
@@ -55,7 +55,7 @@ export default {
 			lastNameField: $('#billing_last_name'),
 			phoneField: $('#billing_phone'),
 			selectedOffice: [],
-      		offices: [],
+			offices: [],
 			state: '',
 			city: '',
 			error: '',
@@ -65,7 +65,7 @@ export default {
 	},
 	computed: {
 		officeLocatorUrl() {
-			let url = 'https://bgmaps.com/templates/econt?address=' + this.city + '&office_type=to_office_courier&shop_url=' + window.location.href;
+			let url = 'https://officelocator.econt.com/?city=' + this.city + '&officeType=office&shopUrl=' + window.location.href;
 
 			return url;
 		},
@@ -112,11 +112,15 @@ export default {
 	},
 	methods: {
 		setOfficeFromLocator( message ) {
-			if ( message.origin !== 'https://bgmaps.com' ) {
+			if ( message.origin !== 'https://officelocator.econt.com' ) {
 				return;
 			}
 
-			let officeID = message.data.split('||')[0];
+			if ( typeof message.data.office === 'undefined' ) {
+				return;
+			}
+
+			let officeID = message.data.office.code;
 
 			if ( this.offices.length ) {
 				let _this = this;
@@ -134,13 +138,19 @@ export default {
 			$('#woo-bg--econt-office-locator').magnificPopup({
 				type:'iframe',
 				midClick: true,
+				iframe: {
+					markup: '<div class="mfp-iframe-scaler">'+
+		            '<div class="mfp-close"></div>'+
+		            '<iframe allow="geolocation;" style="border-width: 0px;" class="mfp-iframe"></iframe>'+
+		          '</div>', 
+				}
 			});
 
 			window.addEventListener( 'message', this.setOfficeFromLocator, false );
 		},
 		compileLabel({ name, address }) {
-	      return `${name} (${address.fullAddress})`;
-	    },
+		  return `${name} (${address.fullAddress})`;
+		},
 		checkFields() {
 			$('#billing_address_1').attr('disabled', false);
 			$('#shipping_address_1').attr('disabled', false);
