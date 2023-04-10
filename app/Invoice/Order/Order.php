@@ -86,6 +86,14 @@ class Order {
 
 		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
 			foreach ( $shipping_items as $item_id => $item ) {
+				if ( $metas = $item->get_meta_data() ) {
+					foreach ( $metas as $meta ) {
+						$data = $meta->get_data();
+
+						$item->add_meta_data( $data['key'], $data['value'], true );
+					}
+				}
+				
 				$this->woo_order->add_item( $item );
 			}
 
@@ -137,6 +145,14 @@ class Order {
 
 		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
 			foreach ( $shipping_items as $item_id => $item ) {
+				if ( $metas = $item->get_meta_data() ) {
+					foreach ( $metas as $meta ) {
+						$data = $meta->get_data();
+
+						$item->add_meta_data( $data['key'], $data['value'], true );
+					}
+				}
+
 				$this->woo_order->add_item( $item );
 			}
 
