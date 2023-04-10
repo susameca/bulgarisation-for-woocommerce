@@ -436,7 +436,7 @@ class Method extends \WC_Shipping_Method {
 	private function get_package_total() {
 		$total = floatval( WC()->cart->get_cart_contents_total() ) + floatval( WC()->cart->get_cart_contents_tax() );
 
-		return number_format( $total, 2 );
+		return number_format( $total, 2, '.', '' );
 	}
 
 	public static function validate_cvc_method( $fields, $errors ){
