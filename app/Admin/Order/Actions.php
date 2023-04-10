@@ -12,7 +12,7 @@ class Actions {
 		$order_documents_trigger = woo_bg_get_option( 'invoice', 'trigger' );
 
 		if ( !$order_documents_trigger || $order_documents_trigger === "order_created" ) {
-			add_action( 'woocommerce_checkout_order_processed', array( '\Woo_BG\Admin\Order\Documents', 'generate_documents' ) );
+			add_action( 'woocommerce_checkout_order_processed', array( '\Woo_BG\Admin\Order\Documents', 'generate_documents' ), 100 );
 		} else if ( $order_documents_trigger === "order_completed" ) {
 			add_action( 'woocommerce_order_status_completed_notification', array( '\Woo_BG\Admin\Order\Documents', 'generate_documents' ), 5 );
 		}
