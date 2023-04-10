@@ -462,7 +462,7 @@ class Method extends \WC_Shipping_Method {
 	protected function get_package_total() {
 		$total = floatval( WC()->cart->get_cart_contents_total() ) + floatval( WC()->cart->get_cart_contents_tax() );
 
-		return number_format( $total, 2 );
+		return number_format( $total, 2, '.', '' );
 	}
 
 	public static function validate_speedy_method( $fields, $errors ){
