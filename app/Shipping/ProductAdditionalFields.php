@@ -47,7 +47,12 @@ class ProductAdditionalFields {
 	}
 
 	public static function save( $product ) {
-		$product->update_meta_data( '_woo_bg_os_value', sanitize_text_field( $_POST[ '_woo_bg_os_value' ] ) );
-		$product->update_meta_data( '_woo_bg_fragile', sanitize_text_field( $_POST[ '_woo_bg_fragile' ] ) );
+		if ( isset( $_POST[ '_woo_bg_os_value' ] ) ) {
+			$product->update_meta_data( '_woo_bg_os_value', sanitize_text_field( $_POST[ '_woo_bg_os_value' ] ) );
+		}
+
+		if ( isset( $_POST[ '_woo_bg_fragile' ] ) ) {
+			$product->update_meta_data( '_woo_bg_fragile', sanitize_text_field( $_POST[ '_woo_bg_fragile' ] ) );
+		}
 	}
 }
