@@ -61,8 +61,8 @@ class Actions {
 		<?php
 	}
 
-	public static function set_payment_method( $post ) {
-		$order = wc_get_order( $post );
+	public static function set_payment_method( $order_id ) {
+		$order = wc_get_order( $order_id );
 		$settings = new Settings_Tab();
 		$options = $settings->get_localized_fields();
 
