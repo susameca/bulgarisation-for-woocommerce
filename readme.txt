@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.2
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.1
+Stable tag: 3.0.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.3 =
+Econt: Update office locator
+Speedy, Econt, CVC: Optimize label generation
+Documents: Improve functionality
+Optimize product additional fields
+Optimize fields in checkout
 
 = 3.0.2 =
 Documents: Improve functionality
