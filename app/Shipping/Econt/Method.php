@@ -338,9 +338,10 @@ class Method extends \WC_Shipping_Method {
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
 			$_product = wc_get_product( $item[ 'product_id' ] );
+			$product_os_value = $_product->get_meta( '_woo_bg_os_value' );
 
-			if ( $product_os_value = $_product->get_meta( '_woo_bg_os_value' ) ) {
-				$os_value += $product_os_value * $item['quantity'];
+			if ( is_numeric( $product_os_value ) && is_numeric( $item['quantity'] ) ) {
+				$os_value += $product_os_value * absint( $item['quantity'] );
 			}
 			
 			if ( $item['data']->get_weight() ) {
