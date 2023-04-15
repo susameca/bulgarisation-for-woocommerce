@@ -168,9 +168,8 @@ class EU_Vat {
 
 		return false;
 	}
-
 	public static function validate( $vat_number, $billing_country ) {
-		$vat_number = self::get_formatted_vat_number( $vat_number );
+		$vat_numer = self::get_formatted_vat_number( $vat_number );
 		$valid      = self::vat_number_is_valid( $vat_number, $billing_country );
 
 		if ( is_wp_error( $valid ) ) {
@@ -215,9 +214,9 @@ class EU_Vat {
 		$billing_country  = wc_clean( $_POST['billing_country'] );
 		$shipping_country = wc_clean( ! empty( $_POST['shipping_country'] ) && ! empty( $_POST['ship_to_different_address'] ) ? $_POST['shipping_country'] : $_POST['billing_country'] );
 
-		if ( woo_bg_get_option('nap', 'dds_number_required' ) !== 'no' && !empty( $_POST[ 'billing_to_company' ] ) ) {
-			self::validate( wc_clean( $_POST['billing_vat_number'] ), $billing_country );
+		self::validate( wc_clean( $_POST['billing_vat_number'] ), $billing_country );
 
+		if ( woo_bg_get_option('nap', 'dds_number_required' ) !== 'no' && !empty( $_POST[ 'billing_to_company' ] ) ) {
 			if ( false === self::$data['validation']['valid'] && isset( $_REQUEST[ 'billing_to_company' ] ) && sanitize_text_field( $_REQUEST[ 'billing_to_company' ] ) ) {
 				wc_add_notice( sprintf( __( 'You have entered an invalid %1$s (%2$s) for your billing country (%3$s).', 'woo-bg' ), __( 'VAT number', 'woo-bg' ), self::$data['vat_number'], $billing_country ), 'error' );
 			} else {
