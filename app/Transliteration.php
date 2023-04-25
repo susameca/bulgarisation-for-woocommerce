@@ -3,6 +3,14 @@ namespace Woo_BG;
 
 class Transliteration {
     public static function latin2cyrillic( $word ) {
+        $strange_words = apply_filters( 'woo_bg/transliteration/strange_words', array(
+            'sofia' => 'софия',
+        ) );
+
+        if ( in_array( strtolower( $word ), array_keys( $strange_words ) ) ) {
+            $word = $strange_words[ strtolower( $word ) ];
+        }
+
         $cyr = [
             'ч', 'Ч', 'щ', 'Щ', 'ш', 'Ш',
             'ц', 'Ц', 'ц', 'Ц',
