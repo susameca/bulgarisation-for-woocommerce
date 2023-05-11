@@ -158,8 +158,9 @@ class CVC {
 
 		$city_id = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
 
-		$streets = woo_bg_return_array_for_select( Address::get_streets_for_query( $city_id, ' ' ), 1, array( 'type' => 'streets' ) );
-		$quarters = woo_bg_return_array_for_select( Address::get_quarters_for_query( $city_id, ' ' ), 1, array( 'type' => 'quarters' ) );
+		$streets = woo_bg_return_array_for_select( Address::get_streets_for_query( $city_id, $cookie_data['selectedAddress']['label'] ), 1, array( 'type' => 'streets' ) );
+
+		$quarters = woo_bg_return_array_for_select( Address::get_quarters_for_query( $city_id, $cookie_data['selectedAddress']['label'] ), 1, array( 'type' => 'quarters' ) );
 
 		return array_merge( $streets, $quarters );
 	}

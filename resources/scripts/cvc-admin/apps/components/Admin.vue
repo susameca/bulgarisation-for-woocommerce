@@ -327,6 +327,8 @@ export default {
 			this.streetNumber = wooBg_cvc.cookie_data.streetNumber;
 			this.other = wooBg_cvc.cookie_data.other;
 			this.streets.forEach( function ( street ) {
+				console.log( street.orig_key );
+				console.log( wooBg_cvc.cookie_data.selectedAddress.orig_key );
 				if ( street.orig_key == wooBg_cvc.cookie_data.selectedAddress.orig_key ) {
 					_this.street = street;
 				}
