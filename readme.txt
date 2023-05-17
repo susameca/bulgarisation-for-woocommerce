@@ -72,6 +72,10 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 == Changelog ==
 
 = 3.0.4 =
+CVC: Fix address
+Speedy, Econt, CVC: Optimize COD
+Optimize NRA export
+Optimize cities transliteration
 
 = 3.0.3 =
 Econt: Update office locator
