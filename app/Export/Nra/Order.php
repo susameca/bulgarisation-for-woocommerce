@@ -77,17 +77,29 @@ class Order {
 		$items = array();
 		$shipping_vat = woo_bg_get_order_shipping_vat( $this->woo_order );
 
-		foreach ( $this->woo_order->get_items() as $key => $item ) {
+		$order_items = array_merge( $this->woo_order->get_items(), $this->woo_order->get_items('fee') );
+
+		foreach ( $order_items as $key => $item ) {
 			$price = $item->get_total() / $item->get_quantity();
 			$item_vat = woo_bg_get_order_item_vat_rate( $item, $this->woo_order );
 
-			$items[] = array(
-				'name' => $item->get_name(),
-				'qty' => $item->get_quantity(),
-				'sub_price' => $item->get_subtotal() / $item->get_quantity(),
-				'price' => apply_filters( 'woo_bg/admin/export/item_price', $price, $item, $this->woo_order ),
-				'vat' => apply_filters( 'woo_bg/admin/export/item_vat', $item_vat, $item, $this->woo_order ),
-			);
+			if ( is_a( $item, 'WC_Order_Item_Fee' ) ) {
+				$items[] = array(
+					'name' => $item->get_name(),
+					'qty' => $item->get_quantity(),
+					'sub_price' => $item->get_total() / $item->get_quantity(),
+					'price' => apply_filters( 'woo_bg/admin/export/item_price', $price, $item, $this->woo_order ),
+					'vat' => apply_filters( 'woo_bg/admin/export/item_vat', $item_vat, $item, $this->woo_order ),
+				);
+			} else {
+				$items[] = array(
+					'name' => $item->get_name(),
+					'qty' => $item->get_quantity(),
+					'sub_price' => $item->get_subtotal() / $item->get_quantity(),
+					'price' => apply_filters( 'woo_bg/admin/export/item_price', $price, $item, $this->woo_order ),
+					'vat' => apply_filters( 'woo_bg/admin/export/item_vat', $item_vat, $item, $this->woo_order ),
+				);
+			}
 		}
 
 		foreach ( $this->woo_order->get_items( 'shipping' ) as $item ) {
