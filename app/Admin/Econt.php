@@ -84,6 +84,7 @@ class Econt {
 						'label' => $label_data['label'],
 						'shipmentStatus' => $shipment_status,
 						'cookie_data' => $cookie_data,
+						'paymentType' => $theorder->get_payment_method(),
 						'shipmentTypes' => self::get_shipment_types(),
 						'offices' => self::get_offices( $cookie_data ),
 						'streets' => self::get_streets( $cookie_data ),

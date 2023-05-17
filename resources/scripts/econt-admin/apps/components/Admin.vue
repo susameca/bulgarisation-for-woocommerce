@@ -128,7 +128,7 @@
 							<input v-model="labelData.packCount" type="number">
 						</p>
 
-						<p v-if="( labelData.services && labelData.services.cdAmount )" class="form-field form-field-wide">
+						<p v-if="paymentType === 'cod'" class="form-field form-field-wide">
 							<label>
 								{{i18n.cd}}:
 							</label>
@@ -299,6 +299,7 @@ export default {
 					label: wooBg_econt.i18n.address
 				}
 			],
+			paymentType: wooBg_econt.paymentType,
 			paymentBy: '',
 			paymentByTypes: [
 				{

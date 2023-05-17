@@ -115,7 +115,7 @@
 							<input v-model="labelData.content.parcelsCount" type="number">
 						</p>
 
-						<p v-if="( typeof( labelData.service.additionalServices ) !== 'undefined' && typeof( labelData.service.additionalServices.cod) !== 'undefined' )" class="form-field form-field-wide">
+						<p v-if="( typeof( labelData.service.additionalServices ) !== 'undefined' && typeof( labelData.service.additionalServices.cod) !== 'undefined' ) && paymentType === 'cod'" class="form-field form-field-wide">
 							<label>
 								{{i18n.cd}}:
 							</label>
@@ -268,6 +268,7 @@ export default {
 					label: wooBg_speedy.i18n.address
 				}
 			],
+			paymentType: wooBg_speedy.paymentType,
 			paymentBy: '',
 			paymentByTypes: [
 				{

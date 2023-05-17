@@ -85,7 +85,7 @@
 							<input v-model="labelData.total_parcels" type="number">
 						</p>
 
-						<p v-if="( labelData.cod_amount )" class="form-field form-field-wide">
+						<p v-if="paymentType === 'cod'" class="form-field form-field-wide">
 							<label>
 								{{i18n.cd}}:
 							</label>
@@ -234,6 +234,7 @@ export default {
 					label: wooBg_cvc.i18n.address
 				}
 			],
+			paymentType: wooBg_cvc.paymentType,
 			paymentBy: '',
 			paymentByTypes: [
 				{

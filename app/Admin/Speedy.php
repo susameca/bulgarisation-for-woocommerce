@@ -86,6 +86,7 @@ class Speedy {
 						'shipmentStatus' => $shipment_status,
 						'operations' => $operations,
 						'cookie_data' => $cookie_data,
+						'paymentType' => $theorder->get_payment_method(),
 						'offices' => self::get_offices( $cookie_data ),
 						'streets' => self::get_streets( $cookie_data ),
 						'orderId' => $theorder->get_id(),
@@ -381,9 +382,7 @@ class Speedy {
 		}
 
 		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) ) {
-			if ( !$label['service']['additionalServices']['cod']['amount'] ) {
-				unset( $label['service']['additionalServices']['cod'] );
-			} else if ( 
+			if ( 
 				isset( $label['service']['additionalServices']['cod']['amount'] ) && 
 				$cookie_data['fixed_price'] && 
 				$payment_by['id'] == 'fixed'

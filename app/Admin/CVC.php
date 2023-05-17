@@ -85,6 +85,7 @@ class CVC {
 						'label' => $label_data,
 						'shipmentStatus' => $shipment_status,
 						'actions' => $actions,
+						'paymentType' => $theorder->get_payment_method(),
 						'cookie_data' => $cookie_data,
 						'offices' => self::get_offices( $cookie_data ),
 						'streets' => self::get_streets( $cookie_data ),
