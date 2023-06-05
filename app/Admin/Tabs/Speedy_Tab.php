@@ -74,26 +74,28 @@ class Speedy_Tab extends Base_Tab {
 		if ( $this->container[ Client::SPEEDY_PROFILE ]->is_valid_profile( true ) ) {
 			$all_profiles = $this->container[ Client::SPEEDY_PROFILE ]->get_profiles_for_settings();
 
-			$fields[ 'speedy' ][] = new Fields\Select_Field( $all_profiles, 'profile_key', __( 'Select profile', 'woo-bg' ), null, null, __( 'Select the profile you want to use and save to show or update the other options.', 'woo-bg' )
-			);
-			$fields[ 'speedy' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ) );
-			$fields[ 'speedy' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ) );
-			$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'ppp', __( 'Cash on delivery as PPP.', 'woo-bg' ) );
-			$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'disable_apt', __( 'Remove APT from offices', 'woo-bg' ) );
-			$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) );
-			$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) );
-			$fields[ 'speedy' ][] = new Fields\Select_Field( 
-				array(
-					'office' => array(
-						'id' => 'office',
-						'label' => __( 'Office', 'woo-bg' ),
-					),
-					'address' => array(
-						'id' => 'address',
-						'label' => __( 'Address', 'woo-bg' ),
-					),
-				), 'send_from', __( 'Send From', 'woo-bg' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'woo-bg' ),
-			);
+			if ( !empty( $all_profiles ) ) {
+				$fields[ 'speedy' ][] = new Fields\Select_Field( $all_profiles, 'profile_key', __( 'Select profile', 'woo-bg' ), null, null, __( 'Select the profile you want to use and save to show or update the other options.', 'woo-bg' )
+				);
+				$fields[ 'speedy' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ) );
+				$fields[ 'speedy' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'ppp', __( 'Cash on delivery as PPP.', 'woo-bg' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'disable_apt', __( 'Remove APT from offices', 'woo-bg' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) );
+				$fields[ 'speedy' ][] = new Fields\Select_Field( 
+					array(
+						'office' => array(
+							'id' => 'office',
+							'label' => __( 'Office', 'woo-bg' ),
+						),
+						'address' => array(
+							'id' => 'address',
+							'label' => __( 'Address', 'woo-bg' ),
+						),
+					), 'send_from', __( 'Send From', 'woo-bg' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'woo-bg' ),
+				);
+			}
 		}
 
 		return $fields;
@@ -103,24 +105,26 @@ class Speedy_Tab extends Base_Tab {
 		if ( $this->container[ Client::SPEEDY_PROFILE ]->is_valid_profile( true ) ) {
 			$all_profiles = $this->container[ Client::SPEEDY_PROFILE ]->get_profiles_for_settings();
 
-			$send_from = ( woo_bg_get_option( 'speedy', 'send_from' ) ) ? woo_bg_get_option( 'speedy', 'send_from' ) : 'office';
-			$cities = $this->container[ Client::SPEEDY_CITIES ]->get_formatted_cities();
-			
-			$offices = $this->container[ Client::SPEEDY_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'speedy_send_from', 'city' ) );
-			$fields[ 'speedy_send_from' ] = [];
+			if ( !empty( $all_profiles ) ) {
+				$send_from = ( woo_bg_get_option( 'speedy', 'send_from' ) ) ? woo_bg_get_option( 'speedy', 'send_from' ) : 'office';
+				$cities = $this->container[ Client::SPEEDY_CITIES ]->get_formatted_cities();
+				
+				$offices = $this->container[ Client::SPEEDY_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'speedy_send_from', 'city' ) );
+				$fields[ 'speedy_send_from' ] = [];
 
-			switch ( $send_from ) {
-				case 'office':
-					$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( $cities, 'city', __( 'City', 'woo-bg' ) );
-					$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( 
-						$offices['shops'], 
-						'office', 
-						__( 'Office', 'woo-bg' ), 
-						null, 
-						null, 
-						__('Choose a city and save in order to show offices.', 'woo-bg' ) 
-					);
-					break;
+				switch ( $send_from ) {
+					case 'office':
+						$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( $cities, 'city', __( 'City', 'woo-bg' ) );
+						$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( 
+							$offices['shops'], 
+							'office', 
+							__( 'Office', 'woo-bg' ), 
+							null, 
+							null, 
+							__('Choose a city and save in order to show offices.', 'woo-bg' ) 
+						);
+						break;
+				}
 			}
 		}
 
@@ -188,6 +192,16 @@ class Speedy_Tab extends Base_Tab {
 			ob_start();
 			echo wpautop( sprintf( __( 'Username and password are incorrect.', 'woo-bg' ) ) );
 			$error = ob_get_clean(); 
+		} else {
+			$all_profiles = $this->container[ Client::SPEEDY_PROFILE ]->get_profiles_for_settings();
+
+			if ( empty( $all_profiles ) ) {
+				ob_start();
+
+				echo wpautop( __( 'No profiles was found. Please contact with Speedy.', 'woo-bg' ) );
+
+				$error = ob_get_clean();
+			}
 		}
 
 		return $error;
