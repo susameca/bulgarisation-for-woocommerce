@@ -217,7 +217,7 @@ class BaseDocument {
 
 	public function generate_file() {
 		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
-		$name = uniqid( rand(), true );
+		$name = apply_filters( 'woo_bg/admin/invoice/file_name', uniqid( rand(), true ), $this );
 		$pdf = wp_upload_bits( $name . '.pdf', null, $this->pdf->generate() );
 		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 

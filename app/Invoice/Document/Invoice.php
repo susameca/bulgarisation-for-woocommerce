@@ -33,7 +33,7 @@ class Invoice extends BaseDocument {
 		$merger->addPDF( $copy_invoice );
 
 		//Upload single document
-		$name = uniqid( rand(), true );
+		$name = apply_filters( 'woo_bg/admin/invoice/file_name', uniqid( rand(), true ), $this );
 		$pdf = wp_upload_bits( $name . '.pdf', null, $merger->merge( 'string' ) );
 		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 
