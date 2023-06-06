@@ -172,7 +172,7 @@ class BaseDocument {
 		return apply_filters( 'woo_bg/invoice/additional_items', $items, $this );
 	}
 
-	protected function get_document_number() {
+	public function get_document_number() {
 		$document_number = $this->woo_order->get_meta( 'woo_bg_order_number' );
 
 		if ( !$document_number ) {

@@ -21,7 +21,7 @@ class NRARefunded extends BaseDocument {
 		$this->meta = 'woo_bg_refunded_order_document';
 	}
 
-	protected function get_document_number() {
+	public function get_document_number() {
 		$document_number = $this->woo_order->get_meta( 'woo_bg_refunded_order_number' );
 		
 		if ( !$document_number ) {
