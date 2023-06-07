@@ -54,7 +54,7 @@ class Export {
 		$this->load_xml_shop();
 
 		foreach ( $this->woo_orders as $woo_order ) {
-			if ( is_a( $woo_order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) ) {
+			if ( is_a( $woo_order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || is_a( $woo_order, 'WC_Order_Refund' ) ) {
 				$refunded_order = new RefundedOrder( $woo_order );
 
 				$this->xml_shop->addReturnedOrder( $refunded_order->get_xml_order() );
@@ -68,6 +68,10 @@ class Export {
 				} else {
 					continue;
 				}
+			}
+
+			if ( !$woo_order ) {
+				continue;
 			}
 
 			$xml_order = new Order( $woo_order, $this->generate_files );
