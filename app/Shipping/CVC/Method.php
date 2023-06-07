@@ -91,7 +91,7 @@ class Method extends \WC_Shipping_Method {
 
 			$request_data = $this->calculate_shipping_price_from_api();
 			$rate['meta_data']['validated'] = true;
-
+			
 			if ( isset( $request_data['errors'] ) ) {
 				$rate['meta_data']['validated'] = false;
 				$rate['meta_data']['errors'] = $request_data['errors'];
@@ -219,7 +219,7 @@ class Method extends \WC_Shipping_Method {
 		WC()->session->set( 'woo-bg-cvc-label' , $request_body );
 
 		$request = $this->container[ Client::CVC ]->api_call( $this->container[ Client::CVC ]::CALC_LABELS_ENDPOINT, $request_body );
-
+		
 		if ( !isset( $request ) ) {
 			$data['errors'] = __( 'Calculation failed. Please try again.', 'woo-bg' );
 		} else if ( !$request['success'] ) {
@@ -276,10 +276,10 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_receiver_data() {
-		$country = ( !empty( $_POST['country'] ) ) ? sanitize_text_field( $_POST['country'] ) : 100;
+		$country = ( !empty( $this->cookie_data['country'] ) ) ? sanitize_text_field( $this->cookie_data['country'] ) : 100;
 		$country_id = $this->container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
-		$raw_city = ( !empty( $_POST['city'] ) ) ? sanitize_text_field( $_POST['city'] ) : '';
-		$state_id = ( !empty( $_POST['state'] ) ) ? $this->container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $_POST['state'] ), $country_id ) : '';
+		$raw_city = ( !empty( $this->cookie_data['city'] ) ) ? sanitize_text_field( $this->cookie_data['city'] ) : '';
+		$state_id = ( !empty( $this->cookie_data['state'] ) ) ? $this->container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $this->cookie_data['state'] ), $country_id ) : '';
 		$city = $this->container[ Client::CVC_CITIES ]->search_for_city( $raw_city, $state_id, $country_id );
 
 		if ( empty( $city ) ) {
