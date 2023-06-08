@@ -85,15 +85,32 @@ class Econt_Tab extends Base_Tab {
 			$all_profiles = $this->container[ Client::ECONT_PROFILE ]->get_profiles_for_settings();
 
 			if ( !empty( $all_profiles ) ) {
+				$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
+
 				$fields[ 'econt' ][] = new Fields\Select_Field( $all_profiles, 'profile_key', __( 'Select profile', 'woo-bg' ), null, null, __( 'Select the profile you want to use and save to show or update the other options.', 'woo-bg' )
 				);
-
 				$fields[ 'econt' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ) );
 				$fields[ 'econt' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ) );
 				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'disable_apt', __( 'Remove APT from offices', 'woo-bg' ) );
 				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) );
 				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) );
 				$fields[ 'econt' ][] = new Fields\Select_Field( $this->generate_pay_options(), 'pay_options', __( 'Cash on delivery agreement', 'woo-bg' ), null, null, __( 'Choose cash on delivery agreement', 'woo-bg' ) );
+
+				if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
+					$fields[ 'econt' ][] = new Fields\Select_Field( 
+						array(
+							'' => array(
+								'id' => 'credit',
+								'label' => __( 'Credit', 'woo-bg' ),
+							),
+							'cash' => array(
+								'id' => 'cash',
+								'label' => __( 'Cash', 'woo-bg' ),
+							),
+						), 'sender_payment_type', __( 'Sender payment type', 'woo-bg' ), null, null, __( 'Select how you will pay for the shipments.', 'woo-bg' ) 
+					);
+				}
+
 				$fields[ 'econt' ][] = new Fields\Select_Field( 
 					array(
 						'office' => array(
@@ -123,6 +140,9 @@ class Econt_Tab extends Base_Tab {
 				$offices = $this->container[ Client::ECONT_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'econt_send_from', 'office_city' ) );
 				$fields[ 'econt_send_from' ] = [];
 
+				$offices = array_merge( $offices['shops'], $offices['aps'] );
+
+
 				switch ( $send_from ) {
 					case 'address':
 						if ( !empty( $addresses ) ) {
@@ -134,9 +154,9 @@ class Econt_Tab extends Base_Tab {
 							$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $cities, 'office_city', __( 'City', 'woo-bg' ) );
 						}
 
-						if ( !empty( $offices['shops'] ) ) {
+						if ( !empty( $offices ) ) {
 							$fields[ 'econt_send_from' ][] = new Fields\Select_Field( 
-								$offices['shops'], 
+								$offices, 
 								'office', 
 								__( 'Office', 'woo-bg' ), 
 								null, 

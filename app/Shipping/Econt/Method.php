@@ -258,8 +258,9 @@ class Method extends \WC_Shipping_Method {
 	private function generate_sender_address() {
 		$address = '';
 		$id = woo_bg_get_option( 'econt_send_from', 'address' );
+		$send_from = woo_bg_get_option( 'econt', 'send_from' );
 
-		if ( $id !== '' ) {
+		if ( $id !== '' && $send_from === 'address' ) {
 			$profile_addresses = $this->container[ Client::ECONT_PROFILE ]->get_profile_data()['addresses'];
 
 			$address = $profile_addresses[ $id ];
@@ -361,6 +362,12 @@ class Method extends \WC_Shipping_Method {
 			$cart['services']['cdType'] = 'get';
 			$cart['services']['cdAmount'] = $this->get_package_total();
 			$cart['services']['cdCurrency'] = get_woocommerce_currency();
+
+			$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
+			
+			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
+				$cart['services']['cdPayOptionsTemplate'] = $cd_pay_option;
+			}
 		}
 
 		if ( $os_value && empty( $this->cookie_data['selectedOfficeIsAPS'] ) ) {
@@ -368,9 +375,22 @@ class Method extends \WC_Shipping_Method {
 			$cart[ 'services' ]['declaredValueCurrency'] = 'BGN';
 		}
 
+		$send_from = woo_bg_get_option( 'econt', 'send_from' );
+
+		if ( $send_from === 'office' ) {
+			$offices = $this->container[ Client::ECONT_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'econt_send_from', 'office_city' ) );
+			$office = woo_bg_get_option( 'econt_send_from', 'office' );
+
+			if ( !empty( $offices['aps'] ) && array_key_exists( $office, $offices['aps'] ) ) {
+				unset( $cart[ 'services' ]['declaredValueAmount'] );
+				unset( $cart[ 'services' ]['declaredValueCurrency'] );
+			}
+		}
+
 		if ( $this->sms === 'yes' ) {
 			$cart['services']['smsNotification'] = true;
 		}
+
 
 		return $cart;
 	}

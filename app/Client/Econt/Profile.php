@@ -86,7 +86,7 @@ class Profile {
 		$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
 
 		if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
-			$method = 'credit';
+			$method = woo_bg_get_option( 'econt', 'sender_payment_type' );
 		}
 
 		return $method;
