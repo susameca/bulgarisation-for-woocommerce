@@ -70,6 +70,11 @@ export default {
 			firstNameField: $('#billing_first_name'),
 			lastNameField: $('#billing_last_name'),
 			phoneField: $('#billing_phone'),
+			toCompanyField: $('#woo-billing-to-company'),
+			vatField: $('#woo_bg_eu_vat_number'),
+			companyField: $('#billing_company'),
+			molField: $('#woo-bg-billing-company-mol'),
+			eikField: $('#woo-bg-billing-company-eik'),
 			selectedAddress: [],
       		addresses: [],
 			state: '',
@@ -107,6 +112,11 @@ export default {
 		this.phoneField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.firstNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.lastNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
+		this.toCompanyField.on( 'change.maybeTriggerUpdate', this.maybeTriggerUpdate );
+		this.vatField.on( 'change.maybeTriggerUpdate', this.maybeTriggerUpdate );
+		this.companyField.on( 'change.maybeTriggerUpdate', this.maybeTriggerUpdate );
+		this.molField.on( 'change.maybeTriggerUpdate', this.maybeTriggerUpdate );
+		this.eikField.on( 'change.maybeTriggerUpdate', this.maybeTriggerUpdate );
 
 		if ( window.econtAddressInitialUpdate ) {
 			this.document.trigger('update_checkout');
@@ -273,8 +283,12 @@ export default {
 			let first_name = this.firstNameField.val();
 			let last_name = this.lastNameField.val();
 			let phone = this.phoneField.val();
+			let formData = $('form[name="checkout"]').serializeArray().reduce((accumulator, value) => {
+			  return {...accumulator, [value.name]: value.value};
+			}, {});
 
 			let cookie = {
+				form: formData,
 				type: 'address',
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
@@ -318,6 +332,17 @@ export default {
 		triggerUpdateCheckout() {
 			this.document.trigger('update_checkout');
 		},
+		maybeTriggerUpdate() {
+			if ( 
+				this.toCompanyField.val() &&
+				this.vatField.val() &&
+				this.companyField.val() &&
+				this.molField.val() &&
+				this.eikField.val()
+			) {
+				this.document.trigger('update_checkout');
+			}
+		},
 		onUpdate() {
 			this.Address1Field.attr('disabled', true);
 			this.setCookieData();
@@ -328,6 +353,12 @@ export default {
 		this.phoneField.off( 'change.triggerUpdate' );
 		this.firstNameField.off( 'change.triggerUpdate' );
 		this.lastNameField.off( 'change.triggerUpdate' );
+
+		this.toCompanyField.off( 'change.maybeTriggerUpdate' );
+		this.vatField.off( 'change.maybeTriggerUpdate' );
+		this.companyField.off( 'change.maybeTriggerUpdate' );
+		this.molField.off( 'change.maybeTriggerUpdate' );
+		this.eikField.off( 'change.maybeTriggerUpdate' );
 
 		$('#billing_address_1').attr('disabled', false);
 		$('#shipping_address_1').attr('disabled', false);

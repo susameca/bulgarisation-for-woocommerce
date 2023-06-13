@@ -451,6 +451,9 @@ class Econt {
 		$phone = [];
 		$name = '';
 
+		unset( $label['receiverClient'] );
+		unset( $label['receiverAgent'] );
+
 		if ( $order->get_shipping_first_name() && $order->get_shipping_last_name() ) {
 			$name = $order->get_shipping_first_name() . " " . $order->get_shipping_last_name();
 		} else {
@@ -462,9 +465,23 @@ class Econt {
 		} else {
 			$phone = [ $order->get_billing_phone() ];
 		}
-
+		
+		$label['receiverClient'] = array();
 		$label['receiverClient']['name'] = $name;
 		$label['receiverClient']['phones'] = $phone;
+
+		if ( $order->get_meta( '_billing_to_company' ) ) {
+			$label['receiverAgent'] = $label['receiverClient'];
+			$label['receiverClient']['juridicalEntity'] = true;
+			$label['receiverClient']['molName'] = $order->get_meta( '_billing_company_mol' );
+			$label['receiverClient']['name'] = $order->get_billing_company();
+			
+			if ( $order->get_meta( '_billing_vat_number' ) ) {
+				$label['receiverClient']['ein'] = substr( $order->get_meta( '_billing_vat_number' ), 2 );
+				$label['receiverClient']['ddsEin'] = $label['receiverClient']['ein'];
+				$label['receiverClient']['ddsEinPrefix'] = str_replace( $label['receiverClient']['ein'], '', $order->get_meta( '_billing_vat_number' ) );
+			}
+		}
 
 		return $label;
 	}

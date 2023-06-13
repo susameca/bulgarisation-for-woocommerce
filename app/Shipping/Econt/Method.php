@@ -226,7 +226,22 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		if ( $this->cookie_data ) {
-			$label['receiverClient'] = $this->generate_receiver_data();
+			if ( isset( $this->cookie_data['form']['billing_to_company'] ) ) {
+				$label['receiverAgent'] = $this->generate_receiver_data();
+				$label['receiverClient'] = $this->generate_receiver_data();
+				$label['receiverClient']['juridicalEntity'] = true;
+				$label['receiverClient']['molName'] = $this->cookie_data['form']['billing_company_mol'];
+				$label['receiverClient']['name'] = $this->cookie_data['form']['billing_company'];
+
+				if ( $this->cookie_data['form']['billing_vat_number'] ) {
+					$vat_number = $this->cookie_data['form']['billing_vat_number'];
+					$label['receiverClient']['ein'] = substr( $vat_number, 2 );
+					$label['receiverClient']['ddsEin'] = $label['receiverClient']['ein'];
+					$label['receiverClient']['ddsEinPrefix'] = str_replace( $label['receiverClient']['ein'], '', $vat_number );
+				}
+			} else {
+				$label['receiverClient'] = $this->generate_receiver_data();
+			}
 
 			if ( $this->cookie_data['type'] === 'address' ) {
 				$label['receiverAddress'] = $this->generate_receiver_address();
