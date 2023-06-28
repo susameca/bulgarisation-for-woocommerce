@@ -17,6 +17,9 @@ class Speedy {
 	private $user = '';
 	private $password = '';
 	private $base_endpoint;
+	public static $skip_cached_files = array(
+		'cities-100.csv',
+	);
 
 	public function __construct() {
 		$this->load_user();
@@ -95,11 +98,22 @@ class Speedy {
 		return array_filter( $message );
 	}
 
-	public static function clear_cache_folder() {
-		require_once(ABSPATH . 'wp-admin/includes/file.php');
+	public static function clear_cache_folder( $skip_cached_files = false ) {
+		require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		WP_Filesystem();
 		global $wp_filesystem;
-		$wp_filesystem->rmdir( self::CACHE_FOLDER, true );
+
+		$files = $wp_filesystem->dirlist( self::CACHE_FOLDER );
+
+		if ( !empty( $files ) ) {
+			foreach ( $files as $file ) {
+				if ( $skip_cached_files && in_array( $file['name'], self::$skip_cached_files ) ) {
+					continue;
+				}
+
+				$wp_filesystem->delete( self::CACHE_FOLDER . DIRECTORY_SEPARATOR . $file['name'] );
+			}
+		}
 	}
 
 	public static function clear_profile_data() {

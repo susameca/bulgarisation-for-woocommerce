@@ -17,6 +17,6 @@ class Speedy {
 	}
 
 	public static function clear_cache_folder() {
-		woo_bg()->container()[ Client::SPEEDY ]::clear_cache_folder();
+		woo_bg()->container()[ Client::SPEEDY ]::clear_cache_folder( true );
 	}
 }
