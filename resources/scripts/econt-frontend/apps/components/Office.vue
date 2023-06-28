@@ -238,6 +238,7 @@ export default {
 
 					_this.selectedOffice = cloneDeep( selectedOffice );
 
+					_this.setCookieData();
 					_this.loading = false;
 				} )
 				.catch( error => {
