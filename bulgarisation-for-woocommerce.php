@@ -3,11 +3,11 @@
 Plugin Name:  Bulgarisation for WooCommerce
 Description:  Everything necessary for your online store to work in Bulgaria and according to Bulgarian regulations. Includes a light regime for Ordinance - H-18 and Econt,CVC and Speedy shipping method.
 Author:       Autopolis.bg
-Version:      3.0.5
+Version:      3.0.6
 Author URI:   https://autopolis.bg/
 Requires PHP: 7.4.0
 WC requires at least: 7.1.0
-WC tested up to: 7.7
+WC tested up to: 7.8
 Text Domain:  woo-bg
 License:      GPLv3 or later
 */
