@@ -231,7 +231,10 @@ class Method extends \WC_Shipping_Method {
 				$label['receiverClient'] = $this->generate_receiver_data();
 				$label['receiverClient']['juridicalEntity'] = true;
 				$label['receiverClient']['molName'] = $this->cookie_data['form']['billing_company_mol'];
-				$label['receiverClient']['name'] = $this->cookie_data['form']['billing_company'];
+				
+				if ( !empty( $this->cookie_data['form']['billing_company'] ) ) {
+					$label['receiverClient']['name'] = $this->cookie_data['form']['billing_company'];
+				}
 
 				if ( $this->cookie_data['form']['billing_vat_number'] ) {
 					$vat_number = $this->cookie_data['form']['billing_vat_number'];
