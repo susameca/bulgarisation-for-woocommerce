@@ -323,7 +323,7 @@ class Method extends \WC_Shipping_Method {
 				$receiver_address['other'] = implode( ' ', $num_parts );
 			}
 
-			if ( $this->cookie_data['otherField'] ) {
+			if ( !empty( $this->cookie_data['otherField'] ) ) {
 				$receiver_address['other'] .= $this->cookie_data['otherField'];
 			}
 
