@@ -540,7 +540,9 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	public static function add_label_number_to_email( $order, $sent_to_admin, $plain_text, $email ) {
-		if ( $email->id !== 'customer_processing_order' ) {
+		$email_ids_to_send = apply_filters( 'woo_bg/econt/emails_to_send_label_number', array( 'customer_processing_order' ) );
+
+		if ( !in_array( $email->id, $email_ids_to_send ) ) {
 			return;
 		}
 
