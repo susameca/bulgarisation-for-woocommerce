@@ -2,10 +2,10 @@
 Contributors: autopolisbg
 Tags: woocommerce, e-commerce, invoice, shipping, bulgaria, bulgarisation, nra
 Requires at least: 5.3
-Tested up to: 6.2
+Tested up to: 6.3
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.6
+Stable tag: 3.0.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,10 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.7 =
+Speedy, Econt: Optimizations
+NRA Export: Optimizations
 
 = 3.0.6 =
 Speedy, Econt: Optimizations
