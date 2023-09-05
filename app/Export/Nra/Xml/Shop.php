@@ -142,4 +142,24 @@ class Shop {
 
         return $total;
     }
+
+    public function getOrdersTotal(): float
+    {
+        $total = 0;
+        foreach($this->getOrders() as $order){
+            $total+=$order->getOrderTotal();
+        }
+
+        return $total;
+    }
+    
+    public function getOrdersTotalVat(): float
+    {
+        $total = 0;
+        foreach($this->getOrders() as $order){
+            $total+=$order->getOrderTotalVat();
+        }
+
+        return $total;
+    }
 }

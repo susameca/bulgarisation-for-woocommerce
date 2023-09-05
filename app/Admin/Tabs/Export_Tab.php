@@ -87,6 +87,12 @@ class Export_Tab extends Base_Tab {
 				implode(', ', $generated_file['not_included_orders'] ) 
 			);
 		}
+
+		if ( !empty( $generated_file['totals'] ) ) {
+			$additional_message .= "<br><br>" . $generated_file['totals'];
+		}
+
+		$additional_message = apply_filters( 'woo_bg/admin/export/nra/additional_message', $additional_message, $export );
 		
 		wp_send_json_success( array(
 			"message" => sprintf( __( 'File generated successfully! <a href="%s" download target="_blank">Download</a>', 'woo-bg' ), $generated_file['file'] ) . $additional_message,

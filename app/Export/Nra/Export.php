@@ -110,6 +110,18 @@ class Export {
 		return array(
 			'file' => wp_get_attachment_url( $attach_id ),
 			'not_included_orders' => $this->not_included_orders,
+			'totals' => $this->calculate_totals_message(),
 		);
+	}
+
+	protected function calculate_totals_message() {
+		$message = sprintf( 
+			__( 'Total: %s | Total vat: %s | Returned Total: %s', 'woo-bg' ), 
+			wc_price( $this->xml_shop->getOrdersTotal() ), 
+			wc_price( $this->xml_shop->getOrdersTotalVat() ),
+			wc_price( $this->xml_shop->getTotalAmountReturnedOrders() ) 
+		);
+
+		return $message;
 	}
 }
