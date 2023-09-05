@@ -41,8 +41,9 @@ class Register {
 
 		if ( woo_bg_get_option( 'econt', 'label_after_checkout' ) === 'yes' ) {
 			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\Econt', 'generate_label_after_order_generated' ), 25 );
-			add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\Econt\Method', 'add_label_number_to_email' ), 1, 4 );
 		}
+
+		add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\Econt\Method', 'add_label_number_to_email' ), 1, 4 );
 
 		add_action( 'wp_enqueue_scripts', array( 'Woo_BG\Shipping\Econt\Method', 'enqueue_scripts' ) );
 	}
@@ -63,8 +64,9 @@ class Register {
 
 		if ( woo_bg_get_option( 'speedy', 'label_after_checkout' ) === 'yes' ) {
 			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\Speedy', 'generate_label_after_order_generated' ), 25 );
-			add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\Speedy\Method', 'add_label_number_to_email' ), 1, 4 );
 		}
+		
+		add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\Speedy\Method', 'add_label_number_to_email' ), 1, 4 );
 
 		add_action( 'wp_enqueue_scripts', array( 'Woo_BG\Shipping\Speedy\Method', 'enqueue_scripts' ) );
 	}
@@ -85,8 +87,9 @@ class Register {
 
 		if ( woo_bg_get_option( 'cvc_sender', 'label_after_checkout' ) === 'yes' ) {
 			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\CVC', 'generate_label_after_order_generated' ), 25 );
-			add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\CVC\Method', 'add_label_number_to_email' ), 1, 4 );
 		}
+		
+		add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\CVC\Method', 'add_label_number_to_email' ), 1, 4 );
 
 		add_action( 'wp_enqueue_scripts', array( 'Woo_BG\Shipping\CVC\Method', 'enqueue_scripts' ) );
 	}
