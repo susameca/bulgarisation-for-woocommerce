@@ -13,6 +13,10 @@ class Order {
 		$this->set_vat_and_taxes();
 	}
 
+	public static function get_default_taxable_shipping_rates() {
+		return array( 'local_pickup', 'flat_rate' );
+	}
+
 	private function set_vat_and_taxes() {
 		$this->vat_group = woo_bg_get_option( 'shop', 'vat_group' );
 		$this->vat_percentages = woo_bg_get_vat_groups();
@@ -62,8 +66,18 @@ class Order {
 				$item_price = $item->get_total() / $item->get_quantity();
 				$item_vat = $this->vat;
 				$item_tax = $item->get_total_tax();
+				$item_tax_status = 'taxable';
 
-				if ( wc_tax_enabled() ) {
+				if ( in_array( $item->get_method_id(), self::get_default_taxable_shipping_rates() ) ) {
+					$instance = \WC_Shipping_Zones::get_shipping_method ( $item->get_instance_id() );
+					$item_tax_status = $instance->get_instance_option( 'tax_status' );
+					
+					if ( $item_tax_status === 'none' ) {
+						$item_vat = 0;
+					}
+				}
+
+				if ( wc_tax_enabled() && $item_tax_status === 'taxable' ) {
 					if ( $item->get_total_tax() ) {
 						$item_vat = $shipping_vat;
 					} else {
@@ -106,6 +120,18 @@ class Order {
 	public function get_total_items() {
 		$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
 		$shipping_items = $this->woo_order->get_items( 'shipping' );
+		$shipping_total = $this->woo_order->get_shipping_total();
+
+		foreach ( $shipping_items as $item ) {
+			if ( in_array( $item->get_method_id(), self::get_default_taxable_shipping_rates() ) ) {
+				$instance = \WC_Shipping_Zones::get_shipping_method ( $item->get_instance_id() );
+				$item_tax_status = $instance->get_instance_option( 'tax_status' );
+				
+				if ( $item_tax_status === 'none' ) {
+					$shipping_total = 0;
+				}
+			}
+		}
 
 		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
 			foreach ( $shipping_items as $item_id => $item ) {
@@ -118,7 +144,7 @@ class Order {
 		$items = array(
 			'subtotal' => array(
 				'label' => __( "Total", 'woo-bg' ),
-				'value' => wc_price( abs( $this->woo_order->get_subtotal() + $this->woo_order->get_shipping_total() + $this->woo_order->get_total_fees() ) , array( 'currency' => $this->woo_order->get_currency() ) ),
+				'value' => wc_price( abs( $this->woo_order->get_subtotal() + $shipping_total + $this->woo_order->get_total_fees() ) , array( 'currency' => $this->woo_order->get_currency() ) ),
 			),
 		);
 
