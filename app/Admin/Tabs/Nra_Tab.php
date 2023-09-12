@@ -169,35 +169,4 @@ class Nra_Tab extends Base_Tab {
 
 		return $fields;
 	}
-
-	public static function woo_bg_save_settings_callback() {
-		if ( !wp_verify_nonce( $_REQUEST['nonce'], 'woo_bg_settings' ) ) {
-			wp_send_json_error();
-			wp_die();
-		}
-
-		$tab_class_name = stripslashes( $_REQUEST['tab'] );
-		$tab = new $tab_class_name();
-		$tab->load_fields();
-		$fields = $tab->get_fields();
-
-		foreach ( $fields as $group => $group_fields ) {
-			foreach ( $group_fields as $field ) {
-				$field->save_value( $group );
-			}
-		}
-
-		do_action( 'woo_bg/admin/settings/afte_save_fields/' . $tab_class_name );
-
-		$tab->load_fields();
-		
-		wp_send_json_success( array(
-			'fields' => $tab->get_localized_fields(),
-			'groups_titles' => $tab->get_groups_titles(),
-			'message' => __( 'Settings saved successfully!', 'woo-bg' ),
-			'auth_errors' => $tab->auth_test(),
-		) );
-
-		wp_die();
-	}
 }

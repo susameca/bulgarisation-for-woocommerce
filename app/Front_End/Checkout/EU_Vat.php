@@ -83,7 +83,7 @@ class EU_Vat {
 	}
 
 	public static function vat_number_field( $fields ) {
-		if ( ! WC()->cart->needs_payment() ) {
+		if ( WC()->cart && ! WC()->cart->needs_payment() ) {
 			return $fields;
 		}
 
