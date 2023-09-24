@@ -35,7 +35,7 @@ class Nekorekten_Com {
 	}
 
 	public static function customer_status_info( $order ) {
-		$reports = self::get_all_reports( $order, isset( $_GET[ 'woo-bg--nekorekten-refresh' ] ), 1 );
+		$reports = self::get_all_reports( $order, isset( $_GET[ 'woo-bg--nekorekten-refresh' ] ) );
 
 		if ( $reports[ 'count' ] ) {
 			?>
@@ -294,6 +294,6 @@ class Nekorekten_Com {
 	public static function set_customer_status_info( $order_id ) {
 		$order = wc_get_order( $order_id );
 
-		self::get_all_reports( $order, isset( $_GET[ 'woo-bg--nekorekten-refresh' ] ) );
+		self::get_all_reports( $order, 1 );
 	}
 }
