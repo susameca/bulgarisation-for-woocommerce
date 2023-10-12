@@ -7,7 +7,10 @@ $doc.on('update_checkout', function() {
 	$( '.woo-bg-company-info' ).hide();
 
 	if ( $( '#woo-billing-to-company' ).is( ':checked' ) ) {
+		$( '#woo-billing-to-company' ).val('1');
 		$( '.woo-bg-company-info' ).show();
+	} else {
+		$( '#woo-billing-to-company' ).val('0');
 	}
 })
 
