@@ -29,7 +29,7 @@ class Cities {
 		} else {
 			$cities_file = $this->container[ Client::SPEEDY ]::CACHE_FOLDER . 'cities-' . $country_id . '.csv';
 			$cities = '';
-
+			$error = false;
 			if ( file_exists( $cities_file ) ) {
 				$csv = new CsvFile( $cities_file );
 			}
@@ -40,7 +40,11 @@ class Cities {
 
 			try {
 			    $csv = new CsvFile( $cities_file );
-			} catch (CsvException $e) { 
+			} catch (CsvException $e) {
+				$error = true;
+			}
+
+			if ( !$csv || $error ) {
 				$this->container[ Client::SPEEDY ]::clear_cache_folder();
 
 				return [];

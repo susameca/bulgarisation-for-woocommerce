@@ -227,7 +227,7 @@ class EU_Vat {
 
 	public static function ajax_update_checkout_totals( $form_data ) {
 		// If order total is zero (free), don't need to proceed.
-		if ( ! WC()->cart->needs_payment() ) {
+		if ( WC()->cart && ! WC()->cart->needs_payment() ) {
 			return $form_data;
 		}
 

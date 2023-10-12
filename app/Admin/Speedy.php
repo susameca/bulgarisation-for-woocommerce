@@ -365,6 +365,11 @@ class Speedy {
 			$payment[ 'courierServicePayer' ] = $payment_by['id'];
 		}
 
+		if ( $payment[ 'courierServicePayer' ] === 'SENDER' ) {
+			$payment[ 'declaredValuePayer' ] = 'SENDER';
+			$payment[ 'packagePayer' ] = 'SENDER';
+		}
+
 		$label['payment'] = $payment;
 
 		return $label;

@@ -53,7 +53,7 @@ class Order {
 			$items[] = array(
 				'name' => apply_filters( 'woo_bg/invoice/order/item_name', $item->get_name(), $item ),
 				'quantity' => $qty, 
-				'vat_rate' => $this->get_item_vat_rate( $item, $this->woo_order ) . "%", 
+				'vat_rate' => woo_bg_get_order_item_vat_rate( $item, $this->woo_order ) . "%", 
 				'price' => wc_price( abs( $item->get_total() / $qty ), array( 'currency' => $this->woo_order->get_currency() ) ),
 				'total' => wc_price( abs( $item->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) )
 			);
@@ -190,31 +190,5 @@ class Order {
 
 	public function get_woo_order() {
 		return $this->woo_order;
-	}
-
-	public function get_item_vat_rate( $item ) {
-		$tax_data = wc_tax_enabled() ? $item->get_taxes() : false;
-		$rate = $this->vat;
-
-		if ( $tax_data ) {
-			$founded = false;
-
-			foreach ( $this->order_taxes as $tax_item ) {
-				$tax_item_id       = $tax_item->get_rate_id();
-				$tax_item_total    = isset( $tax_data['total'][ $tax_item_id ] ) ? $tax_data['total'][ $tax_item_id ] : '';
-					
-				if ( '' !== $tax_item_total ) {
-					$rate = $tax_item->get_rate_percent();
-					$founded = true;
-					break;
-				}
-			}
-
-			if ( !$founded ) {
-				$rate = 0;
-			}
-		}
-
-		return $rate;
 	}
 }

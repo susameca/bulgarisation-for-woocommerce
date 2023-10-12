@@ -451,6 +451,8 @@ class Method extends \WC_Shipping_Method {
 
 			if ( $payment[ 'courierServicePayer' ] === 'RECIPIENT' ) {
 				$payment[ 'courierServicePayer' ] = 'SENDER';
+				$payment[ 'declaredValuePayer' ] = 'SENDER';
+				$payment[ 'packagePayer' ] = 'SENDER';
 			}
 		}
 
