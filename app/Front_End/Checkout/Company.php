@@ -144,3 +144,5 @@ add_action( 'woocommerce_after_checkout_validation', function( $data, $errors ) 
 	unset( $errors->errors[ 'billing_vat_number'] );
 	unset( $errors->error_data[ 'billing_vat_number'] );
 }, 11, 2 );
+
+
