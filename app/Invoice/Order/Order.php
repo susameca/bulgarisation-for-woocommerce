@@ -15,7 +15,7 @@ class Order {
 		$this->set_vat_and_taxes();
 
 		if ( woo_bg_get_option( 'invoice', 'total_text' ) === 'yes' ) {
-			add_action( 'woo_bg/invoice/pdf/default_template/after_table', [ __CLASS__, 'print_total_in_words' ] );
+			add_action( 'woo_bg/invoice/pdf/default_template/after_table', [ __CLASS__, 'print_total_in_words' ], 10, 2 );
 		}
 	}
 
@@ -127,6 +127,7 @@ class Order {
 		$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
 		$shipping_items = $this->woo_order->get_items( 'shipping' );
 		$shipping_total = $this->woo_order->get_shipping_total();
+		$subtotal = abs( $this->woo_order->get_subtotal() + $shipping_total + $this->woo_order->get_total_fees() );
 
 		foreach ( $shipping_items as $item ) {
 			if ( in_array( $item->get_method_id(), self::get_default_taxable_shipping_rates() ) ) {
@@ -145,12 +146,14 @@ class Order {
 			}
 
 			$this->woo_order->calculate_totals();
+
+			$subtotal = abs( $this->woo_order->get_subtotal() + $this->woo_order->get_total_fees() );
 		}
 
 		$items = array(
 			'subtotal' => array(
 				'label' => __( "Total", 'woo-bg' ),
-				'value' => wc_price( abs( $this->woo_order->get_subtotal() + $shipping_total + $this->woo_order->get_total_fees() ) , array( 'currency' => $this->woo_order->get_currency() ) ),
+				'value' => wc_price(  $subtotal, array( 'currency' => $this->woo_order->get_currency() ) ),
 			),
 		);
 
@@ -173,6 +176,7 @@ class Order {
 		$items['total'] = array(
 			'label' => __( "Total due", 'woo-bg' ),
 			'value' => wc_price( abs( $this->woo_order->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) ),
+			'value_number' => abs( $this->woo_order->get_total() ),
 		);
 
 		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
@@ -198,13 +202,10 @@ class Order {
 		return $this->woo_order;
 	}
 
-	public static function get_price_in_words( $woo_order ) {
-		return CurrencyToString::number_to_lev( $woo_order->get_total() );
-	}
-
-	public static function print_total_in_words( $woo_order ) {
+	public static function print_total_in_words( $woo_order, $pdf ) {
 		if ( $woo_order->get_currency() === 'BGN' ) {
-			echo '<p class="fz-12"><strong>Словом</strong>: ' . self::get_price_in_words( $woo_order ) . "</p>";
+			$total_items = $pdf->document->order->get_total_items();
+			echo '<p class="fz-12"><strong>Словом</strong>: ' . CurrencyToString::number_to_lev( $total_items['total']['value_number'] ) . "</p>";
 		}
 	}
 }
