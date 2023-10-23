@@ -1,6 +1,8 @@
 <?php
 namespace Woo_BG\Invoice\Order;
 
+use Woo_BG\Invoice\CurrencyToString;
+
 defined( 'ABSPATH' ) || exit;
 
 class Order {
@@ -11,6 +13,10 @@ class Order {
 		$this->woo_order = $order;
 
 		$this->set_vat_and_taxes();
+
+		if ( woo_bg_get_option( 'invoice', 'total_text' ) === 'yes' ) {
+			add_action( 'woo_bg/invoice/pdf/default_template/after_table', [ __CLASS__, 'print_total_in_words' ] );
+		}
 	}
 
 	public static function get_default_taxable_shipping_rates() {
@@ -190,5 +196,15 @@ class Order {
 
 	public function get_woo_order() {
 		return $this->woo_order;
+	}
+
+	public static function get_price_in_words( $woo_order ) {
+		return CurrencyToString::number_to_lev( $woo_order->get_total() );
+	}
+
+	public static function print_total_in_words( $woo_order ) {
+		if ( $woo_order->get_currency() === 'BGN' ) {
+			echo '<p class="fz-12"><strong>Словом</strong>: ' . self::get_price_in_words( $woo_order ) . "</p>";
+		}
 	}
 }

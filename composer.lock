@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a5b2097b4a64c57f002a0e30c3d3eb57",
+    "content-hash": "990e1993024c06768f52c5fdfed7f366",
     "packages": [
         {
             "name": "chillerlan/php-qrcode",
@@ -154,12 +154,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clegginabox/pdf-merger.git",
-                "reference": "ca9367d0d4e21faa686414961d3e096973ecef14"
+                "reference": "7383e41bfc32a6266700c9f91b9101ea6ab2ba48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clegginabox/pdf-merger/zipball/ca9367d0d4e21faa686414961d3e096973ecef14",
-                "reference": "ca9367d0d4e21faa686414961d3e096973ecef14",
+                "url": "https://api.github.com/repos/clegginabox/pdf-merger/zipball/7383e41bfc32a6266700c9f91b9101ea6ab2ba48",
+                "reference": "7383e41bfc32a6266700c9f91b9101ea6ab2ba48",
                 "shasum": ""
             },
             "require": {
@@ -187,20 +187,20 @@
             "support": {
                 "source": "https://github.com/clegginabox/pdf-merger/tree/master"
             },
-            "time": "2021-01-16T08:44:14+00:00"
+            "time": "2023-06-16T17:50:11+00:00"
         },
         {
             "name": "ddeboer/vatin",
-            "version": "2.4.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ddeboer/vatin.git",
-                "reference": "a424f34a974da32d4197822271bd0d2936545be5"
+                "reference": "04ded11d02235148d7a3793b61cf96db1a17cd90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ddeboer/vatin/zipball/a424f34a974da32d4197822271bd0d2936545be5",
-                "reference": "a424f34a974da32d4197822271bd0d2936545be5",
+                "url": "https://api.github.com/repos/ddeboer/vatin/zipball/04ded11d02235148d7a3793b61cf96db1a17cd90",
+                "reference": "04ded11d02235148d7a3793b61cf96db1a17cd90",
                 "shasum": ""
             },
             "require": {
@@ -243,7 +243,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ddeboer/vatin/issues",
-                "source": "https://github.com/ddeboer/vatin/tree/2.4.0"
+                "source": "https://github.com/ddeboer/vatin/tree/2.4.1"
             },
             "funding": [
                 {
@@ -251,7 +251,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-11-25T13:59:30+00:00"
+            "time": "2023-08-07T19:39:29+00:00"
         },
         {
             "name": "dompdf/dompdf",
@@ -353,26 +353,24 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.7.6",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "897eb517a343a2281f11bc5556d6548db7d93947"
+                "reference": "f47dcf3c70c584de14f21143c55d9939631bc6cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/897eb517a343a2281f11bc5556d6548db7d93947",
-                "reference": "897eb517a343a2281f11bc5556d6548db7d93947",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/f47dcf3c70c584de14f21143c55d9939631bc6cf",
+                "reference": "f47dcf3c70c584de14f21143c55d9939631bc6cf",
                 "shasum": ""
             },
             "require": {
-                "ext-ctype": "*",
                 "ext-dom": "*",
-                "ext-libxml": "*",
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6 || ^7"
+                "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6 || ^7 || ^8"
             },
             "type": "library",
             "extra": {
@@ -416,9 +414,133 @@
             ],
             "support": {
                 "issues": "https://github.com/Masterminds/html5-php/issues",
-                "source": "https://github.com/Masterminds/html5-php/tree/2.7.6"
+                "source": "https://github.com/Masterminds/html5-php/tree/2.8.1"
             },
-            "time": "2022-08-18T16:18:26+00:00"
+            "time": "2023-05-10T11:58:31+00:00"
+        },
+        {
+            "name": "pear/math_biginteger",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pear/Math_BigInteger.git",
+                "reference": "33d4357543037a458fad3e8c837a01b93104e592"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pear/Math_BigInteger/zipball/33d4357543037a458fad3e8c837a01b93104e592",
+                "reference": "33d4357543037a458fad3e8c837a01b93104e592",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcre": "*",
+                "php": ">=4.2.0"
+            },
+            "suggest": {
+                "ext-bcmath": "Allows using the BCMath extension internally for computation. Faster than native implementation.",
+                "ext-gmp": "Allows using the GNU Multiple Precision extension internally for computation. If you are doing a lot of computation this is the recommended extension."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Math_": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Wigginton",
+                    "email": "terrafrost@php.net"
+                }
+            ],
+            "description": "Pure-PHP arbitrary precission integer arithmetic library. If GMP or BCMath are available they are used.",
+            "homepage": "https://github.com/pear/Math_BigInteger",
+            "keywords": [
+                "arbitrary",
+                "bcmath",
+                "gmp",
+                "integer",
+                "precision"
+            ],
+            "support": {
+                "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Math_BigInteger",
+                "source": "https://github.com/pear/Math_BigInteger"
+            },
+            "time": "2016-04-12T05:46:52+00:00"
+        },
+        {
+            "name": "pear/numbers_words",
+            "version": "v0.18.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pear/Numbers_Words.git",
+                "reference": "e4d1d8e20def443b69fbf3028d1029950d101c9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pear/Numbers_Words/zipball/e4d1d8e20def443b69fbf3028d1029950d101c9d",
+                "reference": "e4d1d8e20def443b69fbf3028d1029950d101c9d",
+                "shasum": ""
+            },
+            "require": {
+                "pear/math_biginteger": ">=1.0.2",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Numbers": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "./"
+            ],
+            "license": [
+                "PHP-3.01"
+            ],
+            "authors": [
+                {
+                    "name": "Kouber Saparev",
+                    "email": "kouber@php.net"
+                },
+                {
+                    "name": "Igor Feghali",
+                    "email": "ifeghali@php.net"
+                },
+                {
+                    "name": "Xavier Noguer",
+                    "email": "xnoguer.php@gmail.com"
+                },
+                {
+                    "name": "Hadar Porat",
+                    "email": "hpman28@gmail.com"
+                },
+                {
+                    "name": "Piotr Klaban",
+                    "email": "makler@man.torun.pl"
+                },
+                {
+                    "name": "Marcelo Subtil Marcal",
+                    "email": "msmarcal@php.net"
+                }
+            ],
+            "description": "Allows converting numbers written in arabic digits to words in several languages. You can convert an integer between -infinity and infinity.",
+            "homepage": "https://github.com/pear/Numbers_Words",
+            "keywords": [
+                "numbers"
+            ],
+            "support": {
+                "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Numbers_Words",
+                "source": "https://github.com/pear/Numbers_Words"
+            },
+            "time": "2018-02-13T13:58:45+00:00"
         },
         {
             "name": "phenx/php-font-lib",
@@ -671,16 +793,16 @@
         },
         {
             "name": "setasign/fpdf",
-            "version": "1.8.5",
+            "version": "1.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Setasign/FPDF.git",
-                "reference": "f4104a04c9a3f95c4c26a0a0531abebcc980987a"
+                "reference": "0838e0ee4925716fcbbc50ad9e1799b5edfae0a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Setasign/FPDF/zipball/f4104a04c9a3f95c4c26a0a0531abebcc980987a",
-                "reference": "f4104a04c9a3f95c4c26a0a0531abebcc980987a",
+                "url": "https://api.github.com/repos/Setasign/FPDF/zipball/0838e0ee4925716fcbbc50ad9e1799b5edfae0a0",
+                "reference": "0838e0ee4925716fcbbc50ad9e1799b5edfae0a0",
                 "shasum": ""
             },
             "require": {
@@ -711,22 +833,22 @@
                 "pdf"
             ],
             "support": {
-                "source": "https://github.com/Setasign/FPDF/tree/1.8.5"
+                "source": "https://github.com/Setasign/FPDF/tree/1.8.6"
             },
-            "time": "2022-11-18T07:02:00+00:00"
+            "time": "2023-06-26T14:44:25+00:00"
         },
         {
             "name": "setasign/fpdi",
-            "version": "v2.3.7",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Setasign/FPDI.git",
-                "reference": "bccc892d5fa1f48c43f8ba7db5ed4ba6f30c8c05"
+                "reference": "ecf0459643ec963febfb9a5d529dcd93656006a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Setasign/FPDI/zipball/bccc892d5fa1f48c43f8ba7db5ed4ba6f30c8c05",
-                "reference": "bccc892d5fa1f48c43f8ba7db5ed4ba6f30c8c05",
+                "url": "https://api.github.com/repos/Setasign/FPDI/zipball/ecf0459643ec963febfb9a5d529dcd93656006a4",
+                "reference": "ecf0459643ec963febfb9a5d529dcd93656006a4",
                 "shasum": ""
             },
             "require": {
@@ -739,7 +861,7 @@
             "require-dev": {
                 "phpunit/phpunit": "~5.7",
                 "setasign/fpdf": "~1.8",
-                "setasign/tfpdf": "1.31",
+                "setasign/tfpdf": "~1.31",
                 "squizlabs/php_codesniffer": "^3.5",
                 "tecnickcom/tcpdf": "~6.2"
             },
@@ -777,7 +899,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Setasign/FPDI/issues",
-                "source": "https://github.com/Setasign/FPDI/tree/v2.3.7"
+                "source": "https://github.com/Setasign/FPDI/tree/v2.5.0"
             },
             "funding": [
                 {
@@ -785,7 +907,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-09T10:38:43+00:00"
+            "time": "2023-09-28T10:46:27+00:00"
         }
     ],
     "packages-dev": [],

@@ -139,6 +139,8 @@
 					</td>
 				</tr>
 			</table>
+
+			<?php do_action( 'woo_bg/invoice/pdf/default_template/after_table', $this->document->order->woo_order, $this ); ?>
 		</div>
 
 		<div class="table-section bill-tbl w-100 mt-10">

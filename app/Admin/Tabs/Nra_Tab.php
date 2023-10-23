@@ -80,6 +80,7 @@ class Nra_Tab extends Base_Tab {
 				new Fields\Text_Field( 'prepared_by', __( 'Prepared by', 'woo-bg' ), __( 'Enter the name of the compiler of the automatically generated documents, which will be displayed in them.', 'woo-bg' ), null ),
 				new Fields\Text_Field( 'identification_code', __( 'Identification code', 'woo-bg' ), null, null, __( "Enter an ID in the invoices and credit memos that replace the compiler's signature.", 'woo-bg' ) ),
 				new Fields\Text_Field( 'footer_text', __( 'Footer text', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'total_text', __( 'Total in text', 'woo-bg' ), null, null, __( 'Print order total after the table. Works only in levs.', 'woo-bg' ) ),
 			),
 			'shop' => array(
 				new Fields\Select_Field( array(
