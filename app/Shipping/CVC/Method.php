@@ -276,25 +276,26 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_receiver_data() {
-		$country = ( !empty( $this->cookie_data['country'] ) ) ? sanitize_text_field( $this->cookie_data['country'] ) : 100;
-		$country_id = $this->container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
-		$raw_city = ( !empty( $this->cookie_data['city'] ) ) ? sanitize_text_field( $this->cookie_data['city'] ) : '';
-		$state_id = ( !empty( $this->cookie_data['state'] ) ) ? $this->container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $this->cookie_data['state'] ), $country_id ) : '';
-		$city = $this->container[ Client::CVC_CITIES ]->search_for_city( $raw_city, $state_id, $country_id );
-
-		if ( empty( $city ) ) {
-			return( [] );
-		}
-		
-		$rec = array(
+		$rec = [
 			"name" => $this->cookie_data['receiver'], 
 			"phone" => $this->cookie_data['phone'],
-			"country_id" => $country_id, 
-			"city_id" => $city[0]['id'],
-			"zip" => $city[0]['zip'],
-		);
+		];
 
 		if ( $this->cookie_data['type'] === 'address' ) {
+			$country = ( !empty( $this->cookie_data['country'] ) ) ? sanitize_text_field( $this->cookie_data['country'] ) : 100;
+			$country_id = $this->container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
+			$raw_city = ( !empty( $this->cookie_data['city'] ) ) ? sanitize_text_field( $this->cookie_data['city'] ) : '';
+			$state_id = ( !empty( $this->cookie_data['state'] ) ) ? $this->container[ Client::CVC_CITIES ]->get_state_id( sanitize_text_field( $this->cookie_data['state'] ), $country_id ) : '';
+			$city = $this->container[ Client::CVC_CITIES ]->search_for_city( $raw_city, $state_id, $country_id );
+
+			if ( empty( $city ) ) {
+				return( [] );
+			}
+			
+			$rec['country_id'] = $country_id;
+			$rec['city_id'] = $city[0]['id'];
+			$rec['zip'] = $city[0]['zip'];
+
 			if ( $this->cookie_data['selectedAddress']['type'] === 'streets' ) {
 				$rec["street_id"] = str_replace('street-', '', $this->cookie_data['selectedAddress']['orig_key'] ); 
 				$rec["num"] = $this->cookie_data['streetNumber'];
