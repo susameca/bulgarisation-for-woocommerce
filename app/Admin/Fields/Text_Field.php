@@ -21,7 +21,7 @@ class Text_Field extends Base_Field {
 	}
 
 	public function save_value( $group ) {
-		$value = sanitize_text_field( $_REQUEST[ 'options' ][ $group ][ $this->get_name() ][ 'value' ] );
+		$value = wp_unslash( sanitize_text_field( $_REQUEST[ 'options' ][ $group ][ $this->get_name() ][ 'value' ] ) );
 
 		update_option( 'woo_bg_settings_' . $group . '_' . $this->get_name(), sanitize_text_field( $value ) );
 	}
