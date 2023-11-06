@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2023-10-23 16:22+0000\n"
+"PO-Revision-Date: 2023-11-06 20:43+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -80,11 +80,11 @@ msgstr "Autopolis.bg"
 msgid "Billing Country"
 msgstr "Държава на фактуриране"
 
-#: app/Invoice/PDF/view.php:72
+#: app/Invoice/PDF/view.php:71
 msgid "Billing from"
 msgstr "Доставчик"
 
-#: app/Invoice/PDF/view.php:73
+#: app/Invoice/PDF/view.php:72
 msgid "Billing to"
 msgstr "Клиент"
 
@@ -238,7 +238,7 @@ msgstr "Кредитно известие - Копие"
 msgid "Credit Notice - Original"
 msgstr "Кредитно известие - Оригинал"
 
-#: app/Shipping/CVC/Method.php:453
+#: app/Shipping/CVC/Method.php:454
 #, php-format
 msgid "CVC - %s"
 msgstr "CVC - %s"
@@ -308,7 +308,7 @@ msgstr "Детайли:"
 msgid "Disable invoice generation"
 msgstr "Изключи генерирането на фактури"
 
-#: app/Invoice/Order/Order.php:159
+#: app/Invoice/Order/Order.php:165
 msgid "Discount"
 msgstr "Отстъпка"
 
@@ -328,7 +328,7 @@ msgstr "Документ-палет"
 msgid "Documents"
 msgstr "Документи"
 
-#: app/Admin/Tabs/Nra_Tab.php:145
+#: app/Admin/Tabs/Nra_Tab.php:146
 msgid "Documents Settings"
 msgstr "Настройки на документи"
 
@@ -646,7 +646,7 @@ msgstr "Генерирай товарителница."
 msgid "Generate label after checkout"
 msgstr "Генерирай товарителница след чекаут"
 
-#: app/Admin/Tabs/Nra_Tab.php:148
+#: app/Admin/Tabs/Nra_Tab.php:149
 msgid "Global Shop Settings"
 msgstr "Глобални настройки на магазина"
 
@@ -689,9 +689,17 @@ msgstr "https://autopolis.bg/"
 msgid "Identification code"
 msgstr "Идентификационен код"
 
-#: app/Admin/Tabs/Nra_Tab.php:165
+#: app/Admin/Tabs/Nra_Tab.php:169
 msgid "Identifier"
 msgstr "Идентификатор"
+
+#: app/Admin/Tabs/Nra_Tab.php:185
+msgid ""
+"If set to yes, all deliveries with PPP will be removed from documents and "
+"XML export"
+msgstr ""
+"Ако се включи, доставките с ППП ще бъдат премахнати от документите и от XML "
+"експорта"
 
 #: app/Admin/Tabs/Settings_Tab.php:48
 msgid ""
@@ -748,6 +756,11 @@ msgstr "IP Адрес"
 msgid "IP Country"
 msgstr "IP Държава"
 
+#: app/Admin/Tabs/Nra_Tab.php:184
+#, php-format
+msgid "Is %s courier?"
+msgstr "%s куриер ли е?"
+
 #: app/Admin/CVC.php:109 app/Admin/Econt.php:108 app/Admin/Speedy.php:109
 msgid "Label"
 msgstr "Товарителница"
@@ -756,7 +769,7 @@ msgstr "Товарителница"
 msgid "Label data"
 msgstr "Данни за товарителница"
 
-#: app/Shipping/CVC/Method.php:540 app/Shipping/Econt/Method.php:566
+#: app/Shipping/CVC/Method.php:541 app/Shipping/Econt/Method.php:566
 #: app/Shipping/Speedy/Method.php:574
 #, php-format
 msgid "Label number: %s. %s"
@@ -770,7 +783,7 @@ msgstr "Фамилия:"
 msgid "Live"
 msgstr "Реална"
 
-#: app/Admin/Tabs/Nra_Tab.php:142
+#: app/Admin/Tabs/Nra_Tab.php:143
 msgid "Main Company Settings"
 msgstr "Главни настройки на фирмата"
 
@@ -782,7 +795,7 @@ msgstr "Главни функционалности"
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr "Направете опциите за доставка на 2 реда и с пълна ширина в чекаут."
 
-#: app/Admin/Tabs/Nra_Tab.php:163
+#: app/Admin/Tabs/Nra_Tab.php:167
 msgid "Manner of payment of the order according to the NRA system."
 msgstr "Начин на плащане на поръчката според системата на НАП."
 
@@ -946,7 +959,7 @@ msgstr "Пакет"
 msgid "Pack count"
 msgstr "Брой пакети"
 
-#: app/Invoice/PDF/view.php:174
+#: app/Invoice/PDF/view.php:173
 #, php-format
 msgid "Page %s of %s"
 msgstr "Страница %s от %s"
@@ -967,7 +980,7 @@ msgstr "Плати по договор"
 msgid "Payment method"
 msgstr "Метод на плащане"
 
-#: app/Admin/Tabs/Nra_Tab.php:120
+#: app/Admin/Tabs/Nra_Tab.php:121
 #, php-format
 msgid "Payment method: %s"
 msgstr "Метод на плащане: %s"
@@ -976,7 +989,7 @@ msgstr "Метод на плащане: %s"
 msgid "Payment service provider"
 msgstr "Доставчик на платежни услуги"
 
-#: app/Admin/Tabs/Nra_Tab.php:163
+#: app/Admin/Tabs/Nra_Tab.php:167
 msgid "Payment Type"
 msgstr "Начин на плащане"
 
@@ -1012,7 +1025,7 @@ msgstr "Място на сделката"
 msgid "Please choose a office."
 msgstr "Моля изберете офис."
 
-#: app/Shipping/CVC/Method.php:455 app/Shipping/Econt/Method.php:475
+#: app/Shipping/CVC/Method.php:456 app/Shipping/Econt/Method.php:475
 #: app/Shipping/Speedy/Method.php:483
 msgid "Please choose delivery option!"
 msgstr "Моля изберете начин на доставка!"
@@ -1235,7 +1248,7 @@ msgstr "Изпращач"
 msgid "Sender payment type"
 msgstr "Метод на плащане на изпращача"
 
-#: app/Plugin.php:65 app/Plugin.php:162 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:65 app/Plugin.php:168 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1256,7 +1269,11 @@ msgstr "Статус на пратката"
 msgid "Shipment type"
 msgstr "Тип на товарителницата"
 
-#: app/Export/Nra/Order.php:122 app/Invoice/Order/Order.php:98
+#: app/Admin/Tabs/Nra_Tab.php:152
+msgid "Shipping Methods Settings"
+msgstr "Настройки за доставки"
+
+#: app/Export/Nra/Order.php:122 app/Invoice/Order/Order.php:102
 #, php-format
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
@@ -1428,11 +1445,11 @@ msgstr "Към фактура №"
 msgid "To Office: "
 msgstr "До офис: "
 
-#: app/Invoice/Document/BaseDocument.php:94 app/Invoice/Order/Order.php:152
+#: app/Invoice/Document/BaseDocument.php:94 app/Invoice/Order/Order.php:158
 msgid "Total"
 msgstr "Данъчна основа"
 
-#: app/Invoice/Order/Order.php:174
+#: app/Invoice/Order/Order.php:180
 msgid "Total due"
 msgstr "Всичко"
 
@@ -1445,7 +1462,7 @@ msgstr "Общата цена изписана с текст"
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
 
-#: app/Shipping/CVC/Method.php:544 app/Shipping/Econt/Method.php:570
+#: app/Shipping/CVC/Method.php:545 app/Shipping/Econt/Method.php:570
 #: app/Shipping/Speedy/Method.php:578
 msgid "Track your order."
 msgstr "Проследи пратката."
@@ -1527,7 +1544,7 @@ msgstr "ДДС номер: %s"
 msgid "Virtual POS terminal"
 msgstr "Виртуален ПОС терминал"
 
-#: app/Admin/Tabs/Nra_Tab.php:164
+#: app/Admin/Tabs/Nra_Tab.php:168
 msgid "Virtual POS №"
 msgstr "Номер на виртуален ПОС терминал"
 
