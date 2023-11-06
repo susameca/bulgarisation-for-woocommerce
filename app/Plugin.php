@@ -67,6 +67,12 @@ class Plugin {
 				echo wp_kses_post( sprintf( '<div class="error">%s</div>', wpautop( $message ) ) );
 			} );
 		}
+
+		if ( !woo_bg_get_option( 'shippings', 'woo_bg_econt_is_courier' ) ) {
+			woo_bg_set_option( 'shippings', 'woo_bg_econt_is_courier', 'yes' );
+			woo_bg_set_option( 'shippings', 'woo_bg_speedy_is_courier', 'yes' );
+			woo_bg_set_option( 'shippings', 'woo_bg_cvc_is_courier', 'yes' );
+		}
 	}
 
 	private function load_classes() {

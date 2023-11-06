@@ -169,7 +169,7 @@ class Order {
 				$item['sub_price'],
 				$item['price'],
 				$item['vat'],
-				! ( $this->vat_group === 'a' )
+				wc_tax_enabled()
 			) );
 		}
 
