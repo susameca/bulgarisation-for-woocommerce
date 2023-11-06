@@ -275,3 +275,16 @@ function woo_bg_tax_based_price( $price, $rate = 20 ) {
 
 	return number_format( $price, 2 );
 }
+
+function woo_bg_maybe_remove_shipping( $order ) {
+	$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
+
+	$shipping_method = @array_shift( $order->get_shipping_methods() );
+	$shipping_method_id = $shipping_method['method_id'];
+
+	if ( $order->get_payment_method() === 'cod' && woo_bg_get_option('shippings', $shipping_method_id . '_is_courier' ) === 'yes' ) {
+		$remove_shipping = 'yes';
+	}
+
+	return $remove_shipping;
+}

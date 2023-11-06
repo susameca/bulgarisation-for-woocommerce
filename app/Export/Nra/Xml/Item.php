@@ -12,18 +12,22 @@ class Item {
 
     private int $vatRate;
 
+    private bool $addVat;
+
     public function __construct(
         string $name,
         float $quantity,
         float $subPrice,
         float $price,
-        int $vatRate = 20
+        int $vatRate = 20,
+        bool $addVat = true
     ) {
         $this->name = $name;
         $this->quantity = $quantity;
         $this->subPrice = $subPrice;
         $this->price = $price;
         $this->vatRate = $vatRate;
+        $this->addVat = $addVat;
     }
 
     /**
@@ -78,11 +82,23 @@ class Item {
 
     public function getFinalPrice(): float
     {
-        return ($this->price * (1+($this->vatRate / 100))) * $this->quantity;
+        $single_price = $this->price;
+
+        if ( $this->addVat ) {
+            $single_price = $this->price * (1+($this->vatRate / 100));
+        }
+
+        return $single_price * $this->quantity;
     }
 
     public function getFinalSubPrice(): float
     {
-        return ($this->subPrice * (1+($this->vatRate / 100))) * $this->quantity;
+        $single_price = $this->subPrice;
+
+        if ( $this->addVat ) {
+            $single_price = $this->subPrice * (1+($this->vatRate / 100));
+        }
+        
+        return $single_price * $this->quantity;
     }
 }

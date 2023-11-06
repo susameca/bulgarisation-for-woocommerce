@@ -102,6 +102,7 @@ class Nra_Tab extends Base_Tab {
 		) );
 
 		$fields = $this->add_payment_methods_fields( $fields );
+		$fields = $this->add_shipping_methods_fields( $fields );
 
 		$this->set_fields( $fields );
 	}
@@ -146,13 +147,16 @@ class Nra_Tab extends Base_Tab {
 			),
 			'shop' => array(
 				'title' => __( 'Global Shop Settings', 'woo-bg' ),
-			)
+			),
+			'shippings' => array(
+				'title' => __( 'Shipping Methods Settings', 'woo-bg' ),
+			),
 		) );
 
 		return $titles;
 	}
 
-	public function add_payment_methods_fields( $fields ) {
+	public function add_shipping_methods_fields( $fields ) {
 		$gateways = WC()->payment_gateways->payment_gateways();
 
 		if ( !empty( $gateways ) ) {
@@ -166,6 +170,20 @@ class Nra_Tab extends Base_Tab {
 					);
 				}
 			}
+		}
+
+		return $fields;
+	}
+
+	public function add_payment_methods_fields( $fields ) {
+		$shippings = WC()->shipping->get_shipping_methods();
+
+		foreach ( $shippings as $shipping ) {
+			$fields['shippings'][] = new Fields\TrueFalse_Field(
+				$shipping->id . '_is_courier', 
+				sprintf( __( 'Is %s courier?', 'woo-bg' ), $shipping->method_title ),
+				__( 'If set to yes, all deliveries with PPP will be removed from documents and XML export', 'woo-bg' ) 
+			);
 		}
 
 		return $fields;

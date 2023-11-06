@@ -7,12 +7,13 @@ defined( 'ABSPATH' ) || exit;
 
 class Order {
 	public $woo_order;
-	private $vat_group, $vat_percentages, $_tax, $vat, $order_taxes;
+	private $vat_group, $vat_percentages, $_tax, $vat, $order_taxes, $remove_shipping;
 
 	function __construct( $order ) {
 		$this->woo_order = $order;
 
 		$this->set_vat_and_taxes();
+		$this->set_remove_shipping();
 
 		if ( woo_bg_get_option( 'invoice', 'total_text' ) === 'yes' ) {
 			add_action( 'woo_bg/invoice/pdf/default_template/after_table', [ __CLASS__, 'print_total_in_words' ], 10, 2 );
@@ -31,11 +32,14 @@ class Order {
 		$this->order_taxes = $this->woo_order->get_taxes();
 	}
 
+	private function set_remove_shipping() {
+		$this->remove_shipping = woo_bg_maybe_remove_shipping( $this->woo_order );
+	}
+
 	public function get_items() {
-		$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
 		$shipping_items = $this->woo_order->get_items( 'shipping' );
 
-		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
+		if ( sizeof( $shipping_items ) > 0 && $this->remove_shipping === 'yes' ) {
 			foreach ( $shipping_items as $item_id => $item ) {
 				$this->woo_order->remove_item( $item_id );
 			}
@@ -104,7 +108,7 @@ class Order {
 			}
 		}
 
-		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
+		if ( sizeof( $shipping_items ) > 0 && $this->remove_shipping === 'yes' ) {
 			foreach ( $shipping_items as $item_id => $item ) {
 				if ( $metas = $item->get_meta_data() ) {
 					foreach ( $metas as $meta ) {
@@ -124,7 +128,6 @@ class Order {
 	}
 
 	public function get_total_items() {
-		$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
 		$shipping_items = $this->woo_order->get_items( 'shipping' );
 		$shipping_total = $this->woo_order->get_shipping_total();
 		$subtotal = abs( $this->woo_order->get_subtotal() + $shipping_total + $this->woo_order->get_total_fees() );
@@ -140,7 +143,7 @@ class Order {
 			}
 		}
 
-		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
+		if ( sizeof( $shipping_items ) > 0 && $this->remove_shipping === 'yes' ) {
 			foreach ( $shipping_items as $item_id => $item ) {
 				$this->woo_order->remove_item( $item_id );
 			}
@@ -179,7 +182,7 @@ class Order {
 			'value_number' => abs( $this->woo_order->get_total() ),
 		);
 
-		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
+		if ( sizeof( $shipping_items ) > 0 && $this->remove_shipping === 'yes' ) {
 			foreach ( $shipping_items as $item_id => $item ) {
 				if ( $metas = $item->get_meta_data() ) {
 					foreach ( $metas as $meta ) {

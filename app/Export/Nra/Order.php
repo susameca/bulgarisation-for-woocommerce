@@ -63,7 +63,7 @@ class Order {
 	}
 
 	protected function get_items_from_order() {
-		$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
+		$remove_shipping = woo_bg_maybe_remove_shipping( $this->woo_order );
 		$shipping_items = $this->woo_order->get_items( 'shipping' );
 
 		if ( sizeof( $shipping_items ) > 0 && $remove_shipping === 'yes' ) {
@@ -168,9 +168,9 @@ class Order {
 				$item['qty'], 
 				$item['sub_price'],
 				$item['price'],
-				$item['vat']
+				$item['vat'],
+				! ( $this->vat_group === 'a' )
 			) );
-
 		}
 
 		return $xml_order;
