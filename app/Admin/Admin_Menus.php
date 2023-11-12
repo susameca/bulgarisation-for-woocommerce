@@ -122,6 +122,7 @@ class Admin_Menus {
 		}
 
 		$tabs = apply_filters( 'woo_bg/admin/get_tabs_items', $tabs );
+		$tabs[] = new Tabs\Pro_Tab();
 		$tabs[] = new Tabs\Help_Tab();
 
 		return $tabs;

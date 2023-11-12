@@ -69,7 +69,7 @@ class Order {
 			);
 		}
 
-		if ( sizeof( $this->woo_order->get_items( 'shipping' ) ) > 0 ) {
+		if ( sizeof( $this->woo_order->get_items( 'shipping' ) ) > 0 && $this->remove_shipping !== 'yes') {
 			$shipping_vat = woo_bg_get_order_shipping_vat( $this->woo_order );
 
 			foreach ( $this->woo_order->get_items( 'shipping' ) as $item ) {

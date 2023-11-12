@@ -109,20 +109,27 @@ class Speedy_Tab extends Base_Tab {
 				$send_from = ( woo_bg_get_option( 'speedy', 'send_from' ) ) ? woo_bg_get_option( 'speedy', 'send_from' ) : 'office';
 				$cities = $this->container[ Client::SPEEDY_CITIES ]->get_formatted_cities();
 				
-				$offices = $this->container[ Client::SPEEDY_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'speedy_send_from', 'city' ) );
+
 				$fields[ 'speedy_send_from' ] = [];
 
 				switch ( $send_from ) {
 					case 'office':
+						if ( woo_bg_get_option( 'speedy_send_from', 'city' ) ) {
+							$offices = $this->container[ Client::SPEEDY_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'speedy_send_from', 'city' ) );
+						}
+						
 						$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( $cities, 'city', __( 'City', 'woo-bg' ) );
-						$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( 
-							$offices['shops'], 
-							'office', 
-							__( 'Office', 'woo-bg' ), 
-							null, 
-							null, 
-							__('Choose a city and save in order to show offices.', 'woo-bg' ) 
-						);
+
+						if ( !empty( $offices['shops'] ) ) {
+							$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( 
+								$offices['shops'], 
+								'office', 
+								__( 'Office', 'woo-bg' ), 
+								null, 
+								null, 
+								__('Choose a city and save in order to show offices.', 'woo-bg' ) 
+							);
+						}
 						break;
 				}
 			}

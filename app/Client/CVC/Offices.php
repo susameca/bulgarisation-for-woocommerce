@@ -101,13 +101,15 @@ class Offices {
 		if ( $zip = $this->container[ Client::CVC_CITIES ]->get_city_zip_by_id( str_replace( 'cityID-', '', $city ) ) ) {
 			$offices = $this->get_offices( $zip );
 
-			foreach ( $offices as $office ) {
-				$data = [
-					'id' => 'officeID-' . $office['id'],
-					'label' => $office['name_bg'],
-				];
+			if ( !empty( $offices ) ) {
+				foreach ( $offices as $office ) {
+					$data = [
+						'id' => 'officeID-' . $office['id'],
+						'label' => $office['name_bg'],
+					];
 
-				$shops[ 'officeID-' . $office['id'] ] = $data;
+					$shops[ 'officeID-' . $office['id'] ] = $data;
+				}
 			}
 		}
 

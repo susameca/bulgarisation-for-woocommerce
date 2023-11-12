@@ -69,16 +69,18 @@ class Offices {
 		$shops = [];
 		$aps = [];
 
-		foreach ( $offices['offices'] as $office ) {
-			$data = [
-				'id' => 'officeID-' . $office['code'],
-				'label' => $office['name'] . ' (' . $office['address']['fullAddress'] . ')',
-			];
+		if ( !empty( $offices['offices'] ) ) {
+			foreach ( $offices['offices'] as $office ) {
+				$data = [
+					'id' => 'officeID-' . $office['code'],
+					'label' => $office['name'] . ' (' . $office['address']['fullAddress'] . ')',
+				];
 
-			if ( $office['isAPS'] ) {
-				$aps[ 'officeID-' . $office['code'] ] = $data;
-			} else {
-				$shops[ 'officeID-' . $office['code'] ] = $data;
+				if ( $office['isAPS'] ) {
+					$aps[ 'officeID-' . $office['code'] ] = $data;
+				} else {
+					$shops[ 'officeID-' . $office['code'] ] = $data;
+				}
 			}
 		}
 

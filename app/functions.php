@@ -279,6 +279,10 @@ function woo_bg_tax_based_price( $price, $rate = 20 ) {
 function woo_bg_maybe_remove_shipping( $order ) {
 	$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
 
+	if ( is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || is_a( $order, 'WC_Order_Refund' ) ) {
+		$order = wc_get_order( $order->get_parent_id() );
+	}
+
 	$shipping_method = @array_shift( $order->get_shipping_methods() );
 	$shipping_method_id = $shipping_method['method_id'];
 

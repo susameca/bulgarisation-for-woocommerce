@@ -114,7 +114,6 @@
 					</tr>
 				<?php endforeach ?>
 
-
 				<tr>
 					<td colspan="<?php echo count( $headers ) ?>">
 						<div class="total-part">

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2023-11-06 20:43+0000\n"
+"PO-Revision-Date: 2023-11-12 13:55+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -20,8 +20,8 @@ msgstr ""
 msgid "%s is not found in %s region."
 msgstr "%s не е намерен в %s регион."
 
-#: app/Shipping/CVC/Method.php:104 app/Shipping/Econt/Method.php:102
-#: app/Shipping/Speedy/Method.php:103
+#: app/Shipping/CVC/Method.php:105 app/Shipping/Econt/Method.php:102
+#: app/Shipping/Speedy/Method.php:104
 #, php-format
 msgid "%s: Free shipping"
 msgstr "%s: Безплатна доставка"
@@ -47,8 +47,8 @@ msgstr "Добавете колона в списъка с поръчки."
 #: app/Admin/CVC.php:122 app/Admin/Econt.php:121 app/Admin/Speedy.php:122
 #: app/Admin/Tabs/CVC_Tab.php:95 app/Admin/Tabs/Econt_Tab.php:122
 #: app/Admin/Tabs/Speedy_Tab.php:94 app/Front_End/Checkout/Company.php:69
-#: app/Shipping/CVC/Method.php:138 app/Shipping/Econt/Method.php:130
-#: app/Shipping/Speedy/Method.php:137
+#: app/Shipping/CVC/Method.php:139 app/Shipping/Econt/Method.php:130
+#: app/Shipping/Speedy/Method.php:138
 msgid "Address"
 msgstr "Адрес"
 
@@ -129,7 +129,7 @@ msgstr "По еmail ( %s )"
 msgid "By Phone ( %s )"
 msgstr "По телефон ( %s )"
 
-#: app/Shipping/CVC/Method.php:224 app/Shipping/Speedy/Method.php:197
+#: app/Shipping/CVC/Method.php:225 app/Shipping/Speedy/Method.php:198
 msgid "Calculation failed. Please try again."
 msgstr "Неуспешно калкулиране. Моля опитайте отново."
 
@@ -176,7 +176,7 @@ msgstr "Настройки на \"Страница за поръчка\""
 msgid "Choose"
 msgstr "Избери"
 
-#: app/Admin/Tabs/Econt_Tab.php:164 app/Admin/Tabs/Speedy_Tab.php:124
+#: app/Admin/Tabs/Econt_Tab.php:164 app/Admin/Tabs/Speedy_Tab.php:130
 msgid "Choose a city and save in order to show offices."
 msgstr "Избери град и запази за да се покажат офиси."
 
@@ -185,7 +185,7 @@ msgid "Choose cash on delivery agreement"
 msgstr "Избери споразумение за наложен платеж"
 
 #: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Econt_Tab.php:154
-#: app/Admin/Tabs/Speedy_Tab.php:117
+#: app/Admin/Tabs/Speedy_Tab.php:121
 msgid "City"
 msgstr "Град"
 
@@ -238,7 +238,7 @@ msgstr "Кредитно известие - Копие"
 msgid "Credit Notice - Original"
 msgstr "Кредитно известие - Оригинал"
 
-#: app/Shipping/CVC/Method.php:454
+#: app/Shipping/CVC/Method.php:455
 #, php-format
 msgid "CVC - %s"
 msgstr "CVC - %s"
@@ -287,8 +287,8 @@ msgstr "Изтрий товарителница"
 msgid "Delivery is payed by"
 msgstr "Доставката се поема от"
 
-#: app/Shipping/CVC/Method.php:132 app/Shipping/Econt/Method.php:124
-#: app/Shipping/Speedy/Method.php:131
+#: app/Shipping/CVC/Method.php:133 app/Shipping/Econt/Method.php:124
+#: app/Shipping/Speedy/Method.php:132
 msgid "Delivery Type"
 msgstr "Доставка до"
 
@@ -346,7 +346,7 @@ msgstr "Дата на падеж"
 msgid "E-mail"
 msgstr "Имейл"
 
-#: app/Admin/Tabs/Help_Tab.php:37
+#: app/Admin/Tabs/Help_Tab.php:35
 msgid "E-mail:"
 msgstr "Имейл"
 
@@ -452,7 +452,7 @@ msgid "Enables Speedy Shipping methods."
 msgstr ""
 "Включва Спиди начин на доставка.\n"
 
-#: app/Shipping/Econt/Method.php:163 app/Shipping/Speedy/Method.php:159
+#: app/Shipping/Econt/Method.php:163 app/Shipping/Speedy/Method.php:160
 msgid ""
 "Enter a fixed price that the users will pay. The remaining will be payed by "
 "you."
@@ -460,7 +460,7 @@ msgstr ""
 "Въведете максимална фиксирана цена, която клиента ще плати. Остатъка ще бъде "
 "платен от вас."
 
-#: app/Shipping/CVC/Method.php:186
+#: app/Shipping/CVC/Method.php:187
 msgid ""
 "Enter a fixed price that will be payed by you, and will be included in the "
 "order."
@@ -576,9 +576,19 @@ msgstr ""
 msgid "First Name:"
 msgstr "Име:"
 
+#: app/Admin/Tabs/Pro_Tab.php:22
+msgid ""
+"First one hides most of the unwanted fields as Country, City, State, "
+"Postcode, Address 1/2 and in their replacement add one field for city that "
+"is a dropdown field with all cities from the courier API."
+msgstr ""
+"Първата скрива повечето нежелани полета от чекаута като държава, град, "
+"област, пощенски код, адрес 1/2 и като техен заместител добавя ново поле за "
+"град с дропаун с градовете от API на спедитора."
+
 #: app/Admin/CVC.php:129 app/Admin/Econt.php:127 app/Admin/Speedy.php:128
-#: app/Shipping/CVC/Method.php:183 app/Shipping/Econt/Method.php:160
-#: app/Shipping/Speedy/Method.php:156
+#: app/Shipping/CVC/Method.php:184 app/Shipping/Econt/Method.php:160
+#: app/Shipping/Speedy/Method.php:157
 msgid "Fixed price"
 msgstr "Фиксирана цена"
 
@@ -590,6 +600,14 @@ msgstr "Текст в края на документа"
 #, php-format
 msgid "For generating an API key, use this IP address: %s"
 msgstr "За генериране на API ключ използвайте този IP адрес: %s"
+
+#: app/Admin/Tabs/Pro_Tab.php:36
+#, php-format
+msgid ""
+"For more information on how to get it, you can find at the plugin %s page."
+msgstr ""
+"За повече информация как да се сдобиете с плъгина можете да намерите на %s "
+"страницата."
 
 #: app/functions.php:214
 msgid "For single donation as development support you can send at "
@@ -609,18 +627,18 @@ msgstr "Намерени: %s"
 msgid "Fragile"
 msgstr "Чупливо"
 
-#: app/Shipping/CVC/Method.php:175 app/Shipping/Econt/Method.php:152
-#: app/Shipping/Speedy/Method.php:148
+#: app/Shipping/CVC/Method.php:176 app/Shipping/Econt/Method.php:152
+#: app/Shipping/Speedy/Method.php:149
 msgid "Free shipping over"
 msgstr "Безплатна доставна над"
 
-#: app/Shipping/CVC/Method.php:178 app/Shipping/Econt/Method.php:155
-#: app/Shipping/Speedy/Method.php:151
+#: app/Shipping/CVC/Method.php:179 app/Shipping/Econt/Method.php:155
+#: app/Shipping/Speedy/Method.php:152
 msgid "Free shipping over total cart price."
 msgstr "Безплатна доставка над сума на количката "
 
 #: app/Admin/Tabs/CVC_Tab.php:135 app/Admin/Tabs/Econt_Tab.php:206
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:60 app/Admin/Tabs/Speedy_Tab.php:145
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:60 app/Admin/Tabs/Speedy_Tab.php:152
 msgid "General"
 msgstr "Главни"
 
@@ -714,7 +732,7 @@ msgstr "При нужда от помощ"
 msgid "If you want to generate invoices or enable N-18"
 msgstr "Ако искате да генерирате фактури или да включите наредба Н-18"
 
-#: app/Admin/Tabs/Help_Tab.php:21
+#: app/Admin/Tabs/Help_Tab.php:22
 msgid ""
 "If your shop is in group B or G, we suggest you to enable the default "
 "WooCommerce settings at \"Settings >> General >> Enable taxes\". After that "
@@ -769,8 +787,8 @@ msgstr "Товарителница"
 msgid "Label data"
 msgstr "Данни за товарителница"
 
-#: app/Shipping/CVC/Method.php:541 app/Shipping/Econt/Method.php:566
-#: app/Shipping/Speedy/Method.php:574
+#: app/Shipping/CVC/Method.php:542 app/Shipping/Econt/Method.php:566
+#: app/Shipping/Speedy/Method.php:575
 #, php-format
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
@@ -799,7 +817,7 @@ msgstr "Направете опциите за доставка на 2 реда 
 msgid "Manner of payment of the order according to the NRA system."
 msgstr "Начин на плащане на поръчката според системата на НАП."
 
-#: app/Admin/Tabs/Help_Tab.php:38
+#: app/Admin/Tabs/Help_Tab.php:36
 msgid "Message:"
 msgstr "Съобщение:"
 
@@ -820,7 +838,7 @@ msgstr "МОЛ: %s"
 msgid "Name"
 msgstr "Име"
 
-#: app/Admin/Tabs/Help_Tab.php:36
+#: app/Admin/Tabs/Help_Tab.php:34
 msgid "Name:"
 msgstr "Име"
 
@@ -841,8 +859,8 @@ msgstr "Настройки за nekorekten.com"
 msgid "Next Invoice Number"
 msgstr "Следващ номер на документ"
 
-#: app/functions.php:63 app/functions.php:219 app/Shipping/CVC/Method.php:147
-#: app/Shipping/CVC/Method.php:158 app/Shipping/CVC/Method.php:169
+#: app/functions.php:63 app/functions.php:219 app/Shipping/CVC/Method.php:148
+#: app/Shipping/CVC/Method.php:159 app/Shipping/CVC/Method.php:170
 #: app/Shipping/Econt/Method.php:146
 msgid "No"
 msgstr "Не"
@@ -864,7 +882,7 @@ msgstr "Няма намерени поръчки за този месец."
 msgid "No profiles was found. Please contact with Econt."
 msgstr "Не бяха намерени профили. Моля свържете се с Еконт."
 
-#: app/Admin/Tabs/Speedy_Tab.php:201
+#: app/Admin/Tabs/Speedy_Tab.php:208
 msgid "No profiles was found. Please contact with Speedy."
 msgstr "Не бяха намерени профили. Моля свържете се със Спиди."
 
@@ -899,9 +917,9 @@ msgstr "Уникален номер на магазина издаден ви о
 #: app/Admin/CVC.php:121 app/Admin/Econt.php:120 app/Admin/Speedy.php:121
 #: app/Admin/Tabs/CVC_Tab.php:91 app/Admin/Tabs/CVC_Tab.php:113
 #: app/Admin/Tabs/Econt_Tab.php:118 app/Admin/Tabs/Econt_Tab.php:161
-#: app/Admin/Tabs/Speedy_Tab.php:90 app/Admin/Tabs/Speedy_Tab.php:121
-#: app/Shipping/CVC/Method.php:137 app/Shipping/Econt/Method.php:129
-#: app/Shipping/Speedy/Method.php:136
+#: app/Admin/Tabs/Speedy_Tab.php:90 app/Admin/Tabs/Speedy_Tab.php:127
+#: app/Shipping/CVC/Method.php:138 app/Shipping/Econt/Method.php:129
+#: app/Shipping/Speedy/Method.php:137
 msgid "Office"
 msgstr "Офис"
 
@@ -959,7 +977,7 @@ msgstr "Пакет"
 msgid "Pack count"
 msgstr "Брой пакети"
 
-#: app/Invoice/PDF/view.php:173
+#: app/Invoice/PDF/view.php:172
 #, php-format
 msgid "Page %s of %s"
 msgstr "Страница %s от %s"
@@ -1021,12 +1039,12 @@ msgstr "Телефон: %s"
 msgid "Place of transaction"
 msgstr "Място на сделката"
 
-#: app/Shipping/Econt/Method.php:482 app/Shipping/Speedy/Method.php:490
+#: app/Shipping/Econt/Method.php:482 app/Shipping/Speedy/Method.php:491
 msgid "Please choose a office."
 msgstr "Моля изберете офис."
 
-#: app/Shipping/CVC/Method.php:456 app/Shipping/Econt/Method.php:475
-#: app/Shipping/Speedy/Method.php:483
+#: app/Shipping/CVC/Method.php:457 app/Shipping/Econt/Method.php:475
+#: app/Shipping/Speedy/Method.php:484
 msgid "Please choose delivery option!"
 msgstr "Моля изберете начин на доставка!"
 
@@ -1061,6 +1079,10 @@ msgstr "Цена"
 #: app/Admin/Tabs/Nra_Tab.php:83
 msgid "Print order total after the table. Works only in levs."
 msgstr "Показва общата цена на документа под таблицата."
+
+#: app/Admin/Tabs/Pro_Tab.php:8 app/Admin/Tabs/Pro_Tab.php:17
+msgid "Pro Addon"
+msgstr "Про добавка"
 
 #: app/Invoice/Document/BaseDocument.php:78
 msgid "Product"
@@ -1128,13 +1150,13 @@ msgid "Return method"
 msgstr "Начин на връщане на сумата"
 
 #: app/functions.php:221 app/Admin/CVC.php:136 app/Admin/Econt.php:134
-#: app/Admin/Speedy.php:135 app/Shipping/CVC/Method.php:142
-#: app/Shipping/CVC/Method.php:149 app/Shipping/Econt/Method.php:134
-#: app/Shipping/Speedy/Method.php:141
+#: app/Admin/Speedy.php:135 app/Shipping/CVC/Method.php:143
+#: app/Shipping/CVC/Method.php:150 app/Shipping/Econt/Method.php:134
+#: app/Shipping/Speedy/Method.php:142
 msgid "Review and test"
 msgstr "Преглед и тест"
 
-#: app/functions.php:220 app/Shipping/CVC/Method.php:148
+#: app/functions.php:220 app/Shipping/CVC/Method.php:149
 msgid "Review only"
 msgstr "Само преглед"
 
@@ -1146,13 +1168,21 @@ msgstr "Фактура - Копие"
 msgid "Sale Invoice - Original"
 msgstr "Фактура - Оригинал"
 
-#: app/Shipping/CVC/Method.php:153
+#: app/Shipping/CVC/Method.php:154
 msgid "Saturday Delivery"
 msgstr "Доставка в събота"
 
-#: app/Shipping/CVC/Method.php:161
+#: app/Shipping/CVC/Method.php:162
 msgid "Saturday delivery/pickup."
 msgstr "Доставка/взимане в събота."
+
+#: app/Admin/Tabs/Pro_Tab.php:24
+msgid "Screenshot of the options:"
+msgstr "Скрийншот на настройките:"
+
+#: app/Admin/Tabs/Pro_Tab.php:29
+msgid "Screenshots of the checkout:"
+msgstr "Скрийншоти на чекаута:"
 
 #: app/Shipping/CVC/Address.php:33 app/Shipping/Econt/Address.php:33
 #: app/Shipping/Speedy/Address.php:33
@@ -1163,6 +1193,14 @@ msgstr "Търси адрес"
 #: app/Shipping/Speedy/Office.php:29
 msgid "Search office"
 msgstr "Търси офис"
+
+#: app/Admin/Tabs/Pro_Tab.php:23
+msgid ""
+"Second addtion is changing the default radio buttons for shipping methods "
+"with more stylish buttons."
+msgstr ""
+"Втората добавка променя дефолтните радио бутони на шипинг методите с по-"
+"стилизирани нормални бутони."
 
 #: app/Shipping/CVC/Address.php:34 app/Shipping/CVC/Office.php:30
 #: app/Shipping/Econt/Address.php:34 app/Shipping/Econt/Office.php:30
@@ -1226,17 +1264,17 @@ msgstr ""
 msgid "Selected"
 msgstr "Избрано"
 
-#: app/Shipping/CVC/Method.php:172 app/Shipping/Econt/Method.php:149
+#: app/Shipping/CVC/Method.php:173 app/Shipping/Econt/Method.php:149
 msgid "Send customer notification for delivery."
 msgstr "Изпратете известие на клиента за доставка."
 
 #: app/Admin/Tabs/CVC_Tab.php:97 app/Admin/Tabs/CVC_Tab.php:145
 #: app/Admin/Tabs/Econt_Tab.php:124 app/Admin/Tabs/Econt_Tab.php:216
-#: app/Admin/Tabs/Speedy_Tab.php:96 app/Admin/Tabs/Speedy_Tab.php:155
+#: app/Admin/Tabs/Speedy_Tab.php:96 app/Admin/Tabs/Speedy_Tab.php:162
 msgid "Send From"
 msgstr "Изпрати от"
 
-#: app/Admin/Tabs/Help_Tab.php:39
+#: app/Admin/Tabs/Help_Tab.php:37
 msgid "Send Request"
 msgstr "Изпратете запитване"
 
@@ -1278,7 +1316,7 @@ msgstr "Настройки за доставки"
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
 
-#: app/Shipping/CVC/Method.php:164 app/Shipping/Econt/Method.php:141
+#: app/Shipping/CVC/Method.php:165 app/Shipping/Econt/Method.php:141
 msgid "SMS notification"
 msgstr "SMS известия"
 
@@ -1291,7 +1329,7 @@ msgstr ""
 "Някои от поръчките не бяха добавени, защото метода на плащане не беше "
 "намерен или е изключен. Списък с ид на поръчките: %s"
 
-#: app/Shipping/Speedy/Method.php:481
+#: app/Shipping/Speedy/Method.php:482
 #, php-format
 msgid "Speedy - %s"
 msgstr "Спиди - %s"
@@ -1352,7 +1390,7 @@ msgstr "Данъчни класове за цифрови стоки"
 msgid "Text:"
 msgstr "Текст:"
 
-#: app/Admin/Tabs/Help_Tab.php:56
+#: app/Admin/Tabs/Help_Tab.php:54
 msgid "Thank you for your message! We'll contact you shortly."
 msgstr ""
 "Благодарим ви за изпратеното съобщение! Ще се свържем с вас възможно най-"
@@ -1376,12 +1414,20 @@ msgstr "Населеното място на регистрация на ваш�
 msgid "The registration address of your company."
 msgstr "Адресът на регистрация на вашата фирма."
 
+#: app/Admin/Tabs/Pro_Tab.php:21
+msgid ""
+"There is a Pro version of the plugin as an addon ( additional plugin to the "
+"free one ). This version of the plugin has 2 major checkout functionalities."
+msgstr ""
+"Има разработена Про версия на плъгина като добавка ( допълнителен плъгин към "
+"безплатния ). Тази версия добавя 2 нови функционалности към чекаута."
+
 #: app/Admin/Nekorekten_Com.php:79
 msgid "There was some error in one of the reports."
 msgstr "Имаше грешка в някой от отзивите."
 
-#: app/Shipping/CVC/Method.php:127 app/Shipping/Econt/Method.php:119
-#: app/Shipping/Speedy/Method.php:126
+#: app/Shipping/CVC/Method.php:128 app/Shipping/Econt/Method.php:119
+#: app/Shipping/Speedy/Method.php:127
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 "Това контролира заглавието, което потребителят вижда по време на плащане."
@@ -1431,8 +1477,8 @@ msgstr "Тази поръчка е извън обхвата на ДДС в ЕС
 msgid "Time:"
 msgstr "Време:"
 
-#: app/Shipping/CVC/Method.php:125 app/Shipping/Econt/Method.php:117
-#: app/Shipping/Speedy/Method.php:124
+#: app/Shipping/CVC/Method.php:126 app/Shipping/Econt/Method.php:117
+#: app/Shipping/Speedy/Method.php:125
 msgid "Title"
 msgstr "Заглавие"
 
@@ -1462,8 +1508,8 @@ msgstr "Общата цена изписана с текст"
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
 
-#: app/Shipping/CVC/Method.php:545 app/Shipping/Econt/Method.php:570
-#: app/Shipping/Speedy/Method.php:578
+#: app/Shipping/CVC/Method.php:546 app/Shipping/Econt/Method.php:570
+#: app/Shipping/Speedy/Method.php:579
 msgid "Track your order."
 msgstr "Проследи пратката."
 
@@ -1487,7 +1533,7 @@ msgstr "Обнови статуса на пратката"
 msgid "Username"
 msgstr "Потребителско име"
 
-#: app/Admin/Tabs/Speedy_Tab.php:193
+#: app/Admin/Tabs/Speedy_Tab.php:200
 msgid "Username and password are incorrect."
 msgstr "Потребителско име и парола са невалидни."
 
@@ -1600,8 +1646,8 @@ msgstr ""
 "WooCommerce - Българизация изисква PHP версия %s+ и WP версия %s+, плъгина "
 "за сега НЕ РАБОТИ."
 
-#: app/functions.php:67 app/Shipping/CVC/Method.php:159
-#: app/Shipping/CVC/Method.php:170 app/Shipping/Econt/Method.php:147
+#: app/functions.php:67 app/Shipping/CVC/Method.php:160
+#: app/Shipping/CVC/Method.php:171 app/Shipping/Econt/Method.php:147
 msgid "Yes"
 msgstr "Да"
 
@@ -1613,7 +1659,7 @@ msgstr ""
 "Можете да добавите отзив през <a href=\"https://nekorekten.com/\" "
 "target=\"_blank\">https://nekorekten.com/</a>"
 
-#: app/Admin/Tabs/Help_Tab.php:24
+#: app/Admin/Tabs/Help_Tab.php:22
 msgid ""
 "You can find more help in the official Facebook Group for the plugin: <a "
 "target=\"_blank\" href=\"https://www.facebook."
@@ -1622,6 +1668,11 @@ msgstr ""
 "Можете да намерите повече помощ в официалната Facebook група на плъгина: <a "
 "target=\"_blank\" href=\"https://www.facebook."
 "com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
+
+#: app/Admin/Tabs/Pro_Tab.php:35
+#, php-format
+msgid "You can review a demo at: %s"
+msgstr "Можете да видите демо на: %s"
 
 #: app/Front_End/Checkout/EU_Vat.php:221
 #, php-format

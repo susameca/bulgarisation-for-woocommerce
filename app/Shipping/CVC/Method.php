@@ -91,6 +91,7 @@ class Method extends \WC_Shipping_Method {
 
 			$request_data = $this->calculate_shipping_price_from_api();
 			$rate['meta_data']['validated'] = true;
+			$rate['request_data'] = $request_data;
 			
 			if ( isset( $request_data['errors'] ) ) {
 				$rate['meta_data']['validated'] = false;
