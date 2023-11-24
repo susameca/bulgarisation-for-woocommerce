@@ -216,15 +216,15 @@ class Speedy {
 	}
 
 	public static function generate_label() {
-		$order_id = $_REQUEST['orderId'];
+		$order = wc_get_order( $_REQUEST['orderId'] );
 		$label = $_REQUEST['label_data'];
 
 		$label = self::update_recipient_data( $label );
-		$label = self::update_payment_by( $label, $order_id );
+		$label = self::update_payment_by( $label, $order );
 		$label = self::update_services( $label );
-		$label = self::update_shipment_description( $label, $order_id );
+		$label = self::update_shipment_description( $label, $order );
 
-		$data = self::send_label_to_speedy( $label, $order_id );
+		$data = self::send_label_to_speedy( $label, $order );
 
 		wp_send_json_success( $data );
 		wp_die();
@@ -233,20 +233,36 @@ class Speedy {
 	public static function generate_label_after_order_generated( $order_id ) {
 		$order = wc_get_order( $order_id );
 		$label = $order->get_meta( 'woo_bg_speedy_label' );
-
 		if ( !$label ) {
 			return;
 		}
 
-		$label = self::update_shipment_description( $label, $order_id );
+		$label = self::update_shipment_description( $label, $order );
+		$label = self::update_cod( $label, $order );
 
-		self::send_label_to_speedy( $label, $order_id );
+		self::send_label_to_speedy( $label, $order );
 	}
 
-	public static function send_label_to_speedy( $label, $order_id ) {
+	public static function update_cod( $label, $order ) {
+		$cookie_data = $order->get_meta( 'woo_bg_speedy_cookie_data' );
+
+		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) ) {
+			if ( 
+				isset( $label['service']['additionalServices']['cod']['amount'] ) && 
+				$cookie_data['fixed_price']
+			) {
+				$label['service']['additionalServices']['cod']['amount'] += number_format( $cookie_data['fixed_price'], 2 );
+				$label['service']['additionalServices']['cod']['amount'] = number_format( $label['service']['additionalServices']['cod']['amount'], 2 );
+			}
+		}
+
+		return $label;
+	}
+
+	public static function send_label_to_speedy( $label, $order ) {
 		$data = [];
-		$order = wc_get_order( $order_id );
-		$generated_data = self::generate_response( $label, $order_id );
+		$order_id = $order->get_id();
+		$generated_data = self::generate_response( $label, $order );
 		$response = $generated_data['response'];
 		$request_body = $generated_data['request_body'];
 
@@ -346,8 +362,9 @@ class Speedy {
 		return $address;
 	}
 
-	protected static function update_payment_by( $label, $order_id ) {
+	protected static function update_payment_by( $label, $order ) {
 		unset( $label['payment'] );
+		$order_id = $order->get_id();
 
 		$payment_by = $_REQUEST['paymentBy'];
 		$cookie_data = $_REQUEST['cookie_data'];
@@ -430,9 +447,8 @@ class Speedy {
 		return $label;
 	}
 
-	protected static function update_shipment_description( $label, $order_id ) {
+	protected static function update_shipment_description( $label, $order ) {
 		$force = woo_bg_get_option( 'speedy', 'force_variations_in_desc' );
-		$order = wc_get_order( $order_id );
 		$names = [];
 
 		foreach ( $order->get_items() as $item ) {
@@ -506,9 +522,8 @@ class Speedy {
 		$order->save();
 	}
 
-	protected static function generate_response( $label, $order_id ) {
+	protected static function generate_response( $label, $order ) {
 		$container = woo_bg()->container();
-		$order = wc_get_order( $order_id );
 		$shipment_status = $order->get_meta( 'woo_bg_speedy_shipment_status' );
 
 		if ( $shipment_status ) {
