@@ -102,9 +102,13 @@ class Export {
 	}
 
 	protected function upload_file() {
-		$rows = array_map( function ( $document ) {
-			return implode('|', $document );
-		}, $this->documents );
+		if ( !empty( $this->documents ) ) {
+			$rows = array_map( function ( $document ) {
+				return implode('|', $document );
+			}, $this->documents );
+		} else {
+			$rows = [];
+		}
 
 		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 		$txt = wp_upload_bits( 'import.txt', null, implode( "\n", $rows ) );
