@@ -13,10 +13,10 @@ class Documents {
 		}
 
 		if ( self::maybe_generate_invoice( $order ) ) {
-			( new Document\Proforma( $order ) )->generate_file();
+			( new Document\Invoice( $order ) )->generate_file();
 			
 			if ( $order->get_payment_method() === 'bacs' ) {
-				( new Document\Invoice( $order ) )->generate_file();
+				( new Document\Proforma( $order ) )->generate_file();
 			}
 		}
 
