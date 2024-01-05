@@ -145,7 +145,10 @@ class BaseDocument {
 			$items[] = __( 'Payment method', 'woo-bg' );
 		}
 
-		if ( $this->woo_order->get_payment_method() === 'bacs' ) {
+		if ( 
+			method_exists( $this->woo_order , 'get_payment_method' ) &&
+			$this->woo_order->get_payment_method() === 'bacs' 
+		) {
 			$items[] = __( 'Bank account', 'woo-bg' );
 		}
 
