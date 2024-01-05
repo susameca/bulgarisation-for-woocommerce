@@ -84,10 +84,6 @@ class Method extends \WC_Shipping_Method {
 				( isset( $this->cookie_data['mysticQuarter'] ) && $this->cookie_data['other'] )
 			) 
 		) {
-			if ( empty( $this->fixed_price ) && $payment_by_data['payment'][ 'courierServicePayer' ] !== 'RECIPIENT' ) {
-				$this->free_shipping = true;
-			}
-
 			$request_data = $this->calculate_shipping_price_from_api();
 			$rate['meta_data']['validated'] = true;
 			$rate['request_data'] = $request_data;
@@ -435,6 +431,7 @@ class Method extends \WC_Shipping_Method {
 		);
 
 		if ( isset( $this->cookie_data['payment'] ) && $this->cookie_data['payment'] !== 'cod' ) {
+			$payment[ 'courierServicePayer' ] = 'SENDER';
 			$payment[ 'declaredValuePayer' ] = 'SENDER';
 			$payment[ 'packagePayer' ] = 'SENDER';
 		}

@@ -13,7 +13,11 @@ class Documents {
 		}
 
 		if ( self::maybe_generate_invoice( $order ) ) {
-			( new Document\Invoice( $order ) )->generate_file();
+			( new Document\Proforma( $order ) )->generate_file();
+			
+			if ( $order->get_payment_method() === 'bacs' ) {
+				( new Document\Invoice( $order ) )->generate_file();
+			}
 		}
 
 		if ( $refunds = $order->get_refunds() ) {
@@ -83,6 +87,13 @@ class Documents {
 				$files[] = array(
 					'name' => __( 'Refunded Invoice', 'woo-bg' ),
 					'file_url' => wp_get_attachment_url( $refunded_invoice_pdf ),
+				);
+			}
+
+			if ( $proform_pdf = $order->get_meta( 'woo_bg_proform_document' ) ) {
+				$files[] = array(
+					'name' => __( 'Pro forma', 'woo-bg' ),
+					'file_url' => wp_get_attachment_url( $proform_pdf ),
 				);
 			}
 		}

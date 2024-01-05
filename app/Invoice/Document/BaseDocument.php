@@ -145,6 +145,10 @@ class BaseDocument {
 			$items[] = __( 'Payment method', 'woo-bg' );
 		}
 
+		if ( $this->woo_order->get_payment_method() === 'bacs' ) {
+			$items[] = __( 'Bank account', 'woo-bg' );
+		}
+
 		if ( $this->transaction_id ) {
 			$items[] = __( 'Transaction ID', 'woo-bg' );
 		}
@@ -160,6 +164,22 @@ class BaseDocument {
 
 		if ( $this->payment_method ) {
 			$items[] = $this->payment_method;
+		}
+
+		if ( $this->woo_order->get_payment_method() === 'bacs' ) {
+			$bacs_info  = get_option( 'woocommerce_bacs_accounts');
+
+			ob_start();
+
+			foreach ( $bacs_info as $account ) {
+				?>
+				<strong><?php _e( 'Bank name', 'woo-bg' ) ?>:</strong> <?php echo $account['bank_name'] ?> <br>
+				<strong>IBAN:</strong> <?php echo $account['iban'] ?> <br>
+				<strong>BIC:</strong> <?php echo $account['bic'] ?> <br>
+				<?php
+			}
+
+			$items[] = ob_get_clean();
 		}
 
 		if ( $this->transaction_id ) {

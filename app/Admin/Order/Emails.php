@@ -27,13 +27,19 @@ class Emails {
 		$email_ids[] = 'customer_invoice';
 
 		if ( in_array ( $email_id, $email_ids ) ) {
-			if ( $invoice_id = $order->get_meta( 'woo_bg_order_document' ) ) {
-	            $attachments[] = get_attached_file( $invoice_id );
+			$order_doc_id = $order->get_meta( 'woo_bg_order_document' );
+			$proform_id = $order->get_meta( 'woo_bg_proform_document' );
+			$invoice_id = $order->get_meta( 'woo_bg_invoice_document' );
+
+			if ( $order_doc_id ) {
+	            $attachments[] = get_attached_file( $order_doc_id );
 	        }
 	        
-			if ( $invoice_id = $order->get_meta( 'woo_bg_invoice_document' ) ) {
+	        if ( $email_id === 'customer_on_hold_order' && $proform_id ) {
+				$attachments[] = get_attached_file( $proform_id );
+	        } else if ( $invoice_id ) {
 				$attachments[] = get_attached_file( $invoice_id );
-			}
+	        }
 		}
 
 		return $attachments;
