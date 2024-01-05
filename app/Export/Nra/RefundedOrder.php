@@ -21,9 +21,18 @@ class RefundedOrder {
 	}
 
 	public function get_xml_order() {
+		$total = abs( $this->woo_order->get_total() );
+
+		if ( 
+			woo_bg_maybe_remove_shipping( $this->parent_order ) === 'yes' &&
+			abs( $this->parent_order->get_total() ) === abs( $total )
+		) {
+			$total = $total - ( abs( $this->parent_order->get_shipping_total() ) + abs( $this->parent_order->get_shipping_tax() ) );
+		}
+
 		return new Xml\ReturnedOrder(
 			apply_filters( 'woo_bg/admin/export/refunded_order_id', $this->parent_order->get_order_number(), $this->woo_order ), 
-			abs( $this->woo_order->get_total() ), 
+			abs( $total ), 
 			new \DateTime( $this->woo_order->get_date_created() ), 
 			$this->return_methods[ $this->options[ 'shop' ][ 'return_method' ][ 'value' ]['id'] ]
 		);
