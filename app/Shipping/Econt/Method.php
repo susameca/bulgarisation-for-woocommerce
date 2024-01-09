@@ -440,6 +440,16 @@ class Method extends \WC_Shipping_Method {
 			$payment_by_data['paymentReceiverAmount'] = $this->fixed_price;
 		}
 
+		if ( $this->cookie_data['payment'] !== 'cod' ) {
+			unset( 
+				$payment_by_data['paymentReceiverMethod'],
+				$payment_by_data['paymentReceiverAmount'],
+				$payment_by_data['paymentSenderMethod'],
+			);
+			
+			$label['paymentSenderMethod'] = $this->container[ Client::ECONT_PROFILE ]->get_sender_payment_method();
+		}
+
 		if ( !empty( $this->free_shipping_over ) && $this->get_package_total() > $this->free_shipping_over ) {
 			$this->free_shipping = true;
 
