@@ -509,7 +509,7 @@ class Method extends \WC_Shipping_Method {
 					if ( WC()->session->get( 'woo-bg-econt-label' ) ) {
 						$label = WC()->session->get( 'woo-bg-econt-label' );
 
-						if ( $cookie_data['payment'] !== 'cod' ) {
+						if ( isset( $cookie_data['payment'] ) && $cookie_data['payment'] !== 'cod' ) {
 							$container = woo_bg()->container();
 							
 							unset( 
