@@ -7,7 +7,7 @@ class Company {
 	public function __construct() {
 		add_filter( 'woocommerce_checkout_fields', array( __CLASS__, 'vat_number_field' ), 20 );
 		add_action( 'woocommerce_admin_billing_fields', array( __CLASS__, 'admin_billing_fields' ) );
-		add_action( 'woocommerce_after_checkout_validation', array( __CLASS__, 'validate_fields' ), 11, 2 );
+		add_action( 'woocommerce_after_checkout_validation', array( __CLASS__, 'validate_fields' ), 5, 2 );
 	}
 
 	public static function vat_number_field( $fields ) {
@@ -143,6 +143,4 @@ class Company {
 add_action( 'woocommerce_after_checkout_validation', function( $data, $errors ) {
 	unset( $errors->errors[ 'billing_vat_number'] );
 	unset( $errors->error_data[ 'billing_vat_number'] );
-}, 11, 2 );
-
-
+}, 5, 2 );
