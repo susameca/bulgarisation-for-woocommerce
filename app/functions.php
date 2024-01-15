@@ -234,7 +234,7 @@ function woo_bg_get_order_shipping_vat( $order ) {
 		}
 	}
 
-	return $shipping_vat;
+	return apply_filters( 'woo_bg/order_item/shipping_vat_rate', $shipping_vat, $order );
 }
 
 function woo_bg_get_order_item_vat_rate( $item, $order ) {
@@ -263,7 +263,7 @@ function woo_bg_get_order_item_vat_rate( $item, $order ) {
 		}
 	}
 
-	return $rate;
+	return apply_filters( 'woo_bg/order_item/vat_rate', $rate, $item, $order );
 }
 
 function woo_bg_tax_based_price( $price, $rate = 20 ) {
