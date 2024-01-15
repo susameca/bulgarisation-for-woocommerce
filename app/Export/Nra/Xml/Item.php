@@ -59,7 +59,16 @@ class Item {
      */
     public function getSubPrice(): float
     {
-        return $this->subPrice;
+        $sub_price = $this->subPrice;
+        
+        if ( 
+            $this->getVatRate() != 0 &&
+            number_format( $sub_price * $this->getQuantity(), 2, '.', '') ===  number_format( $this->getFinalSubPrice(), 2, '.', '')
+        ) {
+            $sub_price -= $this->getSubVat();
+        }
+
+        return $sub_price;
     }
 
     /**
