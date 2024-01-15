@@ -91,7 +91,7 @@ class BaseDocument {
 				'class' => 'w-15',
 			),
 			array(
-				'label' => __( 'Total', 'woo-bg' ),
+				'label' => __( 'Total amount', 'woo-bg' ),
 				'class' => 'w-15',
 			),
 		), $this );
