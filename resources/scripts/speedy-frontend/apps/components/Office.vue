@@ -64,10 +64,15 @@ export default {
 	computed: {
 		officeLocatorUrl() {
 			let url = 'https://services.speedy.bg/speedy_office_locator_widget/office_locator.php?selectOfficeButtonCaption=Избери"';
-
+			let _this = this;
+			
 			if ( this.selectedOffice.id ) {
 				url += '&officeID=' + this.selectedOffice.id;
 			}
+
+			setTimeout(function() {
+				_this.initOfficeLocator();
+			}, 50);
 
 			return url;
 		},

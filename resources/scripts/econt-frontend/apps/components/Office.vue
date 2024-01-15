@@ -71,6 +71,11 @@ export default {
 	computed: {
 		officeLocatorUrl() {
 			let url = 'https://officelocator.econt.com/?city=' + this.city + '&officeType=office&shopUrl=' + window.location.href;
+			let _this = this;
+
+			setTimeout(function() {
+				_this.initOfficeLocator();
+			}, 50);
 
 			return url;
 		},
@@ -145,6 +150,8 @@ export default {
 			$.magnificPopup.close();
 		},
 		initOfficeLocator() {
+			console.log($('#woo-bg--econt-office-locator').length);
+
 			$('#woo-bg--econt-office-locator').magnificPopup({
 				type:'iframe',
 				midClick: true,
