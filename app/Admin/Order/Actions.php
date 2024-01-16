@@ -35,8 +35,7 @@ class Actions {
 	}
 
 	public static function add_selections_to_bulk_action( $actions ) {
-		$actions[ 'woo_bg_regenerate_pdfs' ] = __( 'Regenerate PDF\'s', 'woo-bg' );
-		return $actions;
+		return $actions[ 'woo_bg_regenerate_pdfs' ] = __( 'Regenerate PDF\'s', 'woo-bg' );
 	}
 	
 	public static function regenerate_order_pdfs_bulk_action_process( $redirect_to, $action, $ids ) {
