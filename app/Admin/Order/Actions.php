@@ -40,10 +40,8 @@ class Actions {
 	
 	public static function regenerate_order_pdfs_bulk_action_process( $redirect_to, $action, $ids ) {
 		if ( $action === 'woo_bg_regenerate_pdfs' ) {
-			foreach ( $ids as $post_id ) {
-				$order = wc_get_order( $post_id );
-
-				Documents::generate_documents( $order->get_id() );
+			foreach ( $ids as $order_id ) {
+				Documents::generate_documents( $order_id );
 			}
 	
 			// Adding the right query vars to the returned URL
