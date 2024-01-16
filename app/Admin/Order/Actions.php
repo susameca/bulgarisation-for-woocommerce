@@ -35,12 +35,12 @@ class Actions {
 	}
 
 	public static function add_selections_to_bulk_action( $actions ) {
-		return $actions[ 'woo_bg_regenerate_pdfs' ] = __( 'Regenerate PDF\'s', 'woo-bg' );
+		$actions[ 'woo_bg_regenerate_pdfs' ] = __( 'Regenerate PDF\'s', 'woo-bg' );
+		return $actions;
 	}
 	
 	public static function regenerate_order_pdfs_bulk_action_process( $redirect_to, $action, $ids ) {
 		if ( $action === 'woo_bg_regenerate_pdfs' ){
-			$processed_ids = array(); // Initializing
 	
 			foreach ( $ids as $post_id ) {
 				$order = wc_get_order( $post_id );
@@ -50,8 +50,8 @@ class Actions {
 			// Adding the right query vars to the returned URL
 			$redirect_to = add_query_arg( array(
 				'woo_bg_regenerate_pdfs' => '1',
-				'processed_count' => count( $processed_ids ),
-				'processed_ids' => implode( ',', $processed_ids ),
+				'processed_count' => count( $ids ),
+				'processed_ids' => implode( ',', $ids ),
 			), $redirect_to );
 		}
 		return $redirect_to;
