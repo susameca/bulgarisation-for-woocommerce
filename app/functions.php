@@ -268,12 +268,18 @@ function woo_bg_get_order_item_vat_rate( $item, $order ) {
 
 function woo_bg_tax_based_price( $price, $rate = 20 ) {
 	if ( wc_tax_enabled() ) {
-		$tax = (new \WC_Tax)::calc_tax( $price, array( array('compound' => 'yes', 'rate' => $rate ) ), true )[0];
-		$tax = round( $tax, 3, PHP_ROUND_HALF_DOWN );
-		$price = round( $price - $tax, 2, PHP_ROUND_HALF_DOWN );
+		$price = round( $price - woo_bg_calculate_vat_from_price( $price, $rate ), 2, PHP_ROUND_HALF_DOWN );
 	}
 
 	return number_format( $price, 2 );
+}
+
+function woo_bg_calculate_vat_from_price( $price, $rate = 20 ) {
+	$vat = (new \WC_Tax)::calc_tax( $price, array( array('compound' => 'yes', 'rate' => $rate ) ), true )[0];
+    $vat = round( $vat, 3, PHP_ROUND_HALF_DOWN );
+    $vat = number_format( $vat, 2, '.', '');
+    
+    return $vat;
 }
 
 function woo_bg_maybe_remove_shipping( $order ) {
