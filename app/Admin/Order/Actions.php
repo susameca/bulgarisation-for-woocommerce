@@ -28,44 +28,39 @@ class Actions {
 		add_action( 'woocommerce_checkout_order_processed', array( __CLASS__, 'set_payment_method' ) );
 
 		add_filter( 'bulk_actions-woocommerce_page_wc-orders', array( __CLASS__, 'add_selections_to_bulk_action' ) );
-
 		add_filter( 'handle_bulk_actions-woocommerce_page_wc-orders', array( __CLASS__, 'regenerate_order_pdfs_bulk_action_process' ), 10, 3 );
-
 		add_action( 'admin_notices', array( __CLASS__, 'pdf_regeneration_bulk_action_admin_notices' ) );
 	}
 
 	public static function add_selections_to_bulk_action( $actions ) {
 		$actions[ 'woo_bg_regenerate_pdfs' ] = __( 'Regenerate PDF\'s', 'woo-bg' );
+
 		return $actions;
 	}
 	
 	public static function regenerate_order_pdfs_bulk_action_process( $redirect_to, $action, $ids ) {
-		if ( $action === 'woo_bg_regenerate_pdfs' ){
-	
+		if ( $action === 'woo_bg_regenerate_pdfs' ) {
 			foreach ( $ids as $post_id ) {
 				$order = wc_get_order( $post_id );
-				self::process_order_meta_box_actions( $order );
+
+				Documents::generate_documents( $order->get_id() );
 			}
 	
 			// Adding the right query vars to the returned URL
 			$redirect_to = add_query_arg( array(
-				'woo_bg_regenerate_pdfs' => '1',
-				'processed_count' => count( $ids ),
-				'processed_ids' => implode( ',', $ids ),
+				'processed_count' => count( $ids )
 			), $redirect_to );
 		}
+
 		return $redirect_to;
 	}
 	
 	public static function pdf_regeneration_bulk_action_admin_notices() {
-		global $post_type;
-	
-		if ( $post_type == 'shop_order' && isset( $_REQUEST['woo_bg_regenerate_pdfs'] ) ) {
-			$count = intval( $_REQUEST['woo_bg_regenerate_pdfss'] );
+		if ( isset( $_REQUEST[ 'processed_count' ] ) ) {
+			$count = intval( $_REQUEST[ 'processed_count' ] );
+
 			printf(
-				'<div id="message" class="updated fade">' .
-				_n( '%s order marked.', $count )
-				. '</div>',
+				'<div id="message" class="updated fade">' . wpautop( _n( '%s order documents were regenerated.', '%s orders documents were regenerated.', $count, 'woo-bg' ) ) . '</div>',
 				$count
 			);
 		}
