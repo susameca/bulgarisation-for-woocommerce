@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.4
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.12
+Stable tag: 3.0.13
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.13 =
+Nra: Optimizations
+Econt, Speedy: Office locator optimizations
+Change documents total to total amount
+Change checkout required fields validation priority
+Add bulk documents regeneration
 
 = 3.0.12 =
 NRA Export: Optimizations 
