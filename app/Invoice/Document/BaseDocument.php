@@ -222,7 +222,7 @@ class BaseDocument {
 			$this->woo_order->get_order_number(),
 			$this->woo_order->get_transaction_id(),
 			$this->woo_order->get_date_created()->date_i18n('Y-m-d'),
-			$this->woo_order->get_date_created()->date_i18n('g:i:s'),
+			$this->woo_order->get_date_created()->date_i18n('G:i:s'),
 			$this->woo_order->get_total(),
 		);
 
