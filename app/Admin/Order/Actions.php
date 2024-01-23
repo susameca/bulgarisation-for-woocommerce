@@ -27,9 +27,9 @@ class Actions {
 
 		add_action( 'woocommerce_checkout_order_processed', array( __CLASS__, 'set_payment_method' ) );
 
-    		if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
-     			add_filter( 'bulk_actions-woocommerce_page_wc-orders', array( __CLASS__, 'add_selections_to_bulk_action' ) );
-     			add_filter( 'handle_bulk_actions-woocommerce_page_wc-orders', array( __CLASS__, 'regenerate_order_pdfs_bulk_action_process' ), 10, 3 );
+		if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			add_filter( 'bulk_actions-woocommerce_page_wc-orders', array( __CLASS__, 'add_selections_to_bulk_action' ) );
+			add_filter( 'handle_bulk_actions-woocommerce_page_wc-orders', array( __CLASS__, 'regenerate_order_pdfs_bulk_action_process' ), 10, 3 );
 		} else {
 			add_filter( 'bulk_actions-edit-shop_order', array( __CLASS__, 'add_selections_to_bulk_action' ) );
 			add_filter( 'handle_bulk_actions-edit-shop_order', array( __CLASS__, 'regenerate_order_pdfs_bulk_action_process' ), 10, 3 );
@@ -151,6 +151,6 @@ class Actions {
 	}
 
 	public static function create_refund_action( $order_get_id, $refund_get_id ) {
-        Documents::generate_refunded_documents( $order_get_id->get_id(), $order_get_id->get_parent_id() );
+		Documents::generate_refunded_documents( $order_get_id->get_id(), $order_get_id->get_parent_id() );
 	}
 }
