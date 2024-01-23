@@ -298,3 +298,19 @@ function woo_bg_maybe_remove_shipping( $order ) {
 
 	return $remove_shipping;
 }
+
+function woo_bg_has_free_shipping_coupon_in_cart() {
+	$has_coupon = false;
+	$coupons = WC()->cart->get_coupons();
+
+	if ( $coupons ) {
+		foreach ( $coupons as $code => $coupon ) {
+			if ( $coupon->is_valid() && $coupon->get_free_shipping() ) {
+				$has_coupon = true;
+				break;
+			}
+		}
+	}
+
+	return $has_coupon;
+}

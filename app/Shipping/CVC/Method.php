@@ -416,7 +416,10 @@ class Method extends \WC_Shipping_Method {
 			$payment_by_data[ 'payer' ] = 'sender';
 		}
 
-		if ( !empty( $this->free_shipping_over ) && $this->get_package_total() > $this->free_shipping_over ) {
+		if ( 
+			woo_bg_has_free_shipping_coupon_in_cart() ||
+			( !empty( $this->free_shipping_over ) && $this->get_package_total() > $this->free_shipping_over )
+		) {
 			$this->free_shipping = true;
 			
 			if ( isset( $this->cookie_data['fixed_price'] ) ) {
