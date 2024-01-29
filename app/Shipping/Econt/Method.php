@@ -369,6 +369,10 @@ class Method extends \WC_Shipping_Method {
 				$cart['weight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
 			}
 
+			if ( $cart['weight'] > 0 && $cart['weight'] < 0.100 ) {
+				$cart['weight'] = 0.100;
+			}
+
 			$names[] = $item['data']->get_name();
 		}
 
