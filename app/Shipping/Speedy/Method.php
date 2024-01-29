@@ -252,7 +252,7 @@ class Method extends \WC_Shipping_Method {
 			'privatePerson' => true,
 			'clientName' => $this->cookie_data[ 'receiver' ],
 			'phone1' => array(
-				'number' => $this->cookie_data[ 'phone' ],
+				'number' => woo_bg_format_phone( $this->cookie_data[ 'phone' ] ),
 			)
 		);
 

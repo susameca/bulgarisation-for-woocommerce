@@ -314,3 +314,11 @@ function woo_bg_has_free_shipping_coupon_in_cart() {
 
 	return $has_coupon;
 }
+
+function woo_bg_format_phone( $phone ) {
+	if ( substr( $phone, 1 ) !== '+' ) {
+		$phone = str_pad( $phone, 10, '0', STR_PAD_LEFT );
+	}
+
+	return $phone;
+}

@@ -480,9 +480,9 @@ class Speedy {
 		}
 
 		if ( $order->get_shipping_phone() ) {
-			$phone = [ 'number' => $order->get_shipping_phone() ];
+			$phone = [ 'number' => woo_bg_format_phone( $order->get_shipping_phone() ) ];
 		} else {
-			$phone = [ 'number' => $order->get_billing_phone() ];
+			$phone = [ 'number' => woo_bg_format_phone( $order->get_billing_phone() ) ];
 		}
 
 		$label['recipient']['clientName'] = $name;
