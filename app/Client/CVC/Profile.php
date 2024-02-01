@@ -42,8 +42,8 @@ class Profile {
 
 	public function is_valid_profile( $forced = false ) {
 		if ( $forced ) {
-		}
 			$this->set_is_valid_profile();
+		}
 
 		return $this->is_valid_profile;
 	}
