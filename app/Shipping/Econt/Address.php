@@ -169,10 +169,8 @@ class Address {
 
 		if ( !empty( $query ) ) {
 			$cities_filtered = array_filter( $cities, function( $city ) use ( $query ) {
-				foreach ( $query as $query_part ) {
-					if ( strpos( mb_strtolower( $city ), mb_strtolower( $query_part ) ) !== false ) {
-						return true;
-					}
+				if ( strpos( mb_strtolower( $city ), mb_strtolower( $query ) ) !== false ) {
+					return true;
 				}
 			} );
 
