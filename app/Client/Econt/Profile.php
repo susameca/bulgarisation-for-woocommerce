@@ -84,7 +84,7 @@ class Profile {
 	public static function get_sender_payment_method() {
 		$method = 'cash';
 		$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
-		$seneder_method = woo_bg_get_option( 'econt', 'sender_payment_type' );
+		$sender_method = woo_bg_get_option( 'econt', 'sender_payment_type' );
 
 		if ( $cd_pay_option && $cd_pay_option !== 'no' && $sender_method ) {
 			$method = $sender_method;
