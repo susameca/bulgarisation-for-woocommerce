@@ -19,11 +19,11 @@ class Export {
 	}
 
 	protected function load_woo_orders() {
-		$this->woo_orders = wc_get_orders( array(
+		$this->woo_orders = apply_filters( 'woo_bg/admin/export/orders', wc_get_orders( array(
 			'date_created' => strtotime( 'first day of ' . $this->date ) . '...' . strtotime( 'last day of ' . $this->date . ' 23:59' ),
 			'status' => $this->status,
 			'limit' => -1,
-		) );
+		) ), $this );
 
 		$this->orders_ids = array();
 
