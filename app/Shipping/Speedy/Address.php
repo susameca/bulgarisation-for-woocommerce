@@ -62,7 +62,6 @@ class Address {
 		}
 
 		wp_send_json_success( $args );
-
 		wp_die();
 	}
 

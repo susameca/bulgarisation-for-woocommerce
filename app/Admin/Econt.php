@@ -14,10 +14,7 @@ class Econt {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
 
 		add_action( 'wp_ajax_woo_bg_econt_generate_label', array( __CLASS__, 'generate_label' ) );
-		add_action( 'wp_ajax_nopriv_woo_bg_econt_generate_label', array( __CLASS__, 'generate_label' ) );
-
 		add_action( 'wp_ajax_woo_bg_econt_delete_label', array( __CLASS__, 'delete_label' ) );
-
 		add_action( 'wp_ajax_woo_bg_econt_update_shipment_status', array( __CLASS__, 'update_shipment_status' ) );
 	}
 
@@ -92,6 +89,7 @@ class Econt {
 						'testsOptions' => woo_bg_return_array_for_select( woo_bg_get_shipping_tests_options() ),
 						'testOption' => self::get_test_option( $label_data['label'] ),
 						'i18n' => self::get_i18n(),
+						'nonce' => wp_create_nonce( 'woo_bg_admin_label' ),
 					) );
 					break;
 				}
@@ -188,6 +186,8 @@ class Econt {
 	}
 
 	public static function delete_label() {
+		woo_bg_check_admin_label_actions();
+
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
 		$shipment_status = $_REQUEST['shipmentStatus'];
@@ -205,6 +205,8 @@ class Econt {
 	}
 
 	public static function update_shipment_status() {
+		woo_bg_check_admin_label_actions();
+		
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
 		$order = wc_get_order( $order_id );
@@ -229,6 +231,8 @@ class Econt {
 	}
 
 	public static function generate_label() {
+		woo_bg_check_admin_label_actions();
+
 		$order_id = $_REQUEST['orderId'];
 		$label = $_REQUEST['label_data'];
 
@@ -469,9 +473,9 @@ class Econt {
 		$label['receiverClient'] = array();
 		$label['receiverClient']['name'] = $name;
 		$label['receiverClient']['phones'] = $phone;
-
+		$label['receiverAgent'] = $label['receiverClient'];
+		
 		if ( $order->get_meta( '_billing_to_company' ) ) {
-			$label['receiverAgent'] = $label['receiverClient'];
 			$label['receiverClient']['juridicalEntity'] = true;
 			$label['receiverClient']['molName'] = $order->get_meta( '_billing_company_mol' );
 			$label['receiverClient']['name'] = $order->get_billing_company();

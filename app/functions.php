@@ -322,3 +322,22 @@ function woo_bg_format_phone( $phone ) {
 
 	return $phone;
 }
+
+function woo_bg_check_admin_label_actions() {
+	$errors = [];
+		
+	if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'woo_bg_admin_label' ) ) {
+		$errors[] = __( 'Nonce was not provided!', 'woo-bg' );
+	}
+
+	if ( ! current_user_can( 'manage_woocommerce' ) ) {
+		$errors[] = __( 'You cannot create labels.', 'woo-bg' );
+	}
+
+	if ( !empty( $errors ) ) {
+		wp_send_json_error( [
+			'message' => implode( ' ', $errors ),
+		] );
+		wp_die();
+	}
+}

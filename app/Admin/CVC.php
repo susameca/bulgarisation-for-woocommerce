@@ -14,10 +14,7 @@ class CVC {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
 
 		add_action( 'wp_ajax_woo_bg_cvc_generate_label', array( __CLASS__, 'generate_label' ) );
-		add_action( 'wp_ajax_nopriv_woo_bg_cvc_generate_label', array( __CLASS__, 'generate_label' ) );
-
 		add_action( 'wp_ajax_woo_bg_cvc_delete_label', array( __CLASS__, 'delete_label' ) );
-
 		add_action( 'wp_ajax_woo_bg_cvc_update_actions', array( __CLASS__, 'update_actions' ) );
 	}
 
@@ -93,6 +90,7 @@ class CVC {
 						'testsOptions' => woo_bg_return_array_for_select( woo_bg_get_shipping_tests_options() ),
 						'testOption' => self::get_test_option( $label_data ),
 						'i18n' => self::get_i18n(),
+						'nonce' => wp_create_nonce( 'woo_bg_admin_label' ),
 					) );
 					break;
 				}
@@ -179,6 +177,8 @@ class CVC {
 	}
 
 	public static function delete_label() {
+		woo_bg_cvc_generate_label();
+		
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
 		$shipment_status = $_REQUEST['shipmentStatus'];
@@ -197,6 +197,8 @@ class CVC {
 	}
 
 	public static function update_actions() {
+		woo_bg_cvc_generate_label();
+
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
 		$order = wc_get_order( $order_id );
@@ -217,6 +219,8 @@ class CVC {
 	}
 
 	public static function generate_label() {
+		woo_bg_cvc_generate_label();
+
 		$order_id = $_REQUEST['orderId'];
 		$label = $_REQUEST['label_data'];
 

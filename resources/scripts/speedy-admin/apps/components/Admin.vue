@@ -408,7 +408,8 @@ export default {
 				action: 'woo_bg_speedy_search_address',
 				country: wooBg_speedy.cookie_data.country,
 				state: wooBg_speedy.cookie_data.state,
-				city: wooBg_speedy.cookie_data.city
+				city: wooBg_speedy.cookie_data.city,
+				nonce: wooBg_speedy.nonce,
 			}
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
@@ -445,6 +446,7 @@ export default {
 				orderId: wooBg_speedy.orderId,
 				declaredValue: this.declaredValue,
 				action: 'woo_bg_speedy_generate_label',
+				nonce: wooBg_speedy.nonce,
 			};
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
@@ -469,6 +471,7 @@ export default {
 				orderId: wooBg_speedy.orderId,
 				shipmentStatus: this.shipmentStatus,
 				action: 'woo_bg_speedy_update_shipment_status',
+				nonce: wooBg_speedy.nonce,
 			};
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
@@ -493,6 +496,7 @@ export default {
 				orderId: wooBg_speedy.orderId,
 				shipmentStatus: this.shipmentStatus,
 				action: 'woo_bg_speedy_delete_label',
+				nonce: wooBg_speedy.nonce,
 			};
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )

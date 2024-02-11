@@ -246,6 +246,7 @@ class Method extends \WC_Shipping_Method {
 				}
 			} else {
 				$label['receiverClient'] = $this->generate_receiver_data();
+				$label['receiverAgent'] = $this->generate_receiver_data();
 			}
 
 			if ( $this->cookie_data['type'] === 'address' ) {

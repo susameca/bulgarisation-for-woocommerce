@@ -14,7 +14,7 @@ class Export {
 
 	protected function load_woo_orders() {
 		$this->woo_orders = wc_get_orders( array(
-			'date_created' => strtotime( 'first day of ' . $this->date ) . '...' . strtotime( 'last day of ' . $this->date . ' 23:59' ),
+			'date_created' => strtotime( 'first day of ' . $this->date . ' ' . wp_timezone_string() ) . '...' . strtotime( 'last day of ' . $this->date . ' 23:59:59 ' . wp_timezone_string() ),
 			'limit' => -1,
 		) );
 	}
@@ -34,7 +34,7 @@ class Export {
 			$address = '';
 			$city = '';
 
-			if ( is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) ) {
+			if ( is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || is_a( $order, 'WC_Order_Refund' ) ) {
 				$temp_order = wc_get_order( $order->get_parent_id() );
 			}
 

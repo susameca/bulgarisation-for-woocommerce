@@ -14,8 +14,6 @@ class Speedy {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
 
 		add_action( 'wp_ajax_woo_bg_speedy_generate_label', array( __CLASS__, 'generate_label' ) );
-		add_action( 'wp_ajax_nopriv_woo_bg_speedy_generate_label', array( __CLASS__, 'generate_label' ) );
-
 		add_action( 'wp_ajax_woo_bg_speedy_delete_label', array( __CLASS__, 'delete_label' ) );
 		add_action( 'wp_ajax_woo_bg_speedy_update_shipment_status', array( __CLASS__, 'update_shipment_status' ) );
 		add_action( 'wp_ajax_woo_bg_speedy_print_labels', array( __CLASS__, 'print_labels_endpoint' ) );
@@ -93,6 +91,7 @@ class Speedy {
 						'testsOptions' => woo_bg_return_array_for_select( woo_bg_get_shipping_tests_options() ),
 						'testOption' => self::get_test_option( $label_data ),
 						'i18n' => self::get_i18n(),
+						'nonce' => wp_create_nonce( 'woo_bg_admin_label' ),
 					) );
 					break;
 				}
@@ -177,6 +176,8 @@ class Speedy {
 	}
 
 	public static function delete_label() {
+		woo_bg_check_admin_label_actions();
+
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
 		$shipment_status = $_REQUEST['shipmentStatus'];
@@ -196,6 +197,8 @@ class Speedy {
 	}
 
 	public static function update_shipment_status() {
+		woo_bg_check_admin_label_actions();
+
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
 		$order = wc_get_order( $order_id );
@@ -216,6 +219,8 @@ class Speedy {
 	}
 
 	public static function generate_label() {
+		woo_bg_check_admin_label_actions();
+
 		$order = wc_get_order( $_REQUEST['orderId'] );
 		$label = $_REQUEST['label_data'];
 

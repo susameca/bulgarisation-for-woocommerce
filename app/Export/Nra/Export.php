@@ -20,7 +20,7 @@ class Export {
 
 	protected function load_woo_orders() {
 		$this->woo_orders = apply_filters( 'woo_bg/admin/export/orders', wc_get_orders( array(
-			'date_created' => strtotime( 'first day of ' . $this->date ) . '...' . strtotime( 'last day of ' . $this->date . ' 23:59' ),
+			'date_created' => strtotime( 'first day of ' . $this->date . ' ' . wp_timezone_string() ) . '...' . strtotime( 'last day of ' . $this->date . ' 23:59:59 ' . wp_timezone_string() ),
 			'status' => $this->status,
 			'limit' => -1,
 		) ), $this );

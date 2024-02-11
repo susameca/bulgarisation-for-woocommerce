@@ -376,6 +376,7 @@ export default {
 				orderId: wooBg_cvc.orderId,
 				declaredValue: this.declaredValue,
 				action: 'woo_bg_cvc_generate_label',
+				nonce: wooBg_cvc.nonce,
 			};
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
@@ -401,6 +402,7 @@ export default {
 				orderId: wooBg_cvc.orderId,
 				shipmentStatus: this.shipmentStatus,
 				action: 'woo_bg_cvc_update_actions',
+				nonce: wooBg_cvc.nonce,
 			};
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
@@ -425,6 +427,7 @@ export default {
 				orderId: wooBg_cvc.orderId,
 				shipmentStatus: this.shipmentStatus,
 				action: 'woo_bg_cvc_delete_label',
+				nonce: wooBg_cvc.nonce,
 			};
 
 			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
