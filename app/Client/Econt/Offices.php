@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Client\Econt;
 use Woo_BG\Container\Client;
+use Woo_BG\Cache;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -20,11 +21,7 @@ class Offices {
 		}
 
 		$offices_file = $this->container[ Client::ECONT ]::CACHE_FOLDER . 'offices-' . $city_id . '.json';
-		$offices = '';
-
-		if ( file_exists( $offices_file ) ) {
-			$offices = file_get_contents( $offices_file );
-		}
+		$offices = Cache::get_file( $offices_file );
 
 		if ( !$offices ) {
 			$api_call = $this->container[ Client::ECONT ]->api_call( self::OFFICES_ENDPOINT, array( 
@@ -37,7 +34,7 @@ class Offices {
 					if ( !empty( $api_call['offices'] ) ) {
 						$offices = wp_json_encode( $api_call );
 						
-						file_put_contents( $offices_file, $offices );
+						Cache::put_to_file( $offices_file, $offices );
 					}
 				}
 			}

@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Client\Econt;
 use Woo_BG\Container\Client;
+use Woo_BG\Cache;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -20,11 +21,7 @@ class Countries {
 		}
 
 		$countries_file = $this->container[ Client::ECONT ]::CACHE_FOLDER . 'countries.json';
-		$countries = '';
-
-		if ( file_exists( $countries_file ) ) {
-			$countries = file_get_contents( $countries_file );
-		}
+		$countries = Cache::get_file( $countries_file );
 
 		if ( !$countries ) {
 			$api_call = $this->container[ Client::ECONT ]->api_call( self::COUNTRIES_ENDPOINT, array( 'GetCountriesRequest' => '' ) );
@@ -33,7 +30,7 @@ class Countries {
 				if ( $this->container[ Client::ECONT ]::validate_access( $api_call ) ) {
 					$countries = wp_json_encode( $api_call );
 					
-					file_put_contents( $countries_file, $countries );
+					Cache::put_to_file( $countries_file, $countries );
 				}
 			}
 		}
