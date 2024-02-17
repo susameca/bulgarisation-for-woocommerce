@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Client\CVC;
 use Woo_BG\Container\Client;
+use Woo_BG\Cache;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,11 +43,7 @@ class Hubs {
 		}
 
 		$hubs_file = $this->container[ Client::CVC ]::CACHE_FOLDER . 'hubs.json';
-		$hubs = null;
-
-		if ( file_exists( $hubs_file ) ) {
-			$hubs = file_get_contents( $hubs_file );
-		}
+		$hubs = Cache::get_file( $hubs_file );
 
 		if ( !$hubs ) {
 			$api_call = $this->container[ Client::CVC ]->api_call( self::HUBS_ENDPOINT, array( 'country_id' => $country_id ), $this->method );
@@ -56,7 +53,7 @@ class Hubs {
 					if ( !empty( $api_call['hubs'] ) ) {
 						$hubs = wp_json_encode( $api_call['hubs'] );
 						
-						file_put_contents( $hubs_file, $hubs );
+						Cache::put_to_file( $hubs_file, $hubs );
 					}
 				}
 			}

@@ -45,8 +45,8 @@ class Export {
 			$this->options['nap']['domain']['value'],
 			new \DateTime(), 
 			false, 
-			date('Y', strtotime( $this->date ) ), 
-			date('m', strtotime( $this->date ) )
+			gmdate('Y', strtotime( $this->date ) ), 
+			gmdate('m', strtotime( $this->date ) )
 		);
 	}
 
@@ -89,7 +89,7 @@ class Export {
 
 	protected function upload_xml() {
 		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
-		$name = uniqid( rand(), true );
+		$name = uniqid( wp_rand(), true );
 		$xml = wp_upload_bits( $name . '.xml', null, Xml\XmlConverter::convert( $this->xml_shop ) );
 		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 

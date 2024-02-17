@@ -68,13 +68,13 @@ class CreditNotice extends NRARefunded {
 		$merger->addPDF( $copy_invoice );
 
 		//Upload single document
-		$name = apply_filters( 'woo_bg/admin/invoice/file_name', uniqid( rand(), true ), $this );
+		$name = apply_filters( 'woo_bg/admin/invoice/file_name', uniqid( wp_rand(), true ), $this );
 		$pdf = wp_upload_bits( $name . '.pdf', null, $merger->merge( 'string' ) );
 		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 
 		//Delete both PDF files
-		unlink( $original_invoice );
-		unlink( $copy_invoice );
+		wp_delete_file( $original_invoice );
+		wp_delete_file( $copy_invoice );
 
 		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 

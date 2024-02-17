@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Client\CVC;
 use Woo_BG\Container\Client;
+use Woo_BG\Cache;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,11 +23,7 @@ class Quarters {
 
 		$hash = md5( $query );
 		$quarters_file = $this->container[ Client::CVC ]::CACHE_FOLDER . 'quarters-' . $city_id . '-' . $hash . '.json';
-		$quarters = '';
-
-		if ( file_exists( $quarters_file ) ) {
-			$quarters = file_get_contents( $quarters_file );
-		}
+		$quarters = Cache::get_file( $quarters_file );
 
 		if ( !$quarters ) {
 			$api_call = $this->container[ Client::CVC ]->api_call( self::QUARTERS_ENDPOINT, array( 'country_id' => '100', 'city_id' => $city_id, 'search_for' => urlencode( $query ) ), $this->method );
@@ -36,7 +33,7 @@ class Quarters {
 					if ( !empty( $api_call['qts'] ) ) {
 						$quarters = wp_json_encode( $api_call );
 						
-						file_put_contents( $quarters_file, $quarters );
+						Cache::put_to_file( $quarters_file, $quarters );
 					}
 				}
 			}
