@@ -1,5 +1,6 @@
 <?php
 namespace Woo_BG\Client;
+use Woo_BG\Cache;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -11,7 +12,7 @@ class Speedy {
 	const DELETE_LABELS_ENDPOINT = 'shipment/cancel';
 	const PRINT_LABELS_ENDPOINT = 'print';
 	const TRACK_ENDPOINT = 'track';
-	const CACHE_FOLDER = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'woo-bg' . DIRECTORY_SEPARATOR . 'speedy' . DIRECTORY_SEPARATOR;
+	const CACHE_FOLDER = Cache::BASE_FOLDER . 'speedy' . DIRECTORY_SEPARATOR;
 
 	private $env = '';
 	private $user = '';

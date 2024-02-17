@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Client\Speedy;
 use Woo_BG\Container\Client;
+use Woo_BG\Cache;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,11 +22,7 @@ class Streets {
 
 		$hash = md5( $query );
 		$streets_file = $this->container[ Client::SPEEDY ]::CACHE_FOLDER . 'streets-' . $city_id . '-' . $hash . '.json';
-		$streets = '';
-
-		if ( file_exists( $streets_file ) ) {
-			$streets = file_get_contents( $streets_file );
-		}
+		$streets = Cache::get_file( $streets_file );
 
 		if ( !$streets ) {
 			$api_call = $this->container[ Client::SPEEDY ]->api_call( self::STREETS_ENDPOINT, array( 'siteId' => $city_id, 'name' => $query ) );
@@ -34,8 +31,8 @@ class Streets {
 				if ( $this->container[ Client::SPEEDY ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['streets'] ) ) {
 						$streets = wp_json_encode( $api_call['streets'] );
-						
-						file_put_contents( $streets_file, $streets );
+
+						Cache::put_to_file( $streets_file, $streets );
 					}
 				}
 			}

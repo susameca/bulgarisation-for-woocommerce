@@ -4,6 +4,7 @@ use Woo_BG\Container\Client;
 use Woo_BG\Transliteration;
 use \Carbon_CSV\CsvFile;
 use \Carbon_CSV\Exception as CsvException;
+use Woo_BG\Cache;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,7 +26,7 @@ class Cities {
 		$cities_by_region_file = $this->container[ Client::SPEEDY ]::CACHE_FOLDER . 'cities-' . $country_id . '-' . $region . '.json';
 
 		if ( file_exists( $cities_by_region_file ) ) {
-			$cities_by_region = file_get_contents( $cities_by_region_file );
+			$cities_by_region = Cache::get_file( $cities_by_region_file );
 		} else {
 			$cities_file = $this->container[ Client::SPEEDY ]::CACHE_FOLDER . 'cities-' . $country_id . '.csv';
 			$cities = '';
@@ -35,7 +36,7 @@ class Cities {
 				$csv = new CsvFile( $cities_file );
 			} else {
 				$api_call = $this->container[ Client::SPEEDY ]->api_call( self::CITIES_ENDPOINT . $country_id, array(), 1 );
-				file_put_contents( $cities_file, $api_call );
+				Cache::put_to_file( $cities_file, $api_call );
 			}
 
 			clearstatcache();
@@ -51,7 +52,7 @@ class Cities {
 
 				$cities_by_region = wp_json_encode( $cities_by_region );
 
-				file_put_contents( $cities_by_region_file, $cities_by_region );
+				Cache::put_to_file( $cities_by_region_file, $cities_by_region );
 			} else {
 				$this->container[ Client::SPEEDY ]::clear_cache_folder();
 
