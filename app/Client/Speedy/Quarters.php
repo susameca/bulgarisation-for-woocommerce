@@ -33,7 +33,7 @@ class Quarters {
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::SPEEDY ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['complexes'] ) ) {
-						$quarters = json_encode( $api_call['complexes'] );
+						$quarters = wp_json_encode( $api_call['complexes'] );
 						
 						file_put_contents( $quarters_file, $quarters );
 					}

@@ -371,7 +371,7 @@ class Econt {
 							$document_number = str_pad( $order->get_id(), 10, '0', STR_PAD_LEFT );
 						}
 
-						$label['services']['invoiceNum'] = $document_number . '/' . date( 'd.m.y', strtotime( $order->get_date_created() ) );
+						$label['services']['invoiceNum'] = $document_number . '/' . gmdate( 'd.m.y', strtotime( $order->get_date_created() ) );
 					}
 				}
 			}

@@ -56,7 +56,7 @@ class Offices {
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::CVC ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['offices'] ) ) {
-						$offices = json_encode( $api_call['offices'] );
+						$offices = wp_json_encode( $api_call['offices'] );
 						
 						file_put_contents( $offices_file, $offices );
 					}

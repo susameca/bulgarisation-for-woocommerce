@@ -33,7 +33,7 @@ class Cities {
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::ECONT ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['cities'] ) ) {
-						$cities = json_encode( $api_call );
+						$cities = wp_json_encode( $api_call );
 						
 						file_put_contents( $cities_file, $cities );
 					}

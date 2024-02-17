@@ -34,7 +34,7 @@ class Quarters {
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::CVC ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['qts'] ) ) {
-						$quarters = json_encode( $api_call );
+						$quarters = wp_json_encode( $api_call );
 						
 						file_put_contents( $quarters_file, $quarters );
 					}

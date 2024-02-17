@@ -39,7 +39,7 @@ class Speedy {
 			'headers' => array(
 				'content-type' => 'application/json',
 			),
-			'body' => json_encode( $args ),
+			'body' => wp_json_encode( $args ),
 		) );
 
 		if ( $return_plain ) {

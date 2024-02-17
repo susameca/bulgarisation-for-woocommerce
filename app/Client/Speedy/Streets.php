@@ -33,7 +33,7 @@ class Streets {
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::SPEEDY ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['streets'] ) ) {
-						$streets = json_encode( $api_call['streets'] );
+						$streets = wp_json_encode( $api_call['streets'] );
 						
 						file_put_contents( $streets_file, $streets );
 					}

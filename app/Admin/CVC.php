@@ -177,8 +177,8 @@ class CVC {
 	}
 
 	public static function delete_label() {
-		woo_bg_cvc_generate_label();
-		
+		woo_bg_check_admin_label_actions();
+
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
 		$shipment_status = $_REQUEST['shipmentStatus'];
@@ -197,7 +197,7 @@ class CVC {
 	}
 
 	public static function update_actions() {
-		woo_bg_cvc_generate_label();
+		woo_bg_check_admin_label_actions();
 
 		$container = woo_bg()->container();
 		$order_id = $_REQUEST['orderId'];
@@ -219,7 +219,7 @@ class CVC {
 	}
 
 	public static function generate_label() {
-		woo_bg_cvc_generate_label();
+		woo_bg_check_admin_label_actions();
 
 		$order_id = $_REQUEST['orderId'];
 		$label = $_REQUEST['label_data'];

@@ -49,7 +49,7 @@ class Cities {
 					return ( $city['regionEn'] === $region );
 				} );
 
-				$cities_by_region = json_encode( $cities_by_region );
+				$cities_by_region = wp_json_encode( $cities_by_region );
 
 				file_put_contents( $cities_by_region_file, $cities_by_region );
 			} else {

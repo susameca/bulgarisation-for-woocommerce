@@ -34,7 +34,7 @@ class Offices {
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::SPEEDY ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['offices'] ) ) {
-						$offices = json_encode( $api_call );
+						$offices = wp_json_encode( $api_call );
 						
 						file_put_contents( $offices_file, $offices );
 					}

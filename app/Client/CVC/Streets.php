@@ -34,7 +34,7 @@ class Streets {
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::CVC ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['streets'] ) ) {
-						$streets = json_encode( $api_call );
+						$streets = wp_json_encode( $api_call );
 						
 						file_put_contents( $streets_file, $streets );
 					}

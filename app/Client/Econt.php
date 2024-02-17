@@ -37,7 +37,7 @@ class Econt {
 				'content-type' => 'application/json',
 				'Authorization' => 'Basic ' . base64_encode( $this->get_user() . ':' . $this->get_password() ),
 			),
-			'body' => json_encode( $args ),
+			'body' => wp_json_encode( $args ),
 		) );
 
 		return json_decode( wp_remote_retrieve_body( $request ), 1 );

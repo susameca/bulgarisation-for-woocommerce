@@ -29,7 +29,7 @@ class Export_Tab extends Base_Tab {
 	public function admin_localize() {
 		wp_localize_script( 'woo-bg-js-admin', 'wooBg_export', array(
 			'i18n' => $this->get_i18n(),
-			'year' => date( 'Y-m', strtotime( 'today - 1 month' ) ),
+			'year' => gmdate( 'Y-m', strtotime( 'today - 1 month' ) ),
 			'nonce' => wp_create_nonce( 'woo_bg_export_nap' ),
 		) );
 	}

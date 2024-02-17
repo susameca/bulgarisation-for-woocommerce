@@ -25,7 +25,7 @@ class CVC {
 				'content-type' => 'application/json',
 				'Authorization' => 'Bearer ' . $this->get_token(),
 			),
-			'body' => json_encode( $args ),
+			'body' => wp_json_encode( $args ),
 		);
 
 		if ( $method === 'GET' ) {

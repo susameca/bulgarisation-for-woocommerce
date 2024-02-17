@@ -54,7 +54,7 @@ class Hubs {
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::CVC ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['hubs'] ) ) {
-						$hubs = json_encode( $api_call['hubs'] );
+						$hubs = wp_json_encode( $api_call['hubs'] );
 						
 						file_put_contents( $hubs_file, $hubs );
 					}

@@ -32,7 +32,7 @@ class Quarters {
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::ECONT ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['quarters'] ) ) {
-						$quarters = json_encode( $api_call );
+						$quarters = wp_json_encode( $api_call );
 						
 						file_put_contents( $quarters_file, $quarters );
 					}

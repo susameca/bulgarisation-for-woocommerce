@@ -31,7 +31,7 @@ class Countries {
 
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::ECONT ]::validate_access( $api_call ) ) {
-					$countries = json_encode( $api_call );
+					$countries = wp_json_encode( $api_call );
 					
 					file_put_contents( $countries_file, $countries );
 				}
