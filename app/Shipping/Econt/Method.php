@@ -228,18 +228,18 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		if ( $this->cookie_data ) {
-			if ( isset( $this->cookie_data['form']['billing_to_company'] ) ) {
+			if ( isset( $this->cookie_data['billing_to_company'] ) ) {
 				$label['receiverAgent'] = $this->generate_receiver_data();
 				$label['receiverClient'] = $this->generate_receiver_data();
 				$label['receiverClient']['juridicalEntity'] = true;
-				$label['receiverClient']['molName'] = $this->cookie_data['form']['billing_company_mol'];
+				$label['receiverClient']['molName'] = $this->cookie_data['billing_company_mol'];
 				
-				if ( !empty( $this->cookie_data['form']['billing_company'] ) ) {
-					$label['receiverClient']['name'] = $this->cookie_data['form']['billing_company'];
+				if ( !empty( $this->cookie_data['billing_company'] ) ) {
+					$label['receiverClient']['name'] = $this->cookie_data['billing_company'];
 				}
 
-				if ( $this->cookie_data['form']['billing_vat_number'] ) {
-					$vat_number = $this->cookie_data['form']['billing_vat_number'];
+				if ( $this->cookie_data['billing_vat_number'] ) {
+					$vat_number = $this->cookie_data['billing_vat_number'];
 					$label['receiverClient']['ein'] = substr( $vat_number, 2 );
 					$label['receiverClient']['ddsEin'] = $label['receiverClient']['ein'];
 					$label['receiverClient']['ddsEinPrefix'] = str_replace( $label['receiverClient']['ein'], '', $vat_number );
