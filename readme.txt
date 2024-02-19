@@ -73,6 +73,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 = 3.0.16 =
 General optimizations
+Econt: Optimizations
 
 = 3.0.15 =
 Add missing nonces
