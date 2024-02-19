@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Invoice\Document;
 use \Clegginabox\PDFMerger\PDFMerger;
+use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -20,12 +21,12 @@ class Invoice extends BaseDocument {
 
 		//Original Invoice Generation
 		$original_invoice = $upload_dir['path'] . '/original.pdf';
-		file_put_contents( $original_invoice, $this->pdf->generate() );
+		File::put_to_file( $original_invoice, $this->pdf->generate() );
 
 		//Copy Invoice Generation
 		$copy_invoice = $upload_dir['path'] . '/copy.pdf';
 		$this->set_title( apply_filters( 'woo_bg/admin/invoice/invoice_title_copy', __( 'Sale Invoice - Copy', 'woo-bg' ) ) );
-		file_put_contents( $copy_invoice, $this->pdf->generate() );
+		File::put_to_file( $copy_invoice, $this->pdf->generate() );
 
 		// Merge both PDF's
 		$merger = new PDFMerger();

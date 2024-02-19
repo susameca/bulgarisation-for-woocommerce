@@ -1,7 +1,7 @@
 <?php
 namespace Woo_BG\Client\Speedy;
 use Woo_BG\Container\Client;
-use Woo_BG\Cache;
+use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,7 +22,7 @@ class Quarters {
 
 		$hash = md5( $query );
 		$quarters_file = $this->container[ Client::SPEEDY ]::CACHE_FOLDER . 'quarters-' . $city_id . '-' . $hash . '.json';
-		$quarters = Cache::get_file( $quarters_file );
+		$quarters = File::get_file( $quarters_file );
 
 		if ( !$quarters ) {
 			$api_call = $this->container[ Client::SPEEDY ]->api_call( self::QUARTERS_ENDPOINT, array( 'siteId' => $city_id, 'name' => $query ) );
@@ -32,7 +32,7 @@ class Quarters {
 					if ( !empty( $api_call['complexes'] ) ) {
 						$quarters = wp_json_encode( $api_call['complexes'] );
 						
-						Cache::put_to_file( $quarters_file, $quarters );
+						File::put_to_file( $quarters_file, $quarters );
 					}
 				}
 			}

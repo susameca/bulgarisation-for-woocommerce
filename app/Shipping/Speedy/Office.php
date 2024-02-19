@@ -17,7 +17,7 @@ class Office {
 	public static function delivery_with_speedy_render_form_button( $method, $index ) {
 		if ( $method->get_method_id() === Method::METHOD_ID ) {
 			if ( $method->meta_data['delivery_type'] === 'office' ) {
-				echo '<div data-cache="' . wp_rand() . '" id="woo-bg-speedy-shipping-to--office" class="woo-bg-additional-fields" data-type="office"></div>';
+				echo wp_kses_post( '<div data-cache="' . wp_rand() . '" id="woo-bg-speedy-shipping-to--office" class="woo-bg-additional-fields" data-type="office"></div>' );
 			}
 		}
 	}
@@ -53,13 +53,15 @@ class Office {
 			} elseif ( empty( $raw_city ) ) {
 				$args[ 'error' ] = sprintf( __( 'Please enter a city.', 'woo-bg' ), $raw_city, $state );
 			} else {
-				$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'woo-bg' ), $raw_city, $state );
+				/* translators: %1$s is the city and %2$s is the state */
+				$args[ 'error' ] = sprintf( __( '%1$s is not found in %2$s region.', 'woo-bg' ), $raw_city, $state );
 			}
 		} else {
 			$offices = self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] );
 
 			if ( empty( $offices ) ) {
 				$offices = [];
+				/* translators: %s is the city */
 				$args[ 'error' ] = sprintf( __( 'No offices were found at %s.', 'woo-bg' ), $raw_city );
 			} else {
 				$offices = $offices['offices'];

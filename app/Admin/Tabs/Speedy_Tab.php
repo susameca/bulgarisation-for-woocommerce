@@ -40,7 +40,7 @@ class Speedy_Tab extends Base_Tab {
 		$this->admin_localize();
 		woo_bg_support_text();
 		?>
-		<a href="<?php echo add_query_arg( 'clear-cache', true ) ?>" class="button-secondary"><?php _e( 'Clear cache', 'woo-bg' ) ?></a>
+		<a href="<?php echo esc_url( add_query_arg( 'clear-cache', true ) ) ?>" class="button-secondary"><?php esc_html_e( 'Clear cache', 'woo-bg' ) ?></a>
 
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
 		<?php
@@ -197,7 +197,7 @@ class Speedy_Tab extends Base_Tab {
 
 		if ( !$this->container[ Client::SPEEDY_PROFILE ]->is_valid_profile( true ) ) {
 			ob_start();
-			echo wpautop( sprintf( __( 'Username and password are incorrect.', 'woo-bg' ) ) );
+			echo wp_kses_post( wpautop( sprintf( __( 'Username and password are incorrect.', 'woo-bg' ) ) ) );
 			$error = ob_get_clean(); 
 		} else {
 			$all_profiles = $this->container[ Client::SPEEDY_PROFILE ]->get_profiles_for_settings();
@@ -205,7 +205,7 @@ class Speedy_Tab extends Base_Tab {
 			if ( empty( $all_profiles ) ) {
 				ob_start();
 
-				echo wpautop( __( 'No profiles was found. Please contact with Speedy.', 'woo-bg' ) );
+				echo wp_kses_post( wpautop( __( 'No profiles was found. Please contact with Speedy.', 'woo-bg' ) ) );
 
 				$error = ob_get_clean();
 			}

@@ -64,8 +64,8 @@ class Actions {
 			$count = intval( $_REQUEST[ 'processed_count' ] );
 
 			printf(
-				'<div id="message" class="updated fade">' . wpautop( _n( '%s order documents were regenerated.', '%s orders documents were regenerated.', $count, 'woo-bg' ) ) . '</div>',
-				$count
+				'<div id="message" class="updated fade">' . wp_kses_post( wpautop( _n( '%s order documents were regenerated.', '%s orders documents were regenerated.', $count, 'woo-bg' ) ) ) . '</div>',
+				esc_html( $count )
 			);
 		}
 	}
@@ -85,16 +85,16 @@ class Actions {
 			?>
 				<?php if ( $invoice_pdf = $order->get_meta( 'woo_bg_invoice_document' ) ): ?>
 					<p>
-						<a target="_blank" href="<?php echo wp_get_attachment_url( $invoice_pdf ); ?>" class="woo-bg button button--pdf">
-							<?php _e('Invoice PDF', 'woo-bg') ?>
+						<a target="_blank" href="<?php echo esc_url( wp_get_attachment_url( $invoice_pdf ) ); ?>" class="woo-bg button button--pdf">
+							<?php esc_html_e('Invoice PDF', 'woo-bg') ?>
 						</a>
 					</p>
 				<?php endif ?>
 
 				<?php if ( $refunded_invoice_pdf = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ): ?>
 					<p>
-						<a target="_blank" href="<?php echo wp_get_attachment_url( $refunded_invoice_pdf ); ?>" class="woo-bg button button--pdf">
-							<?php _e('Refunded Invoice PDF', 'woo-bg') ?>
+						<a target="_blank" href="<?php echo esc_url( wp_get_attachment_url( $refunded_invoice_pdf ) ); ?>" class="woo-bg button button--pdf">
+							<?php esc_html_e('Refunded Invoice PDF', 'woo-bg') ?>
 						</a>
 					</p>
 				<?php endif ?>

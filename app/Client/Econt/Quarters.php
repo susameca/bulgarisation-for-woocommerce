@@ -1,7 +1,7 @@
 <?php
 namespace Woo_BG\Client\Econt;
 use Woo_BG\Container\Client;
-use Woo_BG\Cache;
+use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,7 +21,7 @@ class Quarters {
 		}
 
 		$quarters_file = $this->container[ Client::ECONT ]::CACHE_FOLDER . 'quarters-' . $city_id . '.json';
-		$quarters = Cache::get_file( $quarters_file );
+		$quarters = File::get_file( $quarters_file );
 
 		if ( !$quarters ) {
 			$api_call = $this->container[ Client::ECONT ]->api_call( self::QUARTERS_ENDPOINT, array( 'cityID' => $city_id ) );
@@ -31,7 +31,7 @@ class Quarters {
 					if ( !empty( $api_call['quarters'] ) ) {
 						$quarters = wp_json_encode( $api_call );
 
-						Cache::put_to_file( $quarters_file, $quarters );
+						File::put_to_file( $quarters_file, $quarters );
 					}
 				}
 			}

@@ -1,7 +1,7 @@
 <?php
 namespace Woo_BG\Client\CVC;
 use Woo_BG\Container\Client;
-use Woo_BG\Cache;
+use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,7 +21,7 @@ class Countries {
 		}
 
 		$countries_file = $this->container[ Client::CVC ]::CACHE_FOLDER . 'countries.json';
-		$countries = Cache::get_file( $countries_file );
+		$countries = File::get_file( $countries_file );
 
 		if ( !$countries ) {
 			$api_call = $this->container[ Client::CVC ]->api_call( self::COUNTRIES_ENDPOINT, array( 'request' => '' ) );
@@ -30,7 +30,7 @@ class Countries {
 				if ( $this->container[ Client::CVC ]::validate_access( $api_call ) ) {
 					$countries = wp_json_encode( $api_call );
 					
-					Cache::put_to_file( $countries_file, $countries );
+					File::put_to_file( $countries_file, $countries );
 				}
 			}
 		}

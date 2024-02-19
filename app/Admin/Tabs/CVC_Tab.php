@@ -40,7 +40,7 @@ class CVC_Tab extends Base_Tab {
 		
 		woo_bg_support_text();
 		?>
-		<a href="<?php echo add_query_arg( 'clear-cache', true ) ?>" class="button-secondary"><?php _e( 'Clear cache', 'woo-bg' ) ?></a>
+		<a href="<?php echo esc_url( add_query_arg( 'clear-cache', true ) ) ?>" class="button-secondary"><?php esc_html_e( 'Clear cache', 'woo-bg' ) ?></a>
 
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
 		<?php		
@@ -165,7 +165,7 @@ class CVC_Tab extends Base_Tab {
 		if ( !$this->container[ Client::CVC_PROFILE ]->is_valid_profile( true ) ) {
 			ob_start();
 			
-			echo wpautop( __( 'API Token is incorrect.', 'woo-bg' ) );
+			echo wp_kses_post( wpautop( __( 'API Token is incorrect.', 'woo-bg' ) ) );
 			
 			$error = ob_get_clean(); 
 		}

@@ -552,6 +552,6 @@ class Method extends \WC_Shipping_Method {
 
 		$track_number_text = apply_filters( 'woo_bg/cvc/track_number_text_in_email', $track_number_text, $url, $order );
 
-		echo wpautop( $track_number_text );
+		echo wp_kses_post( wpautop( $track_number_text ) );
 	}
 }

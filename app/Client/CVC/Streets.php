@@ -1,7 +1,7 @@
 <?php
 namespace Woo_BG\Client\CVC;
 use Woo_BG\Container\Client;
-use Woo_BG\Cache;
+use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,7 +23,7 @@ class Streets {
 
 		$hash = md5( $query );
 		$streets_file = $this->container[ Client::CVC ]::CACHE_FOLDER . 'streets-' . $city_id . '-' . $hash . '.json';
-		$streets = Cache::get_file( $streets_file );
+		$streets = File::get_file( $streets_file );
 
 
 		if ( !$streets ) {
@@ -34,7 +34,7 @@ class Streets {
 					if ( !empty( $api_call['streets'] ) ) {
 						$streets = wp_json_encode( $api_call );
 						
-						Cache::put_to_file( $streets_file, $streets );
+						File::put_to_file( $streets_file, $streets );
 					}
 				}
 			}

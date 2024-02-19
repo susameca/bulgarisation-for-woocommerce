@@ -210,7 +210,7 @@ class Plugin {
 		$dir = woo_bg()->plugin_dir_url() . 'dist/';
 		?>
 		<script type="text/javascript">
-			window.__webpack_public_path__ = '<?php echo $dir ?>';
+			window.__webpack_public_path__ = '<?php echo esc_url( $dir ) ?>';
 		</script>
 		<?php
 	}

@@ -176,9 +176,9 @@ class BaseDocument {
 
 			foreach ( $bacs_info as $account ) {
 				?>
-				<strong><?php _e( 'Bank name', 'woo-bg' ) ?>:</strong> <?php echo $account['bank_name'] ?> <br>
-				<strong>IBAN:</strong> <?php echo $account['iban'] ?> <br>
-				<strong>BIC:</strong> <?php echo $account['bic'] ?> <br>
+				<strong><?php esc_html_e( 'Bank name', 'woo-bg' ) ?>:</strong> <?php echo esc_html( $account['bank_name'] ) ?> <br>
+				<strong>IBAN:</strong> <?php echo esc_html( $account['iban'] ) ?> <br>
+				<strong>BIC:</strong> <?php echo esc_html( $account['bic'] ) ?> <br>
 				<?php
 			}
 

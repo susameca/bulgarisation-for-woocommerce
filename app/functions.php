@@ -1,5 +1,6 @@
 <?php
 use Woo_BG\Export\Nra\Xml\PaymentTypes;
+use Woo_BG\File;
 
 function woo_bg_assets_bundle( $path ) {
 	static $manifest = null;
@@ -8,7 +9,7 @@ function woo_bg_assets_bundle( $path ) {
 		$manifest_path = woo_bg()->plugin_dir_path() . 'dist/manifest.json';
 
 		if ( file_exists( $manifest_path ) ) {
-			$manifest = json_decode( file_get_contents( $manifest_path ), true );
+			$manifest = json_decode( File::get_file( $manifest_path ), true );
 		} else {
 			$manifest = array();
 		}
@@ -209,9 +210,9 @@ function woo_bg_return_bg_states() {
 
 function woo_bg_support_text() {
 	?> 
-	<h3><?php _e( 'Supporting the development', 'woo-bg' ) ?></h3> 
+	<h3><?php esc_html_e( 'Supporting the development', 'woo-bg' ) ?></h3> 
 	<?php
-	echo wpautop( __( 'For single donation as development support you can send at ', 'woo-bg' ) . '<a target="_blank" href="https://revolut.me/tihomi9gj5">Revolut</a>' );
+	echo wp_kses_post( wpautop( esc_html__( 'For single donation as development support you can send at ', 'woo-bg' ) ) . '<a target="_blank" href="https://revolut.me/tihomi9gj5">Revolut</a>' );
 }
 
 function woo_bg_get_shipping_tests_options() {

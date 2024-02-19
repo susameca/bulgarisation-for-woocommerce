@@ -36,12 +36,12 @@ class Columns {
 					?>
 					<p>
 						<a
-							href="<?php echo $file[ 'file_url' ] ?>"
+							href="<?php echo esc_url( $file[ 'file_url' ] ) ?>"
 							target="_blank"
 						> 
 							<i class="dashicons-before dashicons-pdf"></i>
 
-							<?php echo $file[ 'name' ] ?>
+							<?php echo esc_html( $file[ 'name' ] ) ?>
 						</a>
 					</p>
 					<?php

@@ -41,7 +41,7 @@ class Econt_Tab extends Base_Tab {
 		
 		woo_bg_support_text();
 		?>
-		<a href="<?php echo add_query_arg( 'clear-cache', true ) ?>" class="button-secondary"><?php _e( 'Clear cache', 'woo-bg' ) ?></a>
+		<a href="<?php echo esc_html( add_query_arg( 'clear-cache', true ) ) ?>" class="button-secondary"><?php esc_html_e( 'Clear cache', 'woo-bg' ) ?></a>
 
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
 		<?php
@@ -250,7 +250,7 @@ class Econt_Tab extends Base_Tab {
 		if ( !$this->container[ Client::ECONT_PROFILE ]->is_valid_profile( true ) ) {
 			ob_start();
 			$tooltip = '<span class="woocommerce-help-tip woocommerce-help-tip--with-image" data-tip="<img src=\'' . woo_bg()->plugin_dir_url() . '/app/Admin/Tabs/Econt_Tab/images/econt-help.png\'>"></span>';
-			echo wpautop( sprintf( __( 'Username and password are incorrect. Please generate API keys from "Integration for online shops" %s', 'woo-bg' ), $tooltip ) );
+			echo wp_kses_post( wpautop( sprintf( __( 'Username and password are incorrect. Please generate API keys from "Integration for online shops" %s', 'woo-bg' ), $tooltip ) ) );
 			$error = ob_get_clean(); 
 		} else {
 			$all_profiles = $this->container[ Client::ECONT_PROFILE ]->get_profiles_for_settings();
@@ -258,7 +258,7 @@ class Econt_Tab extends Base_Tab {
 			if ( empty( $all_profiles ) ) {
 				ob_start();
 
-				echo wpautop( __( 'No profiles was found. Please contact with Econt.', 'woo-bg' ) );
+				echo wp_kses_post( wpautop( __( 'No profiles was found. Please contact with Econt.', 'woo-bg' ) ) );
 
 				$error = ob_get_clean();
 			}

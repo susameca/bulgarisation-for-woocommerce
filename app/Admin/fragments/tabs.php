@@ -16,7 +16,7 @@ $current_tab_object = $tabs[ $current_tab_key ];
 	<nav class="nav-tab-wrapper woo-nav-tab-wrapper">
 		<?php
 		foreach ( $tabs as $tab ) {
-			echo '<a href="' . admin_url( 'admin.php?page=woo-bg&tab=' . urlencode( $tab->tab_slug ) ) . '" class="nav-tab ';
+			echo '<a href="' . esc_url( admin_url( 'admin.php?page=woo-bg&tab=' . urlencode( $tab->tab_slug ) ) ) . '" class="nav-tab ';
 			if ( $current_tab == $tab->tab_slug ) {
 				echo 'nav-tab-active';
 			}
@@ -25,5 +25,5 @@ $current_tab_object = $tabs[ $current_tab_key ];
 		?>
 	</nav>
 
-	<?php echo $current_tab_object->render_tab_html() ?>
+	<?php echo wp_kses_post( $current_tab_object->render_tab_html() ) ?>
 </div>

@@ -48,7 +48,7 @@ class Export_Tab extends Base_Tab {
 	public function get_microinvest_description() {
 		ob_start();
 		?>
-		<h2><?php _e('Export documents for Microinvest', 'woo-bg' ) ?></h2>
+		<h2><?php esc_html_e('Export documents for Microinvest', 'woo-bg' ) ?></h2>
 		<?php
 		return ob_get_clean();
 	}
@@ -56,7 +56,7 @@ class Export_Tab extends Base_Tab {
 	public function get_description() {
 		ob_start();
 		?>
-		<h2><?php _e('Standardized audit file according to Annex № 38', 'woo-bg' ) ?></h2>
+		<h2><?php esc_html_e('Standardized audit file according to Annex № 38', 'woo-bg' ) ?></h2>
 		<?php
 		return ob_get_clean();
 	}

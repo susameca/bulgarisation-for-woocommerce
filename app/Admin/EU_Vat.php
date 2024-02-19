@@ -65,7 +65,7 @@ class EU_Vat {
 
 		// We only need this box for EU orders.
 		if ( ! self::is_eu_order( $theorder ) ) {
-			echo wpautop( __( 'This order is out of scope for EU VAT.', 'woo-bg' ) );
+			echo wp_kses_post( wpautop( __( 'This order is out of scope for EU VAT.', 'woo-bg' ) ) );
 			return;
 		}
 
@@ -76,11 +76,11 @@ class EU_Vat {
 			<tbody>
 				<?php if ( $data->vat_number ) : ?>
 					<tr>
-						<th><?php echo __('VAT number', 'woo-bg') ?></th>
+						<th><?php echo wp_kses_post( __('VAT number', 'woo-bg') ) ?></th>
 						<td><?php echo esc_html( $data->vat_number ); ?></td>
 						<td><?php
 							if ( ! $data->validated ) {
-								echo '<span class="tips" data-tip="' . wc_sanitize_tooltip( __( 'Validation was not possible', 'woo-bg' ) ) . '">?<span>';
+								echo wp_kses_post( '<span class="tips" data-tip="' . wc_sanitize_tooltip( __( 'Validation was not possible', 'woo-bg' ) ) . '">?<span>' );
 							} else {
 								echo $data->valid ? '&#10004;' : '&#10008;';
 							}
@@ -88,12 +88,12 @@ class EU_Vat {
 					</tr>
 				<?php else : ?>
 					<tr>
-						<th><?php _e( 'IP Address', 'woo-bg' ); ?></th>
-						<td><?php echo $data->ip_address ? esc_html( $data->ip_address ) : __( 'Unknown', 'woo-bg' ); ?></td>
+						<th><?php esc_html_e( 'IP Address', 'woo-bg' ); ?></th>
+						<td><?php echo $data->ip_address ? esc_html( $data->ip_address ) : esc_html__( 'Unknown', 'woo-bg' ); ?></td>
 						<td></td>
 					</tr>
 					<tr>
-						<th><?php _e( 'IP Country', 'woo-bg' ); ?></th>
+						<th><?php esc_html_e( 'IP Country', 'woo-bg' ); ?></th>
 						<td><?php
 							if ( $data->ip_country ) {
 								echo esc_html__( $countries[ $data->billing_country ] ) . ' ';
@@ -111,8 +111,8 @@ class EU_Vat {
 						?><td></td>
 					</tr>
 					<tr>
-						<th><?php _e( 'Billing Country', 'woo-bg' ); ?></th>
-						<td><?php echo $data->billing_country ? esc_html( $countries[ $data->billing_country ] ) : __( 'Unknown', 'woo-bg' ); ?></td>
+						<th><?php esc_html_e( 'Billing Country', 'woo-bg' ); ?></th>
+						<td><?php echo $data->billing_country ? esc_html( $countries[ $data->billing_country ] ) : esc_html__( 'Unknown', 'woo-bg' ); ?></td>
 						<td></td>
 					</tr>
 				<?php endif; ?>

@@ -31,7 +31,7 @@ class Nekorekten_Com {
 
 		$screen = array_filter( $screen );
 
-		add_meta_box( 'woo_bg_nekorekten_reports', __( 'Reports', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
+		add_meta_box( 'woo_bg_nekorekten_reports', esc_html__( 'Reports', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
 	}
 
 	public static function customer_status_info( $order ) {
@@ -43,7 +43,7 @@ class Nekorekten_Com {
 				<i class="woo-bg-icon woo-bg-icon--alert"></i>
 				
 				<a href="#woo_bg_nekorekten_reports">
-					 <?php _e( 'We have found negative reports about this customer. <br> Click for more information.', 'woo-bg' ) ?>
+					 <?php esc_html_e( 'We have found negative reports about this customer. <br> Click for more information.', 'woo-bg' ) ?>
 				</a>
 			</p>
 			<?php
@@ -53,7 +53,7 @@ class Nekorekten_Com {
 				<i class="woo-bg-icon woo-bg-icon--check"></i>
 				
 				<a href="#woo_bg_nekorekten_reports">
-					 <?php _e( 'No reports was found for this customer!', 'woo-bg' ) ?>
+					 <?php esc_html_e( 'No reports was found for this customer!', 'woo-bg' ) ?>
 				</a>
 			</p>
 			<?php
@@ -76,31 +76,31 @@ class Nekorekten_Com {
 		}
 		$phone = ( $theorder->get_shipping_phone() ) ? $theorder->get_shipping_phone() : $theorder->get_billing_phone();
 		$email = $theorder->get_billing_email();
-		$title = __( 'There was some error in one of the reports.', 'woo-bg' );
+		$title = esc_html__( 'There was some error in one of the reports.', 'woo-bg' );
 		$reports = self::get_all_reports( $theorder );
 		
 		if ( $reports[ 'count' ] ) {
-			$title = __( 'We have found negative reports about this customer.', 'woo-bg' );
+			$title = esc_html__( 'We have found negative reports about this customer.', 'woo-bg' );
 		} else if ( 
 			( !empty( $reports['reports_by_phone'] ) && $reports['reports_by_phone'][ 'server' ]['httpCode'] === 200 ) && 
 			( !empty( $reports['reports_by_email'] ) && $reports['reports_by_email'][ 'server' ]['httpCode'] === 200)
 		) {
-			$title = __( 'No reports was found.', 'woo-bg' );
+			$title = esc_html__( 'No reports was found.', 'woo-bg' );
 		} 
 		?>
 		<div class="panel-wrap woocommerce">
-			<input name="post_title" type="hidden" value="<?php echo empty( $post->post_title ) ? __( 'Order', 'woocommerce' ) : esc_attr( $post->post_title ); ?>" />
+			<input name="post_title" type="hidden" value="<?php echo empty( $post->post_title ) ? esc_html__( 'Order', 'woocommerce' ) : esc_attr( $post->post_title ); ?>" />
 			<input name="post_status" type="hidden" value="<?php echo esc_attr( $post->post_status ); ?>" />
 			<div id="order_data" class="panel woocommerce-order-data">
-				<a href="<?php echo add_query_arg( 'woo-bg--nekorekten-refresh', true ) ?>"><?php _e( 'Refresh data', 'woo-bg' ) ?></a>
+				<a href="<?php echo esc_url( add_query_arg( 'woo-bg--nekorekten-refresh', true ) ) ?>"><?php esc_html_e( 'Refresh data', 'woo-bg' ) ?></a>
 
 				<h2 class="woocommerce-order-data__heading">
-					<?php echo $title ?>
+					<?php echo esc_html( $title ) ?>
 				</h2>
 
 				<div class="order_data_column_container">
 					<div class="order_data_column order_data_column--half">
-						<h3><?php printf( __( 'By Phone ( %s )', 'woo-bg' ), $phone ) ?></h3>
+						<h3><?php printf( esc_html__( 'By Phone ( %s )', 'woo-bg' ), esc_html( $phone ) ) ?></h3>
 
 						<?php
 						if ( !empty( $reports['reports_by_phone'] ) && $reports['reports_by_phone'][ 'server' ][ 'httpCode' ] == 200 ) {
@@ -112,7 +112,7 @@ class Nekorekten_Com {
 					</div><!-- /.order_data_column order_data_column-/-half -->
 
 					<div class="order_data_column order_data_column--half">
-						<h3><?php printf( __( 'By Email ( %s )', 'woo-bg' ), $email ) ?></h3>
+						<h3><?php printf( esc_html__( 'By Email ( %s )', 'woo-bg' ), esc_html( $email ) ) ?></h3>
 
 						<?php  
 						if ( !empty( $reports['reports_by_email'] ) && $reports['reports_by_email'][ 'server' ][ 'httpCode' ] == 200 ) {
@@ -129,7 +129,7 @@ class Nekorekten_Com {
 		<div class="clear"></div>
 
 		<div>
-			<?php _e( 'You can add a report from <a href="https://nekorekten.com/" target="_blank">https://nekorekten.com/</a>', 'woo-bg' ) ?>
+			<?php esc_html_e( 'You can add a report from <a href="https://nekorekten.com/" target="_blank">https://nekorekten.com/</a>', 'woo-bg' ) ?>
 		</div>
 		<?php
 	}
@@ -137,13 +137,13 @@ class Nekorekten_Com {
 	public static function meta_box_error( $report ) {
 		?>
 		<?php if ( isset( $report[ 'server' ][ 'date' ] ) ): ?>
-			<span><?php printf( __( 'Date: %s', 'woo-bg' ), $report[ 'server' ][ 'date' ] ) ?></span>
+			<span><?php printf( esc_html__( 'Date: %s', 'woo-bg' ), esc_html( $report[ 'server' ][ 'date' ] ) ) ?></span>
 		<?php endif ?>
 
 		<?php if ( !empty( $report['message'] ) ): ?>
-			<h3><?php printf( __( 'Error: "%s"', 'woo-bg' ), $report['message'] ) ?></h3>
+			<h3><?php printf( esc_html__( 'Error: "%s"', 'woo-bg' ), esc_html( $report['message'] ) ) ?></h3>
 		<?php else: ?>
-			<h3><?php printf( __( 'Invalid access.', 'woo-bg' ) ) ?></h3>
+			<h3><?php printf( esc_html__( 'Invalid access.', 'woo-bg' ) ) ?></h3>
 		<?php endif ?>
 		<?php
 	}
@@ -151,17 +151,17 @@ class Nekorekten_Com {
 	public static function meta_box_success( $report ) {
 		?>
 		<?php if ( isset( $report[ 'server' ][ 'date' ] ) ): ?>
-			<span><?php printf( __( 'Date: %s', 'woo-bg' ), $report[ 'server' ][ 'date' ] ) ?></span>
+			<span><?php printf( esc_html__( 'Date: %s', 'woo-bg' ), esc_html( $report[ 'server' ][ 'date' ] ) ) ?></span>
 		<?php endif ?>
 
 		<?php if ( isset( $report[ 'count' ] ) ): ?>
 			<p>
-				<strong><?php printf( __( 'Found: %s', 'woo-bg' ), $report[ 'count' ] ) ?></strong>
+				<strong><?php printf( esc_html__( 'Found: %s', 'woo-bg' ), esc_html( $report[ 'count' ] ) ) ?></strong>
 			</p>
 		<?php endif ?>
 			
 		<?php if ( isset( $report[ 'message' ] ) ): ?>
-			<h4><?php echo $report[ 'message' ] ?></h4>
+			<h4><?php echo esc_html( $report[ 'message' ] ) ?></h4>
 		<?php endif ?>
 
 		<br> <br>
@@ -169,22 +169,22 @@ class Nekorekten_Com {
 		<?php foreach ( $report[ 'items' ] as $item ): ?>
 			<div class="customer">
 				<p>
-					<strong><?php _e('First Name:', 'woo-bg') ?></strong> <span> <?php echo $item['firstName']; ?> </span>
-					<strong><?php _e('Last Name:', 'woo-bg') ?></strong> <span> <?php echo $item['lastName']; ?> </span>
-					<strong><?php _e('Phone:', 'woo-bg') ?></strong> <span> <?php echo $item['phone']; ?> </span>
-					<strong><?php _e('Email:', 'woo-bg') ?></strong> <span> <?php echo $item['email']; ?> </span>
+					<strong><?php esc_html_e('First Name:', 'woo-bg') ?></strong> <span> <?php echo esc_html( $item['firstName'] ); ?> </span>
+					<strong><?php esc_html_e('Last Name:', 'woo-bg') ?></strong> <span> <?php echo esc_html( $item['lastName'] ); ?> </span>
+					<strong><?php esc_html_e('Phone:', 'woo-bg') ?></strong> <span> <?php echo esc_html( $item['phone'] ); ?> </span>
+					<strong><?php esc_html_e('Email:', 'woo-bg') ?></strong> <span> <?php echo esc_html( $item['email'] ); ?> </span>
 				</p>
 
-				<p> <strong><?php _e('Date:', 'woo-bg') ?> </strong> <span> <?php echo $item[ 'createDate' ] ?></span> </p>
+				<p> <strong><?php esc_html_e('Date:', 'woo-bg') ?> </strong> <span> <?php echo esc_html( $item[ 'createDate' ] ) ?></span> </p>
 
-				<p> <strong><?php _e('Text:', 'woo-bg') ?></strong> <?php echo $item[ 'text' ] ?> </p>
+				<p> <strong><?php esc_html_e('Text:', 'woo-bg') ?></strong> <?php echo esc_html( $item[ 'text' ] ) ?> </p>
 
 				<?php if ( !empty( $item['files'] ) ): ?>
 					<?php foreach ( $item['files'] as $file_item ): 
 						$link = self::IMAGES_BASE_URL . $file_item['previewUrl'];
 					?>
-						<a href="<?php echo $link ?>" target="_blank" class="customer-reports--image">
-							<img src="<?php echo $link ?>" alt="">
+						<a href="<?php echo esc_url( $link ) ?>" target="_blank" class="customer-reports--image">
+							<img src="<?php echo esc_url( $link ) ?>" alt="">
 						</a>
 					<?php endforeach ?>
 				<?php endif ?>
@@ -266,7 +266,7 @@ class Nekorekten_Com {
 	        $reordered_columns[ $key ] = $column;
 
 	        if( $key ==  'shipping_address' ){
-	            $reordered_columns[ 'order_nekorekten' ] = __( 'Nekorekten', 'woo-bg' );
+	            $reordered_columns[ 'order_nekorekten' ] = esc_html__( 'Nekorekten', 'woo-bg' );
 	        }
 	    }
 

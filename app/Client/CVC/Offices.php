@@ -1,7 +1,7 @@
 <?php
 namespace Woo_BG\Client\CVC;
 use Woo_BG\Container\Client;
-use Woo_BG\Cache;
+use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -45,7 +45,7 @@ class Offices {
 		}
 
 		$offices_file = $this->container[ Client::CVC ]::CACHE_FOLDER . 'offices.json';
-		$offices = Cache::get_file( $offices_file );
+		$offices = File::get_file( $offices_file );
 
 		if ( !$offices ) {
 			$api_call = $this->container[ Client::CVC ]->api_call( self::OFFICES_ENDPOINT, array( 'country_id' => $country_id ), $this->method );
@@ -55,7 +55,7 @@ class Offices {
 					if ( !empty( $api_call['offices'] ) ) {
 						$offices = wp_json_encode( $api_call['offices'] );
 						
-						Cache::put_to_file( $offices_file, $offices );
+						File::put_to_file( $offices_file, $offices );
 					}
 				}
 			}

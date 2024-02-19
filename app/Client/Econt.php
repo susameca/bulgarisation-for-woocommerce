@@ -1,6 +1,6 @@
 <?php
 namespace Woo_BG\Client;
-use Woo_BG\Cache;
+use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -11,7 +11,7 @@ class Econt {
     const UPDATE_LABELS_ENDPOINT = 'Shipments/LabelService.updateLabel.json';
     const DELETE_LABELS_ENDPOINT = 'Shipments/LabelService.deleteLabels.json';
     const SHIPMENT_STATUS_ENDPOINT = 'Shipments/ShipmentService.getShipmentStatuses.json';
-    const CACHE_FOLDER = Cache::BASE_FOLDER . 'econt' . DIRECTORY_SEPARATOR;
+    const CACHE_FOLDER = File::CACHE_FOLDER . 'econt' . DIRECTORY_SEPARATOR;
 
     private $env = '';
     private $user = '';

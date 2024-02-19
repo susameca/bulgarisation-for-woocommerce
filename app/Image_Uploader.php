@@ -30,7 +30,7 @@ class Image_Uploader {
 		$filename = $name . $extension;
 		$hashed_filename = md5( $filename . microtime() ) . $extension;
 
-		$image_upload = file_put_contents( $upload_path . $hashed_filename, $decoded );
+		File::put_to_file( $upload_path . $hashed_filename, $decoded );
 
 		if( !function_exists( 'wp_handle_sideload' ) ) {
 		  require_once( ABSPATH . 'wp-admin/includes/file.php' );
@@ -43,8 +43,6 @@ class Image_Uploader {
 		$file['type']     = $image[ 'type' ];
 		$file['size']     = filesize( $upload_path . $hashed_filename );
 
-		// upload file to server
-		// @new use $file instead of $image_upload
 		$file_return = wp_handle_sideload( $file, array( 'test_form' => false ) );
 
 		$attachment = array(
@@ -64,12 +62,6 @@ class Image_Uploader {
 		wp_update_attachment_metadata( $attach_id, $attach_data );
 
 		return $attach_id;
-	}
-
-	public static function base64_encode_image( $file, $filetype ) {
-		$img_binary = fread( fopen( $file, "r" ), filesize( $file ) );
-		
-		return 'data:' . $filetype['type'] . ';base64,' . base64_encode( $img_binary );
 	}
 
 	public static function change_upload_dir( $args ) {

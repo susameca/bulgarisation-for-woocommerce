@@ -208,7 +208,7 @@ class Order {
 	public static function print_total_in_words( $woo_order, $pdf ) {
 		if ( $woo_order->get_currency() === 'BGN' ) {
 			$total_items = $pdf->document->order->get_total_items();
-			echo '<p class="fz-12"><strong>Словом</strong>: ' . CurrencyToString::number_to_lev( $total_items['total']['value_number'] ) . "</p>";
+			echo wp_kses_post( '<p class="fz-12"><strong>Словом</strong>: ' . CurrencyToString::number_to_lev( $total_items['total']['value_number'] ) . "</p>" );
 		}
 	}
 }

@@ -571,13 +571,14 @@ class Speedy {
 			'parcels' => $parcels,
 		);
 
-		$pdf = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::PRINT_LABELS_ENDPOINT, $request_body, 1 );
+		$pdf_escaped = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::PRINT_LABELS_ENDPOINT, $request_body, 1 );
 
 		header('Content-Type: application/pdf');
-		header('Content-Length: '.strlen( $pdf ));
+		header('Content-Length: '.strlen( $pdf_escaped ));
 		header('Content-disposition: inline; filename="' . $labels[0] . '.pdf"');
 
-		echo $pdf;
+		echo $pdf_escaped;
+
 		wp_die();
 	}
 }

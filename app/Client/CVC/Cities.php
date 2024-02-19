@@ -2,7 +2,7 @@
 namespace Woo_BG\Client\CVC;
 use Woo_BG\Container\Client;
 use Woo_BG\Transliteration;
-use Woo_BG\Cache;
+use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,7 +25,7 @@ class Cities {
 		}
 
 		$cities_file = $this->container[ Client::CVC ]::CACHE_FOLDER . 'cities-' . $country_id . '.json';
-		$cities = Cache::get_file( $cities_file );
+		$cities = File::get_file( $cities_file );
 
 		if ( !$cities ) {
 			$api_call = $this->container[ Client::CVC ]->api_call( self::CITIES_ENDPOINT, array( 'country_id' => $country_id ), $this->method );
@@ -35,7 +35,7 @@ class Cities {
 					if ( !empty( $api_call['counties'] ) ) {
 						$cities = wp_json_encode( $api_call );
 						
-						Cache::put_to_file( $cities_file, $cities );
+						File::put_to_file( $cities_file, $cities );
 					}
 				}
 			}

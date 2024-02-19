@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo $this->document->title ?></title>
+	<title><?php echo esc_html( $this->document->title ) ?></title>
 </head>
 <style type="text/css">
 	h1 { font-size:20px; }
@@ -48,15 +48,15 @@
 	<main>
 		<div class="add-detail">
 			<div class="w-45 float-left logo">
-				<?php echo apply_filters( 'woo_bg/invoice/pdf/default_template/qr', wp_get_attachment_image( $this->document->qr_png, 'medium_large' ), $this ) ?>
+				<?php echo wp_kses_post( apply_filters( 'woo_bg/invoice/pdf/default_template/qr', wp_get_attachment_image( $this->document->qr_png, 'medium_large' ), $this ) ) ?>
 			</div>
 			<div class="w-55 float-left text-right">
-				<h1 class="m-0 p-0"><?php echo $this->document->title ?></h1>
+				<h1 class="m-0 p-0"><?php echo esc_html( $this->document->title ) ?></h1>
 
 				<?php if ( !empty( $this->document->get_head_items() ) ): ?>
 					<?php foreach ( $this->document->get_head_items() as $head_item ): ?>
 						<p class="m-0 pt-0 fz-12 text-bold w-100">
-							<?php printf('%s: <span class="gray-color">%s</span>', $head_item['label'], $head_item['value']) ?>
+							<?php printf('%s: <span class="gray-color">%s</span>', esc_html( $head_item['label'] ), esc_html( $head_item['value'] ) ) ?>
 						</p>
 					<?php endforeach ?>
 				<?php endif ?>
@@ -68,8 +68,8 @@
 		<div class="table-section bill-tbl w-100 mt-10">
 			<table class="table w-100 mt-10">
 				<tr>
-					<th class="w-50"><?php _e( 'Billing from', 'woo-bg' ) ?></th>
-					<th class="w-50"><?php _e( 'Billing to', 'woo-bg' ) ?></th>
+					<th class="w-50"><?php esc_html_e( 'Billing from', 'woo-bg' ) ?></th>
+					<th class="w-50"><?php esc_html_e( 'Billing to', 'woo-bg' ) ?></th>
 				</tr>
 
 				<tr class="va-top">
@@ -77,7 +77,7 @@
 						<div class="box-text">
 							<?php 
 							foreach ( $this->document->get_from_items() as $item ) {
-								echo wpautop( $item );
+								echo wp_kses_post( wpautop( $item ) );
 							}
 							?>
 						</div>
@@ -87,7 +87,7 @@
 						<div class="box-text">
 							<?php 
 							foreach ( $this->document->get_to_items() as $item ) {
-								echo wpautop( $item );
+								echo wp_kses_post( wpautop( $item ) );
 							}
 							?>
 						</div>
@@ -102,14 +102,14 @@
 
 				<tr>
 					<?php foreach ( $headers as $item ): ?>
-						<th class="<?php echo $item['class'] ?>"><?php echo $item['label'] ?></th>
+						<th class="<?php echo esc_attr( $item['class'] ) ?>"><?php echo esc_html( $item['label'] ) ?></th>
 					<?php endforeach ?>
 				</tr>
 
 				<?php foreach ( $this->document->order->get_items() as $item ): ?>
 					<tr>
 						<?php foreach ( $item as $key => $col ): ?>
-							<td <?php echo ( $key !== 'name' ) ? 'align="center"' : '' ?>><?php echo $col ?></td>
+							<td <?php echo ( $key !== 'name' ) ? 'align="center"' : '' ?>><?php echo esc_html( $col ) ?></td>
 						<?php endforeach ?>
 					</tr>
 				<?php endforeach ?>
@@ -120,7 +120,7 @@
 							<div class="total-left w-85 float-left" align="right">
 								<?php 
 								foreach ( $this->document->order->get_total_items() as $item ) {
-									echo wpautop( $item['label'] . ":" );
+									echo wp_kses_post( wpautop( $item['label'] . ":" ) );
 								}
 								?>
 							</div>
@@ -128,7 +128,7 @@
 							<div class="total-right w-15 float-left text-bold" align="right">
 								<?php 
 								foreach ( $this->document->order->get_total_items() as $item ) {
-									echo wpautop( $item['value'] );
+									echo wp_kses_post( wpautop( $item['value'] ) );
 								}
 								?>
 							</div>
@@ -146,13 +146,13 @@
 			<table class="table w-100 mt-10">
 				<tr>
 					<?php foreach ( $this->document->get_additional_items_labels() as $label ): ?>
-						<th class="w-50"><?php echo $label ?></th>
+						<th class="w-50"><?php echo esc_html( $label ) ?></th>
 					<?php endforeach ?>
 				</tr>
 
 				<tr class="text-center">
 					<?php foreach ( $this->document->get_additional_items() as $value ): ?>
-						<td><?php echo $value ?></td>
+						<td><?php echo esc_html( $value ) ?></td>
 					<?php endforeach ?>
 				</tr>
 			</table>
@@ -160,16 +160,16 @@
 
 		<?php 
 		if ( $this->document->footer_text ) {
-			echo wpautop( '<span class="gray-color fz-12">' . $this->document->footer_text . '</span>' );
+			echo wp_kses_post( wpautop( '<span class="gray-color fz-12">' . $this->document->footer_text . '</span>' ) );
 		}
 		?>
 	</main>
 
 	<footer>
-		<?php echo get_bloginfo( 'name' ) ?>
+		<?php echo esc_html( get_bloginfo( 'name' ) ) ?>
 
 		<span class="page-count text-right">
-			<?php printf( __('Page %s of %s', 'woo-bg'), '<span class="page-number"></span>', '%PC%' ) ?>
+			<?php printf( esc_html__('Page %s of %s', 'woo-bg'), '<span class="page-number"></span>', '%PC%' ) ?>
 		</span>
 	</footer>
 </html>

@@ -33,10 +33,10 @@ class MetaBox {
 		<ul class="wpo_wcpdf-actions">
 			<?php foreach ( $files as $file ): ?>
 				<li>
-					<a target="_blank" href="<?php echo $file[ 'file_url' ]; ?>" class="button">
+					<a target="_blank" href="<?php echo esc_url( $file[ 'file_url' ] ); ?>" class="button">
 						<div class="wp-menu-image dashicons-before dashicons-pdf"></div>
 						
-						<?php echo $file['name'] ?>
+						<?php echo esc_html( $file['name'] ) ?>
 					</a>
 				</li>
 			<?php endforeach ?>

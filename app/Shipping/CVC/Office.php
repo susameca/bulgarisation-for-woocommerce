@@ -17,7 +17,7 @@ class Office {
 	public static function delivery_with_cvc_render_form_button( $method, $index ) {
 		if ( $method->get_method_id() === Method::METHOD_ID ) {
 			if ( $method->meta_data['delivery_type'] === 'office' ) {
-				echo '<div data-cache="' . wp_rand() . '" id="woo-bg-cvc-shipping-to--office" class="woo-bg-additional-fields" data-type="office"></div>';
+				echo wp_kses_post( '<div data-cache="' . wp_rand() . '" id="woo-bg-cvc-shipping-to--office" class="woo-bg-additional-fields" data-type="office"></div>' );
 			}
 		}
 	}

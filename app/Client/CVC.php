@@ -1,6 +1,6 @@
 <?php
 namespace Woo_BG\Client;
-use Woo_BG\Cache;
+use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,7 +10,7 @@ class CVC {
 	const CREATE_LABELS_ENDPOINT = 'create_wb';
 	const CANCEL_LABELS_ENDPOINT = 'cancel_wb';
 	const ACTIONS_ENDPOINT = 'get_status_history';
-    const CACHE_FOLDER = Cache::BASE_FOLDER . 'cvc' . DIRECTORY_SEPARATOR;
+    const CACHE_FOLDER = File::CACHE_FOLDER . 'cvc' . DIRECTORY_SEPARATOR;
 
     private $token = '';
 
