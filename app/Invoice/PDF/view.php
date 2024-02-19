@@ -102,14 +102,14 @@
 
 				<tr>
 					<?php foreach ( $headers as $item ): ?>
-						<th class="<?php echo esc_attr( $item['class'] ) ?>"><?php echo esc_html( $item['label'] ) ?></th>
+						<th class="<?php echo esc_attr( $item['class'] ) ?>"><?php echo wp_kses_post( $item['label'] ) ?></th>
 					<?php endforeach ?>
 				</tr>
 
 				<?php foreach ( $this->document->order->get_items() as $item ): ?>
 					<tr>
 						<?php foreach ( $item as $key => $col ): ?>
-							<td <?php echo ( $key !== 'name' ) ? 'align="center"' : '' ?>><?php echo esc_html( $col ) ?></td>
+							<td <?php echo ( $key !== 'name' ) ? 'align="center"' : '' ?>><?php echo wp_kses_post( $col ) ?></td>
 						<?php endforeach ?>
 					</tr>
 				<?php endforeach ?>

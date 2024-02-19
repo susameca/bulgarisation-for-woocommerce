@@ -129,7 +129,7 @@ class Nekorekten_Com {
 		<div class="clear"></div>
 
 		<div>
-			<?php esc_html_e( 'You can add a report from <a href="https://nekorekten.com/" target="_blank">https://nekorekten.com/</a>', 'woo-bg' ) ?>
+			<?php echo wp_kses_post( __( 'You can add a report from <a href="https://nekorekten.com/" target="_blank">https://nekorekten.com/</a>', 'woo-bg' ) ) ?>
 		</div>
 		<?php
 	}
