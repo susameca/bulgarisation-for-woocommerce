@@ -21,7 +21,14 @@ class Address {
 	public static function delivery_with_cvc_render_form_button( $method, $index ) {
 		if ( $method->get_method_id() === Method::METHOD_ID ) {
 			if ( $method->meta_data['delivery_type'] === 'address' ) {
-				echo wp_kses_post( '<div data-cache="' . wp_rand() . '" id="woo-bg-cvc-shipping-to--address" class="woo-bg-additional-fields" data-type="address"></div>' );
+				echo wp_kses( '<div data-cache="' . wp_rand() . '" id="woo-bg-cvc-shipping-to--address" class="woo-bg-additional-fields" data-type="address"></div>', [
+					'div' => [
+						'data-cache' => [],
+						'data-type' => [],
+						'class' => [],
+						'id' => [],
+					]
+				] );
 			}
 		}
 	}

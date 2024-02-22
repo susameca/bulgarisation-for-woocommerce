@@ -146,13 +146,13 @@
 			<table class="table w-100 mt-10">
 				<tr>
 					<?php foreach ( $this->document->get_additional_items_labels() as $label ): ?>
-						<th class="w-50"><?php echo esc_html( $label ) ?></th>
+						<th class="w-50"><?php echo wp_kses_post( $label ) ?></th>
 					<?php endforeach ?>
 				</tr>
 
 				<tr class="text-center">
 					<?php foreach ( $this->document->get_additional_items() as $value ): ?>
-						<td><?php echo esc_html( $value ) ?></td>
+						<td><?php echo wp_kses_post( $value ) ?></td>
 					<?php endforeach ?>
 				</tr>
 			</table>
