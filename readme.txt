@@ -1,6 +1,6 @@
 === Bulgarisation for WooCommerce ===
 Contributors: autopolisbg
-Tags: woocommerce, e-commerce, invoice, shipping, bulgaria, bulgarisation, nra
+Tags: woocommerce, e-commerce, invoice, shipping, bulgaria
 Requires at least: 5.3
 Tested up to: 6.4.3
 Donate link: https://revolut.me/tihomi9gj5
@@ -9,7 +9,7 @@ Stable tag: 3.0.16
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Всичко необходимо за вашият онлайн магазин на WooCommerce да работи в България и според Българските разпоредби. Включва облекчен режим за Наредба - H-18 и методи за доставка с Еконт, CVC и Спиди.
+Всичко необходимо за вашият онлайн магазин за България. Включва облекчен режим за Наредба - H-18 и методи за доставка с Еконт, CVC и Спиди.
 
 == Description ==
 

@@ -32,14 +32,14 @@ class Emails {
 			$invoice_id = $order->get_meta( 'woo_bg_invoice_document' );
 
 			if ( $order_doc_id ) {
-	            $attachments[] = get_attached_file( $order_doc_id );
-	        }
-	        
-	        if ( $email_id === 'customer_on_hold_order' && $proform_id ) {
+				$attachments[] = get_attached_file( $order_doc_id );
+			}
+			
+			if ( $email_id === 'customer_on_hold_order' && $proform_id ) {
 				$attachments[] = get_attached_file( $proform_id );
-	        } else if ( $invoice_id ) {
+			} else if ( $invoice_id ) {
 				$attachments[] = get_attached_file( $invoice_id );
-	        }
+			}
 		}
 
 		return $attachments;
@@ -66,8 +66,8 @@ class Emails {
 			foreach ( $ids as $id ) {
 				$order = wc_get_order( $id );
 				if ( $invoice_id = $order->get_meta( 'woo_bg_refunded_order_document' ) ) {
-		            $attachments[] = get_attached_file( $invoice_id );
-		        }
+					$attachments[] = get_attached_file( $invoice_id );
+				}
 
 				if ( $invoice_id = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ) {
 					$attachments[] = get_attached_file( $invoice_id );

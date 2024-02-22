@@ -44,15 +44,17 @@ class Profile {
 
 			$clients = [];
 
-			foreach ( $profile_data['clients'] as $profile ) {
-				$client = $this->get_client( $profile['clientId'] );
+			if ( !empty( $profile_data['clients'] ) ) {
+				foreach ( $profile_data['clients'] as $profile ) {
+					$client = $this->get_client( $profile['clientId'] );
 
-				if ( isset( $client[ 'client' ] ) ) {
-					$clients[ $profile['clientId'] ] = $client[ 'client' ];
+					if ( isset( $client[ 'client' ] ) ) {
+						$clients[ $profile['clientId'] ] = $client[ 'client' ];
+					}
 				}
-			}
 
-			woo_bg_set_option( 'speedy', 'clients', $clients );
+				woo_bg_set_option( 'speedy', 'clients', $clients );
+			}
 		}
 
 		return $profile_data;
