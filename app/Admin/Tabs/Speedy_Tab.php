@@ -196,21 +196,15 @@ class Speedy_Tab extends Base_Tab {
 		$error = '';
 
 		if ( !$this->container[ Client::SPEEDY_PROFILE ]->is_valid_profile( true ) ) {
-			ob_start();
-			echo wp_kses_post( wpautop( sprintf( __( 'Username and password are incorrect.', 'woo-bg' ) ) ) );
-			$error = ob_get_clean(); 
+			$error = __( 'Username and password are incorrect.', 'woo-bg' ); 
 		} else {
 			$all_profiles = $this->container[ Client::SPEEDY_PROFILE ]->get_profiles_for_settings();
 
 			if ( empty( $all_profiles ) ) {
-				ob_start();
-
-				echo wp_kses_post( wpautop( __( 'No profiles was found. Please contact with Speedy.', 'woo-bg' ) ) );
-
-				$error = ob_get_clean();
+				$error = __( 'No profiles was found. Please contact with Speedy.', 'woo-bg' )
 			}
 		}
 
-		return $error;
+		return wpautop( $error );
 	}
 }

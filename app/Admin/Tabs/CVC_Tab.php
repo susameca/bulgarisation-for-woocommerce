@@ -163,13 +163,9 @@ class CVC_Tab extends Base_Tab {
 		$error = '';
 
 		if ( !$this->container[ Client::CVC_PROFILE ]->is_valid_profile( true ) ) {
-			ob_start();
-			
-			echo wp_kses_post( wpautop( __( 'API Token is incorrect.', 'woo-bg' ) ) );
-			
-			$error = ob_get_clean(); 
+			$error = __( 'API Token is incorrect.', 'woo-bg' );
 		}
 
-		return $error;
+		return wpautop( $error );
 	}
 }

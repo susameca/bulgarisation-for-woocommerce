@@ -248,22 +248,19 @@ class Econt_Tab extends Base_Tab {
 		$error = '';
 
 		if ( !$this->container[ Client::ECONT_PROFILE ]->is_valid_profile( true ) ) {
-			ob_start();
 			$tooltip = '<span class="woocommerce-help-tip woocommerce-help-tip--with-image" data-tip="<img src=\'' . woo_bg()->plugin_dir_url() . '/app/Admin/Tabs/Econt_Tab/images/econt-help.png\'>"></span>';
-			echo wp_kses_post( wpautop( sprintf( __( 'Username and password are incorrect. Please generate API keys from "Integration for online shops" %s', 'woo-bg' ), $tooltip ) ) );
-			$error = ob_get_clean(); 
+			$error = sprintf( __( 'Username and password are incorrect. Please generate API keys from "Integration for online shops" %s', 'woo-bg' ), $tooltip ); 
 		} else {
+			$api_response = $this->container[ Client::ECONT_PROFILE ]->fetch_profile_data();
 			$all_profiles = $this->container[ Client::ECONT_PROFILE ]->get_profiles_for_settings();
 
-			if ( empty( $all_profiles ) ) {
-				ob_start();
-
-				echo wp_kses_post( wpautop( __( 'No profiles was found. Please contact with Econt.', 'woo-bg' ) ) );
-
-				$error = ob_get_clean();
+			if ( isset( $api_response['message'] ) && ! is_array( $api_response['message'] ) ) {
+				$error = "API: " . $api_response['message'];
+			} elseif ( empty( $all_profiles ) ) {
+				$error = __( 'No profiles was found. Please contact with Econt.', 'woo-bg' );
 			}
 		}
 
-		return $error;
+		return wpautop( $error );
 	}
 }
