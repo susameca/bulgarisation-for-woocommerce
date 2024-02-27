@@ -269,7 +269,10 @@ export default {
 			}, {});
 
 			let cookie = {
-				form: formData,
+				billing_to_company: this.toCompanyField.val(),
+				billing_company_mol: formData.billing_company_mol,
+				billing_company: formData.billing_company,
+				billing_vat_number: formData.billing_vat_number,
 				type: 'office',
 				receiver: first_name + ' ' + last_name,
 				phone: phone,

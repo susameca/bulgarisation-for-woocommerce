@@ -201,7 +201,7 @@ class Speedy_Tab extends Base_Tab {
 			$all_profiles = $this->container[ Client::SPEEDY_PROFILE ]->get_profiles_for_settings();
 
 			if ( empty( $all_profiles ) ) {
-				$error = __( 'No profiles was found. Please contact with Speedy.', 'woo-bg' )
+				$error = __( 'No profiles was found. Please contact with Speedy.', 'woo-bg' );
 			}
 		}
 
