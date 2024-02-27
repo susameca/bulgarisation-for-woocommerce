@@ -140,6 +140,8 @@ class EU_Vat {
 
 	public static function vat_number_is_valid( $vat_number, $country ) {
 		$vat_prefix     = self::get_vat_number_prefix( $country );
+		$vat_number = str_replace( array( ' ', '.', '-', ',', ', ' ), '', trim( $vat_number ) );
+		$vat_number = str_replace( $vat_prefix, '', $vat_number );
 		$transient_name = 'vat_number_' . $vat_prefix . $vat_number;
 		$cached_result  = get_transient( $transient_name );
 
@@ -148,8 +150,6 @@ class EU_Vat {
 		}
 
 		$vies = new Validator;
-
-		$vat_number = str_replace( array( ' ', '.', '-', ',', ', ' ), '', trim( $vat_number ) );
 
 		if ( ! isset( self::$country_codes_patterns[ $vat_prefix ] ) ) {
 			return new \WP_Error( 'api', __( 'Invalid country code', 'woo-bg' ) );
@@ -161,6 +161,7 @@ class EU_Vat {
 			$is_valid = $vies->isValid( $vat_prefix . $vat_number, $maybe_vies_validation );
 
 			set_transient( $transient_name, $is_valid ? 'yes' : 'no', 7 * DAY_IN_SECONDS );
+
 			return $is_valid;
 		} catch( SoapFault $e ) {
 			return new \WP_Error( 'api', __( 'Error communicating with the VAT validation server - please try again', 'woo-bg' ) );
@@ -216,7 +217,7 @@ class EU_Vat {
 
 		self::validate( wc_clean( $_POST['billing_vat_number'] ), $billing_country );
 
-		if ( woo_bg_get_option('nap', 'dds_number_required' ) !== 'no' && !empty( $_POST[ 'billing_to_company' ] ) ) {
+		if ( woo_bg_get_option('invoice', 'enable_vies' ) !== 'no' && !empty( $_POST[ 'billing_to_company' ] ) ) {
 			if ( false === self::$data['validation']['valid'] && isset( $_REQUEST[ 'billing_to_company' ] ) && sanitize_text_field( $_REQUEST[ 'billing_to_company' ] ) ) {
 				wc_add_notice( sprintf( __( 'You have entered an invalid %1$s (%2$s) for your billing country (%3$s).', 'woo-bg' ), __( 'VAT number', 'woo-bg' ), self::$data['vat_number'], $billing_country ), 'error' );
 			} else {
@@ -239,7 +240,7 @@ class EU_Vat {
 			return $form_data;
 		}
 
-		if ( woo_bg_get_option('nap', 'dds_number_required' ) !== 'no' ) {
+		if ( woo_bg_get_option('invoice', 'enable_vies' ) !== 'no' ) {
 			if ( in_array( $form_data['billing_country'], self::get_eu_countries() ) && ! empty( $form_data['billing_vat_number'] ) ) {
 				$shipping_country = wc_clean( ! empty( $form_data['shipping_country'] ) && ! empty( $form_data['ship_to_different_address'] ) ? $form_data['shipping_country'] : $form_data['billing_country'] );
 
