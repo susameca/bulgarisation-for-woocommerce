@@ -326,7 +326,12 @@ export default {
 
 			if ( this.operations.length ) {
 				this.operations.forEach( function ( status ) {
-					let details = status.description + ' - ' + status.comment;
+					let details = status.description;
+
+					if ( typeof status.comment !== 'undefined' ) {
+						details += ' - ' + status.comment;
+					}
+
 					let time = new Date( status.dateTime ).toLocaleString();
 
 					statuses.push({
