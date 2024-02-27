@@ -150,8 +150,6 @@ export default {
 			$.magnificPopup.close();
 		},
 		initOfficeLocator() {
-			console.log($('#woo-bg--econt-office-locator').length);
-
 			$('#woo-bg--econt-office-locator').magnificPopup({
 				type:'iframe',
 				midClick: true,
