@@ -108,7 +108,11 @@ class Cities {
 	}
 
 	public function get_filtered_cities( $city, $state, $country_id ) {
-		$city = mb_strtolower( $city );
+        if ( $country_id === '100' ) {
+            $city = mb_strtolower(Transliteration::latin2cyrillic($city));
+        } else {
+            $city = mb_strtolower( $city );
+        }
 		$cities = $this->get_cities_by_region( $state, $country_id );
 		$cities_only_names = [];
 		$cities_search_names = [];
