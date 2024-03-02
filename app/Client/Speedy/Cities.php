@@ -18,7 +18,7 @@ class Cities {
 		$this->container = $container;
 	}
 
-	protected function load_cities( $region, $country_id ) {
+	protected function load_cities( $region, $country_id = '100' ) {
 		if ( ! is_dir( $this->container[ Client::SPEEDY ]::CACHE_FOLDER ) ) {
 			wp_mkdir_p( $this->container[ Client::SPEEDY ]::CACHE_FOLDER );
 		}
@@ -68,7 +68,7 @@ class Cities {
 	}
 
 	//Getters
-	public function get_cities( $region, $country_id ) {
+	public function get_cities( $region, $country_id = '100' ) {
 		if ( empty( $this->cities[ $region ] ) ) {
 			$this->load_cities( $region, $country_id );
 		}
@@ -76,13 +76,13 @@ class Cities {
 		return $this->cities[ $region ];
 	}
 
-	public function get_formatted_cities( $country_code ) {
+	public function get_formatted_cities( $country_code = 'BG' ) {
 		$formatted = [];
 		$regions = $this->get_regions();
 		$regions_bg_names = woo_bg_return_bg_states();
 
 		foreach ( $regions as $region_key => $region ) {
-			$cities = $this->get_cities( $region, $country_code );
+			$cities = $this->get_cities( $region );
 
 			if ( !empty( $cities ) ) {
 				foreach ( $cities as $city ) {
@@ -101,13 +101,13 @@ class Cities {
 		return $formatted;
 	}
 
-	public function get_cities_by_region( $region_code, $country_id ) {
+	public function get_cities_by_region( $region_code, $country_id = '100' ) {
 		$region = self::get_regions()[ $region_code ];
 
 		return array_values( $this->get_cities( $region, $country_id ) );
 	}
 
-	public function get_filtered_cities( $city, $state, $country_id ) {
+	public function get_filtered_cities( $city, $state, $country_id = '100' ) {
         if ( $country_id === '100' ) {
             $city = mb_strtolower(Transliteration::latin2cyrillic($city));
         } else {

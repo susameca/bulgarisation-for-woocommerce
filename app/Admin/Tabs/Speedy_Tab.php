@@ -107,7 +107,7 @@ class Speedy_Tab extends Base_Tab {
 
 			if ( !empty( $all_profiles ) ) {
 				$send_from = ( woo_bg_get_option( 'speedy', 'send_from' ) ) ? woo_bg_get_option( 'speedy', 'send_from' ) : 'office';
-				$cities = $this->container[ Client::SPEEDY_CITIES ]->get_formatted_cities( '100');
+				$cities = $this->container[ Client::SPEEDY_CITIES ]->get_formatted_cities();
 				
 
 				$fields[ 'speedy_send_from' ] = [];
@@ -115,7 +115,7 @@ class Speedy_Tab extends Base_Tab {
 				switch ( $send_from ) {
 					case 'office':
 						if ( woo_bg_get_option( 'speedy_send_from', 'city' ) ) {
-							$offices = $this->container[ Client::SPEEDY_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'speedy_send_from', 'city' ), '100' );
+							$offices = $this->container[ Client::SPEEDY_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'speedy_send_from', 'city' ) );
 						}
 						
 						$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( $cities, 'city', __( 'City', 'woo-bg' ) );

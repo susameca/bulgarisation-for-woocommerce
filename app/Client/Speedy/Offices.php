@@ -15,7 +15,7 @@ class Offices {
 		$this->container = $container;
 	}
 
-	protected function load_offices( $city_id, $country_id ) {
+	protected function load_offices( $city_id, $country_id = '100' ) {
 		if ( ! is_dir( $this->container[ Client::SPEEDY ]::CACHE_FOLDER ) ) {
 			wp_mkdir_p( $this->container[ Client::SPEEDY ]::CACHE_FOLDER );
 		}
@@ -48,7 +48,7 @@ class Offices {
 	}
 
 	//Getters
-	public function get_offices( $city_id, $country_id ) {
+	public function get_offices( $city_id, $country_id = '100' ) {
 		if ( empty( $this->offices[ $city_id ] ) ) {
 			$this->load_offices( $city_id, $country_id );
 		}
@@ -61,7 +61,7 @@ class Offices {
 		$this->offices[ $city_id ] = $offices;
 	}
 
-	public function get_formatted_offices( $city, $country_id ) {
+	public function get_formatted_offices( $city, $country_id = '100' ) {
 		$offices = $this->get_offices( str_replace( 'cityID-', '', $city ), $country_id );
 		$shops = [];
 		$aps = [];
