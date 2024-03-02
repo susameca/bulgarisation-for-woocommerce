@@ -164,7 +164,7 @@ class Method extends \WC_Shipping_Method {
 		//$countries = $this->container[ Client::SPEEDY_COUNTRIES ]->get_countries();
 		//Ne raboti dobre s GR i RO
 		//$countries = array( 'BG', 'GR', 'RO' );
-		$countries = array( 'BG' );
+		$countries = array( 'BG', 'RO', 'GR' );
 
 		if ( in_array( $package['destination']['country'], $countries ) ) {
 			return true;
@@ -269,7 +269,8 @@ class Method extends \WC_Shipping_Method {
 	private function generate_recipient_address() {
 		$raw_city = sanitize_text_field( $this->cookie_data['city'] );
 		$raw_state = sanitize_text_field( $this->cookie_data['state'] );
-		$cities_data = $this->container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state );
+        $country_id = $this->container[ Client::SPEEDY_COUNTRIES ]->get_country_id( sanitize_text_field( $this->cookie_data['country'] ) );
+		$cities_data = $this->container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state, $country_id );
 		
 		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) || !isset( $cities_data['cities'][ $cities_data['city_key'] ] ) ) {
 			return( [] );

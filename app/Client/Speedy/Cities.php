@@ -18,7 +18,7 @@ class Cities {
 		$this->container = $container;
 	}
 
-	protected function load_cities( $region, $country_id = '100' ) {
+	protected function load_cities( $region, $country_id ) {
 		if ( ! is_dir( $this->container[ Client::SPEEDY ]::CACHE_FOLDER ) ) {
 			wp_mkdir_p( $this->container[ Client::SPEEDY ]::CACHE_FOLDER );
 		}
@@ -68,7 +68,7 @@ class Cities {
 	}
 
 	//Getters
-	public function get_cities( $region, $country_id = '100' ) {
+	public function get_cities( $region, $country_id ) {
 		if ( empty( $this->cities[ $region ] ) ) {
 			$this->load_cities( $region, $country_id );
 		}
@@ -76,13 +76,13 @@ class Cities {
 		return $this->cities[ $region ];
 	}
 
-	public function get_formatted_cities( $country_code = 'BG' ) {
+	public function get_formatted_cities( $country_code ) {
 		$formatted = [];
 		$regions = $this->get_regions();
 		$regions_bg_names = woo_bg_return_bg_states();
 
 		foreach ( $regions as $region_key => $region ) {
-			$cities = $this->get_cities( $region );
+			$cities = $this->get_cities( $region, $country_code );
 
 			if ( !empty( $cities ) ) {
 				foreach ( $cities as $city ) {
@@ -101,15 +101,15 @@ class Cities {
 		return $formatted;
 	}
 
-	public function get_cities_by_region( $region_code ) {
+	public function get_cities_by_region( $region_code, $country_id ) {
 		$region = self::get_regions()[ $region_code ];
 
-		return array_values( $this->get_cities( $region ) );
+		return array_values( $this->get_cities( $region, $country_id ) );
 	}
 
-	public function get_filtered_cities( $city, $state ) {
-		$city = mb_strtolower( Transliteration::latin2cyrillic( $city ) );
-		$cities = $this->get_cities_by_region( $state );
+	public function get_filtered_cities( $city, $state, $country_id ) {
+		$city = mb_strtolower( $city );
+		$cities = $this->get_cities_by_region( $state, $country_id );
 		$cities_only_names = [];
 		$cities_search_names = [];
 		$cities_only_names_dropdowns = [];
@@ -165,6 +165,28 @@ class Cities {
 			'BG-26' => 'HASKOVO',
 			'BG-27' => 'SHUMEN',
 			'BG-28' => 'YAMBOL',
+			'AB' => 'Alba',
+			'BC' => 'Bacău',
+			'BT' => 'Botoșani',
+			'B'  => 'BUCURESTI',
+			'CS' => 'Caraș-Severin',
+			'CV' => 'Covasna',
+			'GL' => 'Galați',
+			'HR' => 'Harghita',
+			'IS' => 'Iași',
+			'MH' => 'Mehedinți',
+			'OT' => 'Olt',
+			'SM' => 'Mare',
+			'TR' => 'Teleorman',
+			'VL' => 'Vâlcea',
+		);
+	}
+
+	public function get_country_id() {
+		return array(
+			'BG' => '100',
+			'RO' => '647',
+			'GR' => '300',
 		);
 	}
 
