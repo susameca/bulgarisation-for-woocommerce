@@ -164,7 +164,7 @@ class Method extends \WC_Shipping_Method {
 		//$countries = $this->container[ Client::SPEEDY_COUNTRIES ]->get_countries();
 		//Ne raboti dobre s GR i RO
 		//$countries = array( 'BG', 'GR', 'RO' );
-		$countries = array( 'BG', 'RO', 'GR' );
+		$countries = array( 'BG', 'RO' );
 
 		if ( in_array( $package['destination']['country'], $countries ) ) {
 			return true;
