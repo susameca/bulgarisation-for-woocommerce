@@ -51,7 +51,7 @@ class Office {
 		$state = $states[ $raw_state ];
 
         $country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( sanitize_text_field( $_POST[ 'country' ] ) );
-        $cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state, $country_id );
+		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state, $country_id );
 
 		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) || !$raw_city ) {
 			$args[ 'status' ] = 'invalid-city';
