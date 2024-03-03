@@ -417,7 +417,7 @@ class Method extends \WC_Shipping_Method {
 
 				$services['additionalServices']['obpd'] = array(
 					'option' => $test, 
-					'returnShipmentServiceId' => 505, 
+					'returnShipmentServiceId' => $service_id,
 					'returnShipmentPayer' => 'SENDER' 
 				);
 			}

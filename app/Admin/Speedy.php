@@ -403,6 +403,11 @@ class Speedy {
 	protected static function update_services( $label ) {
 		$cookie_data = $_REQUEST['cookie_data'];
 		$payment_by = $_REQUEST['paymentBy'];
+		$service_id = '505';
+		if ( $label['recipient']['addressLocation']['countryId'] === '642' ) {
+			$service_id = '202';
+		}
+
 		if ( isset( $label['service']['additionalServices']['declaredValue'] ) ) {
 			unset( $label['service']['additionalServices']['declaredValue'] );
 		}
@@ -443,7 +448,7 @@ class Speedy {
 		if ( $test ) {
 			$label['service']['additionalServices']['obpd'] = array(
 				'option' => $test, 
-				'returnShipmentServiceId' => 505, 
+				'returnShipmentServiceId' => $service_id,
 				'returnShipmentPayer' => 'SENDER' 
 			);
 		}
