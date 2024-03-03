@@ -12,7 +12,7 @@ $doc.on('update_checkout', function() {
 	} else {
 		$( '#woo-billing-to-company' ).val('0');
 	}
-})
+});
 
 $('#woo-billing-to-company').on( 'change', function() {
 	$doc.trigger("update_checkout");
