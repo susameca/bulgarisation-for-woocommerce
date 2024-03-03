@@ -219,9 +219,21 @@ class Method extends \WC_Shipping_Method {
 			$label['recipient'] = $this->generate_recipient_data();
 		}
 
+		$services_data = '';
+		$payment_by_data = '';
+		$country = '';
+		if ( $this->cookie_data && isset( $this->cookie_data['country'] ) ) {
+			$country = $this->cookie_data['country'];
+		}
+		if ( $country === 'RO' ) {
+			$services_data = $this->generate_services_data( '202' );
+			$payment_by_data = $this->generate_payment_by_data( 'SENDER' );
+		} else {
+			$services_data = $this->generate_services_data();
+			$payment_by_data = $this->generate_payment_by_data();
+		}
+
 		$content_data = $this->generate_content_data();
-		$services_data = $this->generate_services_data();
-		$payment_by_data = $this->generate_payment_by_data();
 
 		return array_merge( $label, $content_data, $services_data, $payment_by_data );
 	}
@@ -256,11 +268,12 @@ class Method extends \WC_Shipping_Method {
 			)
 		);
 
-		if ( $this->cookie_data['type'] === 'address' ) {
+		if ( $this->cookie_data[ 'type' ] === 'address' ) {
 			$recipient[ 'addressLocation' ] = $this->generate_recipient_address();
 			$recipient[ 'address' ] = $this->generate_recipient_address();
 		} else if ( $this->cookie_data['type'] === 'office' ) {
 			$recipient[ 'pickupOfficeId' ] = $this->generate_recipient_office_code();
+			$recipient[ 'country' ] = $this->cookie_data[ 'country' ];
 		}
 
 		return $recipient;

@@ -373,8 +373,16 @@ class Speedy {
 
 		$payment_by = $_REQUEST['paymentBy'];
 		$cookie_data = $_REQUEST['cookie_data'];
+		$recipient_country = '';
+		$bulgarian_id = 'BG';
+		if ( isset( $label['recipient']['addressLocation']['countryId'] ) ){
+			$recipient_country = $label['recipient']['addressLocation']['countryId'];
+			$bulgarian_id = '100';
+		} else {
+			$country = $label['recipient']['country'];
+		}
 
-		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) && $label['service']['additionalServices']['cod']['amount'] && $label['recipient']['addressLocation']['countryId'] === '100' ) {
+		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) && $label['service']['additionalServices']['cod']['amount'] && $recipient_country === $bulgarian_id ) {
 			$payment[ 'declaredValuePayer' ] = 'RECIPIENT';
 			$payment[ 'packagePayer' ] = 'RECIPIENT';
 		} else {
@@ -404,7 +412,7 @@ class Speedy {
 		$cookie_data = $_REQUEST['cookie_data'];
 		$payment_by = $_REQUEST['paymentBy'];
 		$service_id = '505';
-		if ( $label['recipient']['addressLocation']['countryId'] === '642' ) {
+		if ( $label['recipient']['country'] === 'RO' || $label['recipient']['addressLocation']['countryId'] === '642') {
 			$service_id = '202';
 		}
 
