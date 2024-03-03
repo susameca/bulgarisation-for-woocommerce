@@ -277,11 +277,12 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		$address = array(
+			'countryId' => $country_id,
 			'siteId' => $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ],
 		);
 
 		if ( !empty( $this->cookie_data['selectedAddress']['type'] ) && $this->cookie_data['selectedAddress']['type'] === 'streets' ) {
-			$address["streetId"] = str_replace('street-', '', $this->cookie_data['selectedAddress']['orig_key'] ); 
+			$address["streetId"] = str_replace('street-', '', $this->cookie_data['selectedAddress']['orig_key'] );
 			$parts = explode( ',', $this->cookie_data['streetNumber'] );
 			$address["streetNo"] = array_shift( $parts );
 
@@ -359,11 +360,11 @@ class Method extends \WC_Shipping_Method {
 		);
 	}
 
-	private function generate_services_data() {
+	private function generate_services_data( $service_id = '505' ) {
 		$services = array(
 			'autoAdjustPickupDate' => true, 
-			'serviceId' => 505,
-			'serviceIds' => array( 505 ),
+			'serviceId' => $service_id,
+			'serviceIds' => array( $service_id ),
 			'additionalServices' => [],
 		);
 
@@ -391,10 +392,18 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		if ( $this->cookie_data['payment'] === 'cod' ) {
-			$services['additionalServices']['cod'] = array(
-				'amount' => $this->get_package_total(), 
-				'processingType' => ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'ppp' ) ) ) ? 'POSTAL_MONEY_TRANSFER' : 'CASH',
-			);
+			$cod_data = '';
+			if ( $service_id === '505' ) {
+				$cod_data = array(
+					'amount' => $this->get_package_total(),
+					'processingType' => ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'ppp' ) ) ) ? 'POSTAL_MONEY_TRANSFER' : 'CASH',
+				);
+			} else {
+				$cod_data = array(
+					'amount' => $this->get_package_total()
+				);
+			}
+			$services['additionalServices']['cod'] = $cod_data;
 
 			if ( 
 				$this->test !== 'no' && 
@@ -424,11 +433,11 @@ class Method extends \WC_Shipping_Method {
 		);
 	}
 	
-	private function generate_payment_by_data() {
+	private function generate_payment_by_data( $shipping_costs_payer = 'RECIPIENT' ) {
 		$payment = array(
-			"courierServicePayer" => "RECIPIENT",
-			"declaredValuePayer" => "RECIPIENT",
-			"packagePayer" => "RECIPIENT",
+			"courierServicePayer" => $shipping_costs_payer,
+			"declaredValuePayer" => $shipping_costs_payer,
+			"packagePayer" => $shipping_costs_payer,
 		);
 
 		if ( isset( $this->cookie_data['payment'] ) && $this->cookie_data['payment'] !== 'cod' ) {
