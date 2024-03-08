@@ -317,8 +317,12 @@ function woo_bg_has_free_shipping_coupon_in_cart() {
 }
 
 function woo_bg_format_phone( $phone ) {
-	if ( substr( $phone, 1 ) !== '+' ) {
-		$phone = str_pad( $phone, 10, '0', STR_PAD_LEFT );
+	if ( substr( $phone, 0, 1 ) === '+' ) {
+		$phone = str_pad( substr( $phone, 1 ), 10, '0', STR_PAD_LEFT );
+	}
+
+	if ( substr( $phone, 0, 3 ) === '359' ) {
+		$phone = str_pad( substr( $phone, 3 ), 10, '0', STR_PAD_LEFT );
 	}
 
 	return $phone;
