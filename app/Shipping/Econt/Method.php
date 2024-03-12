@@ -62,6 +62,8 @@ class Method extends \WC_Shipping_Method {
 		$this->cookie_data = self::get_cookie_data();
 		$this->package = $package;
 
+		do_action( 'woo_bg/econt/rate/before_calculate', $this );
+
 		$rate = array(
 			'label' => $this->title,
 			'cost' => 0,

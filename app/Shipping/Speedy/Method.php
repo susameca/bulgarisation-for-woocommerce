@@ -59,6 +59,9 @@ class Method extends \WC_Shipping_Method {
 	public function calculate_shipping( $package = Array() ) {
 		$this->cookie_data = self::get_cookie_data();
 		$this->package = $package;
+
+		do_action( 'woo_bg/speedy/rate/before_calculate', $this );
+
 		if ( is_array( $this->cookie_data ) ) {
 			$this->cookie_data['fixed_price'] = $this->fixed_price;
 		}
