@@ -373,10 +373,21 @@ class Speedy {
 
 		$payment_by = $_REQUEST['paymentBy'];
 		$cookie_data = $_REQUEST['cookie_data'];
+		$recipient_country = '';
+		$bulgarian_id = 'BG';
+		if ( isset( $label['recipient']['addressLocation']['countryId'] ) ){
+			$recipient_country = $label['recipient']['addressLocation']['countryId'];
+			$bulgarian_id = '100';
+		} else {
+			$country = $label['recipient']['country'];
+		}
 
-		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) && $label['service']['additionalServices']['cod']['amount'] ) {
+		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) && $label['service']['additionalServices']['cod']['amount'] && $recipient_country === $bulgarian_id ) {
 			$payment[ 'declaredValuePayer' ] = 'RECIPIENT';
 			$payment[ 'packagePayer' ] = 'RECIPIENT';
+		} else {
+			$payment[ 'declaredValuePayer' ] = 'SENDER';
+			$payment[ 'packagePayer' ] = 'SENDER';
 		}
 
 		if ( $payment_by['id'] === 'fixed'  ) {
@@ -400,6 +411,11 @@ class Speedy {
 	protected static function update_services( $label ) {
 		$cookie_data = $_REQUEST['cookie_data'];
 		$payment_by = $_REQUEST['paymentBy'];
+		$service_id = '505';
+		if ( $label['recipient']['country'] === 'RO' || $label['recipient']['addressLocation']['countryId'] === '642') {
+			$service_id = '202';
+		}
+
 		if ( isset( $label['service']['additionalServices']['declaredValue'] ) ) {
 			unset( $label['service']['additionalServices']['declaredValue'] );
 		}
@@ -440,7 +456,7 @@ class Speedy {
 		if ( $test ) {
 			$label['service']['additionalServices']['obpd'] = array(
 				'option' => $test, 
-				'returnShipmentServiceId' => 505, 
+				'returnShipmentServiceId' => $service_id,
 				'returnShipmentPayer' => 'SENDER' 
 			);
 		}
@@ -507,7 +523,7 @@ class Speedy {
 		if ( $payment_by = $_REQUEST['paymentBy'] ) {
 			$cookie_data = $_REQUEST['cookie_data'];
 
-			if ( $payment_by['id'] == 'RECIPIENT' ) {
+			if ( $payment_by['id'] == 'RECIPIENT' || $payment_by['id'] == 'SENDER' ) {
 				$price = ( wc_tax_enabled() ) ? $response['price']['amount'] : $response['price']['total'];
 			} else if ( $payment_by['id'] == 'fixed' && $cookie_data['fixed_price'] ) {
 				$price = woo_bg_tax_based_price( $cookie_data['fixed_price'] );

@@ -101,15 +101,19 @@ class Cities {
 		return $formatted;
 	}
 
-	public function get_cities_by_region( $region_code ) {
+	public function get_cities_by_region( $region_code, $country_id = '100' ) {
 		$region = self::get_regions()[ $region_code ];
 
-		return array_values( $this->get_cities( $region ) );
+		return array_values( $this->get_cities( $region, $country_id ) );
 	}
 
-	public function get_filtered_cities( $city, $state ) {
-		$city = mb_strtolower( Transliteration::latin2cyrillic( $city ) );
-		$cities = $this->get_cities_by_region( $state );
+	public function get_filtered_cities( $city, $state, $country_id = '100' ) {
+        if ( $country_id === '100' ) {
+            $city = mb_strtolower(Transliteration::latin2cyrillic($city));
+        } else {
+            $city = mb_strtolower( $city );
+        }
+		$cities = $this->get_cities_by_region( $state, $country_id );
 		$cities_only_names = [];
 		$cities_search_names = [];
 		$cities_only_names_dropdowns = [];
@@ -165,7 +169,49 @@ class Cities {
 			'BG-26' => 'HASKOVO',
 			'BG-27' => 'SHUMEN',
 			'BG-28' => 'YAMBOL',
-		);
+			'AB' => 'ALBA',
+			'BC' => 'BACAU',
+			'BT' => 'BOTOSANI',
+			'B'  => 'BUCURESTI',
+			'CS' => 'CARAS-SEVERIN',
+			'CV' => 'COVASNA',
+			'GL' => 'GALATI',
+			'HR' => 'HARGHITA',
+			'IS' => 'IASI',
+			'MH' => 'MEHEDINTI',
+			'OT' => 'OLT',
+			'SM' => 'MARE',
+			'TR' => 'TELEORMAN',
+			'VL' => 'VALCEA',
+            'AR' => 'ARAD',
+            'BH' => 'BIHOR',
+            'BR' => 'BRAILA',
+            'BZ' => 'BUZAU',
+            'CJ' => 'CLUJ',
+            'DB' => 'DAMBOVITA',
+            'GR' => 'GIURGIU',
+            'HD' => 'HUNEDOARA',
+            'IF' => 'ILFOV',
+            'MS' => 'MURES',
+            'PH' => 'PRAHOVA',
+            'SB' => 'SIBIU',
+            'TM' => 'TIMIS',
+            'VS' => 'VASLUI',
+            'AG' => 'ARGES',
+            'BN' => 'BISTRITA-NASAUD',
+            'BV' => 'BRASOV',
+            'CL' => 'CALARASI',
+            'CT' => 'CONSTANTA',
+            'DJ' => 'DOLJ',
+            'GJ' => 'GORJ',
+            'IL' => 'IALOMITA',
+            'MM' => 'MARAMURES',
+            'NT' => 'NEAMT',
+            'SJ' => 'SALAJ',
+            'SV' => 'SUCEAVA',
+            'TL' => 'TULCEA',
+            'VN' => 'VRANCEA',
+        );
 	}
 
 	//Setters

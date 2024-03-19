@@ -50,10 +50,16 @@ class Address {
 	public static function search_address() {
 		self::$container = woo_bg()->container();
 		$args = [];
-		$query = Transliteration::latin2cyrillic( sanitize_text_field( $_POST['query'] ) );
+        $country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( sanitize_text_field( $_POST['country'] ) );
+        $query = '';
+        if ( $country_id === '100' ) {
+            $query = Transliteration::latin2cyrillic( sanitize_text_field( $_POST['query'] ) );
+        } else {
+            $query = sanitize_text_field( $_POST['query'] );
+        }
 		$raw_city = sanitize_text_field( $_POST['city'] );
 		$raw_state = sanitize_text_field( $_POST['state'] );
-		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state );
+		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state, $country_id );
 
 		if ( in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
 			$city_id = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
@@ -77,7 +83,8 @@ class Address {
 		$args = [];
 		$raw_city = sanitize_text_field( $_POST['city'] );
 		$raw_state = sanitize_text_field( $_POST['state'] );
-		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state );
+		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( sanitize_text_field( $_POST['country'] ) );
+		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state, $country_id );
 
 		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
 			$args[ 'cities' ] = woo_bg_return_array_for_select( $cities_data['cities_only_names_dropdowns'], 1, array( 'type'=>'city' ) );
