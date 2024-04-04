@@ -6,10 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 class Method extends \WC_Shipping_Method {
 	const METHOD_ID = "woo_bg_cvc";
-	private $container = '';
-	private $cookie_data = '';
-	private $package = '';
-	private $free_shipping = false;
+	public $container, $cookie_data, $package, $delivery_type, $free_shipping_over, $fixed_price, $test, $is_sat, $sms, $tax_status, $free_shipping = false;
 
 	public function __construct( $instance_id = 0 ) {
 		$this->container          = woo_bg()->container();
