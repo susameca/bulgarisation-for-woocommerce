@@ -8,7 +8,7 @@ class Profile {
     const PROFILE_ENDPOINT = 'client/contract';
     const CLIENT_ENDPOINT = 'client/';
 
-    private $is_valid_profile, $profile_data;
+    private $is_valid_profile, $profile_data, $container, $clients;
 
 	public function __construct( $container ) {
 		$this->container = $container;

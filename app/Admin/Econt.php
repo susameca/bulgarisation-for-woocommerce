@@ -131,6 +131,7 @@ class Econt {
 			'details' => __( 'Details:', 'woo-bg' ),
 			'reviewAndTest' => __( 'Review and test', 'woo-bg' ),
 			'declaredValue' => __( 'Declared value', 'woo-bg' ),
+			'description' => __( 'Description', 'woo-bg' ),
 		);
 	}
 
@@ -241,7 +242,6 @@ class Econt {
 		$label = self::update_payment_by( $label, $order_id );
 		$label = self::update_test_options( $label );
 		$label = self::update_shipment_type( $label );
-		$label = self::update_shipment_description( $label, $order_id );
 		$label = self::update_phone_and_names( $label );
 		$label = self::update_os_value( $label );
 

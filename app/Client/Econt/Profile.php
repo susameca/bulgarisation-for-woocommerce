@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit;
 class Profile {
     const PROFILE_ENDPOINT = 'Profile/ProfileService.getClientProfiles.json';
 
-    private $is_valid_profile, $profile_data;
+    private $is_valid_profile, $profile_data, $container;
 
 	public function __construct( $container ) {
 		$this->container = $container;

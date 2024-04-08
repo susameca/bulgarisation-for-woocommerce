@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-30 20:38+0000\n"
+"POT-Creation-Date: 2024-04-08 20:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -34,8 +34,8 @@ msgid_plural "%s orders documents were regenerated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/Shipping/CVC/Method.php:108 app/Shipping/Econt/Method.php:105
-#: app/Shipping/Speedy/Method.php:103
+#: app/Shipping/CVC/Method.php:105 app/Shipping/Econt/Method.php:102
+#: app/Shipping/Speedy/Method.php:100
 #, php-format
 msgid "%s: Free shipping"
 msgstr ""
@@ -58,8 +58,8 @@ msgstr ""
 #: app/Admin/CVC.php:120 app/Admin/Econt.php:119 app/Admin/Speedy.php:121
 #: app/Admin/Tabs/CVC_Tab.php:95 app/Admin/Tabs/Econt_Tab.php:122
 #: app/Admin/Tabs/Speedy_Tab.php:96 app/Front_End/Checkout/Company.php:69
-#: app/Shipping/CVC/Method.php:142 app/Shipping/Econt/Method.php:133
-#: app/Shipping/Speedy/Method.php:137
+#: app/Shipping/CVC/Method.php:139 app/Shipping/Econt/Method.php:130
+#: app/Shipping/Speedy/Method.php:134
 msgid "Address"
 msgstr ""
 
@@ -122,7 +122,7 @@ msgstr ""
 msgid "Bulgarisation for WooCommerce"
 msgstr ""
 
-#: bulgarisation-for-woocommerce.php:46
+#: bulgarisation-for-woocommerce.php:47
 msgid "Bulgarisation for WooCommerce - Please enable WooCommerce first."
 msgstr ""
 
@@ -147,7 +147,7 @@ msgstr ""
 msgid "By Phone ( %s )"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:228 app/Shipping/Speedy/Method.php:197
+#: app/Shipping/CVC/Method.php:225 app/Shipping/Speedy/Method.php:194
 msgid "Calculation failed. Please try again."
 msgstr ""
 
@@ -155,7 +155,7 @@ msgstr ""
 msgid "Card"
 msgstr ""
 
-#: app/Admin/Econt.php:142
+#: app/Admin/Econt.php:143
 msgid "Cargo"
 msgstr ""
 
@@ -256,7 +256,7 @@ msgstr ""
 msgid "Credit Notice - Original"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:461
+#: app/Shipping/CVC/Method.php:458
 #, php-format
 msgid "CVC - %s"
 msgstr ""
@@ -305,8 +305,8 @@ msgstr ""
 msgid "Delivery is payed by"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:136 app/Shipping/Econt/Method.php:127
-#: app/Shipping/Speedy/Method.php:131
+#: app/Shipping/CVC/Method.php:133 app/Shipping/Econt/Method.php:124
+#: app/Shipping/Speedy/Method.php:128
 msgid "Delivery Type"
 msgstr ""
 
@@ -316,6 +316,10 @@ msgstr ""
 
 #: app/Admin/Tabs/Econt_Tab.php:66
 msgid "Demo"
+msgstr ""
+
+#: app/Admin/Econt.php:134
+msgid "Description"
 msgstr ""
 
 #: app/Admin/CVC.php:133 app/Admin/Econt.php:131 app/Admin/Speedy.php:133
@@ -334,11 +338,11 @@ msgstr ""
 msgid "Do you want a company invoice?"
 msgstr ""
 
-#: app/Admin/Econt.php:140
+#: app/Admin/Econt.php:141
 msgid "Document"
 msgstr ""
 
-#: app/Admin/Econt.php:143
+#: app/Admin/Econt.php:144
 msgid "Document-Pallet"
 msgstr ""
 
@@ -377,7 +381,7 @@ msgstr ""
 msgid "E-mail: %s"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:483
+#: app/Shipping/Econt/Method.php:480
 msgid "Econt - "
 msgstr ""
 
@@ -442,7 +446,7 @@ msgstr ""
 msgid "Enable VIES validation"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:19
+#: app/Shipping/CVC/Method.php:16
 msgid "Enables CVC delivery and automatically calculate shipping price."
 msgstr ""
 
@@ -450,7 +454,7 @@ msgstr ""
 msgid "Enables CVC Shipping methods."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:20
+#: app/Shipping/Econt/Method.php:17
 msgid "Enables econt delivery and automatically calculate shipping price."
 msgstr ""
 
@@ -458,7 +462,7 @@ msgstr ""
 msgid "Enables Econt Shipping methods."
 msgstr ""
 
-#: app/Shipping/Speedy/Method.php:19
+#: app/Shipping/Speedy/Method.php:16
 msgid "Enables Speedy delivery and automatically calculate shipping price."
 msgstr ""
 
@@ -466,13 +470,13 @@ msgstr ""
 msgid "Enables Speedy Shipping methods."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:166 app/Shipping/Speedy/Method.php:159
+#: app/Shipping/Econt/Method.php:163 app/Shipping/Speedy/Method.php:156
 msgid ""
 "Enter a fixed price that the users will pay. The remaining will be payed by "
 "you."
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:190
+#: app/Shipping/CVC/Method.php:187
 msgid ""
 "Enter a fixed price that will be payed by you, and will be included in the "
 "order."
@@ -581,8 +585,8 @@ msgid ""
 msgstr ""
 
 #: app/Admin/CVC.php:127 app/Admin/Econt.php:125 app/Admin/Speedy.php:127
-#: app/Shipping/CVC/Method.php:187 app/Shipping/Econt/Method.php:163
-#: app/Shipping/Speedy/Method.php:156
+#: app/Shipping/CVC/Method.php:184 app/Shipping/Econt/Method.php:160
+#: app/Shipping/Speedy/Method.php:153
 msgid "Fixed price"
 msgstr ""
 
@@ -619,13 +623,13 @@ msgstr ""
 msgid "Fragile"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:179 app/Shipping/Econt/Method.php:155
-#: app/Shipping/Speedy/Method.php:148
+#: app/Shipping/CVC/Method.php:176 app/Shipping/Econt/Method.php:152
+#: app/Shipping/Speedy/Method.php:145
 msgid "Free shipping over"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:182 app/Shipping/Econt/Method.php:158
-#: app/Shipping/Speedy/Method.php:151
+#: app/Shipping/CVC/Method.php:179 app/Shipping/Econt/Method.php:155
+#: app/Shipping/Speedy/Method.php:148
 msgid "Free shipping over total cart price."
 msgstr ""
 
@@ -771,8 +775,8 @@ msgstr ""
 msgid "Label data"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:548 app/Shipping/Econt/Method.php:591
-#: app/Shipping/Speedy/Method.php:578
+#: app/Shipping/CVC/Method.php:545 app/Shipping/Econt/Method.php:588
+#: app/Shipping/Speedy/Method.php:575
 #, php-format
 msgid "Label number: %s. %s"
 msgstr ""
@@ -842,9 +846,9 @@ msgstr ""
 msgid "Next Invoice Number"
 msgstr ""
 
-#: app/functions.php:64 app/functions.php:220 app/Shipping/CVC/Method.php:151
-#: app/Shipping/CVC/Method.php:162 app/Shipping/CVC/Method.php:173
-#: app/Shipping/Econt/Method.php:149
+#: app/functions.php:64 app/functions.php:220 app/Shipping/CVC/Method.php:148
+#: app/Shipping/CVC/Method.php:159 app/Shipping/CVC/Method.php:170
+#: app/Shipping/Econt/Method.php:146
 msgid "No"
 msgstr ""
 
@@ -903,8 +907,8 @@ msgstr ""
 #: app/Admin/Tabs/CVC_Tab.php:91 app/Admin/Tabs/CVC_Tab.php:113
 #: app/Admin/Tabs/Econt_Tab.php:118 app/Admin/Tabs/Econt_Tab.php:161
 #: app/Admin/Tabs/Speedy_Tab.php:92 app/Admin/Tabs/Speedy_Tab.php:129
-#: app/Shipping/CVC/Method.php:141 app/Shipping/Econt/Method.php:132
-#: app/Shipping/Speedy/Method.php:136
+#: app/Shipping/CVC/Method.php:138 app/Shipping/Econt/Method.php:129
+#: app/Shipping/Speedy/Method.php:133
 msgid "Office"
 msgstr ""
 
@@ -954,7 +958,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: app/Admin/Econt.php:139
+#: app/Admin/Econt.php:140
 msgid "Pack"
 msgstr ""
 
@@ -967,7 +971,7 @@ msgstr ""
 msgid "Page %s of %s"
 msgstr ""
 
-#: app/Admin/Econt.php:141
+#: app/Admin/Econt.php:142
 msgid "Pallet"
 msgstr ""
 
@@ -1024,12 +1028,12 @@ msgstr ""
 msgid "Place of transaction"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:493 app/Shipping/Speedy/Method.php:494
+#: app/Shipping/Econt/Method.php:490 app/Shipping/Speedy/Method.php:491
 msgid "Please choose a office."
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:463 app/Shipping/Econt/Method.php:486
-#: app/Shipping/Speedy/Method.php:487
+#: app/Shipping/CVC/Method.php:460 app/Shipping/Econt/Method.php:483
+#: app/Shipping/Speedy/Method.php:484
 msgid "Please choose delivery option!"
 msgstr ""
 
@@ -1037,7 +1041,7 @@ msgstr ""
 msgid "Please enter a city."
 msgstr ""
 
-#: bulgarisation-for-woocommerce.php:57
+#: bulgarisation-for-woocommerce.php:58
 msgid ""
 "Please run `composer install` in the plugin folder `bulgarisation-for-"
 "woocommerce`"
@@ -1136,13 +1140,13 @@ msgid "Return method"
 msgstr ""
 
 #: app/functions.php:222 app/Admin/CVC.php:134 app/Admin/Econt.php:132
-#: app/Admin/Speedy.php:134 app/Shipping/CVC/Method.php:146
-#: app/Shipping/CVC/Method.php:153 app/Shipping/Econt/Method.php:137
-#: app/Shipping/Speedy/Method.php:141
+#: app/Admin/Speedy.php:134 app/Shipping/CVC/Method.php:143
+#: app/Shipping/CVC/Method.php:150 app/Shipping/Econt/Method.php:134
+#: app/Shipping/Speedy/Method.php:138
 msgid "Review and test"
 msgstr ""
 
-#: app/functions.php:221 app/Shipping/CVC/Method.php:152
+#: app/functions.php:221 app/Shipping/CVC/Method.php:149
 msgid "Review only"
 msgstr ""
 
@@ -1154,11 +1158,11 @@ msgstr ""
 msgid "Sale Invoice - Original"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:157
+#: app/Shipping/CVC/Method.php:154
 msgid "Saturday Delivery"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:165
+#: app/Shipping/CVC/Method.php:162
 msgid "Saturday delivery/pickup."
 msgstr ""
 
@@ -1235,7 +1239,7 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:176 app/Shipping/Econt/Method.php:152
+#: app/Shipping/CVC/Method.php:173 app/Shipping/Econt/Method.php:149
 msgid "Send customer notification for delivery."
 msgstr ""
 
@@ -1287,7 +1291,7 @@ msgstr ""
 msgid "Shipping: %s"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:168 app/Shipping/Econt/Method.php:144
+#: app/Shipping/CVC/Method.php:165 app/Shipping/Econt/Method.php:141
 msgid "SMS notification"
 msgstr ""
 
@@ -1298,7 +1302,7 @@ msgid ""
 "not found or the payment method was disabled. List of orders id's: %s"
 msgstr ""
 
-#: app/Shipping/Speedy/Method.php:485
+#: app/Shipping/Speedy/Method.php:482
 #, php-format
 msgid "Speedy - %s"
 msgstr ""
@@ -1391,8 +1395,8 @@ msgstr ""
 msgid "There was some error in one of the reports."
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:131 app/Shipping/Econt/Method.php:122
-#: app/Shipping/Speedy/Method.php:126
+#: app/Shipping/CVC/Method.php:128 app/Shipping/Econt/Method.php:119
+#: app/Shipping/Speedy/Method.php:123
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
@@ -1429,8 +1433,8 @@ msgstr ""
 msgid "Time:"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:129 app/Shipping/Econt/Method.php:120
-#: app/Shipping/Speedy/Method.php:124
+#: app/Shipping/CVC/Method.php:126 app/Shipping/Econt/Method.php:117
+#: app/Shipping/Speedy/Method.php:121
 msgid "Title"
 msgstr ""
 
@@ -1464,8 +1468,8 @@ msgstr ""
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:552 app/Shipping/Econt/Method.php:595
-#: app/Shipping/Speedy/Method.php:582
+#: app/Shipping/CVC/Method.php:549 app/Shipping/Econt/Method.php:592
+#: app/Shipping/Speedy/Method.php:579
 msgid "Track your order."
 msgstr ""
 
@@ -1579,28 +1583,28 @@ msgstr ""
 msgid "When to generate invoices?"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:18
+#: app/Shipping/CVC/Method.php:15
 msgid "Woo BG - CVC"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:19
+#: app/Shipping/Econt/Method.php:16
 msgid "Woo BG - Econt"
 msgstr ""
 
-#: app/Shipping/Speedy/Method.php:18
+#: app/Shipping/Speedy/Method.php:15
 msgid "Woo BG - Speedy"
 msgstr ""
 
 #. %1$s is minimum php version and %2$s is minimum WP version
-#: bulgarisation-for-woocommerce.php:37
+#: bulgarisation-for-woocommerce.php:38
 #, php-format
 msgid ""
 "WooCommerce - Bulgarisation requires PHP version %1$s+ and WP version %2$s+, "
 "plugin is currently NOT RUNNING."
 msgstr ""
 
-#: app/functions.php:68 app/Shipping/CVC/Method.php:163
-#: app/Shipping/CVC/Method.php:174 app/Shipping/Econt/Method.php:150
+#: app/functions.php:68 app/Shipping/CVC/Method.php:160
+#: app/Shipping/CVC/Method.php:171 app/Shipping/Econt/Method.php:147
 msgid "Yes"
 msgstr ""
 

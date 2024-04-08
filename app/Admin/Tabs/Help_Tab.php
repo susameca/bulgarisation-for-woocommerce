@@ -19,7 +19,7 @@ class Help_Tab extends Base_Tab {
 		<h3><?php esc_html_e( 'Recommended settings', 'woo-bg' ) ?></h3>
 
 		<?php 
-		echo wp_kses_post( wpautop( __( 'If your shop is in group B or G, we suggest you to enable the default WooCommerce settings at "Settings >> General >> Enable taxes". After that go to "Settings >> Tax >> Yes, I will enter prices inclusive of tax". Also, go to "Standard rates" submenu and add your rate ( 20% or 9% ).', 'woo-bg' ) ) . wpautop( _e('You can find more help in the official Facebook Group for the plugin: <a target="_blank" href="https://www.facebook.com/groups/bulgarisationforwoocommerce/">Bulgarisation For WooCommerce</a>.', 'woo-bg' ) ) );
+		echo wp_kses_post( wpautop( __( 'If your shop is in group B or G, we suggest you to enable the default WooCommerce settings at "Settings >> General >> Enable taxes". After that go to "Settings >> Tax >> Yes, I will enter prices inclusive of tax". Also, go to "Standard rates" submenu and add your rate ( 20% or 9% ).', 'woo-bg' ) ) . wpautop( __('You can find more help in the official Facebook Group for the plugin: <a target="_blank" href="https://www.facebook.com/groups/bulgarisationforwoocommerce/">Bulgarisation For WooCommerce</a>.', 'woo-bg' ) ) );
 	}
 
 	public function admin_localize() {

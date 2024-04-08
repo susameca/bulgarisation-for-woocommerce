@@ -109,6 +109,14 @@
 							<input v-model="labelData.total_kgs" type="number">
 						</p>
 
+						<p  class="form-field form-field-wide">
+							<label>
+								{{i18n.description}}:
+							</label>
+
+							<input v-model="labelData.description" type="text">
+						</p>
+
 						<p class="form-field form-field-wide">
 							<label>
 								{{i18n.deliveryPayedBy}}:

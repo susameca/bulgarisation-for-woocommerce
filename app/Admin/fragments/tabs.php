@@ -25,5 +25,9 @@ $current_tab_object = $tabs[ $current_tab_key ];
 		?>
 	</nav>
 
-	<?php echo wp_kses_post( $current_tab_object->render_tab_html() ) ?>
+	<?php 
+	if ( $current_tab_object->render_tab_html() ) {
+		echo wp_kses_post( $current_tab_object->render_tab_html() );
+	}
+	?>
 </div>

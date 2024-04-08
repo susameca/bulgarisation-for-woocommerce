@@ -134,6 +134,7 @@ class Speedy {
 			'reviewAndTest' => __( 'Review and test', 'woo-bg' ),
 			'declaredValue' => __( 'Declared value', 'woo-bg' ),
 			'mysticQuarter' => __( 'Street or quarter', 'woo-bg' ),
+			'description' => __( 'Description', 'woo-bg' ),
 		);
 	}
 
@@ -227,7 +228,6 @@ class Speedy {
 		$label = self::update_recipient_data( $label );
 		$label = self::update_payment_by( $label, $order );
 		$label = self::update_services( $label );
-		$label = self::update_shipment_description( $label, $order );
 
 		$data = self::send_label_to_speedy( $label, $order );
 

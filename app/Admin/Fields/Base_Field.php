@@ -48,11 +48,11 @@ abstract class Base_Field {
 	}
 
 	public function set_help_text( $help_text ) {
-		return $this->help_text = wp_kses_post( $help_text );
+		return $this->help_text = ( $help_text ) ? wp_kses_post( $help_text ) : '';
 	}
 
 	public function set_desc( $desc ) {
-		return $this->desc = wp_kses_post( $desc );
+		return $this->desc = ( $desc ) ? wp_kses_post( $desc ) : '';
 	}
 
 	public function set_validation_rules( $validation_rules ) {

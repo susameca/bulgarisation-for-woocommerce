@@ -141,6 +141,14 @@
 
 						<p class="form-field form-field-wide">
 							<label>
+								{{i18n.description}}:
+							</label>
+
+							<input v-model="labelData.content.contents" type="text">
+						</p>
+
+						<p class="form-field form-field-wide">
+							<label>
 								{{i18n.deliveryPayedBy}}:
 							</label>
 

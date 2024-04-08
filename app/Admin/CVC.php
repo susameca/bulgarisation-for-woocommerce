@@ -133,6 +133,7 @@ class CVC {
 			'details' => __( 'Details:', 'woo-bg' ),
 			'reviewAndTest' => __( 'Review and test', 'woo-bg' ),
 			'declaredValue' => __( 'Declared value', 'woo-bg' ),
+			'description' => __( 'Description', 'woo-bg' ),
 		);
 	}
 
@@ -227,7 +228,6 @@ class CVC {
 		$label = self::update_receiver_address( $label );
 		$label = self::update_payment_by( $label, $order_id );
 		$label = self::update_test_options( $label );
-		$label = self::update_shipment_description( $label, $order_id );
 		$label = self::update_phone_and_names( $label );
 		$label = self::update_os_value_and_cod( $label );
 
