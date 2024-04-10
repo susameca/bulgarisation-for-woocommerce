@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.5
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.18
+Stable tag: 3.0.19
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,12 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.19 =
+Couriers: Optimizations
+Couriers: Add field for label description in admin panel
+Add new plugin headers
+Global optimizations
 
 = 3.0.18 =
 Speedy: Add description for credentials
