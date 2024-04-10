@@ -391,7 +391,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( $this->cookie_data['payment'] === 'cod' ) {
 			$services['additionalServices']['cod'] = array(
-				'amount' => $this->get_package_total(), 
+				'amount' => woo_bg_get_package_total(), 
 				'processingType' => ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'ppp' ) ) ) ? 'POSTAL_MONEY_TRANSFER' : 'CASH',
 			);
 
@@ -442,7 +442,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( 
 			woo_bg_has_free_shipping_coupon_in_cart() ||
-			( !empty( $this->free_shipping_over ) && $this->get_package_total() > $this->free_shipping_over )
+			( !empty( $this->free_shipping_over ) && woo_bg_get_package_total() > $this->free_shipping_over )
 		) {
 			$this->free_shipping = true;
 			
@@ -460,12 +460,6 @@ class Method extends \WC_Shipping_Method {
 		return array(
 			'payment' => $payment,
 		);
-	}
-
-	protected function get_package_total() {
-		$total = floatval( WC()->cart->get_cart_contents_total() ) + floatval( WC()->cart->get_cart_contents_tax() );
-
-		return number_format( $total, 2, '.', '' );
 	}
 
 	public static function validate_speedy_method( $fields, $errors ){

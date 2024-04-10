@@ -384,7 +384,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( $this->cookie_data['payment'] === 'cod' ) {
 			$cart['services']['cdType'] = 'get';
-			$cart['services']['cdAmount'] = $this->get_package_total();
+			$cart['services']['cdAmount'] = woo_bg_get_package_total();
 			$cart['services']['cdCurrency'] = get_woocommerce_currency();
 
 			$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
@@ -447,7 +447,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( 
 			woo_bg_has_free_shipping_coupon_in_cart() || 
-			( !empty( $this->free_shipping_over ) && $this->get_package_total() > $this->free_shipping_over )
+			( !empty( $this->free_shipping_over ) && woo_bg_get_package_total() > $this->free_shipping_over )
 		) {
 			$this->free_shipping = true;
 
@@ -458,12 +458,6 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		return $payment_by_data;
-	}
-
-	protected function get_package_total() {
-		$total = floatval( WC()->cart->get_cart_contents_total() ) + floatval( WC()->cart->get_cart_contents_tax() );
-
-		return number_format( $total, 2, '.', '' );
 	}
 
 	public static function validate_econt_method( $fields, $errors ){

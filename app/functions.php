@@ -346,3 +346,15 @@ function woo_bg_check_admin_label_actions() {
 		wp_die();
 	}
 }
+
+function woo_bg_get_package_total() {
+	$total = floatval( WC()->cart->get_cart_contents_total() ) + floatval( WC()->cart->get_cart_contents_tax() );
+
+	if ( apply_filters('woo_bg/shipping/package_total_includes_fees', true ) ) {
+		$total += floatval( WC()->cart->get_fee_total() ) + floatval( WC()->cart->get_fee_tax() );
+	}
+
+	$total = number_format( $total, 2, '.', '' );
+
+	return apply_filters( 'woo_bg/shipping/package_total', $total );
+}
