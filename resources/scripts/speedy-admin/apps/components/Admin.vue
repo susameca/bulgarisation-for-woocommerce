@@ -224,6 +224,33 @@
 					<div class="generated-label" v-if="shipmentStatus">
 						<h3>{{i18n.label}}: {{shipmentStatus.id}}</h3>
 
+						<div>
+							<span class="woo-bg--radio">
+					  			<input id="label_size_default" type="radio" name="label_size" value="A6" checked>
+					  			<label for="label_size_default">A6</label>
+							</span>
+
+							<span class="woo-bg--radio">
+					  			<input id="label_size_A4_4xA6" type="radio" name="label_size" value="A4_4xA6" >
+					  			<label for="label_size_A4_4xA6">A4_4xA6</label>
+							</span>
+
+							<span class="woo-bg--radio">
+					  			<input id="label_size_a4" type="radio" name="label_size" value="A4" >
+					  			<label for="label_size_a4">A4</label>
+							</span>
+
+							<span class="woo-bg--radio">
+					  			<input id="label_size_a4_same" type="radio" name="label_size" value="A4&awbsc=ON_SAME_PAGE" >
+					  			<label for="label_size_a4_same">{{i18n.a4WithCopy}}</label>
+							</span>
+
+							<span class="woo-bg--radio">
+					  			<input id="label_size_a4_single" type="radio" name="label_size" value="A4&awbsc=ON_SINGLE_PAGE" >
+					  			<label for="label_size_a4_single">{{i18n.a4OnSingle}}</label>
+							</span>
+						</div>
+
 						<iframe id="woo-bg--speedy-label-print" :src="iframeUrl"></iframe>
 					</div>
 				</div><!-- /.order_data_column order_data_column-/-half -->
@@ -292,7 +319,7 @@ export default {
 					label: wooBg_speedy.i18n.fixedPrice
 				}
 			],
-			size: '',
+			size: 'A6',
 			shipmentStatus : '',
 			labelData : wooBg_speedy.label,
 			document: $( document.body ),
@@ -321,7 +348,7 @@ export default {
 					parcels.push( parcel.id );
 				});
 
-				link = woocommerce_admin.ajax_url + '?cache-buster=' + Math.random()  + '&action=woo_bg_speedy_print_labels&parcels=' + parcels.join('|');
+				link = woocommerce_admin.ajax_url + '?cache-buster=' + Math.random()  + '&action=woo_bg_speedy_print_labels&parcels=' + parcels.join('|') + "&size=" + this.size;
 			}
 
 			return ( parcels.length ) ? link : '';

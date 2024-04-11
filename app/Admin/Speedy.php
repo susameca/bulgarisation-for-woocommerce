@@ -135,6 +135,8 @@ class Speedy {
 			'declaredValue' => __( 'Declared value', 'woo-bg' ),
 			'mysticQuarter' => __( 'Street or quarter', 'woo-bg' ),
 			'description' => __( 'Description', 'woo-bg' ),
+			'a4WithCopy' => __( 'A4 with copy on same page', 'woo-bg' ),
+			'a4OnSingle' => __( 'A4 with copy on single page', 'woo-bg' ),
 		);
 	}
 
@@ -555,7 +557,8 @@ class Speedy {
 
 	public static function print_labels_endpoint() {
 		$container = woo_bg()->container();
-		$labels = explode( '|', $_REQUEST['parcels'] );
+		$labels = explode( '|', sanitize_text_field( $_REQUEST['parcels']) );
+		$size = sanitize_text_field( $_REQUEST['size'] );
 		$parcels = array();
 
 		foreach ( $labels as $label ) {
@@ -567,9 +570,13 @@ class Speedy {
 		}
 
 		$request_body = array(
-			'paperSize' => 'A6',
+			'paperSize' => $size,
 			'parcels' => $parcels,
 		);
+
+		if ( !empty( $_REQUEST['awbsc'] ) ) {
+			$request_body['additionalWaybillSenderCopy'] = sanitize_text_field( $_REQUEST['awbsc'] );
+		}
 
 		$pdf_escaped = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::PRINT_LABELS_ENDPOINT, $request_body, 1 );
 

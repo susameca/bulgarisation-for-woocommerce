@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2024-04-08 20:30+0000\n"
+"PO-Revision-Date: 2024-04-11 18:25+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -42,6 +42,15 @@ msgstr "%s: Безплатна доставка"
 #: app/Admin/EU_Vat.php:104
 msgid "(self-declared)"
 msgstr "(самодеклариран)"
+
+# S
+#: app/Admin/Speedy.php:138
+msgid "A4 with copy on same page"
+msgstr "A4 с копие на същия лист"
+
+#: app/Admin/Speedy.php:139
+msgid "A4 with copy on single page"
+msgstr "A4 с копие на друг лист"
 
 #: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:95
 #: app/Admin/Tabs/Speedy_Tab.php:86
@@ -259,7 +268,7 @@ msgstr "Кредитно известие - Копие"
 msgid "Credit Notice - Original"
 msgstr "Кредитно известие - Оригинал"
 
-#: app/Shipping/CVC/Method.php:458
+#: app/Shipping/CVC/Method.php:452
 #, php-format
 msgid "CVC - %s"
 msgstr "CVC - %s"
@@ -321,7 +330,7 @@ msgstr "Доставка до"
 msgid "Demo"
 msgstr "Демо"
 
-#: app/Admin/Econt.php:134
+#: app/Admin/CVC.php:136 app/Admin/Econt.php:134 app/Admin/Speedy.php:137
 msgid "Description"
 msgstr "Описание"
 
@@ -384,7 +393,7 @@ msgstr "Имейл"
 msgid "E-mail: %s"
 msgstr "Имейл: %s"
 
-#: app/Shipping/Econt/Method.php:480
+#: app/Shipping/Econt/Method.php:474
 msgid "Econt - "
 msgstr "Еконт - "
 
@@ -812,8 +821,8 @@ msgstr "Товарителница"
 msgid "Label data"
 msgstr "Данни за товарителница"
 
-#: app/Shipping/CVC/Method.php:545 app/Shipping/Econt/Method.php:588
-#: app/Shipping/Speedy/Method.php:575
+#: app/Shipping/CVC/Method.php:539 app/Shipping/Econt/Method.php:582
+#: app/Shipping/Speedy/Method.php:569
 #, php-format
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
@@ -1069,12 +1078,12 @@ msgstr "Телефон: %s"
 msgid "Place of transaction"
 msgstr "Място на сделката"
 
-#: app/Shipping/Econt/Method.php:490 app/Shipping/Speedy/Method.php:491
+#: app/Shipping/Econt/Method.php:484 app/Shipping/Speedy/Method.php:485
 msgid "Please choose a office."
 msgstr "Моля изберете офис."
 
-#: app/Shipping/CVC/Method.php:460 app/Shipping/Econt/Method.php:483
-#: app/Shipping/Speedy/Method.php:484
+#: app/Shipping/CVC/Method.php:454 app/Shipping/Econt/Method.php:477
+#: app/Shipping/Speedy/Method.php:478
 msgid "Please choose delivery option!"
 msgstr "Моля изберете начин на доставка!"
 
@@ -1363,7 +1372,7 @@ msgstr ""
 "Някои от поръчките не бяха добавени, защото метода на плащане не беше "
 "намерен или е изключен. Списък с ид на поръчките: %s"
 
-#: app/Shipping/Speedy/Method.php:482
+#: app/Shipping/Speedy/Method.php:476
 #, php-format
 msgid "Speedy - %s"
 msgstr "Спиди - %s"
@@ -1546,8 +1555,8 @@ msgstr "Общата цена изписана с текст"
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
 
-#: app/Shipping/CVC/Method.php:549 app/Shipping/Econt/Method.php:592
-#: app/Shipping/Speedy/Method.php:579
+#: app/Shipping/CVC/Method.php:543 app/Shipping/Econt/Method.php:586
+#: app/Shipping/Speedy/Method.php:573
 msgid "Track your order."
 msgstr "Проследи пратката."
 
