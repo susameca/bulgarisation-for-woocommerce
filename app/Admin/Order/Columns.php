@@ -1,6 +1,8 @@
 <?php
 namespace Woo_BG\Admin\Order;
 
+use Woo_BG\Admin\Admin_Menus;
+
 defined( 'ABSPATH' ) || exit;
 
 class Columns {
@@ -20,6 +22,10 @@ class Columns {
 
 			if ( $key ==  'order_status' ) {
 				$reordered_columns[ 'order_docs' ] = __( 'Documents', 'woo-bg' );
+
+				if ( woo_bg_is_shipping_enabled() ) {
+					$reordered_columns[ 'order_label' ] = __( 'Label', 'woo-bg' );
+				}
 			}
 		}
 
@@ -48,6 +54,16 @@ class Columns {
 				}
 				
 				break;
+			case 'order_label' :
+				$order = wc_get_order( $post_id );
+				$data = woo_bg_get_order_label( $post_id );
+
+				if ( !empty( $data ) ) {
+					Admin_Menus::render_fragment( 'label-column', [ 
+						'data' => $data,
+						'order' => $order,
+					] );
+				}
 		}
 	}
 }

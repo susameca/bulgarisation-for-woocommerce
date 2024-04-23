@@ -286,7 +286,10 @@ function woo_bg_calculate_vat_from_price( $price, $rate = 20 ) {
 function woo_bg_maybe_remove_shipping( $order ) {
 	$remove_shipping = woo_bg_get_option( 'invoice', 'remove_shipping' );
 
-	if ( is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || is_a( $order, 'WC_Order_Refund' ) ) {
+	if ( 
+		is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || 
+		is_a( $order, 'WC_Order_Refund' ) 
+	) {
 		$order = wc_get_order( $order->get_parent_id() );
 	}
 
@@ -357,4 +360,93 @@ function woo_bg_get_package_total() {
 	$total = number_format( $total, 2, '.', '' );
 
 	return apply_filters( 'woo_bg/shipping/package_total', $total );
+}
+
+function woo_bg_is_shipping_enabled() {
+	$enabled = false;
+
+	if ( 
+		woo_bg_get_option( 'apis', 'enable_econt' ) === 'yes' || 
+		woo_bg_get_option( 'apis', 'enable_cvc' ) === 'yes' || 
+		woo_bg_get_option( 'apis', 'enable_speedy' ) === 'yes' 
+	) {
+		$enabled = true;
+	}
+
+	return $enabled;
+}
+
+function woo_bg_get_order_label( $order_id ) {
+	$order = wc_get_order( $order_id );
+	$data = [];
+	$label_data = [];
+	$method = '';
+
+	if ( !empty( $order->get_items( 'shipping' ) ) ) {
+		foreach ( $order->get_items( 'shipping' ) as $shipping ) {
+			$method = $shipping['method_id'];
+
+			if ( $shipping['method_id'] === 'woo_bg_speedy' ) {
+				if ( $label = $order->get_meta( 'woo_bg_speedy_label' ) ) {
+					$label_data = $label;
+				}
+
+				break;
+			} elseif ( $shipping['method_id'] === 'woo_bg_econt' ) {
+				if ( $label = $order->get_meta( 'woo_bg_econt_label' ) ) {
+					$label_data = $label;
+				}
+
+				break;
+			} elseif ( $shipping['method_id'] === 'woo_bg_cvc' ) {
+				if ( $label = $order->get_meta( 'woo_bg_cvc_label' ) ) {
+					$label_data = $label;
+				}
+
+				break;
+			}
+		}
+	}
+
+	if ( !empty( $label_data ) ) {
+		switch ( $method ) {
+			case 'woo_bg_speedy':
+				$shipment_status = $order->get_meta( 'woo_bg_speedy_shipment_status' );
+				
+				if ( $shipment_status && $label_data['id'] ) {
+					$data = [
+						'number' => $label_data['id'],
+						'link' => admin_url( 'admin-ajax.php' ) . '?cache-buster=' . rand() . '&action=woo_bg_speedy_print_labels&parcels=' . implode('|', wp_list_pluck( $shipment_status['parcels'], 'id' ) ) . "&size=A6",
+					];
+				}
+				break;
+			case 'woo_bg_econt':
+				$shipment_status = $order->get_meta( 'woo_bg_econt_shipment_status' );
+
+				if ( $shipment_status && !empty( $label_data['label']['shipmentNumber'] ) ) {
+					$data = [
+						'number' => $label_data['label']['shipmentNumber'],
+						'link' => $shipment_status['label']['pdfURL'] . '&label=10x15',
+					];
+				}
+				break;
+			case 'woo_bg_cvc':
+				$shipment_status = $order->get_meta( 'woo_bg_cvc_shipment_status' );
+
+				if ( $shipment_status && !empty( $shipment_status['pdf'] ) ) {
+					$data = [
+						'number' => $label_data['wb'],
+						'link' => $shipment_status['pdf'],
+					];
+				}
+				
+				break;
+		}
+	}
+
+	if ( $method ) {
+		$data['method'] = $method;
+	}
+
+	return $data;
 }

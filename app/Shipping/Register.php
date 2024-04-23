@@ -15,12 +15,9 @@ class Register {
 		self::maybe_register_speedy();
 		self::maybe_register_cvc();
 
-		if ( 
-			woo_bg_get_option( 'apis', 'enable_econt' ) === 'yes' || 
-			woo_bg_get_option( 'apis', 'enable_cvc' ) === 'yes' || 
-			woo_bg_get_option( 'apis', 'enable_speedy' ) === 'yes' 
-		) {
+		if ( woo_bg_is_shipping_enabled() ) {
 			add_action( 'woocommerce_checkout_update_order_review', array( __CLASS__, 'update_order_review' ), 1, 2 );
+			
 			new ProductAdditionalFields( $container );
 		}
 	}
