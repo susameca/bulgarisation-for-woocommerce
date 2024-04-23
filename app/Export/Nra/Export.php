@@ -10,7 +10,7 @@ class Export {
 	public $status, $payment_methods, $woo_orders, $not_included_orders, $options, $orders_ids, $generate_files, $date, $xml_shop, $xml_orders;
 
 	function __construct( $date, $generate_files ) {
-		$this->status = apply_filters( 'woo_bg/admin/export/orders_statuses', array( 'wc-completed' ) );
+		$this->status = apply_filters( 'woo_bg/admin/export/orders_statuses', array( 'wc-completed', 'wc-refunded' ) );
 		$this->payment_methods = woo_bg_get_payment_types_for_meta();
 		$this->generate_files = $generate_files;
 		$this->date = $date;
@@ -53,7 +53,11 @@ class Export {
 	public function get_xml_file() {
 		$this->load_xml_shop();
 
+		$this->woo_orders = array_reverse( $this->woo_orders );
+		
 		foreach ( $this->woo_orders as $woo_order ) {
+			$woo_order->update_meta_data( 'woo_bg_order_number', '' );
+
 			if ( is_a( $woo_order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || is_a( $woo_order, 'WC_Order_Refund' ) ) {
 				$refunded_order = new RefundedOrder( $woo_order );
 
@@ -65,6 +69,20 @@ class Export {
 					}
 
 					$woo_order = wc_get_order( $woo_order->get_parent_id() );
+				} else {
+					continue;
+				}
+			} elseif ( $woo_order->get_status( 'refunded' ) ) {
+				$refunded_order = new RefundedOrderHPOS( $woo_order );
+
+				$this->xml_shop->addReturnedOrder( $refunded_order->get_xml_order() );
+
+				if ( !$woo_order->get_items() || !in_array( $woo_order->get_id(), $this->orders_ids ) ) {
+					if ( !in_array( $woo_order->get_id(), $this->orders_ids ) ) {
+						$this->orders_ids[] = $woo_order->get_id(); 
+					}
+
+					$woo_order = wc_get_order( $woo_order->get_id() );
 				} else {
 					continue;
 				}
