@@ -81,6 +81,8 @@ export default {
 			firstNameField: $('#billing_first_name'),
 			lastNameField: $('#billing_last_name'),
 			phoneField: $('#billing_phone'),
+			toCompanyField: $('#woo-billing-to-company'),
+			companyField: $('#billing_company'),
 			selectedAddress: [],
       		addresses: [],
 			state: '',
@@ -120,6 +122,8 @@ export default {
 		this.phoneField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.firstNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.lastNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
+		this.toCompanyField.on( 'change.maybeTriggerUpdate', this.maybeTriggerUpdate );
+		this.companyField.on( 'change.maybeTriggerUpdate', this.maybeTriggerUpdate );
 
 		if ( window.speedyAddressInitialUpdate ) {
 			this.document.trigger('update_checkout');
@@ -287,6 +291,8 @@ export default {
 			let phone = this.phoneField.val();
 
 			let cookie = {
+				billing_to_company: this.toCompanyField.val(),
+				billing_company: this.companyField.val(),
 				type: 'address',
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
@@ -334,6 +340,14 @@ export default {
 		triggerUpdateCheckout() {
 			this.document.trigger('update_checkout');
 		},
+		maybeTriggerUpdate() {
+			if ( 
+				this.toCompanyField.val() &&
+				this.companyField.val()
+			) {
+				this.document.trigger('update_checkout');
+			}
+		},
 		onUpdate() {
 			this.Address1Field.attr('disabled', true);
 			this.setCookieData();
@@ -344,8 +358,9 @@ export default {
 		this.phoneField.off( 'change.triggerUpdate' );
 		this.firstNameField.off( 'change.triggerUpdate' );
 		this.lastNameField.off( 'change.triggerUpdate' );
+		this.toCompanyField.off( 'change.maybeTriggerUpdate' );
+		this.companyField.off( 'change.maybeTriggerUpdate' );
 
-		//setCookie( 'woo-bg--speedy-address', '', 1 );
 		$('#billing_address_1').attr('disabled', false);
 		$('#shipping_address_1').attr('disabled', false);
 		window.speedyAddressIsMounted = false;

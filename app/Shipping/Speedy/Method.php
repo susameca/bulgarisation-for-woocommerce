@@ -256,6 +256,13 @@ class Method extends \WC_Shipping_Method {
 			)
 		);
 
+		if ( isset( $this->cookie_data['billing_to_company'] ) ) {
+			$recipient['privatePerson'] = false;
+			$recipient['contactName'] = $recipient['clientName'];
+			$recipient['clientName'] = $this->cookie_data['billing_company'];
+		}
+
+
 		if ( $this->cookie_data['type'] === 'address' ) {
 			$recipient[ 'addressLocation' ] = $this->generate_recipient_address();
 			$recipient[ 'address' ] = $this->generate_recipient_address();

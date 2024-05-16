@@ -52,6 +52,8 @@ export default {
 			firstNameField: $('#billing_first_name'),
 			lastNameField: $('#billing_last_name'),
 			phoneField: $('#billing_phone'),
+			toCompanyField: $('#woo-billing-to-company'),
+			companyField: $('#billing_company'),
 			selectedOffice: [],
       		offices: [],
 			state: '',
@@ -100,6 +102,8 @@ export default {
 		this.phoneField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.firstNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
 		this.lastNameField.on( 'change.triggerUpdate', this.triggerUpdateCheckout );
+		this.toCompanyField.on( 'change.maybeTriggerUpdate', this.maybeTriggerUpdate );
+		this.companyField.on( 'change.maybeTriggerUpdate', this.maybeTriggerUpdate );
 		this.cityField.on('change.loadOffices', function () {
 			_this.city = $(this).val();
 			_this.loadOffices();
@@ -245,6 +249,8 @@ export default {
 			let phone = this.phoneField.val();
 
 			let cookie = {
+				billing_to_company: this.toCompanyField.val(),
+				billing_company: this.companyField.val(),
 				type: 'office',
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
@@ -290,6 +296,14 @@ export default {
 		triggerUpdateCheckout() {
 			this.document.trigger('update_checkout');
 		},
+		maybeTriggerUpdate() {
+			if ( 
+				this.toCompanyField.val() &&
+				this.companyField.val()
+			) {
+				this.document.trigger('update_checkout');
+			}
+		},
 		onUpdate() {
 			this.Address1Field.attr('disabled', true);
 			this.setCookieData();
@@ -301,6 +315,8 @@ export default {
 		this.phoneField.off( 'change.triggerUpdate' );
 		this.firstNameField.off( 'change.triggerUpdate' );
 		this.lastNameField.off( 'change.triggerUpdate' );
+		this.toCompanyField.off( 'change.maybeTriggerUpdate' );
+		this.companyField.off( 'change.maybeTriggerUpdate' );
 		this.cityField.off('change.loadOffices' );
 		this.stateField.off('change.loadOffices' );
 

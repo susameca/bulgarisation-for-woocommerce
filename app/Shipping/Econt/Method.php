@@ -480,7 +480,7 @@ class Method extends \WC_Shipping_Method {
 
 				$cookie_data = self::get_cookie_data();
 
-				if ( $cookie_data['type'] === 'office' && empty( $cookie_data['selectedOffice'] ) ) {
+				if ( !empty( $cookie_data['type'] ) && $cookie_data['type'] === 'office' && empty( $cookie_data['selectedOffice'] ) ) {
 					$errors->add( 'validation', __( 'Please choose a office.', 'woo-bg' ) );
 				}
 			}
