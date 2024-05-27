@@ -354,24 +354,45 @@ class Econt {
 
 		unset( $label['services']['invoiceNum'] );
 		unset( $label['services']['cdPayOptionsTemplate'] );
+		unset( $label['packingListType'] );
+		unset( $label['packingList'] );
 		
 		if ( $cookie_data['payment'] === 'cod' ) {
 			$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
 
 			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
-				$label['services']['cdPayOptionsTemplate'] = $cd_pay_option;
-				$cd_pay_options = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_profile_data()['cdPayOptions'];
+				$packing_list_or_invoice = woo_bg_get_option( 'econt', 'invoice_or_packing_list' );
 
-				foreach ( $cd_pay_options as $option ) {
-					if ( $option['num'] === $cd_pay_option && $option['method'] != 'office' ) {
-						$order = wc_get_order( $order_id );
-						$document_number = $order->get_meta( 'woo_bg_order_number' );
+				if (  !$packing_list_or_invoice || $packing_list_or_invoice === 'invoice' ) {
+					$label['services']['cdPayOptionsTemplate'] = $cd_pay_option;
+					$cd_pay_options = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_profile_data()['cdPayOptions'];
 
-						if ( !$document_number ) {
-							$document_number = str_pad( $order->get_id(), 10, '0', STR_PAD_LEFT );
+					foreach ( $cd_pay_options as $option ) {
+						if ( $option['num'] === $cd_pay_option && $option['method'] != 'office' ) {
+							$order = wc_get_order( $order_id );
+							$document_number = $order->get_meta( 'woo_bg_order_number' );
+
+							if ( !$document_number ) {
+								$document_number = str_pad( $order->get_id(), 10, '0', STR_PAD_LEFT );
+							}
+
+							$label['services']['invoiceNum'] = $document_number . '/' . gmdate( 'd.m.y', strtotime( $order->get_date_created() ) );
 						}
+					}
+				} else if ( $packing_list_or_invoice === 'packing_list' ) {
+					$label["packingListType"] = 'digital';
+					$label["packingList"] = [];
+					
+					foreach ( $order->get_items() as $key => $item ) {
+						$item_weight = ( $item->get_product()->get_weight() ) ? wc_get_weight( $item->get_product()->get_weight(), 'kg' ) * $item['quantity'] : 0.100;
 
-						$label['services']['invoiceNum'] = $document_number . '/' . gmdate( 'd.m.y', strtotime( $order->get_date_created() ) );
+						$label["packingList"][] = [
+							'inventoryNum' => $key,
+							'description' => $item->get_name(),
+							'weight' => $item_weight,
+							'count' => $item->get_quantity(),
+							'price' => $item->get_total(),
+						];
 					}
 				}
 			}

@@ -109,6 +109,19 @@ class Econt_Tab extends Base_Tab {
 							),
 						), 'sender_payment_type', __( 'Sender payment type', 'woo-bg' ), null, null, __( 'Select how you will pay for the shipments.', 'woo-bg' ) 
 					);
+
+					$fields[ 'econt' ][] = new Fields\Select_Field( 
+						array(
+							'invoice' => array(
+								'id' => 'invoice',
+								'label' => __( 'Invoice number', 'woo-bg' ),
+							),
+							'packing_list' => array(
+								'id' => 'packing_list',
+								'label' => __( 'Packing list', 'woo-bg' ),
+							),
+						), 'invoice_or_packing_list', __( 'Packing list or invoice number', 'woo-bg' ), null, null, __( 'Select if you want to have packing list or invoice number in the label.', 'woo-bg' ) 
+					);
 				}
 
 				$fields[ 'econt' ][] = new Fields\Select_Field( 
