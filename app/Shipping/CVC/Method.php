@@ -438,7 +438,11 @@ class Method extends \WC_Shipping_Method {
 		return $payment_by_data;
 	}
 
-	public static function validate_cvc_method( $fields, $errors ){
+	public static function validate_cvc_method( $fields, $errors ) {
+		if ( ! WC()->cart->needs_shipping() ) {
+			return;
+		}
+		
 		$chosen_shippings = WC()->session->get('chosen_shipping_methods');
 
 		foreach ( $chosen_shippings as $key => $shipping ) {

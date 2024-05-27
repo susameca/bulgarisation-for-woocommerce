@@ -469,7 +469,11 @@ class Method extends \WC_Shipping_Method {
 		);
 	}
 
-	public static function validate_speedy_method( $fields, $errors ){
+	public static function validate_speedy_method( $fields, $errors ) {
+		if ( ! WC()->cart->needs_shipping() ) {
+			return;
+		}
+
 		$chosen_shippings = WC()->session->get('chosen_shipping_methods');
 
 		foreach ( $chosen_shippings as $key => $shipping ) {
@@ -484,12 +488,16 @@ class Method extends \WC_Shipping_Method {
 					} else {
 						$errors->add( 'validation', __( 'Please choose delivery option!', 'woo-bg' ) );
 					}
-				}
+				} elseif ( $data->method_id === 'woo_bg_speedy' ) {
+					$cookie_data = self::get_cookie_data();
 
-				$cookie_data = self::get_cookie_data();
-
-				if ( $cookie_data['type'] === 'office' &&  empty( $cookie_data['selectedOffice'] ) ) {
-					$errors->add( 'validation', __( 'Please choose a office.', 'woo-bg' ) );
+					if ( 
+						!empty( $cookie_data ) && 
+						( !empty($cookie_data['type'] ) && $cookie_data['type'] === 'office' ) &&  
+						empty( $cookie_data['selectedOffice'] ) 
+					) {
+						$errors->add( 'validation', __( 'Please choose a office.', 'woo-bg' ) );
+					}	
 				}
 			}
 		}
