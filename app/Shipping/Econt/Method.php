@@ -392,6 +392,16 @@ class Method extends \WC_Shipping_Method {
 			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
 				$cart['services']['cdPayOptionsTemplate'] = $cd_pay_option;
 			}
+
+			$cart['instructions'] = array(
+				array(
+					'type' => 'return',
+					'returnInstructionParams' => array(
+						'returnParcelPaymentSide' => 'receiver',
+						'printReturnParcel' => true,
+					),
+				),
+			);
 		}
 
 		if ( $os_value && empty( $this->cookie_data['selectedOfficeIsAPS'] ) ) {
@@ -414,7 +424,6 @@ class Method extends \WC_Shipping_Method {
 		if ( $this->sms === 'yes' ) {
 			$cart['services']['smsNotification'] = true;
 		}
-
 
 		return $cart;
 	}
