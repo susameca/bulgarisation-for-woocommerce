@@ -398,7 +398,6 @@ class Method extends \WC_Shipping_Method {
 					'type' => 'return',
 					'returnInstructionParams' => array(
 						'returnParcelPaymentSide' => 'receiver',
-						'printReturnParcel' => true,
 					),
 				),
 			);

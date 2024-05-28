@@ -364,7 +364,6 @@ class Econt {
 					'type' => 'return',
 					'returnInstructionParams' => array(
 						'returnParcelPaymentSide' => 'sender',
-						'printReturnParcel' => true,
 					),
 				),
 			);
