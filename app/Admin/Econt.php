@@ -358,16 +358,7 @@ class Econt {
 		unset( $label['packingList'] );
 		unset( $label['instructions'] );
 		
-		if ( $cookie_data['payment'] === 'cod' ) {
-			$label['instructions'] = array(
-				array(
-					'type' => 'return',
-					'returnInstructionParams' => array(
-						'returnParcelPaymentSide' => 'sender',
-					),
-				),
-			);
-			
+		if ( $cookie_data['payment'] === 'cod' ) {			
 			$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
 
 			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
