@@ -27,6 +27,14 @@ class Documents {
 		}
 	}
 
+	public static function generate_proforma( $order_id ) {
+		$order = wc_get_order( $order_id );
+
+		if ( self::maybe_generate_invoice( $order ) && $order->get_payment_method() === 'bacs' ) {
+			( new Document\Proforma( $order ) )->generate_file();
+		}
+	}
+
 	public static function maybe_generate_invoice( $order ) {
 		$invoice_generation = woo_bg_get_option( 'invoice', 'invoices' );
 

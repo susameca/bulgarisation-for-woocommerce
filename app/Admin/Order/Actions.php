@@ -11,6 +11,8 @@ class Actions {
 	function __construct() {
 		$order_documents_trigger = woo_bg_get_option( 'invoice', 'trigger' );
 
+		add_action( 'woocommerce_checkout_order_processed', array( '\Woo_BG\Admin\Order\Documents', 'generate_proforma' ), 100 );
+		
 		if ( !$order_documents_trigger || $order_documents_trigger === "order_created" ) {
 			add_action( 'woocommerce_checkout_order_processed', array( '\Woo_BG\Admin\Order\Documents', 'generate_documents' ), 100 );
 		} else if ( $order_documents_trigger === "order_completed" ) {

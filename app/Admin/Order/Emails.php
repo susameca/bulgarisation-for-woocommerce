@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 class Emails {
 	function __construct() {
 		add_filter( 'woocommerce_email_attachments', array( __CLASS__, 'attach_invoice_to_mail' ), 10, 4 );
+		add_filter( 'woocommerce_email_attachments', array( __CLASS__, 'attach_proform_to_mail' ), 10, 4 );
 		add_filter( 'woocommerce_email_attachments', array( __CLASS__, 'attach_refund_pdfs_to_mail' ), 10, 4 );
 	}
 
@@ -72,6 +73,25 @@ class Emails {
 				if ( $invoice_id = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ) {
 					$attachments[] = get_attached_file( $invoice_id );
 				}
+			}
+		}
+
+		return $attachments;
+	}
+
+	public static function attach_proform_to_mail( $attachments, $email_id, $order, $email ) {
+		if ( !is_object( $order ) || !is_a( $order, 'WC_Order' ) ) {
+			return;
+		}
+
+		$email_ids = array( 'customer_on_hold_order' );
+
+		if ( in_array ( $email_id, $email_ids ) ) {
+			$order = wc_get_order( $order->get_id() );
+			$proform_id = $order->get_meta( 'woo_bg_proform_document' );
+
+			if ( $proform_id ) {
+				$attachments[] = get_attached_file( $proform_id );
 			}
 		}
 
