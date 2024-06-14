@@ -156,7 +156,7 @@ export default {
 				type: 'office',
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
-				selectedOffice: this.selectedOffice.id,
+				selectedOffice: ( this.selectedOffice ) ? this.selectedOffice.id : null,
 				state: '',
 				city: '',
 				country: this.countryField.val(),
@@ -183,7 +183,7 @@ export default {
 		setAddress1FieldData() {
 			let shippingAddress = "";
 
-			if ( this.selectedOffice.name_bg ) {
+			if ( this.selectedOffice && this.selectedOffice.name_bg ) {
 				shippingAddress = this.i18n.toOffice + this.selectedOffice.name_bg;
 			}
 

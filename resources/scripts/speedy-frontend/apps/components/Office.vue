@@ -68,7 +68,7 @@ export default {
 			let url = 'https://services.speedy.bg/speedy_office_locator_widget/office_locator.php?selectOfficeButtonCaption=Избери"';
 			let _this = this;
 			
-			if ( this.selectedOffice.id ) {
+			if ( this.selectedOffice && this.selectedOffice.id ) {
 				url += '&officeID=' + this.selectedOffice.id;
 			}
 
@@ -221,7 +221,7 @@ export default {
 					}
 
 					_this.offices.forEach( function ( office ) {
-						if ( _this.selectedOffice.id == office.id ) {
+						if ( _this.selectedOffice && _this.selectedOffice.id == office.id ) {
 							selectedOffice = office;
 						}
 					});
@@ -254,8 +254,8 @@ export default {
 				type: 'office',
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
-				selectedOffice: this.selectedOffice.id,
-				selectedOfficeType: this.selectedOffice.type,
+				selectedOffice: ( this.selectedOffice ) ? this.selectedOffice.id : null,
+				selectedOfficeType: ( this.selectedOffice ) ? this.selectedOffice.type : null,
 				state: this.state,
 				city: this.city,
 				country: this.countryField.val(),
@@ -287,7 +287,7 @@ export default {
 		setAddress1FieldData() {
 			let shippingAddress = "";
 
-			if ( this.selectedOffice.name ) {
+			if ( this.selectedOffice && this.selectedOffice.name ) {
 				shippingAddress = this.i18n.toOffice + this.selectedOffice.name + ' ( ' + this.selectedOffice.address.fullAddressString + ' ) ';
 			}
 

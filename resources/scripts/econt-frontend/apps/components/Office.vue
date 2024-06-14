@@ -236,7 +236,7 @@ export default {
 					}
 
 					_this.offices.forEach( function ( office ) {
-						if ( _this.selectedOffice.code == office.code ) {
+						if ( _this.selectedOffice && _this.selectedOffice.code == office.code ) {
 							selectedOffice = office;
 						}
 					});
@@ -274,8 +274,8 @@ export default {
 				type: 'office',
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
-				selectedOffice: this.selectedOffice.code,
-				selectedOfficeIsAPS: this.selectedOffice.isAPS,
+				selectedOffice: ( this.selectedOffice ) ? this.selectedOffice.code : null,
+				selectedOfficeIsAPS: ( this.selectedOffice ) ? this.selectedOffice.isAPS : null,
 				state: this.state,
 				city: this.city,
 				country: this.countryField.val(),
@@ -307,7 +307,7 @@ export default {
 		setAddress1FieldData() {
 			let shippingAddress = "";
 
-			if ( this.selectedOffice.name ) {
+			if ( this.selectedOffice && this.selectedOffice.name ) {
 				shippingAddress = this.i18n.toOffice + this.selectedOffice.name + ' ( ' + this.selectedOffice.address.fullAddress + ' ) ';
 			}
 
