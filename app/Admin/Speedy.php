@@ -518,6 +518,10 @@ class Speedy {
 		$order = wc_get_order( $order_id );
 		$price = 0;
 
+		if ( $order->get_payment_method() !== 'cod' ) { 
+			return;
+		}
+
 		if ( $payment_by = $_REQUEST['paymentBy'] ) {
 			$cookie_data = $_REQUEST['cookie_data'];
 

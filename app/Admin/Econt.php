@@ -404,7 +404,7 @@ class Econt {
 
 	protected static function update_payment_by( $label, $order_id ) {
 		$payment_by = $_REQUEST['paymentBy'];
-		$fixed_price = $label['paymentReceiverAmount'];
+		$fixed_price = ( isset( $label['paymentReceiverAmount'] ) ) ? $label['paymentReceiverAmount'] : 0;
 		$sender_method = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_sender_payment_method();
 
 		unset( 
@@ -533,6 +533,11 @@ class Econt {
 
 		$order = wc_get_order( $order_id );
 		$price = 0;
+		$cookie_data = $order->get_meta( 'woo_bg_econt_cookie_data' );
+
+		if ( $order->get_payment_method() !== 'cod' ) { 
+			return;
+		}	
 
 		if ( $payment_by = $_REQUEST['paymentBy'] ) {
 			if ( $payment_by['id'] == 'buyer' ) {
