@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.5
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.21
+Stable tag: 3.0.22
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.22 =
+Econt: Remove instructions
+Econt: Optimize to address
+Couriers: Optimize to office
+Couriers: Don't update price if payment method is not COD
+Invoices: Optimize proforma logic
 
 = 3.0.21 =
 Econt: Optimize return payment
