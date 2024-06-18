@@ -57,4 +57,14 @@ class Quarters {
 	private function set_quarters( $quarters, $city_id ) {
 		$this->quarters[ $city_id ] = $quarters;
 	}
+
+	public function format_quarters( $quarters ) {
+		$formatted = [];
+
+		foreach ( $quarters as $qtr ) {
+			$formatted[ 'qtr-' . $qtr['id'] ] = $qtr['name'];
+		}
+
+		return $formatted;
+	}
 }

@@ -329,7 +329,11 @@ class Method extends \WC_Shipping_Method {
 			}
 
 			if ( !empty( $this->cookie_data['otherField'] ) ) {
-				$receiver_address['other'] .= $this->cookie_data['otherField'];
+				if ( isset( $receiver_address['other'] ) ) {
+					$receiver_address['other'] .= $this->cookie_data['otherField'];
+				} else {
+					$receiver_address['other'] = $this->cookie_data['otherField'];
+				}
 			}
 
 			if ( isset( $receiver_address['other'] ) ) {

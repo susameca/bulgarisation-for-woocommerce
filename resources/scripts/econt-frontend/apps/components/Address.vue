@@ -239,7 +239,11 @@ export default {
 					}
 
 					_this.addresses.forEach( function ( address ) {
-						if ( _this.selectedAddress.id == address.id ) {
+						if ( 
+							_this.selectedAddress.id == address.id && 
+							_this.selectedAddress.type == address.type && 
+							_this.selectedAddress.orig_key == address.orig_key 
+						) {
 							selectedAddress = address;
 							clearAdditionaFields = false;
 						}
@@ -251,6 +255,7 @@ export default {
 						_this.other = '';
 					}
 
+					_this.setCookieData();
 					_this.loading = false;
 				} )
 				.catch( error => {

@@ -57,4 +57,14 @@ class Streets {
 	private function set_streets( $streets, $city_id ) {
 		$this->streets[ $city_id ] = $streets;
 	}
+
+	public function format_streets( $streets ) {
+		$formatted = [];
+
+		foreach ( $streets as $street ) {
+			$formatted[ 'street-' . $street['id'] ] = $street['name'];
+		}
+		
+		return $formatted;
+	}
 }

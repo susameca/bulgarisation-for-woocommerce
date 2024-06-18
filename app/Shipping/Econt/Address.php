@@ -121,17 +121,11 @@ class Address {
 		}
 		
 		$streets = self::$container[ Client::ECONT_STREETS ]->get_streets_by_city( $cities[ $city_key ]['id'] );
-		$streets = ( !empty( $streets['streets'] ) ) ? $streets['streets'] : [];
+		$streets = ( !empty( $streets['streets'] ) ) ? self::$container[ Client::ECONT_STREETS ]->format_streets( $streets['streets'] ) : [];
 
-		if ( $cities[ $city_key ]['country']['code2'] == 'BG' ) {
-			$streets_only_names = array_map( function( $street ) {
-				return $street['name'];
-			}, $streets );
-		} else {
-			$streets_only_names = array_map( function( $street ) {
-				return $street['nameEn'];
-			}, $streets );
-		}
+		$streets_only_names = array_map( function( $street ) {
+			return $street;
+		}, $streets );
 
 		if ( !empty( $query ) ) {
 			$streets_only_names = array_filter( $streets_only_names, function( $street ) use ( $query ) {
