@@ -133,8 +133,6 @@ class Address {
 					return true;
 				}
 			} );
-
-			$streets_only_names = array_values( $streets_only_names );
 		}
 
 		return $streets_only_names;
