@@ -17,7 +17,13 @@ class RefundedOrder {
 			'4' => Xml\ReturnMethods\Other::class, //4
 		);
 		$this->load_options();
-		$this->parent_order = wc_get_order( $this->woo_order->get_parent_id() );
+
+
+		if ( $this->woo_order->get_parent_id() ) {
+			$this->parent_order = wc_get_order( $this->woo_order->get_parent_id() );
+		} else {
+			$this->parent_order = $this->woo_order;
+		}
 	}
 
 	public function get_xml_order() {
