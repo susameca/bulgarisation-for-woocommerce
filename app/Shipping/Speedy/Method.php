@@ -559,7 +559,7 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	public static function add_label_number_to_email( $order, $sent_to_admin, $plain_text, $email ) {
-		$email_ids_to_send = [];
+		$email_ids_to_send = [ 'customer_completed_order' ];
 
 		if ( woo_bg_get_option( 'speedy', 'label_after_checkout' ) === 'yes' ) {
 			$email_ids_to_send[] = 'customer_processing_order';

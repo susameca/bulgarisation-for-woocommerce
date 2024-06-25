@@ -262,6 +262,7 @@ class Econt {
 		$label = $label['label'];
 		$label = self::update_label_pay_options( $label, $order_id );
 		$label = self::update_shipment_description( $label, $order_id );
+		$label = self::update_phone_and_names( $label, $order_id );
 
 		self::send_label_to_econt( $label, $order_id );
 	}
@@ -472,8 +473,16 @@ class Econt {
 		return $label;
 	}
 
-	protected static function update_phone_and_names( $label ) {
-		$order = wc_get_order( $_REQUEST['orderId'] );
+	protected static function update_phone_and_names( $label, $order_id = null ) {
+		if ( !$order_id ) {
+			$order_id = $_REQUEST['orderId'];
+		}
+
+		if ( !$order_id ) {
+			return $label;
+		}
+
+		$order = wc_get_order( $order_id );
 		$phone = [];
 		$name = '';
 
@@ -494,6 +503,7 @@ class Econt {
 		
 		$label['receiverClient'] = array();
 		$label['receiverClient']['name'] = $name;
+		$label['receiverClient']['email'] = $order->get_billing_email();
 		$label['receiverClient']['phones'] = $phone;
 		$label['receiverAgent'] = $label['receiverClient'];
 		
