@@ -364,9 +364,9 @@ class Econt {
 
 			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
 				$packing_list_or_invoice = woo_bg_get_option( 'econt', 'invoice_or_packing_list' );
+				$label['services']['cdPayOptionsTemplate'] = $cd_pay_option;
 
 				if (  !$packing_list_or_invoice || $packing_list_or_invoice === 'invoice' ) {
-					$label['services']['cdPayOptionsTemplate'] = $cd_pay_option;
 					$cd_pay_options = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_profile_data()['cdPayOptions'];
 
 					foreach ( $cd_pay_options as $option ) {
