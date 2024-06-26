@@ -37,14 +37,13 @@ class Export {
 				is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || 
 				is_a( $order, 'WC_Order_Refund' )
 			) {
-				$this->refunded_orders_ids[] = $order->get_id();
-
-
 				if ( $order->get_parent_id() ) {
 					$parent_order = wc_get_order( $order->get_parent_id() );
 				} else {
 					$parent_order = $order;
 				}
+
+				$this->refunded_orders_ids[] = $parent_order->get_id();
 
 				if ( $parent_order->get_date_completed() ) {
 					$completed_date = strtotime( $parent_order->get_date_completed()->__toString() );
@@ -86,8 +85,7 @@ class Export {
 		$this->load_xml_shop();
 
 		foreach ( $this->completed_orders_ids as $order_id ) {
-			$woo_order = wc_get_order( $order_id );
-			$xml_order = new Order( $woo_order, $this->generate_files );
+			$xml_order = new Order( wc_get_order( $order_id ), $this->generate_files );
 
 			if ( ! $xml_order->payment_method_type ) {
 				$this->not_included_orders[] = $xml_order->order_id_to_show;
@@ -98,8 +96,7 @@ class Export {
 		}
 
 		foreach ( $this->refunded_orders_ids as $order_id ) {
-			$woo_order = wc_get_order( $order_id );
-			$refunded_order = new RefundedOrder( $woo_order );
+			$refunded_order = new RefundedOrder( wc_get_order( $order_id ), $this->date );
 
 			$this->xml_shop->addReturnedOrder( $refunded_order->get_xml_order() );
 		}
