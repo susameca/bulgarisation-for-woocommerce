@@ -19,19 +19,8 @@ class NRARefunded extends BaseDocument {
 
 		$this->set_title( apply_filters( 'woo_bg/admin/invoice/order_document_title_refunded', __( 'Refunded Order - Original', 'woo-bg' ) ) );
 		$this->meta = 'woo_bg_refunded_order_document';
-	}
 
-	public function get_document_number() {
-		$document_number = $this->woo_order->get_meta( 'woo_bg_refunded_order_number' );
-		
-		if ( !$document_number ) {
-			$document_number = woo_bg_get_option( 'invoice', 'next_invoice_number' );
-			woo_bg_set_option( 'invoice', 'next_invoice_number', str_pad( $document_number + 1, 10, '0', STR_PAD_LEFT ) );
-			$this->woo_order->update_meta_data( 'woo_bg_refunded_order_number', str_pad( $document_number, 10, '0', STR_PAD_LEFT ) );
-			$this->woo_order->save();
-		}
-
-		return $document_number;
+		$this->document_number_meta = 'woo_bg_refunded_order_number';
 	}
 
 	public function get_head_items() {

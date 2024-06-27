@@ -26,14 +26,8 @@ class RefundedOrder {
 		$refunds = $this->woo_order->get_refunds();
 
 		foreach ( $refunds as $refund ) {
-			if ( $this->woo_order->get_date_completed() ) {
-				$completed_date = $this->woo_order->get_date_completed();
-			} else {
-				$completed_date = $refund->get_date_created();
-			}
-
-			if ( date_i18n( 'Y-m', strtotime( $completed_date->__toString() ) ) === $this->export_date  ) {
-				$refund_date = $completed_date;
+			if ( date_i18n( 'Y-m', strtotime( $refund->get_date_created()->__toString() ) ) === $this->export_date  ) {
+				$refund_date = $refund->get_date_created();
 				$total += $refund->get_amount();
 			}
 		}
@@ -41,7 +35,7 @@ class RefundedOrder {
 		return new Xml\ReturnedOrder(
 			apply_filters( 'woo_bg/admin/export/refunded_order_id', $this->woo_order->get_order_number(), $this->woo_order ), 
 			abs( $total ), 
-			new \DateTime( $completed_date ), 
+			new \DateTime( $refund_date ), 
 			$this->return_methods[ $this->options[ 'shop' ][ 'return_method' ][ 'value' ]['id'] ]
 		);
 	}

@@ -7,10 +7,9 @@ use Woo_BG\Admin\Order\Documents;
 defined( 'ABSPATH' ) || exit;
 
 class Export {
-	public $status, $payment_methods, $not_included_orders, $options, $completed_orders_ids, $refunded_orders_ids, $generate_files, $date, $xml_shop, $xml_orders;
+	public $payment_methods, $not_included_orders, $options, $completed_orders_ids, $refunded_orders_ids, $generate_files, $date, $xml_shop, $xml_orders;
 
 	function __construct( $date, $generate_files ) {
-		$this->status = apply_filters( 'woo_bg/admin/export/orders_statuses', array( 'wc-completed', 'wc-refunded' ) );
 		$this->payment_methods = woo_bg_get_payment_types_for_meta();
 		$this->generate_files = $generate_files;
 		$this->date = $date;
@@ -21,18 +20,33 @@ class Export {
 	}
 
 	protected function load_woo_orders() {
-		$args = array(
-			'date_created' => strtotime( 'first day of ' . $this->date . ' ' . wp_timezone_string() ) . '...' . strtotime( 'last day of ' . $this->date . ' 23:59:59 ' . wp_timezone_string() ),
-			'status' => $this->status,
+		$orders = apply_filters( 'woo_bg/admin/export/orders', wc_get_orders( array(
+			'date_paid' => date_i18n( 'Y-m-d', strtotime( 'first day of ' . $this->date ) ) . '...' . date_i18n( 'Y-m-d', strtotime( 'last day of ' . $this->date ) ),
+			'status' => apply_filters( 'woo_bg/admin/export/orders_statuses', array( 'wc-completed', 'wc-processing' ) ),
 			'limit' => -1,
-		);
+		) ), $this );
 
-		$orders = apply_filters( 'woo_bg/admin/export/orders', wc_get_orders( $args ), $this );
+		$refunded_orders = apply_filters( 'woo_bg/admin/export/refunded_orders', wc_get_orders( array(
+			'date_created' => date_i18n( 'Y-m-d', strtotime( 'first day of ' . $this->date ) ) . '...' . date_i18n( 'Y-m-d', strtotime( 'last day of ' . $this->date ) ),
+			'status' => apply_filters( 'woo_bg/admin/export/refunded_orders_statuses', array( 'wc-completed', 'wc-refunded' ) ),
+			'limit' => -1,
+		) ), $this );
 
 		$this->completed_orders_ids = array();
 		$this->refunded_orders_ids = array();
 
 		foreach ( $orders as $order ) {
+			if ( 
+				is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || 
+				is_a( $order, 'WC_Order_Refund' )
+			) {
+				continue;
+			} else {
+				$this->completed_orders_ids[] = $order->get_id();
+			}
+		}
+
+		foreach ( $refunded_orders as $order ) {
 			if ( 
 				is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || 
 				is_a( $order, 'WC_Order_Refund' )
@@ -45,17 +59,9 @@ class Export {
 
 				$this->refunded_orders_ids[] = $parent_order->get_id();
 
-				if ( $parent_order->get_date_completed() ) {
-					$completed_date = strtotime( $parent_order->get_date_completed()->__toString() );
-				} else {
-					$completed_date = strtotime( $order->get_date_created()->__toString() );
-				}
-
-				if ( date_i18n( 'Y-m', $completed_date ) === $this->date  ) {
+				if ( date_i18n( 'Y-m', strtotime( $parent_order->get_date_paid()->__toString() ) ) === $this->date  ) {
 					$this->completed_orders_ids[] = $parent_order->get_id();
 				}
-			} else {
-				$this->completed_orders_ids[] = $order->get_id();
 			}
 		}
 

@@ -15,13 +15,18 @@ class CreditNotice extends NRARefunded {
 
 		$this->set_title( apply_filters( 'woo_bg/admin/invoice/credit_notice_title', __( 'Credit Notice - Original', 'woo-bg' ) ) );
 		$this->meta = 'woo_bg_refunded_invoice_document';
+		
+		if ( woo_bg_get_option( 'invoice', 'next_invoice_separate_number' ) ) {
+			$this->document_number_meta = 'woo_bg_order_invoice_number';
+			$this->document_number_option = 'next_invoice_separate_number';
+		}
 	}
 
 	public function get_head_items() {
 		return apply_filters( 'woo_bg/invoice/head_items', array(
 			'parent_reference' => array(
 				'label' => __('To invoice №', 'woo-bg'),
-				'value' => str_pad( $this->parent_order->get_meta( 'woo_bg_order_number' ), 10, '0', STR_PAD_LEFT ),
+				'value' => $this->get_parent_reference(),
 			),
 			'reference' => array(
 				'label' => '№',
@@ -95,5 +100,15 @@ class CreditNotice extends NRARefunded {
 		$this->woo_order->save();
 		
 		wp_delete_attachment( $this->qr_png, 1 );
+	}
+
+	public function get_parent_reference() {
+		$meta = 'woo_bg_order_number';
+
+		if ( woo_bg_get_option( 'invoice', 'next_invoice_separate_number' ) ) {
+			$meta = 'woo_bg_order_invoice_number';
+		}
+
+		return str_pad( $this->parent_order->get_meta( $meta ), 10, '0', STR_PAD_LEFT );
 	}
 }

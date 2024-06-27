@@ -13,6 +13,11 @@ class Invoice extends BaseDocument {
 
 		$this->set_title( apply_filters( 'woo_bg/admin/invoice/invoice_title', __( 'Sale Invoice - Original', 'woo-bg' ) ) );
 		$this->meta = 'woo_bg_invoice_document';
+
+		if ( woo_bg_get_option( 'invoice', 'next_invoice_separate_number' ) ) {
+			$this->document_number_meta = 'woo_bg_order_invoice_number';
+			$this->document_number_option = 'next_invoice_separate_number';
+		}
 	}
 
 	public function generate_file() {

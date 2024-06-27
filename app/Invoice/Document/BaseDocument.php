@@ -9,7 +9,7 @@ use chillerlan\QRCode\QRCode;
 defined( 'ABSPATH' ) || exit;
 
 class BaseDocument {
-	public $pdf, $woo_order, $nap_number, $company_name, $mol, $eik, $vat_number, $address, $city, $phone_number, $email, $color, $add_shipping, $prepared_by, $identification_code, $footer_text, $qr_png, $meta, $payment_method, $transaction_id, $title;
+	public $pdf, $woo_order, $nap_number, $company_name, $mol, $eik, $vat_number, $address, $city, $phone_number, $email, $color, $add_shipping, $prepared_by, $identification_code, $footer_text, $qr_png, $meta, $payment_method, $transaction_id, $title, $document_number_meta, $document_number_option;
 
 	function __construct( $order ) {
 		$this->woo_order    = $order;
@@ -23,6 +23,9 @@ class BaseDocument {
 		$this->phone_number = woo_bg_get_option( 'nap', 'phone_number' );
 		$this->email        = woo_bg_get_option( 'nap', 'email' );
 		$this->nap_number   = woo_bg_get_option( 'nap', 'nap_number' );
+
+		$this->document_number_meta = 'woo_bg_order_number';
+		$this->document_number_option = 'next_invoice_number';
 
 		$this->color               = woo_bg_get_option( 'invoice', 'color' );
 		$this->add_shipping        = woo_bg_get_option( 'invoice', 'add_shipping' );
@@ -196,12 +199,12 @@ class BaseDocument {
 	}
 
 	public function get_document_number() {
-		$document_number = $this->woo_order->get_meta( 'woo_bg_order_number' );
+		$document_number = $this->woo_order->get_meta( $this->document_number_meta );
 
 		if ( !$document_number ) {
-			$document_number = woo_bg_get_option( 'invoice', 'next_invoice_number' );
-			woo_bg_set_option( 'invoice', 'next_invoice_number', str_pad( $document_number + 1, 10, '0', STR_PAD_LEFT ) );
-			$this->woo_order->update_meta_data( 'woo_bg_order_number', str_pad( $document_number, 10, '0', STR_PAD_LEFT ) );
+			$document_number = woo_bg_get_option( 'invoice', $this->document_number_option );
+			woo_bg_set_option( 'invoice', $this->document_number_option, str_pad( $document_number + 1, 10, '0', STR_PAD_LEFT ) );
+			$this->woo_order->update_meta_data( $this->document_number_meta, str_pad( $document_number, 10, '0', STR_PAD_LEFT ) );
 			$this->woo_order->save();
 		}
 
