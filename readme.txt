@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.5
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.22
+Stable tag: 3.0.24
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.24 =
+Econt: Optimizations
+Couriers: Add tracking number to customer_completed_order email
+
+= 3.0.23 =
+Econt: Fix to address method
 
 = 3.0.22 =
 Econt: Remove instructions
