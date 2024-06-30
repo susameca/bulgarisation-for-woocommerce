@@ -51,13 +51,19 @@ class Export {
 				$city = $temp_order->get_billing_city();
 			}
 
+			$order_number = $order->get_meta( 'woo_bg_order_number' );
+			if ( woo_bg_get_option( 'invoice', 'next_invoice_separate_number' ) ) {
+				$order_number = $order->get_meta( 'woo_bg_order_invoice_number' );
+			}
+
 			if ( $order->get_meta( 'woo_bg_invoice_document' ) ) {
 				$total_due = $order->get_total();
+				
 
 				$this->documents[] = apply_filters( 'woo_bg/admin/export/microinvest-order', array(
 					'2', 
 					date_i18n( 'd.m.Y', strtotime( $order->get_date_created() ) ),
-					$order->get_meta( 'woo_bg_order_number' ),
+					$order_number,
 					'Ф-ра',
 					$total_due,
 					'16',
@@ -78,7 +84,7 @@ class Export {
 				$this->documents[] = apply_filters( 'woo_bg/admin/export/microinvest-order', array(
 					'2', 
 					date_i18n( 'd.m.Y', strtotime( $order->get_date_created() ) ),
-					$order->get_meta( 'woo_bg_refunded_order_number' ),
+					$order_number,
 					'КИ',
 					$total_due,
 					'16',
