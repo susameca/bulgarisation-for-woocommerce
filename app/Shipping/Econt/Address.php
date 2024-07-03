@@ -144,10 +144,10 @@ class Address {
 		}
 
 		$quarters = self::$container[ Client::ECONT_QUARTERS ]->get_quarters_by_city( $cities[ $city_key ]['id'] );
-		$quarters = ( !empty( $quarters['quarters'] ) ) ? $quarters['quarters'] : [];
+		$quarters = ( !empty( $quarters['quarters'] ) ) ? self::$container[ Client::ECONT_QUARTERS ]->format_quarters( $quarters['quarters'] ) : [];
 
 		$quarters_only_names = array_map( function( $quarter ) {
-			return $quarter['name'];
+			return $quarter;
 		}, $quarters );
 
 		if ( !empty( $query ) ) {
@@ -156,8 +156,6 @@ class Address {
 					return true;
 				}
 			} );
-
-			$quarters_only_names = array_values( $quarters_only_names );
 		}
 
 		return $quarters_only_names;

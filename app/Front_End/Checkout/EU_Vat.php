@@ -53,12 +53,6 @@ class EU_Vat {
 		add_action( 'woocommerce_checkout_create_order', array( __CLASS__, 'set_order_data' ) );
 		add_action( 'woocommerce_create_refund', array( __CLASS__, 'set_refund_data' ) );
 
-
-		// Add VAT to addresses.
-		add_filter( 'woocommerce_order_formatted_billing_address', array( __CLASS__, 'formatted_billing_address' ), 10, 2 );
-		add_filter( 'woocommerce_formatted_address_replacements', array( __CLASS__, 'output_company_vat_number' ), 10, 2 );
-		add_filter( 'woocommerce_localisation_address_formats', array( __CLASS__, 'localisation_address_formats' ), 10, 2 );
-
 		// Digital goods taxable location.
 		add_filter( 'woocommerce_get_tax_location', array( __CLASS__, 'woocommerce_get_tax_location' ), 10, 2 );
 
@@ -92,7 +86,6 @@ class EU_Vat {
 			'required' => ( woo_bg_get_option('nap', 'dds_number_required' ) !== 'no' ),
 			'class'    => array(
 				'form-row-first',
-				'update_totals_on_change',
 				'woo-bg-company-info',
 			),
 			'id' => 'woo_bg_eu_vat_number',
@@ -268,33 +261,6 @@ class EU_Vat {
 		}
 
 		return apply_filters( 'woocommerce_cart_has_digital_goods', $has_digital_goods );
-	}
-
-	public static function formatted_billing_address( $address, $order ) {
-		$vat_id = woo_bg_get_vat_from_order( $order );
-
-		if ( $vat_id ) {
-			$address['vat_id'] = $vat_id;
-		}
-		return $address;
-	}
-
-	public static function output_company_vat_number( $formats, $args ) {
-		if ( isset( $args['vat_id'] ) ) {
-			$formats['{vat_id}'] = sprintf( __( 'VAT Number: %s', 'woo-bg' ), $args['vat_id'] );
-		} else {
-			$formats['{vat_id}'] = '';
-		}
-		return $formats;
-	}
-
-	public static function localisation_address_formats( $formats ) {
-		foreach ( $formats as $key => $format ) {
-			if ( 'default' === $key || in_array( $key, self::get_eu_countries() ) ) {
-				$formats[ $key ] .= "\n{vat_id}";
-			}
-		}
-		return $formats;
 	}
 
 	public static function woocommerce_get_tax_location( $location, $tax_class = '' ) {
