@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.5
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.24
+Stable tag: 3.0.25
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,12 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.25 =
+Econt: Optimize quarters
+Fix microinvest export for Credit notice
+Documents: Add separate numeration for invoices
+NRA: Optimizations
 
 = 3.0.24 =
 Econt: Optimizations
