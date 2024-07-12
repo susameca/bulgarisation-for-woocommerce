@@ -20,14 +20,16 @@ class Export {
 	}
 
 	protected function load_woo_orders() {
+		$timespan = strtotime( 'first day of ' . $this->date . ' ' . wp_timezone_string() ) . '...' . strtotime( 'last day of ' . $this->date . ' 23:59:59 ' . wp_timezone_string() );
+		
 		$orders = apply_filters( 'woo_bg/admin/export/orders', wc_get_orders( array(
-			'date_paid' => date_i18n( 'Y-m-d', strtotime( 'first day of ' . $this->date ) ) . '...' . date_i18n( 'Y-m-d', strtotime( 'last day of ' . $this->date ) ),
+			'date_paid' => $timespan,
 			'status' => apply_filters( 'woo_bg/admin/export/orders_statuses', array( 'wc-completed', 'wc-processing' ) ),
 			'limit' => -1,
 		) ), $this );
-
+		
 		$refunded_orders = apply_filters( 'woo_bg/admin/export/refunded_orders', wc_get_orders( array(
-			'date_created' => date_i18n( 'Y-m-d', strtotime( 'first day of ' . $this->date ) ) . '...' . date_i18n( 'Y-m-d', strtotime( 'last day of ' . $this->date ) ),
+			'date_created' => $timespan,
 			'status' => apply_filters( 'woo_bg/admin/export/refunded_orders_statuses', array( 'wc-completed', 'wc-refunded' ) ),
 			'limit' => -1,
 		) ), $this );
@@ -59,7 +61,7 @@ class Export {
 
 				$this->refunded_orders_ids[] = $parent_order->get_id();
 
-				if ( date_i18n( 'Y-m', strtotime( $parent_order->get_date_paid()->__toString() ) ) === $this->date  ) {
+				if ( $parent_order->get_date_paid() && date_i18n( 'Y-m', strtotime( $parent_order->get_date_paid()->__toString() ) ) === $this->date  ) {
 					$this->completed_orders_ids[] = $parent_order->get_id();
 				}
 			}
