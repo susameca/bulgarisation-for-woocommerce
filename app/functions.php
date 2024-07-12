@@ -330,6 +330,8 @@ function woo_bg_format_phone( $phone ) {
 		$phone = str_pad( substr( $phone, 3 ), 10, '0', STR_PAD_LEFT );
 	}
 
+	$phone = str_replace( ' ', '', $phone );
+
 	return $phone;
 }
 
