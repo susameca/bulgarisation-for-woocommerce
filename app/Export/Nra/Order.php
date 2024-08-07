@@ -154,7 +154,7 @@ class Order {
 			new \DateTime( $this->woo_order->get_date_created() ), 
 			$this->order_document_number,
 			new \DateTime( $this->woo_order->get_date_created() ),
-			$this->woo_order->get_total_discount(), 
+			apply_filters( 'woo_bg/admin/nra_export/order_total_discount', $this->woo_order->get_total_discount(), $this->woo_order ), 
 			$this->payment_method_type,
 			[], 
 			$this->pos_number,

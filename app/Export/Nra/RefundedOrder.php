@@ -28,7 +28,7 @@ class RefundedOrder {
 		foreach ( $refunds as $refund ) {
 			if ( date_i18n( 'Y-m', strtotime( $refund->get_date_created()->__toString() ) ) === $this->export_date  ) {
 				$refund_date = $refund->get_date_created();
-				$total += $refund->get_amount();
+				$total += apply_filters( 'woo_bg/admin/export/refunded_total', $refund->get_amount(), $refund );
 			}
 		}
 
