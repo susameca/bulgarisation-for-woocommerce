@@ -77,10 +77,10 @@ class Plugin {
 
 	private function load_classes() {
 		new Admin\Admin_Menus();
+		new Admin\Order\Columns();
 
 		if ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' ) {
 			new Admin\Order\Actions();
-			new Admin\Order\Columns();
 			new Admin\Order\Emails();
 			new Admin\Order\MetaBox();
 			new Admin\Order\Subscriptions();
