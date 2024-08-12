@@ -486,7 +486,9 @@ class Method extends \WC_Shipping_Method {
 					} else {
 						$errors->add( 'validation', __( 'Please choose delivery option!', 'woo-bg' ) );
 					}
-				} elseif ( $data->method_id === 'woo_bg_econt' ) { 
+				} 
+
+				if ( $data->method_id === 'woo_bg_econt' ) { 
 					$cookie_data = self::get_cookie_data();
 
 					if ( 
@@ -496,8 +498,15 @@ class Method extends \WC_Shipping_Method {
 					) {
 						$errors->add( 'validation', __( 'Please choose a office.', 'woo-bg' ) );
 					}
-				}
 
+					if(
+						! empty( $cookie_data ) && 
+						( !empty( $cookie_data['type'] ) && $cookie_data['type'] === 'address' ) &&  
+						empty( $cookie_data['selectedAddress'] ) 
+					) {
+						$errors->add( 'validation', __( 'Please choose address.', 'woo-bg' ) ); 
+					}
+				}
 			}
 		}
 	}

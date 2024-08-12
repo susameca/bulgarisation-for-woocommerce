@@ -9,7 +9,7 @@ use chillerlan\QRCode\QRCode;
 defined( 'ABSPATH' ) || exit;
 
 class BaseDocument {
-	public $pdf, $woo_order, $nap_number, $company_name, $mol, $eik, $vat_number, $address, $city, $phone_number, $email, $color, $add_shipping, $prepared_by, $identification_code, $footer_text, $qr_png, $meta, $payment_method, $transaction_id, $title, $document_number_meta, $document_number_option;
+	public $order, $pdf, $woo_order, $nap_number, $company_name, $mol, $eik, $vat_number, $address, $city, $phone_number, $email, $color, $add_shipping, $prepared_by, $identification_code, $footer_text, $qr_png, $meta, $payment_method, $transaction_id, $title, $document_number_meta, $document_number_option;
 
 	function __construct( $order ) {
 		$this->woo_order    = $order;

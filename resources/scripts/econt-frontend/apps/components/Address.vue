@@ -158,19 +158,20 @@ export default {
 
 			this.cityField.on('change', function () {
 				_this.city = $(this).val();
-				_this.loadCity();
 			});
 
 			this.stateField.on('change', function () {
 				_this.state = $(this).val();
-				_this.loadCity();
 			});
 
 			this.countryField.on('change', function () {
 				setCookie( 'woo-bg--econt-address', '', 1 );
 				_this.state = $(this).val();
-				_this.loadCity();
 			});
+
+			this.cityField.on('change.loadCity', this.loadCity);
+			this.stateField.on('change.loadCity', this.loadCity);
+			this.countryField.on('change.loadCity', this.loadCity);
 		},
 		loadLocalStorage(){
 			let localStorageData = localStorage.getItem( 'woo-bg--econt-address' );
@@ -249,6 +250,10 @@ export default {
 						}
 					});
 
+					console.log('asf');
+					console.log(selectedAddress);
+					console.log('asf');
+
 					_this.selectedAddress = cloneDeep( selectedAddress );
 					if ( clearAdditionaFields ) {
 						_this.streetNumber = '';
@@ -279,7 +284,7 @@ export default {
 		}, 2000 ),
 		resetData() {
 			this.city = '';
-			this.selectedAddress = '';
+			this.selectedAddress = [];
 			this.streetNumber = '';
 			this.other = '';
 			localStorage.removeItem( 'woo-bg--econt-address' );
@@ -357,6 +362,10 @@ export default {
 		},
 	},
 	beforeDestroy() {
+		this.cityField.off('change.loadCity');
+		this.stateField.off('change.loadCity');
+		this.countryField.off('change.loadCity');
+
 		this.document.off( 'update_checkout.onUpdate');
 		this.phoneField.off( 'change.triggerUpdate' );
 		this.firstNameField.off( 'change.triggerUpdate' );

@@ -63,7 +63,7 @@ class Order {
 			$items[] = array(
 				'name' => apply_filters( 'woo_bg/invoice/order/item_name', $item->get_name(), $item ),
 				'quantity' => $qty, 
-				'vat_rate' => woo_bg_get_order_item_vat_rate( $item, $this->woo_order ) . "%", 
+				'vat_rate' => woo_bg_get_order_item_vat_rate( $item, $this->woo_order, 1 ) . "%", 
 				'price' => wc_price( abs( $item->get_total() / $qty ), array( 'currency' => $this->woo_order->get_currency() ) ),
 				'total' => wc_price( abs( $item->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) )
 			);
@@ -101,7 +101,7 @@ class Order {
 				$items[] = array(
 					'name' => apply_filters( 'woo_bg/invoice/order/item_name', sprintf( __('Shipping: %s', 'woo-bg'), $item->get_name() ), $item ),
 					'quantity' => abs( $item->get_quantity() ), 
-					'vat_rate' => $item_vat . "%", 
+					'vat_rate' => woo_bg_maybe_add_rate_group( $item_vat ) . "%", 
 					'price' => wc_price( abs( $item_price ), array( 'currency' => $this->woo_order->get_currency() ) ),
 					'total' => wc_price( abs( $item_total ), array( 'currency' => $this->woo_order->get_currency() ) )
 				);

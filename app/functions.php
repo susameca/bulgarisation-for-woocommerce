@@ -223,7 +223,7 @@ function woo_bg_get_shipping_tests_options() {
 	);
 }
 
-function woo_bg_get_order_shipping_vat( $order ) {
+function woo_bg_get_order_shipping_vat( $order, $show_group = false ) {
 	$shipping_vat = 0;
 
 	if ( wc_tax_enabled() && !empty( $order->get_items( 'tax' ) ) ) {
@@ -235,10 +235,14 @@ function woo_bg_get_order_shipping_vat( $order ) {
 		}
 	}
 
+	if ( $show_group ) {
+		$shipping_vat = woo_bg_maybe_add_rate_group( $shipping_vat );
+	}
+
 	return apply_filters( 'woo_bg/order_item/shipping_vat_rate', $shipping_vat, $order );
 }
 
-function woo_bg_get_order_item_vat_rate( $item, $order ) {
+function woo_bg_get_order_item_vat_rate( $item, $order, $show_group = false ) {
 	$tax_data = wc_tax_enabled() ? $item->get_taxes() : false;
 	$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
 	$vat_percentages     = woo_bg_get_vat_groups();
@@ -264,7 +268,40 @@ function woo_bg_get_order_item_vat_rate( $item, $order ) {
 		}
 	}
 
+	if ( $show_group ) {
+		$rate = woo_bg_maybe_add_rate_group( $rate );
+	}
+
 	return apply_filters( 'woo_bg/order_item/vat_rate', $rate, $item, $order );
+}
+
+function woo_bg_maybe_add_rate_group( $rate ) {
+	$group = woo_bg_get_vat_group_from_rate( $rate );
+
+	if ( $group ) {
+		$rate = $group . " - " . $rate;
+	}
+
+	return $rate;
+}
+
+function woo_bg_get_vat_group_from_rate( $rate ) {
+	switch ( $rate ) {
+		case '0':
+			$group = "А";
+			break;
+		case '9':
+			$group = "Г";
+			break;
+		case '20':
+			$group = "Б";
+			break;
+		default:
+			$group = "";
+			break;
+	}
+
+	return $group;
 }
 
 function woo_bg_tax_based_price( $price, $rate = 20 ) {

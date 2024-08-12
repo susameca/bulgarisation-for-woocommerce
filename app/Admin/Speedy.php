@@ -260,6 +260,21 @@ class Speedy {
 			) {
 				$label['service']['additionalServices']['cod']['amount'] += number_format( $cookie_data['fixed_price'], 2 );
 				$label['service']['additionalServices']['cod']['amount'] = number_format( $label['service']['additionalServices']['cod']['amount'], 2 );
+
+				if ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) && wc_tax_enabled() ) {
+					$label['service']['additionalServices']['cod']['fiscalReceiptItems'] = array();
+
+					foreach ( $order->get_items() as $item ) {
+						$rate = woo_bg_get_order_item_vat_rate( $item, $order );
+
+						$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
+							'description' => mb_substr( $item->get_name(), 0, 50 ),
+							'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
+							'amount' => $item->get_total() - $item->get_total_tax(),
+							'amountWithVat' => $item->get_total(),
+						];
+					}
+				}
 			}
 		}
 

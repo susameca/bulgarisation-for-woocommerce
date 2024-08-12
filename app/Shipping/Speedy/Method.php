@@ -402,6 +402,20 @@ class Method extends \WC_Shipping_Method {
 				'processingType' => ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'ppp' ) ) ) ? 'POSTAL_MONEY_TRANSFER' : 'CASH',
 			);
 
+			if ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) && wc_tax_enabled() ) {
+				$services['additionalServices']['cod']['fiscalReceiptItems'] = array();
+
+				foreach ( WC()->cart->get_cart() as $cart_item ) {
+					$rate = round( ( $cart_item['line_tax'] / $cart_item['line_total'] ) * 100 );
+					$services['additionalServices']['cod']['fiscalReceiptItems'][] = [
+						'description' => mb_substr( $cart_item['data']->get_name(), 0, 50 ),
+						'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
+						'amount' => $cart_item['line_total'],
+						'amountWithVat' => $cart_item['line_total'] + $cart_item['line_tax'],
+					];
+				}
+			}
+
 			if ( 
 				$this->test !== 'no' && 
 				! ( isset( $this->cookie_data['selectedOfficeType'] ) && $this->cookie_data['selectedOfficeType'] == 'APT' )

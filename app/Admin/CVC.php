@@ -204,7 +204,6 @@ class CVC {
 		$order_id = $_REQUEST['orderId'];
 		$order = wc_get_order( $order_id );
 		$shipment_status = $_REQUEST['shipmentStatus'];
-		$data = array();
 
 		$response = $container[ Client::CVC ]->api_call( $container[ Client::CVC ]::ACTIONS_ENDPOINT, array(
 			'wb' => $shipment_status['wb'],

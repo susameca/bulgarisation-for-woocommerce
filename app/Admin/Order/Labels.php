@@ -16,8 +16,6 @@ class Labels {
 		$method = sanitize_text_field( $_REQUEST['method'] );
 		$order = wc_get_order( $order_id );
 
-		error_log( $order_id );
-
 		switch ( $method ) {
 			case 'woo_bg_speedy':
 				Speedy::generate_label_after_order_generated( $order_id );
