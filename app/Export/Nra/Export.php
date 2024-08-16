@@ -15,8 +15,6 @@ class Export {
 		$this->date = $date;
 		$this->load_woo_orders();
 		$this->load_options();
-
-
 	}
 
 	protected function load_woo_orders() {

@@ -30,6 +30,7 @@ class Order {
 
 		if ( $generate_files == 'true' && !$order_document_number ) {
 			Documents::generate_documents( $this->woo_order->get_id() );
+			$this->woo_order = wc_get_order( $this->woo_order->get_id() );
 			$order_document_number = $this->woo_order->get_meta( 'woo_bg_order_number' );
 		}
 
