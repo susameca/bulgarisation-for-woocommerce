@@ -216,9 +216,9 @@ class Plugin {
 	}
 
 	public static function robots_txt( $output, $public ) {
-		$plugin_dir_url = str_replace( home_url(), '', woo_bg()->plugin_dir_url() );
+		$plugin_dir_url = str_replace( site_url(), '', woo_bg()->plugin_dir_url() );
 		$upload_dir = wp_upload_dir();
-		$upload_dir = str_replace( home_url(), '', $upload_dir['baseurl'] );
+		$upload_dir = str_replace( site_url(), '', $upload_dir['baseurl'] );
 
 		$output .= "Disallow: " . $plugin_dir_url . "\n";
 		$output .= "Disallow: " . $upload_dir . "/woo-bg/\n";
