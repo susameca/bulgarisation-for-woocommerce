@@ -345,8 +345,6 @@ class Method extends \WC_Shipping_Method {
 		);
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
-			$_product = wc_get_product( $item[ 'product_id' ] );
-			
 			if ( $item['data']->get_weight() ) {
 				$content['totalWeight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
 			}
@@ -410,8 +408,8 @@ class Method extends \WC_Shipping_Method {
 					$services['additionalServices']['cod']['fiscalReceiptItems'][] = [
 						'description' => mb_substr( $cart_item['data']->get_name(), 0, 50 ),
 						'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
-						'amount' => $cart_item['line_total'],
-						'amountWithVat' => $cart_item['line_total'] + $cart_item['line_tax'],
+						'amount' => number_format( $cart_item['line_total'], 2 ),
+						'amountWithVat' => number_format( $cart_item['line_total'] + $cart_item['line_tax'], 2 ),
 					];
 				}
 			}

@@ -230,6 +230,7 @@ class Speedy {
 		$label = self::update_recipient_data( $label );
 		$label = self::update_payment_by( $label, $order );
 		$label = self::update_services( $label );
+		$label = self::update_fiscal_items( $label, $order );
 
 		$data = self::send_label_to_speedy( $label, $order );
 
@@ -250,6 +251,25 @@ class Speedy {
 		self::send_label_to_speedy( $label, $order );
 	}
 
+	public static function update_fiscal_items( $label, $order ) {
+		if ( isset( $label['service']['additionalServices']['cod']['fiscalReceiptItems'] ) && wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) && wc_tax_enabled() ) {
+			$label['service']['additionalServices']['cod']['fiscalReceiptItems'] = array();
+
+			foreach ( $order->get_items() as $item ) {
+				$rate = woo_bg_get_order_item_vat_rate( $item, $order );
+
+				$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
+					'description' => mb_substr( $item->get_name(), 0, 50 ),
+					'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
+					'amount' => number_format( $item->get_total(), 2 ),
+					'amountWithVat' => number_format( $item->get_total() + $item->get_total_tax(), 2 ),
+				];
+			}
+		}
+
+		return $label;
+	}
+
 	public static function update_cod( $label, $order ) {
 		$cookie_data = $order->get_meta( 'woo_bg_speedy_cookie_data' );
 
@@ -260,21 +280,6 @@ class Speedy {
 			) {
 				$label['service']['additionalServices']['cod']['amount'] += number_format( $cookie_data['fixed_price'], 2 );
 				$label['service']['additionalServices']['cod']['amount'] = number_format( $label['service']['additionalServices']['cod']['amount'], 2 );
-
-				if ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) && wc_tax_enabled() ) {
-					$label['service']['additionalServices']['cod']['fiscalReceiptItems'] = array();
-
-					foreach ( $order->get_items() as $item ) {
-						$rate = woo_bg_get_order_item_vat_rate( $item, $order );
-
-						$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
-							'description' => mb_substr( $item->get_name(), 0, 50 ),
-							'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
-							'amount' => $item->get_total() - $item->get_total_tax(),
-							'amountWithVat' => $item->get_total(),
-						];
-					}
-				}
 			}
 		}
 
