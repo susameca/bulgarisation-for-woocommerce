@@ -47,7 +47,7 @@ class Office {
 		$args = [];
 		$country = sanitize_text_field( $_POST['country'] );
 		$country_id = self::$container[ Client::CVC_COUNTRIES ]->get_country_id( $country );
-		$args[ 'offices' ] = self::$container[ Client::CVC_OFFICES ]->get_all_offices( $country_id );
+		$args[ 'offices' ] = apply_filters( 'woo_bg/shipping_method/cvc/offices', self::$container[ Client::CVC_OFFICES ]->get_all_offices( $country_id ) );
 		$args[ 'status' ] = 'valid-city';
 
 		wp_send_json_success( $args );

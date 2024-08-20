@@ -80,7 +80,7 @@ class Office {
 				}
 			}
 
-			$args[ 'offices' ] = $offices;
+			$args[ 'offices' ] = apply_filters( 'woo_bg/shipping_method/speedy/offices', $offices );
 			$args[ 'status' ] = 'valid-city';
 		}
 
