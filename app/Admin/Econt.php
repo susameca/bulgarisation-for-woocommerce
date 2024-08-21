@@ -393,7 +393,7 @@ class Econt {
 							'description' => $item->get_name(),
 							'weight' => $item_weight,
 							'count' => $item->get_quantity(),
-							'price' => $item->get_total(),
+							'price' => number_format( $item->get_total() + $item->get_total_tax(), 2 ),
 						];
 					}
 				}
