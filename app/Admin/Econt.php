@@ -328,6 +328,8 @@ class Econt {
 			$receiver_address = array(
 				'city' => $cities[ $city_key ],
 			);
+			
+			unset( $receiver_address['city']['servingOffices'] );
 
 			if ( $type === 'streets' ) {
 				$receiver_address['street'] = $cookie_data['selectedAddress']['label'];

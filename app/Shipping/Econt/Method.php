@@ -320,6 +320,8 @@ class Method extends \WC_Shipping_Method {
 			'city' => $cities['cities'][ $city_key ],
 		);
 
+		unset( $receiver_address['city']['servingOffices'] );
+
 		if ( $type === 'streets' ) {
 			$num_parts = explode( ' ', $this->cookie_data['streetNumber'] );
 			$receiver_address['street'] = $this->cookie_data['selectedAddress']['label'];
