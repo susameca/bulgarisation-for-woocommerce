@@ -2,10 +2,10 @@
 Contributors: autopolisbg
 Tags: woocommerce, e-commerce, invoice, shipping, bulgaria
 Requires at least: 5.3
-Tested up to: 6.5
+Tested up to: 6.6
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.28
+Stable tag: 3.0.29
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.29 =
+Econt: Optimizations
 
 = 3.0.28 =
 Speedy: Optimizations
