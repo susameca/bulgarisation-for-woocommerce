@@ -47,11 +47,16 @@ class BaseDocument {
 	}
 
 	public function get_head_items() {
-		return apply_filters( 'woo_bg/invoice/head_items', array(
-			'reference' => array(
+		$items = array();
+
+		if ( $document_number = $this->get_document_number() ) {
+			$items[ 'reference' ] = array(
 				'label' => '№',
-				'value' => str_pad( $this->get_document_number(), 10, '0', STR_PAD_LEFT ),
-			),
+				'value' => str_pad( $document_number, 10, '0', STR_PAD_LEFT ),
+			);
+		}
+
+		$items = array_merge( $items, array(
 			'date' => array(
 				'label' => __( 'Order date', 'woo-bg' ),
 				'value' => date_i18n( 'M d, Y', strtotime( $this->woo_order->get_date_created() ) ),
@@ -72,7 +77,9 @@ class BaseDocument {
 				'label' => __( 'Order Number', 'woo-bg' ),
 				'value' => $this->woo_order->get_order_number(),
 			),
-		), $this );
+		) );
+
+		return apply_filters( 'woo_bg/invoice/head_items', $items , $this );
 	}
 
 	public function get_cart_headers() {

@@ -15,4 +15,8 @@ class Proforma extends BaseDocument {
 			$this->document_number_option = 'next_invoice_separate_number';
 		}
 	}
+
+	public function get_document_number() {
+		return;
+	}
 }
