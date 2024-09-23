@@ -291,6 +291,8 @@ class Econt {
 			self::update_order_shipping_price( $response, $order_id, $label );
 		}
 
+		do_action( 'woo_bg/econt/after_send_label', $data, $order );
+
 		return $data;
 	}
 

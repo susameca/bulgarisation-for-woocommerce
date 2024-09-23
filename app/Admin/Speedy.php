@@ -307,6 +307,8 @@ class Speedy {
 			self::update_order_shipping_price( $response, $order_id );
 		}
 
+		do_action( 'woo_bg/speedy/after_send_label', $data, $order );
+
 		return $data;
 	}
 

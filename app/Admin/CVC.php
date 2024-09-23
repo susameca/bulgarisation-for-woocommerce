@@ -271,6 +271,8 @@ class CVC {
 			self::update_order_shipping_price( $response, $order_id );
 		}
 
+		do_action( 'woo_bg/cvc/after_send_label', $data, $order );
+
 		return $data;
 	}
 
