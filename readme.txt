@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.6
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.29
+Stable tag: 3.0.30
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -53,11 +53,6 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Да, текстовете на плъгина са написани на английски и съобразено с начина на превеждане на текстове в WordPress.
 
-== Upgrade Notice ==
-
-= 3.0.0 =
-След ъпдейт от версия 2.х.х до версия над 3.0.0 трябва да настроите плъгина наново поради промени в настройките.
-
 == Screenshots ==
 
 1. Страница за експорт
@@ -70,6 +65,11 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.30 =
+Econt: Optimizations
+Couriers: Add action after generating labels
+Invoices: Remove generating doc number on pro forma
 
 = 3.0.29 =
 Econt: Optimizations
