@@ -2,8 +2,7 @@
 namespace Woo_BG\Client\Speedy;
 use Woo_BG\Container\Client;
 use Woo_BG\Transliteration;
-use \Carbon_CSV\CsvFile;
-use \Carbon_CSV\Exception as CsvException;
+use Woo_BG\CsvFile;
 use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
