@@ -23,7 +23,7 @@ class Actions {
 		add_action( 'woocommerce_order_action_woo_bg_regenerate_pdfs', array( __CLASS__, 'process_order_meta_box_actions' ) );
 		add_action( 'woocommerce_order_action_woo_bg_generate_invoice', array( __CLASS__, 'generate_invoice_action' ) );
 
-		add_action( 'woocommerce_create_refund', array( __CLASS__, 'create_refund_action' ), 5, 2 );
+		add_action( 'woocommerce_order_refunded', array( __CLASS__, 'create_refund_action' ), 5, 2 );
 		
 		add_action( 'woocommerce_order_details_after_customer_details', array( __CLASS__, 'add_invoice_to_customer_order' ) );
 
@@ -152,7 +152,7 @@ class Actions {
 		( new Document\Invoice( $order ) )->generate_file();
 	}
 
-	public static function create_refund_action( $order_get_id, $refund_get_id ) {
-		Documents::generate_refunded_documents( $order_get_id->get_id(), $order_get_id->get_parent_id() );
+	public static function create_refund_action( $order_id, $refund_id ) {
+		Documents::generate_refunded_documents( $refund_id, $order_id );
 	}
 }
