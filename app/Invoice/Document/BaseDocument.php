@@ -3,13 +3,11 @@ namespace Woo_BG\Invoice\Document;
 
 use Woo_BG\Invoice\Order\Order;
 use Woo_BG\Invoice\PDF\PDF;
-use Woo_BG\Image_Uploader;
-use chillerlan\QRCode\QRCode;
 
 defined( 'ABSPATH' ) || exit;
 
 class BaseDocument {
-	public $order, $pdf, $woo_order, $nap_number, $company_name, $mol, $eik, $vat_number, $address, $city, $phone_number, $email, $color, $add_shipping, $prepared_by, $identification_code, $footer_text, $qr_png, $meta, $payment_method, $transaction_id, $title, $document_number_meta, $document_number_option;
+	public $order, $pdf, $woo_order, $nap_number, $company_name, $mol, $eik, $vat_number, $address, $city, $phone_number, $email, $color, $add_shipping, $prepared_by, $identification_code, $footer_text, $meta, $payment_method, $transaction_id, $title, $document_number_meta, $document_number_option;
 
 	function __construct( $order ) {
 		$this->woo_order    = $order;
@@ -36,7 +34,6 @@ class BaseDocument {
 		if ( ! is_a( $this->woo_order, '\Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) ) {
 			$this->payment_method         = $this->woo_order->get_payment_method_title();
 			$this->transaction_id         = $this->woo_order->get_transaction_id();
-			$this->generate_QR_code();
 		}
 
 		$this->set_pdf_printer();
@@ -226,27 +223,7 @@ class BaseDocument {
 		$this->title = $title;
 	}
 
-	public function generate_QR_code() {
-		$qr_code_pieces = array(
-			$this->nap_number,
-			$this->woo_order->get_order_number(),
-			$this->woo_order->get_transaction_id(),
-			$this->woo_order->get_date_created()->date_i18n('Y-m-d'),
-			$this->woo_order->get_date_created()->date_i18n('G:i:s'),
-			$this->woo_order->get_total(),
-		);
-
-		$qr_code = new QRCode();
-
-		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
-
-		$this->qr_png = Image_Uploader::upload_image_from_base64( array(
-			'data' => $qr_code->render( implode( '*', $qr_code_pieces ) ),
-			'type' => 'image/png',
-		), 'qrcode' );
-
-		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
-	}
+	public function after_file_generated() {}
 
 	public function generate_file() {
 		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
@@ -269,6 +246,18 @@ class BaseDocument {
 		$this->woo_order->update_meta_data( $this->meta, $attach_id );
 		$this->woo_order->save();
 
-		wp_delete_attachment( $this->qr_png, 1 );
+		$this->after_file_generated();
+	}
+
+	public function render_pdf_logo() {
+		ob_start();
+
+		if ( $this->logo ) {
+			echo wp_get_attachment_image( $this->logo, 'medium_large' );
+		}
+
+		$image_tag_html = ob_get_clean();
+
+		echo apply_filters( 'woo_bg/invoice/pdf/default_template/qr', $image_tag_html, $this );
 	}
 }

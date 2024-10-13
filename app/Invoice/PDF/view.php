@@ -48,8 +48,9 @@
 	<main>
 		<div class="add-detail">
 			<div class="w-45 float-left logo">
-				<?php echo wp_kses_post( apply_filters( 'woo_bg/invoice/pdf/default_template/qr', wp_get_attachment_image( $this->document->qr_png, 'medium_large' ), $this ) ) ?>
+				<?php $this->document->render_pdf_logo(); ?>
 			</div>
+			
 			<div class="w-55 float-left text-right">
 				<h1 class="m-0 p-0"><?php echo esc_html( $this->document->title ) ?></h1>
 
