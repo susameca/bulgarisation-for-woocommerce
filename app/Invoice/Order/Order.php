@@ -52,21 +52,34 @@ class Order {
 
 		if ( empty( $order_items ) ) {
 			$parent_order = wc_get_order( $this->woo_order->get_parent_id() );
-			$this->woo_order = $parent_order;
-			$order_items = array_merge( $parent_order->get_items(), $parent_order->get_items('fee') );
-			$this->order_taxes = $this->woo_order->get_taxes();
+
+			if ( abs( $parent_order->get_total() ) === abs( $this->woo_order->get_total() ) ) {
+				$this->woo_order = $parent_order;
+				$order_items = array_merge( $parent_order->get_items(), $parent_order->get_items('fee') );
+				$this->order_taxes = $this->woo_order->get_taxes();
+			} else {
+				$items[] = array(
+					'name' => apply_filters( 'woo_bg/invoice/order/item_name', $this->woo_order->get_reason(), null ),
+					'quantity' => 1, 
+					'vat_rate' => '', 
+					'price' => wc_price( abs( $this->woo_order->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) ),
+					'total' => wc_price( abs( $this->woo_order->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) )
+				);
+			}
 		}
 
-		foreach ( $order_items as $key => $item ) {
-			$qty = ( abs( $item->get_quantity() ) ) ? abs( $item->get_quantity() ) : 1;
-			
-			$items[] = array(
-				'name' => apply_filters( 'woo_bg/invoice/order/item_name', $item->get_name(), $item ),
-				'quantity' => $qty, 
-				'vat_rate' => woo_bg_get_order_item_vat_rate( $item, $this->woo_order, 1 ) . "%", 
-				'price' => wc_price( abs( $item->get_total() / $qty ), array( 'currency' => $this->woo_order->get_currency() ) ),
-				'total' => wc_price( abs( $item->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) )
-			);
+		if ( !empty( $order_items ) ) {
+			foreach ( $order_items as $key => $item ) {
+				$qty = ( abs( $item->get_quantity() ) ) ? abs( $item->get_quantity() ) : 1;
+				
+				$items[] = array(
+					'name' => apply_filters( 'woo_bg/invoice/order/item_name', $item->get_name(), $item ),
+					'quantity' => $qty, 
+					'vat_rate' => woo_bg_get_order_item_vat_rate( $item, $this->woo_order, 1 ) . "%", 
+					'price' => wc_price( abs( $item->get_total() / $qty ), array( 'currency' => $this->woo_order->get_currency() ) ),
+					'total' => wc_price( abs( $item->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) )
+				);
+			}
 		}
 
 		if ( sizeof( $this->woo_order->get_items( 'shipping' ) ) > 0 && $this->remove_shipping !== 'yes') {
@@ -131,6 +144,10 @@ class Order {
 		$shipping_items = $this->woo_order->get_items( 'shipping' );
 		$shipping_total = $this->woo_order->get_shipping_total();
 		$subtotal = abs( $this->woo_order->get_subtotal() + $shipping_total + $this->woo_order->get_total_fees() );
+
+		if ( method_exists( $this->woo_order, 'get_reason' ) && $this->woo_order->get_reason() && $subtotal == 0 ) {
+			$subtotal = abs( $this->woo_order->get_total() );
+		}
 
 		foreach ( $shipping_items as $item ) {
 			if ( in_array( $item->get_method_id(), self::get_default_taxable_shipping_rates() ) ) {
