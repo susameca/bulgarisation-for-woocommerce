@@ -554,8 +554,6 @@ class Speedy {
 			}
 		}
 
-		$price = number_format( $price, 2 );
-
 		foreach( $order->get_items( 'shipping' ) as $item_id => $item ) {
 			$item->set_total( $price );
 			$item->calculate_taxes();
