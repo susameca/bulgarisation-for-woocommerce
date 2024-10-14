@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.6
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.30
+Stable tag: 3.0.31
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,6 +65,11 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.31 =
+Speedy: Optimizations
+Documents: Optimizations
+Update dompdf and all libraries
 
 = 3.0.30 =
 Econt: Optimizations
