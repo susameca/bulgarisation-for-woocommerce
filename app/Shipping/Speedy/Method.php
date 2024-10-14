@@ -388,7 +388,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( $os_value ) {
 			$services['additionalServices']['declaredValue'] = array(
-				'amount' => number_format( $os_value, 2 ), 
+				'amount' => number_format( $os_value, 2, '.', '' ), 
 				'fragile' => $is_fragile, 
 				"ignoreIfNotApplicable" => true 
 			);
@@ -408,8 +408,8 @@ class Method extends \WC_Shipping_Method {
 					$services['additionalServices']['cod']['fiscalReceiptItems'][] = [
 						'description' => mb_substr( $cart_item['data']->get_name(), 0, 50 ),
 						'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
-						'amount' => number_format( $cart_item['line_total'], 2 ),
-						'amountWithVat' => number_format( $cart_item['line_total'] + $cart_item['line_tax'], 2 ),
+						'amount' => number_format( $cart_item['line_total'], 2, '.', '' ),
+						'amountWithVat' => number_format( $cart_item['line_total'] + $cart_item['line_tax'], 2, '.', '' ),
 					];
 				}
 			}

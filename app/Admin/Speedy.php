@@ -261,8 +261,8 @@ class Speedy {
 				$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
 					'description' => mb_substr( $item->get_name(), 0, 50 ),
 					'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
-					'amount' => number_format( $item->get_total(), 2 ),
-					'amountWithVat' => number_format( $item->get_total() + $item->get_total_tax(), 2 ),
+					'amount' => number_format( $item->get_total(), 2, '.', '' ),
+					'amountWithVat' => number_format( $item->get_total() + $item->get_total_tax(), 2, '.', '' ),
 				];
 			}
 		}
@@ -278,8 +278,8 @@ class Speedy {
 				isset( $label['service']['additionalServices']['cod']['amount'] ) && 
 				$cookie_data['fixed_price']
 			) {
-				$label['service']['additionalServices']['cod']['amount'] += number_format( $cookie_data['fixed_price'], 2 );
-				$label['service']['additionalServices']['cod']['amount'] = number_format( $label['service']['additionalServices']['cod']['amount'], 2 );
+				$label['service']['additionalServices']['cod']['amount'] += number_format( $cookie_data['fixed_price'], 2, '.', '' );
+				$label['service']['additionalServices']['cod']['amount'] = number_format( $label['service']['additionalServices']['cod']['amount'], 2, '.', '' );
 			}
 		}
 
@@ -438,8 +438,8 @@ class Speedy {
 				$cookie_data['fixed_price'] && 
 				$payment_by['id'] == 'fixed'
 			) {
-				$label['service']['additionalServices']['cod']['amount'] += number_format( $cookie_data['fixed_price'], 2 );
-				$label['service']['additionalServices']['cod']['amount'] = number_format( $label['service']['additionalServices']['cod']['amount'], 2 );
+				$label['service']['additionalServices']['cod']['amount'] += number_format( $cookie_data['fixed_price'], 2, '.', '' );
+				$label['service']['additionalServices']['cod']['amount'] = number_format( $label['service']['additionalServices']['cod']['amount'], 2, '.', '' );
 			}
 		}
 
