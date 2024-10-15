@@ -18,5 +18,10 @@
         "psr-4": {
             "Woo_BG\\": "app/"
         }
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
     }
 }
