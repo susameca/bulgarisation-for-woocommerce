@@ -99,7 +99,7 @@ class CreditNotice extends NRARefunded {
 		$this->woo_order->update_meta_data( $this->meta, $attach_id );
 		$this->woo_order->save();
 		
-		wp_delete_attachment( $this->qr_png, 1 );
+		$this->after_file_generated();
 	}
 
 	public function get_parent_reference() {

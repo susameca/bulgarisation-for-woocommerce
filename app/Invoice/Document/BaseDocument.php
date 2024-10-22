@@ -7,7 +7,7 @@ use Woo_BG\Invoice\PDF\PDF;
 defined( 'ABSPATH' ) || exit;
 
 class BaseDocument {
-	public $order, $pdf, $woo_order, $nap_number, $company_name, $mol, $eik, $vat_number, $address, $city, $phone_number, $email, $color, $add_shipping, $prepared_by, $identification_code, $footer_text, $meta, $payment_method, $transaction_id, $title, $document_number_meta, $document_number_option;
+	public $order, $pdf, $woo_order, $nap_number, $company_name, $mol, $eik, $vat_number, $address, $city, $phone_number, $email, $color, $add_shipping, $prepared_by, $identification_code, $footer_text, $meta, $payment_method, $transaction_id, $title, $document_number_meta, $document_number_option, $logo;
 
 	function __construct( $order ) {
 		$this->woo_order    = $order;
