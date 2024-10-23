@@ -44,7 +44,7 @@ class CsvFile extends File implements \Countable {
 	 * Read number of lines in CSV
 	 * @return int number of lines
 	 */
-	function count() {
+	function count(): int {
 		return count($this->to_array());
 	}
 
@@ -61,7 +61,7 @@ class CsvFile extends File implements \Countable {
 		return $rows;
 	}
 
-	public function rewind() {
+	public function rewind(): void {
 		$this->seek($this->offset_row);
 	}
 
@@ -69,11 +69,11 @@ class CsvFile extends File implements \Countable {
 	 * Override the key function in order to allow shifting in indecies according
 	 * to the current offset.
 	 */
-	public function key() {
+	public function key(): int {
 		return $this->row_counter - 1;
 	}
 
-	public function current() {
+	public function current(): array|string|false {
 		$this->row_counter++;
 		$row = parent::current();
 
