@@ -60,7 +60,7 @@ class Columns {
 				$order = wc_get_order( $post_id );
 				$data = woo_bg_get_order_label( $post_id );
 
-				if ( !empty( $data ) ) {
+				if ( !empty( $data ) && strpos( $data['method'], 'woo_bg' ) !== false ) {
 					Admin_Menus::render_fragment( 'label-column', [ 
 						'data' => $data,
 						'order' => $order,
