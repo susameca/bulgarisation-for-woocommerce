@@ -160,6 +160,14 @@
 							<input v-model="labelData.shipmentDescription" type="text">
 						</p>
 
+						<p class="form-field form-field-wide" v-if="useInvoiceNumber">
+							<label>
+								{{i18n.invoiceNum}}:
+							</label>
+
+							<input v-model="labelData.services.invoiceNum" type="text">
+						</p>
+
 						<p class="form-field form-field-wide">
 							<label>
 								{{i18n.deliveryPayedBy}}:
@@ -340,6 +348,7 @@ export default {
 			message: '',
 			i18n: wooBg_econt.i18n,
 			declaredValue: '',
+			useInvoiceNumber: false,
 		}
 	},
 	watch: {
@@ -442,6 +451,11 @@ export default {
 
 		if ( wooBg_econt.label.services.declaredValueAmount ) {
 			this.declaredValue = wooBg_econt.label.services.declaredValueAmount;
+		}
+
+		if ( wooBg_econt.useInvoiceNumber ) {
+			this.useInvoiceNumber = true;
+			this.labelData.services.invoiceNum = wooBg_econt.invoiceNumber;
 		}
 	},
 	methods: {

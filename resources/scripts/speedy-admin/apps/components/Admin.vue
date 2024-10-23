@@ -147,6 +147,22 @@
 							<input v-model="labelData.content.contents" type="text">
 						</p>
 
+						<p class="form-field" style="clear:none">
+							<label>
+								ref 1:
+							</label>
+
+							<input v-model="labelData.ref1" type="text">
+						</p>
+
+						<p class="form-field" style="float:right; clear:none">
+							<label>
+								ref 2:
+							</label>
+
+							<input v-model="labelData.ref2" type="text">
+						</p>
+
 						<p class="form-field form-field-wide">
 							<label>
 								{{i18n.deliveryPayedBy}}:

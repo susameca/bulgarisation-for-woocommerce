@@ -50,8 +50,6 @@ class Econt {
 
 		if ( ! is_object( $theorder ) ) {
 			$theorder = wc_get_order( $post->ID );
-		} else {
-			$order = $theorder;
 		}
 
 		if ( !empty( $theorder->get_items( 'shipping' ) ) ) {
@@ -78,6 +76,8 @@ class Econt {
 					}
 					
 					wp_localize_script( 'woo-bg-js-admin', 'wooBg_econt', array(
+						'useInvoiceNumber' => self::use_invoice_number(),
+						'invoiceNumber' => self::get_invoice_number( $theorder->get_id() ),
 						'label' => $label_data['label'],
 						'shipmentStatus' => $shipment_status,
 						'cookie_data' => $cookie_data,
@@ -132,6 +132,7 @@ class Econt {
 			'reviewAndTest' => __( 'Review and test', 'woo-bg' ),
 			'declaredValue' => __( 'Declared value', 'woo-bg' ),
 			'description' => __( 'Description', 'woo-bg' ),
+			'invoiceNum' => __( 'Invoice number', 'woo-bg' ),
 		);
 	}
 
@@ -356,8 +357,7 @@ class Econt {
 	protected static function update_label_pay_options( $label, $order_id ) {
 		$order = wc_get_order( $order_id );
 		$cookie_data = $order->get_meta( 'woo_bg_econt_cookie_data' );
-
-		unset( $label['services']['invoiceNum'] );
+		
 		unset( $label['services']['cdPayOptionsTemplate'] );
 		unset( $label['packingListType'] );
 		unset( $label['packingList'] );
@@ -370,22 +370,8 @@ class Econt {
 				$packing_list_or_invoice = woo_bg_get_option( 'econt', 'invoice_or_packing_list' );
 				$label['services']['cdPayOptionsTemplate'] = $cd_pay_option;
 
-				if (  !$packing_list_or_invoice || $packing_list_or_invoice === 'invoice' ) {
-					$cd_pay_options = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_profile_data()['cdPayOptions'];
-
-					foreach ( $cd_pay_options as $option ) {
-						if ( $option['num'] === $cd_pay_option && $option['method'] != 'office' ) {
-							$order = wc_get_order( $order_id );
-							$document_number = $order->get_meta( 'woo_bg_order_number' );
-
-							if ( !$document_number ) {
-								$document_number = str_pad( $order->get_id(), 10, '0', STR_PAD_LEFT );
-							}
-
-							$label['services']['invoiceNum'] = $document_number . '/' . gmdate( 'd.m.y', strtotime( $order->get_date_created() ) );
-						}
-					}
-				} else if ( $packing_list_or_invoice === 'packing_list' ) {
+				if ( $packing_list_or_invoice === 'packing_list' ) {
+					unset( $label['services']['invoiceNum'] );
 					$label["packingListType"] = 'digital';
 					$label["packingList"] = [];
 					
@@ -405,6 +391,52 @@ class Econt {
 		}
 		
 		return $label;
+	}
+
+	public static function get_invoice_number( $order_id ) {
+		$order = wc_get_order( $order_id );
+		$cookie_data = $order->get_meta( 'woo_bg_econt_cookie_data' );
+		$invoice_num = '';
+
+		if ( $cookie_data['payment'] === 'cod' ) {
+			$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
+
+			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
+				$packing_list_or_invoice = woo_bg_get_option( 'econt', 'invoice_or_packing_list' );
+
+				if ( self::use_invoice_number() ) {
+					$cd_pay_options = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_profile_data()['cdPayOptions'];
+
+					foreach ( $cd_pay_options as $option ) {
+						if ( $option['num'] === $cd_pay_option && $option['method'] != 'office' ) {
+							$order = wc_get_order( $order_id );
+							$document_number = $order->get_meta( 'woo_bg_order_number' );
+
+							if ( !$document_number ) {
+								$document_number = str_pad( $order->get_id(), 10, '0', STR_PAD_LEFT );
+							}
+
+							$invoice_num = $document_number . '/' . gmdate( 'd.m.y', strtotime( $order->get_date_created() ) );
+						}
+					}
+				}
+			}
+		}
+
+		return $invoice_num;
+	}
+
+	public static function use_invoice_number() {
+		$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
+		$use = false;
+
+		if ( $cd_pay_option && $cd_pay_option !== 'no' ) {
+			$packing_list_or_invoice = woo_bg_get_option( 'econt', 'invoice_or_packing_list' );
+
+			$use = ( !$packing_list_or_invoice || $packing_list_or_invoice === 'invoice' );
+		}
+
+		return $use;
 	}
 
 	protected static function update_payment_by( $label, $order_id ) {
