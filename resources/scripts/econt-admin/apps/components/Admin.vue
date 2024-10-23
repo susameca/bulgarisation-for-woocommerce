@@ -247,12 +247,12 @@
 
 						<div>
 							<span class="woo-bg--radio">
-					  			<input id="label_size_default" type="radio" name="label_size" value="" checked>
+					  			<input id="label_size_default" type="radio" name="label_size" value="">
 					  			<label for="label_size_default"> {{i18n.default}}</label>
 							</span>
 
 							<span class="woo-bg--radio">
-					  			<input id="label_size_10x9" type="radio" name="label_size" value="10x9" >
+					  			<input id="label_size_10x9" type="radio" name="label_size" value="10x9" checked>
 					  			<label for="label_size_10x9">10x9</label>
 							</span>
 
@@ -331,7 +331,7 @@ export default {
 					label: wooBg_econt.i18n.fixedPrice
 				}
 			],
-			size: '',
+			size: '10x9',
 			shipmentStatus : '',
 			labelData : wooBg_econt.label,
 			document: $( document.body ),
