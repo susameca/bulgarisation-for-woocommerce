@@ -2,10 +2,10 @@
 Contributors: autopolisbg
 Tags: woocommerce, e-commerce, invoice, shipping, bulgaria
 Requires at least: 5.3
-Tested up to: 6.6
+Tested up to: 6.7
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.31
+Stable tag: 3.0.32
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,6 +65,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.32 =
+Speedy: Add ref1/2 field in admin order edit
+Econt: Add invoice number field in admin order edit
+Econt: Change default print label to 10x9
+Couriers: Hide generate label if it's not woo_bg method
+Fix warnings
 
 = 3.0.31 =
 Speedy: Optimizations
