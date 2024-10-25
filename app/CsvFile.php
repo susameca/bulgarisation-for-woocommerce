@@ -73,7 +73,7 @@ class CsvFile extends File implements \Countable {
 		return $this->row_counter - 1;
 	}
 
-	public function current(): array|string|false {
+	public function current(): array {
 		$this->row_counter++;
 		$row = parent::current();
 

@@ -386,6 +386,8 @@ class Econt {
 							'price' => number_format( ( $item->get_total() + $item->get_total_tax() ) / $item->get_quantity(), 2 ),
 						];
 					}
+				} else if ( $packing_list_or_invoice === 'invoice' && empty( $label['services']['invoiceNum'] ) ) {
+					$label['services']['invoiceNum'] = self::get_invoice_number( $order_id );
 				}
 			}
 		}

@@ -455,7 +455,10 @@ export default {
 
 		if ( wooBg_econt.useInvoiceNumber ) {
 			this.useInvoiceNumber = true;
-			this.labelData.services.invoiceNum = wooBg_econt.invoiceNumber;
+			
+			if ( !this.labelData.services.invoiceNum ) {
+				this.labelData.services.invoiceNum = wooBg_econt.invoiceNumber;
+			}
 		}
 	},
 	methods: {
