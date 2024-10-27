@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.7
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.0.32
+Stable tag: 3.0.34
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,6 +65,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.0.34 =
+Econt: Fix invoice number
 
 = 3.0.32 =
 Speedy: Add ref1/2 field in admin order edit
