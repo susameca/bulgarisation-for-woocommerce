@@ -12,7 +12,7 @@
 				deselect-label=""
 				open-direction="bottom" 
 				v-model="selectedOffice" 
-				:options-limit="30" 
+				:options-limit="1000" 
 				:limit="6"
 				:max-height="600" 
 				:selectedLabel="i18n.selected" 
