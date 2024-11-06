@@ -376,17 +376,22 @@ class Econt {
 					$label["packingList"] = [];
 					
 					foreach ( $order->get_items() as $key => $item ) {
+						/*
+						/ Count is added to the name for a reason.
+						/ When you have discount with more than 1 quantity, the label cannot be generated because of differences in the cents.
+						*/
+						
 						$item_weight = ( $item->get_product()->get_weight() ) ? wc_get_weight( $item->get_product()->get_weight(), 'kg' ) * $item['quantity'] : 0.100;
 
 						$label["packingList"][] = [
 							'inventoryNum' => $key,
-							'description' => $item->get_name(),
-							'weight' => $item_weight,
-							'count' => $item->get_quantity(),
-							'price' => number_format( ( $item->get_total() + $item->get_total_tax() ) / $item->get_quantity(), 2 ),
+							'description' => $item->get_name() . " x " . $item->get_quantity(),
+							'weight' => number_format( $item_weight, 3 ),
+							'count' => 1,
+							'price' => number_format( $item->get_total() + $item->get_total_tax(), 2),
 						];
 					}
-				} else if ( $packing_list_or_invoice === 'invoice' && empty( $label['services']['invoiceNum'] ) ) {
+				} else if ( ( empty( $packing_list_or_invoice ) || $packing_list_or_invoice === 'invoice' ) && empty( $label['services']['invoiceNum'] ) ) {
 					$label['services']['invoiceNum'] = self::get_invoice_number( $order_id );
 				}
 			}

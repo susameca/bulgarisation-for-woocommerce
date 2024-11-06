@@ -150,7 +150,7 @@ class Method extends \WC_Shipping_Method {
 			),
 			'free_shipping_over' => array(
 				'title'       => __( 'Free shipping over', 'woo-bg' ),
-				'type'        => 'text',
+				'type'        => 'number',
 				'placeholder' => '0',
 				'description' => __( 'Free shipping over total cart price.', 'woo-bg' ),
 				'default'     => '',
@@ -158,7 +158,7 @@ class Method extends \WC_Shipping_Method {
 			),
 			'fixed_price' => array(
 				'title'       => __( 'Fixed price', 'woo-bg' ),
-				'type'        => 'text',
+				'type'        => 'number',
 				'placeholder' => '0',
 				'description' => __( 'Enter a fixed price that the users will pay. The remaining will be payed by you.', 'woo-bg' ),
 				'default'     => '',

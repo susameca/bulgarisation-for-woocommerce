@@ -143,7 +143,7 @@ class Method extends \WC_Shipping_Method {
 			),
 			'free_shipping_over' => array(
 				'title'       => __( 'Free shipping over', 'woo-bg' ),
-				'type'        => 'text',
+				'type'        => 'number',
 				'placeholder' => '0',
 				'description' => __( 'Free shipping over total cart price.', 'woo-bg' ),
 				'default'     => '',
@@ -151,7 +151,7 @@ class Method extends \WC_Shipping_Method {
 			),
 			'fixed_price' => array(
 				'title'       => __( 'Fixed price', 'woo-bg' ),
-				'type'        => 'text',
+				'type'        => 'number',
 				'placeholder' => '0',
 				'description' => __( 'Enter a fixed price that the users will pay. The remaining will be payed by you.', 'woo-bg' ),
 				'default'     => '',
@@ -219,9 +219,9 @@ class Method extends \WC_Shipping_Method {
 			$label['recipient'] = $this->generate_recipient_data();
 		}
 
+		$payment_by_data = $this->generate_payment_by_data();
 		$content_data = $this->generate_content_data();
 		$services_data = $this->generate_services_data();
-		$payment_by_data = $this->generate_payment_by_data();
 
 		return array_merge( $label, $content_data, $services_data, $payment_by_data );
 	}
@@ -410,6 +410,15 @@ class Method extends \WC_Shipping_Method {
 						'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
 						'amount' => number_format( $cart_item['line_total'], 2, '.', '' ),
 						'amountWithVat' => number_format( $cart_item['line_total'] + $cart_item['line_tax'], 2, '.', '' ),
+					];
+				}
+
+				if ( !empty( $this->fixed_price ) && !$this->free_shipping ) {
+					$services['additionalServices']['cod']['fiscalReceiptItems'][] = [
+						'description' => mb_substr( 'Доставка', 0, 50 ),
+						'vatGroup' => woo_bg_get_vat_group_from_rate( 20 ),
+						'amount' => woo_bg_tax_based_price( $this->fixed_price ),
+						'amountWithVat' => number_format( $this->fixed_price, 2, '.', '' ),
 					];
 				}
 			}
