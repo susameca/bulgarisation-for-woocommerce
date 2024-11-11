@@ -139,5 +139,9 @@ class Client extends Provider {
 		$container[ self::CVC_HUBS ] = function ( Container $container ) {
 			return new CVC_Hubs( $container );
 		};
+		
+		remove_filter( 'woocommerce_after_shipping_rate', 'Woo_BG_Pro\Shipping\CityStateField::add_city_state_field', 15 );
+		remove_filter( 'woocommerce_locate_template', 'Woo_BG_Pro\Shipping\CheckoutLayout::intercept_shipping_table_template', 100000 );
+		remove_action( 'wp_enqueue_scripts', 'Woo_BG_Pro\Assets::enqueue_scripts' );
 	}
 }

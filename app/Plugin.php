@@ -37,6 +37,10 @@ class Plugin {
 		$this->load_classes();
 		$this->load_service_providers();
 
+		if ( class_exists( '\Woo_BG_Pro\Checkout' ) ) {
+			add_action( 'woo_bg/init', array( $this, 'validate_pro' ), PHP_INT_MAX );
+		}
+
 		add_filter( 'plugin_action_links_' . plugin_basename( woo_bg()->plugin_dir_path() . 'woocommerce-bulgarisation.php' ), array( __CLASS__, 'plugin_action_links' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
@@ -78,6 +82,7 @@ class Plugin {
 	private function load_classes() {
 		new Admin\Admin_Menus();
 		new Admin\Order\Columns();
+		new Cron\Stats();
 
 		if ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' ) {
 			new Admin\Order\Actions();
@@ -233,5 +238,16 @@ class Plugin {
 		$args[ 'post_mime_type' ] = $accepted_mimes;
 
 		return $args;
+	}
+
+	public function validate_pro() {
+		if ( 
+			hash_file( 'sha256', $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) !== 'fa76df5bd96476389a93795ccc30a257a4e860a26278dd5faa2a67b4b7f37d37' || 
+			!\Woo_BG_Pro\License::is_valid()
+		) {
+			remove_filter( 'woocommerce_after_shipping_rate', 'Woo_BG_Pro\Shipping\CityStateField::pro_checkout', 15 );
+			remove_filter( 'woocommerce_locate_template', 'Woo_BG_Pro\Shipping\CheckoutLayout::change_cart_template', 999999 );
+			remove_action( 'wp_enqueue_scripts', 'Woo_BG_Pro\Assets::styles_and_js' );
+		}
 	}
 }
