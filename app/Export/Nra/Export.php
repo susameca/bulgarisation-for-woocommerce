@@ -102,9 +102,13 @@ class Export {
 		}
 
 		foreach ( $this->refunded_orders_ids as $order_id ) {
-			$refunded_order = new RefundedOrder( wc_get_order( $order_id ), $this->date );
+			$order = wc_get_order( $order_id );
+			
+			if ( method_exists( $this->woo_order, 'get_refunds' ) ) {
+				$refunded_order = new RefundedOrder( wc_get_order( $order_id ), $this->date );
 
-			$this->xml_shop->addReturnedOrder( $refunded_order->get_xml_order() );
+				$this->xml_shop->addReturnedOrder( $refunded_order->get_xml_order() );
+			}
 		}
 
 		return $this->upload_xml();
