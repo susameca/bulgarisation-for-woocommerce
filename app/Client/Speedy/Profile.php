@@ -40,8 +40,6 @@ class Profile {
 		$profile_data = $this->container[ Client::SPEEDY ]->api_call( self::PROFILE_ENDPOINT, array() );
 
 		if ( $this->container[ Client::SPEEDY ]->validate_access( $profile_data ) ) {
-			woo_bg_set_option( 'speedy', 'profile_data', $profile_data );
-
 			$clients = [];
 
 			if ( !empty( $profile_data['clients'] ) ) {
@@ -52,7 +50,23 @@ class Profile {
 						$clients[ $profile['clientId'] ] = $client[ 'client' ];
 					}
 				}
+			} else {
+				$profile_client = $this->container[ Client::SPEEDY ]->api_call( self::CLIENT_ENDPOINT, array() );
 
+				if ( !empty( $profile_client ) ) {
+					$client = $this->get_client( $profile_client['clientId'] );
+
+					$clients[ $profile_client['clientId'] ] = $client[ 'client' ];
+
+					$profile_data = [
+						'clients' => [ $client[ 'client' ] ],
+					];
+				}
+			} 
+
+			woo_bg_set_option( 'speedy', 'profile_data', $profile_data );
+				
+			if ( !empty( $clients ) ) {
 				woo_bg_set_option( 'speedy', 'clients', $clients );
 			}
 		}
@@ -121,14 +135,16 @@ class Profile {
 		$all_profiles = woo_bg_get_option( 'speedy', 'profile_data' );
 		$options = array();
 
-		foreach ( $all_profiles['clients'] as $key => $profile ) {
-			$client = $this->clients[ $profile['clientId'] ];
+		if ( !empty( $all_profiles['clients'] ) ) {
+			foreach ( $all_profiles['clients'] as $key => $profile ) {
+				$client = $this->clients[ $profile['clientId'] ];
 
-			$options[ $key ] = array(
-				'id' => $key,
-				'label' => $client['clientName'] . " ( ID:" . $profile['clientId'] . " )",
-			);
+				$options[ $key ] = array(
+					'id' => $key,
+					'label' => $client['clientName'] . " ( ID:" . $profile['clientId'] . " )",
+				);
 
+			}
 		}
 
 		return $options;
