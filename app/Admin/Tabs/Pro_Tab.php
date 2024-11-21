@@ -129,7 +129,7 @@ class Pro_Tab extends Base_Tab {
 	public function auth_test() {
 		\Woo_BG\Cron\Stats::submit_stats();
 
-		if ( !\Woo_BG_Pro\License::is_valid() ) {
+		if ( class_exists( '\Woo_BG_Pro\Checkout' ) && !\Woo_BG_Pro\License::is_valid() ) {
 			return wpautop( __( 'License is invalid!', 'woo-bg' ) );
 		}
 	}

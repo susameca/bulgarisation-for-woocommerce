@@ -242,8 +242,8 @@ class Plugin {
 
 	public function validate_pro() {
 		if ( 
-			hash_file( 'sha256', $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) !== 'fa76df5bd96476389a93795ccc30a257a4e860a26278dd5faa2a67b4b7f37d37' || 
-			!\Woo_BG_Pro\License::is_valid()
+			! ( file_exists( $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) && hash_file( 'sha256', $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'fa76df5bd96476389a93795ccc30a257a4e860a26278dd5faa2a67b4b7f37d37' ) || 
+			! ( class_exists( 'Woo_BG_Pro\License' ) && \Woo_BG_Pro\License::is_valid() )
 		) {
 			remove_filter( 'woocommerce_after_shipping_rate', 'Woo_BG_Pro\Shipping\CityStateField::pro_checkout', 15 );
 			remove_filter( 'woocommerce_locate_template', 'Woo_BG_Pro\Shipping\CheckoutLayout::change_cart_template', 999999 );
