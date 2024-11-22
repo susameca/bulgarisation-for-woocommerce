@@ -238,6 +238,7 @@ class Econt {
 		$order_id = $_REQUEST['orderId'];
 		$label = $_REQUEST['label_data'];
 
+		$label = self::update_sender( $label );
 		$label = self::update_receiver_address( $label );
 		$label = self::update_label_pay_options( $label, $order_id );
 		$label = self::update_payment_by( $label, $order_id );
@@ -261,6 +262,7 @@ class Econt {
 		}
 
 		$label = $label['label'];
+		$label = self::update_sender( $label );
 		$label = self::update_label_pay_options( $label, $order_id );
 		$label = self::update_shipment_description( $label, $order_id );
 		$label = self::update_phone_and_names( $label, $order_id );
@@ -295,6 +297,34 @@ class Econt {
 		do_action( 'woo_bg/econt/after_send_label', $data, $order );
 
 		return $data;
+	}
+
+	public static function update_sender( $label ) {
+		$container = woo_bg()->container();
+
+		$label['senderClient'] = $container[ Client::ECONT_PROFILE ]->get_profile_data()['client'];
+		$label['senderAgent'] = array(
+			'name' => woo_bg_get_option( 'econt', 'name' ),
+			'phones' => [ woo_bg_get_option( 'econt', 'phone' ) ],
+		);
+		$label['senderAddress'] = self::generate_sender_address();
+
+		return $label;
+	}
+
+	public static function generate_sender_address() {
+		$container = woo_bg()->container();
+		$address = '';
+		$id = woo_bg_get_option( 'econt_send_from', 'address' );
+		$send_from = woo_bg_get_option( 'econt', 'send_from' );
+
+		if ( $id !== '' && $send_from === 'address' ) {
+			$profile_addresses = $container[ Client::ECONT_PROFILE ]->get_profile_data()['addresses'];
+
+			$address = $profile_addresses[ $id ];
+		}
+
+		return $address;
 	}
 
 	protected static function update_receiver_address( $label ) {

@@ -224,6 +224,7 @@ class CVC {
 		$order_id = $_REQUEST['orderId'];
 		$label = $_REQUEST['label_data'];
 
+		$label = self::update_sender( $label );
 		$label = self::update_receiver_address( $label );
 		$label = self::update_payment_by( $label, $order_id );
 		$label = self::update_test_options( $label );
@@ -244,6 +245,7 @@ class CVC {
 			return;
 		}
 
+		$label = self::update_sender( $label );
 		$label = self::update_shipment_description( $label, $order_id );
 
 		self::send_label_to_cvc( $label, $order_id );
@@ -274,6 +276,33 @@ class CVC {
 		do_action( 'woo_bg/cvc/after_send_label', $data, $order );
 
 		return $data;
+	}
+
+	public static function update_sender( $label ) {
+		$container = woo_bg()->container();
+		$city = str_replace( 'cityID-', '', woo_bg_get_option( 'cvc_sender', 'city' ) );
+
+		$sender_data = array( 
+			"name" => woo_bg_get_option( 'cvc_sender', 'name' ), 
+			"phone" => woo_bg_get_option( 'cvc_sender', 'phone' ), 
+			"email" => woo_bg_get_option( 'cvc_sender', 'email' ), 
+			"country_id" => 100, 
+			"city_id" => $city,
+			"zip" => $container[ Client::CVC_CITIES ]->get_city_zip_by_id( $city ),
+		);
+
+		$send_from = woo_bg_get_option( 'cvc_sender', 'send_from' );
+
+		if ( $send_from === 'address' ) {
+			$sender_data[ "custom_location_id" ] = woo_bg_get_option( 'cvc_sender', 'address' );
+		} else if ( $send_from === 'office' ) {
+			$sender_data[ "hub_id" ] = str_replace( 'hubID-', '', woo_bg_get_option( 'cvc_sender', 'office' ) );
+		}
+
+		$label['pickup_date'] = date_i18n( 'Y-m-d' );
+		$label['sender'] = $sender_data;
+
+		return $label;
 	}
 
 	protected static function update_receiver_address( $label ) {

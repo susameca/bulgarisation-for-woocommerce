@@ -227,6 +227,7 @@ class Speedy {
 		$order = wc_get_order( $_REQUEST['orderId'] );
 		$label = $_REQUEST['label_data'];
 
+		$label = self::update_sender( $label );
 		$label = self::update_recipient_data( $label );
 		$label = self::update_payment_by( $label, $order );
 		$label = self::update_services( $label );
@@ -245,10 +246,31 @@ class Speedy {
 			return;
 		}
 
+		$label = self::update_sender( $label );
 		$label = self::update_shipment_description( $label, $order );
 		$label = self::update_cod( $label, $order );
 
 		self::send_label_to_speedy( $label, $order );
+	}
+
+	public static function update_sender( $label ) {
+		$container = woo_bg()->container();
+		$send_from = woo_bg_get_option( 'speedy', 'send_from' );
+		$sender = array(
+			'clientId' => $container[ Client::SPEEDY_PROFILE ]->get_profile_data()['clientId'],
+			'contactName' => woo_bg_get_option( 'speedy', 'name' ),
+			'phone1' => array(
+				'number' => woo_bg_get_option( 'speedy', 'phone' ),
+			),
+		);
+
+		if ( $send_from === 'office' ) {
+			$sender['dropoffOfficeId'] = str_replace( 'officeID-', '', woo_bg_get_option( 'speedy_send_from', 'office' ) );
+		}
+
+		$label['sender'] = $sender;
+
+		return $label;
 	}
 
 	public static function update_fiscal_items( $label, $order ) {
