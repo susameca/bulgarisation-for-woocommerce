@@ -20,7 +20,7 @@ class Emails {
 		$order_documents_trigger = woo_bg_get_option( 'invoice', 'trigger' );
 
 		if ( !$order_documents_trigger || $order_documents_trigger === 'order_created' ) {
-			$email_ids = array( 'customer_processing_order', 'customer_on_hold_order' );
+			$email_ids = array( 'customer_processing_order', 'customer_on_hold_order', 'customer_processing_renewal_order' );
 		} else if ( $order_documents_trigger === 'order_completed' ) {
 			$email_ids = array( 'customer_completed_order' );
 		}
