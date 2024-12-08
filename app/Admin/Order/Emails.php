@@ -22,7 +22,7 @@ class Emails {
 		if ( !$order_documents_trigger || $order_documents_trigger === 'order_created' ) {
 			$email_ids = array( 'customer_processing_order', 'customer_on_hold_order', 'customer_processing_renewal_order' );
 		} else if ( $order_documents_trigger === 'order_completed' ) {
-			$email_ids = array( 'customer_completed_order' );
+			$email_ids = array( 'customer_completed_order', 'customer_completed_renewal_order' );
 		}
 
 		$email_ids[] = 'customer_invoice';
