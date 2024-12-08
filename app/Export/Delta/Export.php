@@ -116,8 +116,10 @@ class Export {
 			$rows = [];
 		}
 
+		$name = uniqid( wp_rand(), true );
+
 		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
-		$txt = wp_upload_bits( 'import.txt', null, implode( "\n", $rows ) );
+		$txt = wp_upload_bits( $name . '.txt', null, implode( "\n", $rows ) );
 		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 
 		if ( is_wp_error( $txt ) ) {
