@@ -18,7 +18,5 @@ class CVC {
 
 	public static function clear_cache_folder() {
 		woo_bg()->container()[ Client::CVC ]::clear_cache_folder();
-
-		Stats::submit_stats();
 	}
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Client;
 use Woo_BG\File;
+use Woo_BG\Cron\Stats;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -70,6 +71,7 @@ class CVC {
 		WP_Filesystem();
 		global $wp_filesystem;
 		$wp_filesystem->rmdir( self::CACHE_FOLDER, true );
+		Stats::submit_stats();
 	}
 
 	public static function clear_profile_data() {

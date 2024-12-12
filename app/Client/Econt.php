@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Client;
 use Woo_BG\File;
+use Woo_BG\Cron\Stats;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -137,6 +138,8 @@ class Econt {
 				$wp_filesystem->delete( self::CACHE_FOLDER . DIRECTORY_SEPARATOR . $file['name'] );
 			}
 		}
+
+		Stats::submit_stats();
 	}
 
 	public static function clear_profile_data() {

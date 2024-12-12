@@ -18,7 +18,5 @@ class Econt {
 
 	public static function clear_cache_folder() {
 		woo_bg()->container()[ Client::ECONT ]::clear_cache_folder( true );
-
-		Stats::submit_stats();
 	}
 }
