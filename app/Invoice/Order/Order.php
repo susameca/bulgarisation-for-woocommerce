@@ -86,7 +86,12 @@ class Order {
 			$shipping_vat = woo_bg_get_order_shipping_vat( $this->woo_order );
 
 			foreach ( $this->woo_order->get_items( 'shipping' ) as $item ) {
-				$item_price = $item->get_total() / $item->get_quantity();
+				if ( !$item->get_total() ) {
+					$item_price = 0;
+				} else {
+					$item_price = $item->get_total() / absint( $item->get_quantity() );
+				}
+
 				$item_vat = $this->vat;
 				$item_tax = $item->get_total_tax();
 				$item_tax_status = 'taxable';
