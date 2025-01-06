@@ -418,7 +418,7 @@ class Econt {
 							'description' => $item->get_name() . " x " . $item->get_quantity(),
 							'weight' => number_format( $item_weight, 3 ),
 							'count' => 1,
-							'price' => number_format( $item->get_total() + $item->get_total_tax(), 2),
+							'price' => number_format( $item->get_total() + $item->get_total_tax(), 2, '.', '' ),
 						];
 					}
 				} else if ( ( empty( $packing_list_or_invoice ) || $packing_list_or_invoice === 'invoice' ) && empty( $label['services']['invoiceNum'] ) ) {
