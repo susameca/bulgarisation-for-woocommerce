@@ -80,6 +80,8 @@ class Plugin {
 	}
 
 	private function load_classes() {
+		do_action( 'woo_bg/before-init-classes', $this, $this->container );
+
 		new Admin\Admin_Menus();
 		new Admin\Order\Columns();
 		new Cron\Stats();
