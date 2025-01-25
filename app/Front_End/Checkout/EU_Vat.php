@@ -173,7 +173,7 @@ class EU_Vat {
 				'error' => $valid->get_error_message(),
 			);
 		} else {
-			self::$data['vat_number'] = $valid ? self::get_vat_number_prefix( $billing_country ) . $vat_number : $vat_number;
+			self::$data['vat_number'] = $vat_number;
 			self::$data['validation'] = array(
 				'valid' => $valid,
 				'error' => false,
