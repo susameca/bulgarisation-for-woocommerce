@@ -40,6 +40,7 @@ class Nekorekten_Com_Tab extends Base_Tab {
 			'nekorekten' => array(
 				new Fields\Text_Field( 'api_key', __( 'API Key', 'woo-bg' ), __( 'Enter the generated API key.', 'woo-bg' ), 'required', sprintf( __( 'For generating an API key, use this IP address: %s', 'woo-bg' ), $_SERVER['SERVER_ADDR'] ) . __( 'Note that nekorekten.com may recognize you by another IP address. If so, you\'ll find a message where the reports appear. Copy the IP address from the error and generate a new API key.', 'woo-bg' ) ),
 				new Fields\TrueFalse_Field( 'column', __( 'Add column on orders list.', 'woo-bg' ), null, null, __( 'This option will add a column with the customer status next to the shipping info column. Please notice that the maximum requests to nekorekten.com are 5 ( 2 per order ), so if you see "?" icon please open the order details page, to generate the information again.', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'check_on_checkout', __( 'Check on checkout and disable COD.', 'woo-bg' ), null, null, __( 'Check by phone number on checkout and disable COD payment method.', 'woo-bg' ) . '<br>' . __('<strong>WARNING:</strong> Please notice that the server has limit of 10 calls per minute.', 'woo-bg') ),
 			)
 		) );
 

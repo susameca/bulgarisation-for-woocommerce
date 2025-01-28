@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-11 20:19+0000\n"
+"POT-Creation-Date: 2025-01-28 21:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -42,6 +42,12 @@ msgstr ""
 
 #: app/Admin/EU_Vat.php:104
 msgid "(self-declared)"
+msgstr ""
+
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
+msgid ""
+"<strong>WARNING:</strong> Please notice that the server has limit of 10 "
+"calls per minute."
 msgstr ""
 
 #: app/Admin/Speedy.php:138
@@ -191,8 +197,16 @@ msgstr ""
 msgid "Cash on delivery with PPP"
 msgstr ""
 
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
+msgid "Check by phone number on checkout and disable COD payment method."
+msgstr ""
+
 #: app/Shipping/ProductAdditionalFields.php:19
 msgid "Check if you want to make the product with fragile status."
+msgstr ""
+
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
+msgid "Check on checkout and disable COD."
 msgstr ""
 
 #: app/Admin/Tabs/Settings_Tab.php:72
@@ -291,11 +305,11 @@ msgstr ""
 msgid "Date of tax. event"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:178
+#: app/Admin/Nekorekten_Com.php:176
 msgid "Date:"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:140 app/Admin/Nekorekten_Com.php:154
+#: app/Admin/Nekorekten_Com.php:138 app/Admin/Nekorekten_Com.php:152
 #, php-format
 msgid "Date: %s"
 msgstr ""
@@ -330,7 +344,8 @@ msgstr ""
 msgid "Demo"
 msgstr ""
 
-#: app/Admin/CVC.php:136 app/Admin/Econt.php:134 app/Admin/Speedy.php:137
+#: app/Admin/CVC.php:136 app/Admin/Econt.php:134
+#: app/Admin/Nekorekten_Com.php:347 app/Admin/Speedy.php:137
 msgid "Description"
 msgstr ""
 
@@ -342,7 +357,7 @@ msgstr ""
 msgid "Disable invoice generation"
 msgstr ""
 
-#: app/Invoice/Order/Order.php:182
+#: app/Invoice/Order/Order.php:187
 msgid "Discount"
 msgstr ""
 
@@ -380,7 +395,7 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
-#: app/Admin/Tabs/Help_Tab.php:35
+#: app/Admin/Nekorekten_Com.php:339 app/Admin/Tabs/Help_Tab.php:35
 msgid "E-mail:"
 msgstr ""
 
@@ -421,7 +436,7 @@ msgstr ""
 msgid "EIK: %s"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:175
+#: app/Admin/Nekorekten_Com.php:173
 msgid "Email:"
 msgstr ""
 
@@ -543,7 +558,7 @@ msgstr ""
 msgid "Error communicating with the VAT validation server - please try again"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:144
+#: app/Admin/Nekorekten_Com.php:142
 #, php-format
 msgid "Error: \"%s\""
 msgstr ""
@@ -586,7 +601,7 @@ msgid ""
 "Download</a>"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:172
+#: app/Admin/Nekorekten_Com.php:170 app/Admin/Nekorekten_Com.php:318
 msgid "First Name:"
 msgstr ""
 
@@ -627,7 +642,7 @@ msgstr ""
 msgid "Force variations in label"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:159
+#: app/Admin/Nekorekten_Com.php:157
 #, php-format
 msgid "Found: %s"
 msgstr ""
@@ -647,7 +662,7 @@ msgid "Free shipping over total cart price."
 msgstr ""
 
 #: app/Admin/Tabs/CVC_Tab.php:135 app/Admin/Tabs/Econt_Tab.php:219
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:60 app/Admin/Tabs/Speedy_Tab.php:155
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:61 app/Admin/Tabs/Speedy_Tab.php:155
 msgid "General"
 msgstr ""
 
@@ -752,7 +767,7 @@ msgid ""
 " go to \"Standard rates\" submenu and add your rate ( 20% or 9% )."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:146
+#: app/Admin/Nekorekten_Com.php:144
 msgid "Invalid access."
 msgstr ""
 
@@ -805,7 +820,7 @@ msgstr ""
 msgid "Label number: %s. %s"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:173
+#: app/Admin/Nekorekten_Com.php:171 app/Admin/Nekorekten_Com.php:325
 msgid "Last Name:"
 msgstr ""
 
@@ -866,7 +881,7 @@ msgstr ""
 msgid "Name:"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:269
+#: app/Admin/Nekorekten_Com.php:277
 msgid "Nekorekten"
 msgstr ""
 
@@ -928,7 +943,7 @@ msgstr ""
 msgid "No results was found for this city"
 msgstr ""
 
-#: app/functions.php:377
+#: app/functions.php:377 app/Admin/Nekorekten_Com.php:369
 msgid "Nonce was not provided!"
 msgstr ""
 
@@ -1057,7 +1072,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:174
+#: app/Admin/Nekorekten_Com.php:172 app/Admin/Nekorekten_Com.php:332
 msgid "Phone:"
 msgstr ""
 
@@ -1319,7 +1334,7 @@ msgstr ""
 msgid "Sender payment type"
 msgstr ""
 
-#: app/Plugin.php:69 app/Plugin.php:173 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:69 app/Plugin.php:176 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
@@ -1344,7 +1359,7 @@ msgstr ""
 msgid "Shipping Methods Settings"
 msgstr ""
 
-#: app/Export/Nra/Order.php:123 app/Invoice/Order/Order.php:115
+#: app/Export/Nra/Order.php:123 app/Invoice/Order/Order.php:120
 #, php-format
 msgid "Shipping: %s"
 msgstr ""
@@ -1410,6 +1425,14 @@ msgstr ""
 msgid "Street/Quarter"
 msgstr ""
 
+#: app/Admin/Nekorekten_Com.php:356
+msgid "Submit"
+msgstr ""
+
+#: app/Admin/Nekorekten_Com.php:313
+msgid "Submit Review"
+msgstr ""
+
 #: app/functions.php:213
 msgid "Supporting the development"
 msgstr ""
@@ -1418,7 +1441,7 @@ msgstr ""
 msgid "Tax Classes for Digital Goods"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:180
+#: app/Admin/Nekorekten_Com.php:178
 msgid "Text:"
 msgstr ""
 
@@ -1506,7 +1529,7 @@ msgstr ""
 msgid "To Office: "
 msgstr ""
 
-#: app/Invoice/Order/Order.php:175
+#: app/Invoice/Order/Order.php:180
 msgid "Total"
 msgstr ""
 
@@ -1514,7 +1537,7 @@ msgstr ""
 msgid "Total amount"
 msgstr ""
 
-#: app/Invoice/Order/Order.php:197
+#: app/Invoice/Order/Order.php:202
 msgid "Total due"
 msgstr ""
 
@@ -1522,7 +1545,7 @@ msgstr ""
 msgid "Total in text"
 msgstr ""
 
-#: app/Export/Nra/Export.php:142
+#: app/Export/Nra/Export.php:146
 #, php-format
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr ""
@@ -1665,12 +1688,6 @@ msgstr ""
 #: app/Shipping/CVC/Method.php:171 app/Shipping/Econt/Method-new.php:150
 #: app/Shipping/Econt/Method.php:147
 msgid "Yes"
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:132
-msgid ""
-"You can add a report from <a href=\"https://nekorekten.com/\" "
-"target=\"_blank\">https://nekorekten.com/</a>"
 msgstr ""
 
 #: app/Admin/Tabs/Help_Tab.php:22

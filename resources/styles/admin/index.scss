@@ -26,6 +26,7 @@ i.woo-bg-icon--question { background-image: url(../../images/question-icon.png);
 
 #order_data {
     .order_data_column.order_data_column--half { width: 49%; }
+    .order_data_column.order_data_column--full { width: 100%; }
 
     .order_data_column { 
         .customer {

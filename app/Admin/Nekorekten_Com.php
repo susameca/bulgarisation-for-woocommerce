@@ -43,7 +43,7 @@ class Nekorekten_Com {
 				<i class="woo-bg-icon woo-bg-icon--alert"></i>
 				
 				<a href="#woo_bg_nekorekten_reports">
-					 <?php esc_html_e( 'We have found negative reports about this customer. <br> Click for more information.', 'woo-bg' ) ?>
+					 <?php _e( 'We have found negative reports about this customer. <br> Click for more information.', 'woo-bg' ) ?>
 				</a>
 			</p>
 			<?php
@@ -127,11 +127,9 @@ class Nekorekten_Com {
 		</div>
 
 		<div class="clear"></div>
-
-		<div>
-			<?php echo wp_kses_post( __( 'You can add a report from <a href="https://nekorekten.com/" target="_blank">https://nekorekten.com/</a>', 'woo-bg' ) ) ?>
-		</div>
 		<?php
+
+		self::render_submit_form( $theorder );
 	}
 
 	public static function meta_box_error( $report ) {
@@ -193,7 +191,7 @@ class Nekorekten_Com {
 		<?php
 	}
 
-	public static function get_user_report( $order, $search_by, $key, $force = false ) {
+	public static function get_user_report_from_order( $order, $search_by, $key, $force = false ) {
 		$meta_key = 'woo_bg_reports-' . $key . "_" . $search_by;
 		$meta = $order->get_meta( $meta_key );
 
@@ -201,17 +199,7 @@ class Nekorekten_Com {
 			return $meta;
 		}
 
-		$request = wp_remote_get( self::REPORTS_URL, array(
-			'timeout'     => 15,
-			'headers' => array(
-				'Api-Key' => woo_bg_get_option( 'nekorekten', 'api_key' ),
-			),
-			'body' => array(
-				$key => $search_by,
-			)
-		) );
-
-		$body = json_decode( wp_remote_retrieve_body( $request ), 1 );
+		$body = self::api_call( self::REPORTS_URL, [ $key => $search_by ] ); 
 
 		if ( !empty( $body ) && $body[ 'server' ]['httpCode'] === 200) {
 			$order->update_meta_data( $meta_key, $body );
@@ -221,12 +209,32 @@ class Nekorekten_Com {
 		return $body;
 	}
 
+	public static function api_call( $endpoint, $args, $method = 'get' ) {
+		$request_args = array(
+			'timeout'     => 15,
+			'headers' => array(
+				'Api-Key' => woo_bg_get_option( 'nekorekten', 'api_key' ),
+			),
+			'body' => $args
+		);
+
+		if ( $method === 'get' ) {
+			$request = wp_remote_get( $endpoint, $request_args );
+		} else {
+			$request = wp_remote_post( $endpoint, $request_args );
+		}
+
+		$body = json_decode( wp_remote_retrieve_body( $request ), 1 );
+
+		return $body;
+	}
+
 	public static function get_all_reports( $order, $force = false ) {
 		$phone = ( $order->get_shipping_phone() ) ? $order->get_shipping_phone() : $order->get_billing_phone();
 		$email = $order->get_billing_email();
 
-		$reports_by_phone = self::get_user_report( $order, $phone, 'phone', $force ); 
-		$reports_by_email = self::get_user_report( $order, $email, 'email', $force );
+		$reports_by_phone = self::get_user_report_from_order( $order, $phone, 'phone', $force ); 
+		$reports_by_email = self::get_user_report_from_order( $order, $email, 'email', $force );
 		$phone_counts = ( isset( $reports_by_phone['count'] ) ) ? $reports_by_phone['count'] : 0;
 		$email_counts = ( isset( $reports_by_email['count'] ) ) ? $reports_by_email['count'] : 0;
 
@@ -237,7 +245,7 @@ class Nekorekten_Com {
 		];
 	}
 
-	public static function get_all_reports_from_meta( $order) {
+	public static function get_all_reports_from_meta( $order ) {
 		$phone = ( $order->get_shipping_phone() ) ? $order->get_shipping_phone() : $order->get_billing_phone();
 		$email = $order->get_billing_email();
 
@@ -295,5 +303,97 @@ class Nekorekten_Com {
 		$order = wc_get_order( $order_id );
 
 		self::get_all_reports( $order, 1 );
+	}
+
+	public static function render_submit_form( $order ) {
+		?>
+		<div id="order_data" class="panel woocommerce-order-data">
+			<div class="order_data_column_container">
+				<div class="order_data_column order_data_column--half">
+					<h3><?php _e( 'Submit Review', 'woo-bg' ); ?></h3> 
+					<form></form>
+					<form class="ajax-container" action="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ) ?>">
+						<p class="form-field" style="clear: none;">
+							<label>
+								<?php _e('First Name:', 'woo-bg') ?>
+
+								<input type="text" name="first_name" required value="<?php echo $order->get_billing_first_name() ?>">
+							</label> 
+						</p> 
+						<p class="form-field" style="float: right; clear: none;">
+							<label>
+								<?php _e('Last Name:', 'woo-bg') ?>
+
+								<input type="text" name="last_name" required value="<?php echo $order->get_billing_last_name() ?>">
+							</label> 
+						</p>
+						<p class="form-field" style="clear: none;">
+							<label>
+								<?php _e('Phone:', 'woo-bg') ?>
+
+								<input type="text" name="phone" required value="<?php echo $order->get_billing_phone() ?>">
+							</label> 
+						</p>
+						<p class="form-field" style="float: right; clear: none;">
+							<label> 
+								<?php _e('E-mail:', 'woo-bg') ?>
+
+								<input type="text" name="email" value="<?php echo $order->get_billing_email() ?>">
+							</label> 
+						</p>
+
+						<p class="form-field form-field-wide">
+							<label> 
+								<?php _e('Description', 'woo-bg') ?>
+
+								<textarea name="description" required rows="4"></textarea>
+							</label> 
+						</p>
+
+						<input type="hidden" name="action" value="woo_bg_nekorekten_submit">
+						<?php wp_nonce_field( 'woo_bg_nekorekten_submit' ); ?>
+
+						<button type="submit" class="button-primary woocommerce-save-button"><?php _e('Submit', 'woo-bg') ?></button>
+					</form>
+				</div>
+				
+				<div class="clear"></div>
+			</div>
+		</div>
+		<?php
+	}
+
+	public static function submit_callback() {
+		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'woo_bg_nekorekten_submit' ) ) {
+			wp_send_json_error( [
+				'message' => __( 'Nonce was not provided!', 'woo-bg' ),
+			] );
+
+			wp_die();
+		}
+
+		$args = [
+			'text' => sanitize_text_field( $_REQUEST['description'] ),
+			'firstName' => sanitize_text_field( $_REQUEST['first_name'] ),
+			'lastName' => sanitize_text_field( $_REQUEST['last_name'] ),
+			'email' => sanitize_text_field( $_REQUEST['email'] ),
+			'phone' => sanitize_text_field( $_REQUEST['phone'] ),
+		];
+
+		$resonse = self::api_call( self::REPORTS_URL, $args, 'post' ); 
+
+		$json = [
+			'message' => $resonse['message'],
+		];
+
+		if ( !empty( $resonse ) && $resonse[ 'server' ]['httpCode'] === 200 ) {
+			wp_send_json_success( $json );
+
+			wp_die();
+		}
+
+		wp_send_json_error( $json );
+
+		wp_die();
 	}
 }

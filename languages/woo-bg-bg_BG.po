@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2024-11-11 20:20+0000\n"
+"PO-Revision-Date: 2025-01-28 21:33+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -42,6 +42,14 @@ msgstr "%s: Безплатна доставка"
 #: app/Admin/EU_Vat.php:104
 msgid "(self-declared)"
 msgstr "(самодеклариран)"
+
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
+msgid ""
+"<strong>WARNING:</strong> Please notice that the server has limit of 10 "
+"calls per minute."
+msgstr ""
+"<strong>ВНИМАНИЕ:</strong> Моля, обърнете внимание, че сървърът има "
+"ограничение от 10 заявки на минута."
 
 # S
 #: app/Admin/Speedy.php:138
@@ -195,9 +203,19 @@ msgstr "Наложен платеж с Касова бележка"
 msgid "Cash on delivery with PPP"
 msgstr "Наложен платеж с ППП"
 
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
+msgid "Check by phone number on checkout and disable COD payment method."
+msgstr ""
+"Провери по телефонен номер на чекаут и изключи \"Наложен платеж\" от "
+"методите за плащане."
+
 #: app/Shipping/ProductAdditionalFields.php:19
 msgid "Check if you want to make the product with fragile status."
 msgstr "Отбележете ако искате продукта да бъде със статус \"Чупливо\"."
+
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
+msgid "Check on checkout and disable COD."
+msgstr "Провери на чекаут и изключи НП"
 
 #: app/Admin/Tabs/Settings_Tab.php:72
 msgid "Checkout Settings"
@@ -295,11 +313,11 @@ msgstr "cvc.com API настройки"
 msgid "Date of tax. event"
 msgstr "Дата на дан. събитие"
 
-#: app/Admin/Nekorekten_Com.php:178
+#: app/Admin/Nekorekten_Com.php:176
 msgid "Date:"
 msgstr "Дата:"
 
-#: app/Admin/Nekorekten_Com.php:140 app/Admin/Nekorekten_Com.php:154
+#: app/Admin/Nekorekten_Com.php:138 app/Admin/Nekorekten_Com.php:152
 #, php-format
 msgid "Date: %s"
 msgstr "Дата: %s"
@@ -334,7 +352,8 @@ msgstr "Доставка до"
 msgid "Demo"
 msgstr "Демо"
 
-#: app/Admin/CVC.php:136 app/Admin/Econt.php:134 app/Admin/Speedy.php:137
+#: app/Admin/CVC.php:136 app/Admin/Econt.php:134
+#: app/Admin/Nekorekten_Com.php:347 app/Admin/Speedy.php:137
 msgid "Description"
 msgstr "Описание"
 
@@ -346,7 +365,7 @@ msgstr "Детайли:"
 msgid "Disable invoice generation"
 msgstr "Изключи генерирането на фактури"
 
-#: app/Invoice/Order/Order.php:182
+#: app/Invoice/Order/Order.php:187
 msgid "Discount"
 msgstr "Отстъпка"
 
@@ -384,7 +403,7 @@ msgstr "Дата на падеж"
 msgid "E-mail"
 msgstr "Имейл"
 
-#: app/Admin/Tabs/Help_Tab.php:35
+#: app/Admin/Nekorekten_Com.php:339 app/Admin/Tabs/Help_Tab.php:35
 msgid "E-mail:"
 msgstr "Имейл"
 
@@ -425,7 +444,7 @@ msgstr "ЕИК на фирмата"
 msgid "EIK: %s"
 msgstr "ЕИК: %s"
 
-#: app/Admin/Nekorekten_Com.php:175
+#: app/Admin/Nekorekten_Com.php:173
 msgid "Email:"
 msgstr "Email:"
 
@@ -559,7 +578,7 @@ msgstr ""
 "Грешка при комуникацията със сървъра за валидиране на ДДС - моля, опитайте "
 "отново"
 
-#: app/Admin/Nekorekten_Com.php:144
+#: app/Admin/Nekorekten_Com.php:142
 #, php-format
 msgid "Error: \"%s\""
 msgstr "Грешка: \"%s\""
@@ -611,7 +630,7 @@ msgstr ""
 "Файла е генериран успешно! <a href=\"%s\" download target=\"_blank\">"
 "Изтегли</a>"
 
-#: app/Admin/Nekorekten_Com.php:172
+#: app/Admin/Nekorekten_Com.php:170 app/Admin/Nekorekten_Com.php:318
 msgid "First Name:"
 msgstr "Име:"
 
@@ -657,7 +676,7 @@ msgstr "За еднократна помощ като подкрепа за ра
 msgid "Force variations in label"
 msgstr "Принудително добавяне на варияцията в товарителницата"
 
-#: app/Admin/Nekorekten_Com.php:159
+#: app/Admin/Nekorekten_Com.php:157
 #, php-format
 msgid "Found: %s"
 msgstr "Намерени: %s"
@@ -677,7 +696,7 @@ msgid "Free shipping over total cart price."
 msgstr "Безплатна доставка над сума на количката "
 
 #: app/Admin/Tabs/CVC_Tab.php:135 app/Admin/Tabs/Econt_Tab.php:219
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:60 app/Admin/Tabs/Speedy_Tab.php:155
+#: app/Admin/Tabs/Nekorekten_Com_Tab.php:61 app/Admin/Tabs/Speedy_Tab.php:155
 msgid "General"
 msgstr "Главни"
 
@@ -792,7 +811,7 @@ msgstr ""
 "prices inclusive of tax\". Също отидете на под менюто \"Standard rates\" и "
 "добавете вашето ДДС ( 20% или 9% )."
 
-#: app/Admin/Nekorekten_Com.php:146
+#: app/Admin/Nekorekten_Com.php:144
 msgid "Invalid access."
 msgstr "Невалиден достъп."
 
@@ -845,7 +864,7 @@ msgstr "Данни за товарителница"
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
 
-#: app/Admin/Nekorekten_Com.php:173
+#: app/Admin/Nekorekten_Com.php:171 app/Admin/Nekorekten_Com.php:325
 msgid "Last Name:"
 msgstr "Фамилия:"
 
@@ -906,7 +925,7 @@ msgstr "Име"
 msgid "Name:"
 msgstr "Име"
 
-#: app/Admin/Nekorekten_Com.php:269
+#: app/Admin/Nekorekten_Com.php:277
 msgid "Nekorekten"
 msgstr "Nekorekten"
 
@@ -969,7 +988,7 @@ msgstr "Няма намерени отзиви."
 msgid "No results was found for this city"
 msgstr "Няма намерени резултати за този град"
 
-#: app/functions.php:377
+#: app/functions.php:377 app/Admin/Nekorekten_Com.php:369
 msgid "Nonce was not provided!"
 msgstr "Nonce не е предоставен!"
 
@@ -1101,7 +1120,7 @@ msgstr "PDF документи"
 msgid "Phone"
 msgstr "Телефон"
 
-#: app/Admin/Nekorekten_Com.php:174
+#: app/Admin/Nekorekten_Com.php:172 app/Admin/Nekorekten_Com.php:332
 msgid "Phone:"
 msgstr "Телефон:"
 
@@ -1382,7 +1401,7 @@ msgstr "Изпращач"
 msgid "Sender payment type"
 msgstr "Метод на плащане на изпращача"
 
-#: app/Plugin.php:69 app/Plugin.php:173 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:69 app/Plugin.php:176 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1407,7 +1426,7 @@ msgstr "Тип на товарителницата"
 msgid "Shipping Methods Settings"
 msgstr "Настройки за доставки"
 
-#: app/Export/Nra/Order.php:123 app/Invoice/Order/Order.php:115
+#: app/Export/Nra/Order.php:123 app/Invoice/Order/Order.php:120
 #, php-format
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
@@ -1475,6 +1494,14 @@ msgstr "Улица или квартал"
 msgid "Street/Quarter"
 msgstr "Улица/Квартал"
 
+#: app/Admin/Nekorekten_Com.php:356
+msgid "Submit"
+msgstr "Изпрати"
+
+#: app/Admin/Nekorekten_Com.php:313
+msgid "Submit Review"
+msgstr "Пуснете сигнал"
+
 #: app/functions.php:213
 msgid "Supporting the development"
 msgstr "Подкрепете разработката"
@@ -1483,7 +1510,7 @@ msgstr "Подкрепете разработката"
 msgid "Tax Classes for Digital Goods"
 msgstr "Данъчни класове за цифрови стоки"
 
-#: app/Admin/Nekorekten_Com.php:180
+#: app/Admin/Nekorekten_Com.php:178
 msgid "Text:"
 msgstr "Текст:"
 
@@ -1589,7 +1616,7 @@ msgstr "Към фактура №"
 msgid "To Office: "
 msgstr "До офис: "
 
-#: app/Invoice/Order/Order.php:175
+#: app/Invoice/Order/Order.php:180
 msgid "Total"
 msgstr "Данъчна основа"
 
@@ -1597,7 +1624,7 @@ msgstr "Данъчна основа"
 msgid "Total amount"
 msgstr "Обща стойност"
 
-#: app/Invoice/Order/Order.php:197
+#: app/Invoice/Order/Order.php:202
 msgid "Total due"
 msgstr "Всичко"
 
@@ -1605,7 +1632,7 @@ msgstr "Всичко"
 msgid "Total in text"
 msgstr "Общата цена изписана с текст"
 
-#: app/Export/Nra/Export.php:142
+#: app/Export/Nra/Export.php:146
 #, php-format
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
@@ -1762,14 +1789,6 @@ msgstr ""
 #: app/Shipping/Econt/Method.php:147
 msgid "Yes"
 msgstr "Да"
-
-#: app/Admin/Nekorekten_Com.php:132
-msgid ""
-"You can add a report from <a href=\"https://nekorekten.com/\" "
-"target=\"_blank\">https://nekorekten.com/</a>"
-msgstr ""
-"Можете да добавите отзив през <a href=\"https://nekorekten.com/\" "
-"target=\"_blank\">https://nekorekten.com/</a>"
 
 #: app/Admin/Tabs/Help_Tab.php:22
 msgid ""
