@@ -66,6 +66,10 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 3.1.3 =
+Nekorekten.com: Add "Submit report" form in admin order page
+Nekorekten.com: Check for reports on checkout and disable COD
+
 = 3.1.2 =
 Invoice: Fix double country code in vat number
 Invoices: Fix if shipping doesn't have a price
