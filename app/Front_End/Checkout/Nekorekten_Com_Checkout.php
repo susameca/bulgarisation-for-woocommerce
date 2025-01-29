@@ -46,7 +46,6 @@ class Nekorekten_Com_Checkout {
 
 
 		if ( ! isset( $phones[ md5( $phone ) ] ) ) {
-			self::api_call( self::REPORTS_URL, [ $key => $search_by ] );
 			$report = Nekorekten_Com::api_call( Nekorekten_Com::REPORTS_URL, [ 'phone' => $phone ] );
 
 			if ( isset( $report['server']['httpCode'] ) && $report['server']['httpCode'] === 200 ) {
@@ -55,8 +54,10 @@ class Nekorekten_Com_Checkout {
 
 			WC()->session->set( 'nekorekten_found', $phones );
 		}
-
-		return $phones[ md5( $phone ) ];
+        
+        if ( !empty( $phones[ md5( $phone ) ] ) ) {
+        	return $phones[ md5( $phone ) ];
+        }
 	}
 
 	public function unset_session( $order_id ) {
