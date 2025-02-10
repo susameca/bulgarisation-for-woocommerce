@@ -248,12 +248,15 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_recipient_data() {
+		$session_customer = WC()->session->get( 'customer' );
+		
 		$recipient = array(
 			'privatePerson' => true,
 			'clientName' => $this->cookie_data[ 'receiver' ],
 			'phone1' => array(
 				'number' => woo_bg_format_phone( $this->cookie_data[ 'phone' ] ),
-			)
+			),
+			'email' => $session_customer[ 'email' ],
 		);
 
 		if ( isset( $this->cookie_data['billing_to_company'] ) ) {
