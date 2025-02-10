@@ -18,6 +18,11 @@ use Woo_BG\Client\Speedy\Offices as Speedy_Offices;
 use Woo_BG\Client\Speedy\Streets as Speedy_Streets;
 use Woo_BG\Client\Speedy\Quarters as Speedy_Quarters;
 
+//BoxNow Classes
+use Woo_BG\Client\BoxNow;
+use Woo_BG\Client\BoxNow\Origins as BoxNow_Origins;
+use Woo_BG\Client\BoxNow\Destinations as BoxNow_Destinations;
+
 //CVC Classes
 use Woo_BG\Client\CVC;
 use Woo_BG\Client\CVC\Cities as CVC_Cities;
@@ -41,10 +46,14 @@ class Client extends Provider {
 
 	const SPEEDY           = 'client.speedy';
 	const SPEEDY_PROFILE   = 'client.speedy.profile';
-	const SPEEDY_CITIES   = 'client.speedy.cities';
+	const SPEEDY_CITIES    = 'client.speedy.cities';
 	const SPEEDY_OFFICES   = 'client.speedy.offices';
 	const SPEEDY_STREETS   = 'client.speedy.streets';
-	const SPEEDY_QUARTERS   = 'client.speedy.quarters';
+	const SPEEDY_QUARTERS  = 'client.speedy.quarters';
+
+	const BOXNOW                = 'client.boxnow';
+	const BOXNOW_ORIGINS        = 'client.boxnow.origins';
+	const BOXNOW_DESTINATIONS   = 'client.boxnow.destinations';
 
 	const CVC              = 'client.cvc';
 	const CVC_PROFILE      = 'client.cvc.profile';
@@ -106,6 +115,18 @@ class Client extends Provider {
 
 		$container[ self::SPEEDY_QUARTERS ] = function ( Container $container ) {
 			return new Speedy_Quarters( $container );
+		};
+
+		$container[ self::BOXNOW ] = function ( Container $container ) {
+			return new BoxNow();
+		};
+
+		$container[ self::BOXNOW_ORIGINS ] = function ( Container $container ) {
+			return new BoxNow_Origins( $container );
+		};
+
+		$container[ self::BOXNOW_DESTINATIONS ] = function ( Container $container ) {
+			return new BoxNow_Destinations( $container );
 		};
 		
 		$container[ self::CVC ] = function ( Container $container ) {

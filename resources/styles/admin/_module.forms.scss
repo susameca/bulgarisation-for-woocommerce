@@ -5,6 +5,14 @@
 
 .woocommerce table.form-table .field-error { color: red; }
 
+.woocommerce table.form-table .multi-field-container { width: 360px; }
+.woocommerce table.form-table .multi-two-field-container { width: 585px; }
+.woocommerce table.form-table .multi-field-row { display:flex; align-items:center; justify-content: center; margin-bottom: 10px; }
+.woocommerce table.form-table .multi-field-row .multi-field-option { display:flex; align-items:center; margin-right: 10px; position: relative; border: 1px solid black; border-radius: 5px; background: white; padding: 0 0px; }
+.woocommerce table.form-table .multi-field-row .multi-field-option span { right: 0; position: absolute; background: #f0f0f0; display: block; padding: 6px; z-index: 0; border-radius: 0 5px 5px 0; height: 59%; }
+.woocommerce table.form-table .multi-field-row .multi-field-option input { max-width: 75px; border: 0; background: none; z-index: 1; padding-right: 18px !important; text-align: right; } 
+.woocommerce table.form-table .multi-field--add-new-row { margin-top:10px; display:flex; justify-content: center; }
+
 .multiselect__tags { padding: 0; }
 .multiselect__tags input{ border: 0; }
 .multiselect__tags .multiselect__single{ padding: 8px 40px 0 8px; }

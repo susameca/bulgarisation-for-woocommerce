@@ -1,11 +1,17 @@
 <?php
 namespace Woo_BG\Shipping;
+
 use Woo_BG\Admin\Econt as Econt_Admin;
 use Woo_BG\Cron\Econt as Econt_Cron;
+
 use Woo_BG\Admin\CVC as CVC_Admin;
 use Woo_BG\Cron\CVC as CVC_Cron;
+
 use Woo_BG\Admin\Speedy as Speedy_Admin;
 use Woo_BG\Cron\Speedy as Speedy_Cron;
+
+use Woo_BG\Admin\BoxNow as BoxNow_Admin;
+use Woo_BG\Cron\BoxNow as BoxNow_Cron;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -13,6 +19,7 @@ class Register {
 	public function __construct( $container ) {
 		self::maybe_register_econt();
 		self::maybe_register_speedy();
+		self::maybe_register_boxnow();
 		self::maybe_register_cvc();
 
 		if ( woo_bg_is_shipping_enabled() ) {
@@ -91,6 +98,28 @@ class Register {
 		add_action( 'wp_enqueue_scripts', array( 'Woo_BG\Shipping\CVC\Method', 'enqueue_scripts' ) );
 	}
 
+	public static function maybe_register_boxnow() {
+		if ( woo_bg_get_option( 'apis', 'enable_boxnow' ) !== 'yes' ) {
+			return;
+		}
+
+		add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'register_boxnow_method' ) );
+
+		new BoxNow_Cron();
+		new BoxNow\Apm();
+		new BoxNow_Admin();
+
+		add_action( 'woocommerce_after_checkout_validation', array( 'Woo_BG\Shipping\BoxNow\Method', 'validate_boxnow_method' ), 20, 2 );
+		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\BoxNow\Method', 'save_label_data_to_order' ), 20, 2 );
+		
+		if ( woo_bg_get_option( 'boxnow_send_from', 'label_after_checkout' ) === 'yes' ) {
+			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\BoxNow', 'generate_label' ), 25 );
+		}
+
+		add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\CVC\Method', 'add_label_number_to_email' ), 1, 4 );
+		add_action( 'wp_enqueue_scripts', array( 'Woo_BG\Shipping\BoxNow\Method', 'enqueue_scripts' ) );
+	}
+
 	public static function register_econt_method( $methods ) {
 		$methods[ Econt\Method::METHOD_ID ] = 'Woo_BG\Shipping\Econt\Method';
 
@@ -105,6 +134,12 @@ class Register {
 
 	public static function register_cvc_method( $methods ) {
 		$methods[ CVC\Method::METHOD_ID ] = 'Woo_BG\Shipping\CVC\Method';
+
+		return $methods;
+	}
+
+	public static function register_boxnow_method( $methods ) {
+		$methods[ BoxNow\Method::METHOD_ID ] = 'Woo_BG\Shipping\BoxNow\Method';
 
 		return $methods;
 	}

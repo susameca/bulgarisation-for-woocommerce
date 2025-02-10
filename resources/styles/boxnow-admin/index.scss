@@ -1,0 +1,36 @@
+/* ------------------------------------------------------------ *\
+	Vendor
+\* ------------------------------------------------------------ */
+
+@import '~@styles/boxnow-admin.config.scss';
+
+#woo_bg_boxnow #order_data { padding: 0 }
+
+.panel-wrap.woocommerce--boxnow {
+	.multiselect__option--highlight:not( .multiselect__option--selected ) {
+		background: $color-boxnow-blue;
+	}
+	.multiselect__option--highlight.multiselect__option--selected {
+		background: $color-red;
+	}
+
+	#woo-bg--boxnow-label-print { 
+		min-height: 600px; 
+		width: 100%; 
+		margin-top: 30px;
+	}
+
+	.woo-bg--radio input { 
+		margin: 3px 0px 0px 0px; 
+	}
+
+	input.multiselect__input { 
+		border: 0!important; 
+	}
+
+	.form-field.form-field--checkbox { display:flex; align-items:center; gap: 4px;}
+	.form-field.form-field--checkbox input[type="checkbox"] { width: auto !important;  }
+
+	.woocommerce_order_status table { width:440px; text-align:left; }
+}
+

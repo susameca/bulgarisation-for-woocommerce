@@ -44,6 +44,7 @@ class Settings_Tab extends Base_Tab {
 				new Fields\TrueFalse_Field( 'enable_documents', __( 'Enable Documents Generation', 'woo-bg' ), null, null, __( 'If you want to generate invoices or enable N-18', 'woo-bg' ) ),
 				new Fields\TrueFalse_Field( 'enable_econt', __( 'Enable Econt Delivery? ', 'woo-bg' ), null, null, __( 'Enables Econt Shipping methods.', 'woo-bg' ) ),
 				new Fields\TrueFalse_Field( 'enable_speedy', __( 'Enable Speedy Delivery? ', 'woo-bg' ), null, null, __( 'Enables Speedy Shipping methods.', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'enable_boxnow', __( 'Enable BoxNow Delivery? ', 'woo-bg' ), null, null, __( 'Enables BoxNow Shipping method.', 'woo-bg' ) ),
 				new Fields\TrueFalse_Field( 'enable_cvc', __( 'Enable CVC Delivery? ', 'woo-bg' ), null, null, __( 'Enables CVC Shipping methods.', 'woo-bg' ) ),
 				new Fields\TrueFalse_Field( 'enable_nekorekten', __( 'Enable nekorekten.com API? ', 'woo-bg' ), null, null, __( 'If yes, you will receive information about the customer from nekorekten.com.', 'woo-bg' ) ),
 			),

@@ -7,13 +7,16 @@
     "econt-frontend",
     "econt-admin",
     "speedy-frontend",
-    "speedy-admin"
+    "speedy-admin",
+    "boxnow-frontend",
+    "boxnow-admin"
   ],
   "variables": {
     "color": {
       "red": "#d63638",
       "econt-blue": "#234182",
       "speedy-blue": "#234182",
+      "boxnow-blue": "#234182",
       "cvc-blue": "#234182"
     }
   },

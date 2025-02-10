@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2025-01-28 21:33+0000\n"
+"PO-Revision-Date: 2025-02-10 22:29+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -12,8 +12,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.3; wp-6.1.1\n"
+"X-Loco-Version: 2.6.14; wp-6.7.1\n"
 "X-Domain: woo-bg"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:123 app/Admin/Tabs/BoxNow_Tab.php:140
+#: app/Admin/Tabs/BoxNow_Tab.php:157
+msgid " to "
+msgstr "до"
 
 #. %1$s is the city and %2$s is the state
 #: app/Shipping/Speedy/Office.php:64
@@ -33,8 +38,9 @@ msgid_plural "%s orders documents were regenerated."
 msgstr[0] "На %s поръчка бяха регенерирани документите."
 msgstr[1] "На %s поръчки бяха регенерирани документите."
 
-#: app/Shipping/CVC/Method.php:105 app/Shipping/Econt/Method-new.php:105
-#: app/Shipping/Econt/Method.php:102 app/Shipping/Speedy/Method.php:100
+#: app/Shipping/BoxNow/Method.php:72 app/Shipping/CVC/Method.php:105
+#: app/Shipping/Econt/Method-new.php:105 app/Shipping/Econt/Method.php:102
+#: app/Shipping/Speedy/Method.php:100
 #, php-format
 msgid "%s: Free shipping"
 msgstr "%s: Безплатна доставка"
@@ -42,6 +48,11 @@ msgstr "%s: Безплатна доставка"
 #: app/Admin/EU_Vat.php:104
 msgid "(self-declared)"
 msgstr "(самодеклариран)"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:125 app/Admin/Tabs/BoxNow_Tab.php:141
+#: app/Admin/Tabs/BoxNow_Tab.php:159
+msgid "+ Add new row"
+msgstr "+ Добавете нов ред"
 
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
 msgid ""
@@ -82,13 +93,29 @@ msgstr "Добавете колона в списъка с поръчки."
 msgid "Address"
 msgstr "Адрес"
 
-#: app/Admin/Tabs/Settings_Tab.php:51
+#: app/Admin/Tabs/BoxNow_Tab.php:114
+msgid ""
+"After you select the option, you must save the settings in order the correct "
+"price settings to be shown."
+msgstr ""
+"След като изберете опцията, трябва да запазите настройките, за да се покажат "
+"правилните ценови настройки."
+
+#: app/Admin/BoxNow.php:103 app/Admin/Tabs/BoxNow_Tab.php:92
+msgid "Allow returns"
+msgstr "Позволи връщане"
+
+#: app/Admin/Tabs/Settings_Tab.php:52
 msgid "Alternative shipping options layout ( checkout )"
 msgstr "Алтернативно оформление на методите за доставка (чекаут)"
 
 #: app/Admin/Tabs/Nra_Tab.php:65
 msgid "Always"
 msgstr "Винаги"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:156
+msgid "and"
+msgstr "и"
 
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:41
 msgid "API Key"
@@ -101,6 +128,14 @@ msgstr "API ключ"
 #: app/Admin/Tabs/CVC_Tab.php:166
 msgid "API Token is incorrect."
 msgstr "Невалиден API ключ."
+
+#: app/Admin/BoxNow.php:101
+msgid "APM"
+msgstr "АПС"
+
+#: app/Shipping/BoxNow/Apm.php:38
+msgid "APM locator"
+msgstr "АПС локатор"
 
 #. Author of the plugin
 msgid "Autopolis.bg"
@@ -131,6 +166,18 @@ msgstr "Клиент"
 #: app/Shipping/Speedy/Address.php:45
 msgid "bl. vh. et."
 msgstr "бл. вх. ет. ап."
+
+#: app/Admin/BoxNow.php:43
+msgid "BoxNow Delivery"
+msgstr "Доставка с BoxNow"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:15
+msgid "BoxNow Settings"
+msgstr "BoxNow настройки"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:16
+msgid "boxnow.bg API Settings"
+msgstr "boxnow.bg API настройки"
 
 #: app/Admin/Admin_Menus.php:44 app/Admin/Admin_Menus.php:45
 #: app/Admin/Admin_Menus.php:57 app/Admin/Admin_Menus.php:80
@@ -217,11 +264,12 @@ msgstr "Отбележете ако искате продукта да бъде 
 msgid "Check on checkout and disable COD."
 msgstr "Провери на чекаут и изключи НП"
 
-#: app/Admin/Tabs/Settings_Tab.php:72
+#: app/Admin/Tabs/Settings_Tab.php:73
 msgid "Checkout Settings"
 msgstr "Настройки на \"Страница за поръчка\""
 
-#: app/Admin/CVC.php:110 app/Admin/Econt.php:109 app/Admin/Speedy.php:111
+#: app/Admin/BoxNow.php:109 app/Admin/CVC.php:110 app/Admin/Econt.php:109
+#: app/Admin/Speedy.php:111 app/Shipping/BoxNow/Apm.php:33
 #: app/Shipping/CVC/Address.php:39 app/Shipping/CVC/Office.php:35
 #: app/Shipping/Econt/Address.php:39 app/Shipping/Econt/Office.php:35
 #: app/Shipping/Speedy/Address.php:39 app/Shipping/Speedy/Office.php:35
@@ -241,10 +289,18 @@ msgstr "Избери споразумение за наложен платеж"
 msgid "City"
 msgstr "Град"
 
-#: app/Admin/Tabs/CVC_Tab.php:43 app/Admin/Tabs/Econt_Tab.php:44
-#: app/Admin/Tabs/Speedy_Tab.php:43
+#: app/Admin/Tabs/BoxNow_Tab.php:43 app/Admin/Tabs/CVC_Tab.php:43
+#: app/Admin/Tabs/Econt_Tab.php:44 app/Admin/Tabs/Speedy_Tab.php:43
 msgid "Clear cache"
 msgstr "Изчисти кеша"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:72
+msgid "Client ID"
+msgstr "Client ID"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:73
+msgid "Client Secret"
+msgstr "Client Secret"
 
 #: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:116
 msgid "Company Address"
@@ -331,7 +387,8 @@ msgstr "Обявена стойност"
 msgid "Default"
 msgstr "По подразбиране"
 
-#: app/Admin/CVC.php:106 app/Admin/Econt.php:105 app/Admin/Speedy.php:107
+#: app/Admin/BoxNow.php:106 app/Admin/CVC.php:106 app/Admin/Econt.php:105
+#: app/Admin/Speedy.php:107
 msgid "Delete label"
 msgstr "Изтрий товарителница"
 
@@ -348,7 +405,7 @@ msgstr "Доставка до"
 msgid "Delivery type"
 msgstr "Доставка до"
 
-#: app/Admin/Tabs/Econt_Tab.php:66
+#: app/Admin/Tabs/BoxNow_Tab.php:65 app/Admin/Tabs/Econt_Tab.php:66
 msgid "Demo"
 msgstr "Демо"
 
@@ -357,7 +414,8 @@ msgstr "Демо"
 msgid "Description"
 msgstr "Описание"
 
-#: app/Admin/CVC.php:133 app/Admin/Econt.php:131 app/Admin/Speedy.php:133
+#: app/Admin/BoxNow.php:119 app/Admin/CVC.php:133 app/Admin/Econt.php:131
+#: app/Admin/Speedy.php:133
 msgid "Details:"
 msgstr "Детайли:"
 
@@ -399,7 +457,7 @@ msgstr "Име на домейна"
 msgid "Due date"
 msgstr "Дата на падеж"
 
-#: app/Admin/Tabs/CVC_Tab.php:81
+#: app/Admin/Tabs/BoxNow_Tab.php:86 app/Admin/Tabs/CVC_Tab.php:81
 msgid "E-mail"
 msgstr "Имейл"
 
@@ -449,6 +507,10 @@ msgid "Email:"
 msgstr "Email:"
 
 #: app/Admin/Tabs/Settings_Tab.php:47
+msgid "Enable BoxNow Delivery? "
+msgstr "Включи доставки с BoxNow?"
+
+#: app/Admin/Tabs/Settings_Tab.php:48
 msgid "Enable CVC Delivery? "
 msgstr "Включи доставки със CVC?"
 
@@ -465,7 +527,7 @@ msgstr "Включи доставки с Еконт?"
 msgid "Enable N-18"
 msgstr "Включи Наредба Н-18"
 
-#: app/Admin/Tabs/Settings_Tab.php:48
+#: app/Admin/Tabs/Settings_Tab.php:49
 msgid "Enable nekorekten.com API? "
 msgstr "Включи nekorekten.com API?"
 
@@ -484,11 +546,19 @@ msgstr "Включи доставки със Спиди?"
 msgid "Enable VIES validation"
 msgstr "Включи VIES валидация"
 
+#: app/Shipping/BoxNow/Method.php:17
+msgid "Enables BoxNow delivery."
+msgstr "Включи доставки с BoxNow."
+
+#: app/Admin/Tabs/Settings_Tab.php:47
+msgid "Enables BoxNow Shipping method."
+msgstr "Включва доставки с BoxNow куриер."
+
 #: app/Shipping/CVC/Method.php:16
 msgid "Enables CVC delivery and automatically calculate shipping price."
 msgstr "Включва доставки със CVC и автоматично пресмятане на доставка."
 
-#: app/Admin/Tabs/Settings_Tab.php:47
+#: app/Admin/Tabs/Settings_Tab.php:48
 msgid "Enables CVC Shipping methods."
 msgstr "Включва CVC начин на доставка."
 
@@ -556,6 +626,14 @@ msgid ""
 "which will be displayed in them."
 msgstr "Името на съставителя на генерираните документи."
 
+#: app/Admin/Tabs/BoxNow_Tab.php:72
+msgid "Enter your Client ID."
+msgstr "Въведете Client ID"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:73
+msgid "Enter your Client Secret."
+msgstr "Въведете Client Secret"
+
 #: app/Admin/Tabs/Econt_Tab.php:74 app/Admin/Tabs/Speedy_Tab.php:66
 msgid "Enter your password."
 msgstr "Въведете парола."
@@ -568,7 +646,7 @@ msgstr "Въведете вашият ключ."
 msgid "Enter your username."
 msgstr "Въведете потребителско име."
 
-#: app/Admin/Tabs/Econt_Tab.php:72
+#: app/Admin/Tabs/BoxNow_Tab.php:71 app/Admin/Tabs/Econt_Tab.php:72
 msgid "Environment"
 msgstr "Работна среда"
 
@@ -587,7 +665,8 @@ msgstr "Грешка: \"%s\""
 msgid "EU VAT"
 msgstr "ДДС номер"
 
-#: app/Admin/CVC.php:132 app/Admin/Econt.php:130 app/Admin/Speedy.php:132
+#: app/Admin/BoxNow.php:118 app/Admin/CVC.php:132 app/Admin/Econt.php:130
+#: app/Admin/Speedy.php:132
 msgid "Event:"
 msgstr "Събитие:"
 
@@ -685,18 +764,33 @@ msgstr "Намерени: %s"
 msgid "Fragile"
 msgstr "Чупливо"
 
-#: app/Shipping/CVC/Method.php:176 app/Shipping/Econt/Method-new.php:155
-#: app/Shipping/Econt/Method.php:152 app/Shipping/Speedy/Method.php:145
+#: app/Admin/Tabs/BoxNow_Tab.php:174 app/Shipping/CVC/Method.php:176
+#: app/Shipping/Econt/Method-new.php:155 app/Shipping/Econt/Method.php:152
+#: app/Shipping/Speedy/Method.php:145
 msgid "Free shipping over"
 msgstr "Безплатна доставна над"
 
-#: app/Shipping/CVC/Method.php:179 app/Shipping/Econt/Method-new.php:158
-#: app/Shipping/Econt/Method.php:155 app/Shipping/Speedy/Method.php:148
+#: app/Admin/Tabs/BoxNow_Tab.php:174 app/Shipping/CVC/Method.php:179
+#: app/Shipping/Econt/Method-new.php:158 app/Shipping/Econt/Method.php:155
+#: app/Shipping/Speedy/Method.php:148
 msgid "Free shipping over total cart price."
 msgstr "Безплатна доставка над сума на количката "
 
-#: app/Admin/Tabs/CVC_Tab.php:135 app/Admin/Tabs/Econt_Tab.php:219
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:61 app/Admin/Tabs/Speedy_Tab.php:155
+#: app/Admin/Tabs/BoxNow_Tab.php:99 app/Admin/Tabs/BoxNow_Tab.php:131
+msgid "From/To in kg"
+msgstr "От/до в кг."
+
+#: app/Admin/Tabs/BoxNow_Tab.php:107 app/Admin/Tabs/BoxNow_Tab.php:166
+msgid "From/To kg and Order Total"
+msgstr "От/До в кг и сума на поръчката"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:103 app/Admin/Tabs/BoxNow_Tab.php:146
+msgid "From/To Order Total"
+msgstr "От/До сума на поръчката"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:191 app/Admin/Tabs/CVC_Tab.php:135
+#: app/Admin/Tabs/Econt_Tab.php:219 app/Admin/Tabs/Nekorekten_Com_Tab.php:61
+#: app/Admin/Tabs/Speedy_Tab.php:155
 msgid "General"
 msgstr "Главни"
 
@@ -713,13 +807,13 @@ msgstr "Генериране на докумени за поръчки пред�
 msgid "Generate Invoice"
 msgstr "Генерирай фактура"
 
-#: app/Admin/CVC.php:105 app/Admin/Econt.php:104 app/Admin/Speedy.php:106
-#: app/Admin/fragments/label-column.php:14
+#: app/Admin/BoxNow.php:105 app/Admin/CVC.php:105 app/Admin/Econt.php:104
+#: app/Admin/Speedy.php:106 app/Admin/fragments/label-column.php:14
 msgid "Generate label"
 msgstr "Генерирай товарителница."
 
-#: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:96
-#: app/Admin/Tabs/Speedy_Tab.php:88
+#: app/Admin/Tabs/BoxNow_Tab.php:93 app/Admin/Tabs/CVC_Tab.php:85
+#: app/Admin/Tabs/Econt_Tab.php:96 app/Admin/Tabs/Speedy_Tab.php:88
 msgid "Generate label after checkout"
 msgstr "Генерирай товарителница след чекаут"
 
@@ -785,7 +879,7 @@ msgstr ""
 "Ако се включи, доставките с ППП ще бъдат премахнати от документите и от XML "
 "експорта"
 
-#: app/Admin/Tabs/Settings_Tab.php:48
+#: app/Admin/Tabs/Settings_Tab.php:49
 msgid ""
 "If yes, you will receive information about the customer from nekorekten.com."
 msgstr "Ако да, ще получавате информация за клиента от nekorekten.com."
@@ -810,6 +904,10 @@ msgstr ""
 "Enable taxes\". След това отидете на \"Settings >> Tax >> Yes, I will enter "
 "prices inclusive of tax\". Също отидете на под менюто \"Standard rates\" и "
 "добавете вашето ДДС ( 20% или 9% )."
+
+#: app/Admin/Tabs/BoxNow_Tab.php:220
+msgid "Incorrect Client ID or Client Secret."
+msgstr "Невалиден  Client ID или Client Secret"
 
 #: app/Admin/Nekorekten_Com.php:144
 msgid "Invalid access."
@@ -849,17 +947,23 @@ msgstr "IP Държава"
 msgid "Is %s courier?"
 msgstr "%s куриер ли е?"
 
-#: app/Admin/CVC.php:107 app/Admin/Econt.php:106 app/Admin/Speedy.php:108
-#: app/Admin/Order/Columns.php:29
+#: app/Admin/Tabs/BoxNow_Tab.php:122 app/Admin/Tabs/BoxNow_Tab.php:154
+msgid "kg"
+msgstr "кг"
+
+#: app/Admin/BoxNow.php:107 app/Admin/CVC.php:107 app/Admin/Econt.php:106
+#: app/Admin/Speedy.php:108 app/Admin/Order/Columns.php:29
 msgid "Label"
 msgstr "Товарителница"
 
-#: app/Admin/CVC.php:122 app/Admin/Econt.php:121 app/Admin/Speedy.php:123
+#: app/Admin/BoxNow.php:110 app/Admin/CVC.php:122 app/Admin/Econt.php:121
+#: app/Admin/Speedy.php:123
 msgid "Label data"
 msgstr "Данни за товарителница"
 
-#: app/Shipping/CVC/Method.php:543 app/Shipping/Econt/Method-new.php:466
-#: app/Shipping/Econt/Method.php:608 app/Shipping/Speedy/Method.php:605
+#: app/Shipping/BoxNow/Method.php:394 app/Shipping/CVC/Method.php:543
+#: app/Shipping/Econt/Method-new.php:466 app/Shipping/Econt/Method.php:608
+#: app/Shipping/Speedy/Method.php:608
 #, php-format
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
@@ -880,19 +984,23 @@ msgstr "Невалиден лиценз!"
 msgid "License Key"
 msgstr "Лицензен ключ"
 
-#: app/Admin/Tabs/Econt_Tab.php:70
+#: app/Admin/Tabs/BoxNow_Tab.php:69 app/Admin/Tabs/Econt_Tab.php:70
 msgid "Live"
 msgstr "Реална"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:90
+msgid "Location"
+msgstr "Локация"
 
 #: app/Admin/Tabs/Nra_Tab.php:144
 msgid "Main Company Settings"
 msgstr "Главни настройки на фирмата"
 
-#: app/Admin/Tabs/Settings_Tab.php:69
+#: app/Admin/Tabs/Settings_Tab.php:70
 msgid "Main functionalities"
 msgstr "Главни функционалности"
 
-#: app/Admin/Tabs/Settings_Tab.php:51
+#: app/Admin/Tabs/Settings_Tab.php:52
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr "Направете опциите за доставка на 2 реда и с пълна ширина в чекаут."
 
@@ -916,8 +1024,8 @@ msgstr "МОЛ на фирмата"
 msgid "MOL: %s"
 msgstr "МОЛ: %s"
 
-#: app/Admin/Tabs/CVC_Tab.php:79 app/Admin/Tabs/Econt_Tab.php:92
-#: app/Admin/Tabs/Speedy_Tab.php:82
+#: app/Admin/Tabs/BoxNow_Tab.php:84 app/Admin/Tabs/CVC_Tab.php:79
+#: app/Admin/Tabs/Econt_Tab.php:92 app/Admin/Tabs/Speedy_Tab.php:82
 msgid "Name"
 msgstr "Име"
 
@@ -981,6 +1089,10 @@ msgstr "Няма намерени отзиви за този клиент."
 #: app/Admin/Nekorekten_Com.php:88
 msgid "No reports was found."
 msgstr "Няма намерени отзиви."
+
+#: app/Shipping/BoxNow/Apm.php:36
+msgid "No results was found"
+msgstr "Няма намерени резултати"
 
 #: app/Shipping/CVC/Address.php:42 app/Shipping/CVC/Office.php:38
 #: app/Shipping/Econt/Address.php:42 app/Shipping/Econt/Office.php:38
@@ -1115,8 +1227,8 @@ msgstr "Начин на плащане"
 msgid "PDF Files"
 msgstr "PDF документи"
 
-#: app/Admin/Tabs/CVC_Tab.php:80 app/Admin/Tabs/Econt_Tab.php:93
-#: app/Admin/Tabs/Speedy_Tab.php:83
+#: app/Admin/Tabs/BoxNow_Tab.php:85 app/Admin/Tabs/CVC_Tab.php:80
+#: app/Admin/Tabs/Econt_Tab.php:93 app/Admin/Tabs/Speedy_Tab.php:83
 msgid "Phone"
 msgstr "Телефон"
 
@@ -1139,8 +1251,12 @@ msgstr "Телефон: %s"
 msgid "Place of transaction"
 msgstr "Място на сделката"
 
+#: app/Shipping/BoxNow/Method.php:256
+msgid "Please choose a APM."
+msgstr "Моля изберете АПС."
+
 #: app/Shipping/Econt/Method-new.php:366 app/Shipping/Econt/Method.php:501
-#: app/Shipping/Speedy/Method.php:520
+#: app/Shipping/Speedy/Method.php:523
 msgid "Please choose a office."
 msgstr "Моля изберете офис."
 
@@ -1149,7 +1265,7 @@ msgid "Please choose address."
 msgstr "Моля изберете адрес"
 
 #: app/Shipping/CVC/Method.php:458 app/Shipping/Econt/Method-new.php:356
-#: app/Shipping/Econt/Method.php:489 app/Shipping/Speedy/Method.php:510
+#: app/Shipping/Econt/Method.php:489 app/Shipping/Speedy/Method.php:513
 msgid "Please choose delivery option!"
 msgstr "Моля изберете начин на доставка!"
 
@@ -1177,9 +1293,18 @@ msgstr "Настройки на плъгина"
 msgid "Prepared by"
 msgstr "Съставил документа"
 
-#: app/Invoice/Document/BaseDocument.php:97
+#: app/Admin/Tabs/BoxNow_Tab.php:124 app/Admin/Tabs/BoxNow_Tab.php:142
+#: app/Admin/Tabs/BoxNow_Tab.php:158 app/Invoice/Document/BaseDocument.php:97
 msgid "Price"
 msgstr "Цена"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:204
+msgid "Price options"
+msgstr "Настройки на цените"
+
+#: app/Admin/Tabs/BoxNow_Tab.php:111
+msgid "Price type"
+msgstr "Тип на цените"
 
 #: app/Admin/Tabs/Nra_Tab.php:84
 msgid "Print order total after the table. Works only in levs."
@@ -1298,6 +1423,10 @@ msgstr "Скрийншоти на чекаута:"
 msgid "Search address"
 msgstr "Търси адрес"
 
+#: app/Shipping/BoxNow/Apm.php:34
+msgid "Search APM"
+msgstr "Търси АПС"
+
 #: app/Shipping/CVC/Office.php:36 app/Shipping/Econt/Office.php:36
 #: app/Shipping/Speedy/Office.php:36
 msgid "Search office"
@@ -1311,9 +1440,10 @@ msgstr ""
 "Втората добавка променя дефолтните радио бутони на шипинг методите с по-"
 "стилизирани нормални бутони."
 
-#: app/Shipping/CVC/Address.php:41 app/Shipping/CVC/Office.php:37
-#: app/Shipping/Econt/Address.php:41 app/Shipping/Econt/Office.php:37
-#: app/Shipping/Speedy/Address.php:41 app/Shipping/Speedy/Office.php:37
+#: app/Shipping/BoxNow/Apm.php:35 app/Shipping/CVC/Address.php:41
+#: app/Shipping/CVC/Office.php:37 app/Shipping/Econt/Address.php:41
+#: app/Shipping/Econt/Office.php:37 app/Shipping/Speedy/Address.php:41
+#: app/Shipping/Speedy/Office.php:37
 msgid "Select"
 msgstr "Избери"
 
@@ -1354,6 +1484,10 @@ msgstr ""
 "Изберете профила който искате да ползвате и запазете настройките за да се "
 "обновят по-долните опции."
 
+#: app/Admin/Tabs/BoxNow_Tab.php:71
+msgid "Select used environment."
+msgstr "Изберете работна среда."
+
 #: app/Admin/Tabs/Econt_Tab.php:72
 #| msgid ""
 #| "Select used environment. For demo you can use Username: \"iasp-dev\" and "
@@ -1371,7 +1505,8 @@ msgstr ""
 "потребителско име и парола или създайте от <a target=\"_blank\" href=\"https:"
 "//login.econt.com/register/\">Еконт доставки</a>."
 
-#: app/Admin/CVC.php:109 app/Admin/Econt.php:108 app/Admin/Speedy.php:110
+#: app/Admin/BoxNow.php:108 app/Admin/CVC.php:109 app/Admin/Econt.php:108
+#: app/Admin/Speedy.php:110 app/Shipping/BoxNow/Apm.php:32
 #: app/Shipping/CVC/Address.php:38 app/Shipping/CVC/Office.php:34
 #: app/Shipping/Econt/Address.php:38 app/Shipping/Econt/Office.php:34
 #: app/Shipping/Speedy/Address.php:38 app/Shipping/Speedy/Office.php:34
@@ -1383,6 +1518,7 @@ msgstr "Избрано"
 msgid "Send customer notification for delivery."
 msgstr "Изпратете известие на клиента за доставка."
 
+#: app/Admin/BoxNow.php:99 app/Admin/Tabs/BoxNow_Tab.php:201
 #: app/Admin/Tabs/CVC_Tab.php:97 app/Admin/Tabs/CVC_Tab.php:145
 #: app/Admin/Tabs/Econt_Tab.php:137 app/Admin/Tabs/Econt_Tab.php:229
 #: app/Admin/Tabs/Speedy_Tab.php:99 app/Admin/Tabs/Speedy_Tab.php:165
@@ -1392,6 +1528,10 @@ msgstr "Изпрати от"
 #: app/Admin/Tabs/Help_Tab.php:37
 msgid "Send Request"
 msgstr "Изпратете запитване"
+
+#: app/Admin/BoxNow.php:98
+msgid "Send to"
+msgstr "Изпрати до"
 
 #: app/Admin/CVC.php:124 app/Admin/Econt.php:123 app/Admin/Speedy.php:125
 msgid "Sender"
@@ -1405,7 +1545,7 @@ msgstr "Метод на плащане на изпращача"
 msgid "Settings"
 msgstr "Настройки"
 
-#: app/Admin/Tabs/Pro_Tab.php:122 app/Admin/Tabs/Settings_Tab.php:103
+#: app/Admin/Tabs/Pro_Tab.php:122 app/Admin/Tabs/Settings_Tab.php:104
 msgid "Settings saved successfully!"
 msgstr "Настройките са запазени успешно!"
 
@@ -1414,7 +1554,8 @@ msgstr "Настройките са запазени успешно!"
 msgid "Settlement"
 msgstr "Населено място"
 
-#: app/Admin/CVC.php:130 app/Admin/Econt.php:128 app/Admin/Speedy.php:130
+#: app/Admin/BoxNow.php:111 app/Admin/CVC.php:130 app/Admin/Econt.php:128
+#: app/Admin/Speedy.php:130
 msgid "Shipment status"
 msgstr "Статус на пратката"
 
@@ -1445,7 +1586,7 @@ msgstr ""
 "Някои от поръчките не бяха добавени, защото метода на плащане не беше "
 "намерен или е изключен. Списък с ид на поръчките: %s"
 
-#: app/Shipping/Speedy/Method.php:508
+#: app/Shipping/Speedy/Method.php:511
 #, php-format
 msgid "Speedy - %s"
 msgstr "Спиди - %s"
@@ -1469,6 +1610,10 @@ msgstr "Страндартна"
 #: app/Admin/Tabs/Export_Tab.php:59
 msgid "Standardized audit file according to Annex № 38"
 msgstr "Одиторски файл съгласно приложение № 38 ( Наредба Н-18 )"
+
+#: app/Shipping/BoxNow/Apm.php:37
+msgid "Start typing APM"
+msgstr "Почнете да търсите АПС"
 
 #: app/Shipping/CVC/Office.php:39 app/Shipping/Econt/Office.php:39
 #: app/Shipping/Speedy/Office.php:39
@@ -1551,8 +1696,9 @@ msgstr ""
 msgid "There was some error in one of the reports."
 msgstr "Имаше грешка в някой от отзивите."
 
-#: app/Shipping/CVC/Method.php:128 app/Shipping/Econt/Method-new.php:122
-#: app/Shipping/Econt/Method.php:119 app/Shipping/Speedy/Method.php:123
+#: app/Shipping/BoxNow/Method.php:107 app/Shipping/CVC/Method.php:128
+#: app/Shipping/Econt/Method-new.php:122 app/Shipping/Econt/Method.php:119
+#: app/Shipping/Speedy/Method.php:123
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 "Това контролира заглавието, което потребителят вижда по време на плащане."
@@ -1584,8 +1730,8 @@ msgstr ""
 "Тази опция ще премахне доставките от всички PDF документи и XML одиторски "
 "файл."
 
-#: app/Admin/Tabs/CVC_Tab.php:85 app/Admin/Tabs/Econt_Tab.php:96
-#: app/Admin/Tabs/Speedy_Tab.php:88
+#: app/Admin/Tabs/BoxNow_Tab.php:93 app/Admin/Tabs/CVC_Tab.php:85
+#: app/Admin/Tabs/Econt_Tab.php:96 app/Admin/Tabs/Speedy_Tab.php:88
 msgid ""
 "This option will try to generate your label immediately after user checkout. "
 "Also, will add the tracking number in the order email."
@@ -1598,14 +1744,20 @@ msgstr ""
 msgid "This order is out of scope for EU VAT."
 msgstr "Тази поръчка е извън обхвата на ДДС в ЕС."
 
-#: app/Admin/CVC.php:131 app/Admin/Econt.php:129 app/Admin/Speedy.php:131
+#: app/Admin/BoxNow.php:117 app/Admin/CVC.php:131 app/Admin/Econt.php:129
+#: app/Admin/Speedy.php:131
 msgid "Time:"
 msgstr "Време:"
 
-#: app/Shipping/CVC/Method.php:126 app/Shipping/Econt/Method-new.php:120
-#: app/Shipping/Econt/Method.php:117 app/Shipping/Speedy/Method.php:121
+#: app/Shipping/BoxNow/Method.php:105 app/Shipping/CVC/Method.php:126
+#: app/Shipping/Econt/Method-new.php:120 app/Shipping/Econt/Method.php:117
+#: app/Shipping/Speedy/Method.php:121
 msgid "Title"
 msgstr "Заглавие"
+
+#: app/Shipping/BoxNow/Apm.php:39
+msgid "To APM: "
+msgstr "До АПС: "
 
 #: app/Invoice/Document/CreditNotice.php:28
 msgid "To invoice №"
@@ -1632,13 +1784,18 @@ msgstr "Всичко"
 msgid "Total in text"
 msgstr "Общата цена изписана с текст"
 
+#: app/Admin/BoxNow.php:102
+msgid "Total price"
+msgstr "Обща цена"
+
 #: app/Export/Nra/Export.php:146
 #, php-format
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
 
-#: app/Shipping/CVC/Method.php:547 app/Shipping/Econt/Method-new.php:470
-#: app/Shipping/Econt/Method.php:612 app/Shipping/Speedy/Method.php:609
+#: app/Shipping/BoxNow/Method.php:398 app/Shipping/CVC/Method.php:547
+#: app/Shipping/Econt/Method-new.php:470 app/Shipping/Econt/Method.php:612
+#: app/Shipping/Speedy/Method.php:612
 msgid "Track your order."
 msgstr "Проследи пратката."
 
@@ -1654,7 +1811,8 @@ msgstr "Неизвестно"
 msgid "Update label"
 msgstr "Обнови товарителницата"
 
-#: app/Admin/CVC.php:103 app/Admin/Econt.php:102 app/Admin/Speedy.php:104
+#: app/Admin/BoxNow.php:104 app/Admin/CVC.php:103 app/Admin/Econt.php:102
+#: app/Admin/Speedy.php:104
 msgid "Update shipment status"
 msgstr "Обнови статуса на пратката"
 
@@ -1728,6 +1886,10 @@ msgstr "Виртуален ПОС терминал"
 msgid "Virtual POS №"
 msgstr "Номер на виртуален ПОС терминал"
 
+#: app/Admin/BoxNow.php:100
+msgid "Warehouse/APM"
+msgstr "Склад/АПС"
+
 #: app/Admin/Nekorekten_Com.php:83
 msgid "We have found negative reports about this customer."
 msgstr "Намерихме негативни отзиви за този клиент."
@@ -1758,6 +1920,10 @@ msgstr "Кога да се създават документите?"
 #: app/Admin/Tabs/Nra_Tab.php:67
 msgid "When to generate invoices?"
 msgstr "Кога да се създават фактурите?"
+
+#: app/Shipping/BoxNow/Method.php:16
+msgid "Woo BG - BoxNow"
+msgstr "Woo BG - BoxNow"
 
 #: app/Shipping/CVC/Method.php:15
 msgid "Woo BG - CVC"

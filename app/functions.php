@@ -407,6 +407,7 @@ function woo_bg_is_shipping_enabled() {
 	if ( 
 		woo_bg_get_option( 'apis', 'enable_econt' ) === 'yes' || 
 		woo_bg_get_option( 'apis', 'enable_cvc' ) === 'yes' || 
+		woo_bg_get_option( 'apis', 'enable_boxnow' ) === 'yes' || 
 		woo_bg_get_option( 'apis', 'enable_speedy' ) === 'yes' 
 	) {
 		$enabled = true;

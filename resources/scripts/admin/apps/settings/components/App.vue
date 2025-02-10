@@ -21,7 +21,7 @@
 								tag="td" :rules="field.validation_rules" class="forminp forminp-text" 
 								v-slot="{ errors }"
 							>
-								<input v-model="fields[group_slug][field_slug].value" :name="`woo-bg-` + field.name" :type="field.subtype" :placeholder="field.title">
+								<input v-model="fields[group_slug][field_slug].value" :name="`woo-bg-` + field.name" :type="field.subtype" :placeholder="field.title" :step="( (field.subtype === 'number' ) ? '0.01' : '' )">
 								<p v-if="field.description" class="description">
 									{{field.description}}
 								</p>
@@ -62,6 +62,139 @@
 								<p v-if="field.description" class="description" v-html="field.description"></p>
 							</td><!-- /.forminp forminp-text -->
 						</tr>
+						<tr v-else-if="field.type === 'multi'" valign="top">
+							<th scope="row" class="titledesc">
+								<label :for="`woo-bg-gateway-${group_slug}-${field_slug}`">
+									{{field.title}} 
+
+									<span v-if="field.help_text" class="woocommerce-help-tip" :data-tip="field.help_text"></span>
+								</label>
+							</th>
+
+							<td class="forminp forminp-text">
+								<div class="multi-field-container">
+									<span class="multi-field-row" v-for="(field_value, field_key) in fields[group_slug][field_slug].value">
+										<span class="multi-field-option" >
+											<input 
+												type="number" 
+												v-model="field_value.from" 
+												:step="fields[group_slug][field_slug].fields_types.step" 
+												:min="0" 
+												:max="fields[group_slug][field_slug].fields_types.max"
+											>
+											<span v-html="fields[group_slug][field_slug].fields_types.type"></span>
+										</span>
+
+										{{fields[group_slug][field_slug].fields_types.separator_text}}&nbsp;&nbsp;
+
+										<span class="multi-field-option">
+											<input
+												type="number" 
+												v-model="field_value.to"
+												:step="fields[group_slug][field_slug].fields_types.step"
+												:min="0" 
+												:max="fields[group_slug][field_slug].fields_types.max"
+											>
+											<span v-html="fields[group_slug][field_slug].fields_types.type"></span>
+										</span>
+
+										&nbsp;{{fields[group_slug][field_slug].fields_types.price_text}}&nbsp;&nbsp;
+
+										<span class="multi-field-option">
+											<input type="number" v-model="field_value.price" step="0.01" ><span v-html="fields[group_slug][field_slug].fields_types.currency"></span>
+										</span>
+
+										<a @click="removeRow( group_slug, field_slug, field_key )" class="button button-small button-secondary">-</a>
+									</span>
+
+									<div class="multi-field--add-new-row">
+										<a @click="addNewRow( group_slug, field_slug )" class="button button-small button-secondary">{{fields[group_slug][field_slug].fields_types.add_row_text}}</a>
+									</div>
+								</div>
+
+								<p v-if="field.description" class="description" v-html="field.description"></p>
+							</td><!-- /.forminp forminp-text -->
+						</tr>
+						<tr v-else-if="field.type === 'multi_two'" valign="top">
+							<th scope="row" class="titledesc">
+								<label :for="`woo-bg-gateway-${group_slug}-${field_slug}`">
+									{{field.title}} 
+
+									<span v-if="field.help_text" class="woocommerce-help-tip" :data-tip="field.help_text"></span>
+								</label>
+							</th>
+
+							<td class="forminp forminp-text">
+								<div class="multi-two-field-container">
+									<span class="multi-field-row" v-for="(field_value, field_key) in fields[group_slug][field_slug].value">
+										<span class="multi-field-option" >
+											<input 
+												type="number" 
+												v-model="field_value.from" 
+												:step="fields[group_slug][field_slug].fields_types.step_type1" 
+												:min="0" 
+												:max="fields[group_slug][field_slug].fields_types.max_type1"
+											>
+											<span v-html="fields[group_slug][field_slug].fields_types.type"></span>
+										</span>
+
+										{{fields[group_slug][field_slug].fields_types.separator_text}}&nbsp;&nbsp;
+
+										<span class="multi-field-option">
+											<input
+												type="number" 
+												v-model="field_value.to"
+												:step="fields[group_slug][field_slug].fields_types.step_type1"
+												:min="0" 
+												:max="fields[group_slug][field_slug].fields_types.max_type1"
+											>
+											<span v-html="fields[group_slug][field_slug].fields_types.type"></span>
+										</span>
+
+										{{fields[group_slug][field_slug].fields_types.and_text}}&nbsp;&nbsp
+
+										<span class="multi-field-option" >
+											<input 
+												type="number" 
+												v-model="field_value.from_price" 
+												:step="fields[group_slug][field_slug].fields_types.step_type2" 
+											>
+											<span v-html="fields[group_slug][field_slug].fields_types.type2"></span>
+										</span>
+
+										{{fields[group_slug][field_slug].fields_types.separator_text}}&nbsp;&nbsp;
+
+										<span class="multi-field-option">
+											<input
+												type="number" 
+												v-model="field_value.to_price"
+												:step="fields[group_slug][field_slug].fields_types.step_type2"
+											>
+											<span v-html="fields[group_slug][field_slug].fields_types.type2"></span>
+										</span>
+
+										&nbsp;{{fields[group_slug][field_slug].fields_types.price_text}}&nbsp;&nbsp;
+
+										<span class="multi-field-option">
+											<input type="number" v-model="field_value.price" ><span v-html="fields[group_slug][field_slug].fields_types.currency"></span>
+										</span>
+
+
+										<a @click="removeRow( group_slug, field_slug, field_key )" class="button button-small button-secondary">-</a>
+									</span>
+
+									<div class="multi-field--add-new-row">
+										<a @click="addNewRow( group_slug, field_slug )" class="button button-small button-secondary">{{fields[group_slug][field_slug].fields_types.add_row_text}}</a>
+									</div>
+								</div>
+
+								<p v-if="field.description" class="description" v-html="field.description"></p>
+							</td><!-- /.forminp forminp-text -->
+						</tr>
+
+
+
+
 					</tbody>
 				</table>
 			</div><!-- /.div -->
@@ -111,6 +244,21 @@ export default {
 		$( document.body ).trigger( 'init_tooltips' );
 	},
 	methods: {
+		addNewRow( group_slug, field_slug ) {
+			let newRowIndex = this.fields[group_slug][field_slug].value.length - 1;
+			let newRow = cloneDeep( this.fields[group_slug][field_slug].value[ newRowIndex ] );
+
+			for (const prop in newRow) {
+			  if (newRow.hasOwnProperty(prop)) {
+			    newRow[prop] = '';
+			  }
+			}
+
+			this.fields[group_slug][field_slug].value.push( newRow );
+		},
+		removeRow( group_slug, field_slug, key ) {
+			this.fields[group_slug][field_slug].value.splice( key, 1 );
+		},
 		runSubmit() {
 			let fieldsForSubmit = {};
 			for ( const [ group, fields ] of Object.entries( this.fields ) ) {

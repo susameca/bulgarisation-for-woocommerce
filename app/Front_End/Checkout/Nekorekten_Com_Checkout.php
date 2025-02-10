@@ -60,7 +60,7 @@ class Nekorekten_Com_Checkout {
         }
 	}
 
-	public function unset_session( $order_id ) {
+	public static function unset_session( $order_id ) {
 		WC()->session->__unset( 'nekorekten_found' );
 	}
 }
