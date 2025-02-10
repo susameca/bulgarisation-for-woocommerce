@@ -15,10 +15,8 @@ class Speedy {
 	const TRACK_ENDPOINT = 'track';
 	const CACHE_FOLDER = File::CACHE_FOLDER . 'speedy' . DIRECTORY_SEPARATOR;
 
-	private $env = '';
 	private $user = '';
 	private $password = '';
-	private $base_endpoint;
 	public static $skip_cached_files = array(
 		'cities-100.csv',
 	);

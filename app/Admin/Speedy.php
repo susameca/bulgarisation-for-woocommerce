@@ -541,8 +541,6 @@ class Speedy {
 			$name = $order->get_billing_first_name() . " " . $order->get_billing_last_name();
 		}
 
-		
-
 		if ( $order->get_shipping_phone() ) {
 			$phone = [ 'number' => woo_bg_format_phone( $order->get_shipping_phone() ) ];
 		} else {
@@ -555,6 +553,7 @@ class Speedy {
 		$label['recipient']['privatePerson'] = true;
 		$label['recipient']['clientName'] = $name;
 		$label['recipient']['phone1'] = $phone;
+		$label['recipient']['email'] = $order->get_billing_email();
 
 		if ( $order->get_meta( '_billing_to_company' ) ) {
 			$label['recipient']['privatePerson'] = false;
