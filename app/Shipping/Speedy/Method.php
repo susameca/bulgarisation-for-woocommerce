@@ -259,7 +259,7 @@ class Method extends \WC_Shipping_Method {
 			'email' => $session_customer[ 'email' ],
 		);
 
-		if ( isset( $this->cookie_data['billing_to_company'] ) ) {
+		if ( isset( $this->cookie_data['billing_to_company'] ) && $this->cookie_data['billing_to_company'] ) {
 			$recipient['privatePerson'] = false;
 			$recipient['contactName'] = $recipient['clientName'];
 			$recipient['clientName'] = $this->cookie_data['billing_company'];
