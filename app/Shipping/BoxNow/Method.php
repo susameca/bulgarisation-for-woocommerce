@@ -295,7 +295,7 @@ class Method extends \WC_Shipping_Method {
 			$item_data = self::determine_item_size( $cart_item['data'] );
 			$item_size = $item_data['item_size'];
 
-			if ( $item_data['oversize'] ) {
+			if ( $item_data['oversize_item'] ) {
 				$has_oversize_item = true;
 			}
 
