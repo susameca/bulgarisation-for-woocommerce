@@ -21,7 +21,7 @@ class BoxNow_Tab extends Base_Tab {
 		add_filter( 'woo_bg/admin/settings/boxnow/groups_titles', array( $this, 'add_send_from_group_title' ) );
 
 		if ( !empty( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] === $this->get_tab_slug() ) {
-			//$this->maybe_clear_cache();
+			$this->maybe_clear_cache();
 			$this->load_fields();
 		}
 	}
@@ -31,8 +31,7 @@ class BoxNow_Tab extends Base_Tab {
 			return;
 		}
 
-		$this->container[ Client::ECONT ]::clear_cache_folder();
-		$this->container[ Client::ECONT ]::clear_profile_data();
+		$this->container[ Client::BOXNOW ]::clear_cache_folder();
 	}
 
 	public function render_tab_html() {

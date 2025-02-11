@@ -71,7 +71,7 @@
 						<p class="form-field form-field-wide" v-if="shipmentStatus">
 							<button @click="deleteLabel" name="save" type="submit" :value="i18n.deleteLabel" class="button-secondary">{{i18n.deleteLabel}}</button>
 
-							<button @click="updateShipmentStatus" name="save" type="submit" :value="i18n.updateShipmentStatus" class="button-primary woocommerce-save-button">{{i18n.updateShipmentStatus}}</button>
+							<!-- <button @click="updateShipmentStatus" name="save" type="submit" :value="i18n.updateShipmentStatus" class="button-primary woocommerce-save-button">{{i18n.updateShipmentStatus}}</button> -->
 						</p>
 
 						<p v-else class="form-field form-field-wide">
@@ -86,9 +86,11 @@
 
 				<div class="order_data_column order_data_column--half">
 					<div class="generated-label" v-if="shipmentStatus">
-						<h3>{{i18n.label}}: {{shipmentStatus.id}}</h3>
+						<div v-for="(iframe, key) in iframes" v-if="iframes.length">
+							<h3>{{i18n.label}}: {{shipmentStatus.parcels[key].id}}</h3>
 
-						<iframe v-for="(iframe, key) in iframes" v-if="iframes.length" id="woo-bg--boxnow-label-print" :src="iframe"></iframe>
+							<iframe id="woo-bg--boxnow-label-print" :src="iframe"></iframe>
+						</div>
 					</div>
 				</div><!-- /.order_data_column order_data_column-/-half -->
 			</div><!-- /.order_data_column_container -->

@@ -233,10 +233,10 @@ class BoxNow {
 
 		$order_id = ( isset( $_REQUEST['orderId'] ) ) ? $_REQUEST['orderId'] : $order_id;
 
-		if ( !$order_ids ) {
+		if ( !$order_id ) {
 			return;
 		}
-		
+
 		$order = wc_get_order( $order_id );
 		$label_data = self::generate_label_data( $order->get_id() );
 
@@ -268,7 +268,7 @@ class BoxNow {
 
 		$data = self::send_label_to_boxnow( $label_data, $order );
 
-		if ( isset( $_REQUEST['action'] ) ) {
+		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] === 'woo_bg_boxnow_generate_label' ) {
 			wp_send_json_success( $data );
 			wp_die();
 		} else {

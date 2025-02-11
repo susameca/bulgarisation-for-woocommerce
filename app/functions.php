@@ -425,7 +425,6 @@ function woo_bg_get_order_label( $order_id ) {
 	if ( !empty( $order->get_items( 'shipping' ) ) ) {
 		foreach ( $order->get_items( 'shipping' ) as $shipping ) {
 			$method = $shipping['method_id'];
-
 			if ( $shipping['method_id'] === 'woo_bg_speedy' ) {
 				if ( $label = $order->get_meta( 'woo_bg_speedy_label' ) ) {
 					$label_data = $label;
@@ -440,6 +439,12 @@ function woo_bg_get_order_label( $order_id ) {
 				break;
 			} elseif ( $shipping['method_id'] === 'woo_bg_cvc' ) {
 				if ( $label = $order->get_meta( 'woo_bg_cvc_label' ) ) {
+					$label_data = $label;
+				}
+
+				break;
+			} elseif ( $shipping['method_id'] === 'woo_bg_boxnow' ) {
+				if ( $label = $order->get_meta( 'woo_bg_boxnow_shipment_status' ) ) {
 					$label_data = $label;
 				}
 
@@ -481,6 +486,17 @@ function woo_bg_get_order_label( $order_id ) {
 				}
 				
 				break;
+			case 'woo_bg_boxnow':
+				$data = ['items'];
+
+				foreach ( $label_data['parcels'] as $parcel ) {
+					$data['items'][] = [
+						'number' => $parcel['id'],
+						'link' => admin_url( 'admin-ajax.php' ) . '?cache-buster=' . rand() . '&action=woo_bg_boxnow_print_label&parcel=' . $parcel['id'],
+					];
+				}
+				
+				break;
 		}
 	}
 
@@ -488,5 +504,5 @@ function woo_bg_get_order_label( $order_id ) {
 		$data['method'] = $method;
 	}
 
-	return $data;
+	return apply_filters( 'woo_bg/column/order/shipment_status_data', $data, $order );
 }

@@ -1,8 +1,14 @@
 <p>
-	<?php if ( !empty( $data[ 'number' ] ) ): ?>
+	<?php if ( !empty( $data[ 'number' ] ) && is_array( $data ) ): ?>
 		<a target="_blank" href="<?php echo $data['link'] ?>">
 			<?php echo $data['number'] ?>
 		</a>
+	<?php elseif( empty( $data[ 'number' ] ) && !empty( $data['items'] ) ): ?>
+		<?php foreach ( $data['items'] as $label ): ?>
+			<a target="_blank" href="<?php echo $label['link'] ?>">
+				<?php echo $label['number'] ?>
+			</a>
+		<?php endforeach ?>
 	<?php else: ?>
 		<a 
 			class="woo-bg--generate-label" 

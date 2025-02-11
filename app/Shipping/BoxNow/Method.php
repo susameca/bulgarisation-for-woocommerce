@@ -387,7 +387,7 @@ class Method extends \WC_Shipping_Method {
 		$track_numbers = [];
 
 		foreach ( $shipment_status['parcels'] as $parcel ) {
-			$number = $label['id'];
+			$number = $parcel['id'];
 			$url = 'https://boxnow.bg/en?track=' . $number;
 
 			$track_numbers[] = sprintf( 
