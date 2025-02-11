@@ -227,7 +227,7 @@ class BoxNow {
 	}
 
 	public static function generate_label( $order_id = '' ) {
-		if ( isset( $_REQUEST['action'] ) ) {
+		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] === 'woo_bg_boxnow_generate_label' ) {
 			woo_bg_check_admin_label_actions();
 		}
 
