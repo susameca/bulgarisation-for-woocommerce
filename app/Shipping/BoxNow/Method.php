@@ -369,8 +369,9 @@ class Method extends \WC_Shipping_Method {
 	public static function add_label_number_to_email( $order, $sent_to_admin, $plain_text, $email ) {
 		$email_ids_to_send = [ 'customer_completed_order' ];
 
-		if ( woo_bg_get_option( 'boxnow', 'label_after_checkout' ) === 'yes' ) {
+		if ( woo_bg_get_option( 'boxnow_send_from', 'label_after_checkout' ) === 'yes' ) {
 			$email_ids_to_send[] = 'customer_processing_order';
+			$email_ids_to_send[] = 'customer_on_hold_order';
 		}
 		
 		$email_ids_to_send = apply_filters( 'woo_bg/boxnow/emails_to_send_label_number', $email_ids_to_send );
@@ -380,6 +381,7 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		$shipment_status = $order->get_meta( 'woo_bg_boxnow_shipment_status' );
+
 		if ( !isset( $shipment_status ) ) {
 			return;
 		}

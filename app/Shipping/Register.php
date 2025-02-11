@@ -116,7 +116,7 @@ class Register {
 			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\BoxNow', 'generate_label' ), 25 );
 		}
 
-		add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\CVC\Method', 'add_label_number_to_email' ), 1, 4 );
+		add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\BoxNow\Method', 'add_label_number_to_email' ), 1, 4 );
 		add_action( 'wp_enqueue_scripts', array( 'Woo_BG\Shipping\BoxNow\Method', 'enqueue_scripts' ) );
 	}
 

@@ -522,6 +522,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( woo_bg_get_option( 'cvc_sender', 'label_after_checkout' ) === 'yes' ) {
 			$email_ids_to_send[] = 'customer_processing_order';
+			$email_ids_to_send[] = 'customer_on_hold_order';
 		}
 		
 		$email_ids_to_send = apply_filters( 'woo_bg/cvc/emails_to_send_label_number', $email_ids_to_send );
