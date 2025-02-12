@@ -132,6 +132,12 @@ class EU_Vat {
 	}
 
 	public static function vat_number_is_valid( $vat_number, $country ) {
+		$required_number = woo_bg_get_option('nap', 'dds_number_required' );
+		
+		if ( $required_number == 'no' && !$vat_number ) {
+			return true;
+		}
+
 		$vat_prefix     = self::get_vat_number_prefix( $country );
 		$vat_number = str_replace( array( ' ', '.', '-', ',', ', ' ), '', trim( $vat_number ) );
 		$vat_number = str_replace( $vat_prefix, '', $vat_number );
