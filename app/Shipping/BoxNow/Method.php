@@ -290,61 +290,87 @@ class Method extends \WC_Shipping_Method {
 	public static function get_allowed_apm_size() {
 		$max_size = '0';
 		$has_oversize_item = false;
+		$total_volume = 0;
+		$max_volume = 89320;
 
 		foreach ( WC()->cart->get_cart_contents() as $cart_item ) {
 			$item_data = self::determine_item_size( $cart_item['data'] );
-			$item_size = $item_data['item_size'];
 
-			if ( $item_data['oversize_item'] ) {
+			if ( $item_data['volume'] ) {
+				$total_volume += $item_data['volume'];
+			}
+			
+			if ( $item_data['oversize'] ) {
 				$has_oversize_item = true;
 			}
 
-            $max_size = ( $item_size > $max_size ) ? $item_size : $max_size;
-        }
+			$max_size = ( $item_data['size'] > $max_size ) ? $item_data['size'] : $max_size;
+		}
 
-        return [
-        	'max_size' => $max_size,
-        	'has_oversize_item' => $has_oversize_item,
-        ];
+		if ( $total_volume > $max_volume ) {
+			$has_oversize_item = true;
+		}
+
+		return [
+			'max_size' => $max_size,
+			'has_oversize_item' => $has_oversize_item,
+		];
 	}
 
 	public static function determine_item_size( $product ) {
+		$max_diagonal = 80.78;
 		$dimensions = [
-			'3' => [
-				'height' => 36,
-				'width' => 45,
-				'length' => 60,
+			[
+				'box_size' => 3,
+				'height' => 35,
+				'width' => 44,
+				'length' => 58,
 			],
-			'2' => [
-				'height' => 17,
-				'width' => 45,
-				'length' => 60,
+			[
+				'box_size' => 2,
+				'height' => 16,
+				'width' => 44,
+				'length' => 58,
 			],
-			'1' => [
-				'height' => 8,
-				'width' => 45,
-				'length' => 60,
+			[
+				'box_size' => 1,
+				'height' => 7,
+				'width' => 44,
+				'length' => 58,
 			],
 		];
 
-		$oversize = false;
+		$item = [ 
+			'oversize' => false,
+			'volume' => 0,
+			'size' => 0,
+		];
 
-		foreach ( $dimensions as $size_key => $size ) {
-        	if ( 
-        		$product->get_height() <= $size['height'] && 
-        		$product->get_width() <= $size['width'] &&
-        		$product->get_length() <= $size['length'] 
-        	) {
-        		$item_size = $size_key;
-        	} else if ( $size_key == '3' ) {
-        		$oversize = true;
-        	}
-        }
+		foreach ( $dimensions as $size ) {
+			if ( 
+				!is_numeric( $product->get_height() ) || 
+				!is_numeric( $product->get_width() ) || 
+				!is_numeric( $product->get_length() )
+			) {
+				$item['size'] = 2;
+			} else if (
+				$product->get_height() <= $size['height'] &&
+				$product->get_width() <= $size['width'] &&
+				$product->get_length() <= $size['length']
+			) {
+				$item['size'] = $size['box_size'];
+				$item['volume'] = $product->get_length() * $product->get_width() * $product->get_height();
+			} else if ( $size['box_size'] === 3 ) {
+				$item['volume'] = $product->get_length() * $product->get_width() * $product->get_height();
+				$item['max_side'] = max( $product->get_length(), $product->get_width(), $product->get_height() );
+				$item['size'] = 3;
+				if ( $item['max_side'] > $max_diagonal ) {
+					$item[ 'oversize' ] = true;
+				}
+			}
+		}
 
-        return [
-        	'item_size' => $item_size,
-        	'oversize_item' => $oversize,
-        ];
+		return $item;
 	}
 
 	public static function enqueue_scripts() {

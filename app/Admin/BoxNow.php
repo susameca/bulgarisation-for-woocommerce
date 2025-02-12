@@ -204,8 +204,8 @@ class BoxNow {
 
 			$item_sizes = Method::determine_item_size( $order_item->get_product() );
 
-			if ( $item_sizes['item_size'] ) {
-				$data[ 'compartmentSize' ] = $item_sizes['item_size'];
+			if ( $item_sizes['size'] ) {
+				$data[ 'compartmentSize' ] = $item_sizes['size'];
 			}
 
 			$items[] = $data;
