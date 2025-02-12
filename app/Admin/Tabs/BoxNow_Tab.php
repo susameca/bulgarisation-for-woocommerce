@@ -12,7 +12,7 @@ class BoxNow_Tab extends Base_Tab {
 	public function __construct() {
 		$this->container = woo_bg()->container();
 		$this->tab_name = get_called_class();
-		$this->set_name( __( 'BoxNow Settings', 'woo-bg' ) );
+		$this->set_name( __( 'BOX NOW Settings', 'woo-bg' ) );
 		$this->set_description( __( 'boxnow.bg API Settings', 'woo-bg' ) );
 		$this->set_tab_slug( "boxnow" );
 
@@ -218,6 +218,8 @@ class BoxNow_Tab extends Base_Tab {
 		if ( !$this->container[ Client::BOXNOW ]->get_access_token() ) {
 			$error = __( 'Incorrect Client ID or Client Secret.', 'woo-bg' ); 
 		}
+
+		$this->container[ Client::BOXNOW ]::clear_cache_folder();
 
 		return wpautop( $error );
 	}

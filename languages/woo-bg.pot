@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 10:28+0000\n"
+"POT-Creation-Date: 2025-02-12 13:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -123,7 +123,7 @@ msgid "API Token is incorrect."
 msgstr ""
 
 #: app/Admin/BoxNow.php:101
-msgid "APM"
+msgid "Automat"
 msgstr ""
 
 #: app/Shipping/BoxNow/Apm.php:38
@@ -161,11 +161,11 @@ msgid "bl. vh. et."
 msgstr ""
 
 #: app/Admin/BoxNow.php:43
-msgid "BoxNow Delivery"
+msgid "BOX NOW Delivery"
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:15
-msgid "BoxNow Settings"
+msgid "BOX NOW Settings"
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:16
@@ -497,7 +497,7 @@ msgid "Email:"
 msgstr ""
 
 #: app/Admin/Tabs/Settings_Tab.php:47
-msgid "Enable BoxNow Delivery? "
+msgid "Enable BOX NOW Delivery? "
 msgstr ""
 
 #: app/Admin/Tabs/Settings_Tab.php:48
@@ -534,11 +534,11 @@ msgid "Enable VIES validation"
 msgstr ""
 
 #: app/Shipping/BoxNow/Method.php:17
-msgid "Enables BoxNow delivery."
+msgid "Enables BOX NOW delivery."
 msgstr ""
 
 #: app/Admin/Tabs/Settings_Tab.php:47
-msgid "Enables BoxNow Shipping method."
+msgid "Enables BOX NOW Shipping method."
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:16
@@ -1202,7 +1202,7 @@ msgid "Place of transaction"
 msgstr ""
 
 #: app/Shipping/BoxNow/Method.php:256
-msgid "Please choose a APM."
+msgid "Please choose a automat."
 msgstr ""
 
 #: app/Shipping/Econt/Method-new.php:366 app/Shipping/Econt/Method.php:501
@@ -1792,7 +1792,7 @@ msgid "Virtual POS №"
 msgstr ""
 
 #: app/Admin/BoxNow.php:100
-msgid "Warehouse/APM"
+msgid "Warehouse/Automat"
 msgstr ""
 
 #: app/Admin/Nekorekten_Com.php:83
@@ -1825,7 +1825,7 @@ msgid "When to generate invoices?"
 msgstr ""
 
 #: app/Shipping/BoxNow/Method.php:16
-msgid "Woo BG - BoxNow"
+msgid "Woo BG - BOX NOW"
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:15

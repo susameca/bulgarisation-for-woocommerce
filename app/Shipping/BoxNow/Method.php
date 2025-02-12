@@ -13,8 +13,8 @@ class Method extends \WC_Shipping_Method {
 		$this->container          = woo_bg()->container();
 		$this->id                 = self::METHOD_ID; 
 		$this->instance_id        = absint( $instance_id );
-		$this->method_title       = __( 'Woo BG - BoxNow', 'woo-bg' );  // Title shown in admin
-		$this->method_description = __( 'Enables BoxNow delivery.', 'woo-bg' ); // Description shown in admin
+		$this->method_title       = __( 'Woo BG - BOX NOW', 'woo-bg' );  // Title shown in admin
+		$this->method_description = __( 'Enables BOX NOW delivery.', 'woo-bg' ); // Description shown in admin
 		$this->supports           = array(
 			'shipping-zones',
 			'instance-settings',
@@ -253,7 +253,7 @@ class Method extends \WC_Shipping_Method {
 					$cookie_data = self::get_cookie_data();
 
 					if ( empty( $cookie_data['selectedApm'] ) ) {
-						$errors->add( 'validation', __( 'Please choose a APM.', 'woo-bg' ) );
+						$errors->add( 'validation', __( 'Please choose a automat.', 'woo-bg' ) );
 					}	
 				}
 			}

@@ -40,7 +40,7 @@ class BoxNow {
 
 		$screen = array_filter( $screen );
 
-		add_meta_box( 'woo_bg_boxnow', __( 'BoxNow Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
+		add_meta_box( 'woo_bg_boxnow', __( 'BOX NOW Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
 	}
 
 	public static function meta_box() {
@@ -97,8 +97,8 @@ class BoxNow {
 		return array(
 			'sendTo' => __('Send to', 'woo-bg'),
 			'sendFrom' => __('Send From', 'woo-bg'),
-			'warehouseApm' => __('Warehouse/APM', 'woo-bg'),
-			'apm' => __('APM', 'woo-bg'),
+			'warehouseApm' => __('Warehouse/Automat', 'woo-bg'),
+			'apm' => __('Automat', 'woo-bg'),
 			'total' => __('Total price', 'woo-bg'),
 			'allowReturn' => __('Allow returns', 'woo-bg'),
 			'updateShipmentStatus' => __( 'Update shipment status', 'woo-bg' ),
