@@ -31,12 +31,12 @@ class Apm {
 		return array(
 			'selected' => __( 'Selected', 'woo-bg' ),
 			'choose' => __( 'Choose', 'woo-bg' ),
-			'searchApm' => __( 'Search APM', 'woo-bg' ), 
+			'searchApm' => __( 'Search Automat', 'woo-bg' ), 
 			'select' => __( 'Select', 'woo-bg' ), 
 			'noResult' => __( 'No results was found', 'woo-bg' ),
-			'noOptions' => __( 'Start typing APM', 'woo-bg' ), 
-			'apmLocator' => __( 'APM locator', 'woo-bg' ),
-			'toApm' => __( 'To APM: ', 'woo-bg' ),
+			'noOptions' => __( 'Start typing Automat', 'woo-bg' ), 
+			'apmLocator' => __( 'Automat locator', 'woo-bg' ),
+			'toApm' => __( 'To Automat: ', 'woo-bg' ),
 		);
 	}
 

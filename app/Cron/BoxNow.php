@@ -17,6 +17,6 @@ class BoxNow {
 	}
 
 	public static function clear_cache_folder() {
-		woo_bg()->container()[ Client::BOXNOW ]::clear_cache_folder( true );
+		woo_bg()->container()[ Client::BOXNOW ]::clear_cache_folder();
 	}
 }

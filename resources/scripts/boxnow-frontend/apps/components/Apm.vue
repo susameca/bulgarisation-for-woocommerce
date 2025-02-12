@@ -56,7 +56,7 @@ export default {
 	},
 	computed: {
 		apmLocatorUrl() {
-			let url = 'https://widget-v5.boxnow.bg/iframe.html?gps=yes&autoselect=yes';
+			let url = 'https://widget-v5.boxnow.bg/popup.html?gps=yes&autoselect=yes&autoclose=yes';
 			let _this = this;
 
 			setTimeout(function() {
@@ -112,6 +112,19 @@ export default {
 			$('#woo-bg--boxnow-apm-locator').magnificPopup({
 				type:'iframe',
 				midClick: true,
+				iframe: {
+					markup: '<iframe class="mfp-iframe" src="https://widget-v5.boxnow.bg/popup.html?gps=yes&autoselect=yes&autoclose=yes" frameborder="0" allowfullscreen></iframe>',
+				},
+				callbacks: {
+					open: function(){
+						$('.mfp-iframe').css( "width", "100%");
+						$('.mfp-iframe').css( "height", "100%");
+						$('.mfp-bg.mfp-ready').css( "background", "none");
+						$('.mfp-container').css( "padding", "0");
+						$('.mfp-content').css( "max-width", "100%");
+						$('.mfp-content').css( "height", "100%");
+					}
+				}
 			});
 
 			window.addEventListener( 'message', this.setApmFromLocator, false );
