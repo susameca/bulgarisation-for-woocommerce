@@ -104,6 +104,10 @@ class Order {
 		}
 
 		foreach ( $this->woo_order->get_items( 'shipping' ) as $item ) {
+			if ( ! $item->get_total() ) {
+				continue;
+			}
+			
 			$price = $item->get_total() / $item->get_quantity();
 			$item_vat = $this->vat_groups[ $this->vat_group ];
 
