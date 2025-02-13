@@ -364,6 +364,7 @@ class Method extends \WC_Shipping_Method {
 				$item['volume'] = $product->get_length() * $product->get_width() * $product->get_height();
 				$item['max_side'] = max( $product->get_length(), $product->get_width(), $product->get_height() );
 				$item['size'] = 3;
+				
 				if ( $item['max_side'] > $max_diagonal ) {
 					$item[ 'oversize' ] = true;
 				}
@@ -408,7 +409,7 @@ class Method extends \WC_Shipping_Method {
 
 		$shipment_status = $order->get_meta( 'woo_bg_boxnow_shipment_status' );
 
-		if ( !isset( $shipment_status ) ) {
+		if ( !isset( $shipment_status ) || empty( $shipment_status['parcels'] ) ) {
 			return;
 		}
 

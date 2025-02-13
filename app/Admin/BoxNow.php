@@ -76,7 +76,6 @@ class BoxNow {
 					wp_localize_script( 'woo-bg-js-admin', 'wooBg_boxnow', array(
 						'label' => $label,
 						'shipmentStatus' => $shipment_status,
-						//'operations' => $operations,
 						'cookie_data' => $cookie_data,
 						'paymentType' => $theorder->get_payment_method(),
 						'destinations' => self::get_destinations(),
@@ -109,14 +108,6 @@ class BoxNow {
 			'choose' => __( 'Choose', 'woo-bg' ),
 			'labelData' => __( 'Label data', 'woo-bg' ),
 			'shipmentStatus' => __( 'Shipment status', 'woo-bg' ),
-
-
-
-
-
-			'time' => __( 'Time:', 'woo-bg' ),
-			'event' => __( 'Event:', 'woo-bg' ),
-			'details' => __( 'Details:', 'woo-bg' ),
 		);
 	}
 
@@ -125,13 +116,17 @@ class BoxNow {
 		$cookie_data = $order->get_meta( 'woo_bg_boxnow_cookie_data' );
 
 		if ( !$cookie_data ) {
-			foreach ( $shipping->get_meta_data() as $meta_data ) {
-				$data = $meta_data->get_data();
+			foreach ( $order->get_items( 'shipping' ) as $shipping ) {
+				if ( $shipping['method_id'] === 'woo_bg_boxnow' ) {
+					foreach ( $shipping->get_meta_data() as $meta_data ) {
+						$data = $meta_data->get_data();
 
-				if ( $data['key'] == 'cookie_data' ) {
-					$cookie_data = $data['value'];
+						if ( $data['key'] == 'cookie_data' ) {
+							$cookie_data = $data['value'];
+						}
+					}
 				}
-			}	
+			}
 		}
 
 		$label_data = [
@@ -180,7 +175,7 @@ class BoxNow {
 			'contactNumber' => self::format_phone( woo_bg_format_phone( $phone ) ),
 			'contactEmail' => $order->get_billing_email(),
 			'contactName' => $name,
-			'locationId' => $cookie_data['selectedApm'],
+			'locationId' => ( !empty( $cookie_data['selectedApm'] ) ) ? $cookie_data['selectedApm'] : '',
 		];
 	}
 
@@ -333,44 +328,6 @@ class BoxNow {
 
 		echo $pdf_escaped;
 
-		wp_die();
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-	public static function update_shipment_status() {
-		woo_bg_check_admin_label_actions();
-
-		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
-		$order = wc_get_order( $order_id );
-		$shipment_status = $_REQUEST['shipmentStatus'];
-		$data = array();
-
-		$response = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::TRACK_ENDPOINT, array(
-			'parcels' => [ [ 'id' => $shipment_status['id'] ] ]
-		) );
-
-		$order_shipment_status = $response['parcels'][0]['operations'];
-		
-		$order->update_meta_data( 'woo_bg_speedy_operations', $order_shipment_status );
-		$order->save();
-
-		wp_send_json_success( array( 'operations' => $order_shipment_status ) );
 		wp_die();
 	}
 }
