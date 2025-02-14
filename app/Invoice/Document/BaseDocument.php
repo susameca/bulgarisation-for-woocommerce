@@ -120,17 +120,23 @@ class BaseDocument {
 
 	public function get_to_items() {
 		if ( $this->woo_order->get_meta('_billing_to_company') === '1' ) {
-			$items = apply_filters( 'woo_bg/invoice/set_to_company', array(
+			$items = [
 				$this->woo_order->get_billing_company(),
 				sprintf( __('EIK: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_company_eik') ),
-				sprintf( __('VAT Number: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_vat_number') ),
-				sprintf( __('MOL: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_company_mol') ),
-				$this->woo_order->get_meta('_billing_company_address'),
-				$this->woo_order->get_meta('_billing_company_settlement'),
-				'&nbsp;',
-				sprintf( __('Phone: %s', 'woo-bg' ), $this->woo_order->get_billing_phone() ),
-				sprintf( __('E-mail: %s', 'woo-bg' ), $this->woo_order->get_billing_email() ),
-			), $this->woo_order );
+			];
+
+			if ( $this->woo_order->get_meta('_billing_vat_number') ) {
+				$items[] = sprintf( __('VAT Number: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_vat_number') );
+			}
+
+			$items[] = sprintf( __('MOL: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_company_mol') );
+			$items[] = $this->woo_order->get_meta('_billing_company_address');
+			$items[] = $this->woo_order->get_meta('_billing_company_settlement');
+			$items[] = '&nbsp;';
+			$items[] = sprintf( __('Phone: %s', 'woo-bg' ), $this->woo_order->get_billing_phone() );
+			$items[] = sprintf( __('E-mail: %s', 'woo-bg' ), $this->woo_order->get_billing_email() );
+
+			$items = apply_filters( 'woo_bg/invoice/set_to_company', $items, $this->woo_order );
 		} else {
 			$items = apply_filters( 'woo_bg/invoice/set_to_person', array(
 				$this->woo_order->get_billing_first_name() . ' ' . $this->woo_order->get_billing_last_name(),
