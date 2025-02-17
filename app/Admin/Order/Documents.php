@@ -38,10 +38,11 @@ class Documents {
 	public static function maybe_generate_invoice( $order ) {
 		$invoice_generation = woo_bg_get_option( 'invoice', 'invoices' );
 
-		return (
+		return apply_filters('woo_bg_maybe_generate_invoice', 
 			$order->get_meta( 'woo_bg_invoice_document' ) ||
 			$invoice_generation === 'always' ||
-			( $invoice_generation === 'only_for_company' && $order->get_meta('_billing_to_company') )
+			( $invoice_generation === 'only_for_company' && $order->get_meta('_billing_to_company') ),
+			$order
 		);
 	}
 
