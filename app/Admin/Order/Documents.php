@@ -38,12 +38,13 @@ class Documents {
 	public static function maybe_generate_invoice( $order ) {
 		$invoice_generation = woo_bg_get_option( 'invoice', 'invoices' );
 
-		return apply_filters('woo_bg_maybe_generate_invoice', 
+		$generate_invoice = ( 
 			$order->get_meta( 'woo_bg_invoice_document' ) ||
 			$invoice_generation === 'always' ||
-			( $invoice_generation === 'only_for_company' && $order->get_meta('_billing_to_company') ),
-			$order
+			( $invoice_generation === 'only_for_company' && $order->get_meta('_billing_to_company') )
 		);
+
+		return apply_filters( 'woo_bg/admin/order/maybe_generate_invoice', $generate_invoice, $order );
 	}
 
 	public static function generate_refunded_documents( $refund_id, $order_id ) {
