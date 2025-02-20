@@ -182,18 +182,20 @@ class Plugin {
 	 * Enqueue frontend scripts and styles.
 	 */
 	public static function enqueue_scripts() {
-		wp_enqueue_script(
-			'woo-bg-js-frontend',
-			woo_bg()->plugin_dir_url() . woo_bg_assets_bundle( 'frontend.js' ),
-			array( 'jquery' ), // deps
-			null, // version -- this is handled by the bundle manifest
-			true // in footer
-		);
-
-		wp_enqueue_style(
-			'woo-bg-css-frontend',
-			woo_bg()->plugin_dir_url() . woo_bg_assets_bundle( 'frontend.css' )
-		);
+		if (is_checkout()) {
+			wp_enqueue_script(
+				'woo-bg-js-frontend',
+				woo_bg()->plugin_dir_url() . woo_bg_assets_bundle( 'frontend.js' ),
+				array( 'jquery' ), // deps
+				null, // version -- this is handled by the bundle manifest
+				true // in footer
+			);
+	
+			wp_enqueue_style(
+				'woo-bg-css-frontend',
+				woo_bg()->plugin_dir_url() . woo_bg_assets_bundle( 'frontend.css' )
+			);
+		}
 	}
 
 	/**
