@@ -407,6 +407,10 @@ class Method extends \WC_Shipping_Method {
 				$services['additionalServices']['cod']['fiscalReceiptItems'] = array();
 
 				foreach ( WC()->cart->get_cart() as $cart_item ) {
+					if ( !$cart_item['line_total'] ) {
+						continue;
+					}
+					
 					$rate = round( ( $cart_item['line_tax'] / $cart_item['line_total'] ) * 100 );
 					$services['additionalServices']['cod']['fiscalReceiptItems'][] = [
 						'description' => mb_substr( $cart_item['data']->get_name(), 0, 50 ),
