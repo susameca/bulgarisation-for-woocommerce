@@ -12,7 +12,7 @@ class Stats {
 		add_action( 'woo_bg/submit_stats', array( __CLASS__, 'submit_stats' ) );
 
 		if ( 
-			class_exists( '\Woo_BG_Pro\License' ) &&
+			class_exists( 'Woo_BG_Pro\License' ) &&
 			get_transient( \Woo_BG_Pro\License::$transient ) === false
 		) {
 			self::submit_stats();

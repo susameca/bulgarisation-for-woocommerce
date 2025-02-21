@@ -13,6 +13,8 @@ $current_tab_key = array_search( $current_tab, $slugs );
 $current_tab_object = $tabs[ $current_tab_key ];
 ?>
 <div class="wrap woocommerce">
+	<div class="notice notice-success"><?php echo wpautop( 'BOX NOW message' ) ?></div>
+
 	<nav class="nav-tab-wrapper woo-nav-tab-wrapper">
 		<?php
 		foreach ( $tabs as $tab ) {

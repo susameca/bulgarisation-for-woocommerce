@@ -37,6 +37,8 @@ class Plugin {
 		$this->load_classes();
 		$this->load_service_providers();
 
+		new Cron\Stats();
+
 		if ( class_exists( '\Woo_BG_Pro\Checkout' ) ) {
 			add_action( 'woo_bg/init', array( $this, 'validate_pro' ), PHP_INT_MAX );
 		}
@@ -84,7 +86,6 @@ class Plugin {
 
 		new Admin\Admin_Menus();
 		new Admin\Order\Columns();
-		new Cron\Stats();
 
 		if ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' ) {
 			new Admin\Order\Actions();

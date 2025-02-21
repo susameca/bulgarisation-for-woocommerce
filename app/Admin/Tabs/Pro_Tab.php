@@ -68,11 +68,11 @@ class Pro_Tab extends Base_Tab {
 	}
 
 	public function load_fields() {
-		$fields = array(
+		$fields = apply_filters( 'woo_bg/admin/pro/fields', array(
 			'pro' => array(
 				new Fields\Text_Field( 'license_key', __( 'License Key', 'woo-bg' ), '', 'required' ),
 			)
-		);
+		) );
 
 		$this->set_fields( $fields );
 	}

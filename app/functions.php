@@ -208,11 +208,62 @@ function woo_bg_return_bg_states() {
 	);
 }
 
+function woo_bg_return_ro_states() {
+    return array(
+		'' => '',
+        'AB' => 'ALBA',
+        'BC' => 'BACAU',
+        'BT' => 'BOTOSANI',
+        'B'  => 'BUCURESTI',
+        'CS' => 'CARAS-SEVERIN',
+        'CV' => 'COVASNA',
+        'GL' => 'GALATI',
+        'HR' => 'HARGHITA',
+        'IS' => 'IASI',
+        'MH' => 'MEHEDINTI',
+        'OT' => 'OLT',
+        'SM' => 'MARE',
+        'TR' => 'TELEORMAN',
+        'VL' => 'VALCEA',
+        'AR' => 'ARAD',
+        'BH' => 'BIHOR',
+        'BR' => 'BRAILA',
+        'BZ' => 'BUZAU',
+        'CJ' => 'CLUJ',
+        'DB' => 'DAMBOVITA',
+        'GR' => 'GIURGIU',
+        'HD' => 'HUNEDOARA',
+        'IF' => 'ILFOV',
+        'MS' => 'MURES',
+        'PH' => 'PRAHOVA',
+        'SB' => 'SIBIU',
+        'TM' => 'TIMIS',
+        'VS' => 'VASLUI',
+        'AG' => 'ARGES',
+        'BN' => 'BISTRITA-NASAUD',
+        'BV' => 'BRASOV',
+        'CL' => 'CALARASI',
+        'CT' => 'CONSTANTA',
+        'DJ' => 'DOLJ',
+        'GJ' => 'GORJ',
+        'IL' => 'IALOMITA',
+        'MM' => 'MARAMURES',
+        'NT' => 'NEAMT',
+        'SJ' => 'SALAJ',
+        'SV' => 'SUCEAVA',
+        'TL' => 'TULCEA',
+        'VN' => 'VRANCEA',
+    );
+}
+
 function woo_bg_support_text() {
 	?> 
-	<h3><?php esc_html_e( 'Supporting the development', 'woo-bg' ) ?></h3> 
+	<div class="notice notice-info">
+		<h3><?php esc_html_e( 'Supporting the development', 'woo-bg' ) ?></h3> 
+		
+		<?php echo wp_kses_post( wpautop( esc_html__( 'For single donation as development support you can send at ', 'woo-bg' ) . '<a target="_blank" href="https://revolut.me/tihomi9gj5">Revolut</a>' ) ); ?>
+	</div>
 	<?php
-	echo wp_kses_post( wpautop( esc_html__( 'For single donation as development support you can send at ', 'woo-bg' ) . '<a target="_blank" href="https://revolut.me/tihomi9gj5">Revolut</a>' ) );
 }
 
 function woo_bg_get_shipping_tests_options() {
