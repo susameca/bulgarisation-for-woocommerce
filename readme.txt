@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.7
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.1.2
+Stable tag: 3.2.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,8 +25,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 *   Проверка за отзиви от nekorekten.com
 *   Добавена възможност за добавяне на вече създадени поръчки към одиторският файл.
 *   Добавени методи за доставка с [Еконт](https://www.econt.com/).
-*   Добавени методи за доставка със [CVC](https://cvc.bg/).
+*   Добавени методи за доставка със [BOX NOW](https://boxnow.bg/e-shops).
 *   Добавени методи за доставка със [Спиди](https://speedy.bg/).
+*   Добавени методи за доставка със [CVC](https://cvc.bg/).
 
 Плъгинът използва следните помощни библиотеки:
 
@@ -39,7 +40,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 *   За да работи коректно плъгина моля попълнете всички задължителни полета, включително настройките за всеки платежен метод.
 *   При нужда свържете се с вашият счетоводител, ако не сте сигурни за някое от полетата.
 *   За да използвате отзивите от nekorekten.com трябва да включите опцията в главните настройки на плъгина и да добавите API ключ в новопоявилия се таб.
-*   За да използвате методи на доставка с Еконт/CVC/Спиди, трябва да включите опцията в главните настройки на плъгина. След запазване и презареждане на страницата ще се появи нов таб с настройките за Еконт/CVC/Спиди. След това добавете желаните методи за доставка ( за адрес и офис трябва да имате 2 метода за доставка ) в зоните за доставка - WooCommerce >> Настройки >> Доставка >> Зони за доставка.
+*   За да използвате методи на доставка с Еконт/BOX NOW/CVC/Спиди, трябва да включите опцията в главните настройки на плъгина. След запазване и презареждане на страницата ще се появи нов таб с настройките за Еконт/BOX NOW/CVC/Спиди. След това добавете желаните методи за доставка ( за адрес и офис трябва да имате 2 метода за доставка ) в зоните за доставка - WooCommerce >> Настройки >> Доставка >> Зони за доставка.
 
 [Facebook група](https://www.facebook.com/groups/bulgarisationforwoocommerce/)
 
@@ -65,6 +66,14 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.2.0 =
+Add BOX NOW shipping method
+Speedy: Label optimizations
+Speedy: Other optimizations
+Fix vies validation if number is not required
+NRA: Optimizations
+Invoices: Optimizations
 
 = 3.1.3 =
 Nekorekten.com: Add "Submit report" form in admin order page
