@@ -256,6 +256,25 @@ function woo_bg_return_ro_states() {
     );
 }
 
+function woo_bg_return_gr_states() {
+    return array(
+		'' => '',
+        'I' => 'ATTIKI',
+        'A' => 'ANATOLIKI MAKEDONIA, THRAKI',
+        'B' => 'KENTRIKI MAKEDONIA',
+        'C'  => 'DYTIKI MAKEDONIA',
+        'D' => 'IPEIROS',
+        'E' => 'THESSALIA',
+        'F' => 'IONIA NISSIA',
+        'G' => 'DYTIKI ELLADA',
+        'H' => 'STEREA ELLADA',
+        'J' => 'PELOPONNISOS',
+        'K' => 'VOREIO AIGAIO',
+        'L' => 'NOTIO AIGAIO',
+        'M' => 'KRITI',
+    );
+}
+
 function woo_bg_support_text() {
 	?> 
 	<div class="notice notice-info">
@@ -409,7 +428,11 @@ function woo_bg_has_free_shipping_coupon_in_cart() {
 	return $has_coupon;
 }
 
-function woo_bg_format_phone( $phone ) {
+function woo_bg_format_phone( $phone, $country = 'BG' ) {
+	if ( $country !== 'BG' ) {
+		return $phone;
+	}
+	
 	$phone = str_replace( [ ' ', '+' ], '', $phone );
 
 	if ( substr( $phone, 0, 3 ) === '359' ) {
@@ -556,4 +579,8 @@ function woo_bg_get_order_label( $order_id ) {
 	}
 
 	return apply_filters( 'woo_bg/column/order/shipment_status_data', $data, $order );
+}
+
+function woo_bg_is_pro_activated() {
+	return class_exists( 'Woo_BG_Pro\Checkout' );
 }

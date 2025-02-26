@@ -30,7 +30,7 @@ class Stats {
 		
 		$args = [
 			'site_url' => esc_url( home_url( '/' ) ),
-			'has_pro' => class_exists( '\Woo_BG_Pro\Checkout' ),
+			'has_pro' => woo_bg_is_pro_activated(),
 			'has_econt' => ( woo_bg_get_option( 'apis', 'enable_econt' ) === 'yes' ),
 			'has_speedy' => ( woo_bg_get_option( 'apis', 'enable_speedy' ) === 'yes' ), 
 			'has_boxnow' => ( woo_bg_get_option( 'apis', 'enable_boxnow' ) === 'yes' ), 
@@ -40,7 +40,7 @@ class Stats {
 			'has_nra' => ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' && woo_bg_get_option( 'invoice', 'nra_n18' ) === 'yes' ),
 		];
 		
-		if ( class_exists( '\Woo_BG_Pro\Checkout' ) ) {
+		if ( woo_bg_is_pro_activated() ) {
 			$args['license_key'] = woo_bg_get_option( 'pro', 'license_key' );
 			$args['valid_pro_license_file_hash'] = hash_file( 'sha256', woo_bg()->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'fa76df5bd96476389a93795ccc30a257a4e860a26278dd5faa2a67b4b7f37d37';
 		}

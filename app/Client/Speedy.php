@@ -19,6 +19,8 @@ class Speedy {
 	private $password = '';
 	public static $skip_cached_files = array(
 		'cities-100.csv',
+		'cities-642.csv',
+		'cities-300.csv',
 	);
 
 	public function __construct() {

@@ -85,8 +85,8 @@ class Speedy {
 						'operations' => $operations,
 						'cookie_data' => $cookie_data,
 						'paymentType' => $theorder->get_payment_method(),
-						'offices' => self::get_offices( $cookie_data ),
-						'streets' => self::get_streets( $cookie_data ),
+						'offices' => self::get_offices( $theorder ),
+						'streets' => self::get_streets( $cookie_data, $theorder ),
 						'orderId' => $theorder->get_id(),
 						'testsOptions' => woo_bg_return_array_for_select( woo_bg_get_shipping_tests_options() ),
 						'testOption' => self::get_test_option( $label_data ),
@@ -140,14 +140,28 @@ class Speedy {
 		);
 	}
 
-	protected static function get_offices( $cookie_data ) {
-		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $cookie_data['city'], $cookie_data['state'] );
-		$offices = ( !empty( self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] ) ) ) ? self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] )['offices'] : [];
+	protected static function get_offices( $order ) {
+		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( $order->get_billing_country() );
+
+		if ( $country_id === '300' ) {
+			$city_id = 0;
+		} else {
+			$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $order->get_billing_city(), $order->get_billing_state(), $country_id );
+			$city_id = $cities_data['cities'][ $cities_data['city_key'] ]['id'];
+		}
+
+		$offices = self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $city_id )['offices'];
+
+		if ( empty( $offices ) ) {
+			$offices = [];
+		}
+
 		return $offices;
 	}
 
-	protected static function get_streets( $cookie_data ) {
+	protected static function get_streets( $cookie_data, $order ) {
 		$query = ' ';
+		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( $order->get_billing_country() );
 
 		if ( !empty( $cookie_data['selectedAddress'] ) ) {
 			$query = explode(' ', $cookie_data['selectedAddress']['label'] );
@@ -155,7 +169,7 @@ class Speedy {
 			$query = implode( ' ', $query );
 		}
 
-		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $cookie_data['city'], $cookie_data['state'] );
+		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $cookie_data['city'], $cookie_data['state'], $country_id );
 		$city_id = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
 
 		$streets = woo_bg_return_array_for_select( Address::get_streets_for_query( $city_id, $query ), 1, array( 'type' => 'streets' ) );
@@ -360,8 +374,8 @@ class Speedy {
 		unset( $label[ 'recipient' ][ 'pickupOfficeId' ] );
 
 		if ( $cookie_data['type'] === 'address' ) {
-			$label[ 'recipient' ][ 'addressLocation' ] = self::generate_recipient_address();
-			$label[ 'recipient' ][ 'address' ] = self::generate_recipient_address();
+			$label[ 'recipient' ][ 'addressLocation' ] = self::generate_recipient_address( $order );
+			$label[ 'recipient' ][ 'address' ] = self::generate_recipient_address( $order );
 		} else if ( $cookie_data['type'] === 'office' ) {
 			$label[ 'recipient' ][ 'pickupOfficeId' ] = $_REQUEST['office']['id'];
 		}
@@ -372,10 +386,12 @@ class Speedy {
 		return $label;
 	}
 
-	protected static function generate_recipient_address() {
+	protected static function generate_recipient_address( $order ) {
 		$container = woo_bg()->container();
 		$cookie_data = $cookie_data = $_REQUEST['cookie_data'];
-		$cities_data = $container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $cookie_data['city'], $cookie_data['state'] );
+		$country_id = $container[ Client::SPEEDY_COUNTRIES ]->get_country_id( $order->get_billing_country() );
+		$cities_data = $container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $cookie_data['city'], $cookie_data['state'], $country_id );
+		$address['countryId'] = $country_id;
 		$address['siteId'] = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
 
 		if ( !empty( $_REQUEST['street']['type'] ) && $_REQUEST['street']['type'] === 'streets' ) {
@@ -384,6 +400,7 @@ class Speedy {
 			$address["streetNo"] = array_shift( $parts );
 
 			if ( !empty( $parts ) ) {
+				$address["addressLine1"] = implode( ' ', $parts );
 				$address["addressNote"] = implode( ' ', $parts );
 			}
 		} else if ( 
@@ -391,6 +408,11 @@ class Speedy {
 			!empty( $_REQUEST['cookie_data']['mysticQuarter'] )
 		) {
 			if ( !empty( $_REQUEST['cookie_data']['mysticQuarter'] ) ) {
+				if ( $country_id == '300' ) {
+					$address["addressLine1"] = $_REQUEST['cookie_data']['mysticQuarter'] . ' ' . $_REQUEST[ 'other' ];
+					//$address["postCode"] = $order->get_billing_postcode();
+				}
+				
 				$address["addressNote"] = $_REQUEST['cookie_data']['mysticQuarter'] . ' ' . $_REQUEST[ 'other' ];
 			} else {
 				$address["complexId"] = str_replace('qtr-', '', $_REQUEST['street']['orig_key'] );
@@ -431,9 +453,21 @@ class Speedy {
 		$payment_by = $_REQUEST['paymentBy'];
 		$cookie_data = $_REQUEST['cookie_data'];
 
-		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) && $label['service']['additionalServices']['cod']['amount'] ) {
+		$recipient_country = '';
+		$bulgarian_id = 'BG';
+		if ( isset( $label['recipient']['addressLocation']['countryId'] ) ){
+			$recipient_country = $label['recipient']['addressLocation']['countryId'];
+			$bulgarian_id = '100';
+		} else {
+			$country = $label['recipient']['country'];
+		}
+
+		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) && $label['service']['additionalServices']['cod']['amount'] && $recipient_country === $bulgarian_id ) {
 			$payment[ 'declaredValuePayer' ] = 'RECIPIENT';
 			$payment[ 'packagePayer' ] = 'RECIPIENT';
+		} else {
+			$payment[ 'declaredValuePayer' ] = 'SENDER';
+			$payment[ 'packagePayer' ] = 'SENDER';
 		}
 
 		if ( $payment_by['id'] === 'fixed'  ) {
@@ -457,6 +491,12 @@ class Speedy {
 	protected static function update_services( $label ) {
 		$cookie_data = $_REQUEST['cookie_data'];
 		$payment_by = $_REQUEST['paymentBy'];
+
+		$service_id = '505';
+		if ( $label['recipient']['country'] === 'RO' || $label['recipient']['addressLocation']['countryId'] === '642') {
+			$service_id = '202';
+		}
+
 		if ( isset( $label['service']['additionalServices']['declaredValue'] ) ) {
 			unset( $label['service']['additionalServices']['declaredValue'] );
 		}
@@ -464,6 +504,7 @@ class Speedy {
 		if ( isset( $label['service']['additionalServices']['obpd'] ) ) {
 			unset( $label['service']['additionalServices']['obpd'] );
 		}
+
 
 		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) ) {
 			if ( 
@@ -497,7 +538,7 @@ class Speedy {
 		if ( $test ) {
 			$label['service']['additionalServices']['obpd'] = array(
 				'option' => $test, 
-				'returnShipmentServiceId' => 505, 
+				'returnShipmentServiceId' => $service_id, 
 				'returnShipmentPayer' => 'SENDER' 
 			);
 		}
@@ -542,9 +583,9 @@ class Speedy {
 		}
 
 		if ( $order->get_shipping_phone() ) {
-			$phone = [ 'number' => woo_bg_format_phone( $order->get_shipping_phone() ) ];
+			$phone = [ 'number' => woo_bg_format_phone( $order->get_shipping_phone(), $order->get_shipping_country() ) ];
 		} else {
-			$phone = [ 'number' => woo_bg_format_phone( $order->get_billing_phone() ) ];
+			$phone = [ 'number' => woo_bg_format_phone( $order->get_billing_phone(), $order->get_billing_country() ) ];
 		}
 
 		unset( $label['recipient']['clientName'] );
@@ -579,7 +620,7 @@ class Speedy {
 		if ( $payment_by = $_REQUEST['paymentBy'] ) {
 			$cookie_data = $_REQUEST['cookie_data'];
 
-			if ( $payment_by['id'] == 'RECIPIENT' ) {
+			if ( $payment_by['id'] == 'RECIPIENT' || $payment_by['id'] == 'SENDER' ) {
 				$price = ( wc_tax_enabled() ) ? $response['price']['amount'] : $response['price']['total'];
 			} else if ( $payment_by['id'] == 'fixed' && $cookie_data['fixed_price'] ) {
 				$price = woo_bg_tax_based_price( $cookie_data['fixed_price'] );

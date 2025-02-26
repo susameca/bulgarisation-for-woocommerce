@@ -27,7 +27,7 @@ class Pro_Tab extends Base_Tab {
 
 		<div class="woo-bg-text-wrapper">
 			<?php 
-			if ( ! class_exists( '\Woo_BG_Pro\Checkout' ) ) {
+			if ( ! woo_bg_is_pro_activated() ) {
 				echo "<h3>" . esc_html__( 'Pro Addon', 'woo-bg' ) . "</h3>";
 				
 				echo wp_kses_post( wpautop( __( 'There is a Pro version of the plugin as an addon ( additional plugin to the free one ). This version of the plugin has 2 major checkout functionalities.', 'woo-bg' ) ) );
@@ -129,7 +129,7 @@ class Pro_Tab extends Base_Tab {
 	public function auth_test() {
 		\Woo_BG\Cron\Stats::submit_stats();
 
-		if ( class_exists( '\Woo_BG_Pro\Checkout' ) && !\Woo_BG_Pro\License::is_valid() ) {
+		if ( woo_bg_is_pro_activated() && !\Woo_BG_Pro\License::is_valid() ) {
 			return wpautop( __( 'License is invalid!', 'woo-bg' ) );
 		}
 	}

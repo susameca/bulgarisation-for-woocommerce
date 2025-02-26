@@ -24,6 +24,10 @@ class Register {
 
 		if ( woo_bg_is_shipping_enabled() ) {
 			add_action( 'woocommerce_checkout_update_order_review', array( __CLASS__, 'update_order_review' ), 1, 2 );
+			add_filter( 'wc_cart_totals_shipping_method_cost', array( __CLASS__, 'change_price_label_if_not_calculated' ), 10, 2 );
+			add_filter( 'woo_bg/speedy/rate', array( __CLASS__, 'add_not_calculated_label' ), 10, 2 );
+			add_filter( 'woo_bg/econt/rate', array( __CLASS__, 'add_not_calculated_label' ), 10, 2 );
+			add_filter( 'woo_bg/cvc/rate', array( __CLASS__, 'add_not_calculated_label' ), 10, 2 );
 			
 			new ProductAdditionalFields( $container );
 		}
@@ -154,5 +158,28 @@ class Register {
 
 	    WC()->cart->calculate_shipping();
 	    return;
+	}
+
+	public static function change_price_label_if_not_calculated( $output, $method ) {
+		if ( strpos( $method->get_method_id(), 'woo_bg' ) !== false && $method->cost <= 0 ) {
+			$output = __( 'Not calculated', 'woo-bg' );
+		}
+
+		return $output;
+	}
+
+	public static function add_not_calculated_label( $rate, $method ) {
+		if ( 
+			( 
+				!woo_bg_is_pro_activated() || 
+				woo_bg_get_option( 'shipping_methods', 'change_radio_buttons_to_images' ) !== 'yes'
+			) && 
+			$rate['label'] === $method->title && 
+			!$rate['cost']
+		) {
+			$rate['label'] = sprintf( __( '%s: Not calculated', 'woo-bg' ), $rate['label'] );
+		}
+
+		return $rate;
 	}
 }

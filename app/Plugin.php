@@ -39,7 +39,7 @@ class Plugin {
 
 		new Cron\Stats();
 
-		if ( class_exists( '\Woo_BG_Pro\Checkout' ) ) {
+		if ( woo_bg_is_pro_activated() ) {
 			add_action( 'woo_bg/init', array( $this, 'validate_pro' ), PHP_INT_MAX );
 		}
 

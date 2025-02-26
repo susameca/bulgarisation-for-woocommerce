@@ -47,12 +47,21 @@ class Office {
 		$args = [];
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$raw_city = sanitize_text_field( $_POST['city'] );
-		$states = woo_bg_return_bg_states();
+		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( sanitize_text_field( $_POST[ 'country' ] ) );
+		$states = '';
+
+        if ( $country_id === '100' ) {
+            $states = woo_bg_return_bg_states();
+        } else if ( $country_id === '642' ) {
+            $states = woo_bg_return_ro_states();
+        } else if ( $country_id === '300' ) {
+            $states = woo_bg_return_gr_states();
+        }
+
 		$state = $states[ $raw_state ];
+		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state, $country_id );
 
-		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state );
-
-		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) || !$raw_city ) {
+		if ( $country_id !== '300' && !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) || !$raw_city ) {
 			$args[ 'status' ] = 'invalid-city';
 
 			if ( !$state ) {
@@ -64,7 +73,13 @@ class Office {
 				$args[ 'error' ] = sprintf( __( '%1$s is not found in %2$s region.', 'woo-bg' ), $raw_city, $state );
 			}
 		} else {
-			$offices = self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] );
+			$city_id = $cities_data['cities'][ $cities_data['city_key'] ]['id'];
+
+			if ( $country_id === '300' ) {
+				$city_id = 0;
+			}
+
+			$offices = self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $city_id, $country_id );
 
 			if ( empty( $offices ) ) {
 				$offices = [];

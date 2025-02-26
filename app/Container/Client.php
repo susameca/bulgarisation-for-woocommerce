@@ -17,6 +17,7 @@ use Woo_BG\Client\Speedy\Cities as Speedy_Cities;
 use Woo_BG\Client\Speedy\Offices as Speedy_Offices;
 use Woo_BG\Client\Speedy\Streets as Speedy_Streets;
 use Woo_BG\Client\Speedy\Quarters as Speedy_Quarters;
+use Woo_BG\Client\Speedy\Countries as Speedy_Countries;
 
 //BoxNow Classes
 use Woo_BG\Client\BoxNow;
@@ -50,6 +51,7 @@ class Client extends Provider {
 	const SPEEDY_OFFICES   = 'client.speedy.offices';
 	const SPEEDY_STREETS   = 'client.speedy.streets';
 	const SPEEDY_QUARTERS  = 'client.speedy.quarters';
+	const SPEEDY_COUNTRIES = 'client.speedy.countries';
 
 	const BOXNOW                = 'client.boxnow';
 	const BOXNOW_ORIGINS        = 'client.boxnow.origins';
@@ -116,6 +118,10 @@ class Client extends Provider {
 		$container[ self::SPEEDY_QUARTERS ] = function ( Container $container ) {
 			return new Speedy_Quarters( $container );
 		};
+
+		$container[self::SPEEDY_COUNTRIES] = function ( Container $container ) {
+            return new Speedy_Countries( $container );
+        };
 
 		$container[ self::BOXNOW ] = function ( Container $container ) {
 			return new BoxNow();

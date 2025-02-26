@@ -65,7 +65,6 @@ class Method extends \WC_Shipping_Method {
 
 		$rate = array(
 			'label' => $this->title,
-			'cost' => 0,
 		);
 
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
@@ -93,8 +92,13 @@ class Method extends \WC_Shipping_Method {
 				$rate['meta_data']['errors'] = $request_data['errors'];
 			} elseif ( isset( $request_data['price'] )  ) {
 				$rate['cost'] = $request_data['price'];
+
+				if ( wc_tax_enabled() ) {
+					$rate[ 'taxes' ] = [ $request_data['vat'] ];
+				}
 			}
 		}
+
 
 		if ( $this->free_shipping ) {
 			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
@@ -103,6 +107,10 @@ class Method extends \WC_Shipping_Method {
 
 		if ( !$this->free_shipping && !empty( $this->fixed_price ) ) {
 			$rate[ 'cost' ] = woo_bg_tax_based_price( $this->fixed_price );
+			
+			if ( wc_tax_enabled() ) {
+				$rate[ 'taxes' ] = [ woo_bg_calculate_vat_from_price( $this->fixed_price ) ];
+			}
 		}
 
 		$rate['meta_data']['cookie_data'] = $this->cookie_data;
@@ -163,8 +171,8 @@ class Method extends \WC_Shipping_Method {
 	public function is_available( $package ) {
 		//$countries = $this->container[ Client::SPEEDY_COUNTRIES ]->get_countries();
 		//Ne raboti dobre s GR i RO
-		//$countries = array( 'BG', 'GR', 'RO' );
-		$countries = array( 'BG' );
+		//$countries = array( 'BG' );
+		$countries = array( 'BG', 'GR', 'RO' );
 
 		if ( in_array( $package['destination']['country'], $countries ) ) {
 			return true;
@@ -219,9 +227,22 @@ class Method extends \WC_Shipping_Method {
 			$label['recipient'] = $this->generate_recipient_data();
 		}
 
-		$payment_by_data = $this->generate_payment_by_data();
+		$services_data = '';
+		$payment_by_data = '';
+		$country = '';
+		if ( $this->cookie_data && isset( $this->cookie_data['country'] ) ) {
+			$country = $this->cookie_data['country'];
+		}
+
+		if ( $country !== 'BG' ) {
+			$services_data = $this->generate_services_data( '202', $country );
+			$payment_by_data = $this->generate_payment_by_data( 'SENDER' );
+		} else {
+			$services_data = $this->generate_services_data();
+			$payment_by_data = $this->generate_payment_by_data();
+		}
+
 		$content_data = $this->generate_content_data();
-		$services_data = $this->generate_services_data();
 
 		return array_merge( $label, $content_data, $services_data, $payment_by_data );
 	}
@@ -254,7 +275,7 @@ class Method extends \WC_Shipping_Method {
 			'privatePerson' => true,
 			'clientName' => $this->cookie_data[ 'receiver' ],
 			'phone1' => array(
-				'number' => woo_bg_format_phone( $this->cookie_data[ 'phone' ] ),
+				'number' => woo_bg_format_phone( $this->cookie_data[ 'phone' ], $this->cookie_data[ 'country' ] ),
 			),
 			'email' => $session_customer[ 'email' ],
 		);
@@ -271,6 +292,7 @@ class Method extends \WC_Shipping_Method {
 			$recipient[ 'address' ] = $this->generate_recipient_address();
 		} else if ( $this->cookie_data['type'] === 'office' ) {
 			$recipient[ 'pickupOfficeId' ] = $this->generate_recipient_office_code();
+			$recipient[ 'country' ] = $this->cookie_data[ 'country' ];
 		}
 
 		return $recipient;
@@ -279,18 +301,21 @@ class Method extends \WC_Shipping_Method {
 	private function generate_recipient_address() {
 		$raw_city = sanitize_text_field( $this->cookie_data['city'] );
 		$raw_state = sanitize_text_field( $this->cookie_data['state'] );
-		$cities_data = $this->container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state );
+		$country_id = $this->container[ Client::SPEEDY_COUNTRIES ]->get_country_id( sanitize_text_field( $this->cookie_data['country'] ) );
+		$cities_data = $this->container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state, $country_id );
+
 		
 		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) || !isset( $cities_data['cities'][ $cities_data['city_key'] ] ) ) {
 			return( [] );
 		}
 
 		$address = array(
+			'countryId' => $country_id,
 			'siteId' => $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ],
 		);
 
 		if ( !empty( $this->cookie_data['selectedAddress']['type'] ) && $this->cookie_data['selectedAddress']['type'] === 'streets' ) {
-			$address["streetId"] = str_replace('street-', '', $this->cookie_data['selectedAddress']['orig_key'] ); 
+			$address["streetId"] = str_replace('street-', '', $this->cookie_data['selectedAddress']['orig_key'] );
 			$parts = explode( ',', $this->cookie_data['streetNumber'] );
 			$address["streetNo"] = array_shift( $parts );
 
@@ -366,11 +391,11 @@ class Method extends \WC_Shipping_Method {
 		);
 	}
 
-	private function generate_services_data() {
+	private function generate_services_data( $service_id = '505', $country = 'BG' ) {
 		$services = array(
 			'autoAdjustPickupDate' => true, 
-			'serviceId' => 505,
-			'serviceIds' => array( 505 ),
+			'serviceId' => $service_id,
+			'serviceIds' => array( $service_id ),
 			'additionalServices' => [],
 		);
 
@@ -398,10 +423,20 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		if ( $this->cookie_data['payment'] === 'cod' ) {
-			$services['additionalServices']['cod'] = array(
-				'amount' => woo_bg_get_package_total(), 
-				'processingType' => ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'ppp' ) ) ) ? 'POSTAL_MONEY_TRANSFER' : 'CASH',
-			);
+			$cod_data = [];
+
+			if ( $service_id === '505' ) {
+				$cod_data = array(
+					'amount' => woo_bg_get_package_total(),
+					'processingType' => ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'ppp' ) ) ) ? 'POSTAL_MONEY_TRANSFER' : 'CASH',
+				);
+			} else {
+				$cod_data = array(
+					'amount' => woo_bg_get_package_total()
+				);
+			}
+
+			$services['additionalServices']['cod'] = $cod_data;
 
 			if ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) && wc_tax_enabled() ) {
 				$services['additionalServices']['cod']['fiscalReceiptItems'] = array();
@@ -431,6 +466,7 @@ class Method extends \WC_Shipping_Method {
 			}
 
 			if ( 
+				$country !== 'GR' &&
 				$this->test !== 'no' && 
 				! ( isset( $this->cookie_data['selectedOfficeType'] ) && $this->cookie_data['selectedOfficeType'] == 'APT' )
 			) {
@@ -442,7 +478,7 @@ class Method extends \WC_Shipping_Method {
 
 				$services['additionalServices']['obpd'] = array(
 					'option' => $test, 
-					'returnShipmentServiceId' => 505, 
+					'returnShipmentServiceId' => $service_id, 
 					'returnShipmentPayer' => 'SENDER' 
 				);
 			}
@@ -450,7 +486,7 @@ class Method extends \WC_Shipping_Method {
 
 
 		if ( empty( $services['additionalServices'] ) ) {
-		    unset( $services['additionalServices'] );
+			unset( $services['additionalServices'] );
 		}
 
 		return array(
@@ -458,11 +494,11 @@ class Method extends \WC_Shipping_Method {
 		);
 	}
 	
-	private function generate_payment_by_data() {
+	private function generate_payment_by_data( $shipping_costs_payer = 'RECIPIENT' ) {
 		$payment = array(
-			"courierServicePayer" => "RECIPIENT",
-			"declaredValuePayer" => "RECIPIENT",
-			"packagePayer" => "RECIPIENT",
+			"courierServicePayer" => $shipping_costs_payer,
+			"declaredValuePayer" => $shipping_costs_payer,
+			"packagePayer" => $shipping_costs_payer,
 		);
 
 		if ( isset( $this->cookie_data['payment'] ) && $this->cookie_data['payment'] !== 'cod' ) {
