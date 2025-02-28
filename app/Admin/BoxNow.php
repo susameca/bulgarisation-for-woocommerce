@@ -135,9 +135,9 @@ class BoxNow {
 			'destination' => self::generate_receiver_data( $order, $cookie_data ),
 			'items' => self::generate_items( $order ),
 			'allowReturn' => wc_string_to_bool( woo_bg_get_option( 'boxnow_send_from', 'allow_return' ) ),
-			'invoiceValue' => '0',
+			'invoiceValue' => '0.00',
 			'paymentMode' => 'prepaid',
-			'amountToBeCollected' => '0',
+			'amountToBeCollected' => '0.00',
 		];
 
 		if ( $order->get_payment_method() === 'cod' ) {
@@ -252,8 +252,8 @@ class BoxNow {
 				$label_data[ 'amountToBeCollected' ] = $total;
 			} else {
 				$label_data[ 'paymentMode' ] = 'prepaid';
-				unset( $label_data[ 'invoiceValue' ] );
-				unset( $label_data[ 'amountToBeCollected' ] );
+				$label_data[ 'invoiceValue' ] = '0.00';
+				$label_data[ 'amountToBeCollected' ] = '0.00';
 			}
 		}
 
