@@ -430,13 +430,14 @@ function woo_bg_get_order_label( $order_id ) {
 	$method = '';
 
 	if ( !empty( $order->get_items( 'shipping' ) ) ) {
-		$method_object = array_shift( $order->get_items( 'shipping' ) );
+		$items = $order->get_items( 'shipping' );
+		$method_object = array_shift( $items );
 		$method = $method_object['method_id'];
 
 		$label_data = woo_bg_get_label_data_for_shipping_method( $method_object, $order );
+		
 		foreach ( $order->get_items( 'shipping' ) as $shipping ) {
 			$method = $shipping['method_id'];
-			
 		}
 	}
 

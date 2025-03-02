@@ -380,7 +380,7 @@ class Econt {
 			$states = $container[ Client::ECONT_CITIES ]->get_regions( $country );
 			$state = $states[ $cookie_data['state'] ];
 
-			$cities_data = $container[ Client::ECONT_CITIES ]->get_filtered_cities( $cookie_data['city'], $state );
+			$cities_data = $container[ Client::ECONT_CITIES ]->get_filtered_cities( $cookie_data['city'], $state, $country );
 			$cities = $cities_data['cities'];
 			$city_key = $cities_data['city_key'];
 
@@ -648,7 +648,7 @@ class Econt {
 
 		if ( $order->get_payment_method() !== 'cod' ) { 
 			return;
-		}	
+		}
 
 		if ( $payment_by = $_REQUEST['paymentBy'] ) {
 			if ( $payment_by['id'] == 'buyer' ) {

@@ -28,6 +28,7 @@ class Register {
 			add_filter( 'woo_bg/speedy/rate', array( __CLASS__, 'add_not_calculated_label' ), 10, 2 );
 			add_filter( 'woo_bg/econt/rate', array( __CLASS__, 'add_not_calculated_label' ), 10, 2 );
 			add_filter( 'woo_bg/cvc/rate', array( __CLASS__, 'add_not_calculated_label' ), 10, 2 );
+			add_action( 'woocommerce_order_item_shipping_after_calculate_taxes', array( __CLASS__, 'set_shipping_rate_taxes_for_recalculation' ), 10, 2 );
 			
 			new ProductAdditionalFields( $container );
 		}
@@ -181,5 +182,15 @@ class Register {
 		}
 
 		return $rate;
+	}
+
+	public static function set_shipping_rate_taxes_for_recalculation( $method, $calculate_tax_for ) {
+		if ( strpos( $method[ 'method_id' ], 'woo_bg' ) === false ) {
+			return;
+		}
+
+		if ( wc_tax_enabled() ) {
+			$method->set_taxes( woo_bg_get_shipping_rate_taxes( $method->get_total() ) );
+		}
 	}
 }
