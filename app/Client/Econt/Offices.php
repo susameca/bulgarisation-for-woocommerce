@@ -15,7 +15,7 @@ class Offices {
 		$this->container = $container;
 	}
 
-	protected function load_offices( $city_id ) {
+	protected function load_offices( $city_id, $country_code = 'BG' ) {
 		if ( ! is_dir( $this->container[ Client::ECONT ]::CACHE_FOLDER ) ) {
 			wp_mkdir_p( $this->container[ Client::ECONT ]::CACHE_FOLDER );
 		}
@@ -24,10 +24,12 @@ class Offices {
 		$offices = File::get_file( $offices_file );
 
 		if ( !$offices ) {
-			$api_call = $this->container[ Client::ECONT ]->api_call( self::OFFICES_ENDPOINT, array( 
+			$args = apply_filters( 'woo_bg/econt/offices/api_call_args', array( 
 				'countryCode' => 'BGR', 
 				'cityID' => $city_id, 
-			) );
+			), $city_id, $country_code );
+			
+			$api_call = $this->container[ Client::ECONT ]->api_call( self::OFFICES_ENDPOINT, $args );
 
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::ECONT ]::validate_access( $api_call ) ) {
@@ -48,9 +50,9 @@ class Offices {
 	}
 
 	//Getters
-	public function get_offices( $city_id ) {
+	public function get_offices( $city_id, $country_code = 'BG' ) {
 		if ( empty( $this->offices[ $city_id ] ) ) {
-			$this->load_offices( $city_id );
+			$this->load_offices( $city_id, $country_code );
 		}
 
 		return $this->offices[ $city_id ];
@@ -61,8 +63,8 @@ class Offices {
 		$this->offices[ $city_id ] = $offices;
 	}
 
-	public function get_formatted_offices( $city ) {
-		$offices = $this->get_offices( str_replace( 'cityID-', '', $city ) );
+	public function get_formatted_offices( $city, $country_code = 'BG' ) {
+		$offices = $this->get_offices( str_replace( 'cityID-', '', $city ), $country_code );
 		$shops = [];
 		$aps = [];
 

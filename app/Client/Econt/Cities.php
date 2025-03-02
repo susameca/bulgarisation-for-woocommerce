@@ -30,6 +30,10 @@ class Cities {
 			if ( is_array( $api_call ) ) {
 				if ( $this->container[ Client::ECONT ]::validate_access( $api_call ) ) {
 					if ( !empty( $api_call['cities'] ) ) {
+						foreach ( $api_call['cities'] as &$city ) {
+							unset( $city[ 'servingOffices' ] );
+						}
+
 						$cities = wp_json_encode( $api_call );
 						
 						File::put_to_file( $cities_file, $cities );
@@ -81,7 +85,13 @@ class Cities {
 	}
 
 	public function get_cities_by_region( $region, $country_code = 'BG' ) {
-		$cities = array_filter( $this->get_cities( $country_code )['cities'], function( $city ) use ( $region ) {
+		$cities = $this->get_cities( $country_code );
+
+		if ( empty( $cities ) ) {
+			return [];
+		}
+		
+		$cities = array_filter( $cities['cities'], function( $city ) use ( $region ) {
 			if ( 
 				mb_strtolower( $city['regionName'] ) === mb_strtolower( $region ) || 
 				mb_strtolower( $city['regionNameEn'] ) === mb_strtolower( $region )
@@ -105,23 +115,43 @@ class Cities {
 		$this->cities[ $country_code ] = $cities;
 	}
 
-	public function get_filtered_cities( $city, $state ) {
-		$city = mb_strtolower( Transliteration::latin2cyrillic( $city ) );
-		$cities = self::get_cities_by_region( $state );
+	public function get_filtered_cities( $city, $state, $country_code = 'BG' ) {
+		if ( $country_code !== 'BG' ) {
+			$city = mb_strtolower( $city );
+		} else {
+			$city = mb_strtolower( Transliteration::latin2cyrillic( $city ) );
+		}
+
+		if ( $country_code === 'GR' ) {
+			$regions = explode( ',', $state );
+			$cities = [];
+
+			foreach ( $regions as $region ) {
+				$cities = array_merge( $cities, self::get_cities_by_region( $region, $country_code ) );
+			}
+		} else {
+			$cities = self::get_cities_by_region( $state, $country_code );
+		}
+
 		$cities_only_names = [];
 		$cities_search_names = [];
 		$cities_only_names_dropdowns = [];
-		
+		$key = 'name';
+
+		if ( $country_code !== 'BG' ) {
+			$key = 'nameEn';
+		}
+
 		if ( !empty( $cities ) ) {
 			foreach ( $cities as $temp_city ) {
-				$cities_only_names_dropdowns[] = $temp_city['name'];
-				$temp_city['name'] = mb_strtolower( $temp_city['name'] );
-				$cities_only_names[] = $temp_city['name'];
+				$cities_only_names_dropdowns[] = $temp_city[ $key ];
+				$temp_city[ $key ] = mb_strtolower( $temp_city[ $key ] );
+				$cities_only_names[] = $temp_city[ $key ];
 				$cities_search_names[] = $temp_city;
 			}
 		}
 
-		$city_key = array_search( $city, array_column( $cities_search_names, 'name' ) );
+		$city_key = array_search( $city, array_column( $cities_search_names, $key ) );
 
 		return [
 			'city' => $city,
@@ -131,5 +161,42 @@ class Cities {
 			'cities_only_names_dropdowns' => $cities_only_names_dropdowns,
 			'city_key' => $city_key,
 		];
+	}
+
+	public function get_regions( $country_code = 'BG' ) {
+		$regions = apply_filters( 'woo_bg/econt/cities/regions', array(
+			'BG' => [
+				'BG-01' => 'Благоевград',
+				'BG-02' => 'Бургас',
+				'BG-03' => 'Варна',
+				'BG-04' => 'Велико Търново',
+				'BG-05' => 'Видин',
+				'BG-06' => 'Враца',
+				'BG-07' => 'Габрово',
+				'BG-08' => 'Добрич',
+				'BG-09' => 'Кърджали',
+				'BG-10' => 'Кюстендил',
+				'BG-11' => 'Ловеч',
+				'BG-12' => 'Монтана',
+				'BG-13' => 'Пазарджик',
+				'BG-14' => 'Перник',
+				'BG-15' => 'Плевен',
+				'BG-16' => 'Пловдив',
+				'BG-17' => 'Разград',
+				'BG-18' => 'Русе',
+				'BG-19' => 'Силистра',
+				'BG-20' => 'Сливен',
+				'BG-21' => 'Смолян',
+				'BG-22' => 'София',
+				'BG-23' => 'София Област',
+				'BG-24' => 'Стара Загора',
+				'BG-25' => 'Търговище',
+				'BG-26' => 'Хасково',
+				'BG-27' => 'Шумен',
+				'BG-28' => 'Ямбол',
+			]
+		) );
+		
+		return $regions[ $country_code ];
 	}
 }

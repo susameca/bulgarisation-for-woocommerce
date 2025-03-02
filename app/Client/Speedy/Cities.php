@@ -78,7 +78,6 @@ class Cities {
 	public function get_formatted_cities( $country_id = '100' ) {
 		$formatted = [];
 		$regions = $this->get_regions( $country_id );
-		$regions_bg_names = woo_bg_return_bg_states();
 
 		foreach ( $regions as $region_key => $region ) {
 			$cities = $this->get_cities( $region, $country_id );
@@ -87,7 +86,7 @@ class Cities {
 				foreach ( $cities as $city ) {
 					$formatted[ 'cityID-' . $city['id'] ] = array(
 						'id' => 'cityID-' . $city['id'],
-						'label' => sprintf( '%s - %s', $regions_bg_names[ $region_key ], $city['name'] ),
+						'label' => sprintf( '%s - %s', $region, $city['name'] ),
 					);
 				}
 			}
@@ -140,7 +139,7 @@ class Cities {
 	}
 
 	public function get_regions( $country_id = 100 ) {
-		$regions = array(
+		$regions = apply_filters( 'woo_bg/speedy/cities/regions', array(
 			100 => [
 				'BG-01' => 'BLAGOEVGRAD',
 				'BG-02' => 'BURGAS',
@@ -170,67 +169,8 @@ class Cities {
 				'BG-26' => 'HASKOVO',
 				'BG-27' => 'SHUMEN',
 				'BG-28' => 'YAMBOL',
-			],
-			642 => [
-				'AB' => 'ALBA',
-				'BC' => 'BACAU',
-				'BT' => 'BOTOSANI',
-				'B'  => 'BUCURESTI',
-				'CS' => 'CARAS-SEVERIN',
-				'CV' => 'COVASNA',
-				'GL' => 'GALATI',
-				'HR' => 'HARGHITA',
-				'IS' => 'IASI',
-				'MH' => 'MEHEDINTI',
-				'OT' => 'OLT',
-				'SM' => 'MARE',
-				'TR' => 'TELEORMAN',
-				'VL' => 'VALCEA',
-				'AR' => 'ARAD',
-				'BH' => 'BIHOR',
-				'BR' => 'BRAILA',
-				'BZ' => 'BUZAU',
-				'CJ' => 'CLUJ',
-				'DB' => 'DAMBOVITA',
-				'GR' => 'GIURGIU',
-				'HD' => 'HUNEDOARA',
-				'IF' => 'ILFOV',
-				'MS' => 'MURES',
-				'PH' => 'PRAHOVA',
-				'SB' => 'SIBIU',
-				'TM' => 'TIMIS',
-				'VS' => 'VASLUI',
-				'AG' => 'ARGES',
-				'BN' => 'BISTRITA-NASAUD',
-				'BV' => 'BRASOV',
-				'CL' => 'CALARASI',
-				'CT' => 'CONSTANTA',
-				'DJ' => 'DOLJ',
-				'GJ' => 'GORJ',
-				'IL' => 'IALOMITA',
-				'MM' => 'MARAMURES',
-				'NT' => 'NEAMT',
-				'SJ' => 'SALAJ',
-				'SV' => 'SUCEAVA',
-				'TL' => 'TULCEA',
-				'VN' => 'VRANCEA',
-			],
-			300 => [
-				'I' => 'ATTIKI',
-				'A' => 'ANATOLIKI MAKEDONIA, THRAKI',
-				'B' => 'KENTRIKI MAKEDONIA',
-				'C'  => 'DYTIKI MAKEDONIA',
-				'D' => 'IPEIROS',
-				'E' => 'THESSALIA',
-				'F' => 'IONIA NISSIA',
-				'G' => 'DYTIKI ELLADA',
-				'H' => 'STEREA ELLADA',
-				'J' => 'PELOPONNISOS',
-				'K' => 'VOREIO AIGAIO',
-				'L' => 'NOTIO AIGAIO',
-				'M' => 'KRITI',
 			]
-		);
+		) );
 		
 		return $regions[ $country_id ];
 	}

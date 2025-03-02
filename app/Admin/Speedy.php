@@ -244,7 +244,7 @@ class Speedy {
 		$label = self::update_sender( $label );
 		$label = self::update_recipient_data( $label );
 		$label = self::update_payment_by( $label, $order );
-		$label = self::update_services( $label );
+		$label = self::update_services( $label, $order );
 		$label = self::update_fiscal_items( $label, $order );
 
 		$data = self::send_label_to_speedy( $label, $order );
@@ -491,9 +491,10 @@ class Speedy {
 	protected static function update_services( $label ) {
 		$cookie_data = $_REQUEST['cookie_data'];
 		$payment_by = $_REQUEST['paymentBy'];
+		$country = ( $order->get_shipping_country() ) ? $order->get_shipping_country() : $order->get_billing_country();
 
 		$service_id = '505';
-		if ( $label['recipient']['country'] === 'RO' || $label['recipient']['addressLocation']['countryId'] === '642') {
+		if ( $country !== 'BG' ) {
 			$service_id = '202';
 		}
 

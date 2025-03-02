@@ -90,6 +90,10 @@ class Method extends \WC_Shipping_Method {
 				$rate['meta_data']['errors'] = $request_data['errors'];
 			} elseif ( $request_data['price']  ) {
 				$rate['cost'] = $request_data['price'];
+
+				if ( wc_tax_enabled() ) {
+					$rate[ 'taxes' ] = woo_bg_get_shipping_rate_taxes( $request_data['price'] );
+				}
 			}
 
 			if ( !$rate['cost'] ) {
@@ -156,21 +160,18 @@ class Method extends \WC_Shipping_Method {
 				'desc_tip'    => true,
 			),
 			'fixed_price' => array(
-				'title'       => __( 'Fixed price', 'woo-bg' ),
+				'title'       => __( 'Maximum price payed by the client', 'woo-bg' ),
 				'type'        => 'number',
 				'placeholder' => '0',
-				'description' => __( 'Enter a fixed price that the users will pay. The remaining will be payed by you.', 'woo-bg' ),
+				'description' => __( 'Enter a fixed price that the users will pay. The remaining will be payed by you.', 'woo-bg' ) . __( 'Can be used only in Bulgaria', 'woo-bg' ),
 				'default'     => '',
 				'desc_tip'    => true,
-			),
+			)
 		);
 	}
 
 	public function is_available( $package ) {
-		//$countries = $this->container[ Client::ECONT_COUNTRIES ]->get_countries();
-		//Ne raboti dobre s GR i RO
-		//$countries = array( 'BG', 'GR', 'RO' );
-		$countries = array( 'BG' );
+		$countries = apply_filters( 'woo_bg/econt/available_countries', array( 'BG' ) );
 
 		if ( in_array( $package['destination']['country'], $countries ) ) {
 			return true;
@@ -205,6 +206,8 @@ class Method extends \WC_Shipping_Method {
 
 		if ( isset( $request['type'] ) && $request['type'] === 'ExInvalidParam' ) {
 			$data['errors'] = $request;
+		} if ( $this->cookie_data[ 'country' ] !== 'BG' ) {
+			$data['price'] = woo_bg_tax_based_price( $request['label']['senderDueAmount'] );
 		} else if ( isset( $request['label']['receiverDueAmount'] ) ) {
 			$data['price'] = woo_bg_tax_based_price( $request['label']['receiverDueAmount'] );
 		}
@@ -226,7 +229,7 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		if ( $this->cookie_data ) {
-			if ( isset( $this->cookie_data['billing_to_company'] ) ) {
+			if ( isset( $this->cookie_data['billing_to_company'] ) && $this->cookie_data['billing_to_company'] ) {
 				$label['receiverAgent'] = $this->generate_receiver_data();
 				$label['receiverClient'] = $this->generate_receiver_data();
 				$label['receiverClient']['juridicalEntity'] = true;
@@ -257,6 +260,13 @@ class Method extends \WC_Shipping_Method {
 		$cart_data = $this->generate_cart_data();
 		$other_data = $this->generate_other_data();
 		$payment_by_data = $this->generate_payment_by_data();
+
+		if ( isset( $this->cookie_data[ 'country' ] ) && $this->cookie_data[ 'country' ] !== 'BG' ) {
+			unset( $payment_by_data[ 'paymentReceiverMethod' ] );
+			unset( $payment_by_data[ 'paymentReceiverAmount' ] );
+
+			$payment_by_data['paymentSenderMethod'] = $this->container[ Client::ECONT_PROFILE ]->get_sender_payment_method();
+		}
 
 		return array_merge( $label, $cart_data, $other_data, $payment_by_data );
 	}
@@ -305,9 +315,10 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_receiver_address() {
-		$states = woo_bg_return_bg_states();
+		$country = $this->cookie_data['country'];
+		$states = $this->container[ Client::ECONT_CITIES ]->get_regions( $country );
 		$state = $states[ $this->cookie_data['state'] ];
-		$cities = $this->container[ Client::ECONT_CITIES ]->get_filtered_cities( $this->cookie_data['city'], $state );
+		$cities = $this->container[ Client::ECONT_CITIES ]->get_filtered_cities( $this->cookie_data['city'], $state, $country );
 		$city_key = $cities['city_key'];
 		$type = ( !empty( $this->cookie_data['selectedAddress']['type'] ) ) ? $this->cookie_data['selectedAddress']['type'] :'';
 
@@ -446,7 +457,7 @@ class Method extends \WC_Shipping_Method {
 			'paymentReceiverMethod' => 'cash',
 		);
 
-		if ( !empty( $this->fixed_price ) ) {
+		if ( !empty( $this->fixed_price ) && $this->cookie_data['country'] === 'BG' ) {
 			$payment_by_data['paymentSenderMethod'] = $this->container[ Client::ECONT_PROFILE ]->get_sender_payment_method();
 			$payment_by_data['paymentReceiverMethod'] = 'cash';
 			$payment_by_data['paymentReceiverAmount'] = $this->fixed_price;
@@ -535,16 +546,23 @@ class Method extends \WC_Shipping_Method {
 					if ( WC()->session->get( 'woo-bg-econt-label' ) ) {
 						$label = WC()->session->get( 'woo-bg-econt-label' );
 
-						if ( isset( $cookie_data['payment'] ) && $cookie_data['payment'] !== 'cod' ) {
+						if ( isset( $cookie_data['payment'] ) ) {
 							$container = woo_bg()->container();
-							
-							unset( 
-								$label['label']['paymentReceiverMethod'],
-								$label['label']['paymentReceiverAmount'],
-								$label['label']['paymentSenderMethod'],
-							);
-							
-							$label['label']['paymentSenderMethod'] = $container[ Client::ECONT_PROFILE ]->get_sender_payment_method();
+
+							if ( $cookie_data['payment'] !== 'cod' ) {
+								unset( 
+									$label['label']['paymentReceiverMethod'],
+									$label['label']['paymentReceiverAmount'],
+									$label['label']['paymentSenderMethod'],
+								);
+								
+								$label['label']['paymentSenderMethod'] = $container[ Client::ECONT_PROFILE ]->get_sender_payment_method();
+							} else if ( 
+								$cookie_data['country'] !== 'BG' && 
+								!$shipping->free_shipping
+							) {
+								$label['label']['paymentReceiverMethod'] = 'cash';
+							}	
 						}
 
 						$order->update_meta_data( 'woo_bg_econt_label', $label );

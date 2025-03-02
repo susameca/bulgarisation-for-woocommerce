@@ -208,73 +208,6 @@ function woo_bg_return_bg_states() {
 	);
 }
 
-function woo_bg_return_ro_states() {
-    return array(
-		'' => '',
-        'AB' => 'ALBA',
-        'BC' => 'BACAU',
-        'BT' => 'BOTOSANI',
-        'B'  => 'BUCURESTI',
-        'CS' => 'CARAS-SEVERIN',
-        'CV' => 'COVASNA',
-        'GL' => 'GALATI',
-        'HR' => 'HARGHITA',
-        'IS' => 'IASI',
-        'MH' => 'MEHEDINTI',
-        'OT' => 'OLT',
-        'SM' => 'MARE',
-        'TR' => 'TELEORMAN',
-        'VL' => 'VALCEA',
-        'AR' => 'ARAD',
-        'BH' => 'BIHOR',
-        'BR' => 'BRAILA',
-        'BZ' => 'BUZAU',
-        'CJ' => 'CLUJ',
-        'DB' => 'DAMBOVITA',
-        'GR' => 'GIURGIU',
-        'HD' => 'HUNEDOARA',
-        'IF' => 'ILFOV',
-        'MS' => 'MURES',
-        'PH' => 'PRAHOVA',
-        'SB' => 'SIBIU',
-        'TM' => 'TIMIS',
-        'VS' => 'VASLUI',
-        'AG' => 'ARGES',
-        'BN' => 'BISTRITA-NASAUD',
-        'BV' => 'BRASOV',
-        'CL' => 'CALARASI',
-        'CT' => 'CONSTANTA',
-        'DJ' => 'DOLJ',
-        'GJ' => 'GORJ',
-        'IL' => 'IALOMITA',
-        'MM' => 'MARAMURES',
-        'NT' => 'NEAMT',
-        'SJ' => 'SALAJ',
-        'SV' => 'SUCEAVA',
-        'TL' => 'TULCEA',
-        'VN' => 'VRANCEA',
-    );
-}
-
-function woo_bg_return_gr_states() {
-    return array(
-		'' => '',
-        'I' => 'ATTIKI',
-        'A' => 'ANATOLIKI MAKEDONIA, THRAKI',
-        'B' => 'KENTRIKI MAKEDONIA',
-        'C'  => 'DYTIKI MAKEDONIA',
-        'D' => 'IPEIROS',
-        'E' => 'THESSALIA',
-        'F' => 'IONIA NISSIA',
-        'G' => 'DYTIKI ELLADA',
-        'H' => 'STEREA ELLADA',
-        'J' => 'PELOPONNISOS',
-        'K' => 'VOREIO AIGAIO',
-        'L' => 'NOTIO AIGAIO',
-        'M' => 'KRITI',
-    );
-}
-
 function woo_bg_support_text() {
 	?> 
 	<div class="notice notice-info">
@@ -497,33 +430,13 @@ function woo_bg_get_order_label( $order_id ) {
 	$method = '';
 
 	if ( !empty( $order->get_items( 'shipping' ) ) ) {
+		$method_object = array_shift( $order->get_items( 'shipping' ) );
+		$method = $method_object['method_id'];
+
+		$label_data = woo_bg_get_label_data_for_shipping_method( $method_object, $order );
 		foreach ( $order->get_items( 'shipping' ) as $shipping ) {
 			$method = $shipping['method_id'];
-			if ( $shipping['method_id'] === 'woo_bg_speedy' ) {
-				if ( $label = $order->get_meta( 'woo_bg_speedy_label' ) ) {
-					$label_data = $label;
-				}
-
-				break;
-			} elseif ( $shipping['method_id'] === 'woo_bg_econt' ) {
-				if ( $label = $order->get_meta( 'woo_bg_econt_label' ) ) {
-					$label_data = $label;
-				}
-
-				break;
-			} elseif ( $shipping['method_id'] === 'woo_bg_cvc' ) {
-				if ( $label = $order->get_meta( 'woo_bg_cvc_label' ) ) {
-					$label_data = $label;
-				}
-
-				break;
-			} elseif ( $shipping['method_id'] === 'woo_bg_boxnow' ) {
-				if ( $label = $order->get_meta( 'woo_bg_boxnow_shipment_status' ) ) {
-					$label_data = $label;
-				}
-
-				break;
-			}
+			
 		}
 	}
 
@@ -581,6 +494,47 @@ function woo_bg_get_order_label( $order_id ) {
 	return apply_filters( 'woo_bg/column/order/shipment_status_data', $data, $order );
 }
 
+function woo_bg_get_label_data_for_shipping_method( $shipping ) {
+	$order = $shipping->get_order();
+	$label_data = null;
+	
+	if ( $shipping['method_id'] === 'woo_bg_speedy' ) {
+		if ( $label = $order->get_meta( 'woo_bg_speedy_label' ) ) {
+			$label_data = $label;
+		}
+	} elseif ( $shipping['method_id'] === 'woo_bg_econt' ) {
+		if ( $label = $order->get_meta( 'woo_bg_econt_label' ) ) {
+			$label_data = $label;
+		}
+	} elseif ( $shipping['method_id'] === 'woo_bg_cvc' ) {
+		if ( $label = $order->get_meta( 'woo_bg_cvc_label' ) ) {
+			$label_data = $label;
+		}
+	} elseif ( $shipping['method_id'] === 'woo_bg_boxnow' ) {
+		if ( $label = $order->get_meta( 'woo_bg_boxnow_shipment_status' ) ) {
+			$label_data = $label;
+		}
+	}
+
+	return $label_data;
+}
+
 function woo_bg_is_pro_activated() {
 	return class_exists( 'Woo_BG_Pro\Checkout' );
+}
+
+function woo_bg_get_shipping_rate_taxes( $price, $country = 'BG' ) {
+	if ( !wc_tax_enabled() ) {
+		return [];
+	}
+
+	$tax_rates = \WC_Tax::find_shipping_rates( ['country' => $country ] );
+
+	if ( !empty( $tax_rates ) ) {
+		$taxes = \WC_Tax::calc_tax( $price, $tax_rates, false );
+	} else {
+		$taxes = [ woo_bg_calculate_vat_from_price( $price ) ];
+	}
+
+	return $taxes;
 }

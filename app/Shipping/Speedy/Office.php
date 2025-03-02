@@ -48,16 +48,7 @@ class Office {
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$raw_city = sanitize_text_field( $_POST['city'] );
 		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( sanitize_text_field( $_POST[ 'country' ] ) );
-		$states = '';
-
-        if ( $country_id === '100' ) {
-            $states = woo_bg_return_bg_states();
-        } else if ( $country_id === '642' ) {
-            $states = woo_bg_return_ro_states();
-        } else if ( $country_id === '300' ) {
-            $states = woo_bg_return_gr_states();
-        }
-
+		$states = self::$container[ Client::SPEEDY_CITIES ]->get_regions( $country_id );
 		$state = $states[ $raw_state ];
 		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state, $country_id );
 

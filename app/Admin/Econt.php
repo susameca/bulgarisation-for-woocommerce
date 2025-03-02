@@ -83,8 +83,8 @@ class Econt {
 						'cookie_data' => $cookie_data,
 						'paymentType' => $theorder->get_payment_method(),
 						'shipmentTypes' => self::get_shipment_types(),
-						'offices' => self::get_offices( $cookie_data ),
-						'streets' => self::get_streets( $cookie_data ),
+						'offices' => self::get_offices( $cookie_data, $theorder ),
+						'streets' => self::get_streets( $cookie_data, $theorder ),
 						'orderId' => $theorder->get_id(),
 						'testsOptions' => woo_bg_return_array_for_select( woo_bg_get_shipping_tests_options() ),
 						'testOption' => self::get_test_option( $label_data['label'] ),
@@ -146,19 +146,39 @@ class Econt {
 		) );
 	}
 
-	protected static function get_offices( $cookie_data ) {
-		$states = woo_bg_return_bg_states();
-		$state = $states[ $cookie_data['state'] ];
-		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $cookie_data['city'], $state );
+	protected static function get_offices( $cookie_data, $order ) {
+		$country = $order->get_billing_country();
+		$state = $order->get_billing_state();
+		$city = $order->get_billing_city();
+
+		if ( $order->get_shipping_country() ) {
+			$country = $order->get_shipping_country();
+			$state = $order->get_shipping_state();
+			$city = $order->get_shipping_city();
+		}
+
+		$states = self::$container[ Client::ECONT_CITIES ]->get_regions( $country );
+		$state = $states[ $state ];
+		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $city, $state, $country );
 
 		return self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] )['offices'];
 	}
 
-	protected static function get_streets( $cookie_data ) {
-		$states = woo_bg_return_bg_states();
-		$state = $states[ $cookie_data['state'] ];
+	protected static function get_streets( $cookie_data, $order ) {
+		$country = $order->get_billing_country();
+		$state = $order->get_billing_state();
+		$city = $order->get_billing_city();
+		
+		if ( $order->get_shipping_country() ) {
+			$country = $order->get_shipping_country();
+			$state = $order->get_shipping_state();
+			$city = $order->get_shipping_city();
+		}
 
-		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $cookie_data['city'], $state );
+		$states = self::$container[ Client::ECONT_CITIES ]->get_regions( $country );
+		$state = $states[ $state ];
+
+		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $city, $state, $country );
 
 		$streets = woo_bg_return_array_for_select( 
 			Address::get_streets_for_query( '', $cities_data['city_key'], $cities_data['cities'] ), 
@@ -194,13 +214,17 @@ class Econt {
 		$order_id = $_REQUEST['orderId'];
 		$shipment_status = $_REQUEST['shipmentStatus'];
 		$order = wc_get_order( $order_id );
-		
-		$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::DELETE_LABELS_ENDPOINT, array(
-			'shipmentNumbers' => [ $shipment_status['label']['shipmentNumber'] ]
-		) );
 
-		$order->update_meta_data( 'woo_bg_econt_shipment_status', '' );
-		$order->save();
+		if ( isset( $shipment_status['label']['shipmentNumber'] ) ) {
+			$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::DELETE_LABELS_ENDPOINT, array(
+				'shipmentNumbers' => [ $shipment_status['label']['shipmentNumber'] ]
+			) );
+
+			$order->update_meta_data( 'woo_bg_econt_shipment_status', '' );
+			$order->save();
+		} else {
+			$response = [ 'message' => 'Няма намерена товарителница' ];
+		}
 		
 		wp_send_json_success( $response );
 		wp_die();
@@ -278,7 +302,10 @@ class Econt {
 		$response = $generated_data['response'];
 		$request_body = $generated_data['request_body'];
 
-		if ( isset( $response['type'] ) && strpos( $response['type'], 'ExInvalid' ) !== false ) {
+		if ( 
+			isset( $response['type'] ) && 
+			( strpos( $response['type'], 'ExInvalid' ) !== false || strpos( $response['type'], 'ExException' ) !== false )
+		) {
 			$errors = woo_bg()->container()[ Client::ECONT ]::add_error_message( $response );
 
 			$data['message'] = implode('', $errors );
@@ -334,6 +361,7 @@ class Econt {
 		$type = $_REQUEST['type'];
 		$cookie_data = $_REQUEST['cookie_data'];
 		$cookie_data['type'] = $type['id'];
+		$country = ( $order->get_shipping_country() ) ? $order->get_shipping_country() : $order->get_billing_country();
 
 		unset( $label[ 'receiverOfficeCode' ] );
 		unset( $label[ 'receiverAddress' ] );
@@ -349,7 +377,7 @@ class Econt {
 			$cookie_data['streetNumber'] = $_REQUEST['streetNumber'];
 			$cookie_data['other'] = $_REQUEST['other'];
 
-			$states = woo_bg_return_bg_states();
+			$states = $container[ Client::ECONT_CITIES ]->get_regions( $country );
 			$state = $states[ $cookie_data['state'] ];
 
 			$cities_data = $container[ Client::ECONT_CITIES ]->get_filtered_cities( $cookie_data['city'], $state );
@@ -435,7 +463,7 @@ class Econt {
 		$cookie_data = $order->get_meta( 'woo_bg_econt_cookie_data' );
 		$invoice_num = '';
 
-		if ( $cookie_data['payment'] === 'cod' ) {
+		if ( !empty( $cookie_data['payment'] ) && $cookie_data['payment'] === 'cod' ) {
 			$cd_pay_option = woo_bg_get_option( 'econt', 'pay_options' );
 
 			if ( $cd_pay_option && $cd_pay_option !== 'no' ) {

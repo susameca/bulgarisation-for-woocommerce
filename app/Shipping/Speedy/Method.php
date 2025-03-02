@@ -94,7 +94,7 @@ class Method extends \WC_Shipping_Method {
 				$rate['cost'] = $request_data['price'];
 
 				if ( wc_tax_enabled() ) {
-					$rate[ 'taxes' ] = [ $request_data['vat'] ];
+					$rate[ 'taxes' ] = woo_bg_get_shipping_rate_taxes( $request_data['price'] );
 				}
 			}
 		}
@@ -109,7 +109,7 @@ class Method extends \WC_Shipping_Method {
 			$rate[ 'cost' ] = woo_bg_tax_based_price( $this->fixed_price );
 			
 			if ( wc_tax_enabled() ) {
-				$rate[ 'taxes' ] = [ woo_bg_calculate_vat_from_price( $this->fixed_price ) ];
+				$rate[ 'taxes' ] = woo_bg_get_shipping_rate_taxes( $this->fixed_price );
 			}
 		}
 
@@ -169,10 +169,7 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	public function is_available( $package ) {
-		//$countries = $this->container[ Client::SPEEDY_COUNTRIES ]->get_countries();
-		//Ne raboti dobre s GR i RO
-		//$countries = array( 'BG' );
-		$countries = array( 'BG', 'GR', 'RO' );
+		$countries = apply_filters( 'woo_bg/speedy/available_countries', array( 'BG' ) );
 
 		if ( in_array( $package['destination']['country'], $countries ) ) {
 			return true;

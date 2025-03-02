@@ -49,12 +49,16 @@ class Address {
 	public static function search_address() {
 		self::$container = woo_bg()->container();
 		$args = [];
-		$query = Transliteration::latin2cyrillic( sanitize_text_field( $_POST['query'] ) );
 		$raw_state = sanitize_text_field( $_POST['state'] );
-		$states = woo_bg_return_bg_states();
+		$country = sanitize_text_field( $_POST[ 'country' ] );
+		$query = sanitize_text_field( $_POST['query'] );
+		if ( $country == 'BG' ) {
+			$query = Transliteration::latin2cyrillic( $query );
+		}
+		$states = self::$container[ Client::ECONT_CITIES ]->get_regions( $country );
 		$state = $states[ $raw_state ];
 		$raw_city = sanitize_text_field( $_POST['city'] );
-		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $raw_city, $state );
+		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $raw_city, $state, $country );
 
 		if ( in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
 			$streets = woo_bg_return_array_for_select( 
@@ -82,13 +86,13 @@ class Address {
 	public static function load_streets() {
 		self::$container = woo_bg()->container();
 		$args = [];
-
 		$raw_state = sanitize_text_field( $_POST['state'] );
-		$states = woo_bg_return_bg_states();
+		$country = sanitize_text_field( $_POST[ 'country' ] );
+		$states = self::$container[ Client::ECONT_CITIES ]->get_regions( $country );
 		$state = $states[ $raw_state ];
 
 		$raw_city = sanitize_text_field( $_POST['city'] );
-		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $raw_city, $state );
+		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $raw_city, $state, $country );
 
 		if ( !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
 			$args[ 'cities' ] = woo_bg_return_array_for_select( $cities_data['cities_only_names_dropdowns'], 1, array( 'type'=>'city' ) );
