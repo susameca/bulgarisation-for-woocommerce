@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-02 12:24+0000\n"
+"POT-Creation-Date: 2025-03-02 19:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -45,7 +45,7 @@ msgstr[1] ""
 msgid "%s: Free shipping"
 msgstr ""
 
-#: app/Shipping/Register.php:180
+#: app/Shipping/Register.php:181
 #, php-format
 msgid "%s: Not calculated"
 msgstr ""
@@ -100,6 +100,10 @@ msgstr ""
 
 #: app/Admin/BoxNow.php:102 app/Admin/Tabs/BoxNow_Tab.php:91
 msgid "Allow returns"
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:49
+msgid "Allow shipping to Greece and Romania for Econt and Speedy."
 msgstr ""
 
 #: app/Admin/Tabs/Settings_Tab.php:52
@@ -210,7 +214,7 @@ msgstr ""
 msgid "By Phone ( %s )"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:224 app/Shipping/Speedy/Method.php:202
+#: app/Shipping/CVC/Method.php:224 app/Shipping/Speedy/Method.php:199
 msgid "Calculation failed. Please try again."
 msgstr ""
 
@@ -248,6 +252,12 @@ msgstr ""
 
 #: app/functions.php:85
 msgid "Cash on delivery with PPP"
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:46
+msgid ""
+"Changing the default radio buttons for shipping methods with more stylish "
+"buttons."
 msgstr ""
 
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
@@ -687,13 +697,6 @@ msgstr ""
 msgid "First Name:"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:34
-msgid ""
-"First one hides most of the unwanted fields as Country, City, State, "
-"Postcode, Address 1/2 and in their replacement add one field for city that "
-"is a dropdown field with all cities from the courier API."
-msgstr ""
-
 #: app/Admin/CVC.php:127 app/Admin/Econt.php:125 app/Admin/Speedy.php:127
 #: app/Shipping/CVC/Method.php:183 app/Shipping/Speedy/Method.php:161
 msgid "Fixed price"
@@ -708,7 +711,7 @@ msgstr ""
 msgid "For generating an API key, use this IP address: %s"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:48
+#: app/Admin/Tabs/Pro_Tab.php:65
 #, php-format
 msgid ""
 "For more information on how to get it, you can find at the plugin %s page."
@@ -813,6 +816,14 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
+#: app/Admin/Tabs/Pro_Tab.php:42
+msgid ""
+"Hides most of the unwanted fields as Country, City, State, Postcode, Address "
+"1/2 and in their replacement add one field for city that is a dropdown field "
+"with all cities from the courier API. The user also have a search for that "
+"field."
+msgstr ""
+
 #: app/Admin/Tabs/Nra_Tab.php:101
 msgid "How to return the amount when the client cancel the order."
 msgstr ""
@@ -859,6 +870,12 @@ msgid ""
 "WooCommerce settings at \"Settings >> General >> Enable taxes\". After that "
 "go to \"Settings >> Tax >> Yes, I will enter prices inclusive of tax\". Also,"
 " go to \"Standard rates\" submenu and add your rate ( 20% or 9% )."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:43
+msgid ""
+"In addition, you will have separate option to enable Country field if you "
+"want to ship to Greece or Romania."
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:219
@@ -918,7 +935,7 @@ msgid "Label data"
 msgstr ""
 
 #: app/Shipping/BoxNow/Method.php:423 app/Shipping/CVC/Method.php:543
-#: app/Shipping/Econt/Method.php:626 app/Shipping/Speedy/Method.php:649
+#: app/Shipping/Econt/Method.php:626 app/Shipping/Speedy/Method.php:646
 #, php-format
 msgid "Label number: %s. %s"
 msgstr ""
@@ -927,15 +944,15 @@ msgstr ""
 msgid "Last Name:"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:91
+#: app/Admin/Tabs/Pro_Tab.php:108
 msgid "License"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:133
+#: app/Admin/Tabs/Pro_Tab.php:150
 msgid "License is invalid!"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:73
+#: app/Admin/Tabs/Pro_Tab.php:90
 msgid "License Key"
 msgstr ""
 
@@ -1062,7 +1079,7 @@ msgstr ""
 msgid "Nonce was not provided!"
 msgstr ""
 
-#: app/Shipping/Register.php:165
+#: app/Shipping/Register.php:166
 msgid "Not calculated"
 msgstr ""
 
@@ -1214,7 +1231,7 @@ msgstr ""
 msgid "Please choose a automat."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:511 app/Shipping/Speedy/Method.php:563
+#: app/Shipping/Econt/Method.php:511 app/Shipping/Speedy/Method.php:560
 msgid "Please choose a office."
 msgstr ""
 
@@ -1223,7 +1240,7 @@ msgid "Please choose address."
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:457 app/Shipping/Econt/Method.php:499
-#: app/Shipping/Speedy/Method.php:553
+#: app/Shipping/Speedy/Method.php:550
 msgid "Please choose delivery option!"
 msgstr ""
 
@@ -1365,11 +1382,11 @@ msgstr ""
 msgid "Saturday delivery/pickup."
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:36
+#: app/Admin/Tabs/Pro_Tab.php:53
 msgid "Screenshot of the options:"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:41
+#: app/Admin/Tabs/Pro_Tab.php:58
 msgid "Screenshots of the checkout:"
 msgstr ""
 
@@ -1385,12 +1402,6 @@ msgstr ""
 #: app/Shipping/CVC/Office.php:36 app/Shipping/Econt/Office.php:36
 #: app/Shipping/Speedy/Office.php:36
 msgid "Search office"
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:35
-msgid ""
-"Second addtion is changing the default radio buttons for shipping methods "
-"with more stylish buttons."
 msgstr ""
 
 #: app/Shipping/BoxNow/Apm.php:35 app/Shipping/CVC/Address.php:41
@@ -1483,7 +1494,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:122 app/Admin/Tabs/Settings_Tab.php:104
+#: app/Admin/Tabs/Pro_Tab.php:139 app/Admin/Tabs/Settings_Tab.php:104
 msgid "Settings saved successfully!"
 msgstr ""
 
@@ -1521,7 +1532,7 @@ msgid ""
 "not found or the payment method was disabled. List of orders id's: %s"
 msgstr ""
 
-#: app/Shipping/Speedy/Method.php:551
+#: app/Shipping/Speedy/Method.php:548
 #, php-format
 msgid "Speedy - %s"
 msgstr ""
@@ -1616,10 +1627,10 @@ msgstr ""
 msgid "The registration address of your company."
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:33
+#: app/Admin/Tabs/Pro_Tab.php:35
 msgid ""
 "There is a Pro version of the plugin as an addon ( additional plugin to the "
-"free one ). This version of the plugin has 2 major checkout functionalities."
+"free one )."
 msgstr ""
 
 #: app/Admin/Nekorekten_Com.php:79
@@ -1658,6 +1669,10 @@ msgstr ""
 
 #: app/Admin/EU_Vat.php:68
 msgid "This order is out of scope for EU VAT."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:36
+msgid "This version of the plugin adds a couple of checkout functionalities:"
 msgstr ""
 
 #: app/Admin/CVC.php:131 app/Admin/Econt.php:129 app/Admin/Speedy.php:131
@@ -1708,7 +1723,7 @@ msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr ""
 
 #: app/Shipping/BoxNow/Method.php:427 app/Shipping/CVC/Method.php:547
-#: app/Shipping/Econt/Method.php:630 app/Shipping/Speedy/Method.php:653
+#: app/Shipping/Econt/Method.php:630 app/Shipping/Speedy/Method.php:650
 msgid "Track your order."
 msgstr ""
 
@@ -1862,7 +1877,7 @@ msgid ""
 "com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:47
+#: app/Admin/Tabs/Pro_Tab.php:64
 #, php-format
 msgid "You can review a demo at: %s"
 msgstr ""
