@@ -25,7 +25,15 @@ class Multi_Field extends Base_Field {
 	}
 
 	public function format_value( $value ) {
-		return ( $value ) ? json_decode( $value, 1 ) : [ ['from' => '', 'to' => '', 'price' => ''] ];
+		if ( !empty( $value ) ) {
+			$value = json_decode( $value, 1 );
+		}
+
+		if ( empty( $value ) ) {
+			$value = [ ['from' => '', 'to' => '', 'price' => ''] ];
+		}
+		
+		return $value;
 	}
 
 	public function populate( $group ) {
@@ -35,7 +43,7 @@ class Multi_Field extends Base_Field {
 			'title' => $this->get_title(),
 			'help_text' => $this->get_help_text(),
 			'description' => $this->get_desc(),
-			'value' => $this->format_value( $option, 1 ),
+			'value' => $this->format_value( $option ),
 			'type' => $this->get_type(),
 			'validation_rules' => $this->get_validation_rules(),
 			'fields_types' => $this->get_fields_types(),

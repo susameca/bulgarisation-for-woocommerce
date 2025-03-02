@@ -14,6 +14,14 @@ class Multi_Two_Field extends Multi_Field {
 		$this->set_fields_types( $fields_types );
 	}
 	public function format_value( $value ) {
-		return ( $value ) ? json_decode( $value, 1 ) : [ ['from' => '', 'to' => '', 'from_pice' => '', 'to_price' => '', 'price' => ''] ];
+		if ( !empty( $value ) ) {
+			$value = json_decode( $value, 1 );
+		}
+
+		if ( empty( $value ) ) {
+			$value = [ ['from' => '', 'to' => '', 'from_pice' => '', 'to_price' => '', 'price' => ''] ];
+		}
+
+		return $value;
 	}
 }
