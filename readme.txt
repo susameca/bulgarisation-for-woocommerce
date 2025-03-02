@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.7
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.2.0
+Stable tag: 3.3.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,6 +66,18 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.3.0 =
+Couriers: Add label if not calculated
+Couriers: Fix recalculations
+Econt: Optimizations
+Speedy: Optimizations
+
+= 3.2.2 =
+BOX NOW: Fix label
+
+= 3.2.1 =
+BOX NOW: Fix pricing fields
 
 = 3.2.0 =
 Add BOX NOW shipping method
