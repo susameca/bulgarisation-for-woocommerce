@@ -250,10 +250,6 @@ export default {
 						}
 					});
 
-					console.log('asf');
-					console.log(selectedAddress);
-					console.log('asf');
-
 					_this.selectedAddress = cloneDeep( selectedAddress );
 					if ( clearAdditionaFields ) {
 						_this.streetNumber = '';
