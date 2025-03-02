@@ -28,6 +28,8 @@ class Offices {
 				'countryCode' => 'BGR', 
 				'cityID' => $city_id, 
 			), $city_id, $country_code );
+
+			var_dump( $args );
 			
 			$api_call = $this->container[ Client::ECONT ]->api_call( self::OFFICES_ENDPOINT, $args );
 

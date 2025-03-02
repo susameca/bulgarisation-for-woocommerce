@@ -161,7 +161,7 @@ class Econt {
 		$state = $states[ $state ];
 		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $city, $state, $country );
 
-		return self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] )['offices'];
+		return self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'], $country )['offices'];
 	}
 
 	protected static function get_streets( $cookie_data, $order ) {
