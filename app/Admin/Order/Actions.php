@@ -23,8 +23,9 @@ class Actions {
 		add_action( 'woocommerce_order_action_woo_bg_regenerate_pdfs', array( __CLASS__, 'process_order_meta_box_actions' ) );
 		add_action( 'woocommerce_order_action_woo_bg_generate_invoice', array( __CLASS__, 'generate_invoice_action' ) );
 
-		add_action( 'woocommerce_order_refunded', array( __CLASS__, 'create_refund_action' ), 5, 2 );
-		
+		add_action( 'woocommerce_order_partially_refunded', array( __CLASS__, 'create_refund_action' ), 100, 2 );
+		add_action( 'woocommerce_order_fully_refunded', array( __CLASS__, 'create_refund_action' ), 100, 2 );
+
 		add_action( 'woocommerce_order_details_after_customer_details', array( __CLASS__, 'add_invoice_to_customer_order' ) );
 
 		add_action( 'woocommerce_checkout_order_processed', array( __CLASS__, 'set_payment_method' ) );
