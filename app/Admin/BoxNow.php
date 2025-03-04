@@ -34,13 +34,28 @@ class BoxNow {
 	}
 
 	public static function add_meta_boxes() {
-		$screen = wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
-		? array( wc_get_page_screen_id( 'shop-order' ), wc_get_page_screen_id( 'shop_subscription' ) )
-		: array( 'shop_order', 'shop_subscription' );
+		global $post, $theorder;
 
-		$screen = array_filter( $screen );
+		self::$container = woo_bg()->container();
 
-		add_meta_box( 'woo_bg_boxnow', __( 'BOX NOW Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
+		if ( ! is_object( $theorder ) ) {
+			$theorder = wc_get_order( $post->ID );
+		}
+
+		if ( !empty( $theorder->get_items( 'shipping' ) ) ) {
+			foreach ( $theorder->get_items( 'shipping' ) as $shipping ) {
+				if ( $shipping['method_id'] === 'woo_bg_boxnow' ) {
+					$screen = wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+					? array( wc_get_page_screen_id( 'shop-order' ), wc_get_page_screen_id( 'shop_subscription' ) )
+					: array( 'shop_order', 'shop_subscription' );
+
+					$screen = array_filter( $screen );
+
+					add_meta_box( 'woo_bg_boxnow', __( 'BOX NOW Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
+					break;
+				}
+			}
+		}
 	}
 
 	public static function meta_box() {
@@ -204,20 +219,27 @@ class BoxNow {
 		$box_count = 0;
 
 		foreach ( $order->get_items() as $order_item ) {
+			for ( $i = 0; $i < $order_item['quantity']; $i++ ) { 
+				$order_items[] = $order_item;
+			}
+		}
+
+		foreach ( $order_items as $order_item ) {
 			$_product = $order_item->get_product();
 
-			$current_size['height'] += (float) $_product->get_height() * $order_item['quantity'];
-			$current_size['width'] += (float) $_product->get_width() * $order_item['quantity'];
-			$current_size['length'] += (float) $_product->get_width() * $order_item['quantity'];
+			$height = ( $_product->get_height() ) ? (float) $_product->get_height() : 16;
+			$width = ( $_product->get_height() ) ? (float) $_product->get_width() : 44;
+			$length = ( $_product->get_height() ) ? (float) $_product->get_width() : 58;
 
 			$item_sizes = Method::determine_item_size( $current_size['height'], $current_size['width'], $current_size['length'] );
 			$current_volume += $item_sizes['volume'];
 
 			if ( $item_sizes['oversize'] || $item_sizes['volume'] > 89320 || $current_volume > 89320 ) {
-				$current_size['height'] = (float) $_product->get_height();
-				$current_size['width'] = (float) $_product->get_width();
-				$current_size['length'] = (float) $_product->get_width();
-				$current_volume = 0;
+				$current_size['height'] = $height;
+				$current_size['width'] = $width;
+				$current_size['length'] = $length;
+
+				$current_volume = $item_sizes['volume'];
 				$box_count++;
 				$items[ $box_count ] = [
 					'name' => '',
@@ -227,16 +249,15 @@ class BoxNow {
 				];
 			}
 
-			$weight = ( $_product->get_weight() ) ? wc_get_weight( $_product->get_weight(), 'kg' ) * $order_item['quantity'] : 1;
-			$item_sizes = Method::determine_item_size( $current_size['height'], $current_size['width'], $current_size['length'] );
+			$weight = ( $_product->get_weight() ) ? wc_get_weight( $_product->get_weight(), 'kg' ) : 1;
 			$new_price = (float) $items[ $box_count ][ 'value' ] + number_format( $order_item->get_total() + $order_item->get_total_tax(), 2, '.', '' );
 
 			$items[ $box_count ][ 'weight' ] += (float) $weight;
-			$items[ $box_count ][ 'name' ] .= $order_item->get_name() . " x " . $order_item['quantity'] . ";";
+			$items[ $box_count ][ 'name' ] .= $order_item->get_name() . ";";
 			$items[ $box_count ][ 'value' ] = (string) $new_price;
 
 			if ( $item_sizes['size'] ) {
-				$items[ $box_count ][ 'compartmentSize' ] = $item_sizes['size'];
+				$items[ $box_count ][ 'compartmentSize' ] = Method::determine_item_size_by_volume( $current_volume );
 			}
 		}
 

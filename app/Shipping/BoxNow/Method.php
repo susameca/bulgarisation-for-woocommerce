@@ -367,6 +367,20 @@ class Method extends \WC_Shipping_Method {
 		return $item;
 	}
 
+	public static function determine_item_size_by_volume( $volume ) {
+		$size = 2;
+
+		if ( $volume <= '17864' ) {
+			$size = 1;
+		} else if ( $volume <= 40832 ) {
+			$size = 2;
+		} else if ( $volume <= 89320 ) {
+			$size = 3;
+		}
+
+		return $size;
+	}
+
 	public static function enqueue_scripts() {
 		wp_enqueue_script(
 			'woo-bg-js-boxnow',
