@@ -103,13 +103,14 @@ class Method extends \WC_Shipping_Method {
 		if ( $this->free_shipping ) {
 			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
 			$rate[ 'cost' ] = 0;
+			unset( $rate[ 'taxes' ] );
 		} 
 
 		if ( !$this->free_shipping && !empty( $this->fixed_price ) ) {
 			$rate[ 'cost' ] = woo_bg_tax_based_price( $this->fixed_price );
 			
 			if ( wc_tax_enabled() ) {
-				$rate[ 'taxes' ] = woo_bg_get_shipping_rate_taxes( $this->fixed_price );
+				$rate[ 'taxes' ] = woo_bg_get_shipping_rate_taxes( $rate[ 'cost' ] );
 			}
 		}
 

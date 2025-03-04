@@ -488,7 +488,7 @@ class Speedy {
 		return $label;
 	}
 
-	protected static function update_services( $label ) {
+	protected static function update_services( $label, $order ) {
 		$cookie_data = $_REQUEST['cookie_data'];
 		$payment_by = $_REQUEST['paymentBy'];
 		$country = ( $order->get_shipping_country() ) ? $order->get_shipping_country() : $order->get_billing_country();

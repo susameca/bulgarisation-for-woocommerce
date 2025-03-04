@@ -658,6 +658,8 @@ class Econt {
 			}
 		}
 
+		$price = apply_filters( 'woo_bg/admin/econt/price_for_update', $price, $order, $_REQUEST, $response, $request_body );
+
 		foreach( $order->get_items( 'shipping' ) as $item_id => $item ) {
 			$item->set_total( $price );
 			$item->calculate_taxes();

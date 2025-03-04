@@ -98,6 +98,7 @@ class Method extends \WC_Shipping_Method {
 
 			if ( !$rate['cost'] ) {
 				$this->free_shipping = true;
+				unset( $rate[ 'taxes' ] );
 			}
 		}
 
