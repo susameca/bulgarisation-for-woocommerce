@@ -21,17 +21,6 @@ class ProductAdditionalFields {
 			),
 		);
 
-		woocommerce_wp_text_input(
-			array(
-				'id'          => '_woo_bg_os_value',
-				'value'       => $product_object->get_meta( '_woo_bg_os_value' ),
-				'label'       => __( 'Declared value', 'woo-bg' ) . ' ( BGN )',
-				'placeholder' => wc_format_localized_decimal( 0 ),
-				'type'        => 'text',
-				'data_type'   => 'decimal',
-			)
-		);
-
 		foreach ( $checkboxes as $key => $option ) {
 			?>
 			<p class="form-field ">
@@ -47,10 +36,6 @@ class ProductAdditionalFields {
 	}
 
 	public static function save( $product ) {
-		if ( isset( $_POST[ '_woo_bg_os_value' ] ) ) {
-			$product->update_meta_data( '_woo_bg_os_value', sanitize_text_field( $_POST[ '_woo_bg_os_value' ] ) );
-		}
-
 		if ( isset( $_POST[ '_woo_bg_fragile' ] ) ) {
 			$product->update_meta_data( '_woo_bg_fragile', sanitize_text_field( $_POST[ '_woo_bg_fragile' ] ) );
 		}

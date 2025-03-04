@@ -363,22 +363,16 @@ class Method extends \WC_Shipping_Method {
 			}
 		}
 
-		$os_value = 0;
-
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
 			$_product = wc_get_product( $item[ 'product_id' ] );
 
-			if ( $product_os_value = $_product->get_meta( '_woo_bg_os_value' ) ) {
-				$os_value += $product_os_value * $item['quantity'];
-
-				if ( $_product->get_meta( '_woo_bg_fragile' ) === 'on' ) {
-					$cart['is_fragile'] = 1;
-				}
-			} 
+			if ( $_product->get_meta( '_woo_bg_fragile' ) === 'on' ) {
+				$cart['is_fragile'] = 1;
+			}
 		}
 
-		if ( $os_value ) {
-			$cart[ 'os_value' ] = number_format( $os_value, 2 );
+		if ( $cart['is_fragile'] ) {
+			$cart[ 'os_value' ] = number_format( woo_bg_get_package_total(), 2 );
 		}
 
 		return $cart;

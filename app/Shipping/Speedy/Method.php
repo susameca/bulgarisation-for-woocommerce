@@ -403,18 +403,14 @@ class Method extends \WC_Shipping_Method {
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
 			$_product = wc_get_product( $item[ 'product_id' ] );
 			
-			if ( $product_os_value = $_product->get_meta( '_woo_bg_os_value' ) ) {
-				$os_value += $product_os_value * $item['quantity'];
-
-				if ( $_product->get_meta( '_woo_bg_fragile' ) === 'on' ) {
-					$is_fragile = true;
-				}
+			if ( $_product->get_meta( '_woo_bg_fragile' ) === 'on' ) {
+				$is_fragile = true;
 			}
 		}
 
-		if ( $os_value ) {
+		if ( $is_fragile ) {
 			$services['additionalServices']['declaredValue'] = array(
-				'amount' => number_format( $os_value, 2, '.', '' ), 
+				'amount' => woo_bg_get_package_total(), 
 				'fragile' => $is_fragile, 
 				"ignoreIfNotApplicable" => true 
 			);

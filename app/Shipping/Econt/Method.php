@@ -375,14 +375,13 @@ class Method extends \WC_Shipping_Method {
 			'weight' => 0,
 		);
 
-		$os_value = 0;
+		$is_fragile = false;
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
 			$_product = wc_get_product( $item[ 'product_id' ] );
-			$product_os_value = $_product->get_meta( '_woo_bg_os_value' );
-
-			if ( is_numeric( $product_os_value ) && is_numeric( $item['quantity'] ) ) {
-				$os_value += $product_os_value * absint( $item['quantity'] );
+			
+			if ( $_product->get_meta( '_woo_bg_fragile' ) === 'on' ) {
+				$is_fragile = true;
 			}
 			
 			if ( $item['data']->get_weight() ) {
@@ -414,8 +413,8 @@ class Method extends \WC_Shipping_Method {
 			}
 		}
 
-		if ( $os_value && empty( $this->cookie_data['selectedOfficeIsAPS'] ) ) {
-			$cart[ 'services' ]['declaredValueAmount'] = number_format( $os_value, 2 );
+		if ( $is_fragile && empty( $this->cookie_data['selectedOfficeIsAPS'] ) ) {
+			$cart[ 'services' ]['declaredValueAmount'] = woo_bg_get_package_total();
 			$cart[ 'services' ]['declaredValueCurrency'] = 'BGN';
 		}
 
