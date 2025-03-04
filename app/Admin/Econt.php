@@ -42,6 +42,10 @@ class Econt {
 			$theorder = wc_get_order( $post->ID );
 		}
 
+		if ( empty( $theorder ) ) {
+			return;
+		}
+		
 		if ( !empty( $theorder->get_items( 'shipping' ) ) ) {
 			foreach ( $theorder->get_items( 'shipping' ) as $shipping ) {
 				if ( $shipping['method_id'] === 'woo_bg_econt' ) {

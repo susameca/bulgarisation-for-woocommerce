@@ -40,8 +40,10 @@ class CVC {
 
 		if ( ! is_object( $theorder ) ) {
 			$theorder = wc_get_order( $post->ID );
-		} else {
-			$order = $theorder;
+		}
+
+		if ( empty( $theorder ) ) {
+			return;
 		}
 
 		if ( !empty( $theorder->get_items( 'shipping' ) ) ) {
