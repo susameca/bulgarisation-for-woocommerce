@@ -34,13 +34,28 @@ class Econt {
 	}
 
 	public static function add_meta_boxes() {
-		$screen = wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
-		? array( wc_get_page_screen_id( 'shop-order' ), wc_get_page_screen_id( 'shop_subscription' ) )
-		: array( 'shop_order', 'shop_subscription' );
+		global $post, $theorder;
 
-		$screen = array_filter( $screen );
+		self::$container = woo_bg()->container();
 
-		add_meta_box( 'woo_bg_econt', __( 'Econt Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
+		if ( ! is_object( $theorder ) ) {
+			$theorder = wc_get_order( $post->ID );
+		}
+
+		if ( !empty( $theorder->get_items( 'shipping' ) ) ) {
+			foreach ( $theorder->get_items( 'shipping' ) as $shipping ) {
+				if ( $shipping['method_id'] === 'woo_bg_econt' ) {
+					$screen = wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+					? array( wc_get_page_screen_id( 'shop-order' ), wc_get_page_screen_id( 'shop_subscription' ) )
+					: array( 'shop_order', 'shop_subscription' );
+
+					$screen = array_filter( $screen );
+
+					add_meta_box( 'woo_bg_econt', __( 'Econt Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
+					break;
+				}
+			}
+		}
 	}
 
 	public static function meta_box() {
