@@ -176,7 +176,7 @@ class Register {
 				woo_bg_get_option( 'shipping_methods', 'change_radio_buttons_to_images' ) !== 'yes'
 			) && 
 			$rate['label'] === $method->title && 
-			!$rate['cost']
+			empty( $rate['cost'] )
 		) {
 			$rate['label'] = sprintf( __( '%s: Not calculated', 'woo-bg' ), $rate['label'] );
 		}

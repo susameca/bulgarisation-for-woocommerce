@@ -187,23 +187,57 @@ class BoxNow {
 	}
 
 	public static function generate_items( $order ) {
-		$items = [];
+		$default_box_values = [
+			'name' => '',
+			'weight' => 0,
+			'value' => 0,
+			'compartmentSize' => 0,
+		];
+		$current_size = [
+			'height' => 0,
+			'width' => 0,
+			'length' => 0,
+		];
+		$current_volume = 0;
+
+		$items = [ $default_box_values ];
+		$box_count = 0;
 
 		foreach ( $order->get_items() as $order_item ) {
-			$item_weight = ( $order_item->get_product()->get_weight() ) ? wc_get_weight( $order_item->get_product()->get_weight(), 'kg' ) * $order_item['quantity'] : 1;
-			$data = [
-				'name' => $order_item->get_name() . " x " . $order_item['quantity'],
-				'weight' => $item_weight,
-				'value' => number_format( $order_item->get_total() + $order_item->get_total_tax(), 2, '.', '' ),
-			];
+			$_product = $order_item->get_product();
 
-			$item_sizes = Method::determine_item_size( $order_item->get_product() );
+			$current_size['height'] += (float) $_product->get_height() * $order_item['quantity'];
+			$current_size['width'] += (float) $_product->get_width() * $order_item['quantity'];
+			$current_size['length'] += (float) $_product->get_width() * $order_item['quantity'];
 
-			if ( $item_sizes['size'] ) {
-				$data[ 'compartmentSize' ] = $item_sizes['size'];
+			$item_sizes = Method::determine_item_size( $current_size['height'], $current_size['width'], $current_size['length'] );
+			$current_volume += $item_sizes['volume'];
+
+			if ( $item_sizes['oversize'] || $item_sizes['volume'] > 89320 || $current_volume > 89320 ) {
+				$current_size['height'] = (float) $_product->get_height();
+				$current_size['width'] = (float) $_product->get_width();
+				$current_size['length'] = (float) $_product->get_width();
+				$current_volume = 0;
+				$box_count++;
+				$items[ $box_count ] = [
+					'name' => '',
+					'weight' => 0,
+					'value' => 0,
+					'compartmentSize' => 0,
+				];
 			}
 
-			$items[] = $data;
+			$weight = ( $_product->get_weight() ) ? wc_get_weight( $_product->get_weight(), 'kg' ) * $order_item['quantity'] : 1;
+			$item_sizes = Method::determine_item_size( $current_size['height'], $current_size['width'], $current_size['length'] );
+			$new_price = (float) $items[ $box_count ][ 'value' ] + number_format( $order_item->get_total() + $order_item->get_total_tax(), 2, '.', '' );
+
+			$items[ $box_count ][ 'weight' ] += (float) $weight;
+			$items[ $box_count ][ 'name' ] .= $order_item->get_name() . " x " . $order_item['quantity'] . ";";
+			$items[ $box_count ][ 'value' ] = (string) $new_price;
+
+			if ( $item_sizes['size'] ) {
+				$items[ $box_count ][ 'compartmentSize' ] = $item_sizes['size'];
+			}
 		}
 
 		return $items;
