@@ -640,7 +640,7 @@ class Speedy {
 		if ( $payment_by = $_REQUEST['paymentBy'] ) {
 			$cookie_data = $_REQUEST['cookie_data'];
 
-			if ( $payment_by['id'] == 'RECIPIENT' || $payment_by['id'] == 'SENDER' ) {
+			if ( $payment_by['id'] == 'RECIPIENT' ) {
 				$price = ( wc_tax_enabled() ) ? $response['price']['amount'] : $response['price']['total'];
 			} else if ( $payment_by['id'] == 'fixed' && $cookie_data['fixed_price'] ) {
 				$price = woo_bg_tax_based_price( $cookie_data['fixed_price'] );
