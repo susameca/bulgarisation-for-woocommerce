@@ -92,6 +92,19 @@ class Export_Tab extends Base_Tab {
 			$additional_message .= "<br><br>" . $generated_file['totals'];
 		}
 
+		if ( !empty( $generated_file['errors'] ) ) {
+			ob_start();
+			?>
+			<h2><?php _e( 'Found errors in file:', 'woo-bg' ) ?></h2>
+			<ul>
+				<?php foreach ( $generated_file['errors'] as $error ): ?>
+					<li><?php echo $error ?></li>
+				<?php endforeach ?>
+			</ul>
+			<?php
+			$additional_message .= "<br><br>" . ob_get_clean();
+		}
+
 		$additional_message = apply_filters( 'woo_bg/admin/export/nra/additional_message', $additional_message, $export );
 		
 		wp_send_json_success( array(

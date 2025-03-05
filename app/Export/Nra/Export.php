@@ -3,6 +3,7 @@ namespace Woo_BG\Export\Nra;
 
 use Woo_BG\Admin\Tabs\Nra_Tab;
 use Woo_BG\Admin\Order\Documents;
+use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -138,6 +139,7 @@ class Export {
 			'file' => wp_get_attachment_url( $attach_id ),
 			'not_included_orders' => $this->not_included_orders,
 			'totals' => $this->calculate_totals_message(),
+			'errors' => $this->get_file_errors( $attach_id ),
 		);
 	}
 
@@ -150,5 +152,15 @@ class Export {
 		);
 
 		return $message;
+	}
+
+	protected function get_file_errors( $attach_id ) {
+		libxml_use_internal_errors(true);
+		$doc = new \DOMDocument();
+		$doc->loadXml( File::get_file( get_attached_file( $attach_id ) ) );
+
+		if ( !$doc->schemaValidate( __DIR__ . '/dex_audit.xsd' ) ) {
+			return wp_list_pluck( libxml_get_errors(), 'message' );
+		}
 	}
 }
