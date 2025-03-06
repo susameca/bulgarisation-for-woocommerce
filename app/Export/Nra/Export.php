@@ -89,6 +89,10 @@ class Export {
 	}
 
 	public function get_xml_file() {
+		if ( empty( $this->completed_orders_ids ) && empty( $this->refunded_orders_ids ) ) {
+			return;
+		}
+
 		$this->load_xml_shop();
 
 		foreach ( $this->completed_orders_ids as $order_id ) {
@@ -144,23 +148,29 @@ class Export {
 	}
 
 	protected function calculate_totals_message() {
-		$message = sprintf( 
-			__( 'Total: %s | Total vat: %s | Returned Total: %s', 'woo-bg' ), 
-			wc_price( $this->xml_shop->getOrdersTotal() ), 
-			wc_price( $this->xml_shop->getOrdersTotalVat() ),
-			wc_price( $this->xml_shop->getTotalAmountReturnedOrders() ) 
-		);
+		$message = '';
+
+		if ( !empty( $this->completed_orders_ids ) || !empty( $this->refunded_orders_ids ) ) {
+			$message = sprintf( 
+				__( 'Total: %s | Total vat: %s | Returned Total: %s', 'woo-bg' ), 
+				wc_price( $this->xml_shop->getOrdersTotal() ), 
+				wc_price( $this->xml_shop->getOrdersTotalVat() ),
+				wc_price( $this->xml_shop->getTotalAmountReturnedOrders() ) 
+			);
+		}
 
 		return $message;
 	}
 
 	protected function get_file_errors( $attach_id ) {
-		libxml_use_internal_errors(true);
-		$doc = new \DOMDocument();
-		$doc->loadXml( File::get_file( get_attached_file( $attach_id ) ) );
+		if ( !empty( $this->completed_orders_ids ) || !empty( $this->refunded_orders_ids ) ) {
+			libxml_use_internal_errors(true);
+			$doc = new \DOMDocument();
+			$doc->loadXml( File::get_file( get_attached_file( $attach_id ) ) );
 
-		if ( !$doc->schemaValidate( __DIR__ . '/dex_audit.xsd' ) ) {
-			return wp_list_pluck( libxml_get_errors(), 'message' );
+			if ( !$doc->schemaValidate( __DIR__ . '/dex_audit.xsd' ) ) {
+				return wp_list_pluck( libxml_get_errors(), 'message' );
+			}
 		}
 	}
 }
