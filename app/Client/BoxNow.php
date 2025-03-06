@@ -60,6 +60,10 @@ class BoxNow {
 
 		if ( isset( $response['code'] ) ) {
 			$response['message'] = self::get_message( $response['code'] );
+
+			if ( !empty( $response['jsonSchemaErrors'] ) ) {
+				$response['message'] .= " " . implode('. ', $response['jsonSchemaErrors'] );
+			}
 		}
 
 		return $response;
