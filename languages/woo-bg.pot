@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 21:35+0000\n"
+"POT-Creation-Date: 2025-03-06 17:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -45,7 +45,7 @@ msgstr[1] ""
 msgid "%s: Free shipping"
 msgstr ""
 
-#: app/Shipping/Register.php:181
+#: app/Shipping/Register.php:183
 #, php-format
 msgid "%s: Not calculated"
 msgstr ""
@@ -738,6 +738,10 @@ msgstr ""
 msgid "Fragile"
 msgstr ""
 
+#: app/Shipping/Register.php:165 app/Shipping/Register.php:166
+msgid "Free shipping"
+msgstr ""
+
 #: app/Admin/Tabs/BoxNow_Tab.php:173 app/Shipping/CVC/Method.php:175
 #: app/Shipping/Econt/Method.php:156 app/Shipping/Speedy/Method.php:154
 msgid "Free shipping over"
@@ -1082,7 +1086,7 @@ msgstr ""
 msgid "Nonce was not provided!"
 msgstr ""
 
-#: app/Shipping/Register.php:166
+#: app/Shipping/Register.php:168
 msgid "Not calculated"
 msgstr ""
 
@@ -1720,7 +1724,7 @@ msgstr ""
 msgid "Total price"
 msgstr ""
 
-#: app/Export/Nra/Export.php:148
+#: app/Export/Nra/Export.php:155
 #, php-format
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr ""

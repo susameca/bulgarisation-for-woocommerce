@@ -162,7 +162,9 @@ class Register {
 	}
 
 	public static function change_price_label_if_not_calculated( $output, $method ) {
-		if ( strpos( $method->get_method_id(), 'woo_bg' ) !== false && $method->cost <= 0 ) {
+		if ( strpos( $method->label, __('Free shipping', 'woo-bg') ) !== false ) {
+			$output = __( 'Free shipping', 'woo-bg' );
+		} else if ( strpos( $method->get_method_id(), 'woo_bg' ) !== false && $method->cost <= 0 ) {
 			$output = __( 'Not calculated', 'woo-bg' );
 		}
 

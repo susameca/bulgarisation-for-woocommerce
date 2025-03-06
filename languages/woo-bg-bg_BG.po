@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2025-03-05 21:36+0000\n"
+"PO-Revision-Date: 2025-03-06 17:22+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -44,7 +44,7 @@ msgstr[1] "На %s поръчки бяха регенерирани докуме
 msgid "%s: Free shipping"
 msgstr "%s: Безплатна доставка"
 
-#: app/Shipping/Register.php:181
+#: app/Shipping/Register.php:183
 #, php-format
 msgid "%s: Not calculated"
 msgstr "%s: Не е калкулирано"
@@ -781,10 +781,14 @@ msgstr "Намерени: %s"
 msgid "Fragile"
 msgstr "Чупливо"
 
+#: app/Shipping/Register.php:165 app/Shipping/Register.php:166
+msgid "Free shipping"
+msgstr "Безплатна доставка"
+
 #: app/Admin/Tabs/BoxNow_Tab.php:173 app/Shipping/CVC/Method.php:175
 #: app/Shipping/Econt/Method.php:156 app/Shipping/Speedy/Method.php:154
 msgid "Free shipping over"
-msgstr "Безплатна доставна над"
+msgstr "Безплатна доставка над"
 
 #: app/Admin/Tabs/BoxNow_Tab.php:173 app/Shipping/CVC/Method.php:178
 #: app/Shipping/Econt/Method.php:159 app/Shipping/Speedy/Method.php:157
@@ -1142,7 +1146,7 @@ msgstr "Няма намерени резултати за този град"
 msgid "Nonce was not provided!"
 msgstr "Nonce не е предоставен!"
 
-#: app/Shipping/Register.php:166
+#: app/Shipping/Register.php:168
 msgid "Not calculated"
 msgstr "Не е калкулирано"
 
@@ -1822,7 +1826,7 @@ msgstr "Общата цена изписана с текст"
 msgid "Total price"
 msgstr "Обща цена"
 
-#: app/Export/Nra/Export.php:148
+#: app/Export/Nra/Export.php:155
 #, php-format
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
