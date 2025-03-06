@@ -258,7 +258,7 @@ class BoxNow {
 
 			$items[ $box_count ][ 'weight' ] += (float) $weight;
 			$items[ $box_count ][ 'name' ] .= $order_item->get_name() . ";";
-			$items[ $box_count ][ 'value' ] = (string) $new_price;
+			$items[ $box_count ][ 'value' ] = (string) number_format( $new_price, 2, '.', '' );
 
 			if ( $item_sizes['size'] ) {
 				$items[ $box_count ][ 'compartmentSize' ] = Method::determine_item_size_by_volume( $current_volume );
