@@ -97,11 +97,12 @@ class Order {
 				$item_tax_status = 'taxable';
 
 				if ( in_array( $item->get_method_id(), self::get_default_taxable_shipping_rates() ) ) {
-					$instance = \WC_Shipping_Zones::get_shipping_method ( $item->get_instance_id() );
-					$item_tax_status = $instance->get_instance_option( 'tax_status' );
-					
-					if ( $item_tax_status === 'none' ) {
-						$item_vat = 0;
+					if ( $instance = \WC_Shipping_Zones::get_shipping_method ( $item->get_instance_id() ) ) {
+						$item_tax_status = $instance->get_instance_option( 'tax_status' );
+						
+						if ( $item_tax_status === 'none' ) {
+							$item_vat = 0;
+						}
 					}
 				}
 
@@ -156,11 +157,12 @@ class Order {
 
 		foreach ( $shipping_items as $item ) {
 			if ( in_array( $item->get_method_id(), self::get_default_taxable_shipping_rates() ) ) {
-				$instance = \WC_Shipping_Zones::get_shipping_method ( $item->get_instance_id() );
-				$item_tax_status = $instance->get_instance_option( 'tax_status' );
-				
-				if ( $item_tax_status === 'none' ) {
-					$shipping_total = 0;
+				if ( $instance = \WC_Shipping_Zones::get_shipping_method ( $item->get_instance_id() ) ) {
+					$item_tax_status = $instance->get_instance_option( 'tax_status' );
+					
+					if ( $item_tax_status === 'none' ) {
+						$shipping_total = 0;
+					}
 				}
 			}
 		}
