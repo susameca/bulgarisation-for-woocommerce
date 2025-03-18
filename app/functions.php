@@ -531,11 +531,9 @@ function woo_bg_get_shipping_rate_taxes( $price, $country = 'BG' ) {
 
 	$tax_rates = \WC_Tax::find_shipping_rates( ['country' => $country ] );
 
-	if ( !empty( $tax_rates ) ) {
-		$taxes = \WC_Tax::calc_tax( $price, $tax_rates, false );
-	} else {
-		$taxes = [ woo_bg_calculate_vat_from_price( $price ) ];
+	if ( empty( $tax_rates ) ) {
+		$tax_rates = [ ['rate' => 20, 'compound' => 'yes' ] ];
 	}
 
-	return $taxes;
+	return \WC_Tax::calc_tax( $price, $tax_rates, false );
 }

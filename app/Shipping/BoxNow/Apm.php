@@ -45,6 +45,12 @@ class Apm {
 		$apm_size = Method::get_allowed_apm_size();
 		$apms = self::$container[ Client::BOXNOW_DESTINATIONS ]->get_destinations( $apm_size['max_size'] );
 
+		$apms = array_filter( $apms, function( $apm ) {
+			return ( $apm['country'] === 'BG' );
+		} );
+
+		$apms = array_values( $apms );
+
 		$args[ 'apms' ] = apply_filters( 'woo_bg/shipping_method/boxnow/apms', $apms );
 
 		wp_send_json_success( $args );

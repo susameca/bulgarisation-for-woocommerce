@@ -71,19 +71,25 @@ class Method extends \WC_Shipping_Method {
 			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
 			$this->free_shipping = true;
 		} else if ( $price_type = woo_bg_get_option( 'boxnow_price', 'price_type' ) ) {
+			$price = 0;
+
 			switch ( $price_type ) {
 				case 'from_to_kg':
-					$rate['cost'] = woo_bg_tax_based_price( $this->get_price_from_to_kg_option() );
+					$price = $this->get_price_from_to_kg_option();
 					break;
 				case 'from_to_order_total':
-					$rate['cost'] = woo_bg_tax_based_price( $this->get_price_from_to_order_total_option() );
+					$price = $this->get_price_from_to_order_total_option();
 					break;
 				case 'from_to_kg_and_order_total':
-					$rate['cost'] = woo_bg_tax_based_price( $this->get_price_from_to_combined() );
+					$price = $this->get_price_from_to_combined();
 					break;
 			}
 
-			$rate['taxes'] = woo_bg_get_shipping_rate_taxes( $rate['cost'] );
+			$rate['cost'] = woo_bg_tax_based_price( $price );
+			
+			if ( wc_tax_enabled() ) {
+				$rate['taxes'] = woo_bg_get_shipping_rate_taxes( $rate['cost'] );
+			}
 		}
 
 		$rate['meta_data']['cookie_data'] = $this->cookie_data;
