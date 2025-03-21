@@ -4,7 +4,7 @@ namespace Woo_BG;
 defined( 'ABSPATH' ) || exit;
 
 class Plugin {
-	const VERSION = '3.3.3';
+	const VERSION = '3.3.4';
 
 	protected static $_instance;
 
@@ -86,6 +86,8 @@ class Plugin {
 
 		new Admin\Admin_Menus();
 		new Admin\Order\Columns();
+
+		//new Front_End\Multi_Currency();
 
 		if ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' ) {
 			new Admin\Order\Actions();
