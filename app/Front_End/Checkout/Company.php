@@ -20,6 +20,14 @@ class Company {
 			$fields['billing']['billing_company']['priority'] = 121;
 			$fields['billing']['billing_company']['required'] = true;
 			$fields['billing']['billing_company']['class'] = array( 'woo-bg-company-info form-row-last' );
+		} else {
+			$fields['billing']['billing_company'] = array(
+				'label' => __( 'Company name', 'woocommerce' ),
+				'autocomplete' => 'organization',
+				'priority' => 121,
+				'required' => true,
+				'class' => 'woo-bg-company-info form-row-last',
+			);
 		}
 		
 		$fields['billing']['billing_to_company'] = array(
