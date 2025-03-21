@@ -228,21 +228,17 @@ class BoxNow {
 			}
 		}
 
-		foreach ( $order_items as $order_item ) {
+		foreach ( $order_items as $key => $order_item ) {
 			$_product = $order_item->get_product();
 
 			$height = ( $_product->get_height() ) ? (float) $_product->get_height() : 16;
 			$width = ( $_product->get_height() ) ? (float) $_product->get_width() : 44;
 			$length = ( $_product->get_height() ) ? (float) $_product->get_width() : 58;
 
-			$item_sizes = Method::determine_item_size( $current_size['height'], $current_size['width'], $current_size['length'] );
+			$item_sizes = Method::determine_item_size( $height, $width, $length );
 			$current_volume += $item_sizes['volume'];
 
 			if ( $item_sizes['oversize'] || $item_sizes['volume'] > 89320 || $current_volume > 89320 ) {
-				$current_size['height'] = $height;
-				$current_size['width'] = $width;
-				$current_size['length'] = $length;
-
 				$current_volume = $item_sizes['volume'];
 				$box_count++;
 				$items[ $box_count ] = [
