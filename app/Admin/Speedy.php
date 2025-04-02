@@ -188,7 +188,7 @@ class Speedy {
 			$query = implode( ' ', $query );
 		}
 
-		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $cookie_data['city'], $cookie_data['state'], $country_id );
+		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $order->get_billing_city(), $order->get_billing_state(), $country_id );
 		$city_id = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
 
 		$streets = woo_bg_return_array_for_select( Address::get_streets_for_query( $city_id, $query ), 1, array( 'type' => 'streets' ) );

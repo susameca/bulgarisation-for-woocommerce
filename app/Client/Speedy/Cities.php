@@ -122,11 +122,20 @@ class Cities {
 				$cities_only_names_dropdowns[] = $temp_city['name'];
 				$temp_city['name'] = mb_strtolower( $temp_city['name'] );
 				$cities_only_names[] = $temp_city['name'];
+				$cities_only_names[] = $temp_city['type'] . " " . $temp_city['name'];
 				$cities_search_names[] = $temp_city;
 			}
 		}
 
-		$city_key = array_search( $city, array_column( $cities_search_names, 'name' ) );
+		foreach ( $cities_search_names as $searched_key => $key_search_city ) {
+			$name_with_type = $key_search_city['type'] . " " . $key_search_city['name'];
+
+			if ( $city === $name_with_type || $city === $key_search_city['name'] ) {
+				$city_key = $searched_key;
+				break;
+			}
+		}
+
 
 		return [
 			'city' => $city,
