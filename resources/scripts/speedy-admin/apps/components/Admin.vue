@@ -131,12 +131,12 @@
 							<input v-model="declaredValue" type="number">
 						</p>
 
-						<p v-if="labelData.weight" class="form-field form-field-wide">
+						<p v-if="labelData.content.totalWeight" class="form-field form-field-wide">
 							<label>
 								{{i18n.weight}}:
 							</label>
 
-							<input v-model="labelData.weight" type="number">
+							<input v-model="labelData.content.totalWeight" type="number" step="0.001">
 						</p>
 
 						<p class="form-field form-field-wide">

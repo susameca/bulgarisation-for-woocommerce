@@ -149,7 +149,7 @@
 								{{i18n.weight}}:
 							</label>
 
-							<input v-model="labelData.weight" type="number">
+							<input v-model="labelData.weight" type="number" step="0.001">
 						</p>
 
 						<p class="form-field form-field-wide">
