@@ -40,6 +40,8 @@ i.woo-bg-icon--question { background-image: url(../../images/question-icon.png);
         .form-field._billing_to_company_field { width: 100% }
         .form-field._billing_company_field { width: 48%; clear: initial; }
     }
+
+    .form-field--checkbox label { display: inline-block !important; }
 }
 
 th#nekorekten { width: 0.0001ch; }
@@ -52,4 +54,5 @@ th#nekorekten { width: 0.0001ch; }
 
     div.wp-menu-image::before { color: #2271b1; }
 }
+
 

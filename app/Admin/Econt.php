@@ -152,6 +152,7 @@ class Econt {
 			'declaredValue' => __( 'Declared value', 'woo-bg' ),
 			'description' => __( 'Description', 'woo-bg' ),
 			'invoiceNum' => __( 'Invoice number', 'woo-bg' ),
+			'partialDelivery' => __( 'Partial delivery', 'woo-bg' ),
 		);
 	}
 
@@ -559,6 +560,10 @@ class Econt {
 		} else if ( $payment_by['id'] == 'test' ) {
 			$label['payAfterAccept'] = true;
 			$label['payAfterTest'] = true;
+
+			if ( $_REQUEST['partialDelivery'] ) {
+				$label['partialDelivery'] = true;
+			}
 		}
 		
 		return $label;

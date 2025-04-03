@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-06 17:19+0000\n"
+"POT-Creation-Date: 2025-04-02 20:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -86,7 +86,7 @@ msgstr ""
 
 #: app/Admin/CVC.php:139 app/Admin/Econt.php:138 app/Admin/Speedy.php:140
 #: app/Admin/Tabs/CVC_Tab.php:95 app/Admin/Tabs/Econt_Tab.php:135
-#: app/Admin/Tabs/Speedy_Tab.php:97 app/Front_End/Checkout/Company.php:69
+#: app/Admin/Tabs/Speedy_Tab.php:97 app/Front_End/Checkout/Company.php:77
 #: app/Shipping/CVC/Method.php:138 app/Shipping/Econt/Method.php:134
 #: app/Shipping/Speedy/Method.php:143
 msgid "Address"
@@ -226,7 +226,7 @@ msgstr ""
 msgid "Card"
 msgstr ""
 
-#: app/Admin/Econt.php:163
+#: app/Admin/Econt.php:164
 msgid "Cargo"
 msgstr ""
 
@@ -310,7 +310,7 @@ msgstr ""
 msgid "Client Secret"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:116
+#: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:124
 msgid "Company Address"
 msgstr ""
 
@@ -429,19 +429,19 @@ msgstr ""
 msgid "Disable invoice generation"
 msgstr ""
 
-#: app/Invoice/Order/Order.php:187
+#: app/Invoice/Order/Order.php:189
 msgid "Discount"
 msgstr ""
 
-#: app/Front_End/Checkout/Company.php:27 app/Front_End/Checkout/Company.php:87
+#: app/Front_End/Checkout/Company.php:35 app/Front_End/Checkout/Company.php:95
 msgid "Do you want a company invoice?"
 msgstr ""
 
-#: app/Admin/Econt.php:161
+#: app/Admin/Econt.php:162
 msgid "Document"
 msgstr ""
 
-#: app/Admin/Econt.php:164
+#: app/Admin/Econt.php:165
 msgid "Document-Pallet"
 msgstr ""
 
@@ -496,8 +496,8 @@ msgstr ""
 msgid "econt.com API Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:42 app/Front_End/Checkout/Company.php:47
-#: app/Front_End/Checkout/Company.php:104
+#: app/Admin/Tabs/Nra_Tab.php:42 app/Front_End/Checkout/Company.php:55
+#: app/Front_End/Checkout/Company.php:112
 msgid "EIK"
 msgstr ""
 
@@ -941,7 +941,7 @@ msgstr ""
 msgid "Label data"
 msgstr ""
 
-#: app/Shipping/BoxNow/Method.php:430 app/Shipping/CVC/Method.php:537
+#: app/Shipping/BoxNow/Method.php:436 app/Shipping/CVC/Method.php:537
 #: app/Shipping/Econt/Method.php:626 app/Shipping/Speedy/Method.php:643
 #, php-format
 msgid "Label number: %s. %s"
@@ -995,8 +995,8 @@ msgstr ""
 msgid "Message:"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:41 app/Front_End/Checkout/Company.php:36
-#: app/Front_End/Checkout/Company.php:98
+#: app/Admin/Tabs/Nra_Tab.php:41 app/Front_End/Checkout/Company.php:44
+#: app/Front_End/Checkout/Company.php:106
 msgid "MOL"
 msgstr ""
 
@@ -1156,7 +1156,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: app/Admin/Econt.php:160
+#: app/Admin/Econt.php:161
 msgid "Pack"
 msgstr ""
 
@@ -1177,8 +1177,12 @@ msgstr ""
 msgid "Page %s of %s"
 msgstr ""
 
-#: app/Admin/Econt.php:162
+#: app/Admin/Econt.php:163
 msgid "Pallet"
+msgstr ""
+
+#: app/Admin/Econt.php:155
+msgid "Partial delivery"
 msgstr ""
 
 #: app/Admin/Tabs/Econt_Tab.php:74 app/Admin/Tabs/Speedy_Tab.php:66
@@ -1234,7 +1238,7 @@ msgstr ""
 msgid "Place of transaction"
 msgstr ""
 
-#: app/Shipping/BoxNow/Method.php:257
+#: app/Shipping/BoxNow/Method.php:263
 msgid "Please choose a automat."
 msgstr ""
 
@@ -1497,7 +1501,7 @@ msgstr ""
 msgid "Sender payment type"
 msgstr ""
 
-#: app/Plugin.php:71 app/Plugin.php:177 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:71 app/Plugin.php:179 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
@@ -1505,8 +1509,8 @@ msgstr ""
 msgid "Settings saved successfully!"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:46 app/Front_End/Checkout/Company.php:58
-#: app/Front_End/Checkout/Company.php:110
+#: app/Admin/Tabs/Nra_Tab.php:46 app/Front_End/Checkout/Company.php:66
+#: app/Front_End/Checkout/Company.php:118
 msgid "Settlement"
 msgstr ""
 
@@ -1523,7 +1527,7 @@ msgstr ""
 msgid "Shipping Methods Settings"
 msgstr ""
 
-#: app/Export/Nra/Order.php:127 app/Invoice/Order/Order.php:120
+#: app/Export/Nra/Order.php:127 app/Invoice/Order/Order.php:121
 #, php-format
 msgid "Shipping: %s"
 msgstr ""
@@ -1644,7 +1648,7 @@ msgstr ""
 msgid "There was some error in one of the reports."
 msgstr ""
 
-#: app/Shipping/BoxNow/Method.php:108 app/Shipping/CVC/Method.php:127
+#: app/Shipping/BoxNow/Method.php:114 app/Shipping/CVC/Method.php:127
 #: app/Shipping/Econt/Method.php:123 app/Shipping/Speedy/Method.php:132
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
@@ -1686,7 +1690,7 @@ msgstr ""
 msgid "Time:"
 msgstr ""
 
-#: app/Shipping/BoxNow/Method.php:106 app/Shipping/CVC/Method.php:125
+#: app/Shipping/BoxNow/Method.php:112 app/Shipping/CVC/Method.php:125
 #: app/Shipping/Econt/Method.php:121 app/Shipping/Speedy/Method.php:130
 msgid "Title"
 msgstr ""
@@ -1704,7 +1708,7 @@ msgstr ""
 msgid "To Office: "
 msgstr ""
 
-#: app/Invoice/Order/Order.php:180
+#: app/Invoice/Order/Order.php:182
 msgid "Total"
 msgstr ""
 
@@ -1712,7 +1716,7 @@ msgstr ""
 msgid "Total amount"
 msgstr ""
 
-#: app/Invoice/Order/Order.php:202
+#: app/Invoice/Order/Order.php:204
 msgid "Total due"
 msgstr ""
 
@@ -1729,7 +1733,7 @@ msgstr ""
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr ""
 
-#: app/Shipping/BoxNow/Method.php:434 app/Shipping/CVC/Method.php:541
+#: app/Shipping/BoxNow/Method.php:440 app/Shipping/CVC/Method.php:541
 #: app/Shipping/Econt/Method.php:630 app/Shipping/Speedy/Method.php:647
 msgid "Track your order."
 msgstr ""

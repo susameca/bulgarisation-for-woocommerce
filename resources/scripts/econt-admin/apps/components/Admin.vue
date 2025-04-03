@@ -210,6 +210,14 @@
 							</multiselect>
 						</p>
 
+						<p class="form-field form-field-wide form-field--checkbox" v-if="(!useInvoiceNumber && testOption.id !== 'no')">
+							<label>
+								{{i18n.partialDelivery}} :
+							</label>
+
+							<input v-model="partialDelivery" type="checkbox" class="checkbox">
+						</p>
+
 						<p v-if="( paymentBy.id === 'fixed' )" class="form-field form-field-wide">
 							<label>
 								{{i18n.fixedPrice}}:
@@ -349,6 +357,7 @@ export default {
 			i18n: wooBg_econt.i18n,
 			declaredValue: '',
 			useInvoiceNumber: false,
+			partialDelivery: false,
 		}
 	},
 	watch: {
@@ -482,6 +491,7 @@ export default {
 				other: this.other,
 				paymentBy: this.paymentBy,
 				testOption: this.testOption,
+				partialDelivery: this.partialDelivery,
 				cookie_data: wooBg_econt.cookie_data,
 				orderId: wooBg_econt.orderId,
 				declaredValue: this.declaredValue,

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2025-03-06 17:22+0000\n"
+"PO-Revision-Date: 2025-04-02 20:21+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -91,7 +91,7 @@ msgstr "Добавете колона в списъка с поръчки."
 
 #: app/Admin/CVC.php:139 app/Admin/Econt.php:138 app/Admin/Speedy.php:140
 #: app/Admin/Tabs/CVC_Tab.php:95 app/Admin/Tabs/Econt_Tab.php:135
-#: app/Admin/Tabs/Speedy_Tab.php:97 app/Front_End/Checkout/Company.php:69
+#: app/Admin/Tabs/Speedy_Tab.php:97 app/Front_End/Checkout/Company.php:77
 #: app/Shipping/CVC/Method.php:138 app/Shipping/Econt/Method.php:134
 #: app/Shipping/Speedy/Method.php:143
 msgid "Address"
@@ -236,7 +236,7 @@ msgstr "Може да се ползва само в България"
 msgid "Card"
 msgstr "По карта"
 
-#: app/Admin/Econt.php:163
+#: app/Admin/Econt.php:164
 msgid "Cargo"
 msgstr "Карго"
 
@@ -327,7 +327,7 @@ msgstr "Client ID"
 msgid "Client Secret"
 msgstr "Client Secret"
 
-#: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:116
+#: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:124
 msgid "Company Address"
 msgstr "Адрес на фирмата"
 
@@ -446,19 +446,19 @@ msgstr "Детайли:"
 msgid "Disable invoice generation"
 msgstr "Изключи генерирането на фактури"
 
-#: app/Invoice/Order/Order.php:187
+#: app/Invoice/Order/Order.php:189
 msgid "Discount"
 msgstr "Отстъпка"
 
-#: app/Front_End/Checkout/Company.php:27 app/Front_End/Checkout/Company.php:87
+#: app/Front_End/Checkout/Company.php:35 app/Front_End/Checkout/Company.php:95
 msgid "Do you want a company invoice?"
 msgstr "Искате ли фактура за фирма?"
 
-#: app/Admin/Econt.php:161
+#: app/Admin/Econt.php:162
 msgid "Document"
 msgstr "Документ"
 
-#: app/Admin/Econt.php:164
+#: app/Admin/Econt.php:165
 msgid "Document-Pallet"
 msgstr "Документ-палет"
 
@@ -513,8 +513,8 @@ msgstr "Еконт настройки"
 msgid "econt.com API Settings"
 msgstr "econt.com API настройки"
 
-#: app/Admin/Tabs/Nra_Tab.php:42 app/Front_End/Checkout/Company.php:47
-#: app/Front_End/Checkout/Company.php:104
+#: app/Admin/Tabs/Nra_Tab.php:42 app/Front_End/Checkout/Company.php:55
+#: app/Front_End/Checkout/Company.php:112
 msgid "EIK"
 msgstr "ЕИК на фирмата"
 
@@ -1000,7 +1000,7 @@ msgstr "Товарителница"
 msgid "Label data"
 msgstr "Данни за товарителница"
 
-#: app/Shipping/BoxNow/Method.php:430 app/Shipping/CVC/Method.php:537
+#: app/Shipping/BoxNow/Method.php:436 app/Shipping/CVC/Method.php:537
 #: app/Shipping/Econt/Method.php:626 app/Shipping/Speedy/Method.php:643
 #, php-format
 msgid "Label number: %s. %s"
@@ -1054,8 +1054,8 @@ msgstr "Максимална цена, която ще плати клиента
 msgid "Message:"
 msgstr "Съобщение:"
 
-#: app/Admin/Tabs/Nra_Tab.php:41 app/Front_End/Checkout/Company.php:36
-#: app/Front_End/Checkout/Company.php:98
+#: app/Admin/Tabs/Nra_Tab.php:41 app/Front_End/Checkout/Company.php:44
+#: app/Front_End/Checkout/Company.php:106
 msgid "MOL"
 msgstr "МОЛ на фирмата"
 
@@ -1219,7 +1219,7 @@ msgstr "Номер на поръчка"
 msgid "Other"
 msgstr "Друг"
 
-#: app/Admin/Econt.php:160
+#: app/Admin/Econt.php:161
 msgid "Pack"
 msgstr "Пакет"
 
@@ -1240,9 +1240,13 @@ msgstr "Опис или номер на фактура"
 msgid "Page %s of %s"
 msgstr "Страница %s от %s"
 
-#: app/Admin/Econt.php:162
+#: app/Admin/Econt.php:163
 msgid "Pallet"
 msgstr "Палет"
+
+#: app/Admin/Econt.php:155
+msgid "Partial delivery"
+msgstr "Възможност за избор ( Частична доставка )"
 
 #: app/Admin/Tabs/Econt_Tab.php:74 app/Admin/Tabs/Speedy_Tab.php:66
 msgid "Password"
@@ -1297,7 +1301,7 @@ msgstr "Телефон: %s"
 msgid "Place of transaction"
 msgstr "Място на сделката"
 
-#: app/Shipping/BoxNow/Method.php:257
+#: app/Shipping/BoxNow/Method.php:263
 #| msgid "Please choose a APM."
 msgid "Please choose a automat."
 msgstr "Моля изберете автомат."
@@ -1578,7 +1582,7 @@ msgstr "Изпращач"
 msgid "Sender payment type"
 msgstr "Метод на плащане на изпращача"
 
-#: app/Plugin.php:71 app/Plugin.php:177 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:71 app/Plugin.php:179 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1586,8 +1590,8 @@ msgstr "Настройки"
 msgid "Settings saved successfully!"
 msgstr "Настройките са запазени успешно!"
 
-#: app/Admin/Tabs/Nra_Tab.php:46 app/Front_End/Checkout/Company.php:58
-#: app/Front_End/Checkout/Company.php:110
+#: app/Admin/Tabs/Nra_Tab.php:46 app/Front_End/Checkout/Company.php:66
+#: app/Front_End/Checkout/Company.php:118
 msgid "Settlement"
 msgstr "Населено място"
 
@@ -1604,7 +1608,7 @@ msgstr "Тип на товарителницата"
 msgid "Shipping Methods Settings"
 msgstr "Настройки за доставки"
 
-#: app/Export/Nra/Order.php:127 app/Invoice/Order/Order.php:120
+#: app/Export/Nra/Order.php:127 app/Invoice/Order/Order.php:121
 #, php-format
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
@@ -1733,7 +1737,7 @@ msgstr ""
 msgid "There was some error in one of the reports."
 msgstr "Имаше грешка в някой от отзивите."
 
-#: app/Shipping/BoxNow/Method.php:108 app/Shipping/CVC/Method.php:127
+#: app/Shipping/BoxNow/Method.php:114 app/Shipping/CVC/Method.php:127
 #: app/Shipping/Econt/Method.php:123 app/Shipping/Speedy/Method.php:132
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
@@ -1788,7 +1792,7 @@ msgstr "Тази версия на плъгина добавя няколко ф
 msgid "Time:"
 msgstr "Време:"
 
-#: app/Shipping/BoxNow/Method.php:106 app/Shipping/CVC/Method.php:125
+#: app/Shipping/BoxNow/Method.php:112 app/Shipping/CVC/Method.php:125
 #: app/Shipping/Econt/Method.php:121 app/Shipping/Speedy/Method.php:130
 msgid "Title"
 msgstr "Заглавие"
@@ -1806,7 +1810,7 @@ msgstr "Към фактура №"
 msgid "To Office: "
 msgstr "До офис: "
 
-#: app/Invoice/Order/Order.php:180
+#: app/Invoice/Order/Order.php:182
 msgid "Total"
 msgstr "Данъчна основа"
 
@@ -1814,7 +1818,7 @@ msgstr "Данъчна основа"
 msgid "Total amount"
 msgstr "Обща стойност"
 
-#: app/Invoice/Order/Order.php:202
+#: app/Invoice/Order/Order.php:204
 msgid "Total due"
 msgstr "Всичко"
 
@@ -1831,7 +1835,7 @@ msgstr "Обща цена"
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
 
-#: app/Shipping/BoxNow/Method.php:434 app/Shipping/CVC/Method.php:541
+#: app/Shipping/BoxNow/Method.php:440 app/Shipping/CVC/Method.php:541
 #: app/Shipping/Econt/Method.php:630 app/Shipping/Speedy/Method.php:647
 msgid "Track your order."
 msgstr "Проследи пратката."
