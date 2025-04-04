@@ -68,6 +68,27 @@
 							<input v-model="allowReturn" type="checkbox">
 						</p>
 
+						<p class="form-field form-field-wide">
+							<label>
+								{{i18n.boxSize}}:
+							</label>
+
+							<multiselect 
+								v-model="boxSize" 
+								deselect-label="" 
+								selectLabel="" 
+								track-by="id" 
+								label="label" 
+								:selectedLabel="i18n.selected" 
+								:placeholder="i18n.choose"
+								:options="Object.values( boxSizes )" 
+								:searchable="true" 
+								:allow-empty="false"
+							>
+								<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
+							</multiselect>
+						</p>
+
 						<p class="form-field form-field-wide" v-if="shipmentStatus">
 							<button @click="deleteLabel" name="save" type="submit" :value="i18n.deleteLabel" class="button-secondary">{{i18n.deleteLabel}}</button>
 
@@ -144,6 +165,25 @@ export default {
 			allowReturn: false,
 			message: '',
 			operations : [],
+			boxSize: wooBg_boxnow.box_size,
+			boxSizes: [
+				{
+					id: 'auto',
+					label: wooBg_boxnow.i18n.auto
+				},
+				{
+					id: 'small',
+					label: wooBg_boxnow.i18n.smallBox
+				},
+				{
+					id: 'medium',
+					label: wooBg_boxnow.i18n.mediumBox
+				},
+				{
+					id: 'large',
+					label: wooBg_boxnow.i18n.largeBox
+				},
+			],
 		}
 	},
 	computed: {
@@ -208,6 +248,12 @@ export default {
 			}
 		});
 
+		this.boxSizes.forEach( function ( size ) {
+			if ( size.id == wooBg_boxnow.box_size ) {
+				_this.boxSize = size;
+			}
+		});
+
 		if ( typeof( wooBg_boxnow.label.amountToBeCollected ) !== 'undefined' ) {
 			this.declaredValue = wooBg_boxnow.label.amountToBeCollected;
 		}
@@ -233,6 +279,7 @@ export default {
 				origin: this.origin,
 				destination: this.destination,
 				declaredValue: this.declaredValue,
+				boxSize: this.boxSize,
 				allowReturn: this.allowReturn,
 				action: 'woo_bg_boxnow_generate_label',
 				nonce: wooBg_boxnow.nonce,

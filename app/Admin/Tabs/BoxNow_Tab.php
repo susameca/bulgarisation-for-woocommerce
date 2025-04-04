@@ -171,6 +171,26 @@ class BoxNow_Tab extends Base_Tab {
 			}
 
 			$fields[ 'boxnow_price' ][] = new Fields\Text_Field( 'free_shipping_over', __( 'Free shipping over', 'woo-bg' ), __( 'Free shipping over total cart price.', 'woo-bg' ), null, null, 'number' );
+			$fields[ 'boxnow_price' ][] = new Fields\Select_Field( 
+				array(
+					'auto' => array(
+						'id' => 'auto',
+						'label' => __( 'Automatically pack products to boxes', 'woo-bg' ),
+					),
+					'small' => array(
+						'id' => 'small',
+						'label' => __( 'Small Box', 'woo-bg' ),
+					),
+					'medium' => array(
+						'id' => 'medium',
+						'label' => __( 'Medium Box', 'woo-bg' ),
+					),
+					'large' => array(
+						'id' => 'large',
+						'label' => __( 'Large Box', 'woo-bg' ),
+					),
+				), 'box_size', __( 'Box size', 'woo-bg' ), null, null, __( 'Default box size', 'woo-bg' ) 
+			);
 		}
 
 		return $fields;

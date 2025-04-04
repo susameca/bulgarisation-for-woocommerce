@@ -80,6 +80,7 @@ class BoxNow {
 					$cookie_data = $theorder->get_meta( 'woo_bg_boxnow_cookie_data' );
 					$sender_data = self::generate_sender_data();
 					$shipment_status = $theorder->get_meta( 'woo_bg_boxnow_shipment_status' );
+					$box_size = ( woo_bg_get_option( 'boxnow_price', 'box_size' ) ) ? woo_bg_get_option( 'boxnow_price', 'box_size' ) : 'auto';
 					//$operations = $theorder->get_meta( 'woo_bg_boxnow_operations' );
 
 					if ( !$cookie_data ) {
@@ -102,6 +103,7 @@ class BoxNow {
 						'origins' => self::get_origins(),
 						'orderId' => $theorder->get_id(),
 						'allowReturn' => wc_string_to_bool( woo_bg_get_option( 'boxnow_send_from', 'allow_return' ) ),
+						'box_size' => $box_size,
 						'i18n' => self::get_i18n(),
 						'nonce' => wp_create_nonce( 'woo_bg_admin_label' ),
 					) );
@@ -127,6 +129,11 @@ class BoxNow {
 			'choose' => __( 'Choose', 'woo-bg' ),
 			'labelData' => __( 'Label data', 'woo-bg' ),
 			'shipmentStatus' => __( 'Shipment status', 'woo-bg' ),
+			'boxSize' => __( 'Box size', 'woo-bg' ),
+			'auto' => __( 'Automatically pack products to boxes', 'woo-bg' ),
+			'smallBox' => __( 'Small Box', 'woo-bg' ),
+			'mediumBox' => __( 'Medium Box', 'woo-bg' ),
+			'largeBox' => __( 'Large Box', 'woo-bg' ),
 		);
 	}
 
@@ -205,18 +212,42 @@ class BoxNow {
 		return $phone;
 	}
 
+	public static function get_box_size() {
+		$box_size = ( woo_bg_get_option( 'boxnow_price', 'box_size' ) ) ? woo_bg_get_option( 'boxnow_price', 'box_size' ) : 'auto';
+
+		if ( !empty( $_REQUEST['boxSize'] ) ) {
+			$box_size = $_REQUEST['boxSize']['id'];
+		}
+
+		return $box_size;
+	}
+
 	public static function generate_items( $order ) {
+		$box_size = self::get_box_size();
+
+		if ( $box_size === 'auto' ) {
+			$items = self::auto_generate_items_to_boxes( $order );
+		} else {
+			$items = self::generate_all_items_to_one_box( $order, $box_size );
+		}
+
+		return $items;
+	}
+
+	public static function auto_generate_items_to_boxes( $order ) {
 		$default_box_values = [
 			'name' => '',
 			'weight' => 0,
 			'value' => 0,
 			'compartmentSize' => 0,
 		];
+
 		$current_size = [
 			'height' => 0,
 			'width' => 0,
 			'length' => 0,
 		];
+		
 		$current_volume = 0;
 
 		$items = [ $default_box_values ];
@@ -231,7 +262,7 @@ class BoxNow {
 		foreach ( $order_items as $key => $order_item ) {
 			$_product = $order_item->get_product();
 
-			$height = ( $_product->get_height() ) ? (float) $_product->get_height() : 16;
+			$height = ( $_product->get_height() ) ? (float) $_product->get_height() : 7;
 			$width = ( $_product->get_height() ) ? (float) $_product->get_width() : 44;
 			$length = ( $_product->get_height() ) ? (float) $_product->get_width() : 58;
 
@@ -259,6 +290,35 @@ class BoxNow {
 			if ( $item_sizes['size'] ) {
 				$items[ $box_count ][ 'compartmentSize' ] = Method::determine_item_size_by_volume( $current_volume );
 			}
+		}
+
+		return $items;
+	}
+
+	public static function generate_all_items_to_one_box( $order, $box_size ) {
+		$sizes = [
+			'small' => 1,
+			'medium' => 2,
+			'large' => 3,
+		];
+
+		$items = [
+			[
+				'name' => '',
+				'weight' => 0,
+				'value' => 0,
+				'compartmentSize' => $sizes[ $box_size ],
+			]
+		];
+
+		foreach ( $order->get_items() as $order_item ) {
+			$_product = $order_item->get_product();
+			$weight = ( $_product->get_weight() ) ? wc_get_weight( $_product->get_weight(), 'kg' ) : 1;
+			$price = (float) $items[0][ 'value' ] + number_format( $order_item->get_total() + $order_item->get_total_tax(), 2, '.', '' );
+
+			$items[0][ 'weight' ] += (float) $weight * $order_item['quantity'];
+			$items[0][ 'name' ] .= $order_item->get_name() . ";";
+			$items[0][ 'value' ] = (string) number_format( $price, 2, '.', '' );
 		}
 
 		return $items;

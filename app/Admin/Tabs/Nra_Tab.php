@@ -84,20 +84,6 @@ class Nra_Tab extends Base_Tab {
 				new Fields\TrueFalse_Field( 'total_text', __( 'Total in text', 'woo-bg' ), null, null, __( 'Print order total after the table. Works only in levs.', 'woo-bg' ) ),
 			),
 			'shop' => array(
-				new Fields\Select_Field( array(
-					'a' => array(
-						'id' => 'a',
-						'label' => __( 'Group - A', 'woo-bg' ),
-					),
-					'b' => array(
-						'id' => 'b',
-						'label' => __( 'Group - B', 'woo-bg' ),
-					),
-					'g' => array(
-						'id' => 'g',
-						'label' => __( 'Group - G', 'woo-bg' ),
-					),
-				), 'vat_group', __( 'Vat Group', 'woo-bg' ), null, null, __( 'group "A" - for goods and services, the sales of which are exempt from taxation, for goods and services, the sales of which are subject to 0% VAT, as well as for sales, for which VAT is not charged; group "B" - for goods and services, the sales of which are subject to 20% value added tax; group "D" - for goods and services, the sales of which are subject to 9% value added tax; combined - the group is determined for each product in the store separately.', 'woo-bg' ) ),
 				new Fields\Select_Field( woo_bg_get_return_methods(), 'return_method', __( 'Return method', 'woo-bg' ), __( 'How to return the amount when the client cancel the order.', 'woo-bg' ) ),
 			)
 		) );
