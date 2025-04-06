@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.7
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.3.4
+Stable tag: 3.4.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,6 +66,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.4.0 = 
+Add BGN/EUR dual price
+Speedy: Optimizations
+BOX NOW: Options for box size
+Econt: Add option for partial delivery
+Econt, Speedy: Optimizations
 
 = 3.3.4 = 
 BOX NOW: Optimizations
