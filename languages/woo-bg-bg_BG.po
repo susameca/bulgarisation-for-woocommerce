@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2025-04-06 16:17+0000\n"
+"PO-Revision-Date: 2025-04-06 16:30+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -769,6 +769,10 @@ msgstr ""
 msgid "First Name:"
 msgstr "Име:"
 
+#: app/Front_End/Multi_Currency.php:106
+msgid "Fixed conversion rate:"
+msgstr "Фиксиран обменен курс:"
+
 #: app/Admin/CVC.php:146 app/Admin/Econt.php:144 app/Admin/Speedy.php:146
 #: app/Shipping/CVC/Method.php:183 app/Shipping/Speedy/Method.php:162
 msgid "Fixed price"
@@ -1432,6 +1436,10 @@ msgstr "Съобщение за курса в продуктовата стра�
 #: app/Admin/Tabs/Multi_Currency_Tab.php:43
 msgid "Rate message on Shop page"
 msgstr "Съобщение за курса в каталог страницата"
+
+#: app/Front_End/Multi_Currency.php:87 app/Front_End/Multi_Currency.php:93
+msgid "Rate: 1 EUR = 1.95583 BGN"
+msgstr "Курс: 1 EUR = 1.95583 BGN"
 
 #: app/Invoice/Document/BaseDocument.php:173
 msgid "Received"

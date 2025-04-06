@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-06 16:17+0000\n"
+"POT-Creation-Date: 2025-04-06 16:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -728,6 +728,10 @@ msgstr ""
 msgid "First Name:"
 msgstr ""
 
+#: app/Front_End/Multi_Currency.php:106
+msgid "Fixed conversion rate:"
+msgstr ""
+
 #: app/Admin/CVC.php:146 app/Admin/Econt.php:144 app/Admin/Speedy.php:146
 #: app/Shipping/CVC/Method.php:183 app/Shipping/Speedy/Method.php:162
 msgid "Fixed price"
@@ -1365,6 +1369,10 @@ msgstr ""
 
 #: app/Admin/Tabs/Multi_Currency_Tab.php:43
 msgid "Rate message on Shop page"
+msgstr ""
+
+#: app/Front_End/Multi_Currency.php:87 app/Front_End/Multi_Currency.php:93
+msgid "Rate: 1 EUR = 1.95583 BGN"
 msgstr ""
 
 #: app/Invoice/Document/BaseDocument.php:173
