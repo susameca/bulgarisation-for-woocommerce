@@ -54,7 +54,7 @@ class Multi_Currency {
 	}
 
 	public static function get_eur_rate() { 
-			return 1.95583;
+		return 1.95583;
 	}
 
 	public static function price_to_float( $price ) {

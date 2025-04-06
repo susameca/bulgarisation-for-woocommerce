@@ -94,7 +94,7 @@ class Plugin {
 		new Admin\Admin_Menus();
 		new Admin\Order\Columns();
 
-		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) ) {
+		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ) {
 			new Front_End\Multi_Currency();
 		}
 
