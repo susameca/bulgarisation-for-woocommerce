@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-04 11:05+0000\n"
+"POT-Creation-Date: 2025-04-06 16:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -106,7 +106,7 @@ msgstr ""
 msgid "Allow shipping to Greece and Romania for Econt and Speedy."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:52
+#: app/Admin/Tabs/Settings_Tab.php:53
 msgid "Alternative shipping options layout ( checkout )"
 msgstr ""
 
@@ -152,6 +152,10 @@ msgstr ""
 
 #: app/Invoice/Document/BaseDocument.php:192
 msgid "Bank name"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:10
+msgid "BGN/EUR dual price"
 msgstr ""
 
 #: app/Admin/EU_Vat.php:114
@@ -280,7 +284,11 @@ msgstr ""
 msgid "Check on checkout and disable COD."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:73
+#: app/Admin/Tabs/Multi_Currency_Tab.php:45
+msgid "Checkout Message"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:74
 msgid "Checkout Settings"
 msgstr ""
 
@@ -344,6 +352,10 @@ msgstr ""
 
 #: app/Admin/CVC.php:144
 msgid "Contract"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:63
+msgid "Conversion rate message"
 msgstr ""
 
 #: app/Admin/CVC.php:147 app/Admin/Econt.php:145 app/Admin/Speedy.php:147
@@ -461,7 +473,7 @@ msgstr ""
 msgid "Documents"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:133
+#: app/Admin/Tabs/Nra_Tab.php:147
 msgid "Documents Settings"
 msgstr ""
 
@@ -524,6 +536,10 @@ msgstr ""
 msgid "Email:"
 msgstr ""
 
+#: app/Admin/Tabs/Settings_Tab.php:50
+msgid "Enable BGN/EUR dual price"
+msgstr ""
+
 #: app/Admin/Tabs/Settings_Tab.php:47
 msgid "Enable BOX NOW Delivery? "
 msgstr ""
@@ -575,6 +591,10 @@ msgstr ""
 
 #: app/Admin/Tabs/Settings_Tab.php:48
 msgid "Enables CVC Shipping methods."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:50
+msgid "Enables dual price showing for migrating to EUR."
 msgstr ""
 
 #: app/Shipping/Econt/Method.php:17
@@ -804,8 +824,31 @@ msgstr ""
 msgid "Generate label after checkout"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:136
+#: app/Admin/Tabs/Nra_Tab.php:150
 msgid "Global Shop Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:100
+msgid ""
+"group \"A\" - for goods and services, the sales of which are exempt from "
+"taxation, for goods and services, the sales of which are subject to 0% VAT, "
+"as well as for sales, for which VAT is not charged; group \"B\" - for goods "
+"and services, the sales of which are subject to 20% value added tax; group "
+"\"D\" - for goods and services, the sales of which are subject to 9% value "
+"added tax; combined - the group is determined for each product in the store "
+"separately."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:90
+msgid "Group - A"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:94
+msgid "Group - B"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:98
+msgid "Group - G"
 msgstr ""
 
 #: app/Admin/Tabs/Help_Tab.php:8
@@ -820,7 +863,7 @@ msgid ""
 "field."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:87
+#: app/Admin/Tabs/Nra_Tab.php:101
 msgid "How to return the amount when the client cancel the order."
 msgstr ""
 
@@ -832,7 +875,7 @@ msgstr ""
 msgid "Identification code"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:156
+#: app/Admin/Tabs/Nra_Tab.php:170
 msgid "Identifier"
 msgstr ""
 
@@ -841,7 +884,7 @@ msgid ""
 "If it' filled the invoices will have different number than the NRA documents."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:172
+#: app/Admin/Tabs/Nra_Tab.php:186
 msgid ""
 "If set to yes, all deliveries with PPP will be removed from documents and "
 "XML export"
@@ -911,7 +954,7 @@ msgstr ""
 msgid "IP Country"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:171
+#: app/Admin/Tabs/Nra_Tab.php:185
 #, php-format
 msgid "Is %s courier?"
 msgstr ""
@@ -964,19 +1007,19 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:130
+#: app/Admin/Tabs/Nra_Tab.php:144
 msgid "Main Company Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:70
+#: app/Admin/Tabs/Settings_Tab.php:71
 msgid "Main functionalities"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:52
+#: app/Admin/Tabs/Settings_Tab.php:53
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:154
+#: app/Admin/Tabs/Nra_Tab.php:168
 msgid "Manner of payment of the order according to the NRA system."
 msgstr ""
 
@@ -1017,6 +1060,7 @@ msgstr ""
 msgid "Nekorekten"
 msgstr ""
 
+#: app/Admin/Tabs/Multi_Currency_Tab.php:11
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:11
 msgid "nekorekten.com API Settings"
 msgstr ""
@@ -1194,7 +1238,7 @@ msgstr ""
 msgid "Payment method"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:108
+#: app/Admin/Tabs/Nra_Tab.php:122
 #, php-format
 msgid "Payment method: %s"
 msgstr ""
@@ -1203,7 +1247,7 @@ msgstr ""
 msgid "Payment service provider"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:154
+#: app/Admin/Tabs/Nra_Tab.php:168
 msgid "Payment Type"
 msgstr ""
 
@@ -1307,6 +1351,22 @@ msgstr ""
 msgid "Qty"
 msgstr ""
 
+#: app/Admin/Tabs/Multi_Currency_Tab.php:44
+msgid "Rate message in Emails"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:42
+msgid "Rate message on Cart page"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:41
+msgid "Rate message on Product page"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:43
+msgid "Rate message on Shop page"
+msgstr ""
+
 #: app/Invoice/Document/BaseDocument.php:173
 msgid "Received"
 msgstr ""
@@ -1359,7 +1419,7 @@ msgstr ""
 msgid "Reports"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:87
+#: app/Admin/Tabs/Nra_Tab.php:101
 msgid "Return method"
 msgstr ""
 
@@ -1498,11 +1558,11 @@ msgstr ""
 msgid "Sender payment type"
 msgstr ""
 
-#: app/Plugin.php:71 app/Plugin.php:179 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:71 app/Plugin.php:188 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:139 app/Admin/Tabs/Settings_Tab.php:104
+#: app/Admin/Tabs/Pro_Tab.php:139 app/Admin/Tabs/Settings_Tab.php:105
 msgid "Settings saved successfully!"
 msgstr ""
 
@@ -1520,13 +1580,29 @@ msgstr ""
 msgid "Shipment type"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:139
+#: app/Admin/Tabs/Nra_Tab.php:153
 msgid "Shipping Methods Settings"
 msgstr ""
 
 #: app/Export/Nra/Order.php:127 app/Invoice/Order/Order.php:121
 #, php-format
 msgid "Shipping: %s"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:44
+msgid "Show message about conversion rate in emails."
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:42
+msgid "Show message about conversion rate on the cart page."
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:41
+msgid "Show message about conversion rate on the product page."
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:43
+msgid "Show message about conversion rate on the shop page in each product."
 msgstr ""
 
 #: app/Admin/BoxNow.php:134 app/Admin/Tabs/BoxNow_Tab.php:182
@@ -1788,6 +1864,10 @@ msgstr ""
 msgid "Vat"
 msgstr ""
 
+#: app/Admin/Tabs/Nra_Tab.php:100
+msgid "Vat Group"
+msgstr ""
+
 #: app/Admin/Tabs/Nra_Tab.php:43
 msgid "VAT Number"
 msgstr ""
@@ -1812,7 +1892,7 @@ msgstr ""
 msgid "Virtual POS terminal"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:155
+#: app/Admin/Tabs/Nra_Tab.php:169
 msgid "Virtual POS №"
 msgstr ""
 

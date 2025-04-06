@@ -47,6 +47,7 @@ class Settings_Tab extends Base_Tab {
 				new Fields\TrueFalse_Field( 'enable_boxnow', __( 'Enable BOX NOW Delivery? ', 'woo-bg' ), null, null, __( 'Enables BOX NOW Shipping method.', 'woo-bg' ) ),
 				new Fields\TrueFalse_Field( 'enable_cvc', __( 'Enable CVC Delivery? ', 'woo-bg' ), null, null, __( 'Enables CVC Shipping methods.', 'woo-bg' ) ),
 				new Fields\TrueFalse_Field( 'enable_nekorekten', __( 'Enable nekorekten.com API? ', 'woo-bg' ), null, null, __( 'If yes, you will receive information about the customer from nekorekten.com.', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'enable_multi_currency', __( 'Enable BGN/EUR dual price', 'woo-bg' ), null, null, __( 'Enables dual price showing for migrating to EUR.', 'woo-bg' ) ),
 			),
 			'checkout' => array(
 				new Fields\TrueFalse_Field( 'alternative_shipping_table', __( 'Alternative shipping options layout ( checkout )', 'woo-bg' ), null, null, __( 'Make shipping options on 2 rows and full width in the checkout table.', 'woo-bg' ) ),

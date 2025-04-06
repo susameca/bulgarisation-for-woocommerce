@@ -30,6 +30,26 @@
 							</ValidationProvider>
 						</tr>
 
+						<tr v-else-if="field.type === 'textarea'" valign="top">
+							<th scope="row" class="titledesc">
+								<label :for="`woo-bg-${field.name}`">
+									{{field.title}}
+
+									<span v-if="field.help_text" class="woocommerce-help-tip" :data-tip="field.help_text"></span>
+								</label>
+							</th>
+							<ValidationProvider 
+								tag="td" :rules="field.validation_rules" class="forminp forminp-text" 
+								v-slot="{ errors }"
+							>
+								<textarea rows="5" v-model="fields[group_slug][field_slug].value" :name="`woo-bg-` + field.name" :type="field.subtype" :placeholder="field.title">
+								</textarea>
+								<p v-if="field.description" class="description" v-html="field.description"> </p>
+
+								<p class="field-error">{{ errors[0] }}</p>
+							</ValidationProvider>
+						</tr>
+
 						<tr v-else-if="field.type === 'select'" valign="top">
 							<th scope="row" class="titledesc">
 								<label :for="`woo-bg-gateway-${group_slug}-${field_slug}`">

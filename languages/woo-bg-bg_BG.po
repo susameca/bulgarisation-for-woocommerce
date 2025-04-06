@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2025-04-04 11:07+0000\n"
+"PO-Revision-Date: 2025-04-06 16:17+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -113,7 +113,7 @@ msgstr "Позволи връщане"
 msgid "Allow shipping to Greece and Romania for Econt and Speedy."
 msgstr "Добавяне на доставки до Гърция и Румъния за Еконт и Спиди."
 
-#: app/Admin/Tabs/Settings_Tab.php:52
+#: app/Admin/Tabs/Settings_Tab.php:53
 msgid "Alternative shipping options layout ( checkout )"
 msgstr "Алтернативно оформление на методите за доставка (чекаут)"
 
@@ -160,6 +160,10 @@ msgstr "Банкова сметка"
 #: app/Invoice/Document/BaseDocument.php:192
 msgid "Bank name"
 msgstr "Банка"
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:10
+msgid "BGN/EUR dual price"
+msgstr "BGN/EUR двойни цени"
 
 #: app/Admin/EU_Vat.php:114
 msgid "Billing Country"
@@ -297,7 +301,11 @@ msgstr "Отбележете ако искате продукта да бъде 
 msgid "Check on checkout and disable COD."
 msgstr "Провери на чекаут и изключи НП"
 
-#: app/Admin/Tabs/Settings_Tab.php:73
+#: app/Admin/Tabs/Multi_Currency_Tab.php:45
+msgid "Checkout Message"
+msgstr "Съобщение на чекаут"
+
+#: app/Admin/Tabs/Settings_Tab.php:74
 msgid "Checkout Settings"
 msgstr "Настройки на \"Страница за поръчка\""
 
@@ -362,6 +370,10 @@ msgstr "Телефон за контакти на вашата фирма."
 #: app/Admin/CVC.php:144
 msgid "Contract"
 msgstr "По договор"
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:63
+msgid "Conversion rate message"
+msgstr "Съобщение за обменен курс"
 
 #: app/Admin/CVC.php:147 app/Admin/Econt.php:145 app/Admin/Speedy.php:147
 msgid "Copy Label Data"
@@ -478,7 +490,7 @@ msgstr "Документ-палет"
 msgid "Documents"
 msgstr "Документи"
 
-#: app/Admin/Tabs/Nra_Tab.php:133
+#: app/Admin/Tabs/Nra_Tab.php:147
 msgid "Documents Settings"
 msgstr "Настройки на документи"
 
@@ -541,6 +553,10 @@ msgstr "ЕИК: %s"
 msgid "Email:"
 msgstr "Email:"
 
+#: app/Admin/Tabs/Settings_Tab.php:50
+msgid "Enable BGN/EUR dual price"
+msgstr "Включи BGN/EUR двойни цени"
+
 #: app/Admin/Tabs/Settings_Tab.php:47
 #| msgid "Enable BoxNow Delivery? "
 msgid "Enable BOX NOW Delivery? "
@@ -599,6 +615,10 @@ msgstr "Включва доставки със CVC и автоматично п�
 #: app/Admin/Tabs/Settings_Tab.php:48
 msgid "Enables CVC Shipping methods."
 msgstr "Включва CVC начин на доставка."
+
+#: app/Admin/Tabs/Settings_Tab.php:50
+msgid "Enables dual price showing for migrating to EUR."
+msgstr "Включи показването на двойни цени при миграция към EUR."
 
 #: app/Shipping/Econt/Method.php:17
 msgid "Enables econt delivery and automatically calculate shipping price."
@@ -848,9 +868,32 @@ msgstr "Генерирай товарителница."
 msgid "Generate label after checkout"
 msgstr "Генерирай товарителница след чекаут"
 
-#: app/Admin/Tabs/Nra_Tab.php:136
+#: app/Admin/Tabs/Nra_Tab.php:150
 msgid "Global Shop Settings"
 msgstr "Глобални настройки на магазина"
+
+#: app/Admin/Tabs/Nra_Tab.php:100
+msgid ""
+"group \"A\" - for goods and services, the sales of which are exempt from "
+"taxation, for goods and services, the sales of which are subject to 0% VAT, "
+"as well as for sales, for which VAT is not charged; group \"B\" - for goods "
+"and services, the sales of which are subject to 20% value added tax; group "
+"\"D\" - for goods and services, the sales of which are subject to 9% value "
+"added tax; combined - the group is determined for each product in the store "
+"separately."
+msgstr "група \"А\" - 0 % ДДС; група \"Б\" - 20 % ДДС; група \"Г\" 9% ДДС. "
+
+#: app/Admin/Tabs/Nra_Tab.php:90
+msgid "Group - A"
+msgstr "Група - А"
+
+#: app/Admin/Tabs/Nra_Tab.php:94
+msgid "Group - B"
+msgstr "Група - Б"
+
+#: app/Admin/Tabs/Nra_Tab.php:98
+msgid "Group - G"
+msgstr "Група - Г"
 
 #: app/Admin/Tabs/Help_Tab.php:8
 msgid "Help"
@@ -868,7 +911,7 @@ msgstr ""
 "дропаун с градовете от API на спедитора. Потребителя също има поле за "
 "търсене."
 
-#: app/Admin/Tabs/Nra_Tab.php:87
+#: app/Admin/Tabs/Nra_Tab.php:101
 msgid "How to return the amount when the client cancel the order."
 msgstr "Начин на връщане на сумата при отказ на поръчката."
 
@@ -880,7 +923,7 @@ msgstr "https://autopolis.bg/"
 msgid "Identification code"
 msgstr "Идентификационен код"
 
-#: app/Admin/Tabs/Nra_Tab.php:156
+#: app/Admin/Tabs/Nra_Tab.php:170
 msgid "Identifier"
 msgstr "Идентификатор"
 
@@ -891,7 +934,7 @@ msgstr ""
 "Ако попълните полето, фактури/кредитни известия/проформи ще имат различна "
 "номерация от тази на документите по Н-18."
 
-#: app/Admin/Tabs/Nra_Tab.php:172
+#: app/Admin/Tabs/Nra_Tab.php:186
 msgid ""
 "If set to yes, all deliveries with PPP will be removed from documents and "
 "XML export"
@@ -970,7 +1013,7 @@ msgstr "IP Адрес"
 msgid "IP Country"
 msgstr "IP Държава"
 
-#: app/Admin/Tabs/Nra_Tab.php:171
+#: app/Admin/Tabs/Nra_Tab.php:185
 #, php-format
 msgid "Is %s courier?"
 msgstr "%s куриер ли е?"
@@ -1023,19 +1066,19 @@ msgstr "Реална"
 msgid "Location"
 msgstr "Локация"
 
-#: app/Admin/Tabs/Nra_Tab.php:130
+#: app/Admin/Tabs/Nra_Tab.php:144
 msgid "Main Company Settings"
 msgstr "Главни настройки на фирмата"
 
-#: app/Admin/Tabs/Settings_Tab.php:70
+#: app/Admin/Tabs/Settings_Tab.php:71
 msgid "Main functionalities"
 msgstr "Главни функционалности"
 
-#: app/Admin/Tabs/Settings_Tab.php:52
+#: app/Admin/Tabs/Settings_Tab.php:53
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr "Направете опциите за доставка на 2 реда и с пълна ширина в чекаут."
 
-#: app/Admin/Tabs/Nra_Tab.php:154
+#: app/Admin/Tabs/Nra_Tab.php:168
 msgid "Manner of payment of the order according to the NRA system."
 msgstr "Начин на плащане на поръчката според системата на НАП."
 
@@ -1076,6 +1119,7 @@ msgstr "Име"
 msgid "Nekorekten"
 msgstr "Nekorekten"
 
+#: app/Admin/Tabs/Multi_Currency_Tab.php:11
 #: app/Admin/Tabs/Nekorekten_Com_Tab.php:11
 msgid "nekorekten.com API Settings"
 msgstr "Настройки за nekorekten.com API "
@@ -1257,7 +1301,7 @@ msgstr "Плати по договор"
 msgid "Payment method"
 msgstr "Метод на плащане"
 
-#: app/Admin/Tabs/Nra_Tab.php:108
+#: app/Admin/Tabs/Nra_Tab.php:122
 #, php-format
 msgid "Payment method: %s"
 msgstr "Метод на плащане: %s"
@@ -1266,7 +1310,7 @@ msgstr "Метод на плащане: %s"
 msgid "Payment service provider"
 msgstr "Доставчик на платежни услуги"
 
-#: app/Admin/Tabs/Nra_Tab.php:154
+#: app/Admin/Tabs/Nra_Tab.php:168
 msgid "Payment Type"
 msgstr "Начин на плащане"
 
@@ -1373,6 +1417,22 @@ msgstr "Продукт"
 msgid "Qty"
 msgstr "К-во"
 
+#: app/Admin/Tabs/Multi_Currency_Tab.php:44
+msgid "Rate message in Emails"
+msgstr "Съобщение за курса в е-mail."
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:42
+msgid "Rate message on Cart page"
+msgstr "Съобщение за курса в количката"
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:41
+msgid "Rate message on Product page"
+msgstr "Съобщение за курса в продуктовата страница"
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:43
+msgid "Rate message on Shop page"
+msgstr "Съобщение за курса в каталог страницата"
+
 #: app/Invoice/Document/BaseDocument.php:173
 msgid "Received"
 msgstr "Получил"
@@ -1426,7 +1486,7 @@ msgstr "Премахване на доставките от документит
 msgid "Reports"
 msgstr "Отзиви"
 
-#: app/Admin/Tabs/Nra_Tab.php:87
+#: app/Admin/Tabs/Nra_Tab.php:101
 msgid "Return method"
 msgstr "Начин на връщане на сумата"
 
@@ -1579,11 +1639,11 @@ msgstr "Изпращач"
 msgid "Sender payment type"
 msgstr "Метод на плащане на изпращача"
 
-#: app/Plugin.php:71 app/Plugin.php:179 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:71 app/Plugin.php:188 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
-#: app/Admin/Tabs/Pro_Tab.php:139 app/Admin/Tabs/Settings_Tab.php:104
+#: app/Admin/Tabs/Pro_Tab.php:139 app/Admin/Tabs/Settings_Tab.php:105
 msgid "Settings saved successfully!"
 msgstr "Настройките са запазени успешно!"
 
@@ -1601,7 +1661,7 @@ msgstr "Статус на пратката"
 msgid "Shipment type"
 msgstr "Тип на товарителницата"
 
-#: app/Admin/Tabs/Nra_Tab.php:139
+#: app/Admin/Tabs/Nra_Tab.php:153
 msgid "Shipping Methods Settings"
 msgstr "Настройки за доставки"
 
@@ -1609,6 +1669,23 @@ msgstr "Настройки за доставки"
 #, php-format
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:44
+msgid "Show message about conversion rate in emails."
+msgstr "Покажи съобщение за обменния курс в e-mail."
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:42
+msgid "Show message about conversion rate on the cart page."
+msgstr "Покажи съобщение за обменния курс в страницата на количката."
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:41
+msgid "Show message about conversion rate on the product page."
+msgstr "Покажи съобщение за обменния курс в страницата на продукта."
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:43
+msgid "Show message about conversion rate on the shop page in each product."
+msgstr ""
+"Покажи съобщение за обменния курс в каталожната страница под всеки продукт."
 
 #: app/Admin/BoxNow.php:134 app/Admin/Tabs/BoxNow_Tab.php:182
 msgid "Small Box"
@@ -1896,6 +1973,10 @@ msgstr "Валидирането не беше възможно"
 msgid "Vat"
 msgstr "ДДС"
 
+#: app/Admin/Tabs/Nra_Tab.php:100
+msgid "Vat Group"
+msgstr "ДДС група"
+
 #: app/Admin/Tabs/Nra_Tab.php:43
 msgid "VAT Number"
 msgstr "ДДС номер"
@@ -1920,7 +2001,7 @@ msgstr "ДДС номер: %s"
 msgid "Virtual POS terminal"
 msgstr "Виртуален ПОС терминал"
 
-#: app/Admin/Tabs/Nra_Tab.php:155
+#: app/Admin/Tabs/Nra_Tab.php:169
 msgid "Virtual POS №"
 msgstr "Номер на виртуален ПОС терминал"
 

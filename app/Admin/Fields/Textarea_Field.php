@@ -3,11 +3,11 @@ namespace Woo_BG\Admin\Fields;
 
 defined( 'ABSPATH' ) || exit;
 
-class TrueFalse_Field extends Base_Field {
+class Textarea_Field extends Base_Field {
 	protected $subtype;
 
 	public function __construct( $name, $title, $help_text = '', $validation_rules = '', $desc = '' ) {
-		$this->set_type( 'true_false' );
+		$this->set_type( 'textarea' );
 		$this->set_name( $name );
 		$this->set_title( $title );
 		$this->set_help_text( $help_text );
@@ -16,16 +16,26 @@ class TrueFalse_Field extends Base_Field {
 	}
 
 	public function format_value( $value ) {
-		return wc_string_to_bool( $value );
+		return ( $value ) ? $value : '';
 	}
 
 	public function save_value( $group ) {
-		$value = ( wc_string_to_bool( $_REQUEST[ 'options' ][ $group ][ $this->get_name() ][ 'value' ] ) ) ? 'yes' : 'no';
-		
-		update_option( 'woo_bg_settings_' . $group . '_' . $this->get_name(), sanitize_text_field( $value ) );
+		$allowed_html = array(
+		  'a' => array(
+		    'href' => array(),
+		  ),
+		  'br' => array(),
+		  'p' => array(),
+		  'strong' => array(),
+		  'span' => array(),
+		  'small' => array(),
+		);
+
+		$value = wp_kses( $_REQUEST[ 'options' ][ $group ][ $this->get_name() ][ 'value' ], $allowed_html );
+
+		update_option( 'woo_bg_settings_' . $group . '_' . $this->get_name(), $value );
 	}
 
-	//Setters
 	public function populate( $group ) {
 		$option = woo_bg_get_option( $group, $this->get_name() );
 		

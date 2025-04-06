@@ -125,6 +125,10 @@ class Admin_Menus {
 			$tabs[] = new Tabs\Nekorekten_Com_Tab();
 		}
 
+		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) ) {
+			$tabs[] = new Tabs\Multi_Currency_Tab();
+		}
+
 		$tabs = apply_filters( 'woo_bg/admin/get_tabs_items', $tabs );
 		$tabs[] = new Tabs\Pro_Tab();
 		$tabs[] = new Tabs\Help_Tab();

@@ -79,6 +79,13 @@ class Plugin {
 			woo_bg_set_option( 'shippings', 'woo_bg_speedy_is_courier', 'yes' );
 			woo_bg_set_option( 'shippings', 'woo_bg_cvc_is_courier', 'yes' );
 		}
+
+		if ( !woo_bg_get_option( 'multi_currency', 'product_rate_message' ) ) {
+			woo_bg_set_option( 'multi_currency', 'product_rate_message', 'yes' );
+			woo_bg_set_option( 'multi_currency', 'cart_rate_message', 'yes' );
+			woo_bg_set_option( 'multi_currency', 'shop_rate_message', 'yes' );
+			woo_bg_set_option( 'multi_currency', 'email_rate_message', 'yes' );
+		}
 	}
 
 	private function load_classes() {
@@ -87,7 +94,9 @@ class Plugin {
 		new Admin\Admin_Menus();
 		new Admin\Order\Columns();
 
-		//new Front_End\Multi_Currency();
+		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) ) {
+			new Front_End\Multi_Currency();
+		}
 
 		if ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' ) {
 			new Admin\Order\Actions();
