@@ -249,6 +249,10 @@ class BaseDocument {
 			'post_status' => 'inherit'
 		), $pdf[ 'file' ] );
 
+		if ( $old_file = $this->woo_order->get_meta( $this->meta ) ) {
+			wp_delete_attachment( $old_file );
+		}
+
 		$this->woo_order->update_meta_data( $this->meta, $attach_id );
 		$this->woo_order->save();
 

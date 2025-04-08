@@ -1,3 +1,4 @@
+<?php $bgn_eur = ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,12 +17,14 @@
 	.w-100 { width: 100%; }
 	.w-85 { width:85%; }
 	.w-80 { width:80%; }
+	.w-75 { width:75%; }
 	.w-60 { width:60%; }
 	.w-55 { width:55%; }
 	.w-50 { width:50%; }
 	.w-45 { width:45%; }
 	.w-40 { width:40%; }
 	.w-35 { width:35%; }
+	.w-25 { width:25%; }
 	.w-20 { width:20%; }
 	.w-15 { width:15%; }
 	.w-10 { width:10%; }
@@ -118,7 +121,7 @@
 				<tr>
 					<td colspan="<?php echo count( $headers ) ?>">
 						<div class="total-part">
-							<div class="total-left w-85 float-left" align="right">
+							<div class="total-left <?php echo ( $bgn_eur ) ? 'w-75' : 'w-85' ?>  float-left" align="right">
 								<?php 
 								foreach ( $this->document->order->get_total_items() as $item ) {
 									echo wp_kses_post( wpautop( $item['label'] . ":" ) );
@@ -126,7 +129,7 @@
 								?>
 							</div>
 
-							<div class="total-right w-15 float-left text-bold" align="right">
+							<div class="total-right <?php echo ( $bgn_eur ) ? 'w-25' : 'w-15' ?> float-left text-bold" align="right">
 								<?php 
 								foreach ( $this->document->order->get_total_items() as $item ) {
 									echo wp_kses_post( wpautop( $item['value'] ) );
