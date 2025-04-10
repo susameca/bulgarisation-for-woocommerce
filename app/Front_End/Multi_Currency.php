@@ -44,12 +44,12 @@ class Multi_Currency {
 		if( $current_currency == 'BGN' ) {
 			$price_eur = self::convert_to_eur($price);
 		
-			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-eur\"> <small>(€$price_eur)</small> </span>";
+			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-eur\"> (€$price_eur) </span>";
 
 			return $price_html . $formatted_price_eur;
 		} elseif ($current_currency == 'EUR' ) {
 			$price_bgn = self::convert_to_bgn($price);
-			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-bgn\"> <small>($price_bgn лв.)</small> </span>";
+			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-bgn\"> ($price_bgn лв.) </span>";
 
 			return $price_html . $formatted_price_eur;
 		}
@@ -88,7 +88,7 @@ class Multi_Currency {
 	}
 
 	public static function rate_message() {
-		$html = '<span class="rate_cart_page"><small>' . __( 'Rate: 1 EUR = 1.95583 BGN', 'woo-bg' ) . '</small></span>';
+		$html = '<span class="rate_cart_page">' . __( 'Rate: 1 EUR = 1.95583 BGN', 'woo-bg' ) . '</span>';
 
 		echo apply_filters( 'woo_bg/bgn_eur/rate_message', $html );
 	}
