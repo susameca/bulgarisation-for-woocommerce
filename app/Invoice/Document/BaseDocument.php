@@ -260,14 +260,10 @@ class BaseDocument {
 	}
 
 	public function render_pdf_logo() {
-		ob_start();
-
-		if ( $this->logo ) {
-			echo wp_get_attachment_image( $this->logo, 'medium_large' );
+		if ( !$this->logo ) {
+			return;
 		}
 
-		$image_tag_html = ob_get_clean();
-
-		echo apply_filters( 'woo_bg/invoice/pdf/default_template/qr', $image_tag_html, $this );
+		echo apply_filters( 'woo_bg/invoice/pdf/default_template/qr', $this->logo, $this );
 	}
 }

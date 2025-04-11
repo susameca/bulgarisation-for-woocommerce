@@ -26,18 +26,11 @@ class NRA extends BaseDocument {
 		);
 
 		$qr_code = new QRCode();
+		ob_start();
+		?>
+		<img src="<?php echo $qr_code->render( implode( '*', $qr_code_pieces ) ); ?>">
+		<?php
 
-		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
-
-		$this->logo = Image_Uploader::upload_image_from_base64( array(
-			'data' => $qr_code->render( implode( '*', $qr_code_pieces ) ),
-			'type' => 'image/png',
-		), 'qrcode' );
-
-		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
-	}
-
-	public function after_file_generated() {
-		wp_delete_attachment( $this->logo, 1 );
+		$this->logo = ob_get_clean();
 	}
 }
