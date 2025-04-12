@@ -429,7 +429,7 @@ class Speedy {
 			if ( !empty( $_REQUEST['cookie_data']['mysticQuarter'] ) ) {
 				if ( $country_id == '300' ) {
 					$address["addressLine1"] = $_REQUEST['cookie_data']['mysticQuarter'] . ' ' . $_REQUEST[ 'other' ];
-					//$address["postCode"] = $order->get_billing_postcode();
+					$address["postCode"] = $order->get_billing_postcode();
 				}
 				
 				$address["addressNote"] = $_REQUEST['cookie_data']['mysticQuarter'] . ' ' . $_REQUEST[ 'other' ];
