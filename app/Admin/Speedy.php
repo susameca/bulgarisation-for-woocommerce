@@ -160,27 +160,53 @@ class Speedy {
 	}
 
 	protected static function get_offices( $order ) {
-		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( $order->get_billing_country() );
+		$offices = [];
+		$city_id = false;
+		$country = $order->get_billing_country();
+		$state = $order->get_billing_state();
+		$city = $order->get_billing_city();
+		
+		if ( $order->get_shipping_country() ) {
+			$country = $order->get_shipping_country();
+			$state = $order->get_shipping_state();
+			$city = $order->get_shipping_city();
+		}
+
+		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( $country );
 
 		if ( $country_id === '300' ) {
 			$city_id = 0;
 		} else {
-			$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $order->get_billing_city(), $order->get_billing_state(), $country_id );
-			$city_id = $cities_data['cities'][ $cities_data['city_key'] ]['id'];
+			$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $city, $state, $country_id );
+
+			if ( $cities_data['city_key'] !== false ) {
+				$city_id = $cities_data['cities'][ $cities_data['city_key'] ]['id'];
+			}
 		}
 
-		$offices = self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $city_id )['offices'];
-
-		if ( empty( $offices ) ) {
-			$offices = [];
+		if ( !( $city_id === false || $city_id === null ) ) {
+			$offices = self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $city_id );
+			$offices = ( isset( $offices['offices'] ) ) ? $offices['offices'] : [];
 		}
 
 		return $offices;
 	}
 
 	protected static function get_streets( $cookie_data, $order ) {
+		$streets = [];
+		$quarters = [];
 		$query = ' ';
-		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( $order->get_billing_country() );
+		$country = $order->get_billing_country();
+		$state = $order->get_billing_state();
+		$city = $order->get_billing_city();
+		
+		if ( $order->get_shipping_country() ) {
+			$country = $order->get_shipping_country();
+			$state = $order->get_shipping_state();
+			$city = $order->get_shipping_city();
+		}
+
+		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( $country );
 
 		if ( !empty( $cookie_data['selectedAddress'] ) ) {
 			$query = explode(' ', $cookie_data['selectedAddress']['label'] );
@@ -188,11 +214,14 @@ class Speedy {
 			$query = implode( ' ', $query );
 		}
 
-		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $order->get_billing_city(), $order->get_billing_state(), $country_id );
-		$city_id = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
+		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $city, $state, $country_id );
 
-		$streets = woo_bg_return_array_for_select( Address::get_streets_for_query( $city_id, $query ), 1, array( 'type' => 'streets' ) );
-		$quarters = woo_bg_return_array_for_select( Address::get_quarters_for_query( $city_id, $query ), 1, array( 'type' => 'quarters' ) );
+		if ( $cities_data['city_key'] !== false ) {
+			$city_id = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
+
+			$streets = woo_bg_return_array_for_select( Address::get_streets_for_query( $city_id, $query ), 1, array( 'type' => 'streets' ) );
+			$quarters = woo_bg_return_array_for_select( Address::get_quarters_for_query( $city_id, $query ), 1, array( 'type' => 'quarters' ) );
+		}
 
 		return array_merge( $streets, $quarters );
 	}

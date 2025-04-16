@@ -167,6 +167,7 @@ class Econt {
 	}
 
 	protected static function get_offices( $cookie_data, $order ) {
+		$offices = [];
 		$country = $order->get_billing_country();
 		$state = $order->get_billing_state();
 		$city = $order->get_billing_city();
@@ -181,10 +182,17 @@ class Econt {
 		$state = $states[ $state ];
 		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $city, $state, $country );
 
-		return self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'], $country )['offices'];
+		if ( $cities_data['city_key'] !== false ) {
+			$offices = self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'], $country );
+			$offices = ( isset( $offices['offices'] ) ) ? $offices['offices'] : [];
+		}
+
+		return $offices;
 	}
 
 	protected static function get_streets( $cookie_data, $order ) {
+		$streets = [];
+		$quarters = [];
 		$country = $order->get_billing_country();
 		$state = $order->get_billing_state();
 		$city = $order->get_billing_city();
@@ -200,17 +208,19 @@ class Econt {
 
 		$cities_data = self::$container[ Client::ECONT_CITIES ]->get_filtered_cities( $city, $state, $country );
 
-		$streets = woo_bg_return_array_for_select( 
-			Address::get_streets_for_query( '', $cities_data['city_key'], $cities_data['cities'] ), 
-			1, 
-			array( 'type' => 'streets' ) 
-		);
+		if ( $cities_data['city_key'] !== false ) {
+			$streets = woo_bg_return_array_for_select( 
+				Address::get_streets_for_query( '', $cities_data['city_key'], $cities_data['cities'] ), 
+				1, 
+				array( 'type' => 'streets' ) 
+			);
 
-		$quarters = woo_bg_return_array_for_select( 
-			Address::get_quarters_for_query( '', $cities_data['city_key'], $cities_data['cities'] ), 
-			1, 
-			array( 'type' => 'quarters' ) 
-		);
+			$quarters = woo_bg_return_array_for_select( 
+				Address::get_quarters_for_query( '', $cities_data['city_key'], $cities_data['cities'] ), 
+				1, 
+				array( 'type' => 'quarters' ) 
+			);
+		}
 
 		return array_merge( $streets, $quarters );
 	}
