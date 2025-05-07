@@ -249,7 +249,7 @@ function woo_bg_get_order_item_vat_rate( $item, $order, $show_group = false ) {
 	$tax_data = wc_tax_enabled() ? $item->get_taxes() : false;
 	$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
 	$vat_percentages     = woo_bg_get_vat_groups();
-	$rate = $vat_percentages[ $vat_group ];
+	$rate = ( isset( $vat_percentages[ $vat_group ] ) ) ? $vat_percentages[ $vat_group ] : 0;
 
 	if ( $tax_data ) {
 		$founded = false;

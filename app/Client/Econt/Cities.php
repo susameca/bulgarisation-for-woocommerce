@@ -116,6 +116,8 @@ class Cities {
 	}
 
 	public function get_filtered_cities( $city, $state, $country_code = 'BG' ) {
+		$city = trim( $city );
+		
 		if ( $country_code !== 'BG' ) {
 			$city = mb_strtolower( $city );
 		} else {
