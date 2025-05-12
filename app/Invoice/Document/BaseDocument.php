@@ -260,10 +260,12 @@ class BaseDocument {
 	}
 
 	public function render_pdf_logo() {
-		if ( !$this->logo ) {
+		$logo = apply_filters( 'woo_bg/invoice/pdf/default_template/qr', $this->logo, $this );
+
+		if ( !$logo ) {
 			return;
 		}
 
-		echo apply_filters( 'woo_bg/invoice/pdf/default_template/qr', $this->logo, $this );
+		echo $logo;
 	}
 }
