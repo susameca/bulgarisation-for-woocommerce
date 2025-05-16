@@ -172,7 +172,7 @@ class Econt {
 		$state = $order->get_billing_state();
 		$city = $order->get_billing_city();
 
-		if ( $order->get_shipping_country() ) {
+		if ( woo_bg_is_different_shipping_address( $order ) ) {
 			$country = $order->get_shipping_country();
 			$state = $order->get_shipping_state();
 			$city = $order->get_shipping_city();
@@ -197,7 +197,7 @@ class Econt {
 		$state = $order->get_billing_state();
 		$city = $order->get_billing_city();
 		
-		if ( $order->get_shipping_country() ) {
+		if ( woo_bg_is_different_shipping_address( $order ) ) {
 			$country = $order->get_shipping_country();
 			$state = $order->get_shipping_state();
 			$city = $order->get_shipping_city();
