@@ -250,7 +250,7 @@ function woo_bg_get_order_item_vat_rate( $item, $order, $show_group = false ) {
 	$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
 	$vat_percentages     = woo_bg_get_vat_groups();
 	$rate = ( isset( $vat_percentages[ $vat_group ] ) ) ? $vat_percentages[ $vat_group ] : 0;
-
+	
 	if ( $tax_data ) {
 		$founded = false;
 		$order_taxes = $order->get_taxes();
@@ -536,4 +536,23 @@ function woo_bg_get_shipping_rate_taxes( $price, $country = 'BG' ) {
 	}
 
 	return \WC_Tax::calc_tax( $price, $tax_rates, false );
+}
+
+function woo_bg_is_different_shipping_address( $order ) {
+    $billing_address  = $order->get_address();
+    $shipping_address = $order->get_address( 'shipping' );
+
+    if ( ! empty( $billing_address ) && ! empty( $shipping_address ) ) {
+        foreach ( $billing_address as $billing_address_key => $billing_address_value ) {
+            if ( isset( $shipping_address[ $billing_address_key ] ) ) {
+                $shipping_address_value = $shipping_address[ $billing_address_key ];
+
+                if ( ! empty( $billing_address_value ) && ! empty( $shipping_address_value ) && strcmp( $billing_address_value, $shipping_address_value ) !== 0 ) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
 }
