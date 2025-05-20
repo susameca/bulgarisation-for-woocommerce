@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.8
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.4.3
+Stable tag: 3.4.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -67,6 +67,14 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.4.4 = 
+Documents: Fix documents logo/qr to be able to add/remove/edit them
+Invoice: Optimize document number generation
+Invoice: Optimize invoice date
+Invoice: Add invoice due date option
+Econt: Optimizations
+Speedy: Optimizations
 
 = 3.4.3 = 
 Econt: Optimizations
