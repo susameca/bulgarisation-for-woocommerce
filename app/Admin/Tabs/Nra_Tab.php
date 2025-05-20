@@ -78,6 +78,7 @@ class Nra_Tab extends Base_Tab {
 				new Fields\TrueFalse_Field( 'remove_shipping', __( 'Remove delivery from documents', 'woo-bg' ), null, null, __( 'This option will remove the delivery from invoices and XML file.', 'woo-bg' ) ),
 				new Fields\Text_Field( 'next_invoice_number', __( 'Next NRA Document Number', 'woo-bg' ), __( 'The document number of the next order.', 'woo-bg' ), 'required' ),
 				new Fields\Text_Field( 'next_invoice_separate_number', __( 'Next Invoice/Credit notice Number', 'woo-bg' ), __( 'If it\' filled the invoices will have different number than the NRA documents.', 'woo-bg' ) ),
+				new Fields\Text_Field( 'due_days', __( 'Due days', 'woo-bg' ), __( 'Days added to documents due date.', 'woo-bg' ) ),
 				new Fields\Text_Field( 'prepared_by', __( 'Prepared by', 'woo-bg' ), __( 'Enter the name of the compiler of the automatically generated documents, which will be displayed in them.', 'woo-bg' ), null ),
 				new Fields\Text_Field( 'identification_code', __( 'Identification code', 'woo-bg' ), null, null, __( "Enter an ID in the invoices and credit memos that replace the compiler's signature.", 'woo-bg' ) ),
 				new Fields\Text_Field( 'footer_text', __( 'Footer text', 'woo-bg' ) ),

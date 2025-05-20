@@ -70,4 +70,25 @@ class Invoice extends BaseDocument {
 		
 		$this->after_file_generated();
 	}
+
+	public function get_document_date() {
+		$date = $this->woo_order->get_meta( 'woo_bg_invoice_document_date' );
+
+		if ( !$date ) {
+			$date = date_i18n( 'd-m-Y', strtotime( 'today' ) );
+			$this->woo_order->update_meta_data( 'woo_bg_invoice_document_date', $date );
+		}
+
+		return $date;
+	}
+
+	public function get_document_due_date() {
+		$date = $this->get_document_date();
+
+		if ( $due_days = woo_bg_get_option( 'invoice', 'due_days' ) ) {
+			$date = date_i18n( 'd-m-Y', strtotime( $date . " + " . $due_days . " days" ) );
+		}
+		
+		return $date;
+	}
 }

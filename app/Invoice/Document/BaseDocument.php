@@ -56,15 +56,15 @@ class BaseDocument {
 		$items = array_merge( $items, array(
 			'date' => array(
 				'label' => __( 'Order date', 'woo-bg' ),
-				'value' => date_i18n( 'M d, Y', strtotime( $this->woo_order->get_date_created() ) ),
+				'value' => date_i18n( 'M d, Y', strtotime( $this->get_document_date() ) ),
 			),
 			'date-of-tax' => array(
 				'label' => __( 'Date of tax. event', 'woo-bg' ),
-				'value' => date_i18n( 'M d, Y', strtotime( $this->woo_order->get_date_created() ) ),
+				'value' => date_i18n( 'M d, Y', strtotime( $this->get_document_date() ) ),
 			),
 			'due-date' => array(
 				'label' => __( 'Due date', 'woo-bg' ),
-				'value' => date_i18n( 'M d, Y', strtotime( $this->woo_order->get_date_created() ) ),
+				'value' => date_i18n( 'M d, Y', strtotime( $this->get_document_due_date() ) ),
 			),
 			'address' => array(
 				'label' => __( 'Place of transaction', 'woo-bg' ),
@@ -213,12 +213,25 @@ class BaseDocument {
 
 		if ( !$document_number ) {
 			$document_number = woo_bg_get_option( 'invoice', $this->document_number_option );
+
+			if ( woo_bg_check_if_order_with_that_doc_number_exists( $document_number, $this->document_number_meta ) ) {
+				$document_number = woo_bg_get_next_document_number( $this->document_number_meta, $this->document_number_option );
+			}
+
 			woo_bg_set_option( 'invoice', $this->document_number_option, str_pad( $document_number + 1, 10, '0', STR_PAD_LEFT ) );
 			$this->woo_order->update_meta_data( $this->document_number_meta, str_pad( $document_number, 10, '0', STR_PAD_LEFT ) );
 			$this->woo_order->save();
 		}
 
 		return $document_number;
+	}
+
+	public function get_document_date() {
+		return $this->woo_order->get_date_created();
+	}
+
+	public function get_document_due_date() {
+		return $this->get_document_date();
 	}
 
 	private function set_pdf_printer() {

@@ -115,4 +115,15 @@ class CreditNotice extends NRARefunded {
 
 		return str_pad( $this->parent_order->get_meta( $meta ), 10, '0', STR_PAD_LEFT );
 	}
+
+	public function get_document_date() {
+		$date = $this->woo_order->get_meta( 'woo_bg_credit_notice_document_date' );
+
+		if ( !$date ) {
+			$date = date_i18n( 'M d, Y', strtotime( 'today' ) );
+			$this->woo_order->update_meta_data( 'woo_bg_credit_notice_document_date', $date );
+		}
+
+		return $date;
+	}
 }

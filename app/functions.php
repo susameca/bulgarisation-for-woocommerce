@@ -556,3 +556,30 @@ function woo_bg_is_different_shipping_address( $order ) {
 
     return false;
 }
+
+function woo_bg_check_if_order_with_that_doc_number_exists( $document_number, $document_number_meta ) {
+	$orders = wc_get_orders( array(
+		'meta_key'      => $document_number_meta,
+		'meta_value'    => $document_number, 
+		'meta_compare'  => '=', 
+		'return'        => 'ids',
+		'limit' => 1,
+	) );
+
+	return ( !empty( $orders ) );
+}
+
+function woo_bg_get_next_document_number( $meta_field, $document_number_option ) {
+	$orders = wc_get_orders( array(
+		'meta_key'      => $meta_field,
+		'meta_compare'  => 'exists', 
+		'orderby' => 'meta_value',
+		'return'        => 'ids',
+		'limit' => 1,
+	) );
+
+	$latest_order = wc_get_order( $orders[0] );
+	$largest_number = $latest_order->get_meta( $meta_field );
+
+	return $largest_number + 1;
+}
