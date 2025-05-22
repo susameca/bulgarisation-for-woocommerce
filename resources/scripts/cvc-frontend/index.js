@@ -34,13 +34,15 @@ cvc.then( function ( promise ) {
 				instance.$destroy();
 			}
 
-			if ( type === 'address' ) {
-				window.cvcOfficeInitialUpdate = true;
-				instance = new promise.address({ el: '#' + $target.attr('id') });
-			} else if ( type === 'office' ) {
-				window.cvcAddressInitialUpdate = true;
-				instance = new promise.office({ el: '#' + $target.attr('id') });
-			}
+			setTimeout( function() {
+				if ( type === 'address' ) {
+					window.cvcOfficeInitialUpdate = true;
+					instance = new promise.address({ el: '#' + $target.attr('id') });
+				} else if ( type === 'office' ) {
+					window.cvcAddressInitialUpdate = true;
+					instance = new promise.office({ el: '#' + $target.attr('id') });
+				}
+			}, 5 );
 		} else if ( typeof instance === 'object' ) {
 			window.cvcAddressInitialUpdate = true;
 			window.cvcOfficeInitialUpdate = true;

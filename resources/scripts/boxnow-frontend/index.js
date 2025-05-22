@@ -32,7 +32,9 @@ boxnow.then( function ( promise ) {
 				instance.$destroy();
 			}
 
-			instance = new promise.apm({ el: '#' + $target.attr('id') });
+			setTimeout( function() {
+				instance = new promise.apm({ el: '#' + $target.attr('id') });
+			}, 5 );
 		} else if ( typeof instance === 'object' ) {
 			window.boxnowApmInitialUpdate = true;
 			

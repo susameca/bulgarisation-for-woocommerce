@@ -34,13 +34,15 @@ econt.then( function ( promise ) {
 				instance.$destroy();
 			}
 
-			if ( type === 'address' ) {
-				window.econtOfficeInitialUpdate = true;
-				instance = new promise.address({ el: '#' + $target.attr('id') });
-			} else if ( type === 'office' ) {
-				window.econtAddressInitialUpdate = true;
-				instance = new promise.office({ el: '#' + $target.attr('id') });
-			}
+			setTimeout( function() {
+				if ( type === 'address' ) {
+					window.econtOfficeInitialUpdate = true;
+					instance = new promise.address({ el: '#' + $target.attr('id') });
+				} else if ( type === 'office' ) {
+					window.econtAddressInitialUpdate = true;
+					instance = new promise.office({ el: '#' + $target.attr('id') });
+				}
+			}, 5 );
 		} else if ( typeof instance === 'object' ) {
 			window.econtAddressInitialUpdate = true;
 			window.econtOfficeInitialUpdate = true;

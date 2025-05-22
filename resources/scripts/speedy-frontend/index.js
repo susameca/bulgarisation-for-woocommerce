@@ -34,13 +34,15 @@ speedy.then( function ( promise ) {
 				instance.$destroy();
 			}
 
-			if ( type === 'address' ) {
-				window.speedyOfficeInitialUpdate = true;
-				instance = new promise.address({ el: '#' + $target.attr('id') });
-			} else if ( type === 'office' ) {
-				window.speedyAddressInitialUpdate = true;
-				instance = new promise.office({ el: '#' + $target.attr('id') });
-			}
+			setTimeout( function() {
+				if ( type === 'address' ) {
+					window.speedyOfficeInitialUpdate = true;
+					instance = new promise.address({ el: '#' + $target.attr('id') });
+				} else if ( type === 'office' ) {
+					window.speedyAddressInitialUpdate = true;
+					instance = new promise.office({ el: '#' + $target.attr('id') });
+				}
+			}, 5 );
 		} else if ( typeof instance === 'object' ) {
 			window.speedyAddressInitialUpdate = true;
 			window.speedyOfficeInitialUpdate = true;
