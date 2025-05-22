@@ -445,4 +445,8 @@ class BoxNow {
 
 		wp_die();
 	}
+
+	public static function message_dismiss_callback() {
+		update_option( 'woo_bg_boxnow_message_dismiss', true );
+	}
 }
