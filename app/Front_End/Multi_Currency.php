@@ -44,7 +44,7 @@ class Multi_Currency {
 		if( $current_currency == 'BGN' ) {
 			$price_eur = self::convert_to_eur($price);
 		
-			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-eur\"> (€$price_eur) </span>";
+			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-eur\"> (" . $price_eur . "€) </span>";
 
 			return $price_html . $formatted_price_eur;
 		} elseif ($current_currency == 'EUR' ) {
@@ -108,7 +108,7 @@ class Multi_Currency {
 	public static function add_rate_row_email( $total_rows, $myorder_obj ) {
 		$total_rows['used_rate'] = array(
 			'label' => __( 'Fixed conversion rate:', 'woo-bg' ),
-			'value'   => '€1 = 1.95583 лв.'
+			'value'   => '1 € = 1.95583 лв.'
 		);
 		 
 		return $total_rows;

@@ -169,7 +169,14 @@ class BaseDocument {
 			$items[] = __( 'Transaction ID', 'woo-bg' );
 		}
 
-		$items[] = __( 'Compiled by', 'woo-bg' );
+		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ) {
+			$items[] = str_replace(':', '', __( 'Fixed conversion rate:', 'woo-bg' ) );
+		}
+
+		if ( $this->prepared_by || $this->identification_code ) {
+			$items[] = __( 'Compiled by', 'woo-bg' );
+		}
+
 		$items[] = __( 'Received', 'woo-bg' );
 
 		return apply_filters( 'woo_bg/invoice/additional_items_labels', $items, $this );
@@ -202,7 +209,13 @@ class BaseDocument {
 			$items[] = $this->transaction_id;
 		}
 
-		$items[] = $this->prepared_by . " " . $this->identification_code;
+		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ) {
+			$items[] = __( '1 EUR = 1.95583 BGN', 'woo-bg' );
+		}
+
+		if ( $this->prepared_by || $this->identification_code ) {
+			$items[] = $this->prepared_by . " " . $this->identification_code;
+		}
 		$items[] = $this->woo_order->get_billing_first_name() . ' ' . $this->woo_order->get_billing_last_name();
 
 		return apply_filters( 'woo_bg/invoice/additional_items', $items, $this );
@@ -215,7 +228,7 @@ class BaseDocument {
 			$document_number = woo_bg_get_option( 'invoice', $this->document_number_option );
 
 			if ( woo_bg_check_if_order_with_that_doc_number_exists( $document_number, $this->document_number_meta ) ) {
-				$document_number = woo_bg_get_next_document_number( $this->document_number_meta, $this->document_number_option );
+				$document_number = woo_bg_get_next_document_number( $this->document_number_meta );
 			}
 
 			woo_bg_set_option( 'invoice', $this->document_number_option, str_pad( $document_number + 1, 10, '0', STR_PAD_LEFT ) );
