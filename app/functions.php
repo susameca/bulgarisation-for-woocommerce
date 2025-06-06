@@ -569,7 +569,7 @@ function woo_bg_check_if_order_with_that_doc_number_exists( $document_number, $d
 	return ( !empty( $orders ) );
 }
 
-function woo_bg_get_next_document_number( $meta_field, $document_number_option ) {
+function woo_bg_get_next_document_number( $meta_field ) {
 	$orders = wc_get_orders( array(
 		'meta_key'      => $meta_field,
 		'meta_compare'  => 'exists', 

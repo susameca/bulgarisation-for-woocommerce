@@ -41,6 +41,8 @@ class BoxNow_Tab extends Base_Tab {
 		?>
 		<a href="<?php echo esc_html( add_query_arg( 'clear-cache', true ) ) ?>" class="button-secondary"><?php esc_html_e( 'Clear cache', 'woo-bg' ) ?></a>
 
+		<div class="notice"><p><?php _e( 'Please use "Classic Checkout" block or [woocommerce_checkout] shortcode.', 'woo-bg' ) ?></p></div>
+
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
 		<?php
 	}

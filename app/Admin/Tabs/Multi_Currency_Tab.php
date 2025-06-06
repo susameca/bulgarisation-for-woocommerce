@@ -22,6 +22,8 @@ class Multi_Currency_Tab extends Base_Tab {
 		woo_bg_support_text();
 		?>
 
+		<div class="notice"><p><?php _e( 'Please use "Classic Checkout" and "Classic Cart" blocks or [woocommerce_checkout] and [woocommerce_cart] shortcodes.', 'woo-bg' ) ?></p></div>
+
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
 		<?php
 	}

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-20 19:27+0000\n"
+"POT-Creation-Date: 2025-05-27 18:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,8 +16,8 @@ msgstr ""
 "X-Loco-Version: 2.5.0; wp-5.6\n"
 "X-Domain: woo-bg"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:122 app/Admin/Tabs/BoxNow_Tab.php:139
-#: app/Admin/Tabs/BoxNow_Tab.php:156
+#: app/Admin/Tabs/BoxNow_Tab.php:124 app/Admin/Tabs/BoxNow_Tab.php:141
+#: app/Admin/Tabs/BoxNow_Tab.php:158
 msgid " to "
 msgstr ""
 
@@ -54,8 +54,8 @@ msgstr ""
 msgid "(self-declared)"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:124 app/Admin/Tabs/BoxNow_Tab.php:140
-#: app/Admin/Tabs/BoxNow_Tab.php:158
+#: app/Admin/Tabs/BoxNow_Tab.php:126 app/Admin/Tabs/BoxNow_Tab.php:142
+#: app/Admin/Tabs/BoxNow_Tab.php:160
 msgid "+ Add new row"
 msgstr ""
 
@@ -73,8 +73,8 @@ msgstr ""
 msgid "A4 with copy on single page"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:95
-#: app/Admin/Tabs/Speedy_Tab.php:87
+#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Econt_Tab.php:97
+#: app/Admin/Tabs/Speedy_Tab.php:89
 msgid ""
 "Add additional variations information. Please use this option only if you "
 "want the variation data to be available in the label print and it's missing."
@@ -85,20 +85,20 @@ msgid "Add column on orders list."
 msgstr ""
 
 #: app/Admin/CVC.php:139 app/Admin/Econt.php:138 app/Admin/Speedy.php:140
-#: app/Admin/Tabs/CVC_Tab.php:95 app/Admin/Tabs/Econt_Tab.php:135
-#: app/Admin/Tabs/Speedy_Tab.php:97 app/Front_End/Checkout/Company.php:77
+#: app/Admin/Tabs/CVC_Tab.php:97 app/Admin/Tabs/Econt_Tab.php:137
+#: app/Admin/Tabs/Speedy_Tab.php:99 app/Front_End/Checkout/Company.php:77
 #: app/Shipping/CVC/Method.php:138 app/Shipping/Econt/Method.php:135
 #: app/Shipping/Speedy/Method.php:143
 msgid "Address"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:113
+#: app/Admin/Tabs/BoxNow_Tab.php:115
 msgid ""
 "After you select the option, you must save the settings in order the correct "
 "price settings to be shown."
 msgstr ""
 
-#: app/Admin/BoxNow.php:123 app/Admin/Tabs/BoxNow_Tab.php:91
+#: app/Admin/BoxNow.php:123 app/Admin/Tabs/BoxNow_Tab.php:93
 msgid "Allow returns"
 msgstr ""
 
@@ -114,7 +114,7 @@ msgstr ""
 msgid "Always"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:155
+#: app/Admin/Tabs/BoxNow_Tab.php:157
 msgid "and"
 msgstr ""
 
@@ -122,11 +122,11 @@ msgstr ""
 msgid "API Key"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:62
+#: app/Admin/Tabs/CVC_Tab.php:64
 msgid "API Token"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:166
+#: app/Admin/Tabs/CVC_Tab.php:168
 msgid "API Token is incorrect."
 msgstr ""
 
@@ -138,7 +138,7 @@ msgstr ""
 msgid "Automat locator"
 msgstr ""
 
-#: app/Admin/BoxNow.php:133 app/Admin/Tabs/BoxNow_Tab.php:178
+#: app/Admin/BoxNow.php:133 app/Admin/Tabs/BoxNow_Tab.php:180
 msgid "Automatically pack products to boxes"
 msgstr ""
 
@@ -184,7 +184,7 @@ msgstr ""
 msgid "BOX NOW Settings"
 msgstr ""
 
-#: app/Admin/BoxNow.php:132 app/Admin/Tabs/BoxNow_Tab.php:192
+#: app/Admin/BoxNow.php:132 app/Admin/Tabs/BoxNow_Tab.php:194
 msgid "Box size"
 msgstr ""
 
@@ -242,7 +242,7 @@ msgstr ""
 msgid "Cargo"
 msgstr ""
 
-#: app/functions.php:51 app/Admin/Tabs/Econt_Tab.php:108
+#: app/functions.php:51 app/Admin/Tabs/Econt_Tab.php:110
 msgid "Cash"
 msgstr ""
 
@@ -250,15 +250,15 @@ msgstr ""
 msgid "Cash on delivery"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:97
+#: app/Admin/Tabs/Econt_Tab.php:99
 msgid "Cash on delivery agreement"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:82 app/Admin/Tabs/Speedy_Tab.php:84
+#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Speedy_Tab.php:86
 msgid "Cash on delivery as PPP."
 msgstr ""
 
-#: app/Admin/Tabs/Speedy_Tab.php:85
+#: app/Admin/Tabs/Speedy_Tab.php:87
 msgid "Cash on delivery with cash receipt."
 msgstr ""
 
@@ -284,7 +284,7 @@ msgstr ""
 msgid "Check on checkout and disable COD."
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:45
+#: app/Admin/Tabs/Multi_Currency_Tab.php:47
 msgid "Checkout Message"
 msgstr ""
 
@@ -300,16 +300,16 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:177 app/Admin/Tabs/Speedy_Tab.php:133
+#: app/Admin/Tabs/Econt_Tab.php:179 app/Admin/Tabs/Speedy_Tab.php:135
 msgid "Choose a city and save in order to show offices."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:97
+#: app/Admin/Tabs/Econt_Tab.php:99
 msgid "Choose cash on delivery agreement"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Econt_Tab.php:167
-#: app/Admin/Tabs/Speedy_Tab.php:124
+#: app/Admin/Tabs/CVC_Tab.php:88 app/Admin/Tabs/Econt_Tab.php:169
+#: app/Admin/Tabs/Speedy_Tab.php:126
 msgid "City"
 msgstr ""
 
@@ -318,11 +318,11 @@ msgstr ""
 msgid "Clear cache"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:71
+#: app/Admin/Tabs/BoxNow_Tab.php:73
 msgid "Client ID"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:72
+#: app/Admin/Tabs/BoxNow_Tab.php:74
 msgid "Client Secret"
 msgstr ""
 
@@ -354,7 +354,7 @@ msgstr ""
 msgid "Contract"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:63
+#: app/Admin/Tabs/Multi_Currency_Tab.php:65
 msgid "Conversion rate message"
 msgstr ""
 
@@ -362,7 +362,7 @@ msgstr ""
 msgid "Copy Label Data"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:104
+#: app/Admin/Tabs/Econt_Tab.php:106
 msgid "Credit"
 msgstr ""
 
@@ -406,7 +406,7 @@ msgstr ""
 msgid "Date: %s"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:83
+#: app/Admin/Tabs/Nra_Tab.php:81
 msgid "Days added to documents due date."
 msgstr ""
 
@@ -418,7 +418,7 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:192
+#: app/Admin/Tabs/BoxNow_Tab.php:194
 msgid "Default box size"
 msgstr ""
 
@@ -440,7 +440,7 @@ msgstr ""
 msgid "Delivery type"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:64 app/Admin/Tabs/Econt_Tab.php:66
+#: app/Admin/Tabs/BoxNow_Tab.php:66 app/Admin/Tabs/Econt_Tab.php:68
 msgid "Demo"
 msgstr ""
 
@@ -477,7 +477,7 @@ msgstr ""
 msgid "Documents"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:150
+#: app/Admin/Tabs/Nra_Tab.php:148
 msgid "Documents Settings"
 msgstr ""
 
@@ -491,11 +491,11 @@ msgstr ""
 msgid "Due date"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:83
+#: app/Admin/Tabs/Nra_Tab.php:81
 msgid "Due days"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:85 app/Admin/Tabs/CVC_Tab.php:81
+#: app/Admin/Tabs/BoxNow_Tab.php:87 app/Admin/Tabs/CVC_Tab.php:83
 msgid "E-mail"
 msgstr ""
 
@@ -633,21 +633,21 @@ msgid ""
 "order."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:85
+#: app/Admin/Tabs/Nra_Tab.php:83
 msgid ""
 "Enter an ID in the invoices and credit memos that replace the compiler's "
 "signature."
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:81
+#: app/Admin/Tabs/CVC_Tab.php:83
 msgid "Enter sender email."
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:79
+#: app/Admin/Tabs/CVC_Tab.php:81
 msgid "Enter sender name."
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:80
+#: app/Admin/Tabs/CVC_Tab.php:82
 msgid "Enter sender phone."
 msgstr ""
 
@@ -655,33 +655,33 @@ msgstr ""
 msgid "Enter the generated API key."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:84
+#: app/Admin/Tabs/Nra_Tab.php:82
 msgid ""
 "Enter the name of the compiler of the automatically generated documents, "
 "which will be displayed in them."
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:71
+#: app/Admin/Tabs/BoxNow_Tab.php:73
 msgid "Enter your Client ID."
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:72
+#: app/Admin/Tabs/BoxNow_Tab.php:74
 msgid "Enter your Client Secret."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:74 app/Admin/Tabs/Speedy_Tab.php:66
+#: app/Admin/Tabs/Econt_Tab.php:76 app/Admin/Tabs/Speedy_Tab.php:68
 msgid "Enter your password."
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:62
+#: app/Admin/Tabs/CVC_Tab.php:64
 msgid "Enter your token."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:73 app/Admin/Tabs/Speedy_Tab.php:65
+#: app/Admin/Tabs/Econt_Tab.php:75 app/Admin/Tabs/Speedy_Tab.php:67
 msgid "Enter your username."
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:70 app/Admin/Tabs/Econt_Tab.php:72
+#: app/Admin/Tabs/BoxNow_Tab.php:72 app/Admin/Tabs/Econt_Tab.php:74
 msgid "Environment"
 msgstr ""
 
@@ -745,7 +745,7 @@ msgstr ""
 msgid "Fixed price"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:86
+#: app/Admin/Tabs/Nra_Tab.php:84
 msgid "Footer text"
 msgstr ""
 
@@ -764,8 +764,8 @@ msgstr ""
 msgid "For single donation as development support you can send at "
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Econt_Tab.php:95
-#: app/Admin/Tabs/Speedy_Tab.php:87
+#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Econt_Tab.php:97
+#: app/Admin/Tabs/Speedy_Tab.php:89
 msgid "Force variations in label"
 msgstr ""
 
@@ -786,31 +786,31 @@ msgstr ""
 msgid "Free shipping"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:173 app/Shipping/CVC/Method.php:175
+#: app/Admin/Tabs/BoxNow_Tab.php:175 app/Shipping/CVC/Method.php:175
 #: app/Shipping/Econt/Method.php:157 app/Shipping/Speedy/Method.php:154
 msgid "Free shipping over"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:173 app/Shipping/CVC/Method.php:178
+#: app/Admin/Tabs/BoxNow_Tab.php:175 app/Shipping/CVC/Method.php:178
 #: app/Shipping/Econt/Method.php:160 app/Shipping/Speedy/Method.php:157
 msgid "Free shipping over total cart price."
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:98 app/Admin/Tabs/BoxNow_Tab.php:130
+#: app/Admin/Tabs/BoxNow_Tab.php:100 app/Admin/Tabs/BoxNow_Tab.php:132
 msgid "From/To in kg"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:106 app/Admin/Tabs/BoxNow_Tab.php:165
+#: app/Admin/Tabs/BoxNow_Tab.php:108 app/Admin/Tabs/BoxNow_Tab.php:167
 msgid "From/To kg and Order Total"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:102 app/Admin/Tabs/BoxNow_Tab.php:145
+#: app/Admin/Tabs/BoxNow_Tab.php:104 app/Admin/Tabs/BoxNow_Tab.php:147
 msgid "From/To Order Total"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:210 app/Admin/Tabs/CVC_Tab.php:135
-#: app/Admin/Tabs/Econt_Tab.php:219 app/Admin/Tabs/Nekorekten_Com_Tab.php:61
-#: app/Admin/Tabs/Speedy_Tab.php:155
+#: app/Admin/Tabs/BoxNow_Tab.php:212 app/Admin/Tabs/CVC_Tab.php:137
+#: app/Admin/Tabs/Econt_Tab.php:221 app/Admin/Tabs/Nekorekten_Com_Tab.php:61
+#: app/Admin/Tabs/Speedy_Tab.php:157
 msgid "General"
 msgstr ""
 
@@ -831,16 +831,16 @@ msgstr ""
 msgid "Generate label"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:92 app/Admin/Tabs/CVC_Tab.php:85
-#: app/Admin/Tabs/Econt_Tab.php:96 app/Admin/Tabs/Speedy_Tab.php:88
+#: app/Admin/Tabs/BoxNow_Tab.php:94 app/Admin/Tabs/CVC_Tab.php:87
+#: app/Admin/Tabs/Econt_Tab.php:98 app/Admin/Tabs/Speedy_Tab.php:90
 msgid "Generate label after checkout"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:153
+#: app/Admin/Tabs/Nra_Tab.php:151
 msgid "Global Shop Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:103
+#: app/Admin/Tabs/Nra_Tab.php:101
 msgid ""
 "group \"A\" - for goods and services, the sales of which are exempt from "
 "taxation, for goods and services, the sales of which are subject to 0% VAT, "
@@ -851,15 +851,15 @@ msgid ""
 "separately."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:93
+#: app/Admin/Tabs/Nra_Tab.php:91
 msgid "Group - A"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:97
+#: app/Admin/Tabs/Nra_Tab.php:95
 msgid "Group - B"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:101
+#: app/Admin/Tabs/Nra_Tab.php:99
 msgid "Group - G"
 msgstr ""
 
@@ -875,7 +875,7 @@ msgid ""
 "field."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:104
+#: app/Admin/Tabs/Nra_Tab.php:102
 msgid "How to return the amount when the client cancel the order."
 msgstr ""
 
@@ -883,11 +883,11 @@ msgstr ""
 msgid "https://autopolis.bg/"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:85
+#: app/Admin/Tabs/Nra_Tab.php:83
 msgid "Identification code"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:173
+#: app/Admin/Tabs/Nra_Tab.php:171
 msgid "Identifier"
 msgstr ""
 
@@ -896,7 +896,7 @@ msgid ""
 "If it' filled the invoices will have different number than the NRA documents."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:189
+#: app/Admin/Tabs/Nra_Tab.php:187
 msgid ""
 "If set to yes, all deliveries with PPP will be removed from documents and "
 "XML export"
@@ -929,7 +929,7 @@ msgid ""
 "want to ship to Greece or Romania."
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:239
+#: app/Admin/Tabs/BoxNow_Tab.php:241
 msgid "Incorrect Client ID or Client Secret."
 msgstr ""
 
@@ -950,7 +950,7 @@ msgstr ""
 msgid "Invoice"
 msgstr ""
 
-#: app/Admin/Econt.php:154 app/Admin/Tabs/Econt_Tab.php:117
+#: app/Admin/Econt.php:154 app/Admin/Tabs/Econt_Tab.php:119
 msgid "Invoice number"
 msgstr ""
 
@@ -966,12 +966,12 @@ msgstr ""
 msgid "IP Country"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:188
+#: app/Admin/Tabs/Nra_Tab.php:186
 #, php-format
 msgid "Is %s courier?"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:121 app/Admin/Tabs/BoxNow_Tab.php:153
+#: app/Admin/Tabs/BoxNow_Tab.php:123 app/Admin/Tabs/BoxNow_Tab.php:155
 msgid "kg"
 msgstr ""
 
@@ -991,7 +991,7 @@ msgstr ""
 msgid "Label number: %s. %s"
 msgstr ""
 
-#: app/Admin/BoxNow.php:136 app/Admin/Tabs/BoxNow_Tab.php:190
+#: app/Admin/BoxNow.php:136 app/Admin/Tabs/BoxNow_Tab.php:192
 msgid "Large Box"
 msgstr ""
 
@@ -1011,15 +1011,15 @@ msgstr ""
 msgid "License Key"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:68 app/Admin/Tabs/Econt_Tab.php:70
+#: app/Admin/Tabs/BoxNow_Tab.php:70 app/Admin/Tabs/Econt_Tab.php:72
 msgid "Live"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:89
+#: app/Admin/Tabs/BoxNow_Tab.php:91
 msgid "Location"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:147
+#: app/Admin/Tabs/Nra_Tab.php:145
 msgid "Main Company Settings"
 msgstr ""
 
@@ -1031,7 +1031,7 @@ msgstr ""
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:171
+#: app/Admin/Tabs/Nra_Tab.php:169
 msgid "Manner of payment of the order according to the NRA system."
 msgstr ""
 
@@ -1039,7 +1039,7 @@ msgstr ""
 msgid "Maximum price payed by the client"
 msgstr ""
 
-#: app/Admin/BoxNow.php:135 app/Admin/Tabs/BoxNow_Tab.php:186
+#: app/Admin/BoxNow.php:135 app/Admin/Tabs/BoxNow_Tab.php:188
 msgid "Medium Box"
 msgstr ""
 
@@ -1059,8 +1059,8 @@ msgstr ""
 msgid "MOL: %s"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:83 app/Admin/Tabs/CVC_Tab.php:79
-#: app/Admin/Tabs/Econt_Tab.php:92 app/Admin/Tabs/Speedy_Tab.php:82
+#: app/Admin/Tabs/BoxNow_Tab.php:85 app/Admin/Tabs/CVC_Tab.php:81
+#: app/Admin/Tabs/Econt_Tab.php:94 app/Admin/Tabs/Speedy_Tab.php:84
 msgid "Name"
 msgstr ""
 
@@ -1095,7 +1095,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:192
+#: app/Admin/Tabs/Econt_Tab.php:194
 msgid "No agreement"
 msgstr ""
 
@@ -1109,11 +1109,11 @@ msgstr ""
 msgid "No orders found for this month."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:273
+#: app/Admin/Tabs/Econt_Tab.php:275
 msgid "No profiles was found. Please contact with Econt."
 msgstr ""
 
-#: app/Admin/Tabs/Speedy_Tab.php:207
+#: app/Admin/Tabs/Speedy_Tab.php:209
 msgid "No profiles was found. Please contact with Speedy."
 msgstr ""
 
@@ -1155,9 +1155,9 @@ msgid "NRA unique number"
 msgstr ""
 
 #: app/Admin/CVC.php:138 app/Admin/Econt.php:137 app/Admin/Speedy.php:139
-#: app/Admin/Tabs/CVC_Tab.php:91 app/Admin/Tabs/CVC_Tab.php:113
-#: app/Admin/Tabs/Econt_Tab.php:131 app/Admin/Tabs/Econt_Tab.php:174
-#: app/Admin/Tabs/Speedy_Tab.php:93 app/Admin/Tabs/Speedy_Tab.php:130
+#: app/Admin/Tabs/CVC_Tab.php:93 app/Admin/Tabs/CVC_Tab.php:115
+#: app/Admin/Tabs/Econt_Tab.php:133 app/Admin/Tabs/Econt_Tab.php:176
+#: app/Admin/Tabs/Speedy_Tab.php:95 app/Admin/Tabs/Speedy_Tab.php:132
 #: app/Shipping/CVC/Method.php:137 app/Shipping/Econt/Method.php:134
 #: app/Shipping/Speedy/Method.php:142
 msgid "Office"
@@ -1217,11 +1217,11 @@ msgstr ""
 msgid "Pack count"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:121
+#: app/Admin/Tabs/Econt_Tab.php:123
 msgid "Packing list"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:123
+#: app/Admin/Tabs/Econt_Tab.php:125
 msgid "Packing list or invoice number"
 msgstr ""
 
@@ -1238,11 +1238,11 @@ msgstr ""
 msgid "Partial delivery"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:74 app/Admin/Tabs/Speedy_Tab.php:66
+#: app/Admin/Tabs/Econt_Tab.php:76 app/Admin/Tabs/Speedy_Tab.php:68
 msgid "Password"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:83
+#: app/Admin/Tabs/CVC_Tab.php:85
 msgid "Pay by contract"
 msgstr ""
 
@@ -1250,7 +1250,7 @@ msgstr ""
 msgid "Payment method"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:125
+#: app/Admin/Tabs/Nra_Tab.php:123
 #, php-format
 msgid "Payment method: %s"
 msgstr ""
@@ -1259,7 +1259,7 @@ msgstr ""
 msgid "Payment service provider"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:171
+#: app/Admin/Tabs/Nra_Tab.php:169
 msgid "Payment Type"
 msgstr ""
 
@@ -1267,8 +1267,8 @@ msgstr ""
 msgid "PDF Files"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:84 app/Admin/Tabs/CVC_Tab.php:80
-#: app/Admin/Tabs/Econt_Tab.php:93 app/Admin/Tabs/Speedy_Tab.php:83
+#: app/Admin/Tabs/BoxNow_Tab.php:86 app/Admin/Tabs/CVC_Tab.php:82
+#: app/Admin/Tabs/Econt_Tab.php:95 app/Admin/Tabs/Speedy_Tab.php:85
 msgid "Phone"
 msgstr ""
 
@@ -1322,28 +1322,40 @@ msgstr ""
 msgid "Please select region."
 msgstr ""
 
+#: app/Admin/Tabs/Multi_Currency_Tab.php:25
+msgid ""
+"Please use \"Classic Checkout\" and \"Classic Cart\" blocks or "
+"[woocommerce_checkout] and [woocommerce_cart] shortcodes."
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:44 app/Admin/Tabs/CVC_Tab.php:45
+#: app/Admin/Tabs/Econt_Tab.php:46 app/Admin/Tabs/Speedy_Tab.php:45
+msgid ""
+"Please use \"Classic Checkout\" block or [woocommerce_checkout] shortcode."
+msgstr ""
+
 #: app/Admin/Tabs/Settings_Tab.php:11
 msgid "Plugin Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:84
+#: app/Admin/Tabs/Nra_Tab.php:82
 msgid "Prepared by"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:123 app/Admin/Tabs/BoxNow_Tab.php:141
-#: app/Admin/Tabs/BoxNow_Tab.php:157 app/Invoice/Document/BaseDocument.php:97
+#: app/Admin/Tabs/BoxNow_Tab.php:125 app/Admin/Tabs/BoxNow_Tab.php:143
+#: app/Admin/Tabs/BoxNow_Tab.php:159 app/Invoice/Document/BaseDocument.php:97
 msgid "Price"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:223
+#: app/Admin/Tabs/BoxNow_Tab.php:225
 msgid "Price options"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:110
+#: app/Admin/Tabs/BoxNow_Tab.php:112
 msgid "Price type"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:87
+#: app/Admin/Tabs/Nra_Tab.php:85
 msgid "Print order total after the table. Works only in levs."
 msgstr ""
 
@@ -1363,19 +1375,19 @@ msgstr ""
 msgid "Qty"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:44
+#: app/Admin/Tabs/Multi_Currency_Tab.php:46
 msgid "Rate message in Emails"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:42
+#: app/Admin/Tabs/Multi_Currency_Tab.php:44
 msgid "Rate message on Cart page"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:41
+#: app/Admin/Tabs/Multi_Currency_Tab.php:43
 msgid "Rate message on Product page"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:43
+#: app/Admin/Tabs/Multi_Currency_Tab.php:45
 msgid "Rate message on Shop page"
 msgstr ""
 
@@ -1423,7 +1435,7 @@ msgstr ""
 msgid "Released under Art. 3 payment without PPP"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:94 app/Admin/Tabs/Speedy_Tab.php:86
+#: app/Admin/Tabs/Econt_Tab.php:96 app/Admin/Tabs/Speedy_Tab.php:88
 msgid "Remove APT from offices"
 msgstr ""
 
@@ -1435,7 +1447,7 @@ msgstr ""
 msgid "Reports"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:104
+#: app/Admin/Tabs/Nra_Tab.php:102
 msgid "Return method"
 msgstr ""
 
@@ -1499,39 +1511,39 @@ msgstr ""
 msgid "Select a month for the report"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:104 app/Admin/Tabs/Econt_Tab.php:162
+#: app/Admin/Tabs/CVC_Tab.php:106 app/Admin/Tabs/Econt_Tab.php:164
 msgid "Select Address"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:97 app/Admin/Tabs/Econt_Tab.php:137
-#: app/Admin/Tabs/Speedy_Tab.php:99
+#: app/Admin/Tabs/CVC_Tab.php:99 app/Admin/Tabs/Econt_Tab.php:139
+#: app/Admin/Tabs/Speedy_Tab.php:101
 msgid ""
 "Select from where you will send the packages and save to show more options."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:110
+#: app/Admin/Tabs/Econt_Tab.php:112
 msgid "Select how you will pay for the shipments."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:123
+#: app/Admin/Tabs/Econt_Tab.php:125
 msgid "Select if you want to have packing list or invoice number in the label."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:90 app/Admin/Tabs/Speedy_Tab.php:80
+#: app/Admin/Tabs/Econt_Tab.php:92 app/Admin/Tabs/Speedy_Tab.php:82
 msgid "Select profile"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:90 app/Admin/Tabs/Speedy_Tab.php:80
+#: app/Admin/Tabs/Econt_Tab.php:92 app/Admin/Tabs/Speedy_Tab.php:82
 msgid ""
 "Select the profile you want to use and save to show or update the other "
 "options."
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:70
+#: app/Admin/Tabs/BoxNow_Tab.php:72
 msgid "Select used environment."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:72
+#: app/Admin/Tabs/Econt_Tab.php:74
 msgid ""
 "Select used environment. For demo you can use Username: \"iasp-dev\" and "
 "Password: \"1Asp-dev\". For live environment use your credentials or create "
@@ -1551,10 +1563,10 @@ msgstr ""
 msgid "Send customer notification for delivery."
 msgstr ""
 
-#: app/Admin/BoxNow.php:119 app/Admin/Tabs/BoxNow_Tab.php:220
-#: app/Admin/Tabs/CVC_Tab.php:97 app/Admin/Tabs/CVC_Tab.php:145
-#: app/Admin/Tabs/Econt_Tab.php:137 app/Admin/Tabs/Econt_Tab.php:229
-#: app/Admin/Tabs/Speedy_Tab.php:99 app/Admin/Tabs/Speedy_Tab.php:165
+#: app/Admin/BoxNow.php:119 app/Admin/Tabs/BoxNow_Tab.php:222
+#: app/Admin/Tabs/CVC_Tab.php:99 app/Admin/Tabs/CVC_Tab.php:147
+#: app/Admin/Tabs/Econt_Tab.php:139 app/Admin/Tabs/Econt_Tab.php:231
+#: app/Admin/Tabs/Speedy_Tab.php:101 app/Admin/Tabs/Speedy_Tab.php:167
 msgid "Send From"
 msgstr ""
 
@@ -1570,7 +1582,7 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:110
+#: app/Admin/Tabs/Econt_Tab.php:112
 msgid "Sender payment type"
 msgstr ""
 
@@ -1596,7 +1608,7 @@ msgstr ""
 msgid "Shipment type"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:156
+#: app/Admin/Tabs/Nra_Tab.php:154
 msgid "Shipping Methods Settings"
 msgstr ""
 
@@ -1605,23 +1617,23 @@ msgstr ""
 msgid "Shipping: %s"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:44
+#: app/Admin/Tabs/Multi_Currency_Tab.php:46
 msgid "Show message about conversion rate in emails."
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:42
+#: app/Admin/Tabs/Multi_Currency_Tab.php:44
 msgid "Show message about conversion rate on the cart page."
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:41
+#: app/Admin/Tabs/Multi_Currency_Tab.php:43
 msgid "Show message about conversion rate on the product page."
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:43
+#: app/Admin/Tabs/Multi_Currency_Tab.php:45
 msgid "Show message about conversion rate on the shop page in each product."
 msgstr ""
 
-#: app/Admin/BoxNow.php:134 app/Admin/Tabs/BoxNow_Tab.php:182
+#: app/Admin/BoxNow.php:134 app/Admin/Tabs/BoxNow_Tab.php:184
 msgid "Small Box"
 msgstr ""
 
@@ -1764,8 +1776,8 @@ msgstr ""
 msgid "This option will remove the delivery from invoices and XML file."
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:92 app/Admin/Tabs/CVC_Tab.php:85
-#: app/Admin/Tabs/Econt_Tab.php:96 app/Admin/Tabs/Speedy_Tab.php:88
+#: app/Admin/Tabs/BoxNow_Tab.php:94 app/Admin/Tabs/CVC_Tab.php:87
+#: app/Admin/Tabs/Econt_Tab.php:98 app/Admin/Tabs/Speedy_Tab.php:90
 msgid ""
 "This option will try to generate your label immediately after user checkout. "
 "Also, will add the tracking number in the order email."
@@ -1813,7 +1825,7 @@ msgstr ""
 msgid "Total due"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:87
+#: app/Admin/Tabs/Nra_Tab.php:85
 msgid "Total in text"
 msgstr ""
 
@@ -1848,19 +1860,19 @@ msgstr ""
 msgid "Update shipment status"
 msgstr ""
 
-#: app/Admin/Tabs/Speedy_Tab.php:45
+#: app/Admin/Tabs/Speedy_Tab.php:47
 msgid "Use credentials for API."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:73 app/Admin/Tabs/Speedy_Tab.php:65
+#: app/Admin/Tabs/Econt_Tab.php:75 app/Admin/Tabs/Speedy_Tab.php:67
 msgid "Username"
 msgstr ""
 
-#: app/Admin/Tabs/Speedy_Tab.php:202
+#: app/Admin/Tabs/Speedy_Tab.php:204
 msgid "Username and password are incorrect."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:265
+#: app/Admin/Tabs/Econt_Tab.php:267
 #, php-format
 msgid ""
 "Username and password are incorrect. Please generate API keys from "
@@ -1880,7 +1892,7 @@ msgstr ""
 msgid "Vat"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:103
+#: app/Admin/Tabs/Nra_Tab.php:101
 msgid "Vat Group"
 msgstr ""
 
@@ -1908,7 +1920,7 @@ msgstr ""
 msgid "Virtual POS terminal"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:172
+#: app/Admin/Tabs/Nra_Tab.php:170
 msgid "Virtual POS №"
 msgstr ""
 
