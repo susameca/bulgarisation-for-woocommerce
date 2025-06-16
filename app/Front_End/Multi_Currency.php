@@ -38,18 +38,19 @@ class Multi_Currency {
 
 	public static function display_price_in_multiple_currencies( $price_html ) {
 		$current_currency = get_woocommerce_currency();
-		preg_match( '/[0-9.,]+/', $price_html, $matches );
+		$price_html_copy = str_replace( ' ', '', $price_html );
+		preg_match( '/[0-9.,]+/', $price_html_copy, $matches );
 		$price = isset( $matches[0] ) ? floatval( str_replace( ',', '.', $matches[0] ) ) : 0;
-	
+		
 		if( $current_currency == 'BGN' ) {
 			$price_eur = self::convert_to_eur($price);
 		
-			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-eur\"> (" . $price_eur . "€) </span>";
+			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-eur\"> (" . $price_eur . "&nbsp;€) </span>";
 
 			return $price_html . $formatted_price_eur;
 		} elseif ($current_currency == 'EUR' ) {
 			$price_bgn = self::convert_to_bgn($price);
-			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-bgn\"> ($price_bgn лв.) </span>";
+			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-bgn\"> ($price_bgn&nbsp;лв.) </span>";
 
 			return $price_html . $formatted_price_eur;
 		}
