@@ -63,7 +63,7 @@ class Method extends \WC_Shipping_Method {
 
 		$rate = array(
 			'label' => $this->title,
-			'cost' => null,
+			'cost' => 0,
 		);
 
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;

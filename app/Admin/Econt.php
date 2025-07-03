@@ -365,6 +365,12 @@ class Econt {
 			'phones' => [ woo_bg_get_option( 'econt', 'phone' ) ],
 		);
 		$label['senderAddress'] = self::generate_sender_address();
+		$send_from = woo_bg_get_option( 'econt', 'send_from' );
+
+		if ( $send_from == 'office' ) {
+			$office = woo_bg_get_option( 'econt_send_from', 'office' );
+			$label['senderOfficeCode'] = str_replace( 'officeID-', '', $office );
+		}
 
 		return $label;
 	}
