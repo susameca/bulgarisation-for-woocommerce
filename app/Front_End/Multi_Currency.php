@@ -40,7 +40,7 @@ class Multi_Currency {
 		$current_currency = get_woocommerce_currency();
 		$price_html_copy = str_replace( ' ', '', $price_html );
 		preg_match( '/[0-9.,]+/', $price_html_copy, $matches );
-		$price = isset( $matches[0] ) ? floatval( str_replace( ',', '.', $matches[0] ) ) : 0;
+		$price = isset( $matches[0] ) ? floatval( str_replace( wc_get_price_thousand_separator(), '', $matches[0] ) ) : 0;
 		
 		if( $current_currency == 'BGN' ) {
 			$price_eur = self::convert_to_eur($price);
@@ -63,7 +63,7 @@ class Multi_Currency {
 	}
 
 	public static function price_to_float( $price ) {
-		$price = str_replace( ',', '.', $price );
+		$price = str_replace( wc_get_price_thousand_separator(), '.', $price );
 		$price = preg_replace( "/[^0-9\.]/", "", $price );
 		$price = str_replace( '.', '',substr( $price, 0, -3 ) ) . substr( $price, -3 );
 
