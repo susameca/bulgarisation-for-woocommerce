@@ -105,18 +105,22 @@ class Order {
 
 		foreach ( $this->woo_order->get_items( 'shipping' ) as $item ) {
 			if ( ! $item->get_total() ) {
-				continue;
+				$price = 0;
+			} else {
+				$price = $item->get_total() / $item->get_quantity();
 			}
-			
-			$price = $item->get_total() / $item->get_quantity();
-			$item_vat = $this->vat_groups[ $this->vat_group ];
 
-			if ( wc_tax_enabled() ) {
-				if ( $item->get_total_tax() ) {
-					$item_vat = $shipping_vat;
-				} else {
-					$item_tax = $this->_tax::calc_tax( $price, array( array('compound' => 'yes', 'rate' => $item_vat ) ), true )[0];
-					$price = $price - $item_tax;
+			$item_vat = $this->vat_groups[ $this->vat_group ];
+			
+
+			if ( $price ) {
+				if ( wc_tax_enabled() ) {
+					if ( $item->get_total_tax() ) {
+						$item_vat = $shipping_vat;
+					} else {
+						$item_tax = $this->_tax::calc_tax( $price, array( array('compound' => 'yes', 'rate' => $item_vat ) ), true )[0];
+						$price = $price - $item_tax;
+					}
 				}
 			}
 
