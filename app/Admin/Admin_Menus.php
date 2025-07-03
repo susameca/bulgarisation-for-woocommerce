@@ -61,6 +61,7 @@ class Admin_Menus {
 			foreach ( $pages_to_connect as $page_id => $page_data ) {
 				if ( preg_match( "/^woocommerce_page_{$page_id}/", $screen_id ) ) {
 					add_filter( 'woocommerce_navigation_get_breadcrumbs', array( __CLASS__, 'connect_to_breadcrumbs' ) );
+					add_filter( 'admin_body_class', array( __CLASS__, 'add_body_class' ) );
 
 					return true;
 				}
@@ -68,6 +69,12 @@ class Admin_Menus {
 		}
 
 		return $is_connected;
+	}
+
+	public static function add_body_class( $classes ) {
+		$classes .= ' woocommerce_page_wc-settings';
+
+		return $classes;
 	}
 
 	public static function connect_to_breadcrumbs( $breadcrumbs ) {
