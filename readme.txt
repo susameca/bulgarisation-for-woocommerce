@@ -68,6 +68,15 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 3.4.7 = 
+Dual price: Optimizations
+Econt: Fix send from office, optimizations
+NRA Export: Optimization
+Admin:Update tabs to match new WC styles
+
+= 3.4.6 = 
+Dual price: Optimizations
+
 = 3.4.5 = 
 Dual price optimizations
 Add information in tabs
