@@ -375,7 +375,16 @@ class Method extends \WC_Shipping_Method {
 				$content['totalWeight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
 			}
 
-			$names[] = $item['data']->get_name();
+			$force = woo_bg_get_option( 'speedy', 'force_variations_in_desc' );
+			$name = $item['data']->get_name();
+
+			if ( $force === 'yes' ) {
+				if ( $attributes = $item['data']->get_attributes() ) {
+					$name .= ' - ' .implode( ',', $attributes );
+				}
+			}
+
+			$names[] = $name;
 		}
 
 		if ( !$content['totalWeight'] ) {

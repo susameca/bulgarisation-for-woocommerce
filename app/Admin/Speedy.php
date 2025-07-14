@@ -309,7 +309,6 @@ class Speedy {
 		}
 
 		$label = self::update_sender( $label );
-		$label = self::update_shipment_description( $label, $order );
 		$label = self::update_cod( $label, $order );
 
 		self::send_label_to_speedy( $label, $order );
@@ -596,27 +595,6 @@ class Speedy {
 		    unset( $label['service']['additionalServices'] );
 		}
 			
-		return $label;
-	}
-
-	protected static function update_shipment_description( $label, $order ) {
-		$force = woo_bg_get_option( 'speedy', 'force_variations_in_desc' );
-		$names = [];
-
-		foreach ( $order->get_items() as $item ) {
-			$name = $item->get_name();
-
-			if ( $force === 'yes' ) {
-				if ( $attributes = $item->get_meta_data() ) {
-					$name .= ' - ' .implode( ',', wp_list_pluck( $attributes, 'value' ) );
-				}
-			}
-
-			$names[] = $name;
-		}
-		
-		$label['content']['contents'] =  mb_substr( implode( ',', $names ), 0, 100 );
-
 		return $label;
 	}
 

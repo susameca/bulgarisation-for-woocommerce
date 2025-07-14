@@ -318,7 +318,6 @@ class Econt {
 		$label = $label['label'];
 		$label = self::update_sender( $label );
 		$label = self::update_label_pay_options( $label, $order_id );
-		$label = self::update_shipment_description( $label, $order_id );
 		$label = self::update_phone_and_names( $label, $order_id );
 
 		self::send_label_to_econt( $label, $order_id );
@@ -589,28 +588,6 @@ class Econt {
 		$shipment_type = $_REQUEST['shipmentType'];
 		$label['shipmentType'] = strtolower( $shipment_type['id'] );
 		
-		return $label;
-	}
-
-	protected static function update_shipment_description( $label, $order_id ) {
-		$force = woo_bg_get_option( 'econt', 'force_variations_in_desc' );
-		$order = wc_get_order( $order_id );
-		$names = [];
-
-		foreach ( $order->get_items() as $item ) {
-			$name = $item->get_name();
-
-			if ( $force === 'yes' ) {
-				if ( $attributes = $item->get_meta_data() ) {
-					$name .= ' - ' .implode( ',', wp_list_pluck( $attributes, 'value' ) );
-				}
-			}
-
-			$names[] = $name;
-		}
-
-		$label[ 'shipmentDescription' ] = implode( ', ', $names );
-
 		return $label;
 	}
 

@@ -141,8 +141,6 @@ class Method extends \WC_Shipping_Method {
 			if ( $item['data']->get_weight() ) {
 				$weight += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
 			}
-
-			$names[] = $item['data']->get_name();
 		}
 
 		if ( !$weight ) {

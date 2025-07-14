@@ -393,7 +393,17 @@ class Method extends \WC_Shipping_Method {
 				$cart['weight'] = 0.100;
 			}
 
-			$names[] = $item['data']->get_name();
+			$force = woo_bg_get_option( 'econt', 'force_variations_in_desc' );
+
+			$name = $item['data']->get_name();
+
+			if ( $force === 'yes' ) {
+				if ( $attributes = $item['data']->get_attributes() ) {
+					$name .= ' - ' .implode( ',', $attributes );
+				}
+			}
+
+			$names[] = $name;
 		}
 
 		if ( !$cart['weight'] ) {
