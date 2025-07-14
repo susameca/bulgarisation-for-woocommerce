@@ -40,17 +40,18 @@ class Multi_Currency {
 		$current_currency = get_woocommerce_currency();
 		$price_html_copy = str_replace( ' ', '', $price_html );
 		preg_match( '/[0-9.,]+/', $price_html_copy, $matches );
-		$price = isset( $matches[0] ) ? floatval( str_replace( wc_get_price_thousand_separator(), '', $matches[0] ) ) : 0;
+		$price = isset( $matches[0] ) ? $matches[0] : 0;
+		$price =  str_replace( [ wc_get_price_thousand_separator(), wc_get_price_decimal_separator() ], [ '', '.' ], $matches[0] );
 		
 		if( $current_currency == 'BGN' ) {
 			$price_eur = self::convert_to_eur($price);
 		
-			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-eur\"> (" . $price_eur . "&nbsp;€) </span>";
+			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-eur\"> / " . $price_eur . "&nbsp;€ </span>";
 
 			return $price_html . $formatted_price_eur;
 		} elseif ($current_currency == 'EUR' ) {
 			$price_bgn = self::convert_to_bgn($price);
-			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-bgn\"> ($price_bgn&nbsp;лв.) </span>";
+			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount amount-bgn\"> / " . $price_bgn . "&nbsp;лв. </span>";
 
 			return $price_html . $formatted_price_eur;
 		}
@@ -71,8 +72,6 @@ class Multi_Currency {
 	} 
 
 	public static function float_rate( $price ) {
-		$price = str_replace( ',', '.', $price );
-
 		return (float) $price;
 	} 
 
