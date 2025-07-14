@@ -1,0 +1,14 @@
+.woo-bg-bgntoeur-wrapper { display: flex; align-items: center; flex-wrap: wrap; }
+.woo-bg-bgntoeur-wrapper form p.submit { text-align: center; }
+.woo-bg-bgntoeur-wrapper .progress { width: 100%; max-width: 100% }
+
+.woo-bg-bgntoeur-wrapper .progress-wrapper { margin: 20px 0; width: 650px; height: 20px; background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 50%, #ccc 50%, #ccc 75%, transparent 75%, transparent); animation: progress-bar-stripes 2s linear infinite; background-size: 40px 40px; position: relative; border-radius: 5px; overflow: hidden; }
+.woo-bg-bgntoeur-wrapper .progress-wrapper .progress-bar{z-index: 3; overflow: hidden; position: absolute; height: 20px; background-color: #0073aa; text-align: center; transition: width 0.5s ease; }
+.woo-bg-bgntoeur-wrapper .progress-wrapper .progress-value-1, .progress-wrapper .progress-value-2{margin: 0; position: absolute; width: 650px; color: #0073aa; text-align: center; z-index: 2; font-weight: bold; }
+.woo-bg-bgntoeur-wrapper .progress-wrapper .progress-value-2{color: #fff; z-index: 1; }
+
+@keyframes progress-bar-stripes {from {background-position: 40px 0; } to {background-position: 0 0; } }
+
+.woo-bg-bgntoeur-wrapper .status { width: 97%; }
+.woo-bg-bgntoeur-wrapper .messages { padding: 5px 15px; width: 95%; height: 219px; overflow: overlay; background: lightgray; }
+.woo-bg-bgntoeur-wrapper .messages p { margin: 0; }
