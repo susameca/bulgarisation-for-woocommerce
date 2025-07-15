@@ -68,6 +68,11 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 3.4.8 = 
+Dual price: Optimizations
+Couriers: Change the way attributes are added in description
+Invoices: Add filter for single order item in documents
+
 = 3.4.7 = 
 Dual price: Optimizations
 Econt: Fix send from office, optimizations

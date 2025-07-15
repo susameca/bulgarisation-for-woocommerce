@@ -4,7 +4,7 @@ namespace Woo_BG;
 defined( 'ABSPATH' ) || exit;
 
 class Plugin {
-	const VERSION = '3.4.7';
+	const VERSION = '3.4.8';
 
 	protected static $_instance;
 
@@ -78,6 +78,7 @@ class Plugin {
 			woo_bg_set_option( 'shippings', 'woo_bg_econt_is_courier', 'yes' );
 			woo_bg_set_option( 'shippings', 'woo_bg_speedy_is_courier', 'yes' );
 			woo_bg_set_option( 'shippings', 'woo_bg_cvc_is_courier', 'yes' );
+			woo_bg_set_option( 'shippings', 'woo_bg_boxnow_is_courier', 'yes' );
 		}
 
 		if ( !woo_bg_get_option( 'multi_currency', 'product_rate_message' ) ) {
