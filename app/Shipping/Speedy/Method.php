@@ -377,11 +377,9 @@ class Method extends \WC_Shipping_Method {
 
 			$force = woo_bg_get_option( 'speedy', 'force_variations_in_desc' );
 			$name = $item['data']->get_name();
-
-			if ( $force === 'yes' ) {
-				if ( $attributes = $item['data']->get_attributes() ) {
-					$name .= ' - ' .implode( ',', $attributes );
-				}
+			
+			if ( $force === 'yes' && is_a( $item['data'], 'WC_Product_Variation' ) ) {
+				$name .= ' - ' . $item['data']->get_attribute_summary();
 			}
 
 			$names[] = $name;
