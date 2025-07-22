@@ -265,5 +265,34 @@ class Plugin {
 			remove_filter( 'woocommerce_locate_template', 'Woo_BG_Pro\Shipping\CheckoutLayout::change_cart_template', 999999 );
 			remove_action( 'wp_enqueue_scripts', 'Woo_BG_Pro\Assets::styles_and_js' );
 		}
+
+		$valid_pro_license_file_hash = null;
+
+		if (
+			isset( $this->container()[ 'pro_plugin_dir' ] ) && 
+			file_exists( $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) 
+		) {
+			$valid_pro_license_file_hash = hash_file( 'sha256', $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'fa76df5bd96476389a93795ccc30a257a4e860a26278dd5faa2a67b4b7f37d37';
+		}
+
+		if ( !$valid_pro_license_file_hash ) {
+			self::delete_pro();
+		}
+	}
+
+	public static function delete_pro() {
+		global $wp_filesystem;
+
+		if ( ! $wp_filesystem ) {
+			require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			WP_Filesystem();
+		}
+
+		if ( file_exists( woo_bg()->container()[ 'pro_plugin_dir' ] ) ) {
+			$wp_filesystem->delete( woo_bg()->container()[ 'pro_plugin_dir' ], true );
+		} else if ( $pro_class_file = new \ReflectionClass('Woo_BG_Pro\Checkout') ) {
+			$file_path_info = pathinfo( $pro_class_file->getFileName() );
+			$wp_filesystem->delete( $file_path_info['dirname'] . '/../', true );
+		}
 	}
 }

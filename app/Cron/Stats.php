@@ -1,6 +1,7 @@
 <?php
 namespace Woo_BG\Cron;
 use Woo_BG\Container\Client;
+use Woo_BG\Plugin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,10 +43,14 @@ class Stats {
 		
 		if ( woo_bg_is_pro_activated() ) {
 			$args['license_key'] = woo_bg_get_option( 'pro', 'license_key' );
-			$args['valid_pro_license_file_hash'] = hash_file( 'sha256', woo_bg()->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'fa76df5bd96476389a93795ccc30a257a4e860a26278dd5faa2a67b4b7f37d37';
-		}
 
-		self::check_pro_version( $args );
+			if ( 
+				isset( woo_bg()->container()[ 'pro_plugin_dir' ] ) && 
+				file_exists( woo_bg()->container()[ 'pro_plugin_dir' ] . "app/License.php" ) 
+			) {
+				$args['valid_pro_license_file_hash'] = hash_file( 'sha256', woo_bg()->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'fa76df5bd96476389a93795ccc30a257a4e860a26278dd5faa2a67b4b7f37d37';
+			}
+		}
 
 		$response = json_decode( wp_remote_retrieve_body( wp_remote_post( self::SERVER_URL . 'wp-json/woo-bg/v1/activity/', [
 			'body' => $args,
@@ -53,25 +58,6 @@ class Stats {
 
 		if ( isset( $response['is_pro_active'] ) && class_exists( '\Woo_BG_Pro\License' ) ) {
 			set_transient( \Woo_BG_Pro\License::$transient, $response['is_pro_active'], WEEK_IN_SECONDS * 2 );
-		}
-	}
-
-	private static function check_pro_version( $args ) {
-		if ( 
-			( 
-				! isset( $args['valid_pro_license_file_hash'] ) || 
-				! $args['valid_pro_license_file_hash'] 
-			) && 
-			isset( woo_bg()->container()[ 'pro_plugin_dir' ] ) 
-		) {
-			global $wp_filesystem;
-
-			if ( ! $wp_filesystem ) {
-				require_once( ABSPATH . 'wp-admin/includes/file.php' );
-				WP_Filesystem();
-			}
-
-			$wp_filesystem->delete( woo_bg()->container()[ 'pro_plugin_dir' ], true );
 		}
 	}
 }
