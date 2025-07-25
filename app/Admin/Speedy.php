@@ -502,14 +502,15 @@ class Speedy {
 
 		$recipient_country = '';
 		$bulgarian_id = 'BG';
+		
 		if ( isset( $label['recipient']['addressLocation']['countryId'] ) ){
 			$recipient_country = $label['recipient']['addressLocation']['countryId'];
 			$bulgarian_id = '100';
 		} else {
-			$country = $label['recipient']['country'];
+			$recipient_country = $label['recipient']['country'];
 		}
 
-		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) && $label['service']['additionalServices']['cod']['amount'] && $recipient_country === $bulgarian_id ) {
+		if ( isset( $label['service']['additionalServices']['cod']['amount'] ) && $label['service']['additionalServices']['cod']['amount'] && $recipient_country == $bulgarian_id ) {
 			$payment[ 'declaredValuePayer' ] = 'RECIPIENT';
 			$payment[ 'packagePayer' ] = 'RECIPIENT';
 		} else {
