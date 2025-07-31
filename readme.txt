@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.8
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.4.10
+Stable tag: 3.4.11
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -68,6 +68,11 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 3.4.11 = 
+Speedy: Label Optimizations
+Dual price: Ajax Optimizations
+Dual price: CURCY compatibility fix
+
 = 3.4.10 = 
 Global urgent update
 
@@ -118,89 +123,3 @@ Speedy: Optimizations
 BOX NOW: Options for box size
 Econt: Add option for partial delivery
 Econt, Speedy: Optimizations
-
-= 3.3.4 = 
-BOX NOW: Optimizations
-Couriers: Optimizations
-Invoices: Optimizations
-Checkout: Optimizations
-NRA: Update .xsd
-
-= 3.3.3 = 
-BOX NOW: Add errors when generating label
-BOX NOW: Optimizations
-NRA export: Optimizations
-Speedy: Optimizations
-Couriers: Optimizations
-
-= 3.3.2 = 
-Speedy: Optimizations
-Econt: Optimizations
-BOX NOW: Optimizations
-
-= 3.3.1 =
-Speedy: Fix admin generation
-
-= 3.3.0 =
-Couriers: Add label if not calculated
-Couriers: Fix recalculations
-Econt: Optimizations
-Speedy: Optimizations
-
-= 3.2.2 =
-BOX NOW: Fix label
-
-= 3.2.1 =
-BOX NOW: Fix pricing fields
-
-= 3.2.0 =
-Add BOX NOW shipping method
-Speedy: Label optimizations
-Speedy: Other optimizations
-Fix vies validation if number is not required
-NRA: Optimizations
-Invoices: Optimizations
-
-= 3.1.3 =
-Nekorekten.com: Add "Submit report" form in admin order page
-Nekorekten.com: Check for reports on checkout and disable COD
-
-= 3.1.2 =
-Invoice: Fix double country code in vat number
-Invoices: Fix if shipping doesn't have a price
-Econt: Label Optimizations
-
-= 3.1.1 =
-Add attachments to Woo Subs customer email
-Couriers: Refresh sender data on label creation
-Speedy: Optimize profile pull process
-Fix pro tab and validations
-
-= 3.1.0 =
-Speedy: Label optimizations
-Couriers: Change price options to number field
-Econt: Optimize packing list
-NRA Export: Optimization
-
-= 3.0.34 =
-Econt: Fix invoice number
-
-= 3.0.32 =
-Speedy: Add ref1/2 field in admin order edit
-Econt: Add invoice number field in admin order edit
-Econt: Change default print label to 10x9
-Couriers: Hide generate label if it's not woo_bg method
-Fix warnings
-
-= 3.0.31 =
-Speedy: Optimizations
-Documents: Optimizations
-Update dompdf and all libraries
-
-= 3.0.30 =
-Econt: Optimizations
-Couriers: Add action after generating labels
-Invoices: Remove generating doc number on pro forma
-
-= 3.0.29 =
-Econt: Optimizations
