@@ -5,8 +5,8 @@ defined( 'ABSPATH' ) || exit;
 class Multi_Currency {
 
 	public function __construct() {
-		if ( !is_admin() ) {
-			add_filter( 'wc_price', array( __CLASS__, 'display_price_in_multiple_currencies' ), 10 );
+		if ( !( is_admin() && !wp_doing_ajax() ) ) {
+			add_filter( 'wc_price', array( __CLASS__, 'display_price_in_multiple_currencies' ), 1000 );
 		}
 
 		add_action( 'woo_bg/invoice/pdf/dompdf', array( __CLASS__, 'add_wc_price_filter_to_pdfs' ) );
