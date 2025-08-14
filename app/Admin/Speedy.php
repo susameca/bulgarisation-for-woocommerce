@@ -335,9 +335,8 @@ class Speedy {
 	}
 
 	public static function update_fiscal_items( $label, $order ) {
-		$cookie_data = $order->get_meta( 'woo_bg_speedy_cookie_data' );
-
-		if ( isset( $label['service']['additionalServices']['cod']['fiscalReceiptItems'] ) && wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) && wc_tax_enabled() ) {
+		if ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) ) {
+			$cookie_data = $order->get_meta( 'woo_bg_speedy_cookie_data' );
 			$label['service']['additionalServices']['cod']['fiscalReceiptItems'] = array();
 
 			foreach ( $order->get_items() as $item ) {
@@ -359,6 +358,8 @@ class Speedy {
 					'amountWithVat' => number_format( $cookie_data['fixed_price'], 2, '.', '' ),
 				];
 			}
+		} elseif ( isset( $label['service']['additionalServices']['cod']['fiscalReceiptItems'] ) ) {
+			unset( $label['service']['additionalServices']['cod']['fiscalReceiptItems'] );
 		}
 
 		return $label;
