@@ -98,6 +98,7 @@ class Econt {
 						'useInvoiceNumber' => self::use_invoice_number(),
 						'invoiceNumber' => self::get_invoice_number( $theorder->get_id() ),
 						'label' => $label_data['label'],
+						'sendFrom' => self::get_send_from_data(),
 						'shipmentStatus' => $shipment_status,
 						'cookie_data' => $cookie_data,
 						'paymentType' => $theorder->get_payment_method(),
@@ -153,6 +154,7 @@ class Econt {
 			'description' => __( 'Description', 'woo-bg' ),
 			'invoiceNum' => __( 'Invoice number', 'woo-bg' ),
 			'partialDelivery' => __( 'Partial delivery', 'woo-bg' ),
+			'sendFrom' => __('Send From', 'woo-bg'),
 		);
 	}
 
@@ -164,6 +166,27 @@ class Econt {
 			'CARGO' => __('Cargo', 'woo-bg'),
 			'DOCUMENTPALLET' => __('Document-Pallet', 'woo-bg'),
 		) );
+	}
+
+	protected static function get_send_from_data() {
+		$container = woo_bg()->container();
+		$type = woo_bg_get_option( 'econt', 'send_from' );
+		$data = [
+			'type' => $type,
+		];
+
+		$data['currentOffice'] = woo_bg_get_option( 'econt_send_from', 'office' );
+		$data['offices'] = ( woo_bg_get_option( 'econt_send_from', 'office_city' ) ) ? self::$container[ Client::ECONT_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'econt_send_from', 'office_city' ) ) : [];
+
+		if ( !empty( $data['offices'] ) ) {
+			$data['offices'] = array_merge( $data['offices']['shops'], $data['offices']['aps'] );
+		}
+		
+		$data['currentAddress'] = woo_bg_get_option( 'econt_send_from', 'address' );
+		$data['addresses'] = $container[ Client::ECONT_PROFILE ]->get_formatted_addresses();
+
+
+		return $data;
 	}
 
 	protected static function get_offices( $cookie_data, $order ) {
@@ -369,6 +392,20 @@ class Econt {
 		if ( $send_from == 'office' ) {
 			$office = woo_bg_get_option( 'econt_send_from', 'office' );
 			$label['senderOfficeCode'] = str_replace( 'officeID-', '', $office );
+		}
+
+		if ( isset( $_REQUEST['send_from'] ) && isset( $_REQUEST['send_from_type'] ) ) {
+			switch ( $_REQUEST['send_from_type'] ) {
+				case 'address':
+					$profile_addresses = $container[ Client::ECONT_PROFILE ]->get_profile_data()['addresses'];
+
+					$label['senderAddress'] = $profile_addresses[ $_REQUEST['send_from'] ];
+					unset( $label['senderOfficeCode'] );
+					break;
+				case 'office':
+					$label['senderOfficeCode'] = str_replace( 'officeID-', '', $_REQUEST['send_from'] );
+					break;
+			}
 		}
 
 		return $label;

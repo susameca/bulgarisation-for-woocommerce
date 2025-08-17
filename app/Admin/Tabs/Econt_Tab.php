@@ -157,29 +157,23 @@ class Econt_Tab extends Base_Tab {
 
 				$offices = array_merge( $offices['shops'], $offices['aps'] );
 
+				if ( !empty( $addresses ) ) {
+					$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $addresses, 'address', __( 'Select Address', 'woo-bg' ) );
+				}
 
-				switch ( $send_from ) {
-					case 'address':
-						if ( !empty( $addresses ) ) {
-							$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $addresses, 'address', __( 'Select Address', 'woo-bg' ) );
-						}
-						break;
-					case 'office':
-						if ( !empty( $cities ) ) {
-							$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $cities, 'office_city', __( 'City', 'woo-bg' ) );
-						}
+				if ( !empty( $cities ) ) {
+					$fields[ 'econt_send_from' ][] = new Fields\Select_Field( $cities, 'office_city', __( 'City', 'woo-bg' ) );
+				}
 
-						if ( !empty( $offices ) ) {
-							$fields[ 'econt_send_from' ][] = new Fields\Select_Field( 
-								$offices, 
-								'office', 
-								__( 'Office', 'woo-bg' ), 
-								null, 
-								null, 
-								__('Choose a city and save in order to show offices.', 'woo-bg' ) 
-							);
-						}
-						break;
+				if ( !empty( $offices ) ) {
+					$fields[ 'econt_send_from' ][] = new Fields\Select_Field( 
+						$offices, 
+						'office', 
+						__( 'Office', 'woo-bg' ), 
+						null, 
+						null, 
+						__('Choose a city and save in order to show offices.', 'woo-bg' ) 
+					);
 				}
 			}
 		}

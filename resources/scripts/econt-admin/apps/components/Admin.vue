@@ -8,6 +8,69 @@
 					<form>
 						<p v-if="!shipmentStatus" class="form-field form-field-wide">
 							<label>
+								{{i18n.sendFrom}}:
+							</label>
+
+							<multiselect 
+								v-model="sendFromType" 
+								deselect-label="" 
+								selectLabel="" 
+								track-by="id" 
+								label="label" 
+								:selectedLabel="i18n.selected" 
+								:placeholder="i18n.choose"
+								:options="Object.values( types )" 
+								:searchable="true" 
+								:allow-empty="false"
+							>
+								<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
+							</multiselect>
+						</p>
+
+						<p v-if="!shipmentStatus && sendFromType.id === 'office'" class="form-field form-field-wide">
+							<label>
+								{{i18n.office}}:
+							</label>
+
+							<multiselect 
+								v-model="sendFrom" 
+								deselect-label="" 
+								selectLabel="" 
+								track-by="id" 
+								label="label" 
+								:selectedLabel="i18n.selected" 
+								:placeholder="i18n.choose"
+								:options="Object.values( sendFromOffice )" 
+								:searchable="true" 
+								:allow-empty="false"
+							>
+								<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
+							</multiselect>
+						</p>
+
+						<p v-if="!shipmentStatus && sendFromType.id === 'address'" class="form-field form-field-wide">
+							<label>
+								{{i18n.address}}:
+							</label>
+
+							<multiselect 
+								v-model="sendFrom" 
+								deselect-label="" 
+								selectLabel="" 
+								track-by="id" 
+								label="label" 
+								:selectedLabel="i18n.selected" 
+								:placeholder="i18n.choose"
+								:options="Object.values( sendFromAddress )" 
+								:searchable="true" 
+								:allow-empty="false"
+							>
+								<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
+							</multiselect>
+						</p>
+
+						<p v-if="!shipmentStatus" class="form-field form-field-wide">
+							<label>
 								{{i18n.deliveryType}}:
 							</label>
 
@@ -312,6 +375,10 @@ export default {
 	data() {
 		return {
 			loading: false,
+			sendFromOffice: [],
+			sendFromAddress: [],
+			sendFrom: '',
+			sendFromType: '',
 			type: '',
 			types: [
 				{
@@ -420,7 +487,29 @@ export default {
 			if ( type.id == wooBg_econt.cookie_data.type ) {
 				_this.type = type;
 			}
+
+			if ( type.id == wooBg_econt.sendFrom.type ) {
+				_this.sendFromType = type;
+			}
 		});
+
+
+		this.sendFromOffice = wooBg_econt.sendFrom.offices;
+		this.sendFromAddress = wooBg_econt.sendFrom.addresses;
+
+		if ( this.sendFromType.id === 'office' ) {
+			Object.values(this.sendFromOffice).forEach( function ( office ) {
+				if ( office.id.toLowerCase() == wooBg_econt.sendFrom.currentOffice.toLowerCase() ) {
+					_this.sendFrom = office;
+				}
+			});
+		} else {
+			Object.values( this.sendFromAddress ).forEach( function ( address ) {
+				if ( address.id == wooBg_econt.sendFrom.currentAddress ) {
+					_this.sendFrom = address;
+				}
+			});
+		}
 
 		this.shipmentTypes.forEach( function ( type ) {
 			if ( type.id.toLowerCase() == wooBg_econt.label.shipmentType.toLowerCase() ) {
@@ -483,6 +572,8 @@ export default {
 
 			let data = {
 				type: this.type,
+				send_from_type: this.sendFromType.id,
+				send_from: this.sendFrom.id,
 				label_data: this.labelData,
 				shipmentType: this.shipmentType,
 				office: this.office,

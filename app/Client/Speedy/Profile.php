@@ -104,19 +104,6 @@ class Profile {
 		}
 	}
 
-	public function get_formatted_addresses() {
-		$formatted = [];
-
-		foreach ( $this->get_profile_data()['addresses'] as $key => $address ) {
-			$formatted[ $key ] = array(
-				'id' => $key,
-				'label' => implode( ' ', array( $address['city']['name'], $address['quarter'], $address['street'], $address['num'], $address['other'] ) ),
-			);
-		}
-
-		return $formatted;
-	}
-
 	protected function return_single_profile() {
 		$profile_id = 0;
 

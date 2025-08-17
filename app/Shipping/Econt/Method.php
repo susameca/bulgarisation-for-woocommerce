@@ -208,7 +208,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( isset( $request['type'] ) && $request['type'] === 'ExInvalidParam' ) {
 			$data['errors'] = $request;
-		} if ( $this->cookie_data[ 'country' ] !== 'BG' ) {
+		} else if ( $this->cookie_data[ 'country' ] !== 'BG' ) {
 			$data['price'] = woo_bg_tax_based_price( $request['label']['senderDueAmount'] );
 		} else if ( isset( $request['label']['receiverDueAmount'] ) ) {
 			$data['price'] = woo_bg_tax_based_price( $request['label']['receiverDueAmount'] );
