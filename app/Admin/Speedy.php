@@ -355,7 +355,6 @@ class Speedy {
 			switch ( $_REQUEST['send_from_type'] ) {
 				case 'address':
 					$profiles = woo_bg_get_option( 'speedy', 'profile_data' );
-
 					$sender['clientId'] = $profiles['clients'][ $_REQUEST['send_from'] ]['clientId'];
 
 					unset( $sender['dropoffOfficeId'] );
