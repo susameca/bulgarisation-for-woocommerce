@@ -64,11 +64,13 @@ class Method extends \WC_Shipping_Method {
 		$rate = array(
 			'label' => $this->title,
 			'cost' => 0,
+			'meta_data' => [],
 		);
 
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
 		$rate['meta_data']['validated'] = false;
 		$chosen_shippings = WC()->session->get('chosen_shipping_methods');
+		$payment_by_data = $this->generate_payment_by_data();
 
 		if ( 
 			isset( $this->cookie_data['type'] ) && 
@@ -99,13 +101,14 @@ class Method extends \WC_Shipping_Method {
 
 			if ( !$rate['cost'] ) {
 				$this->free_shipping = true;
-				unset( $rate[ 'taxes' ] );
 			}
 		}
 
-		if ( $this->free_shipping && $rate['meta_data']['validated'] ) {
-			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
-		}
+		if ( $this->free_shipping ) {
+			$rate['meta_data']['free_shipping'] = true;
+			$rate[ 'cost' ] = 0;
+			unset( $rate[ 'taxes' ] );
+		} 
 
 		$rate = apply_filters( 'woo_bg/econt/rate', $rate, $this );
 

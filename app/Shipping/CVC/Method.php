@@ -67,6 +67,7 @@ class Method extends \WC_Shipping_Method {
 
 		$rate = array(
 			'label' => $this->title,
+			'meta_data' => [],
 		);
 
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
@@ -101,7 +102,7 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		if ( $this->free_shipping ) {
-			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
+			$rate['meta_data']['free_shipping'] = true;
 			$rate[ 'cost' ] = 0;
 		} 
 

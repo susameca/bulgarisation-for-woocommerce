@@ -98,7 +98,7 @@ class Speedy_Tab extends Base_Tab {
 							'id' => 'address',
 							'label' => __( 'Address', 'woo-bg' ),
 						),
-					), 'send_from', __( 'Send From', 'woo-bg' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'woo-bg' ),
+					), 'send_from', __( 'Send From', 'woo-bg' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'woo-bg' ) . " " . __('If you choose "Address" the profile address will be used.', 'woo-bg'),
 				);
 			}
 		}
@@ -156,7 +156,7 @@ class Speedy_Tab extends Base_Tab {
 	public function add_send_from_group_title( $titles ) {
 		if ( $this->container[ Client::SPEEDY_PROFILE ]->is_valid_profile( true ) ) {
 			$titles['speedy_send_from'] = array(
-				'title' => __( 'Send From', 'woo-bg' ),
+				'title' => __( 'Send From office', 'woo-bg' ),
 			);
 		}
 		return $titles;

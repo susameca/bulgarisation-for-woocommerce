@@ -65,10 +65,11 @@ class Method extends \WC_Shipping_Method {
 		$rate = array(
 			'label' => $this->title,
 			'cost' => 0,
+			'meta_data' => [],
 		);
 
 		if ( $this->free_shipping_over && woo_bg_get_package_total() >= $this->free_shipping_over ) {
-			$rate['label'] = sprintf( __( '%s: Free shipping', 'woo-bg' ), $rate['label'] );
+			$rate['meta_data']['free_shipping'] = true;
 			$this->free_shipping = true;
 		} else if ( $price_type = woo_bg_get_option( 'boxnow_price', 'price_type' ) ) {
 			$price = 0;

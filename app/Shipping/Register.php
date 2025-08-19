@@ -25,9 +25,7 @@ class Register {
 		if ( woo_bg_is_shipping_enabled() ) {
 			add_action( 'woocommerce_checkout_update_order_review', array( __CLASS__, 'update_order_review' ), 1, 2 );
 			add_filter( 'wc_cart_totals_shipping_method_cost', array( __CLASS__, 'change_price_label_if_not_calculated' ), 10, 2 );
-			add_filter( 'woo_bg/speedy/rate', array( __CLASS__, 'add_not_calculated_label' ), 10, 2 );
-			add_filter( 'woo_bg/econt/rate', array( __CLASS__, 'add_not_calculated_label' ), 10, 2 );
-			add_filter( 'woo_bg/cvc/rate', array( __CLASS__, 'add_not_calculated_label' ), 10, 2 );
+			add_filter( 'woocommerce_shipping_rate_label', array( __CLASS__, 'add_free_shipping_label' ), 100, 2 );
 			add_action( 'woocommerce_order_item_shipping_after_calculate_taxes', array( __CLASS__, 'set_shipping_rate_taxes_for_recalculation' ), 10, 2 );
 			
 			new ProductAdditionalFields( $container );
@@ -184,6 +182,25 @@ class Register {
 		}
 
 		return $rate;
+	}
+
+	public static function add_free_shipping_label( $label, $rate ) {
+		$meta_data = $rate->get_meta_data();
+
+
+		if ( !empty( $meta_data['free_shipping'] ) && $meta_data['free_shipping'] == true ) {
+			$label = sprintf( __( '%s: <span class="woocommerce-Price-amount">%s</span>', 'woo-bg' ), $label, __( 'Free shipping', 'woo-bg' ) );
+		} else if ( 
+			( 
+				!woo_bg_is_pro_activated() || 
+				woo_bg_get_option( 'shipping_methods', 'change_radio_buttons_to_images' ) !== 'yes'
+			) && 
+			empty( $rate->get_cost() )
+		) {
+			$label = sprintf( __( '%s: <span class="woocommerce-Price-amount">%s</span>', 'woo-bg' ), $label, __( 'Not calculated', 'woo-bg' ) );
+		}
+
+		return $label;
 	}
 
 	public static function set_shipping_rate_taxes_for_recalculation( $method, $calculate_tax_for ) {
