@@ -125,10 +125,11 @@ class Profile {
 		if ( !empty( $all_profiles['clients'] ) ) {
 			foreach ( $all_profiles['clients'] as $key => $profile ) {
 				$client = $this->clients[ $profile['clientId'] ];
+				$label = ( $client['objectName'] ) ? $client['objectName'] : $client['clientName'];
 
 				$options[ $key ] = array(
 					'id' => $key,
-					'label' => $client['clientName'] . " ( ID:" . $profile['clientId'] . " )",
+					'label' => $label . " ( ID:" . $profile['clientId'] . " )",
 				);
 
 			}
