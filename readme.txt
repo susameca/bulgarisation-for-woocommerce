@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.8
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.4.12
+Stable tag: 3.4.13
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -68,7 +68,18 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 3.4.13 = 
+Speedy: Optimize clients objects
+Couriers: Optimize additional labels
+Invoice: Optimize VAT field
+
 = 3.4.12 = 
+Speedy: Add ability to change "send from" options in order settings
+Econt: Add ability to change "send from" options in order settings
+Multi_Currency: Fix double second price in documents
+Speedy: Delete fiscal items if option is disabled
+PDF: Optimize view file
+
 = 3.4.11 = 
 Speedy: Label Optimizations
 Dual price: Ajax Optimizations
