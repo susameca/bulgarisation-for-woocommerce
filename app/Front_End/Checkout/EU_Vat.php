@@ -77,10 +77,6 @@ class EU_Vat {
 	}
 
 	public static function vat_number_field( $fields ) {
-		if ( WC()->cart && ! WC()->cart->needs_payment() ) {
-			return $fields;
-		}
-
 		$fields['billing']['billing_vat_number'] = array(
 			'label'    => __( 'VAT number', 'woo-bg' ),
 			'required' => ( woo_bg_get_option('nap', 'dds_number_required' ) !== 'no' ),
