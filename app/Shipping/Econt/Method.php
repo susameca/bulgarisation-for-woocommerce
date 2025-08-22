@@ -469,7 +469,7 @@ class Method extends \WC_Shipping_Method {
 			'paymentReceiverMethod' => 'cash',
 		);
 
-		if ( !empty( $this->fixed_price ) && $this->cookie_data['country'] === 'BG' ) {
+		if ( !empty( $this->fixed_price ) && isset( $this->cookie_data['country'] ) && $this->cookie_data['country'] === 'BG' ) {
 			$payment_by_data['paymentSenderMethod'] = $this->container[ Client::ECONT_PROFILE ]->get_sender_payment_method();
 			$payment_by_data['paymentReceiverMethod'] = 'cash';
 			$payment_by_data['paymentReceiverAmount'] = $this->fixed_price;
