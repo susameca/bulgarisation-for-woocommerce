@@ -574,7 +574,7 @@ class Method extends \WC_Shipping_Method {
 					$cookie_data = '';
 
 					if ( WC()->session->get( 'woo-bg-speedy-label' ) ) {
-						$order->update_meta_data( 'woo_bg_speedy_label', WC()->session->get( 'woo-bg-speedy-label' ) );
+						$order->update_meta_data( 'woo_bg_speedy_label', apply_filters( 'woo_bg/speedy/label_before_save', WC()->session->get( 'woo-bg-speedy-label' ), $order ) );
 						WC()->session->__unset( 'woo-bg-speedy-label' );
 					}
 

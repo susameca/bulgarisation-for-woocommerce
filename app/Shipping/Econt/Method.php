@@ -573,7 +573,7 @@ class Method extends \WC_Shipping_Method {
 							}	
 						}
 
-						$order->update_meta_data( 'woo_bg_econt_label', $label );
+						$order->update_meta_data( 'woo_bg_econt_label', apply_filters( 'woo_bg/econt/label_before_save', $label, $order ) );
 						WC()->session->__unset( 'woo-bg-econt-label' );
 					}
 
