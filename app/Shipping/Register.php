@@ -25,7 +25,7 @@ class Register {
 		if ( woo_bg_is_shipping_enabled() ) {
 			add_action( 'woocommerce_checkout_update_order_review', array( __CLASS__, 'update_order_review' ), 1, 2 );
 			add_filter( 'wc_cart_totals_shipping_method_cost', array( __CLASS__, 'change_price_label_if_not_calculated' ), 10, 2 );
-			add_filter( 'woocommerce_shipping_rate_label', array( __CLASS__, 'add_free_shipping_label' ), 100, 2 );
+			add_filter( 'woocommerce_shipping_rate_label', array( __CLASS__, 'add_fsh_nc_labels' ), 100, 2 );
 			add_action( 'woocommerce_order_item_shipping_after_calculate_taxes', array( __CLASS__, 'set_shipping_rate_taxes_for_recalculation' ), 10, 2 );
 			
 			new ProductAdditionalFields( $container );
@@ -169,24 +169,12 @@ class Register {
 		return $output;
 	}
 
-	public static function add_not_calculated_label( $rate, $method ) {
-		if ( 
-			( 
-				!woo_bg_is_pro_activated() || 
-				woo_bg_get_option( 'shipping_methods', 'change_radio_buttons_to_images' ) !== 'yes'
-			) && 
-			$rate['label'] === $method->title && 
-			empty( $rate['cost'] )
-		) {
-			$rate['label'] = sprintf( __( '%s: Not calculated', 'woo-bg' ), $rate['label'] );
+	public static function add_fsh_nc_labels( $label, $rate ) {
+		if ( strpos( $label, 'woocommerce-Price-amount' ) !== false ) {
+			return $label;
 		}
-
-		return $rate;
-	}
-
-	public static function add_free_shipping_label( $label, $rate ) {
+		
 		$meta_data = $rate->get_meta_data();
-
 
 		if ( !empty( $meta_data['free_shipping'] ) && $meta_data['free_shipping'] == true ) {
 			$label = sprintf( __( '%s: <span class="woocommerce-Price-amount">%s</span>', 'woo-bg' ), $label, __( 'Free shipping', 'woo-bg' ) );
