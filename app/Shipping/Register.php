@@ -27,8 +27,6 @@ class Register {
 			add_filter( 'wc_cart_totals_shipping_method_cost', array( __CLASS__, 'change_price_label_if_not_calculated' ), 10, 2 );
 			add_filter( 'woocommerce_shipping_rate_label', array( __CLASS__, 'add_fsh_nc_labels' ), 100, 2 );
 			add_action( 'woocommerce_order_item_shipping_after_calculate_taxes', array( __CLASS__, 'set_shipping_rate_taxes_for_recalculation' ), 10, 2 );
-			
-			new ProductAdditionalFields( $container );
 		}
 	}
 
@@ -173,7 +171,7 @@ class Register {
 		if ( strpos( $label, 'woocommerce-Price-amount' ) !== false ) {
 			return $label;
 		}
-		
+
 		$meta_data = $rate->get_meta_data();
 
 		if ( !empty( $meta_data['free_shipping'] ) && $meta_data['free_shipping'] == true ) {

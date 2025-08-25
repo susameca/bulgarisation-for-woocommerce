@@ -379,14 +379,10 @@ class Method extends \WC_Shipping_Method {
 			'weight' => 0,
 		);
 
-		$is_fragile = false;
+		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'econt', 'declared_value' ) );
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
 			$_product = wc_get_product( $item[ 'product_id' ] );
-			
-			if ( $_product->get_meta( '_woo_bg_fragile' ) === 'on' ) {
-				$is_fragile = true;
-			}
 			
 			if ( $item['data']->get_weight() ) {
 				$cart['weight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];

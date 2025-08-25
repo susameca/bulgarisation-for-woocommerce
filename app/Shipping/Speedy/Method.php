@@ -406,14 +406,10 @@ class Method extends \WC_Shipping_Method {
 		);
 
 		$os_value = 0;
-		$is_fragile = false;
+		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'speedy', 'declared_value' ) );
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
 			$_product = wc_get_product( $item[ 'product_id' ] );
-			
-			if ( $_product->get_meta( '_woo_bg_fragile' ) === 'on' ) {
-				$is_fragile = true;
-			}
 		}
 
 		if ( $is_fragile ) {
