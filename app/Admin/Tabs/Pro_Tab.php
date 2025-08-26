@@ -48,6 +48,12 @@ class Pro_Tab extends Base_Tab {
 					<li>
 						<?php echo wp_kses_post( wpautop( " - " .  __( 'Allow shipping to Greece and Romania for Econt and Speedy.', 'woo-bg' ) ) ); ?>
 					</li>
+					<li>
+						<?php echo wp_kses_post( wpautop( " - " .  __( 'Option to include order ID in label.', 'woo-bg' ) ) ); ?>
+					</li>
+					<li>
+						<?php echo wp_kses_post( wpautop( " - " .  __( 'Allow automatically update order statuses based on label status.', 'woo-bg' ) ) ); ?>
+					</li>
 				</ul>
 				<?php
 				echo wp_kses_post( wpautop( __( 'Screenshot of the options:', 'woo-bg' ) ) );
