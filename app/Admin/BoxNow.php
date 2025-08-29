@@ -156,7 +156,7 @@ class BoxNow {
 		}
 
 		$label_data = [
-			'orderNumber' => strval( mt_rand() ),
+			'orderNumber' => $order->get_id(),
 			'origin' => self::generate_sender_data(),
 			'destination' => self::generate_receiver_data( $order, $cookie_data ),
 			'items' => self::generate_items( $order ),
