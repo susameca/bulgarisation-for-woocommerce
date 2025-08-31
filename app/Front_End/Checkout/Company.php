@@ -8,6 +8,8 @@ class Company {
 		add_filter( 'woocommerce_checkout_fields', array( __CLASS__, 'vat_number_field' ), 20 );
 		add_action( 'woocommerce_admin_billing_fields', array( __CLASS__, 'admin_billing_fields' ) );
 		add_action( 'woocommerce_after_checkout_validation', array( __CLASS__, 'validate_fields' ), 5, 2 );
+		add_filter( 'woocommerce_states', array( __CLASS__, 'reorder_bg_states' ) );
+		add_filter( 'woocommerce_get_country_locale', array( __CLASS__, 'bg_locale_fields' ) );
 	}
 
 	public static function vat_number_field( $fields ) {
@@ -85,6 +87,9 @@ class Company {
 			'show'  => false,
 		);
 
+		$fields['billing']['billing_state']['required'] = true;
+		$fields['shipping']['shipping_state']['required'] = true;
+
 		return $fields;
 	}
 
@@ -145,6 +150,22 @@ class Company {
 				unset( $errors->error_data[ $field . '_required'] );
 			}
 		}
+	}
+
+	public static function reorder_bg_states( $states ) {
+		$oblasti = $states['BG'];
+		asort( $oblasti );
+		$states['BG'] = $oblasti;
+
+		return $states;
+	}
+
+	public static function bg_locale_fields( $fields ) {
+		if ( isset( $fields['BG']['state']['required'] ) ) {
+			$fields['BG']['state']['required'] = true;
+		}
+
+		return $fields;
 	}
 }
 
