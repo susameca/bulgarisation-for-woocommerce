@@ -155,6 +155,9 @@ class Econt {
 			'invoiceNum' => __( 'Invoice number', 'woo-bg' ),
 			'partialDelivery' => __( 'Partial delivery', 'woo-bg' ),
 			'sendFrom' => __('Send From', 'woo-bg'),
+			'length' => __('Length', 'woo-bg'),
+			'width' => __('Width', 'woo-bg'),
+			'height' => __('Height', 'woo-bg'),
 		);
 	}
 

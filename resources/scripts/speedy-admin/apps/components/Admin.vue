@@ -178,7 +178,7 @@
 							<input v-model="labelData.content.parcelsCount" type="number">
 						</p>
 
-						<p v-if="( typeof( labelData.service.additionalServices ) !== 'undefined' && typeof( labelData.service.additionalServices.cod) !== 'undefined' ) && paymentType === 'cod'" class="form-field form-field-wide">
+						<p v-if="( typeof( labelData.service.additionalServices ) !== 'undefined' && typeof( labelData.service.additionalServices.cod) !== 'undefined' ) && paymentType === 'cod'" class="form-field" style="clear:none">
 							<label>
 								{{i18n.cd}}:
 							</label>
@@ -186,12 +186,36 @@
 							<input v-model="labelData.service.additionalServices.cod.amount" type="number">
 						</p>
 
-						<p  class="form-field form-field-wide">
+						<p v-if="( typeof( labelData.service.additionalServices ) !== 'undefined' && typeof( labelData.service.additionalServices.cod) !== 'undefined' ) && paymentType === 'cod'" class="form-field" style="float:right; clear:none">
 							<label>
 								{{i18n.declaredValue}}:
 							</label>
 
 							<input v-model="declaredValue" type="number">
+						</p>
+
+						<p class="form-field form-field--1-of-3" style="clear:none">
+							<label>
+								{{i18n.length}} (cm):
+							</label>
+
+							<input v-model="dimentions.l" type="number" step="0.1">
+						</p>
+
+						<p class="form-field form-field--1-of-3" style="clear:none">
+							<label>
+								{{i18n.width}} (cm):
+							</label>
+
+							<input v-model="dimentions.w" type="number" step="0.1">
+						</p>
+
+						<p class="form-field form-field--1-of-3" style="float:right; clear:none">
+							<label>
+								{{i18n.height}} (cm):
+							</label>
+
+							<input v-model="dimentions.h" type="number" step="0.1">
 						</p>
 
 						<p v-if="labelData.content.totalWeight" class="form-field form-field-wide">
@@ -374,6 +398,7 @@ export default {
 			sendFromOffice: [],
 			sendFromAddress: [],
 			sendFrom: '',
+			dimentions: [],
 			sendFromType: '',
 			type: '',
 			types: [
@@ -470,6 +495,8 @@ export default {
 		if ( wooBg_speedy.shipmentStatus ) {
 			this.shipmentStatus = wooBg_speedy.shipmentStatus;
 		}
+
+		this.dimentions = wooBg_speedy.dimentions;
 
 	  	this.document.on('change', 'input[name="label_size"]', function () {
 			_this.size = $(this).val();
@@ -591,6 +618,7 @@ export default {
 				cookie_data: this.cookie_data,
 				orderId: wooBg_speedy.orderId,
 				declaredValue: this.declaredValue,
+				dimentions: this.dimentions,
 				action: 'woo_bg_speedy_generate_label',
 				nonce: wooBg_speedy.nonce,
 			};

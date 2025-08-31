@@ -3,6 +3,10 @@ namespace Woo_BG\Shipping\Econt;
 use Woo_BG\Container\Client;
 use Woo_BG\Admin\Econt as Econt_Admin;
 
+use Woo_BG\Shipping\Packer\Carton_Packer;
+use Woo_BG\Shipping\Packer\Product;
+use Woo_BG\Shipping\Packer\Size;
+
 defined( 'ABSPATH' ) || exit;
 
 class Method extends \WC_Shipping_Method {
@@ -379,6 +383,8 @@ class Method extends \WC_Shipping_Method {
 			'weight' => 0,
 		);
 
+		$sizes = [];
+		$auto_sizes = wc_string_to_bool( woo_bg_get_option( 'speedy', 'auto_size' ) );
 		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'econt', 'declared_value' ) );
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
@@ -401,6 +407,17 @@ class Method extends \WC_Shipping_Method {
 			}
 
 			$names[] = $name;
+
+			if ( $auto_sizes && $item['data']->get_length() && $item['data']->get_width() && $item['data']->get_height() ) {
+				$sizes[] = new Product( 
+					$name, 
+					new Size( 
+						wc_get_dimension( $item['data']->get_length(), 'mm', get_option( 'woocommerce_dimension_unit' ) ), 
+						wc_get_dimension( $item['data']->get_width(), 'mm', get_option( 'woocommerce_dimension_unit' ) ), 
+						wc_get_dimension( $item['data']->get_height(), 'mm', get_option( 'woocommerce_dimension_unit' ) ),
+					) 
+				);
+			}
 		}
 
 		if ( !$cart['weight'] ) {
@@ -408,6 +425,15 @@ class Method extends \WC_Shipping_Method {
 		}
 
 		$cart['shipmentDescription'] = implode( ', ', $names );
+
+		if ( $auto_sizes && !empty( $sizes ) ) {
+			$packer = new Carton_Packer();
+			$result = $packer->find_best_carton( $sizes );
+
+			$cart['shipmentDimensionsW'] = wc_get_dimension( $result->W, 'cm', 'mm' );
+			$cart['shipmentDimensionsL'] = wc_get_dimension( $result->L, 'cm', 'mm' );
+			$cart['shipmentDimensionsH'] = wc_get_dimension( $result->H, 'cm', 'mm' );
+		}
 
 		if ( $this->cookie_data['payment'] === 'cod' ) {
 			$cart['services']['cdType'] = 'get';

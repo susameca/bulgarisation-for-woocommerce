@@ -97,6 +97,7 @@ class Econt_Tab extends Base_Tab {
 				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) );
 				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) );
 				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'declared_value', __( 'Declared value', 'woo-bg' ), null, null, __( 'Adds declared value to the label if payment is COD.', 'woo-bg' ) );
+				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'auto_size', __( 'Automatically calculate box size', 'woo-bg' ), null, null, __( 'Automatically calculate LxWxH of the box for the parcel.', 'woo-bg' ) );
 				$fields[ 'econt' ][] = new Fields\Select_Field( $this->generate_pay_options(), 'pay_options', __( 'Cash on delivery agreement', 'woo-bg' ), null, null, __( 'Choose cash on delivery agreement', 'woo-bg' ) );
 
 				if ( $cd_pay_option && $cd_pay_option !== 'no' ) {

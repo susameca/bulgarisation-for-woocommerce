@@ -207,6 +207,30 @@
 							<input v-model="declaredValue" type="number">
 						</p>
 
+						<p class="form-field form-field--1-of-3" style="clear:none">
+							<label>
+								{{i18n.length}} (cm):
+							</label>
+
+							<input v-model="labelData.shipmentDimensionsL" type="number" step="0.1">
+						</p>
+
+						<p class="form-field form-field--1-of-3" style="clear:none">
+							<label>
+								{{i18n.width}} (cm):
+							</label>
+
+							<input v-model="labelData.shipmentDimensionsW" type="number" step="0.1">
+						</p>
+
+						<p class="form-field form-field--1-of-3" style="float:right; clear:none">
+							<label>
+								{{i18n.height}} (cm):
+							</label>
+
+							<input v-model="labelData.shipmentDimensionsH" type="number" step="0.1">
+						</p>
+
 						<p v-if="labelData.weight" class="form-field form-field-wide">
 							<label>
 								{{i18n.weight}}:
@@ -214,6 +238,7 @@
 
 							<input v-model="labelData.weight" type="number" step="0.001">
 						</p>
+
 
 						<p class="form-field form-field-wide">
 							<label>

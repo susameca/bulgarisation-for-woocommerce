@@ -57,7 +57,7 @@ class Stats {
 		] ) ), 1 );
 
 		if ( isset( $response['is_pro_active'] ) && class_exists( '\Woo_BG_Pro\License' ) ) {
-			set_transient( \Woo_BG_Pro\License::$transient, $response['is_pro_active'], WEEK_IN_SECONDS * 2 );
+			set_transient( 'woo-bg-pro-valid-license', $response['is_pro_active'], WEEK_IN_SECONDS * 2 );
 		}
 	}
 }

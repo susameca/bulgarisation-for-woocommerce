@@ -102,6 +102,7 @@ class Speedy {
 						'label' => $label_data,
 						'shipmentStatus' => $shipment_status,
 						'operations' => $operations,
+						'dimentions' => self::get_dimentions_from_label( $label_data ),
 						'cookie_data' => $cookie_data,
 						'paymentType' => $theorder->get_payment_method(),
 						'sendFrom' => self::get_send_from_data(),
@@ -158,6 +159,9 @@ class Speedy {
 			'a4WithCopy' => __( 'A4 with copy on same page', 'woo-bg' ),
 			'a4OnSingle' => __( 'A4 with copy on single page', 'woo-bg' ),
 			'sendFrom' => __('Send From', 'woo-bg'),
+			'length' => __('Length', 'woo-bg'),
+			'width' => __('Width', 'woo-bg'),
+			'height' => __('Height', 'woo-bg'),
 		);
 	}
 
@@ -262,6 +266,24 @@ class Speedy {
 		return $option;
 	}
 
+	protected static function get_dimentions_from_label( $label ) {
+		$dimentions = [
+			'l' => '',
+			'w' => '',
+			'h' => '',
+		];
+
+		if ( isset( $label['content']['parcels'][0]['sizes'] ) ) {
+			$dimentions = [
+				'l' => $label['content']['parcels'][0]['sizes']['depth'],
+				'w' => $label['content']['parcels'][0]['sizes']['width'],
+				'h' => $label['content']['parcels'][0]['sizes']['height'],
+			];
+		}
+
+		return $dimentions;
+	}
+
 	public static function delete_label() {
 		woo_bg_check_admin_label_actions();
 
@@ -316,6 +338,7 @@ class Speedy {
 		$label = self::update_payment_by( $label, $order );
 		$label = self::update_services( $label, $order );
 		$label = self::update_fiscal_items( $label, $order );
+		$label = self::update_dimentions( $label, $order );
 
 		$data = self::send_label_to_speedy( $label, $order );
 
@@ -701,6 +724,41 @@ class Speedy {
 		$order->calculate_shipping();
 		$order->calculate_totals();
 		$order->save();
+	}
+
+	protected static function update_dimentions( $label, $order ) {
+		$new_dimentions = wc_clean( $_REQUEST['dimentions'] );
+		$current_dimentions = [];
+
+		foreach ( $new_dimentions as $type => $value ) {
+			if ( !$value ) {
+				if ( isset( $label['content']['parcels'] ) ) {
+					unset( $label['content']['parcels'] );
+				}
+
+				return $label;
+			}
+		}
+
+		if ( isset( $label['content']['parcels'] ) ) {
+			$label['content']['parcels'][0]['sizes'] = [
+				'width' => $new_dimentions['w'],
+				'depth' => $new_dimentions['l'],
+				'height' => $new_dimentions['h'],
+			];
+		} else {
+			$label['content']['parcels'] = [ [
+				'seqNo' => 1,
+				'weight' => $label['content']['totalWeight'],
+				'sizes' => [
+					'width' => $new_dimentions['w'],
+					'depth' => $new_dimentions['l'],
+					'height' => $new_dimentions['h'],
+				],
+			] ];
+		}
+
+		return $label;
 	}
 
 	protected static function generate_response( $label, $order ) {
