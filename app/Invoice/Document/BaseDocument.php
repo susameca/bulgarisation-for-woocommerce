@@ -83,23 +83,23 @@ class BaseDocument {
 		return apply_filters( 'woo_bg/invoice/cart_headers', array(
 			array(
 				'label' => __( 'Product', 'woo-bg' ),
-				'class' => 'w-40',
+				'class' => '',
 			),
 			array(
 				'label' => __( 'Qty', 'woo-bg' ),
-				'class' => 'w-10',
+				'class' => '',
 			),
 			array(
 				'label' => __( 'Vat', 'woo-bg' ),
-				'class' => 'w-10',
+				'class' => '',
 			),
 			array(
 				'label' => __( 'Price', 'woo-bg' ),
-				'class' => 'w-15',
+				'class' => '',
 			),
 			array(
 				'label' => __( 'Total amount', 'woo-bg' ),
-				'class' => 'w-15',
+				'class' => '',
 			),
 		), $this );
 	}

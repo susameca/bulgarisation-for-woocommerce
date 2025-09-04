@@ -102,29 +102,27 @@
 		</table>
 	</div>
 
-	<div class="w-100 mt-10">
-		<table class="w-100">
-			<?php $headers = $this->document->get_cart_headers(); ?>
+	<table class="w-100 mt-10">
+		<?php $headers = $this->document->get_cart_headers(); ?>
 
+		<tr>
+			<?php foreach ( $headers as $item ): ?>
+				<th class="<?php echo esc_attr( $item['class'] ) ?>"><?php echo wp_kses_post( $item['label'] ) ?></th>
+			<?php endforeach ?>
+		</tr>
+
+		<?php foreach ( $this->document->order->get_items() as $item ): ?>
 			<tr>
-				<?php foreach ( $headers as $item ): ?>
-					<th class="<?php echo esc_attr( $item['class'] ) ?>"><?php echo wp_kses_post( $item['label'] ) ?></th>
+				<?php foreach ( $item as $key => $col ): ?>
+					<td <?php echo ( $key !== 'name' ) ? 'align="center"' : '' ?>><?php echo wp_kses_post( $col ) ?></td>
 				<?php endforeach ?>
 			</tr>
+		<?php endforeach ?>
+	</table>
 
-			<?php foreach ( $this->document->order->get_items() as $item ): ?>
-				<tr>
-					<?php foreach ( $item as $key => $col ): ?>
-						<td <?php echo ( $key !== 'name' ) ? 'align="center"' : '' ?>><?php echo wp_kses_post( $col ) ?></td>
-					<?php endforeach ?>
-				</tr>
-			<?php endforeach ?>
-		</table>
-	</div>
-
-	<div class="w-100" >
+	<div class="w-100">
 		<div class="fz-12">
-			<div class="<?php echo ( $bgn_eur ) ? 'w-75' : 'w-85' ?>  float-left" align="right">
+			<div class="<?php echo ( $bgn_eur ) ? 'w-70' : 'w-80' ?>  float-left" align="right">
 				<?php 
 				foreach ( $this->document->order->get_total_items() as $item ) {
 					echo wp_kses_post( wpautop( $item['label'] . ":" ) );
@@ -132,7 +130,7 @@
 				?>
 			</div>
 
-			<div class="<?php echo ( $bgn_eur ) ? 'w-25' : 'w-15' ?> float-left text-bold" align="right">
+			<div class="<?php echo ( $bgn_eur ) ? 'w-30' : 'w-20' ?> float-left text-bold" align="right">
 				<?php 
 				foreach ( $this->document->order->get_total_items() as $item ) {
 					echo wp_kses_post( wpautop( $item['value'] ) );
