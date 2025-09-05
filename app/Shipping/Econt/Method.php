@@ -384,7 +384,7 @@ class Method extends \WC_Shipping_Method {
 		);
 
 		$sizes = [];
-		$auto_sizes = wc_string_to_bool( woo_bg_get_option( 'speedy', 'auto_size' ) );
+		$auto_sizes = wc_string_to_bool( woo_bg_get_option( 'econt', 'auto_size' ) );
 		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'econt', 'declared_value' ) );
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
