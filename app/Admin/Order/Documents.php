@@ -74,6 +74,7 @@ class Documents {
 
 			if ( $order_pdf = $order->get_meta( 'woo_bg_order_document' ) ) {
 				$files[] = array(
+					'meta' => 'woo_bg_order_document',
 					'name' => __( 'Order', 'woo-bg' ),
 					'file_url' => wp_get_attachment_url( $order_pdf ),
 				);
@@ -81,6 +82,7 @@ class Documents {
 
 			if ( $invoice_pdf = $order->get_meta( 'woo_bg_invoice_document' ) ) {
 				$files[] = array(
+					'meta' => 'woo_bg_invoice_document',
 					'name' => __( 'Invoice', 'woo-bg' ),
 					'file_url' => wp_get_attachment_url( $invoice_pdf ),
 				);
@@ -88,6 +90,7 @@ class Documents {
 
 			if ( $refunded_order_pdf = $order->get_meta( 'woo_bg_refunded_order_document' ) ) {
 				$files[] = array(
+					'meta' => 'woo_bg_refunded_order_document',
 					'name' => __( 'Refunded Order', 'woo-bg' ),
 					'file_url' => wp_get_attachment_url( $refunded_order_pdf ),
 				);
@@ -95,6 +98,7 @@ class Documents {
 
 			if ( $refunded_invoice_pdf = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ) {
 				$files[] = array(
+					'meta' => 'woo_bg_refunded_invoice_document',
 					'name' => __( 'Refunded Invoice', 'woo-bg' ),
 					'file_url' => wp_get_attachment_url( $refunded_invoice_pdf ),
 				);
@@ -102,6 +106,7 @@ class Documents {
 
 			if ( $proform_pdf = $order->get_meta( 'woo_bg_proform_document' ) ) {
 				$files[] = array(
+					'meta' => 'woo_bg_proform_document',
 					'name' => __( 'Pro forma', 'woo-bg' ),
 					'file_url' => wp_get_attachment_url( $proform_pdf ),
 				);
