@@ -87,9 +87,6 @@ class Company {
 			'show'  => false,
 		);
 
-		$fields['billing']['billing_state']['required'] = true;
-		$fields['shipping']['shipping_state']['required'] = true;
-
 		return $fields;
 	}
 
