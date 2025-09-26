@@ -56,10 +56,16 @@ class Method extends \WC_Shipping_Method {
 		$this->package = $package;
 		$weight = $this->get_total_weight();
 		$apm_size = self::get_allowed_apm_size();
+		$hide_over = woo_bg_get_option( 'boxnow_price', 'hide_over' );
 
-		if ( $weight > 20 || $apm_size['has_oversize_item'] ) {
+		if ( 
+			$weight > 20 || 
+			$apm_size['has_oversize_item'] ||
+			( $hide_over && woo_bg_get_package_total() >= $hide_over )
+		) {
 			return;
 		}
+
 		do_action( 'woo_bg/boxnow/rate/before_calculate', $this );
 
 		$rate = array(

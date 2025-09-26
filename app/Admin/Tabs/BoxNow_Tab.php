@@ -172,6 +172,7 @@ class BoxNow_Tab extends Base_Tab {
 				}
 			}
 
+			$fields[ 'boxnow_price' ][] = new Fields\Text_Field( 'hide_over', __( 'Hide shipping over cart total price', 'woo-bg' ), null, null, __( 'If filled will hide the shipping method if the cart total price is over the sum.', 'woo-bg' ), 'number' );
 			$fields[ 'boxnow_price' ][] = new Fields\Text_Field( 'free_shipping_over', __( 'Free shipping over', 'woo-bg' ), __( 'Free shipping over total cart price.', 'woo-bg' ), null, null, 'number' );
 			$fields[ 'boxnow_price' ][] = new Fields\Select_Field( 
 				array(

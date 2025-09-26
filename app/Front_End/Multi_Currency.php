@@ -53,7 +53,7 @@ class Multi_Currency {
 			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount woo-bg--currency amount-eur\"> / " . $price_eur . "&nbsp;€ </span>";
 
 			return $price_html . $formatted_price_eur;
-		} elseif ($current_currency == 'EUR' ) {
+		} elseif ( $current_currency == 'EUR' ) {
 			$price_bgn = self::convert_to_bgn($price);
 			$formatted_price_eur = "<span class=\"woocommerce-Price-amount amount woo-bg--currency amount-bgn\"> / " . $price_bgn . "&nbsp;лв. </span>";
 
