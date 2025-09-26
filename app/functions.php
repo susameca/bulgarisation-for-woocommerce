@@ -259,7 +259,7 @@ function woo_bg_get_order_item_vat_rate( $item, $order, $show_group = false ) {
 			$tax_item_id       = $tax_item->get_rate_id();
 			$tax_item_total    = isset( $tax_data['total'][ $tax_item_id ] ) ? $tax_data['total'][ $tax_item_id ] : '';
 				
-			if ( '' !== $tax_item_total ) {
+			if ( '' !== $tax_item_total && $tax_item_total > 0 ) {
 				$rate = $tax_item->get_rate_percent();
 				$founded = true;
 				break;
