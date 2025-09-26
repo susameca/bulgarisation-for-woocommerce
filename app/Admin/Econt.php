@@ -610,15 +610,20 @@ class Econt {
 		$label['payAfterAccept'] = false;
 		$label['payAfterTest'] = false;
 
+		if ( isset( $label['partialDelivery'] ) ) {
+			unset( $label['partialDelivery'] );
+		}
+
 		if ( $payment_by['id'] == 'review' ) {
 			$label['payAfterAccept'] = true;
 		} else if ( $payment_by['id'] == 'test' ) {
 			$label['payAfterAccept'] = true;
 			$label['payAfterTest'] = true;
 
-			if ( $_REQUEST['partialDelivery'] ) {
+			if ( wc_string_to_bool( $_REQUEST['partialDelivery'] ) ) {
 				$label['partialDelivery'] = true;
 			}
+
 		}
 		
 		return $label;
