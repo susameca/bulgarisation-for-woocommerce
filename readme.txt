@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.8
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.4.17
+Stable tag: 3.4.18
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -68,6 +68,14 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 3.4.18 = 
+Econt: Get actual option for auto size
+Econt: Fix partial delivery
+NRA: Fix item rate if tax is 0
+Checkout: Remove required for state field
+Orders documents: add meta info for each document
+BOXNOW: Add option to hide method over price
+
 = 3.4.17 = 
 BOXNOW: Fix label generation
 Speedy: Optimization
@@ -105,51 +113,3 @@ Dual price: CURCY compatibility fix
 
 = 3.4.10 = 
 Global urgent update
-
-= 3.4.9 = 
-Couriers: Fix attributes in description
-
-= 3.4.8 = 
-Dual price: Optimizations
-Couriers: Change the way attributes are added in description
-Invoices: Add filter for single order item in documents
-
-= 3.4.7 = 
-Dual price: Optimizations
-Econt: Fix send from office, optimizations
-NRA Export: Optimization
-Admin:Update tabs to match new WC styles
-
-= 3.4.6 = 
-Dual price: Optimizations
-
-= 3.4.5 = 
-Dual price optimizations
-Add information in tabs
-BOX NOW: Add dismiss button to message
-
-= 3.4.4 = 
-Documents: Fix documents logo/qr to be able to add/remove/edit them
-Invoice: Optimize document number generation
-Invoice: Optimize invoice date
-Invoice: Add invoice due date option
-Econt: Optimizations
-Speedy: Optimizations
-
-= 3.4.3 = 
-Econt: Optimizations
-
-= 3.4.2 = 
-Econt, Speedy : Optimize admin office/address fields
-Speedy: Optimize GR shipping to address
-Change QR generation to print img with base64
-Remove small tags from Multi_Currency
-Invoices: Optimize dual currency on total, remove old files on regenerations
-Add description for multi currency support
-
-= 3.4.0 = 
-Add BGN/EUR dual price
-Speedy: Optimizations
-BOX NOW: Options for box size
-Econt: Add option for partial delivery
-Econt, Speedy: Optimizations
