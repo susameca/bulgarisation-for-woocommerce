@@ -37,6 +37,7 @@
 	.gray-color { color:#5D5D5D; }
 	.text-bold { font-weight: bold; }
 	.border { border:1px solid black; }
+	.includes_tax { display: none!important; }
 	table tr,th,td { border: 1px solid #d2d2d2; border-collapse:collapse; padding:7px 8px; }
 	table tr th { background: #F4F4F4; font-size:13px; }
 	table tr td { font-size:10px; }
@@ -125,7 +126,7 @@
 			<div class="<?php echo ( $bgn_eur ) ? 'w-70' : 'w-80' ?>  float-left" align="right">
 				<?php 
 				foreach ( $this->document->order->get_total_items() as $item ) {
-					echo wp_kses_post( wpautop( $item['label'] . ":" ) );
+					echo wp_kses_post( wpautop( $item['label'] ) );
 				}
 				?>
 			</div>
