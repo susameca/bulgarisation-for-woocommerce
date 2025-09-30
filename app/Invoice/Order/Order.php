@@ -44,7 +44,7 @@ class Order {
 				$this->woo_order->remove_item( $item_id );
 			}
 
-			$this->woo_order->calculate_totals();
+			$this->woo_order->calculate_totals( true );
 		}
 
 		$items = array();
@@ -76,8 +76,8 @@ class Order {
 					'name' => apply_filters( 'woo_bg/invoice/order/item_name', $item->get_name(), $item ),
 					'quantity' => $qty, 
 					'vat_rate' => woo_bg_get_order_item_vat_rate( $item, $this->woo_order, 1 ) . "%", 
-					'price' => wc_price( abs( $item->get_total() / $qty ), array( 'currency' => $this->woo_order->get_currency() ) ),
-					'total' => wc_price( abs( $item->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) )
+					'price' => wc_price( abs( $item->get_subtotal() / $qty ), array( 'currency' => $this->woo_order->get_currency() ) ),
+					'total' => wc_price( abs( $item->get_subtotal() ), array( 'currency' => $this->woo_order->get_currency() ) )
 				), $item, $this );
 			}
 		}
@@ -140,16 +140,17 @@ class Order {
 				$this->woo_order->add_item( $item );
 			}
 
-			$this->woo_order->calculate_totals();
+			$this->woo_order->calculate_totals( true);
 		}
 
 		return apply_filters( 'woo_bg/invoice/order/items', $items, $this );
 	}
-
+	
 	public function get_total_items() {
 		$shipping_items = $this->woo_order->get_items( 'shipping' );
 		$shipping_total = $this->woo_order->get_shipping_total();
 		$subtotal = abs( $this->woo_order->get_subtotal() + $shipping_total + $this->woo_order->get_total_fees() );
+		$order_total_items = $this->woo_order->get_order_item_totals();
 
 		if ( method_exists( $this->woo_order, 'get_reason' ) && $this->woo_order->get_reason() && $subtotal == 0 ) {
 			$subtotal = abs( $this->woo_order->get_total() );
@@ -172,36 +173,45 @@ class Order {
 				$this->woo_order->remove_item( $item_id );
 			}
 
-			$this->woo_order->calculate_totals();
+			$this->woo_order->calculate_totals( true);
 
 			$subtotal = abs( $this->woo_order->get_subtotal() + $this->woo_order->get_total_fees() );
 		}
 
-		$items = array(
-			'subtotal' => array(
-				'label' => __( "Total", 'woo-bg' ),
-				'value' => wc_price(  $subtotal, array( 'currency' => $this->woo_order->get_currency() ) ),
-			),
-		);
 
-		if ( 0 < $this->woo_order->get_total_discount() ) {
+		if ( isset( $order_total_items['discount'] ) ) {
+			$discount_amount = $this->woo_order->get_total_discount();
+
+			$items['all'] = $order_total_items['cart_subtotal'];
+			$items['all']['value'] = wc_price(  $subtotal, array( 'currency' => $this->woo_order->get_currency() ) );
+
 			$items['discount'] = array(
-				'label' => __( "Discount", 'woo-bg' ),
-				'value' => wc_price( abs( $this->woo_order->get_total_discount() ), array( 'currency' => $this->woo_order->get_currency() ) ),
+				'label' => __( "Discount", 'woo-bg' ) . ":",
+				'value' => wc_price( $discount_amount , array( 'currency' => $this->woo_order->get_currency() ) ),
+			);
+			$items['subtotal'] = array(
+				'label' => __( "Total", 'woo-bg' ) . ":",
+				'value' => wc_price(  $subtotal - $discount_amount, array( 'currency' => $this->woo_order->get_currency() ) ),
+			);
+		} else {
+			$items['subtotal'] = array(
+				'label' => __( "Total", 'woo-bg' ) . ":",
+				'value' => wc_price(  $subtotal, array( 'currency' => $this->woo_order->get_currency() ) ),
 			);
 		}
+
 
 		if ( wc_tax_enabled() ) {
 			foreach ( $this->woo_order->get_tax_totals() as $code => $tax_total ) {
 				$items['tax-' . sanitize_title_with_dashes( $code )] = array(
-					'label' => esc_html( $tax_total->label ),
+					'label' => esc_html( $tax_total->label ) . ":",
 					'value' => wc_price( wc_round_tax_total( abs( $tax_total->amount ) ), array( 'currency' => $this->woo_order->get_currency() ) ),
 				);
 			}
 		}
 
 		$items['total'] = array(
-			'label' => __( "Total due", 'woo-bg' ),
+			'label' => __( "Total due", 'woo-bg' ) . ":",
 			'value' => wc_price( abs( $this->woo_order->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) ),
 			'value_number' => abs( $this->woo_order->get_total() ),
 		);
@@ -219,7 +229,7 @@ class Order {
 				$this->woo_order->add_item( $item );
 			}
 
-			$this->woo_order->calculate_totals();
+			$this->woo_order->calculate_totals( true);
 		}
 
 		return apply_filters( 'woo_bg/invoice/order/total_items', $items, $this );
