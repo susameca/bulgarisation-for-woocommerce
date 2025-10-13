@@ -394,7 +394,7 @@ class Speedy {
 	}
 
 	public static function update_fiscal_items( $label, $order ) {
-		if ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) ) {
+		if ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) && $order->get_payment_method() === 'cod' ) {
 			$cookie_data = $order->get_meta( 'woo_bg_speedy_cookie_data' );
 			$label['service']['additionalServices']['cod']['fiscalReceiptItems'] = array();
 
