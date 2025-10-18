@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.8
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.4.18
+Stable tag: 3.4.19
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -67,6 +67,14 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.4.19 =
+Multi Currency: Add option to convert product prices from bgn to eur.
+NRA: Optimizations
+Invoice PDF: Add filter for shipping items
+Invoice PDF: Discounts optimizations
+Invoice PDF: Order optimization
+Speedy: Optimize fiscal generation
 
 = 3.4.18 = 
 Econt: Get actual option for auto size
