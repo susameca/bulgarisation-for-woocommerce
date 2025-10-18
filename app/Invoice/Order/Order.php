@@ -117,13 +117,13 @@ class Order {
 
 				$item_total = $item_price * $item->get_quantity();
 
-				$items[] = array(
+				$items[] = apply_filters( 'woo_bg/invoice/order/item', array(
 					'name' => apply_filters( 'woo_bg/invoice/order/item_name', sprintf( __('Shipping: %s', 'woo-bg'), $item->get_name() ), $item ),
 					'quantity' => abs( $item->get_quantity() ), 
 					'vat_rate' => woo_bg_maybe_add_rate_group( $item_vat ) . "%", 
 					'price' => wc_price( abs( $item_price ), array( 'currency' => $this->woo_order->get_currency() ) ),
 					'total' => wc_price( abs( $item_total ), array( 'currency' => $this->woo_order->get_currency() ) )
-				);
+				), $item, $this );
 			}
 		}
 
