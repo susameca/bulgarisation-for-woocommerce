@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-26 21:57+0000\n"
+"POT-Creation-Date: 2025-10-18 15:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -25,6 +25,21 @@ msgstr ""
 #: app/Shipping/Speedy/Office.php:64
 #, php-format
 msgid "%1$s is not found in %2$s region."
+msgstr ""
+
+#: app/Front_End/Multi_Currency_Converter.php:108
+#, php-format
+msgid "%s - Change regular price from %s to %s"
+msgstr ""
+
+#: app/Front_End/Multi_Currency_Converter.php:115
+#, php-format
+msgid "%s - Change sale price from %s to %s"
+msgstr ""
+
+#: app/Front_End/Multi_Currency_Converter.php:35
+#, php-format
+msgid "%s - price already updated."
 msgstr ""
 
 #: app/Shipping/Econt/Office.php:63
@@ -53,7 +68,7 @@ msgstr ""
 msgid "+ Add new row"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:213
+#: app/Invoice/Document/BaseDocument.php:216
 msgid "1 EUR = 1.95583 BGN"
 msgstr ""
 
@@ -160,11 +175,11 @@ msgstr ""
 msgid "Autopolis.bg"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:165
+#: app/Invoice/Document/BaseDocument.php:168
 msgid "Bank account"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:199
+#: app/Invoice/Document/BaseDocument.php:202
 msgid "Bank name"
 msgstr ""
 
@@ -176,11 +191,11 @@ msgstr ""
 msgid "Billing Country"
 msgstr ""
 
-#: app/Invoice/PDF/view.php:77
+#: app/Invoice/PDF/view.php:78
 msgid "Billing from"
 msgstr ""
 
-#: app/Invoice/PDF/view.php:78
+#: app/Invoice/PDF/view.php:79
 msgid "Billing to"
 msgstr ""
 
@@ -352,7 +367,7 @@ msgstr ""
 msgid "Company phone Number"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:177
+#: app/Invoice/Document/BaseDocument.php:180
 msgid "Compiled by"
 msgstr ""
 
@@ -519,8 +534,8 @@ msgid "E-mail:"
 msgstr ""
 
 #: app/Invoice/Document/BaseDocument.php:117
-#: app/Invoice/Document/BaseDocument.php:137
-#: app/Invoice/Document/BaseDocument.php:147
+#: app/Invoice/Document/BaseDocument.php:140
+#: app/Invoice/Document/BaseDocument.php:150
 #: app/Invoice/Document/NRARefunded.php:66
 #: app/Invoice/Document/NRARefunded.php:75
 #, php-format
@@ -752,7 +767,7 @@ msgid "First Name:"
 msgstr ""
 
 #: app/Front_End/Multi_Currency.php:114
-#: app/Invoice/Document/BaseDocument.php:173
+#: app/Invoice/Document/BaseDocument.php:176
 msgid "Fixed conversion rate:"
 msgstr ""
 
@@ -1092,7 +1107,7 @@ msgid "MOL"
 msgstr ""
 
 #: app/Invoice/Document/BaseDocument.php:112
-#: app/Invoice/Document/BaseDocument.php:132
+#: app/Invoice/Document/BaseDocument.php:133
 #: app/Invoice/Document/NRARefunded.php:61
 #, php-format
 msgid "MOL: %s"
@@ -1175,6 +1190,7 @@ msgid "No results was found for this city"
 msgstr ""
 
 #: app/functions.php:384 app/Admin/Nekorekten_Com.php:369
+#: app/Front_End/Multi_Currency_Converter.php:80
 msgid "Nonce was not provided!"
 msgstr ""
 
@@ -1268,7 +1284,7 @@ msgstr ""
 msgid "Packing list or invoice number"
 msgstr ""
 
-#: app/Invoice/PDF/view.php:173
+#: app/Invoice/PDF/view.php:174
 #, php-format
 msgid "Page %s of %s"
 msgstr ""
@@ -1289,7 +1305,7 @@ msgstr ""
 msgid "Pay by contract"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:158
+#: app/Invoice/Document/BaseDocument.php:161
 msgid "Payment method"
 msgstr ""
 
@@ -1320,8 +1336,8 @@ msgid "Phone:"
 msgstr ""
 
 #: app/Invoice/Document/BaseDocument.php:116
-#: app/Invoice/Document/BaseDocument.php:136
-#: app/Invoice/Document/BaseDocument.php:146
+#: app/Invoice/Document/BaseDocument.php:139
+#: app/Invoice/Document/BaseDocument.php:149
 #: app/Invoice/Document/NRARefunded.php:65
 #: app/Invoice/Document/NRARefunded.php:74
 #, php-format
@@ -1438,7 +1454,7 @@ msgstr ""
 msgid "Rate: 1 EUR = 1.95583 BGN"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:180
+#: app/Invoice/Document/BaseDocument.php:183
 msgid "Received"
 msgstr ""
 
@@ -1664,6 +1680,10 @@ msgstr ""
 msgid "Shipping: %s"
 msgstr ""
 
+#: app/Front_End/Multi_Currency_Converter.php:138
+msgid "Shop currency changed to EUR"
+msgstr ""
+
 #: app/Admin/Tabs/Multi_Currency_Tab.php:83
 msgid "Show message about conversion rate in emails."
 msgstr ""
@@ -1860,7 +1880,7 @@ msgstr ""
 msgid "To Office: "
 msgstr ""
 
-#: app/Invoice/Order/Order.php:182
+#: app/Invoice/Order/Order.php:193 app/Invoice/Order/Order.php:198
 msgid "Total"
 msgstr ""
 
@@ -1868,7 +1888,7 @@ msgstr ""
 msgid "Total amount"
 msgstr ""
 
-#: app/Invoice/Order/Order.php:204
+#: app/Invoice/Order/Order.php:214
 msgid "Total due"
 msgstr ""
 
@@ -1890,7 +1910,7 @@ msgstr ""
 msgid "Track your order."
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:169
+#: app/Invoice/Document/BaseDocument.php:172
 msgid "Transaction ID"
 msgstr ""
 
@@ -2047,6 +2067,10 @@ msgstr ""
 #: app/Admin/Tabs/Pro_Tab.php:70
 #, php-format
 msgid "You can review a demo at: %s"
+msgstr ""
+
+#: app/Front_End/Multi_Currency_Converter.php:84
+msgid "You cannot change the prices."
 msgstr ""
 
 #: app/functions.php:388

@@ -135,7 +135,7 @@ class Multi_Currency_Converter {
 		update_option('woocommerce_currency', 'EUR');
 
 		wp_send_json_success( [
-			'log' => wpautop( __( 'Shop currency changed to EUR', 'woo_bg' ) ),
+			'log' => wpautop( __( 'Shop currency changed to EUR', 'woo-bg' ) ),
 		] );
 	}
 }

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2025-09-26 22:00+0000\n"
+"PO-Revision-Date: 2025-10-18 15:07+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -25,6 +25,21 @@ msgstr "до"
 #, php-format
 msgid "%1$s is not found in %2$s region."
 msgstr "%1$s не е намерен в \"%2$s\" region."
+
+#: app/Front_End/Multi_Currency_Converter.php:108
+#, php-format
+msgid "%s - Change regular price from %s to %s"
+msgstr "%s - Обновена основна цена от %s на %s"
+
+#: app/Front_End/Multi_Currency_Converter.php:115
+#, php-format
+msgid "%s - Change sale price from %s to %s"
+msgstr "%s - Обновена цена с намаление от %s на %s"
+
+#: app/Front_End/Multi_Currency_Converter.php:35
+#, php-format
+msgid "%s - price already updated."
+msgstr "%s - цената вече е актуализирана."
 
 #: app/Shipping/Econt/Office.php:63
 #, php-format
@@ -52,7 +67,7 @@ msgstr "(самодеклариран)"
 msgid "+ Add new row"
 msgstr "+ Добавете нов ред"
 
-#: app/Invoice/Document/BaseDocument.php:213
+#: app/Invoice/Document/BaseDocument.php:216
 msgid "1 EUR = 1.95583 BGN"
 msgstr "1 EUR = 1.95583 BGN"
 
@@ -170,11 +185,11 @@ msgstr "Автоматично изчисли размера на кутията
 msgid "Autopolis.bg"
 msgstr "Autopolis.bg"
 
-#: app/Invoice/Document/BaseDocument.php:165
+#: app/Invoice/Document/BaseDocument.php:168
 msgid "Bank account"
 msgstr "Банкова сметка"
 
-#: app/Invoice/Document/BaseDocument.php:199
+#: app/Invoice/Document/BaseDocument.php:202
 msgid "Bank name"
 msgstr "Банка"
 
@@ -186,11 +201,11 @@ msgstr "BGN/EUR двойни цени"
 msgid "Billing Country"
 msgstr "Държава на фактуриране"
 
-#: app/Invoice/PDF/view.php:77
+#: app/Invoice/PDF/view.php:78
 msgid "Billing from"
 msgstr "Доставчик"
 
-#: app/Invoice/PDF/view.php:78
+#: app/Invoice/PDF/view.php:79
 msgid "Billing to"
 msgstr "Клиент"
 
@@ -372,7 +387,7 @@ msgstr "Име на фирмата"
 msgid "Company phone Number"
 msgstr "Телефона на фирмата"
 
-#: app/Invoice/Document/BaseDocument.php:177
+#: app/Invoice/Document/BaseDocument.php:180
 msgid "Compiled by"
 msgstr "Съставил"
 
@@ -539,8 +554,8 @@ msgid "E-mail:"
 msgstr "Имейл"
 
 #: app/Invoice/Document/BaseDocument.php:117
-#: app/Invoice/Document/BaseDocument.php:137
-#: app/Invoice/Document/BaseDocument.php:147
+#: app/Invoice/Document/BaseDocument.php:140
+#: app/Invoice/Document/BaseDocument.php:150
 #: app/Invoice/Document/NRARefunded.php:66
 #: app/Invoice/Document/NRARefunded.php:75
 #, php-format
@@ -796,7 +811,7 @@ msgid "First Name:"
 msgstr "Име:"
 
 #: app/Front_End/Multi_Currency.php:114
-#: app/Invoice/Document/BaseDocument.php:173
+#: app/Invoice/Document/BaseDocument.php:176
 msgid "Fixed conversion rate:"
 msgstr "Фиксиран обменен курс:"
 
@@ -1156,7 +1171,7 @@ msgid "MOL"
 msgstr "МОЛ на фирмата"
 
 #: app/Invoice/Document/BaseDocument.php:112
-#: app/Invoice/Document/BaseDocument.php:132
+#: app/Invoice/Document/BaseDocument.php:133
 #: app/Invoice/Document/NRARefunded.php:61
 #, php-format
 msgid "MOL: %s"
@@ -1240,6 +1255,7 @@ msgid "No results was found for this city"
 msgstr "Няма намерени резултати за този град"
 
 #: app/functions.php:384 app/Admin/Nekorekten_Com.php:369
+#: app/Front_End/Multi_Currency_Converter.php:80
 msgid "Nonce was not provided!"
 msgstr "Nonce не е предоставен!"
 
@@ -1337,7 +1353,7 @@ msgstr "Опис"
 msgid "Packing list or invoice number"
 msgstr "Опис или номер на фактура"
 
-#: app/Invoice/PDF/view.php:173
+#: app/Invoice/PDF/view.php:174
 #, php-format
 msgid "Page %s of %s"
 msgstr "Страница %s от %s"
@@ -1358,7 +1374,7 @@ msgstr "Парола"
 msgid "Pay by contract"
 msgstr "Плати по договор"
 
-#: app/Invoice/Document/BaseDocument.php:158
+#: app/Invoice/Document/BaseDocument.php:161
 msgid "Payment method"
 msgstr "Метод на плащане"
 
@@ -1389,8 +1405,8 @@ msgid "Phone:"
 msgstr "Телефон:"
 
 #: app/Invoice/Document/BaseDocument.php:116
-#: app/Invoice/Document/BaseDocument.php:136
-#: app/Invoice/Document/BaseDocument.php:146
+#: app/Invoice/Document/BaseDocument.php:139
+#: app/Invoice/Document/BaseDocument.php:149
 #: app/Invoice/Document/NRARefunded.php:65
 #: app/Invoice/Document/NRARefunded.php:74
 #, php-format
@@ -1514,7 +1530,7 @@ msgstr "Съобщение за курса в каталог страницат�
 msgid "Rate: 1 EUR = 1.95583 BGN"
 msgstr "Курс: 1 EUR = 1.95583 BGN"
 
-#: app/Invoice/Document/BaseDocument.php:180
+#: app/Invoice/Document/BaseDocument.php:183
 msgid "Received"
 msgstr "Получил"
 
@@ -1755,6 +1771,10 @@ msgstr "Настройки за доставки"
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
 
+#: app/Front_End/Multi_Currency_Converter.php:138
+msgid "Shop currency changed to EUR"
+msgstr "Валутата на магазина е сменена на EUR"
+
 #: app/Admin/Tabs/Multi_Currency_Tab.php:83
 msgid "Show message about conversion rate in emails."
 msgstr "Покажи съобщение за обменния курс в e-mail."
@@ -1973,7 +1993,7 @@ msgstr "Към фактура №"
 msgid "To Office: "
 msgstr "До офис: "
 
-#: app/Invoice/Order/Order.php:182
+#: app/Invoice/Order/Order.php:193 app/Invoice/Order/Order.php:198
 msgid "Total"
 msgstr "Данъчна основа"
 
@@ -1981,7 +2001,7 @@ msgstr "Данъчна основа"
 msgid "Total amount"
 msgstr "Обща стойност"
 
-#: app/Invoice/Order/Order.php:204
+#: app/Invoice/Order/Order.php:214
 msgid "Total due"
 msgstr "Всичко"
 
@@ -2003,7 +2023,7 @@ msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
 msgid "Track your order."
 msgstr "Проследи пратката."
 
-#: app/Invoice/Document/BaseDocument.php:169
+#: app/Invoice/Document/BaseDocument.php:172
 msgid "Transaction ID"
 msgstr "Номер на транзакцията"
 
@@ -2178,6 +2198,10 @@ msgstr ""
 #, php-format
 msgid "You can review a demo at: %s"
 msgstr "Можете да видите демо на: %s"
+
+#: app/Front_End/Multi_Currency_Converter.php:84
+msgid "You cannot change the prices."
+msgstr "Вие не можете да променяте цените."
 
 #: app/functions.php:388
 msgid "You cannot create labels."
