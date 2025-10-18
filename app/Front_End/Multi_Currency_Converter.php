@@ -31,6 +31,9 @@ class Multi_Currency_Converter {
 					} else {
 						self::convert_product_price( $product );
 					}
+
+					$product->update_meta_data( 'woo_bg_converted', 'yes' );
+					$product->save();
 				} else {
 					$woo_bg_messages[] = sprintf( __( '%s - price already updated.', 'woo-bg' ), $product->get_formatted_name() );
 				}
