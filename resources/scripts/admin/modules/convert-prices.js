@@ -22,12 +22,12 @@ if ( $form.length ) {
 
 function run_ajax( args ) {
 	$.ajax( {
-		url: tpi.ajax,
+		url: woocommerce_admin.ajax_url,
 		data: args
 	} )
 		.done(function( response ) {
-			if ( typeof response.data.percents !== "undefined" ) {
-				$('.progress-bar').css('width', response.data.percents + '%');
+			if ( typeof response.data.stats !== "undefined" ) {
+				$('.progress-bar').css('width', response.data.stats.percents + '%');
 			}
 
 			if ( response.data.log ) {
