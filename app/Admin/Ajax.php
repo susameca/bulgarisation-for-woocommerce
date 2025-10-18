@@ -12,5 +12,7 @@ class Ajax {
 		add_action( 'wp_ajax_woo_bg_generate_label_from_listing_page', array( 'Woo_BG\Admin\Order\Labels', 'generate_label_from_listing_page_callback') );
 		add_action( 'wp_ajax_woo_bg_nekorekten_submit', array( 'Woo_BG\Admin\Nekorekten_Com', 'submit_callback') );
 		add_action( 'wp_ajax_woo_bg_boxnow_message_dismiss', array( 'Woo_BG\Admin\BoxNow', 'message_dismiss_callback') );
+		add_action( 'wp_ajax_woo_bg_change_bgn_to_eur', array( 'Woo_BG\Front_End\Multi_Currency_Converter', 'update_products_from_bgn_to_eur' ) );
+		add_action( 'wp_ajax_woo_bg_change_shop_currency_to_eur', array( 'Woo_BG\Front_End\Multi_Currency_Converter', 'change_shop_currency_to_eur' ) );
 	}
 }

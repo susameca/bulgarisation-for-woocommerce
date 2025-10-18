@@ -25,6 +25,43 @@ class Multi_Currency_Tab extends Base_Tab {
 		<div class="notice"><p><?php _e( 'Please use "Classic Checkout" and "Classic Cart" blocks or [woocommerce_checkout] and [woocommerce_cart] shortcodes.', 'woo-bg' ) ?></p></div>
 
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
+
+		<div id="woo-bg--change-bgn-to-eur" class="wrap woo-bg-bgntoeur-wrapper">
+			<form 
+				action="" 
+				method="post" 
+				enctype="multipart/form-data"
+				data-loading-text="0%"
+			>
+				<fieldset>
+					<input type="hidden" name="action" value="woo_bg_change_bgn_to_eur">
+
+					<?php submit_button( __( 'Change product prices from BGN to EUR', 'woo-bg' ) ); ?>
+				</fieldset>
+
+				<?php wp_nonce_field( 'woo_bg_change_bgn_to_eur' ); ?>
+			</form>
+
+			<div id="woo-bg-bgntoeur-status" class="status" style="display: none;">
+				<div class="progress">
+					<div class="progress-wrapper">
+						<div class="progress-bar" style="width:0%">
+							<p class="progress-value progress-value-2">
+								<span class="value"></span>
+							</p>
+						</div>
+
+						<p class="progress-value progress-value-1">
+							<span class="value"></span>
+						</p>
+					</div>
+				</div><!-- /.progress -->
+
+				<div class="messages">
+					<p><?php _e( 'Loading products...', 'woo-bg' ) ?></p>
+				</div>
+			</div>
+		</div><!-- /.wrap -->
 		<?php
 	}
 
