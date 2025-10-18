@@ -46,10 +46,13 @@ class Multi_Currency_Converter {
 			}
 		}
 
+		$response['stats']['percents'] = 101;
+
 		if ( $response['stats']['percents'] < 100 ) {
 			$response['data']['step'] = $step + 1;
 			$response['loading_text'] = $response['stats']['percents'] . "%";
 		} else {
+			$response['loading_text'] = "100%";
 			$response['action'] = 'woo_bg_change_shop_currency_to_eur';
 		}
 
