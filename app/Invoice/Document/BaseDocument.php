@@ -129,7 +129,10 @@ class BaseDocument {
 				$items[] = sprintf( __('VAT Number: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_vat_number') );
 			}
 
-			$items[] = sprintf( __('MOL: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_company_mol') );
+			if ( $this->woo_order->get_meta('_billing_company_mol') ) {
+				$items[] = sprintf( __('MOL: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_company_mol') );
+			}
+
 			$items[] = $this->woo_order->get_meta('_billing_company_address');
 			$items[] = $this->woo_order->get_meta('_billing_company_settlement');
 			$items[] = '&nbsp;';

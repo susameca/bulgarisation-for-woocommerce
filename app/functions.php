@@ -456,7 +456,7 @@ function woo_bg_get_order_label( $order_id ) {
 			case 'woo_bg_econt':
 				$shipment_status = $order->get_meta( 'woo_bg_econt_shipment_status' );
 
-				if ( $shipment_status && !empty( $label_data['label']['shipmentNumber'] ) ) {
+				if ( $shipment_status && !empty( $label_data['label'] ) && !empty( $label_data['label']['shipmentNumber'] ) && !empty( $shipment_status['label']['pdfURL'] ) ) {
 					$data = [
 						'number' => $label_data['label']['shipmentNumber'],
 						'link' => $shipment_status['label']['pdfURL'] . '&label=10x9',

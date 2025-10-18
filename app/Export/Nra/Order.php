@@ -72,7 +72,7 @@ class Order {
 				$this->woo_order->remove_item( $item_id );
 			}
 
-			$this->woo_order->calculate_totals();
+			$this->woo_order->calculate_totals( true );
 		}
 
 		$items = array();
