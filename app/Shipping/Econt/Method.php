@@ -403,7 +403,11 @@ class Method extends \WC_Shipping_Method {
 			$name = $item['data']->get_name();
 
 			if ( $force === 'yes' && is_a( $item['data'], 'WC_Product_Variation' ) ) {
-				$name .= ' - ' . $item['data']->get_attribute_summary();
+				if ( $item['data']->get_attribute_summary() ) {
+					$name .= ' - ' . $item['data']->get_attribute_summary();
+				} else if( !empty( $item['data']->get_attributes() ) ) {
+					$name .= ' - ' . implode(', ', $item['data']->get_attributes() );
+				}
 			}
 
 			$names[] = $name;
