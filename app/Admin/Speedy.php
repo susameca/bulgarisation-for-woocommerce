@@ -355,6 +355,7 @@ class Speedy {
 
 		$label = self::update_sender( $label );
 		$label = self::update_cod( $label, $order );
+		$label = self::update_fiscal_items( $label, $order );
 
 		self::send_label_to_speedy( $label, $order );
 	}

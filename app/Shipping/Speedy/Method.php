@@ -489,15 +489,6 @@ class Method extends \WC_Shipping_Method {
 						'amountWithVat' => number_format( $cart_item['line_total'] + $cart_item['line_tax'], 2, '.', '' ),
 					];
 				}
-
-				if ( !empty( $this->fixed_price ) && !$this->free_shipping ) {
-					$services['additionalServices']['cod']['fiscalReceiptItems'][] = [
-						'description' => mb_substr( 'Доставка', 0, 50 ),
-						'vatGroup' => woo_bg_get_vat_group_from_rate( 20 ),
-						'amount' => woo_bg_tax_based_price( $this->fixed_price ),
-						'amountWithVat' => number_format( $this->fixed_price, 2, '.', '' ),
-					];
-				}
 			}
 
 			if ( 
