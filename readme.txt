@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.8
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.4.19
+Stable tag: 3.4.20
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -67,6 +67,11 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.4.20 =
+Econt: Optimize attributes in description
+Speedy: Fix fiscal items and fixed price
+Multy Currency: Add eur to bgn only for BG locale
 
 = 3.4.19 =
 Multi Currency: Add option to convert product prices from bgn to eur.
