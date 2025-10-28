@@ -489,6 +489,19 @@ class Method extends \WC_Shipping_Method {
 						'amountWithVat' => number_format( $cart_item['line_total'] + $cart_item['line_tax'], 2, '.', '' ),
 					];
 				}
+
+				if ( apply_filters('woo_bg/shipping/package_total_includes_fees', true ) && WC()->cart->get_fee_total() > 0 ) {
+					$total = floatval( WC()->cart->get_fee_total() );
+					$tax = floatval( WC()->cart->get_fee_tax() );
+					$rate = round( ( $tax / $total ) * 100 );
+
+					$services['additionalServices']['cod']['fiscalReceiptItems'][] = [
+						'description' => mb_substr( 'Fees', 0, 50 ),
+						'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
+						'amount' => number_format( $total, 2, '.', '' ),
+						'amountWithVat' => number_format( $total + $tax, 2, '.', '' ),
+					];
+				}
 			}
 
 			if ( 

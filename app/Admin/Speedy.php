@@ -410,6 +410,23 @@ class Speedy {
 				];
 			}
 
+			if ( !empty( $order->get_items( 'fee' ) ) && apply_filters('woo_bg/shipping/package_total_includes_fees', true ) ) {
+				foreach ( $order->get_items( 'fee' ) as $item ) {
+					if ( $item->get_total() <= 0 ) {
+						continue;
+					}
+					
+					$rate = woo_bg_get_order_item_vat_rate( $item, $order );
+
+					$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
+						'description' => mb_substr( $item->get_name(), 0, 50 ),
+						'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
+						'amount' => number_format( $item->get_total(), 2, '.', '' ),
+						'amountWithVat' => number_format( $item->get_total() + $item->get_total_tax(), 2, '.', '' ),
+					];
+				}
+			}
+
 			if ( !empty( $cookie_data['fixed_price'] ) ) {
 				$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
 					'description' => mb_substr( 'Доставка', 0, 50 ),
