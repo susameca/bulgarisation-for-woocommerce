@@ -453,7 +453,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( $is_fragile && empty( $this->cookie_data['selectedOfficeIsAPS'] ) ) {
 			$cart[ 'services' ]['declaredValueAmount'] = woo_bg_get_package_total();
-			$cart[ 'services' ]['declaredValueCurrency'] = 'BGN';
+			$cart[ 'services' ]['declaredValueCurrency'] = get_woocommerce_currency();
 		}
 
 		$send_from = woo_bg_get_option( 'econt', 'send_from' );

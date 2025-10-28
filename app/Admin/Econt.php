@@ -524,6 +524,26 @@ class Econt {
 							'price' => number_format( $item->get_total() + $item->get_total_tax(), 2, '.', '' ),
 						];
 					}
+
+					if ( !empty( $order->get_items( 'fee' ) ) && apply_filters('woo_bg/shipping/package_total_includes_fees', true ) ) {
+						foreach ( $order->get_items( 'fee' ) as $key => $item ) {
+							if ( $item->get_total() <= 0 ) {
+								continue;
+							}
+
+							$key++;
+							
+							$rate = woo_bg_get_order_item_vat_rate( $item, $order );
+
+							$label["packingList"][] = [
+								'inventoryNum' => $key,
+								'description' => $item->get_name() . " x " . $item->get_quantity(),
+								'weight' => 0.05,
+								'count' => 1,
+								'price' => number_format( $item->get_total() + $item->get_total_tax(), 2, '.', '' ),
+							];
+						}
+					}
 				} else if ( ( empty( $packing_list_or_invoice ) || $packing_list_or_invoice === 'invoice' ) && empty( $label['services']['invoiceNum'] ) ) {
 					$label['services']['invoiceNum'] = self::get_invoice_number( $order_id );
 				}
