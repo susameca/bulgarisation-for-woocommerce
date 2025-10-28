@@ -71,13 +71,15 @@ class Order {
 		if ( !empty( $order_items ) ) {
 			foreach ( $order_items as $key => $item ) {
 				$qty = ( abs( $item->get_quantity() ) ) ? abs( $item->get_quantity() ) : 1;
+
+				$subtotal = ( method_exists( $item, 'subtotal' ) ) ? $item->get_subtotal() : $item->get_total();
 				
 				$items[] = apply_filters( 'woo_bg/invoice/order/item', array(
 					'name' => apply_filters( 'woo_bg/invoice/order/item_name', $item->get_name(), $item ),
 					'quantity' => $qty, 
 					'vat_rate' => woo_bg_get_order_item_vat_rate( $item, $this->woo_order, 1 ) . "%", 
-					'price' => wc_price( abs( $item->get_subtotal() / $qty ), array( 'currency' => $this->woo_order->get_currency() ) ),
-					'total' => wc_price( abs( $item->get_subtotal() ), array( 'currency' => $this->woo_order->get_currency() ) )
+					'price' => wc_price( abs( $subtotal / $qty ), array( 'currency' => $this->woo_order->get_currency() ) ),
+					'total' => wc_price( abs( $subtotal ), array( 'currency' => $this->woo_order->get_currency() ) )
 				), $item, $this );
 			}
 		}

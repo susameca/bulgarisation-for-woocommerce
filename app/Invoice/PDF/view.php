@@ -115,7 +115,7 @@
 		<?php foreach ( $this->document->order->get_items() as $item ): ?>
 			<tr>
 				<?php foreach ( $item as $key => $col ): ?>
-					<td <?php echo ( $key !== 'name' ) ? 'align="center"' : '' ?>><?php echo wp_kses_post( $col ) ?></td>
+					<td <?php echo ( $key !== 'name' ) ? 'align="center"' : '' ?>><?php echo wordwrap( strip_tags( $col ), 80, "<br>" ) ?></td>
 				<?php endforeach ?>
 			</tr>
 		<?php endforeach ?>
