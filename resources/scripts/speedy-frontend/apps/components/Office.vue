@@ -58,6 +58,7 @@ export default {
       		offices: [],
 			state: '',
 			city: '',
+			cityId: '0',
 			error: '',
 			document: $( document.body ),
 			i18n: wooBg_speedy.i18n,
@@ -65,11 +66,17 @@ export default {
 	},
 	computed: {
 		officeLocatorUrl() {
-			let url = 'https://services.speedy.bg/speedy_office_locator_widget/office_locator.php?selectOfficeButtonCaption=Избери"';
+			let url = 'https://services.speedy.bg/office_locator_widget_v3/office_locator.php?showOfficesList=0&selectOfficeButtonCaption=Избери';
 			let _this = this;
+
+			console.log( this.city );
 			
 			if ( this.selectedOffice && this.selectedOffice.id ) {
 				url += '&officeID=' + this.selectedOffice.id;
+			}
+
+			if ( this.cityId ) {
+				url += '&siteID=' + this.cityId;
 			}
 
 			setTimeout(function() {
@@ -126,7 +133,9 @@ export default {
 				return;
 			}
 
-			let officeID = message.data;
+			let officeID = message.data.id;
+
+			console.log(message.data);
 
 			if ( this.offices.length ) {
 				let _this = this;
@@ -207,6 +216,8 @@ export default {
 				.then(function( response ) {
 					_this.error = '';
 					let selectedOffice = [];
+
+					_this.cityId = response.data.data.cityId;
 
 					if ( response.data.data.status === 'invalid-city' ) {
 						_this.error = response.data.data.error;

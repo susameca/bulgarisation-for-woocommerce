@@ -71,7 +71,7 @@ class Office {
 			}
 
 			$offices = self::$container[ Client::SPEEDY_OFFICES ]->get_offices( $city_id, $country_id );
-
+			
 			if ( empty( $offices ) ) {
 				$offices = [];
 				/* translators: %s is the city */
@@ -88,6 +88,7 @@ class Office {
 
 			$args[ 'offices' ] = apply_filters( 'woo_bg/shipping_method/speedy/offices', $offices );
 			$args[ 'status' ] = 'valid-city';
+			$args[ 'cityId' ] = $cities_data['cities'][ $cities_data['city_key'] ]['id'];
 		}
 
 		wp_send_json_success( $args );
