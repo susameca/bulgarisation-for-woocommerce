@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.8
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.4.20
+Stable tag: 3.4.21
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -67,6 +67,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.4.21 =
+Speedy: Optimize fiscal items
+Econt: Optimize packing list
+Invoice PDF: Optimize items
+Speedy: Fix office locator
+Export: Add archive export for invoices
 
 = 3.4.20 =
 Econt: Optimize attributes in description
