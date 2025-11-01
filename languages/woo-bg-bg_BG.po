@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2025-10-18 15:07+0000\n"
+"PO-Revision-Date: 2025-11-01 14:15+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -26,17 +26,17 @@ msgstr "до"
 msgid "%1$s is not found in %2$s region."
 msgstr "%1$s не е намерен в \"%2$s\" region."
 
-#: app/Front_End/Multi_Currency_Converter.php:108
+#: app/Front_End/Multi_Currency_Converter.php:114
 #, php-format
 msgid "%s - Change regular price from %s to %s"
 msgstr "%s - Обновена основна цена от %s на %s"
 
-#: app/Front_End/Multi_Currency_Converter.php:115
+#: app/Front_End/Multi_Currency_Converter.php:121
 #, php-format
 msgid "%s - Change sale price from %s to %s"
 msgstr "%s - Обновена цена с намаление от %s на %s"
 
-#: app/Front_End/Multi_Currency_Converter.php:35
+#: app/Front_End/Multi_Currency_Converter.php:38
 #, php-format
 msgid "%s - price already updated."
 msgstr "%s - цената вече е актуализирана."
@@ -507,7 +507,7 @@ msgstr "Детайли:"
 msgid "Disable invoice generation"
 msgstr "Изключи генерирането на фактури"
 
-#: app/Invoice/Order/Order.php:189
+#: app/Invoice/Order/Order.php:191
 msgid "Discount"
 msgstr "Отстъпка"
 
@@ -562,7 +562,7 @@ msgstr "Имейл"
 msgid "E-mail: %s"
 msgstr "Имейл: %s"
 
-#: app/Shipping/Econt/Method.php:530
+#: app/Shipping/Econt/Method.php:534
 msgid "Econt - "
 msgstr "Еконт - "
 
@@ -781,23 +781,27 @@ msgstr ""
 "Българските разпоредби. Включва облекчен режим за Наредба - H-18 и метод на "
 "доставка с Еконт, BOX NOW, CVC и Спиди."
 
-#: app/Admin/Tabs/Export_Tab.php:12
+#: app/Admin/Tabs/Export_Tab.php:13
 msgid "Export"
 msgstr "Експорт"
 
-#: app/Admin/Tabs/Export_Tab.php:44
+#: app/Admin/Tabs/Export_Tab.php:64
+msgid "Export archive with invoices for selected month"
+msgstr "Експорт на архив с фактури и кредитни известия за избрания месец"
+
+#: app/Admin/Tabs/Export_Tab.php:49
 msgid "Export documents"
 msgstr "Експортни документите"
 
-#: app/Admin/Tabs/Export_Tab.php:51
+#: app/Admin/Tabs/Export_Tab.php:56
 msgid "Export documents for Microinvest"
 msgstr "Експорт на документите за Microinvest"
 
-#: app/Admin/Tabs/Export_Tab.php:13
+#: app/Admin/Tabs/Export_Tab.php:14
 msgid "Exporting XML"
 msgstr "Експортиране на XML"
 
-#: app/Admin/Tabs/Export_Tab.php:111 app/Admin/Tabs/Export_Tab.php:131
+#: app/Admin/Tabs/Export_Tab.php:124 app/Admin/Tabs/Export_Tab.php:144
 #, php-format
 msgid ""
 "File generated successfully! <a href=\"%s\" download target=\"_blank\">"
@@ -846,7 +850,7 @@ msgstr "За еднократна помощ като подкрепа за ра
 msgid "Force variations in label"
 msgstr "Принудително добавяне на варияцията в товарителницата"
 
-#: app/Admin/Tabs/Export_Tab.php:98
+#: app/Admin/Tabs/Export_Tab.php:111
 msgid "Found errors in file:"
 msgstr "Намерени грешки във файла:"
 
@@ -888,11 +892,11 @@ msgstr "От/До сума на поръчката"
 msgid "General"
 msgstr "Главни"
 
-#: app/Admin/Tabs/Export_Tab.php:43
+#: app/Admin/Tabs/Export_Tab.php:48
 msgid "Generate an XML file"
 msgstr "Генерирай XML файл"
 
-#: app/Admin/Tabs/Export_Tab.php:42
+#: app/Admin/Tabs/Export_Tab.php:47
 msgid "Generate documents for orders before the plugin was installed?"
 msgstr "Генериране на докумени за поръчки преди плъгина да бъде инсталиран?"
 
@@ -1096,7 +1100,7 @@ msgid "Label data"
 msgstr "Данни за товарителница"
 
 #: app/Shipping/BoxNow/Method.php:441 app/Shipping/CVC/Method.php:538
-#: app/Shipping/Econt/Method.php:660 app/Shipping/Speedy/Method.php:684
+#: app/Shipping/Econt/Method.php:664 app/Shipping/Speedy/Method.php:688
 #, php-format
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
@@ -1224,7 +1228,8 @@ msgstr "Без споразумение"
 msgid "No offices were found at %s."
 msgstr "Не бяха намерени офиси в %s."
 
-#: app/Admin/Tabs/Export_Tab.php:78 app/Admin/Tabs/Export_Tab.php:126
+#: app/Admin/Tabs/Export_Tab.php:91 app/Admin/Tabs/Export_Tab.php:139
+#: app/Admin/Tabs/Export_Tab.php:160
 msgid "No orders found for this month."
 msgstr "Няма намерени поръчки за този месец."
 
@@ -1255,7 +1260,7 @@ msgid "No results was found for this city"
 msgstr "Няма намерени резултати за този град"
 
 #: app/functions.php:384 app/Admin/Nekorekten_Com.php:369
-#: app/Front_End/Multi_Currency_Converter.php:80
+#: app/Front_End/Multi_Currency_Converter.php:86
 msgid "Nonce was not provided!"
 msgstr "Nonce не е предоставен!"
 
@@ -1424,16 +1429,16 @@ msgstr "Място на сделката"
 msgid "Please choose a automat."
 msgstr "Моля изберете автомат."
 
-#: app/Shipping/Econt/Method.php:545 app/Shipping/Speedy/Method.php:598
+#: app/Shipping/Econt/Method.php:549 app/Shipping/Speedy/Method.php:602
 msgid "Please choose a office."
 msgstr "Моля изберете офис."
 
-#: app/Shipping/Econt/Method.php:553
+#: app/Shipping/Econt/Method.php:557
 msgid "Please choose address."
 msgstr "Моля изберете адрес"
 
-#: app/Shipping/CVC/Method.php:452 app/Shipping/Econt/Method.php:533
-#: app/Shipping/Speedy/Method.php:588
+#: app/Shipping/CVC/Method.php:452 app/Shipping/Econt/Method.php:537
+#: app/Shipping/Speedy/Method.php:592
 msgid "Please choose delivery option!"
 msgstr "Моля изберете начин на доставка!"
 
@@ -1643,7 +1648,7 @@ msgstr "Търси офис"
 msgid "Select"
 msgstr "Избери"
 
-#: app/Admin/Tabs/Export_Tab.php:41
+#: app/Admin/Tabs/Export_Tab.php:46
 msgid "Select a month for the report"
 msgstr "Изберете месец на извлечението"
 
@@ -1766,12 +1771,12 @@ msgstr "Тип на товарителницата"
 msgid "Shipping Methods Settings"
 msgstr "Настройки за доставки"
 
-#: app/Export/Nra/Order.php:131 app/Invoice/Order/Order.php:121
+#: app/Export/Nra/Order.php:131 app/Invoice/Order/Order.php:123
 #, php-format
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
 
-#: app/Front_End/Multi_Currency_Converter.php:138
+#: app/Front_End/Multi_Currency_Converter.php:144
 msgid "Shop currency changed to EUR"
 msgstr "Валутата на магазина е сменена на EUR"
 
@@ -1800,7 +1805,7 @@ msgstr "Малка кутия"
 msgid "SMS notification"
 msgstr "SMS известия"
 
-#: app/Admin/Tabs/Export_Tab.php:86
+#: app/Admin/Tabs/Export_Tab.php:99
 #, php-format
 msgid ""
 "Some of the orders was not included because the payment method options was "
@@ -1809,7 +1814,7 @@ msgstr ""
 "Някои от поръчките не бяха добавени, защото метода на плащане не беше "
 "намерен или е изключен. Списък с ид на поръчките: %s"
 
-#: app/Shipping/Speedy/Method.php:586
+#: app/Shipping/Speedy/Method.php:590
 #, php-format
 msgid "Speedy - %s"
 msgstr "Спиди - %s"
@@ -1830,7 +1835,7 @@ msgstr "speedy.bg API настройки"
 msgid "Standard"
 msgstr "Страндартна"
 
-#: app/Admin/Tabs/Export_Tab.php:59
+#: app/Admin/Tabs/Export_Tab.php:72
 msgid "Standardized audit file according to Annex № 38"
 msgstr "Одиторски файл съгласно приложение № 38 ( Наредба Н-18 )"
 
@@ -1993,7 +1998,7 @@ msgstr "Към фактура №"
 msgid "To Office: "
 msgstr "До офис: "
 
-#: app/Invoice/Order/Order.php:193 app/Invoice/Order/Order.php:198
+#: app/Invoice/Order/Order.php:195 app/Invoice/Order/Order.php:200
 msgid "Total"
 msgstr "Данъчна основа"
 
@@ -2001,7 +2006,7 @@ msgstr "Данъчна основа"
 msgid "Total amount"
 msgstr "Обща стойност"
 
-#: app/Invoice/Order/Order.php:214
+#: app/Invoice/Order/Order.php:216
 msgid "Total due"
 msgstr "Всичко"
 
@@ -2019,7 +2024,7 @@ msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
 
 #: app/Shipping/BoxNow/Method.php:445 app/Shipping/CVC/Method.php:542
-#: app/Shipping/Econt/Method.php:664 app/Shipping/Speedy/Method.php:688
+#: app/Shipping/Econt/Method.php:668 app/Shipping/Speedy/Method.php:692
 msgid "Track your order."
 msgstr "Проследи пратката."
 
@@ -2199,7 +2204,7 @@ msgstr ""
 msgid "You can review a demo at: %s"
 msgstr "Можете да видите демо на: %s"
 
-#: app/Front_End/Multi_Currency_Converter.php:84
+#: app/Front_End/Multi_Currency_Converter.php:90
 msgid "You cannot change the prices."
 msgstr "Вие не можете да променяте цените."
 

@@ -21,6 +21,12 @@ if ( $('#woo-bg-exports--microinvest').length ) {
 	exportTabMicroinvest();
 }
 
+if ( $('#woo-bg-exports--invoice-archive').length ) {
+	let exportTabInvoiceArchive = () => import('./apps/export/invoiceArchive/app.js');
+
+	exportTabInvoiceArchive();
+}
+
 if ( $('#woo-bg-contact-form').length ) {
 	let helpTab = () => import('./apps/contact-form/app.js');
 

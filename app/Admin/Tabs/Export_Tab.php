@@ -4,6 +4,7 @@ namespace Woo_BG\Admin\Tabs;
 use Woo_BG\Admin\Order\Documents;
 use Woo_BG\Export\Nra\Export as NraExport;
 use Woo_BG\Export\Delta\Export as DeltaExport;
+use Woo_BG\Export\InvoiceArchive\Export as InvoiceArchiveExport;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,6 +23,9 @@ class Export_Tab extends Base_Tab {
 		<?php if ( woo_bg_get_option( 'invoice', 'nra_n18' ) === 'yes' ): ?>
 			<div id="woo-bg-exports"></div><!-- /#woo-bg-export -->
 		<?php endif ?>
+
+		<div id="woo-bg-exports--invoice-archive"></div><!-- /#woo-bg-export -->
+
 		<div id="woo-bg-exports--microinvest"></div><!-- /#woo-bg-export -->
 		<?php
 	}
@@ -38,6 +42,7 @@ class Export_Tab extends Base_Tab {
 		return array(
 			'description' => $this->get_description(),
 			'microinvestDescription' => $this->get_microinvest_description(),
+			'invoiceArchiveDescription' => $this->get_invoice_archive_description(),
 			'choose_month' => __( 'Select a month for the report', 'woo-bg' ),
 			'generated_files' => __( 'Generate documents for orders before the plugin was installed?', 'woo-bg' ),
 			'download' => __( 'Generate an XML file', 'woo-bg' ),
@@ -49,6 +54,14 @@ class Export_Tab extends Base_Tab {
 		ob_start();
 		?>
 		<h2><?php esc_html_e('Export documents for Microinvest', 'woo-bg' ) ?></h2>
+		<?php
+		return ob_get_clean();
+	}
+
+	public function get_invoice_archive_description() {
+		ob_start();
+		?>
+		<h2><?php esc_html_e('Export archive with invoices for selected month', 'woo-bg' ) ?></h2>
 		<?php
 		return ob_get_clean();
 	}
@@ -130,5 +143,27 @@ class Export_Tab extends Base_Tab {
 		wp_send_json_success( array(
 			"message" => sprintf( __( 'File generated successfully! <a href="%s" download target="_blank">Download</a>', 'woo-bg' ), $generated_file['file'] ),
 		) );
+	}
+
+	public static function woo_bg_export_invoice_archive_callback() {
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], 'woo_bg_export_nap' ) ) {
+			wp_send_json_error();
+		}
+
+		$export = new InvoiceArchiveExport( sanitize_text_field( $_REQUEST[ 'year' ] ) );
+		$generated_file = $export->get_file();
+
+		if ( is_wp_error( $generated_file ) ) {
+			wp_send_json_error( $generated_file, 400 );
+		} else if ( empty( $generated_file['documents'] ) ) {
+			wp_send_json_success( array(
+				"message" => __( 'No orders found for this month.', 'woo-bg' ),
+			) );
+		}
+
+		header('Content-type: application/zip');
+		header('Content-Disposition: attachment; filename="' . $generated_file['file_name'] . '"');
+		header("Content-length: " . filesize( $generated_file['temp_file'] ) );
+		echo file_get_contents( $generated_file['temp_file'] );
 	}
 }
