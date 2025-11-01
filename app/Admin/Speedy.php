@@ -395,7 +395,10 @@ class Speedy {
 	}
 
 	public static function update_fiscal_items( $label, $order ) {
-		if ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) && $order->get_payment_method() === 'cod' ) {
+		if ( 
+			wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) && 
+			$order->get_payment_method() === 'cod'
+		) {
 			$cookie_data = $order->get_meta( 'woo_bg_speedy_cookie_data' );
 			$label['service']['additionalServices']['cod']['fiscalReceiptItems'] = array();
 
@@ -428,9 +431,11 @@ class Speedy {
 			}
 
 			if ( !empty( $cookie_data['fixed_price'] ) ) {
+				$rate = ( wc_tax_enabled() ) ? 20 : 0;
+
 				$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
 					'description' => mb_substr( 'Доставка', 0, 50 ),
-					'vatGroup' => woo_bg_get_vat_group_from_rate( 20 ),
+					'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
 					'amount' => woo_bg_tax_based_price( $cookie_data['fixed_price'] ),
 					'amountWithVat' => number_format( $cookie_data['fixed_price'], 2, '.', '' ),
 				];
