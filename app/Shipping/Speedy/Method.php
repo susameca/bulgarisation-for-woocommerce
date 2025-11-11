@@ -477,7 +477,7 @@ class Method extends \WC_Shipping_Method {
 				$services['additionalServices']['cod']['fiscalReceiptItems'] = array();
 
 				foreach ( WC()->cart->get_cart() as $cart_item ) {
-					if ( !$cart_item['line_total'] ) {
+					if ( !$cart_item['line_total'] || $cart_item['line_total'] <= 0 ) {
 						continue;
 					}
 					

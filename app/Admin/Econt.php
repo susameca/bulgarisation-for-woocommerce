@@ -509,6 +509,9 @@ class Econt {
 					$label["packingList"] = [];
 					
 					foreach ( $order->get_items() as $key => $item ) {
+						if ( $item->get_total() <= 0 ) {
+							continue;
+						}
 						/*
 						/ Count is added to the name for a reason.
 						/ When you have discount with more than 1 quantity, the label cannot be generated because of differences in the cents.

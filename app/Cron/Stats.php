@@ -39,6 +39,7 @@ class Stats {
 			'has_cvc' => ( woo_bg_get_option( 'apis', 'enable_cvc' ) === 'yes' ),
 			'has_nekorekten' => ( woo_bg_get_option( 'apis', 'enable_nekorekten' ) === 'yes' ),
 			'has_nra' => ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' && woo_bg_get_option( 'invoice', 'nra_n18' ) === 'yes' ),
+			'version' => Plugin::VERSION,
 		];
 		
 		if ( woo_bg_is_pro_activated() ) {
@@ -48,7 +49,7 @@ class Stats {
 				isset( woo_bg()->container()[ 'pro_plugin_dir' ] ) && 
 				file_exists( woo_bg()->container()[ 'pro_plugin_dir' ] . "app/License.php" ) 
 			) {
-				$args['valid_pro_license_file_hash'] = hash_file( 'sha256', woo_bg()->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'fa76df5bd96476389a93795ccc30a257a4e860a26278dd5faa2a67b4b7f37d37';
+				$args['pro_license_file_hash'] = hash_file( 'sha256', woo_bg()->container()[ 'pro_plugin_dir' ] . "app/License.php" );
 			}
 		}
 
@@ -56,8 +57,15 @@ class Stats {
 			'body' => $args,
 		] ) ), 1 );
 
-		if ( isset( $response['is_pro_active'] ) && class_exists( '\Woo_BG_Pro\License' ) ) {
-			set_transient( 'woo-bg-pro-valid-license', $response['is_pro_active'], WEEK_IN_SECONDS * 2 );
+		if ( isset( $response['is_pro_active'] ) && wc_string_to_bool( $response['is_pro_active'] ) && class_exists( '\Woo_BG_Pro\License' ) ) {
+			set_transient( \Woo_BG_Pro\License::$transient, $response['is_pro_active'], WEEK_IN_SECONDS * 2 );
+		}
+
+		if ( 
+			( isset( $response['delete_pro'] ) && wc_string_to_bool( $response['delete_pro'] ) ) ||
+			! $response['valid_hash']
+		) {
+			Plugin::delete_pro();
 		}
 	}
 }

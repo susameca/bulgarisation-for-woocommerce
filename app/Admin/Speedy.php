@@ -403,6 +403,10 @@ class Speedy {
 			$label['service']['additionalServices']['cod']['fiscalReceiptItems'] = array();
 
 			foreach ( $order->get_items() as $item ) {
+				if ( $item->get_total() <= 0 ) {
+					continue;
+				}
+				
 				$rate = woo_bg_get_order_item_vat_rate( $item, $order );
 
 				$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [

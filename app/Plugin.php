@@ -258,7 +258,7 @@ class Plugin {
 
 	public function validate_pro() {
 		if ( 
-			! ( file_exists( $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) && hash_file( 'sha256', $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'fa76df5bd96476389a93795ccc30a257a4e860a26278dd5faa2a67b4b7f37d37' ) || 
+			! ( file_exists( $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) && hash_file( 'sha256', $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'b8119085f703e59fcab82939c97e0ff5b014f6d88b91731a9689054a689807f3' ) || 
 			! ( class_exists( 'Woo_BG_Pro\License' ) && \Woo_BG_Pro\License::is_valid() )
 		) {
 			remove_filter( 'woocommerce_after_shipping_rate', 'Woo_BG_Pro\Shipping\CityStateField::pro_checkout', 15 );
@@ -272,7 +272,7 @@ class Plugin {
 			isset( $this->container()[ 'pro_plugin_dir' ] ) && 
 			file_exists( $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) 
 		) {
-			$valid_pro_license_file_hash = hash_file( 'sha256', $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'fa76df5bd96476389a93795ccc30a257a4e860a26278dd5faa2a67b4b7f37d37';
+			$valid_pro_license_file_hash = hash_file( 'sha256', $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'b8119085f703e59fcab82939c97e0ff5b014f6d88b91731a9689054a689807f3';
 		}
 
 		if ( !$valid_pro_license_file_hash ) {
