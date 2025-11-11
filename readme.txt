@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.8
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.4.21
+Stable tag: 3.4.22
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -67,6 +67,10 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 8. Избор на метод за доставка
 
 == Changelog ==
+
+= 3.4.22 =
+Speedy: Label optimizations
+Econt: Label optimizations
 
 = 3.4.21 =
 Speedy: Optimize fiscal items

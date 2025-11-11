@@ -4,7 +4,7 @@ namespace Woo_BG;
 defined( 'ABSPATH' ) || exit;
 
 class Plugin {
-	const VERSION = '3.4.21';
+	const VERSION = '3.4.22';
 
 	protected static $_instance;
 
@@ -241,6 +241,7 @@ class Plugin {
 		$upload_dir = wp_upload_dir();
 		$upload_dir = str_replace( site_url(), '', $upload_dir['baseurl'] );
 
+		$output .= "\n";
 		$output .= "Disallow: " . $plugin_dir_url . "\n";
 		$output .= "Disallow: " . $upload_dir . "/woo-bg/\n";
 	
