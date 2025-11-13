@@ -78,7 +78,7 @@ class EU_Vat {
 
 	public static function vat_number_field( $fields ) {
 		$fields['billing']['billing_vat_number'] = array(
-			'label'    => __( 'VAT number', 'woo-bg' ),
+			'label'    => __( 'VAT number', 'bulgarisation-for-woocommerce' ),
 			'required' => ( woo_bg_get_option('nap', 'dds_number_required' ) !== 'no' ),
 			'class'    => array(
 				'form-row-first',
@@ -147,7 +147,7 @@ class EU_Vat {
 		$vies = new Validator;
 
 		if ( ! isset( self::$country_codes_patterns[ $vat_prefix ] ) ) {
-			return new \WP_Error( 'api', __( 'Invalid country code', 'woo-bg' ) );
+			return new \WP_Error( 'api', __( 'Invalid country code', 'bulgarisation-for-woocommerce' ) );
 		}
 
 		try {
@@ -159,7 +159,7 @@ class EU_Vat {
 
 			return $is_valid;
 		} catch( SoapFault $e ) {
-			return new \WP_Error( 'api', __( 'Error communicating with the VAT validation server - please try again', 'woo-bg' ) );
+			return new \WP_Error( 'api', __( 'Error communicating with the VAT validation server - please try again', 'bulgarisation-for-woocommerce' ) );
 		}
 
 		return false;
@@ -214,7 +214,7 @@ class EU_Vat {
 
 		if ( woo_bg_get_option('invoice', 'enable_vies' ) !== 'no' && !empty( $_POST[ 'billing_to_company' ] ) ) {
 			if ( false === self::$data['validation']['valid'] && isset( $_REQUEST[ 'billing_to_company' ] ) && sanitize_text_field( $_REQUEST[ 'billing_to_company' ] ) ) {
-				wc_add_notice( sprintf( __( 'You have entered an invalid %1$s (%2$s) for your billing country (%3$s).', 'woo-bg' ), __( 'VAT number', 'woo-bg' ), self::$data['vat_number'], $billing_country ), 'error' );
+				wc_add_notice( sprintf( __( 'You have entered an invalid %1$s (%2$s) for your billing country (%3$s).', 'bulgarisation-for-woocommerce' ), __( 'VAT number', 'bulgarisation-for-woocommerce' ), self::$data['vat_number'], $billing_country ), 'error' );
 			} else {
 				wc_add_notice( self::$data['validation']['error'], 'error' );
 			}
@@ -244,7 +244,7 @@ class EU_Vat {
 				if ( true === (bool) self::$data['validation']['valid'] ) {
 					self::maybe_set_vat_exempt( true, $form_data['billing_country'], $shipping_country );
 				} else {
-					wc_add_notice( sprintf( __( 'You have entered an invalid VAT number (%1$s) for your billing country (%2$s).', 'woo-bg' ), $form_data['billing_vat_number'], $form_data['billing_country'] ), 'error' );
+					wc_add_notice( sprintf( __( 'You have entered an invalid VAT number (%1$s) for your billing country (%2$s).', 'bulgarisation-for-woocommerce' ), $form_data['billing_vat_number'], $form_data['billing_country'] ), 'error' );
 				}
 			}
 		}

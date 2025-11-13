@@ -5,8 +5,8 @@ defined( 'ABSPATH' ) || exit;
 
 class Help_Tab extends Base_Tab {
 	public function __construct() {
-		$this->set_name( __( 'Help', 'woo-bg' ) );
-		$this->set_description( __( 'If you need help', 'woo-bg' ) );
+		$this->set_name( __( 'Help', 'bulgarisation-for-woocommerce' ) );
+		$this->set_description( __( 'If you need help', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "help" );
 	}
 
@@ -16,10 +16,10 @@ class Help_Tab extends Base_Tab {
 		woo_bg_support_text();
 		?>
 
-		<h3><?php esc_html_e( 'Recommended settings', 'woo-bg' ) ?></h3>
+		<h3><?php esc_html_e( 'Recommended settings', 'bulgarisation-for-woocommerce' ) ?></h3>
 
 		<?php 
-		echo wp_kses_post( wpautop( __( 'If your shop is in group B or G, we suggest you to enable the default WooCommerce settings at "Settings >> General >> Enable taxes". After that go to "Settings >> Tax >> Yes, I will enter prices inclusive of tax". Also, go to "Standard rates" submenu and add your rate ( 20% or 9% ).', 'woo-bg' ) ) . wpautop( __('You can find more help in the official Facebook Group for the plugin: <a target="_blank" href="https://www.facebook.com/groups/bulgarisationforwoocommerce/">Bulgarisation For WooCommerce</a>.', 'woo-bg' ) ) );
+		echo wp_kses_post( wpautop( __( 'If your shop is in group B or G, we suggest you to enable the default WooCommerce settings at "Settings >> General >> Enable taxes". After that go to "Settings >> Tax >> Yes, I will enter prices inclusive of tax". Also, go to "Standard rates" submenu and add your rate ( 20% or 9% ).', 'bulgarisation-for-woocommerce' ) ) . wpautop( __('You can find more help in the official Facebook Group for the plugin: <a target="_blank" href="https://www.facebook.com/groups/bulgarisationforwoocommerce/">Bulgarisation For WooCommerce</a>.', 'bulgarisation-for-woocommerce' ) ) );
 	}
 
 	public function admin_localize() {
@@ -31,10 +31,10 @@ class Help_Tab extends Base_Tab {
 
 	public function get_i18n() {
 		return array(
-			'name' => __( 'Name:', 'woo-bg' ),
-			'email' => __( 'E-mail:', 'woo-bg' ),
-			'message' => __( 'Message:', 'woo-bg' ),
-			'send' => __( 'Send Request', 'woo-bg' ),
+			'name' => __( 'Name:', 'bulgarisation-for-woocommerce' ),
+			'email' => __( 'E-mail:', 'bulgarisation-for-woocommerce' ),
+			'message' => __( 'Message:', 'bulgarisation-for-woocommerce' ),
+			'send' => __( 'Send Request', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 
@@ -51,7 +51,7 @@ class Help_Tab extends Base_Tab {
 		wp_mail( 'wordpress@autopolis.bg', 'Bulgarisation for WooCommerce - Help', $message, $headers );
 
 		wp_send_json_success( array(
-			"message" => __( "Thank you for your message! We'll contact you shortly.", 'woo-bg' ),
+			"message" => __( "Thank you for your message! We'll contact you shortly.", 'bulgarisation-for-woocommerce' ),
 		) );
 
 		wp_die();

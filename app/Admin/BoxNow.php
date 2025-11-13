@@ -55,7 +55,7 @@ class BoxNow {
 
 					$screen = array_filter( $screen );
 
-					add_meta_box( 'woo_bg_boxnow', __( 'BOX NOW Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
+					add_meta_box( 'woo_bg_boxnow', __( 'BOX NOW Delivery', 'bulgarisation-for-woocommerce' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
 					break;
 				}
 			}
@@ -115,25 +115,25 @@ class BoxNow {
 
 	protected static function get_i18n() {
 		return array(
-			'sendTo' => __('Send to', 'woo-bg'),
-			'sendFrom' => __('Send From', 'woo-bg'),
-			'warehouseApm' => __('Warehouse/Automat', 'woo-bg'),
-			'apm' => __('Automat', 'woo-bg'),
-			'total' => __('Total price', 'woo-bg'),
-			'allowReturn' => __('Allow returns', 'woo-bg'),
-			'updateShipmentStatus' => __( 'Update shipment status', 'woo-bg' ),
-			'generateLabel' => __( 'Generate label', 'woo-bg' ),
-			'deleteLabel' => __( 'Delete label', 'woo-bg' ),
-			'label' => __( 'Label', 'woo-bg' ), 
-			'selected' => __( 'Selected', 'woo-bg' ),
-			'choose' => __( 'Choose', 'woo-bg' ),
-			'labelData' => __( 'Label data', 'woo-bg' ),
-			'shipmentStatus' => __( 'Shipment status', 'woo-bg' ),
-			'boxSize' => __( 'Box size', 'woo-bg' ),
-			'auto' => __( 'Automatically pack products to boxes', 'woo-bg' ),
-			'smallBox' => __( 'Small Box', 'woo-bg' ),
-			'mediumBox' => __( 'Medium Box', 'woo-bg' ),
-			'largeBox' => __( 'Large Box', 'woo-bg' ),
+			'sendTo' => __('Send to', 'bulgarisation-for-woocommerce'),
+			'sendFrom' => __('Send From', 'bulgarisation-for-woocommerce'),
+			'warehouseApm' => __('Warehouse/Automat', 'bulgarisation-for-woocommerce'),
+			'apm' => __('Automat', 'bulgarisation-for-woocommerce'),
+			'total' => __('Total price', 'bulgarisation-for-woocommerce'),
+			'allowReturn' => __('Allow returns', 'bulgarisation-for-woocommerce'),
+			'updateShipmentStatus' => __( 'Update shipment status', 'bulgarisation-for-woocommerce' ),
+			'generateLabel' => __( 'Generate label', 'bulgarisation-for-woocommerce' ),
+			'deleteLabel' => __( 'Delete label', 'bulgarisation-for-woocommerce' ),
+			'label' => __( 'Label', 'bulgarisation-for-woocommerce' ), 
+			'selected' => __( 'Selected', 'bulgarisation-for-woocommerce' ),
+			'choose' => __( 'Choose', 'bulgarisation-for-woocommerce' ),
+			'labelData' => __( 'Label data', 'bulgarisation-for-woocommerce' ),
+			'shipmentStatus' => __( 'Shipment status', 'bulgarisation-for-woocommerce' ),
+			'boxSize' => __( 'Box size', 'bulgarisation-for-woocommerce' ),
+			'auto' => __( 'Automatically pack products to boxes', 'bulgarisation-for-woocommerce' ),
+			'smallBox' => __( 'Small Box', 'bulgarisation-for-woocommerce' ),
+			'mediumBox' => __( 'Medium Box', 'bulgarisation-for-woocommerce' ),
+			'largeBox' => __( 'Large Box', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 

@@ -10,8 +10,8 @@ defined( 'ABSPATH' ) || exit;
 
 class Export_Tab extends Base_Tab {
 	public function __construct() {
-		$this->set_name( __( 'Export', 'woo-bg' ) );
-		$this->set_description( __( 'Exporting XML', 'woo-bg' ) );
+		$this->set_name( __( 'Export', 'bulgarisation-for-woocommerce' ) );
+		$this->set_description( __( 'Exporting XML', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "export" );
 	}
 
@@ -43,17 +43,17 @@ class Export_Tab extends Base_Tab {
 			'description' => $this->get_description(),
 			'microinvestDescription' => $this->get_microinvest_description(),
 			'invoiceArchiveDescription' => $this->get_invoice_archive_description(),
-			'choose_month' => __( 'Select a month for the report', 'woo-bg' ),
-			'generated_files' => __( 'Generate documents for orders before the plugin was installed?', 'woo-bg' ),
-			'download' => __( 'Generate an XML file', 'woo-bg' ),
-			'export_documents' => __( 'Export documents', 'woo-bg' ),
+			'choose_month' => __( 'Select a month for the report', 'bulgarisation-for-woocommerce' ),
+			'generated_files' => __( 'Generate documents for orders before the plugin was installed?', 'bulgarisation-for-woocommerce' ),
+			'download' => __( 'Generate an XML file', 'bulgarisation-for-woocommerce' ),
+			'export_documents' => __( 'Export documents', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 
 	public function get_microinvest_description() {
 		ob_start();
 		?>
-		<h2><?php esc_html_e('Export documents for Microinvest', 'woo-bg' ) ?></h2>
+		<h2><?php esc_html_e('Export documents for Microinvest', 'bulgarisation-for-woocommerce' ) ?></h2>
 		<?php
 		return ob_get_clean();
 	}
@@ -61,7 +61,7 @@ class Export_Tab extends Base_Tab {
 	public function get_invoice_archive_description() {
 		ob_start();
 		?>
-		<h2><?php esc_html_e('Export archive with invoices for selected month', 'woo-bg' ) ?></h2>
+		<h2><?php esc_html_e('Export archive with invoices for selected month', 'bulgarisation-for-woocommerce' ) ?></h2>
 		<?php
 		return ob_get_clean();
 	}
@@ -69,7 +69,7 @@ class Export_Tab extends Base_Tab {
 	public function get_description() {
 		ob_start();
 		?>
-		<h2><?php esc_html_e('Standardized audit file according to Annex № 38', 'woo-bg' ) ?></h2>
+		<h2><?php esc_html_e('Standardized audit file according to Annex № 38', 'bulgarisation-for-woocommerce' ) ?></h2>
 		<?php
 		return ob_get_clean();
 	}
@@ -88,7 +88,7 @@ class Export_Tab extends Base_Tab {
 
 		if ( !$generated_file ) {
 			wp_send_json_success( array(
-				"message" => __( 'No orders found for this month.', 'woo-bg' ),
+				"message" => __( 'No orders found for this month.', 'bulgarisation-for-woocommerce' ),
 			) );
 		}
 
@@ -96,7 +96,7 @@ class Export_Tab extends Base_Tab {
 
 		if ( !empty( $generated_file['not_included_orders'] ) ) {
 			$additional_message = '. ' . sprintf( 
-				__( 'Some of the orders was not included because the payment method options was not found or the payment method was disabled. List of orders id\'s: %s', 'woo-bg' ), 
+				__( 'Some of the orders was not included because the payment method options was not found or the payment method was disabled. List of orders id\'s: %s', 'bulgarisation-for-woocommerce' ), 
 				implode(', ', $generated_file['not_included_orders'] ) 
 			);
 		}
@@ -108,7 +108,7 @@ class Export_Tab extends Base_Tab {
 		if ( !empty( $generated_file['errors'] ) ) {
 			ob_start();
 			?>
-			<h2><?php _e( 'Found errors in file:', 'woo-bg' ) ?></h2>
+			<h2><?php _e( 'Found errors in file:', 'bulgarisation-for-woocommerce' ) ?></h2>
 			<ul>
 				<?php foreach ( $generated_file['errors'] as $error ): ?>
 					<li><?php echo $error ?></li>
@@ -121,7 +121,7 @@ class Export_Tab extends Base_Tab {
 		$additional_message = apply_filters( 'woo_bg/admin/export/nra/additional_message', $additional_message, $export );
 		
 		wp_send_json_success( array(
-			"message" => sprintf( __( 'File generated successfully! <a href="%s" download target="_blank">Download</a>', 'woo-bg' ), $generated_file['file'] ) . $additional_message,
+			"message" => sprintf( __( 'File generated successfully! <a href="%s" download target="_blank">Download</a>', 'bulgarisation-for-woocommerce' ), $generated_file['file'] ) . $additional_message,
 		) );
 	}
 
@@ -136,12 +136,12 @@ class Export_Tab extends Base_Tab {
 
 		if ( !$generated_file ) {
 			wp_send_json_success( array(
-				"message" => __( 'No orders found for this month.', 'woo-bg' ),
+				"message" => __( 'No orders found for this month.', 'bulgarisation-for-woocommerce' ),
 			) );
 		}
 
 		wp_send_json_success( array(
-			"message" => sprintf( __( 'File generated successfully! <a href="%s" download target="_blank">Download</a>', 'woo-bg' ), $generated_file['file'] ),
+			"message" => sprintf( __( 'File generated successfully! <a href="%s" download target="_blank">Download</a>', 'bulgarisation-for-woocommerce' ), $generated_file['file'] ),
 		) );
 	}
 
@@ -157,7 +157,7 @@ class Export_Tab extends Base_Tab {
 			wp_send_json_error( $generated_file, 400 );
 		} else if ( empty( $generated_file['documents'] ) ) {
 			wp_send_json_success( array(
-				"message" => __( 'No orders found for this month.', 'woo-bg' ),
+				"message" => __( 'No orders found for this month.', 'bulgarisation-for-woocommerce' ),
 			) );
 		}
 

@@ -12,8 +12,8 @@ class Speedy_Tab extends Base_Tab {
 	public function __construct() {
 		$this->container = woo_bg()->container();
 		$this->tab_name = get_called_class();
-		$this->set_name( __( 'Speedy Settings', 'woo-bg' ) );
-		$this->set_description( __( 'speedy.bg API Settings', 'woo-bg' ) );
+		$this->set_name( __( 'Speedy Settings', 'bulgarisation-for-woocommerce' ) );
+		$this->set_description( __( 'speedy.bg API Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "speedy" );
 
 		add_action( 'woo_bg/admin/settings/afte_save_fields/'. $this->tab_name, array( $this, 'after_save_fields' ) );
@@ -40,11 +40,11 @@ class Speedy_Tab extends Base_Tab {
 		$this->admin_localize();
 		woo_bg_support_text();
 		?>
-		<a href="<?php echo esc_url( add_query_arg( 'clear-cache', true ) ) ?>" class="button-secondary"><?php esc_html_e( 'Clear cache', 'woo-bg' ) ?></a>
+		<a href="<?php echo esc_url( add_query_arg( 'clear-cache', true ) ) ?>" class="button-secondary"><?php esc_html_e( 'Clear cache', 'bulgarisation-for-woocommerce' ) ?></a>
 
-		<div class="notice"><p><?php _e( 'Please use "Classic Checkout" block or [woocommerce_checkout] shortcode.', 'woo-bg' ) ?></p></div>
+		<div class="notice"><p><?php _e( 'Please use "Classic Checkout" block or [woocommerce_checkout] shortcode.', 'bulgarisation-for-woocommerce' ) ?></p></div>
 
-		<div class="notice"><p><?php _e( 'Use credentials for API.', 'woo-bg' ) ?></p></div>
+		<div class="notice"><p><?php _e( 'Use credentials for API.', 'bulgarisation-for-woocommerce' ) ?></p></div>
 		
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
 		<?php
@@ -64,8 +64,8 @@ class Speedy_Tab extends Base_Tab {
 	public function load_fields() {
 		$fields = array(
 			'speedy' => array(
-				new Fields\Text_Field( 'user', __( 'Username', 'woo-bg' ), __( 'Enter your username.', 'woo-bg' ), 'required' ),
-				new Fields\Text_Field( 'password', __( 'Password', 'woo-bg' ), __( 'Enter your password.', 'woo-bg' ), 'required', null, 'password' ),
+				new Fields\Text_Field( 'user', __( 'Username', 'bulgarisation-for-woocommerce' ), __( 'Enter your username.', 'bulgarisation-for-woocommerce' ), 'required' ),
+				new Fields\Text_Field( 'password', __( 'Password', 'bulgarisation-for-woocommerce' ), __( 'Enter your password.', 'bulgarisation-for-woocommerce' ), 'required', null, 'password' ),
 			)
 		);
 
@@ -79,28 +79,28 @@ class Speedy_Tab extends Base_Tab {
 			$all_profiles = $this->container[ Client::SPEEDY_PROFILE ]->get_profiles_for_settings();
 
 			if ( !empty( $all_profiles ) ) {
-				$fields[ 'speedy' ][] = new Fields\Select_Field( $all_profiles, 'profile_key', __( 'Select profile', 'woo-bg' ), null, null, __( 'Select the profile you want to use and save to show or update the other options.', 'woo-bg' )
+				$fields[ 'speedy' ][] = new Fields\Select_Field( $all_profiles, 'profile_key', __( 'Select profile', 'bulgarisation-for-woocommerce' ), null, null, __( 'Select the profile you want to use and save to show or update the other options.', 'bulgarisation-for-woocommerce' )
 				);
-				$fields[ 'speedy' ][] = new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ) );
-				$fields[ 'speedy' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ) );
-				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'ppp', __( 'Cash on delivery as PPP.', 'woo-bg' ) );
-				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'kb', __( 'Cash on delivery with cash receipt.', 'woo-bg' ) );
-				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'disable_apt', __( 'Remove APT from offices', 'woo-bg' ) );
-				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) );
-				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) );
-				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'declared_value', __( 'Declared value', 'woo-bg' ), null, null, __( 'Adds declared value to the label if payment is COD.', 'woo-bg' ) );
-				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'auto_size', __( 'Automatically calculate box size', 'woo-bg' ), null, null, __( 'Automatically calculate LxWxH of the box for the parcel.', 'woo-bg' ) );
+				$fields[ 'speedy' ][] = new Fields\Text_Field( 'name', __( 'Name', 'bulgarisation-for-woocommerce' ) );
+				$fields[ 'speedy' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'bulgarisation-for-woocommerce' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'ppp', __( 'Cash on delivery as PPP.', 'bulgarisation-for-woocommerce' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'kb', __( 'Cash on delivery with cash receipt.', 'bulgarisation-for-woocommerce' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'disable_apt', __( 'Remove APT from offices', 'bulgarisation-for-woocommerce' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'bulgarisation-for-woocommerce' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'bulgarisation-for-woocommerce' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'bulgarisation-for-woocommerce' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'bulgarisation-for-woocommerce' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'declared_value', __( 'Declared value', 'bulgarisation-for-woocommerce' ), null, null, __( 'Adds declared value to the label if payment is COD.', 'bulgarisation-for-woocommerce' ) );
+				$fields[ 'speedy' ][] = new Fields\TrueFalse_Field( 'auto_size', __( 'Automatically calculate box size', 'bulgarisation-for-woocommerce' ), null, null, __( 'Automatically calculate LxWxH of the box for the parcel.', 'bulgarisation-for-woocommerce' ) );
 				$fields[ 'speedy' ][] = new Fields\Select_Field( 
 					array(
 						'office' => array(
 							'id' => 'office',
-							'label' => __( 'Office', 'woo-bg' ),
+							'label' => __( 'Office', 'bulgarisation-for-woocommerce' ),
 						),
 						'address' => array(
 							'id' => 'address',
-							'label' => __( 'Address', 'woo-bg' ),
+							'label' => __( 'Address', 'bulgarisation-for-woocommerce' ),
 						),
-					), 'send_from', __( 'Send From', 'woo-bg' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'woo-bg' ) . " " . __('If you choose "Address" the profile address will be used.', 'woo-bg'),
+					), 'send_from', __( 'Send From', 'bulgarisation-for-woocommerce' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'bulgarisation-for-woocommerce' ) . " " . __('If you choose "Address" the profile address will be used.', 'bulgarisation-for-woocommerce'),
 				);
 			}
 		}
@@ -116,7 +116,7 @@ class Speedy_Tab extends Base_Tab {
 				$send_from = ( woo_bg_get_option( 'speedy', 'send_from' ) ) ? woo_bg_get_option( 'speedy', 'send_from' ) : 'office';
 				$cities = $this->container[ Client::SPEEDY_CITIES ]->get_formatted_cities();
 				$fields[ 'speedy_send_from' ] = [];
-				$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( $cities, 'city', __( 'City', 'woo-bg' ) );
+				$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( $cities, 'city', __( 'City', 'bulgarisation-for-woocommerce' ) );
 
 				if ( woo_bg_get_option( 'speedy_send_from', 'city' ) ) {
 					$offices = $this->container[ Client::SPEEDY_OFFICES ]->get_formatted_offices( woo_bg_get_option( 'speedy_send_from', 'city' ) );
@@ -124,10 +124,10 @@ class Speedy_Tab extends Base_Tab {
 						$fields[ 'speedy_send_from' ][] = new Fields\Select_Field( 
 							$offices['shops'], 
 							'office', 
-							__( 'Office', 'woo-bg' ), 
+							__( 'Office', 'bulgarisation-for-woocommerce' ), 
 							null, 
 							null, 
-							__('Choose a city and save in order to show offices.', 'woo-bg' ) 
+							__('Choose a city and save in order to show offices.', 'bulgarisation-for-woocommerce' ) 
 						);
 					}
 				}
@@ -148,7 +148,7 @@ class Speedy_Tab extends Base_Tab {
 	public function get_groups_titles() {
 		$titles = apply_filters( 'woo_bg/admin/settings/speedy/groups_titles', array(
 			'speedy' => array(
-				'title' => __( 'General', 'woo-bg' ),
+				'title' => __( 'General', 'bulgarisation-for-woocommerce' ),
 			),
 		) );
 
@@ -158,7 +158,7 @@ class Speedy_Tab extends Base_Tab {
 	public function add_send_from_group_title( $titles ) {
 		if ( $this->container[ Client::SPEEDY_PROFILE ]->is_valid_profile( true ) ) {
 			$titles['speedy_send_from'] = array(
-				'title' => __( 'Send From office', 'woo-bg' ),
+				'title' => __( 'Send From office', 'bulgarisation-for-woocommerce' ),
 			);
 		}
 		return $titles;
@@ -195,12 +195,12 @@ class Speedy_Tab extends Base_Tab {
 		$error = '';
 
 		if ( !$this->container[ Client::SPEEDY_PROFILE ]->is_valid_profile( true ) ) {
-			$error = __( 'Username and password are incorrect.', 'woo-bg' ); 
+			$error = __( 'Username and password are incorrect.', 'bulgarisation-for-woocommerce' ); 
 		} else {
 			$all_profiles = $this->container[ Client::SPEEDY_PROFILE ]->get_profiles_for_settings();
 
 			if ( empty( $all_profiles ) ) {
-				$error = __( 'No profiles was found. Please contact with Speedy.', 'woo-bg' );
+				$error = __( 'No profiles was found. Please contact with Speedy.', 'bulgarisation-for-woocommerce' );
 			}
 		}
 

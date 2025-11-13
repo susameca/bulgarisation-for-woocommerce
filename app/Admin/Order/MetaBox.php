@@ -16,7 +16,7 @@ class MetaBox {
 		? array( wc_get_page_screen_id( 'shop-order' ) )
 		: array( 'shop_order' );
 
-		add_meta_box( 'woo_bg_pdf-box', __( 'PDF Files', 'woo-bg' ), array( __CLASS__, 'pdf_actions_meta_box' ), $screen, 'side', 'high' );
+		add_meta_box( 'woo_bg_pdf-box', __( 'PDF Files', 'bulgarisation-for-woocommerce' ), array( __CLASS__, 'pdf_actions_meta_box' ), $screen, 'side', 'high' );
 	}
 
 	public static function pdf_actions_meta_box( $post ) {

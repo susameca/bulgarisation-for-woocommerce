@@ -7,8 +7,8 @@ class Multi_Currency_Tab extends Base_Tab {
 	protected $fields, $localized_fields;
 	
 	public function __construct() {
-		$this->set_name( __( 'BGN/EUR dual price', 'woo-bg' ) );
-		$this->set_description( __( 'nekorekten.com API Settings', 'woo-bg' ) );
+		$this->set_name( __( 'BGN/EUR dual price', 'bulgarisation-for-woocommerce' ) );
+		$this->set_description( __( 'nekorekten.com API Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "bgn-eur" );
 
 		if ( !empty( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] === $this->get_tab_slug() ) {
@@ -22,7 +22,7 @@ class Multi_Currency_Tab extends Base_Tab {
 		woo_bg_support_text();
 		?>
 
-		<div class="notice"><p><?php _e( 'Please use "Classic Checkout" and "Classic Cart" blocks or [woocommerce_checkout] and [woocommerce_cart] shortcodes.', 'woo-bg' ) ?></p></div>
+		<div class="notice"><p><?php _e( 'Please use "Classic Checkout" and "Classic Cart" blocks or [woocommerce_checkout] and [woocommerce_cart] shortcodes.', 'bulgarisation-for-woocommerce' ) ?></p></div>
 
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
 
@@ -36,7 +36,7 @@ class Multi_Currency_Tab extends Base_Tab {
 				<fieldset>
 					<input type="hidden" name="action" value="woo_bg_change_bgn_to_eur">
 
-					<?php submit_button( __( 'Change product prices from BGN to EUR', 'woo-bg' ) ); ?>
+					<?php submit_button( __( 'Change product prices from BGN to EUR', 'bulgarisation-for-woocommerce' ) ); ?>
 				</fieldset>
 
 				<?php wp_nonce_field( 'woo_bg_change_bgn_to_eur' ); ?>
@@ -58,7 +58,7 @@ class Multi_Currency_Tab extends Base_Tab {
 				</div><!-- /.progress -->
 
 				<div class="messages">
-					<p><?php _e( 'Loading products...', 'woo-bg' ) ?></p>
+					<p><?php _e( 'Loading products...', 'bulgarisation-for-woocommerce' ) ?></p>
 				</div>
 			</div>
 		</div><!-- /.wrap -->
@@ -77,11 +77,11 @@ class Multi_Currency_Tab extends Base_Tab {
 	public function load_fields() {
 		$fields = apply_filters( 'woo_bg/admin/settings/nekorektencom/fields', array(
 			'multi_currency' => array(
-				new Fields\TrueFalse_Field( 'product_rate_message', __( 'Rate message on Product page', 'woo-bg' ), null, null, __( 'Show message about conversion rate on the product page.', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'cart_rate_message', __( 'Rate message on Cart page', 'woo-bg' ), null, null, __( 'Show message about conversion rate on the cart page.', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'shop_rate_message', __( 'Rate message on Shop page', 'woo-bg' ), null, null, __( 'Show message about conversion rate on the shop page in each product.', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'email_rate_message', __( 'Rate message in Emails', 'woo-bg' ), null, null, __( 'Show message about conversion rate in emails.', 'woo-bg' ) ),
-				new Fields\Textarea_Field( 'checkout_message', __( 'Checkout Message', 'woo-bg' ), null, null, 'Примерен текст: <br><code>&lt;p&gt;&lt;strong&gt;Всички плащания ще се извършват в лева&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;small&gt;Сумата в евро се получава чрез конвертиране на цената по фиксирания обменен курс на БНБ &lt;br&gt; 1 EUR = 1.95583 BGN &lt;/small&gt;&lt;/p&gt;</code>' ),
+				new Fields\TrueFalse_Field( 'product_rate_message', __( 'Rate message on Product page', 'bulgarisation-for-woocommerce' ), null, null, __( 'Show message about conversion rate on the product page.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'cart_rate_message', __( 'Rate message on Cart page', 'bulgarisation-for-woocommerce' ), null, null, __( 'Show message about conversion rate on the cart page.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'shop_rate_message', __( 'Rate message on Shop page', 'bulgarisation-for-woocommerce' ), null, null, __( 'Show message about conversion rate on the shop page in each product.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'email_rate_message', __( 'Rate message in Emails', 'bulgarisation-for-woocommerce' ), null, null, __( 'Show message about conversion rate in emails.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\Textarea_Field( 'checkout_message', __( 'Checkout Message', 'bulgarisation-for-woocommerce' ), null, null, 'Примерен текст: <br><code>&lt;p&gt;&lt;strong&gt;Всички плащания ще се извършват в лева&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;small&gt;Сумата в евро се получава чрез конвертиране на цената по фиксирания обменен курс на БНБ &lt;br&gt; 1 EUR = 1.95583 BGN &lt;/small&gt;&lt;/p&gt;</code>' ),
 			)
 		) );
 
@@ -99,7 +99,7 @@ class Multi_Currency_Tab extends Base_Tab {
 	public function get_groups_titles() {
 		$titles = apply_filters( 'woo_bg/admin/settings/nekorektencom/groups_titles', array(
 			'multi_currency' => array(
-				'title' => __( 'Conversion rate message', 'woo-bg' ),
+				'title' => __( 'Conversion rate message', 'bulgarisation-for-woocommerce' ),
 			),
 		) );
 

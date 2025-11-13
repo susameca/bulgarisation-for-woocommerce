@@ -35,7 +35,7 @@ class Multi_Currency_Converter {
 					$product->update_meta_data( 'woo_bg_converted', 'yes' );
 					$product->save();
 				} else {
-					$woo_bg_messages[] = sprintf( __( '%s - price already updated.', 'woo-bg' ), $product->get_formatted_name() );
+					$woo_bg_messages[] = sprintf( __( '%s - price already updated.', 'bulgarisation-for-woocommerce' ), $product->get_formatted_name() );
 				}
 			}
 		}
@@ -83,11 +83,11 @@ class Multi_Currency_Converter {
 		$errors = [];
 		
 		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'woo_bg_change_bgn_to_eur' ) ) {
-			$errors[] = __( 'Nonce was not provided!', 'woo-bg' );
+			$errors[] = __( 'Nonce was not provided!', 'bulgarisation-for-woocommerce' );
 		}
 
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
-			$errors[] = __( 'You cannot change the prices.', 'woo-bg' );
+			$errors[] = __( 'You cannot change the prices.', 'bulgarisation-for-woocommerce' );
 		}
 
 		if ( !empty( $errors ) ) {
@@ -111,14 +111,14 @@ class Multi_Currency_Converter {
 		$product->update_meta_data( 'woo_bg_regular_price_bgn', $old_price );
 		$product->set_regular_price( $new_price );
 
-		$woo_bg_messages[] = sprintf( __( '%s - Change regular price from %s to %s', 'woo-bg' ), $product->get_formatted_name(), $old_price, $new_price );
+		$woo_bg_messages[] = sprintf( __( '%s - Change regular price from %s to %s', 'bulgarisation-for-woocommerce' ), $product->get_formatted_name(), $old_price, $new_price );
 
 		if ( $sale_price = $product->get_sale_price() ) {
 			$new_sale_price = Multi_Currency::convert_to_eur( $sale_price );
 
 			$product->update_meta_data( 'woo_bg_sale_price_bgn', $sale_price );
 			$product->set_sale_price( $new_sale_price );
-			$woo_bg_messages[] = sprintf( __( '%s - Change sale price from %s to %s', 'woo-bg' ), $product_name, $sale_price, $new_sale_price );
+			$woo_bg_messages[] = sprintf( __( '%s - Change sale price from %s to %s', 'bulgarisation-for-woocommerce' ), $product_name, $sale_price, $new_sale_price );
 		}
 
 		$product->update_meta_data( 'woo_bg_converted', 'yes' );
@@ -141,7 +141,7 @@ class Multi_Currency_Converter {
 		update_option('woocommerce_currency', 'EUR');
 
 		wp_send_json_success( [
-			'log' => wpautop( __( 'Shop currency changed to EUR', 'woo-bg' ) ),
+			'log' => wpautop( __( 'Shop currency changed to EUR', 'bulgarisation-for-woocommerce' ) ),
 		] );
 	}
 }

@@ -55,7 +55,7 @@ class CVC {
 
 					$screen = array_filter( $screen );
 
-					add_meta_box( 'woo_bg_cvc', __( 'CVC Delivery', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
+					add_meta_box( 'woo_bg_cvc', __( 'CVC Delivery', 'bulgarisation-for-woocommerce' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
 					break;
 				}
 			}
@@ -119,40 +119,40 @@ class CVC {
 
 	protected static function get_i18n() {
 		return array(
-			'updateShipmentStatus' => __( 'Update shipment status', 'woo-bg' ),
-			'updateLabel' => __( 'Update label', 'woo-bg' ),
-			'generateLabel' => __( 'Generate label', 'woo-bg' ),
-			'deleteLabel' => __( 'Delete label', 'woo-bg' ),
-			'label' => __( 'Label', 'woo-bg' ), 
-			'default' => __( 'Default', 'woo-bg' ),
-			'selected' => __( 'Selected', 'woo-bg' ),
-			'choose' => __( 'Choose', 'woo-bg' ),
-			'deliveryPayedBy' => __( 'Delivery is payed by', 'woo-bg' ),
-			'cd' => __( 'Cash on delivery', 'woo-bg' ), 
-			'packCount' => __( 'Pack count', 'woo-bg' ),
-			'shipmentType' => __( 'Shipment type', 'woo-bg' ),
-			'other' => __( 'Other', 'woo-bg' ),
-			'blVhEt' => __( 'bl. vh. et.', 'woo-bg' ),
-			'streetNumber' => __( 'Street number', 'woo-bg' ),
-			'streetQuarter' => __( 'Street/Quarter', 'woo-bg' ),
-			'office' => __( 'Office', 'woo-bg' ),
-			'address' => __( 'Address', 'woo-bg' ),
-			'deliveryType' => __( 'Delivery type', 'woo-bg' ),
-			'labelData' => __( 'Label data', 'woo-bg' ),
-			'buyer' => __( 'Buyer', 'woo-bg' ),
-			'sender' => __( 'Sender', 'woo-bg' ),
-			'contract' => __( 'Contract', 'woo-bg' ),
-			'weight' => __( 'Weight', 'woo-bg' ),
-			'fixedPrice' => __( 'Fixed price', 'woo-bg' ),
-			'copyLabelData' => __( 'Copy Label Data', 'woo-bg' ),
-			'copyLabelDataMessage' => __( 'You just copied the label data used for the cvc API.', 'woo-bg' ),
-			'shipmentStatus' => __( 'Shipment status', 'woo-bg' ),
-			'time' => __( 'Time:', 'woo-bg' ),
-			'event' => __( 'Event:', 'woo-bg' ),
-			'details' => __( 'Details:', 'woo-bg' ),
-			'reviewAndTest' => __( 'Review and test', 'woo-bg' ),
-			'declaredValue' => __( 'Declared value', 'woo-bg' ),
-			'description' => __( 'Description', 'woo-bg' ),
+			'updateShipmentStatus' => __( 'Update shipment status', 'bulgarisation-for-woocommerce' ),
+			'updateLabel' => __( 'Update label', 'bulgarisation-for-woocommerce' ),
+			'generateLabel' => __( 'Generate label', 'bulgarisation-for-woocommerce' ),
+			'deleteLabel' => __( 'Delete label', 'bulgarisation-for-woocommerce' ),
+			'label' => __( 'Label', 'bulgarisation-for-woocommerce' ), 
+			'default' => __( 'Default', 'bulgarisation-for-woocommerce' ),
+			'selected' => __( 'Selected', 'bulgarisation-for-woocommerce' ),
+			'choose' => __( 'Choose', 'bulgarisation-for-woocommerce' ),
+			'deliveryPayedBy' => __( 'Delivery is payed by', 'bulgarisation-for-woocommerce' ),
+			'cd' => __( 'Cash on delivery', 'bulgarisation-for-woocommerce' ), 
+			'packCount' => __( 'Pack count', 'bulgarisation-for-woocommerce' ),
+			'shipmentType' => __( 'Shipment type', 'bulgarisation-for-woocommerce' ),
+			'other' => __( 'Other', 'bulgarisation-for-woocommerce' ),
+			'blVhEt' => __( 'bl. vh. et.', 'bulgarisation-for-woocommerce' ),
+			'streetNumber' => __( 'Street number', 'bulgarisation-for-woocommerce' ),
+			'streetQuarter' => __( 'Street/Quarter', 'bulgarisation-for-woocommerce' ),
+			'office' => __( 'Office', 'bulgarisation-for-woocommerce' ),
+			'address' => __( 'Address', 'bulgarisation-for-woocommerce' ),
+			'deliveryType' => __( 'Delivery type', 'bulgarisation-for-woocommerce' ),
+			'labelData' => __( 'Label data', 'bulgarisation-for-woocommerce' ),
+			'buyer' => __( 'Buyer', 'bulgarisation-for-woocommerce' ),
+			'sender' => __( 'Sender', 'bulgarisation-for-woocommerce' ),
+			'contract' => __( 'Contract', 'bulgarisation-for-woocommerce' ),
+			'weight' => __( 'Weight', 'bulgarisation-for-woocommerce' ),
+			'fixedPrice' => __( 'Fixed price', 'bulgarisation-for-woocommerce' ),
+			'copyLabelData' => __( 'Copy Label Data', 'bulgarisation-for-woocommerce' ),
+			'copyLabelDataMessage' => __( 'You just copied the label data used for the cvc API.', 'bulgarisation-for-woocommerce' ),
+			'shipmentStatus' => __( 'Shipment status', 'bulgarisation-for-woocommerce' ),
+			'time' => __( 'Time:', 'bulgarisation-for-woocommerce' ),
+			'event' => __( 'Event:', 'bulgarisation-for-woocommerce' ),
+			'details' => __( 'Details:', 'bulgarisation-for-woocommerce' ),
+			'reviewAndTest' => __( 'Review and test', 'bulgarisation-for-woocommerce' ),
+			'declaredValue' => __( 'Declared value', 'bulgarisation-for-woocommerce' ),
+			'description' => __( 'Description', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 

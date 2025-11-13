@@ -31,7 +31,7 @@ class Nekorekten_Com {
 
 		$screen = array_filter( $screen );
 
-		add_meta_box( 'woo_bg_nekorekten_reports', esc_html__( 'Reports', 'woo-bg' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
+		add_meta_box( 'woo_bg_nekorekten_reports', esc_html__( 'Reports', 'bulgarisation-for-woocommerce' ), array( __CLASS__, 'meta_box' ), $screen, 'normal', 'default' );
 	}
 
 	public static function customer_status_info( $order ) {
@@ -43,7 +43,7 @@ class Nekorekten_Com {
 				<i class="woo-bg-icon woo-bg-icon--alert"></i>
 				
 				<a href="#woo_bg_nekorekten_reports">
-					 <?php _e( 'We have found negative reports about this customer. <br> Click for more information.', 'woo-bg' ) ?>
+					 <?php _e( 'We have found negative reports about this customer. <br> Click for more information.', 'bulgarisation-for-woocommerce' ) ?>
 				</a>
 			</p>
 			<?php
@@ -53,7 +53,7 @@ class Nekorekten_Com {
 				<i class="woo-bg-icon woo-bg-icon--check"></i>
 				
 				<a href="#woo_bg_nekorekten_reports">
-					 <?php esc_html_e( 'No reports was found for this customer!', 'woo-bg' ) ?>
+					 <?php esc_html_e( 'No reports was found for this customer!', 'bulgarisation-for-woocommerce' ) ?>
 				</a>
 			</p>
 			<?php
@@ -76,23 +76,23 @@ class Nekorekten_Com {
 		}
 		$phone = ( $theorder->get_shipping_phone() ) ? $theorder->get_shipping_phone() : $theorder->get_billing_phone();
 		$email = $theorder->get_billing_email();
-		$title = esc_html__( 'There was some error in one of the reports.', 'woo-bg' );
+		$title = esc_html__( 'There was some error in one of the reports.', 'bulgarisation-for-woocommerce' );
 		$reports = self::get_all_reports( $theorder );
 		
 		if ( $reports[ 'count' ] ) {
-			$title = esc_html__( 'We have found negative reports about this customer.', 'woo-bg' );
+			$title = esc_html__( 'We have found negative reports about this customer.', 'bulgarisation-for-woocommerce' );
 		} else if ( 
 			( !empty( $reports['reports_by_phone'] ) && $reports['reports_by_phone'][ 'server' ]['httpCode'] === 200 ) && 
 			( !empty( $reports['reports_by_email'] ) && $reports['reports_by_email'][ 'server' ]['httpCode'] === 200)
 		) {
-			$title = esc_html__( 'No reports was found.', 'woo-bg' );
+			$title = esc_html__( 'No reports was found.', 'bulgarisation-for-woocommerce' );
 		} 
 		?>
 		<div class="panel-wrap woocommerce">
 			<input name="post_title" type="hidden" value="<?php echo empty( $post->post_title ) ? esc_html__( 'Order', 'woocommerce' ) : esc_attr( $post->post_title ); ?>" />
 			<input name="post_status" type="hidden" value="<?php echo esc_attr( $post->post_status ); ?>" />
 			<div id="order_data" class="panel woocommerce-order-data">
-				<a href="<?php echo esc_url( add_query_arg( 'woo-bg--nekorekten-refresh', true ) ) ?>"><?php esc_html_e( 'Refresh data', 'woo-bg' ) ?></a>
+				<a href="<?php echo esc_url( add_query_arg( 'woo-bg--nekorekten-refresh', true ) ) ?>"><?php esc_html_e( 'Refresh data', 'bulgarisation-for-woocommerce' ) ?></a>
 
 				<h2 class="woocommerce-order-data__heading">
 					<?php echo esc_html( $title ) ?>
@@ -100,7 +100,7 @@ class Nekorekten_Com {
 
 				<div class="order_data_column_container">
 					<div class="order_data_column order_data_column--half">
-						<h3><?php printf( esc_html__( 'By Phone ( %s )', 'woo-bg' ), esc_html( $phone ) ) ?></h3>
+						<h3><?php printf( esc_html__( 'By Phone ( %s )', 'bulgarisation-for-woocommerce' ), esc_html( $phone ) ) ?></h3>
 
 						<?php
 						if ( !empty( $reports['reports_by_phone'] ) && $reports['reports_by_phone'][ 'server' ][ 'httpCode' ] == 200 ) {
@@ -112,7 +112,7 @@ class Nekorekten_Com {
 					</div><!-- /.order_data_column order_data_column-/-half -->
 
 					<div class="order_data_column order_data_column--half">
-						<h3><?php printf( esc_html__( 'By Email ( %s )', 'woo-bg' ), esc_html( $email ) ) ?></h3>
+						<h3><?php printf( esc_html__( 'By Email ( %s )', 'bulgarisation-for-woocommerce' ), esc_html( $email ) ) ?></h3>
 
 						<?php  
 						if ( !empty( $reports['reports_by_email'] ) && $reports['reports_by_email'][ 'server' ][ 'httpCode' ] == 200 ) {
@@ -135,13 +135,13 @@ class Nekorekten_Com {
 	public static function meta_box_error( $report ) {
 		?>
 		<?php if ( isset( $report[ 'server' ][ 'date' ] ) ): ?>
-			<span><?php printf( esc_html__( 'Date: %s', 'woo-bg' ), esc_html( $report[ 'server' ][ 'date' ] ) ) ?></span>
+			<span><?php printf( esc_html__( 'Date: %s', 'bulgarisation-for-woocommerce' ), esc_html( $report[ 'server' ][ 'date' ] ) ) ?></span>
 		<?php endif ?>
 
 		<?php if ( !empty( $report['message'] ) ): ?>
-			<h3><?php printf( esc_html__( 'Error: "%s"', 'woo-bg' ), esc_html( $report['message'] ) ) ?></h3>
+			<h3><?php printf( esc_html__( 'Error: "%s"', 'bulgarisation-for-woocommerce' ), esc_html( $report['message'] ) ) ?></h3>
 		<?php else: ?>
-			<h3><?php printf( esc_html__( 'Invalid access.', 'woo-bg' ) ) ?></h3>
+			<h3><?php printf( esc_html__( 'Invalid access.', 'bulgarisation-for-woocommerce' ) ) ?></h3>
 		<?php endif ?>
 		<?php
 	}
@@ -149,12 +149,12 @@ class Nekorekten_Com {
 	public static function meta_box_success( $report ) {
 		?>
 		<?php if ( isset( $report[ 'server' ][ 'date' ] ) ): ?>
-			<span><?php printf( esc_html__( 'Date: %s', 'woo-bg' ), esc_html( $report[ 'server' ][ 'date' ] ) ) ?></span>
+			<span><?php printf( esc_html__( 'Date: %s', 'bulgarisation-for-woocommerce' ), esc_html( $report[ 'server' ][ 'date' ] ) ) ?></span>
 		<?php endif ?>
 
 		<?php if ( isset( $report[ 'count' ] ) ): ?>
 			<p>
-				<strong><?php printf( esc_html__( 'Found: %s', 'woo-bg' ), esc_html( $report[ 'count' ] ) ) ?></strong>
+				<strong><?php printf( esc_html__( 'Found: %s', 'bulgarisation-for-woocommerce' ), esc_html( $report[ 'count' ] ) ) ?></strong>
 			</p>
 		<?php endif ?>
 			
@@ -167,15 +167,15 @@ class Nekorekten_Com {
 		<?php foreach ( $report[ 'items' ] as $item ): ?>
 			<div class="customer">
 				<p>
-					<strong><?php esc_html_e('First Name:', 'woo-bg') ?></strong> <span> <?php echo esc_html( $item['firstName'] ); ?> </span>
-					<strong><?php esc_html_e('Last Name:', 'woo-bg') ?></strong> <span> <?php echo esc_html( $item['lastName'] ); ?> </span>
-					<strong><?php esc_html_e('Phone:', 'woo-bg') ?></strong> <span> <?php echo esc_html( $item['phone'] ); ?> </span>
-					<strong><?php esc_html_e('Email:', 'woo-bg') ?></strong> <span> <?php echo esc_html( $item['email'] ); ?> </span>
+					<strong><?php esc_html_e('First Name:', 'bulgarisation-for-woocommerce') ?></strong> <span> <?php echo esc_html( $item['firstName'] ); ?> </span>
+					<strong><?php esc_html_e('Last Name:', 'bulgarisation-for-woocommerce') ?></strong> <span> <?php echo esc_html( $item['lastName'] ); ?> </span>
+					<strong><?php esc_html_e('Phone:', 'bulgarisation-for-woocommerce') ?></strong> <span> <?php echo esc_html( $item['phone'] ); ?> </span>
+					<strong><?php esc_html_e('Email:', 'bulgarisation-for-woocommerce') ?></strong> <span> <?php echo esc_html( $item['email'] ); ?> </span>
 				</p>
 
-				<p> <strong><?php esc_html_e('Date:', 'woo-bg') ?> </strong> <span> <?php echo esc_html( $item[ 'createDate' ] ) ?></span> </p>
+				<p> <strong><?php esc_html_e('Date:', 'bulgarisation-for-woocommerce') ?> </strong> <span> <?php echo esc_html( $item[ 'createDate' ] ) ?></span> </p>
 
-				<p> <strong><?php esc_html_e('Text:', 'woo-bg') ?></strong> <?php echo esc_html( $item[ 'text' ] ) ?> </p>
+				<p> <strong><?php esc_html_e('Text:', 'bulgarisation-for-woocommerce') ?></strong> <?php echo esc_html( $item[ 'text' ] ) ?> </p>
 
 				<?php if ( !empty( $item['files'] ) ): ?>
 					<?php foreach ( $item['files'] as $file_item ): 
@@ -274,7 +274,7 @@ class Nekorekten_Com {
 	        $reordered_columns[ $key ] = $column;
 
 	        if( $key ==  'shipping_address' ){
-	            $reordered_columns[ 'order_nekorekten' ] = esc_html__( 'Nekorekten', 'woo-bg' );
+	            $reordered_columns[ 'order_nekorekten' ] = esc_html__( 'Nekorekten', 'bulgarisation-for-woocommerce' );
 	        }
 	    }
 
@@ -310,33 +310,33 @@ class Nekorekten_Com {
 		<div id="order_data" class="panel woocommerce-order-data">
 			<div class="order_data_column_container">
 				<div class="order_data_column order_data_column--half">
-					<h3><?php _e( 'Submit Review', 'woo-bg' ); ?></h3> 
+					<h3><?php _e( 'Submit Review', 'bulgarisation-for-woocommerce' ); ?></h3> 
 					<form></form>
 					<form class="ajax-container" action="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ) ?>">
 						<p class="form-field" style="clear: none;">
 							<label>
-								<?php _e('First Name:', 'woo-bg') ?>
+								<?php _e('First Name:', 'bulgarisation-for-woocommerce') ?>
 
 								<input type="text" name="first_name" required value="<?php echo $order->get_billing_first_name() ?>">
 							</label> 
 						</p> 
 						<p class="form-field" style="float: right; clear: none;">
 							<label>
-								<?php _e('Last Name:', 'woo-bg') ?>
+								<?php _e('Last Name:', 'bulgarisation-for-woocommerce') ?>
 
 								<input type="text" name="last_name" required value="<?php echo $order->get_billing_last_name() ?>">
 							</label> 
 						</p>
 						<p class="form-field" style="clear: none;">
 							<label>
-								<?php _e('Phone:', 'woo-bg') ?>
+								<?php _e('Phone:', 'bulgarisation-for-woocommerce') ?>
 
 								<input type="text" name="phone" required value="<?php echo $order->get_billing_phone() ?>">
 							</label> 
 						</p>
 						<p class="form-field" style="float: right; clear: none;">
 							<label> 
-								<?php _e('E-mail:', 'woo-bg') ?>
+								<?php _e('E-mail:', 'bulgarisation-for-woocommerce') ?>
 
 								<input type="text" name="email" value="<?php echo $order->get_billing_email() ?>">
 							</label> 
@@ -344,7 +344,7 @@ class Nekorekten_Com {
 
 						<p class="form-field form-field-wide">
 							<label> 
-								<?php _e('Description', 'woo-bg') ?>
+								<?php _e('Description', 'bulgarisation-for-woocommerce') ?>
 
 								<textarea name="description" required rows="4"></textarea>
 							</label> 
@@ -353,7 +353,7 @@ class Nekorekten_Com {
 						<input type="hidden" name="action" value="woo_bg_nekorekten_submit">
 						<?php wp_nonce_field( 'woo_bg_nekorekten_submit' ); ?>
 
-						<button type="submit" class="button-primary woocommerce-save-button"><?php _e('Submit', 'woo-bg') ?></button>
+						<button type="submit" class="button-primary woocommerce-save-button"><?php _e('Submit', 'bulgarisation-for-woocommerce') ?></button>
 					</form>
 				</div>
 				
@@ -366,7 +366,7 @@ class Nekorekten_Com {
 	public static function submit_callback() {
 		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'woo_bg_nekorekten_submit' ) ) {
 			wp_send_json_error( [
-				'message' => __( 'Nonce was not provided!', 'woo-bg' ),
+				'message' => __( 'Nonce was not provided!', 'bulgarisation-for-woocommerce' ),
 			] );
 
 			wp_die();

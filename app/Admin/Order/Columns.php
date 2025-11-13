@@ -22,11 +22,11 @@ class Columns {
 
 			if ( $key ==  'order_status' ) {
 				if ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' ) {
-					$reordered_columns[ 'order_docs' ] = __( 'Documents', 'woo-bg' );
+					$reordered_columns[ 'order_docs' ] = __( 'Documents', 'bulgarisation-for-woocommerce' );
 				}
 
 				if ( woo_bg_is_shipping_enabled() ) {
-					$reordered_columns[ 'order_label' ] = __( 'Label', 'woo-bg' );
+					$reordered_columns[ 'order_label' ] = __( 'Label', 'bulgarisation-for-woocommerce' );
 				}
 			}
 		}

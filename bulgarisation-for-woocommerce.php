@@ -4,12 +4,12 @@ Plugin Name:  Bulgarisation for WooCommerce
 Description:  Everything necessary for your online store to work in Bulgaria and according to Bulgarian regulations. Includes a light regime for Ordinance - H-18 and Econt, BOX NOW, CVC and Speedy shipping method.
 Requires Plugins: woocommerce
 Author:       Autopolis.bg
-Version:      3.4.22
+Version:      3.4.23
 Author URI:   https://autopolis.bg/
 Requires PHP: 7.4
 WC requires at least: 8.3.0
 WC tested up to: 10.1
-Text Domain:  woo-bg
+Text Domain:  bulgarisation-for-woocommerce
 License:      GPLv3 or later
 */
 
@@ -30,12 +30,12 @@ add_action( 'before_woocommerce_init', function() {
  * @return \Woo_BG\Plugin
  */
 function woo_bg_init() {
-	load_plugin_textdomain( 'woo-bg', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	load_plugin_textdomain( 'bulgarisation-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
 	if ( version_compare( PHP_VERSION, WOO_BG_PHP_MINIMUM_VERSION, '<' ) || version_compare( get_bloginfo( 'version' ), WOO_BG_WP_MINIMUM_VERSION, '<' ) ) {
 		add_action( 'admin_notices', function() {
 			/* translators: %1$s is minimum php version and %2$s is minimum WP version*/
-			$message = sprintf( esc_html__( 'WooCommerce - Bulgarisation requires PHP version %1$s+ and WP version %2$s+, plugin is currently NOT RUNNING.', 'woo-bg' ), WOO_BG_PHP_MINIMUM_VERSION, WOO_BG_WP_MINIMUM_VERSION );
+			$message = sprintf( esc_html__( 'WooCommerce - Bulgarisation requires PHP version %1$s+ and WP version %2$s+, plugin is currently NOT RUNNING.', 'bulgarisation-for-woocommerce' ), WOO_BG_PHP_MINIMUM_VERSION, WOO_BG_WP_MINIMUM_VERSION );
 			echo wp_kses_post( sprintf( '<div class="error">%s</div>', wpautop( $message ) ) );
 		} );
 
@@ -44,7 +44,7 @@ function woo_bg_init() {
 
 	if ( !class_exists( 'WooCommerce' ) ) {
 		add_action( 'admin_notices', function() {
-			$message = sprintf( esc_html__( 'Bulgarisation for WooCommerce - Please enable WooCommerce first.', 'woo-bg' ) );
+			$message = sprintf( esc_html__( 'Bulgarisation for WooCommerce - Please enable WooCommerce first.', 'bulgarisation-for-woocommerce' ) );
 			echo wp_kses_post( sprintf( '<div class="error">%s</div>', wpautop( $message ) ) );
 		} );
 		
@@ -55,7 +55,7 @@ function woo_bg_init() {
 		require_once __DIR__ . '/vendor/autoload.php';
 	} else {
 		add_action( 'admin_notices', function() {
-			$message = sprintf( esc_html__( 'Please run `composer install` in the plugin folder `bulgarisation-for-woocommerce`', 'woo-bg' ) );
+			$message = sprintf( esc_html__( 'Please run `composer install` in the plugin folder `bulgarisation-for-woocommerce`', 'bulgarisation-for-woocommerce' ) );
 			echo wp_kses_post( sprintf( '<div class="error">%s</div>', wpautop( $message ) ) );
 		} );
 		return;

@@ -92,13 +92,13 @@ class Multi_Currency {
 	}
 
 	public static function rate_message() {
-		$html = '<span class="rate_cart_page">' . __( 'Rate: 1 EUR = 1.95583 BGN', 'woo-bg' ) . '</span>';
+		$html = '<span class="rate_cart_page">' . __( 'Rate: 1 EUR = 1.95583 BGN', 'bulgarisation-for-woocommerce' ) . '</span>';
 
 		echo apply_filters( 'woo_bg/bgn_eur/rate_message', $html );
 	}
 
 	public static function rate_message_product() {
-		$html = '<span class="rate_cart_page">' . __( 'Rate: 1 EUR = 1.95583 BGN', 'woo-bg' ) . '</span>';
+		$html = '<span class="rate_cart_page">' . __( 'Rate: 1 EUR = 1.95583 BGN', 'bulgarisation-for-woocommerce' ) . '</span>';
 
 		echo apply_filters( 'woo_bg/bgn_eur/rate_message_product', $html );
 	}
@@ -111,7 +111,7 @@ class Multi_Currency {
 
 	public static function add_rate_row_email( $total_rows, $myorder_obj ) {
 		$total_rows['used_rate'] = array(
-			'label' => __( 'Fixed conversion rate:', 'woo-bg' ),
+			'label' => __( 'Fixed conversion rate:', 'bulgarisation-for-woocommerce' ),
 			'value'   => '1 € = 1.95583 лв.'
 		);
 		 

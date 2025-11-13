@@ -128,7 +128,7 @@ class Order {
 			$item_vat = apply_filters( 'woo_bg/admin/export/item_vat', $item_vat, $item, $this->woo_order );
 
 			$items[] = array(
-				'name' => sprintf( __( 'Shipping: %s', 'woo-bg' ), $item->get_name() ),
+				'name' => sprintf( __( 'Shipping: %s', 'bulgarisation-for-woocommerce' ), $item->get_name() ),
 				'qty' => $item->get_quantity(),
 				'sub_price' => $price,
 				'price' => $price,

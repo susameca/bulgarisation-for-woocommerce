@@ -17,7 +17,7 @@
 			data-nonce="<?php echo wp_create_nonce( 'woo_bg_admin_label' ) ?>" 
 			data-orderid="<?php echo $order->get_id() ?>"
 		>
-				<?php _e( 'Generate label', 'woo-bg' ) ?>
+				<?php _e( 'Generate label', 'bulgarisation-for-woocommerce' ) ?>
 		</a>
 	<?php endif ?>
 </p>

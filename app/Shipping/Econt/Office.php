@@ -31,14 +31,14 @@ class Office {
 
 	public static function get_i18n() {
 		return array(
-			'selected' => __( 'Selected', 'woo-bg' ),
-			'choose' => __( 'Choose', 'woo-bg' ),
-			'searchOffice' => __( 'Search office', 'woo-bg' ), 
-			'select' => __( 'Select', 'woo-bg' ), 
-			'noResult' => __( 'No results was found for this city', 'woo-bg' ),
-			'noOptions' => __( 'Start typing office', 'woo-bg' ), 
-			'officeLocator' => __( 'Office locator', 'woo-bg' ),
-			'toOffice' => __( 'To Office: ', 'woo-bg' ),
+			'selected' => __( 'Selected', 'bulgarisation-for-woocommerce' ),
+			'choose' => __( 'Choose', 'bulgarisation-for-woocommerce' ),
+			'searchOffice' => __( 'Search office', 'bulgarisation-for-woocommerce' ), 
+			'select' => __( 'Select', 'bulgarisation-for-woocommerce' ), 
+			'noResult' => __( 'No results was found for this city', 'bulgarisation-for-woocommerce' ),
+			'noOptions' => __( 'Start typing office', 'bulgarisation-for-woocommerce' ), 
+			'officeLocator' => __( 'Office locator', 'bulgarisation-for-woocommerce' ),
+			'toOffice' => __( 'To Office: ', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 
@@ -56,18 +56,18 @@ class Office {
 			$args[ 'status' ] = 'invalid-city';
 			
 			if ( !$state ) {
-				$args[ 'error' ] = __( 'Please select region.', 'woo-bg' );
+				$args[ 'error' ] = __( 'Please select region.', 'bulgarisation-for-woocommerce' );
 			} elseif ( empty( $raw_city ) ) {
-				$args[ 'error' ] = sprintf( __( 'Please enter a city.', 'woo-bg' ), $raw_city, $state );
+				$args[ 'error' ] = sprintf( __( 'Please enter a city.', 'bulgarisation-for-woocommerce' ), $raw_city, $state );
 			} else {
-				$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'woo-bg' ), $raw_city, $state );
+				$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'bulgarisation-for-woocommerce' ), $raw_city, $state );
 			}
 		} else {
 			$offices = self::$container[ Client::ECONT_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'], $country );
 
 			if ( empty( $offices ) ) {
 				$offices = [];
-				$args[ 'error' ] = sprintf( __( 'No offices were found at %s.', 'woo-bg' ), $raw_city );
+				$args[ 'error' ] = sprintf( __( 'No offices were found at %s.', 'bulgarisation-for-woocommerce' ), $raw_city );
 			} else {
 				$offices = $offices['offices'];
 

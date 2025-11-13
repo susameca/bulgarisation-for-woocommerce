@@ -41,10 +41,10 @@ class Admin_Menus {
 	public static function admin_menu() {
 		add_submenu_page( 
 			'woocommerce', 
-			__( 'Bulgarisation', 'woo-bg' ), 
-			__( 'Bulgarisation', 'woo-bg' ), 
+			__( 'Bulgarisation', 'bulgarisation-for-woocommerce' ), 
+			__( 'Bulgarisation', 'bulgarisation-for-woocommerce' ), 
 			'edit_others_shop_orders', 
-			'woo-bg', 
+			'bulgarisation-for-woocommerce', 
 			array( __CLASS__, 'settings_page_init' ) 
 		);
 	}
@@ -53,8 +53,8 @@ class Admin_Menus {
 		if ( false === $is_connected && false === $current_page ) {
 			$screen_id        = PageController::get_instance()->get_current_screen_id();
 			$pages_to_connect = apply_filters( 'woo_bg/admin/register_pages', array(
-				'woo-bg'  => array(
-					'title' => __( 'Bulgarisation', 'woo-bg' ),
+				'bulgarisation-for-woocommerce'  => array(
+					'title' => __( 'Bulgarisation', 'bulgarisation-for-woocommerce' ),
 				)
 			) );
 
@@ -81,10 +81,10 @@ class Admin_Menus {
 		return apply_filters( 'woo_bg/admin/register_breadcrumbs', array(
 			array(
 				'admin.php?page=wc-admin',
-				__( 'WooCommerce', 'WooCommerce' ),
+				__( 'WooCommerce', 'bulgarisation-for-woocommerce' ),
 			),
 
-			__( 'Bulgarisation', 'woo-bg' ),
+			__( 'Bulgarisation', 'bulgarisation-for-woocommerce' ),
 		) );
 	}
 

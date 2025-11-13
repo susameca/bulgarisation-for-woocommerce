@@ -17,7 +17,7 @@ class NRARefunded extends BaseDocument {
 		$this->return_method = woo_bg_get_option( 'shop', 'return_method' );
 		$this->payment_method = $this->return_methods[ $this->return_method ]['label'];
 
-		$this->set_title( apply_filters( 'woo_bg/admin/invoice/order_document_title_refunded', __( 'Refunded Order - Original', 'woo-bg' ) ) );
+		$this->set_title( apply_filters( 'woo_bg/admin/invoice/order_document_title_refunded', __( 'Refunded Order - Original', 'bulgarisation-for-woocommerce' ) ) );
 		$this->meta = 'woo_bg_refunded_order_document';
 
 		$this->document_number_meta = 'woo_bg_refunded_order_number';
@@ -30,23 +30,23 @@ class NRARefunded extends BaseDocument {
 				'value' => str_pad( $this->get_document_number(), 10, '0', STR_PAD_LEFT ),
 			),
 			'date' => array(
-				'label' => __( 'Order date', 'woo-bg' ),
+				'label' => __( 'Order date', 'bulgarisation-for-woocommerce' ),
 				'value' => date_i18n( 'M d, Y', strtotime( $this->woo_order->get_date_created() ) ),
 			),
 			'date-of-tax' => array(
-				'label' => __( 'Date of tax. event', 'woo-bg' ),
+				'label' => __( 'Date of tax. event', 'bulgarisation-for-woocommerce' ),
 				'value' => date_i18n( 'M d, Y', strtotime( $this->woo_order->get_date_created() ) ),
 			),
 			'due-date' => array(
-				'label' => __( 'Due date', 'woo-bg' ),
+				'label' => __( 'Due date', 'bulgarisation-for-woocommerce' ),
 				'value' => date_i18n( 'M d, Y', strtotime( $this->woo_order->get_date_created() ) ),
 			),
 			'address' => array(
-				'label' => __( 'Place of transaction', 'woo-bg' ),
+				'label' => __( 'Place of transaction', 'bulgarisation-for-woocommerce' ),
 				'value' => $this->city,
 			),
 			'order-number' => array(
-				'label' => __( 'Order Number', 'woo-bg' ),
+				'label' => __( 'Order Number', 'bulgarisation-for-woocommerce' ),
 				'value' => $this->parent_order->get_order_number(),
 			),
 		), $this );
@@ -56,14 +56,14 @@ class NRARefunded extends BaseDocument {
 		if ( $this->parent_order->get_meta('_billing_to_company') === '1' ) {
 			$items = apply_filters( 'woo_bg/invoice/set_to_company', array(
 				$this->parent_order->get_billing_company(),
-				sprintf( __('EIK: %s', 'woo-bg' ), $this->parent_order->get_meta('_billing_company_eik') ),
-				sprintf( __('VAT Number: %s', 'woo-bg' ), $this->parent_order->get_meta('_billing_vat_number') ),
-				sprintf( __('MOL: %s', 'woo-bg' ), $this->parent_order->get_meta('_billing_company_mol') ),
+				sprintf( __('EIK: %s', 'bulgarisation-for-woocommerce' ), $this->parent_order->get_meta('_billing_company_eik') ),
+				sprintf( __('VAT Number: %s', 'bulgarisation-for-woocommerce' ), $this->parent_order->get_meta('_billing_vat_number') ),
+				sprintf( __('MOL: %s', 'bulgarisation-for-woocommerce' ), $this->parent_order->get_meta('_billing_company_mol') ),
 				$this->parent_order->get_meta('_billing_company_address'),
 				$this->parent_order->get_meta('_billing_company_settlement'),
 				'&nbsp;',
-				sprintf( __('Phone: %s', 'woo-bg' ), $this->parent_order->get_billing_phone() ),
-				sprintf( __('E-mail: %s', 'woo-bg' ), $this->parent_order->get_billing_email() ),
+				sprintf( __('Phone: %s', 'bulgarisation-for-woocommerce' ), $this->parent_order->get_billing_phone() ),
+				sprintf( __('E-mail: %s', 'bulgarisation-for-woocommerce' ), $this->parent_order->get_billing_email() ),
 			), $this->parent_order );
 		} else {
 			$items = apply_filters( 'woo_bg/invoice/set_to_person', array(
@@ -71,8 +71,8 @@ class NRARefunded extends BaseDocument {
 				$this->parent_order->get_billing_address_1() . " " . $this->parent_order->get_billing_address_2(),
 				$this->parent_order->get_billing_city() .", " . $this->parent_order->get_billing_postcode(),
 				'&nbsp;',
-				sprintf( __('Phone: %s', 'woo-bg' ), $this->parent_order->get_billing_phone() ),
-				sprintf( __('E-mail: %s', 'woo-bg' ), $this->parent_order->get_billing_email() ),
+				sprintf( __('Phone: %s', 'bulgarisation-for-woocommerce' ), $this->parent_order->get_billing_phone() ),
+				sprintf( __('E-mail: %s', 'bulgarisation-for-woocommerce' ), $this->parent_order->get_billing_email() ),
 			), $this->parent_order );
 		}
 

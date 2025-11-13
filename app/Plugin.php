@@ -68,7 +68,7 @@ class Plugin {
 			woo_bg_set_option( 'checkout', 'alternative_shipping_table', woo_bg_get_option( 'nap', 'alternative_shipping_table' ) );
 
 			add_action( 'admin_notices', function() {
-				$message = sprintf( __( 'Bulgarisation for WooCommerce - Please review the options and save them again from "%s".', 'woo-bg' ), sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=woo-bg' ), __( 'Settings', 'woo-bg' ) ) );
+				$message = sprintf( __( 'Bulgarisation for WooCommerce - Please review the options and save them again from "%s".', 'bulgarisation-for-woocommerce' ), sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=woo-bg' ), __( 'Settings', 'bulgarisation-for-woocommerce' ) ) );
 
 				echo wp_kses_post( sprintf( '<div class="error">%s</div>', wpautop( $message ) ) );
 			} );
@@ -186,7 +186,7 @@ class Plugin {
 
 	public static function plugin_action_links( $actions ) {
 		$custom_actions = array(
-			'settings' => sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=woo-bg&tab=settings' ), __( 'Settings', 'woo-bg' ) ),
+			'settings' => sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=woo-bg&tab=settings' ), __( 'Settings', 'bulgarisation-for-woocommerce' ) ),
 		);
 		return array_merge( $custom_actions, $actions );
 	}

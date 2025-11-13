@@ -42,7 +42,7 @@ class Actions {
 	}
 
 	public static function add_selections_to_bulk_action( $actions ) {
-		$actions[ 'woo_bg_regenerate_pdfs' ] = __( 'Regenerate PDF\'s', 'woo-bg' );
+		$actions[ 'woo_bg_regenerate_pdfs' ] = __( 'Regenerate PDF\'s', 'bulgarisation-for-woocommerce' );
 
 		return $actions;
 	}
@@ -67,7 +67,7 @@ class Actions {
 			$count = intval( $_REQUEST[ 'processed_count' ] );
 
 			printf(
-				'<div id="message" class="updated fade">' . wp_kses_post( wpautop( _n( '%s order documents were regenerated.', '%s orders documents were regenerated.', $count, 'woo-bg' ) ) ) . '</div>',
+				'<div id="message" class="updated fade">' . wp_kses_post( wpautop( _n( '%s order documents were regenerated.', '%s orders documents were regenerated.', $count, 'bulgarisation-for-woocommerce' ) ) ) . '</div>',
 				esc_html( $count )
 			);
 		}
@@ -89,7 +89,7 @@ class Actions {
 				<?php if ( $invoice_pdf = $order->get_meta( 'woo_bg_invoice_document' ) ): ?>
 					<p>
 						<a target="_blank" href="<?php echo esc_url( wp_get_attachment_url( $invoice_pdf ) ); ?>" class="woo-bg button button--pdf">
-							<?php esc_html_e('Invoice PDF', 'woo-bg') ?>
+							<?php esc_html_e('Invoice PDF', 'bulgarisation-for-woocommerce') ?>
 						</a>
 					</p>
 				<?php endif ?>
@@ -97,7 +97,7 @@ class Actions {
 				<?php if ( $refunded_invoice_pdf = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ): ?>
 					<p>
 						<a target="_blank" href="<?php echo esc_url( wp_get_attachment_url( $refunded_invoice_pdf ) ); ?>" class="woo-bg button button--pdf">
-							<?php esc_html_e('Refunded Invoice PDF', 'woo-bg') ?>
+							<?php esc_html_e('Refunded Invoice PDF', 'bulgarisation-for-woocommerce') ?>
 						</a>
 					</p>
 				<?php endif ?>
@@ -138,8 +138,8 @@ class Actions {
 		}
 
 		if ( get_post_type( $post ) !== 'shop_subscription' ) {
-			$actions[ 'woo_bg_generate_invoice' ] = __( 'Generate Invoice', 'woo-bg' );
-			$actions[ 'woo_bg_regenerate_pdfs' ] = __( 'Regenerate PDF\'s', 'woo-bg' );
+			$actions[ 'woo_bg_generate_invoice' ] = __( 'Generate Invoice', 'bulgarisation-for-woocommerce' );
+			$actions[ 'woo_bg_regenerate_pdfs' ] = __( 'Regenerate PDF\'s', 'bulgarisation-for-woocommerce' );
 		}
 
 		return $actions;

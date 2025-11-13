@@ -16,8 +16,8 @@ class Method extends \WC_Shipping_Method {
 		$this->container          = woo_bg()->container();
 		$this->id                 = self::METHOD_ID; 
 		$this->instance_id        = absint( $instance_id );
-		$this->method_title       = __( 'Woo BG - Speedy', 'woo-bg' );  // Title shown in admin
-		$this->method_description = __( 'Enables Speedy delivery and automatically calculate shipping price.', 'woo-bg' ); // Description shown in admin
+		$this->method_title       = __( 'Woo BG - Speedy', 'bulgarisation-for-woocommerce' );  // Title shown in admin
+		$this->method_description = __( 'Enables Speedy delivery and automatically calculate shipping price.', 'bulgarisation-for-woocommerce' ); // Description shown in admin
 		$this->supports           = array(
 			'shipping-zones',
 			'instance-settings',
@@ -132,42 +132,42 @@ class Method extends \WC_Shipping_Method {
 	public function init_form_fields() {
 		$this->instance_form_fields = array(
 			'title'            => array(
-				'title'       => __( 'Title', 'woo-bg' ),
+				'title'       => __( 'Title', 'bulgarisation-for-woocommerce' ),
 				'type'        => 'text',
-				'description' => __( 'This controls the title which the user sees during checkout.', 'woo-bg' ),
+				'description' => __( 'This controls the title which the user sees during checkout.', 'bulgarisation-for-woocommerce' ),
 				'default'     => $this->method_title,
 				'desc_tip'    => true,
 			),
 			'delivery_type'    => array(
-				'title'             => __( 'Delivery Type', 'woo-bg' ),
+				'title'             => __( 'Delivery Type', 'bulgarisation-for-woocommerce' ),
 				'type'              => 'select',
 				'css'               => 'width: 400px;',
 				'default'           => '',
 				'options'           => array(
-					'office' => __( 'Office', 'woo-bg' ),
-					'address' => __( 'Address', 'woo-bg' ),
+					'office' => __( 'Office', 'bulgarisation-for-woocommerce' ),
+					'address' => __( 'Address', 'bulgarisation-for-woocommerce' ),
 				),
 			),
 			'test'    => array(
-				'title'             => __( 'Review and test', 'woo-bg' ),
+				'title'             => __( 'Review and test', 'bulgarisation-for-woocommerce' ),
 				'type'              => 'select',
 				'css'               => 'width: 400px;',
 				'default'           => 'no',
 				'options'           => woo_bg_get_shipping_tests_options(),
 			),
 			'free_shipping_over' => array(
-				'title'       => __( 'Free shipping over', 'woo-bg' ),
+				'title'       => __( 'Free shipping over', 'bulgarisation-for-woocommerce' ),
 				'type'        => 'number',
 				'placeholder' => '0',
-				'description' => __( 'Free shipping over total cart price.', 'woo-bg' ),
+				'description' => __( 'Free shipping over total cart price.', 'bulgarisation-for-woocommerce' ),
 				'default'     => '',
 				'desc_tip'    => true,
 			),
 			'fixed_price' => array(
-				'title'       => __( 'Fixed price', 'woo-bg' ),
+				'title'       => __( 'Fixed price', 'bulgarisation-for-woocommerce' ),
 				'type'        => 'number',
 				'placeholder' => '0',
-				'description' => __( 'Enter a fixed price that the users will pay. The remaining will be payed by you.', 'woo-bg' ),
+				'description' => __( 'Enter a fixed price that the users will pay. The remaining will be payed by you.', 'bulgarisation-for-woocommerce' ),
 				'default'     => '',
 				'desc_tip'    => true,
 			),
@@ -202,7 +202,7 @@ class Method extends \WC_Shipping_Method {
 		$request = $this->container[ Client::SPEEDY ]->api_call( $this->container[ Client::SPEEDY ]::CALC_LABELS_ENDPOINT, $request_body );
 
 		if ( !isset( $request ) ) {
-			$data['errors'] = __( 'Calculation failed. Please try again.', 'woo-bg' );
+			$data['errors'] = __( 'Calculation failed. Please try again.', 'bulgarisation-for-woocommerce' );
 		} else if ( isset( $request['error'] ) || isset( $request['calculations'][0]['error'] ) ) {
 			if ( isset( $request['calculations'][0]['error'] ) ) {
 				$data['errors'] = $request['calculations'][0]['error']['message'];
@@ -587,9 +587,9 @@ class Method extends \WC_Shipping_Method {
 					$meta_data = $data->get_meta_data();
 
 					if ( !empty( $meta_data['errors'] ) ) {
-						$errors->add( 'validation', sprintf( __( 'Speedy - %s', 'woo-bg' ), $meta_data['errors'] ) );
+						$errors->add( 'validation', sprintf( __( 'Speedy - %s', 'bulgarisation-for-woocommerce' ), $meta_data['errors'] ) );
 					} else {
-						$errors->add( 'validation', __( 'Please choose delivery option!', 'woo-bg' ) );
+						$errors->add( 'validation', __( 'Please choose delivery option!', 'bulgarisation-for-woocommerce' ) );
 					}
 				} elseif ( $data->method_id === 'woo_bg_speedy' ) {
 					$cookie_data = self::get_cookie_data();
@@ -599,7 +599,7 @@ class Method extends \WC_Shipping_Method {
 						( !empty($cookie_data['type'] ) && $cookie_data['type'] === 'office' ) &&  
 						empty( $cookie_data['selectedOffice'] ) 
 					) {
-						$errors->add( 'validation', __( 'Please choose a office.', 'woo-bg' ) );
+						$errors->add( 'validation', __( 'Please choose a office.', 'bulgarisation-for-woocommerce' ) );
 					}	
 				}
 			}
@@ -685,11 +685,11 @@ class Method extends \WC_Shipping_Method {
 		$url = 'https://www.speedy.bg/bg/track-shipment?shipmentNumber=' . $number;
 
 		$track_number_text = sprintf( 
-			__( 'Label number: %s. %s', 'woo-bg' ), 
+			__( 'Label number: %s. %s', 'bulgarisation-for-woocommerce' ), 
 			$number, 
 			sprintf( '<a href="%s" target="_blank">%s</a>',
 				$url,
-				__( 'Track your order.' , 'woo-bg' )
+				__( 'Track your order.' , 'bulgarisation-for-woocommerce' )
 			)
 		);
 

@@ -148,20 +148,21 @@ class Register {
 	public static function update_order_review( $array ) {
 	    $packages = WC()->cart->get_shipping_packages();
 
-	    foreach ($packages as $key => $value) {
+	    foreach ( $packages as $key => $value ) {
 	        $shipping_session = "shipping_for_package_$key";
-	        unset(WC()->session->$shipping_session);
+	        unset( WC()->session->$shipping_session );
 	    }
 
 	    WC()->cart->calculate_shipping();
+	    
 	    return;
 	}
 
 	public static function change_price_label_if_not_calculated( $output, $method ) {
-		if ( strpos( $method->label, __('Free shipping', 'woo-bg') ) !== false ) {
-			$output = __( 'Free shipping', 'woo-bg' );
+		if ( strpos( $method->label, __('Free shipping', 'bulgarisation-for-woocommerce') ) !== false ) {
+			$output = __( 'Free shipping', 'bulgarisation-for-woocommerce' );
 		} else if ( strpos( $method->get_method_id(), 'woo_bg' ) !== false && $method->cost <= 0 ) {
-			$output = __( 'Not calculated', 'woo-bg' );
+			$output = __( 'Not calculated', 'bulgarisation-for-woocommerce' );
 		}
 
 		return $output;
@@ -175,7 +176,7 @@ class Register {
 		$meta_data = $rate->get_meta_data();
 
 		if ( !empty( $meta_data['free_shipping'] ) && $meta_data['free_shipping'] == true ) {
-			$label = sprintf( __( '%s: <span class="woocommerce-Price-amount">%s</span>', 'woo-bg' ), $label, __( 'Free shipping', 'woo-bg' ) );
+			$label = sprintf( __( '%s: <span class="woocommerce-Price-amount">%s</span>', 'bulgarisation-for-woocommerce' ), $label, __( 'Free shipping', 'bulgarisation-for-woocommerce' ) );
 		} else if ( 
 			( 
 				!woo_bg_is_pro_activated() || 
@@ -183,7 +184,7 @@ class Register {
 			) && 
 			empty( $rate->get_cost() )
 		) {
-			$label = sprintf( __( '%s: <span class="woocommerce-Price-amount">%s</span>', 'woo-bg' ), $label, __( 'Not calculated', 'woo-bg' ) );
+			$label = sprintf( __( '%s: <span class="woocommerce-Price-amount">%s</span>', 'bulgarisation-for-woocommerce' ), $label, __( 'Not calculated', 'bulgarisation-for-woocommerce' ) );
 		}
 
 		return $label;

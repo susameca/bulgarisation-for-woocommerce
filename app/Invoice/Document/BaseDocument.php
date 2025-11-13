@@ -55,23 +55,23 @@ class BaseDocument {
 
 		$items = array_merge( $items, array(
 			'date' => array(
-				'label' => __( 'Order date', 'woo-bg' ),
+				'label' => __( 'Order date', 'bulgarisation-for-woocommerce' ),
 				'value' => date_i18n( 'M d, Y', strtotime( $this->get_document_date() ) ),
 			),
 			'date-of-tax' => array(
-				'label' => __( 'Date of tax. event', 'woo-bg' ),
+				'label' => __( 'Date of tax. event', 'bulgarisation-for-woocommerce' ),
 				'value' => date_i18n( 'M d, Y', strtotime( $this->get_document_date() ) ),
 			),
 			'due-date' => array(
-				'label' => __( 'Due date', 'woo-bg' ),
+				'label' => __( 'Due date', 'bulgarisation-for-woocommerce' ),
 				'value' => date_i18n( 'M d, Y', strtotime( $this->get_document_due_date() ) ),
 			),
 			'address' => array(
-				'label' => __( 'Place of transaction', 'woo-bg' ),
+				'label' => __( 'Place of transaction', 'bulgarisation-for-woocommerce' ),
 				'value' => $this->city,
 			),
 			'order-number' => array(
-				'label' => __( 'Order Number', 'woo-bg' ),
+				'label' => __( 'Order Number', 'bulgarisation-for-woocommerce' ),
 				'value' => $this->woo_order->get_order_number(),
 			),
 		) );
@@ -82,23 +82,23 @@ class BaseDocument {
 	public function get_cart_headers() {
 		return apply_filters( 'woo_bg/invoice/cart_headers', array(
 			array(
-				'label' => __( 'Product', 'woo-bg' ),
+				'label' => __( 'Product', 'bulgarisation-for-woocommerce' ),
 				'class' => '',
 			),
 			array(
-				'label' => __( 'Qty', 'woo-bg' ),
+				'label' => __( 'Qty', 'bulgarisation-for-woocommerce' ),
 				'class' => '',
 			),
 			array(
-				'label' => __( 'Vat', 'woo-bg' ),
+				'label' => __( 'Vat', 'bulgarisation-for-woocommerce' ),
 				'class' => '',
 			),
 			array(
-				'label' => __( 'Price', 'woo-bg' ),
+				'label' => __( 'Price', 'bulgarisation-for-woocommerce' ),
 				'class' => '',
 			),
 			array(
-				'label' => __( 'Total amount', 'woo-bg' ),
+				'label' => __( 'Total amount', 'bulgarisation-for-woocommerce' ),
 				'class' => '',
 			),
 		), $this );
@@ -107,14 +107,14 @@ class BaseDocument {
 	public function get_from_items() {
 		return apply_filters( 'woo_bg/invoice/from_items', array(
 			'company_name' => $this->company_name,
-			'eik' => sprintf( __('EIK: %s', 'woo-bg' ), $this->eik ),
-			'vat_number' => ( $this->vat_number ) ? sprintf( __('VAT Number: %s', 'woo-bg' ), $this->vat_number ) : '&nbsp;',
-			'mol' => sprintf( __('MOL: %s', 'woo-bg' ), $this->mol ),
+			'eik' => sprintf( __('EIK: %s', 'bulgarisation-for-woocommerce' ), $this->eik ),
+			'vat_number' => ( $this->vat_number ) ? sprintf( __('VAT Number: %s', 'bulgarisation-for-woocommerce' ), $this->vat_number ) : '&nbsp;',
+			'mol' => sprintf( __('MOL: %s', 'bulgarisation-for-woocommerce' ), $this->mol ),
 			'address' => $this->address,
 			'city' => $this->city,
 			'space' => '&nbsp;',
-			'phone' => sprintf( __('Phone: %s', 'woo-bg' ), $this->phone_number ),
-			'email' => sprintf( __('E-mail: %s', 'woo-bg' ), $this->email ),
+			'phone' => sprintf( __('Phone: %s', 'bulgarisation-for-woocommerce' ), $this->phone_number ),
+			'email' => sprintf( __('E-mail: %s', 'bulgarisation-for-woocommerce' ), $this->email ),
 		), $this );
 	}
 
@@ -122,22 +122,22 @@ class BaseDocument {
 		if ( $this->woo_order->get_meta('_billing_to_company') === '1' ) {
 			$items = [
 				$this->woo_order->get_billing_company(),
-				sprintf( __('EIK: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_company_eik') ),
+				sprintf( __('EIK: %s', 'bulgarisation-for-woocommerce' ), $this->woo_order->get_meta('_billing_company_eik') ),
 			];
 
 			if ( $this->woo_order->get_meta('_billing_vat_number') ) {
-				$items[] = sprintf( __('VAT Number: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_vat_number') );
+				$items[] = sprintf( __('VAT Number: %s', 'bulgarisation-for-woocommerce' ), $this->woo_order->get_meta('_billing_vat_number') );
 			}
 
 			if ( $this->woo_order->get_meta('_billing_company_mol') ) {
-				$items[] = sprintf( __('MOL: %s', 'woo-bg' ), $this->woo_order->get_meta('_billing_company_mol') );
+				$items[] = sprintf( __('MOL: %s', 'bulgarisation-for-woocommerce' ), $this->woo_order->get_meta('_billing_company_mol') );
 			}
 
 			$items[] = $this->woo_order->get_meta('_billing_company_address');
 			$items[] = $this->woo_order->get_meta('_billing_company_settlement');
 			$items[] = '&nbsp;';
-			$items[] = sprintf( __('Phone: %s', 'woo-bg' ), $this->woo_order->get_billing_phone() );
-			$items[] = sprintf( __('E-mail: %s', 'woo-bg' ), $this->woo_order->get_billing_email() );
+			$items[] = sprintf( __('Phone: %s', 'bulgarisation-for-woocommerce' ), $this->woo_order->get_billing_phone() );
+			$items[] = sprintf( __('E-mail: %s', 'bulgarisation-for-woocommerce' ), $this->woo_order->get_billing_email() );
 
 			$items = apply_filters( 'woo_bg/invoice/set_to_company', $items, $this->woo_order );
 		} else {
@@ -146,8 +146,8 @@ class BaseDocument {
 				$this->woo_order->get_billing_address_1() . " " . $this->woo_order->get_billing_address_2(),
 				$this->woo_order->get_billing_city() .", " . $this->woo_order->get_billing_postcode(),
 				'&nbsp;',
-				sprintf( __('Phone: %s', 'woo-bg' ), $this->woo_order->get_billing_phone() ),
-				sprintf( __('E-mail: %s', 'woo-bg' ), $this->woo_order->get_billing_email() ),
+				sprintf( __('Phone: %s', 'bulgarisation-for-woocommerce' ), $this->woo_order->get_billing_phone() ),
+				sprintf( __('E-mail: %s', 'bulgarisation-for-woocommerce' ), $this->woo_order->get_billing_email() ),
 			), $this->woo_order );
 		}
 
@@ -158,29 +158,29 @@ class BaseDocument {
 		$items = array();
 
 		if ( $this->payment_method ) {
-			$items[] = __( 'Payment method', 'woo-bg' );
+			$items[] = __( 'Payment method', 'bulgarisation-for-woocommerce' );
 		}
 
 		if ( 
 			method_exists( $this->woo_order , 'get_payment_method' ) &&
 			$this->woo_order->get_payment_method() === 'bacs' 
 		) {
-			$items[] = __( 'Bank account', 'woo-bg' );
+			$items[] = __( 'Bank account', 'bulgarisation-for-woocommerce' );
 		}
 
 		if ( $this->transaction_id ) {
-			$items[] = __( 'Transaction ID', 'woo-bg' );
+			$items[] = __( 'Transaction ID', 'bulgarisation-for-woocommerce' );
 		}
 
 		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ) {
-			$items[] = str_replace(':', '', __( 'Fixed conversion rate:', 'woo-bg' ) );
+			$items[] = str_replace(':', '', __( 'Fixed conversion rate:', 'bulgarisation-for-woocommerce' ) );
 		}
 
 		if ( $this->prepared_by || $this->identification_code ) {
-			$items[] = __( 'Compiled by', 'woo-bg' );
+			$items[] = __( 'Compiled by', 'bulgarisation-for-woocommerce' );
 		}
 
-		$items[] = __( 'Received', 'woo-bg' );
+		$items[] = __( 'Received', 'bulgarisation-for-woocommerce' );
 
 		return apply_filters( 'woo_bg/invoice/additional_items_labels', $items, $this );
 	}
@@ -199,7 +199,7 @@ class BaseDocument {
 
 			foreach ( $bacs_info as $account ) {
 				?>
-				<strong><?php esc_html_e( 'Bank name', 'woo-bg' ) ?>:</strong> <?php echo esc_html( $account['bank_name'] ) ?> <br>
+				<strong><?php esc_html_e( 'Bank name', 'bulgarisation-for-woocommerce' ) ?>:</strong> <?php echo esc_html( $account['bank_name'] ) ?> <br>
 				<strong>IBAN:</strong> <?php echo esc_html( $account['iban'] ) ?> <br>
 				<strong>BIC:</strong> <?php echo esc_html( $account['bic'] ) ?> <br>
 				<?php
@@ -213,7 +213,7 @@ class BaseDocument {
 		}
 
 		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ) {
-			$items[] = __( '1 EUR = 1.95583 BGN', 'woo-bg' );
+			$items[] = __( '1 EUR = 1.95583 BGN', 'bulgarisation-for-woocommerce' );
 		}
 
 		if ( $this->prepared_by || $this->identification_code ) {

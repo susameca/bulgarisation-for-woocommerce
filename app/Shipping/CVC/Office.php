@@ -31,14 +31,14 @@ class Office {
 
 	public static function get_i18n() {
 		return array(
-			'selected' => __( 'Selected', 'woo-bg' ),
-			'choose' => __( 'Choose', 'woo-bg' ),
-			'searchOffice' => __( 'Search office', 'woo-bg' ), 
-			'select' => __( 'Select', 'woo-bg' ), 
-			'noResult' => __( 'No results was found for this city', 'woo-bg' ),
-			'noOptions' => __( 'Start typing office', 'woo-bg' ), 
-			'officeLocator' => __( 'Office locator', 'woo-bg' ),
-			'toOffice' => __( 'To Office: ', 'woo-bg' ),
+			'selected' => __( 'Selected', 'bulgarisation-for-woocommerce' ),
+			'choose' => __( 'Choose', 'bulgarisation-for-woocommerce' ),
+			'searchOffice' => __( 'Search office', 'bulgarisation-for-woocommerce' ), 
+			'select' => __( 'Select', 'bulgarisation-for-woocommerce' ), 
+			'noResult' => __( 'No results was found for this city', 'bulgarisation-for-woocommerce' ),
+			'noOptions' => __( 'Start typing office', 'bulgarisation-for-woocommerce' ), 
+			'officeLocator' => __( 'Office locator', 'bulgarisation-for-woocommerce' ),
+			'toOffice' => __( 'To Office: ', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 

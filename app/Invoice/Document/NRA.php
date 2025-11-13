@@ -10,7 +10,7 @@ class NRA extends BaseDocument {
 	function __construct( $order ) {
 		parent::__construct( $order );
 
-		$this->set_title( apply_filters( 'woo_bg/admin/invoice/order_document_title', __( 'Order - Original', 'woo-bg' ) ) );
+		$this->set_title( apply_filters( 'woo_bg/admin/invoice/order_document_title', __( 'Order - Original', 'bulgarisation-for-woocommerce' ) ) );
 		$this->meta = 'woo_bg_order_document';
 		$this->generate_QR_code();
 	}

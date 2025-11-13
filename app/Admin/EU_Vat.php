@@ -21,10 +21,10 @@ class EU_Vat {
 
 	public static function add_fields_in_settings( $fields ) {
 		if ( extension_loaded( 'soap' ) ) {
-			$fields[ 'invoice' ][] = new Fields\TrueFalse_Field( 'enable_vies', __( 'Enable VIES validation', 'woo-bg' ), null, null, __( 'Validate the VAT number with the European VIES system or only with regex.', 'woo-bg' ) );
+			$fields[ 'invoice' ][] = new Fields\TrueFalse_Field( 'enable_vies', __( 'Enable VIES validation', 'bulgarisation-for-woocommerce' ), null, null, __( 'Validate the VAT number with the European VIES system or only with regex.', 'bulgarisation-for-woocommerce' ) );
 		}
 
-		$fields[ 'invoice' ][] = new Fields\Select_Field( woo_bg_get_tax_classes(), 'digital_tax_classes', __( 'Tax Classes for Digital Goods', 'woo-bg' ), null, null, __( 'This option tells the plugin which of your tax classes are for digital goods. This affects the taxable location of the user as of 1st Jan 2015.', 'woo-bg' ) );
+		$fields[ 'invoice' ][] = new Fields\Select_Field( woo_bg_get_tax_classes(), 'digital_tax_classes', __( 'Tax Classes for Digital Goods', 'bulgarisation-for-woocommerce' ), null, null, __( 'This option tells the plugin which of your tax classes are for digital goods. This affects the taxable location of the user as of 1st Jan 2015.', 'bulgarisation-for-woocommerce' ) );
 
 		return $fields;
 	}
@@ -35,7 +35,7 @@ class EU_Vat {
 		$vat_number = is_object( $theorder ) ? woo_bg_get_vat_from_order( $theorder ) : '';
 
 		$fields[ 'vat_number' ] = array(
-			'label' => __( 'VAT number', 'woo-bg' ),
+			'label' => __( 'VAT number', 'bulgarisation-for-woocommerce' ),
 			'show'  => false,
 			'id'    => '_billing_vat_number',
 			'value' => $vat_number,
@@ -49,7 +49,7 @@ class EU_Vat {
 		? array( wc_get_page_screen_id( 'shop-order' ), wc_get_page_screen_id( 'shop_subscription' ) )
 		: array( 'shop_order', 'shop_subscription' );
 
-		add_meta_box( 'woo_bg_eu_vat', __( 'EU VAT', 'woo-bg' ), array( __CLASS__, 'output_meta_box' ), array( 'shop_order', 'shop_subscription' ), 'side' );
+		add_meta_box( 'woo_bg_eu_vat', __( 'EU VAT', 'bulgarisation-for-woocommerce' ), array( __CLASS__, 'output_meta_box' ), array( 'shop_order', 'shop_subscription' ), 'side' );
 	}
 
 	protected static function is_eu_order( $order ) {
@@ -65,7 +65,7 @@ class EU_Vat {
 
 		// We only need this box for EU orders.
 		if ( ! self::is_eu_order( $theorder ) ) {
-			echo wp_kses_post( wpautop( __( 'This order is out of scope for EU VAT.', 'woo-bg' ) ) );
+			echo wp_kses_post( wpautop( __( 'This order is out of scope for EU VAT.', 'bulgarisation-for-woocommerce' ) ) );
 			return;
 		}
 
@@ -76,11 +76,11 @@ class EU_Vat {
 			<tbody>
 				<?php if ( $data->vat_number ) : ?>
 					<tr>
-						<th><?php echo wp_kses_post( __('VAT number', 'woo-bg') ) ?></th>
+						<th><?php echo wp_kses_post( __('VAT number', 'bulgarisation-for-woocommerce') ) ?></th>
 						<td><?php echo esc_html( $data->vat_number ); ?></td>
 						<td><?php
 							if ( ! $data->validated ) {
-								echo wp_kses_post( '<span class="tips" data-tip="' . wc_sanitize_tooltip( __( 'Validation was not possible', 'woo-bg' ) ) . '">?<span>' );
+								echo wp_kses_post( '<span class="tips" data-tip="' . wc_sanitize_tooltip( __( 'Validation was not possible', 'bulgarisation-for-woocommerce' ) ) . '">?<span>' );
 							} else {
 								echo $data->valid ? '&#10004;' : '&#10008;';
 							}
@@ -88,31 +88,31 @@ class EU_Vat {
 					</tr>
 				<?php else : ?>
 					<tr>
-						<th><?php esc_html_e( 'IP Address', 'woo-bg' ); ?></th>
-						<td><?php echo $data->ip_address ? esc_html( $data->ip_address ) : esc_html__( 'Unknown', 'woo-bg' ); ?></td>
+						<th><?php esc_html_e( 'IP Address', 'bulgarisation-for-woocommerce' ); ?></th>
+						<td><?php echo $data->ip_address ? esc_html( $data->ip_address ) : esc_html__( 'Unknown', 'bulgarisation-for-woocommerce' ); ?></td>
 						<td></td>
 					</tr>
 					<tr>
-						<th><?php esc_html_e( 'IP Country', 'woo-bg' ); ?></th>
+						<th><?php esc_html_e( 'IP Country', 'bulgarisation-for-woocommerce' ); ?></th>
 						<td><?php
 							if ( $data->ip_country ) {
-								echo esc_html__( $countries[ $data->billing_country ] ) . ' ';
+								echo $countries[ $data->billing_country ] . ' ';
 
 								if ( $data->billing_country === $data->ip_country ) {
 									echo '<span style="color:green">&#10004;</span>';
 								} elseif ( $data->self_declared ) {
-									esc_html_e( '(self-declared)', 'woo-bg' );
+									esc_html_e( '(self-declared)', 'bulgarisation-for-woocommerce' );
 								} else {
 									echo '<span style="color:red">&#10008;</span>';
 								}
 							} else {
-								esc_html_e( 'Unknown', 'woo-bg' );
+								esc_html_e( 'Unknown', 'bulgarisation-for-woocommerce' );
 							}
 						?><td></td>
 					</tr>
 					<tr>
-						<th><?php esc_html_e( 'Billing Country', 'woo-bg' ); ?></th>
-						<td><?php echo $data->billing_country ? esc_html( $countries[ $data->billing_country ] ) : esc_html__( 'Unknown', 'woo-bg' ); ?></td>
+						<th><?php esc_html_e( 'Billing Country', 'bulgarisation-for-woocommerce' ); ?></th>
+						<td><?php echo $data->billing_country ? esc_html( $countries[ $data->billing_country ] ) : esc_html__( 'Unknown', 'bulgarisation-for-woocommerce' ); ?></td>
 						<td></td>
 					</tr>
 				<?php endif; ?>

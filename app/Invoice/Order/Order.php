@@ -120,7 +120,7 @@ class Order {
 				$item_total = $item_price * $item->get_quantity();
 
 				$items[] = apply_filters( 'woo_bg/invoice/order/item', array(
-					'name' => apply_filters( 'woo_bg/invoice/order/item_name', sprintf( __('Shipping: %s', 'woo-bg'), $item->get_name() ), $item ),
+					'name' => apply_filters( 'woo_bg/invoice/order/item_name', sprintf( __('Shipping: %s', 'bulgarisation-for-woocommerce'), $item->get_name() ), $item ),
 					'quantity' => abs( $item->get_quantity() ), 
 					'vat_rate' => woo_bg_maybe_add_rate_group( $item_vat ) . "%", 
 					'price' => wc_price( abs( $item_price ), array( 'currency' => $this->woo_order->get_currency() ) ),
@@ -188,16 +188,16 @@ class Order {
 			$items['all']['value'] = wc_price(  $subtotal, array( 'currency' => $this->woo_order->get_currency() ) );
 
 			$items['discount'] = array(
-				'label' => __( "Discount", 'woo-bg' ) . ":",
+				'label' => __( "Discount", 'bulgarisation-for-woocommerce' ) . ":",
 				'value' => wc_price( $discount_amount , array( 'currency' => $this->woo_order->get_currency() ) ),
 			);
 			$items['subtotal'] = array(
-				'label' => __( "Total", 'woo-bg' ) . ":",
+				'label' => __( "Total", 'bulgarisation-for-woocommerce' ) . ":",
 				'value' => wc_price(  $subtotal - $discount_amount, array( 'currency' => $this->woo_order->get_currency() ) ),
 			);
 		} else {
 			$items['subtotal'] = array(
-				'label' => __( "Total", 'woo-bg' ) . ":",
+				'label' => __( "Total", 'bulgarisation-for-woocommerce' ) . ":",
 				'value' => wc_price(  $subtotal, array( 'currency' => $this->woo_order->get_currency() ) ),
 			);
 		}
@@ -213,7 +213,7 @@ class Order {
 		}
 
 		$items['total'] = array(
-			'label' => __( "Total due", 'woo-bg' ) . ":",
+			'label' => __( "Total due", 'bulgarisation-for-woocommerce' ) . ":",
 			'value' => wc_price( abs( $this->woo_order->get_total() ), array( 'currency' => $this->woo_order->get_currency() ) ),
 			'value_number' => abs( $this->woo_order->get_total() ),
 		);

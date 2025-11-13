@@ -13,7 +13,7 @@ class CreditNotice extends NRARefunded {
 	function __construct( $refund_id ) {
 		parent::__construct( $refund_id );
 
-		$this->set_title( apply_filters( 'woo_bg/admin/invoice/credit_notice_title', __( 'Credit Notice - Original', 'woo-bg' ) ) );
+		$this->set_title( apply_filters( 'woo_bg/admin/invoice/credit_notice_title', __( 'Credit Notice - Original', 'bulgarisation-for-woocommerce' ) ) );
 		$this->meta = 'woo_bg_refunded_invoice_document';
 		
 		if ( woo_bg_get_option( 'invoice', 'next_invoice_separate_number' ) ) {
@@ -25,7 +25,7 @@ class CreditNotice extends NRARefunded {
 	public function get_head_items() {
 		return apply_filters( 'woo_bg/invoice/head_items', array(
 			'parent_reference' => array(
-				'label' => __('To invoice №', 'woo-bg'),
+				'label' => __('To invoice №', 'bulgarisation-for-woocommerce'),
 				'value' => $this->get_parent_reference(),
 			),
 			'reference' => array(
@@ -33,23 +33,23 @@ class CreditNotice extends NRARefunded {
 				'value' => str_pad( $this->get_document_number(), 10, '0', STR_PAD_LEFT ),
 			),
 			'date' => array(
-				'label' => __( 'Order date', 'woo-bg' ),
+				'label' => __( 'Order date', 'bulgarisation-for-woocommerce' ),
 				'value' => date_i18n( 'M d, Y', strtotime( $this->woo_order->get_date_created() ) ),
 			),
 			'date-of-tax' => array(
-				'label' => __( 'Date of tax. event', 'woo-bg' ),
+				'label' => __( 'Date of tax. event', 'bulgarisation-for-woocommerce' ),
 				'value' => date_i18n( 'M d, Y', strtotime( $this->woo_order->get_date_created() ) ),
 			),
 			'due-date' => array(
-				'label' => __( 'Due date', 'woo-bg' ),
+				'label' => __( 'Due date', 'bulgarisation-for-woocommerce' ),
 				'value' => date_i18n( 'M d, Y', strtotime( $this->woo_order->get_date_created() ) ),
 			),
 			'address' => array(
-				'label' => __( 'Place of transaction', 'woo-bg' ),
+				'label' => __( 'Place of transaction', 'bulgarisation-for-woocommerce' ),
 				'value' => $this->city,
 			),
 			'order-number' => array(
-				'label' => __( 'Order Number', 'woo-bg' ),
+				'label' => __( 'Order Number', 'bulgarisation-for-woocommerce' ),
 				'value' => $this->parent_order->get_order_number(),
 			),
 		), $this );
@@ -65,7 +65,7 @@ class CreditNotice extends NRARefunded {
 
 		//Copy Invoice Generation
 		$copy_invoice = $upload_dir['path'] . '/copy.pdf';
-		$this->set_title( apply_filters( 'woo_bg/admin/invoice/credit_notice_title_copy', __( 'Credit Notice - Copy', 'woo-bg' ) ) );
+		$this->set_title( apply_filters( 'woo_bg/admin/invoice/credit_notice_title_copy', __( 'Credit Notice - Copy', 'bulgarisation-for-woocommerce' ) ) );
 		File::put_to_file( $copy_invoice, $this->pdf->generate() );
 
 		// Merge both PDF's

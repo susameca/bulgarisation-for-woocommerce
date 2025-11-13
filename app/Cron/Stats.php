@@ -57,13 +57,16 @@ class Stats {
 			'body' => $args,
 		] ) ), 1 );
 
-		if ( isset( $response['is_pro_active'] ) && wc_string_to_bool( $response['is_pro_active'] ) && class_exists( '\Woo_BG_Pro\License' ) ) {
+		if ( isset( $response['is_pro_active'] ) && class_exists( '\Woo_BG_Pro\License' ) ) {
 			set_transient( \Woo_BG_Pro\License::$transient, $response['is_pro_active'], WEEK_IN_SECONDS * 2 );
 		}
 
-		if ( 
-			( isset( $response['delete_pro'] ) && wc_string_to_bool( $response['delete_pro'] ) ) ||
-			! $response['valid_hash']
+		if (
+			class_exists( '\Woo_BG_Pro\License' ) &&
+			(
+				( isset( $response['delete_pro'] ) && wc_string_to_bool( $response['delete_pro'] ) ) ||
+				!( isset( $response['valid_hash'] ) && wc_string_to_bool( $response['valid_hash'] ) )
+			)
 		) {
 			Plugin::delete_pro();
 		}

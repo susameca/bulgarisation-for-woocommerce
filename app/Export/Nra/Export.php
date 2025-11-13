@@ -152,7 +152,7 @@ class Export {
 
 		if ( !empty( $this->completed_orders_ids ) || !empty( $this->refunded_orders_ids ) ) {
 			$message = sprintf( 
-				__( 'Total: %s | Total vat: %s | Returned Total: %s', 'woo-bg' ), 
+				__( 'Total: %s | Total vat: %s | Returned Total: %s', 'bulgarisation-for-woocommerce' ), 
 				wc_price( $this->xml_shop->getOrdersTotal() ), 
 				wc_price( $this->xml_shop->getOrdersTotalVat() ),
 				wc_price( $this->xml_shop->getTotalAmountReturnedOrders() ) 

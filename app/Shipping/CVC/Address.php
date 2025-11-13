@@ -35,14 +35,14 @@ class Address {
 
 	public static function get_i18n() {
 		return array(
-			'selected' => __( 'Selected', 'woo-bg' ),
-			'choose' => __( 'Choose', 'woo-bg' ),
-			'searchAddress' => __( 'Search address', 'woo-bg' ), 
-			'select' => __( 'Select', 'woo-bg' ), 
-			'noResult' => __( 'No results was found for this city', 'woo-bg' ), 
-			'noOptions' => __( 'Start typing street or quarter', 'woo-bg' ), 
-			'streetNumber' => __( 'Street number', 'woo-bg' ), 
-			'blVhEt' => __( 'bl. vh. et.', 'woo-bg' ),
+			'selected' => __( 'Selected', 'bulgarisation-for-woocommerce' ),
+			'choose' => __( 'Choose', 'bulgarisation-for-woocommerce' ),
+			'searchAddress' => __( 'Search address', 'bulgarisation-for-woocommerce' ), 
+			'select' => __( 'Select', 'bulgarisation-for-woocommerce' ), 
+			'noResult' => __( 'No results was found for this city', 'bulgarisation-for-woocommerce' ), 
+			'noOptions' => __( 'Start typing street or quarter', 'bulgarisation-for-woocommerce' ), 
+			'streetNumber' => __( 'Street number', 'bulgarisation-for-woocommerce' ), 
+			'blVhEt' => __( 'bl. vh. et.', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 

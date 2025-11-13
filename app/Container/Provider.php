@@ -15,7 +15,7 @@ abstract class Provider implements ServiceProviderInterface {
 
 	protected function create_callback( $identifier, callable $callback ) {
 		if ( array_key_exists( $identifier, $this->callbacks ) ) {
-			throw new \InvalidArgumentException( sprintf( esc_html( __( 'Invalid identifier: %s has already been set.', 'woo-bg' ), esc_html( $identifier ) ) ) );
+			throw new \InvalidArgumentException( sprintf( esc_html( __( 'Invalid identifier: %s has already been set.', 'bulgarisation-for-woocommerce' ), esc_html( $identifier ) ) ) );
 		}
 		
 		$this->callbacks[ $identifier ] = $callback;

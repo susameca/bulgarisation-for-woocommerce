@@ -1,4 +1,7 @@
-<?php $bgn_eur = ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ); ?>
+<?php 
+defined( 'ABSPATH' ) || exit;
+$bgn_eur = ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ); 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,8 +78,8 @@
 	<div class="w-100 mt-10">
 		<table class="w-100 mt-10">
 			<tr>
-				<th class="w-50"><?php esc_html_e( 'Billing from', 'woo-bg' ) ?></th>
-				<th class="w-50"><?php esc_html_e( 'Billing to', 'woo-bg' ) ?></th>
+				<th class="w-50"><?php esc_html_e( 'Billing from', 'bulgarisation-for-woocommerce' ) ?></th>
+				<th class="w-50"><?php esc_html_e( 'Billing to', 'bulgarisation-for-woocommerce' ) ?></th>
 			</tr>
 
 			<tr class="va-top">
@@ -171,7 +174,7 @@
 		<?php echo esc_html( get_bloginfo( 'name' ) ) ?>
 
 		<span class="page-count text-right">
-			<?php printf( esc_html__('Page %s of %s', 'woo-bg'), '<span class="page-number"></span>', '%PC%' ) ?>
+			<?php printf( esc_html__('Page %s of %s', 'bulgarisation-for-woocommerce'), '<span class="page-number"></span>', '%PC%' ) ?>
 		</span>
 	</footer>
 </html>

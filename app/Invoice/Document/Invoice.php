@@ -11,7 +11,7 @@ class Invoice extends BaseDocument {
 	function __construct( $order ) {
 		parent::__construct( $order );
 
-		$this->set_title( apply_filters( 'woo_bg/admin/invoice/invoice_title', __( 'Sale Invoice - Original', 'woo-bg' ) ) );
+		$this->set_title( apply_filters( 'woo_bg/admin/invoice/invoice_title', __( 'Sale Invoice - Original', 'bulgarisation-for-woocommerce' ) ) );
 		$this->meta = 'woo_bg_invoice_document';
 
 		if ( woo_bg_get_option( 'invoice', 'next_invoice_separate_number' ) ) {
@@ -30,7 +30,7 @@ class Invoice extends BaseDocument {
 
 		//Copy Invoice Generation
 		$copy_invoice = $upload_dir['path'] . '/copy.pdf';
-		$this->set_title( apply_filters( 'woo_bg/admin/invoice/invoice_title_copy', __( 'Sale Invoice - Copy', 'woo-bg' ) ) );
+		$this->set_title( apply_filters( 'woo_bg/admin/invoice/invoice_title_copy', __( 'Sale Invoice - Copy', 'bulgarisation-for-woocommerce' ) ) );
 		File::put_to_file( $copy_invoice, $this->pdf->generate() );
 
 		// Merge both PDF's

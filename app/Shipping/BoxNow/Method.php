@@ -13,8 +13,8 @@ class Method extends \WC_Shipping_Method {
 		$this->container          = woo_bg()->container();
 		$this->id                 = self::METHOD_ID; 
 		$this->instance_id        = absint( $instance_id );
-		$this->method_title       = __( 'Woo BG - BOX NOW', 'woo-bg' );  // Title shown in admin
-		$this->method_description = __( 'Enables BOX NOW delivery.', 'woo-bg' ); // Description shown in admin
+		$this->method_title       = __( 'Woo BG - BOX NOW', 'bulgarisation-for-woocommerce' );  // Title shown in admin
+		$this->method_description = __( 'Enables BOX NOW delivery.', 'bulgarisation-for-woocommerce' ); // Description shown in admin
 		$this->supports           = array(
 			'shipping-zones',
 			'instance-settings',
@@ -116,9 +116,9 @@ class Method extends \WC_Shipping_Method {
 	public function init_form_fields() {
 		$this->instance_form_fields = array(
 			'title'            => array(
-				'title'       => __( 'Title', 'woo-bg' ),
+				'title'       => __( 'Title', 'bulgarisation-for-woocommerce' ),
 				'type'        => 'text',
-				'description' => __( 'This controls the title which the user sees during checkout.', 'woo-bg' ),
+				'description' => __( 'This controls the title which the user sees during checkout.', 'bulgarisation-for-woocommerce' ),
 				'default'     => $this->method_title,
 				'desc_tip'    => true,
 			),
@@ -265,7 +265,7 @@ class Method extends \WC_Shipping_Method {
 					$cookie_data = self::get_cookie_data();
 
 					if ( empty( $cookie_data['selectedApm'] ) ) {
-						$errors->add( 'validation', __( 'Please choose a automat.', 'woo-bg' ) );
+						$errors->add( 'validation', __( 'Please choose a automat.', 'bulgarisation-for-woocommerce' ) );
 					}	
 				}
 			}
@@ -438,11 +438,11 @@ class Method extends \WC_Shipping_Method {
 			$url = 'https://boxnow.bg/en?track=' . $number;
 
 			$track_numbers[] = sprintf( 
-				__( 'Label number: %s. %s', 'woo-bg' ), 
+				__( 'Label number: %s. %s', 'bulgarisation-for-woocommerce' ), 
 				$number, 
 				sprintf( '<a href="%s" target="_blank">%s</a>',
 					$url,
-					__( 'Track your order.' , 'woo-bg' )
+					__( 'Track your order.' , 'bulgarisation-for-woocommerce' )
 				)
 			);
 		}

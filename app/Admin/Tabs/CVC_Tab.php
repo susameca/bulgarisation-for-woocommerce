@@ -12,8 +12,8 @@ class CVC_Tab extends Base_Tab {
 	public function __construct() {
 		$this->container = woo_bg()->container();
 		$this->tab_name = get_called_class();
-		$this->set_name( __( 'CVC Settings', 'woo-bg' ) );
-		$this->set_description( __( 'cvc.com API Settings', 'woo-bg' ) );
+		$this->set_name( __( 'CVC Settings', 'bulgarisation-for-woocommerce' ) );
+		$this->set_description( __( 'cvc.com API Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "cvc" );
 
 		add_action( 'woo_bg/admin/settings/afte_save_fields/'. $this->tab_name, array( $this, 'after_save_fields' ) );
@@ -40,9 +40,9 @@ class CVC_Tab extends Base_Tab {
 		
 		woo_bg_support_text();
 		?>
-		<a href="<?php echo esc_url( add_query_arg( 'clear-cache', true ) ) ?>" class="button-secondary"><?php esc_html_e( 'Clear cache', 'woo-bg' ) ?></a>
+		<a href="<?php echo esc_url( add_query_arg( 'clear-cache', true ) ) ?>" class="button-secondary"><?php esc_html_e( 'Clear cache', 'bulgarisation-for-woocommerce' ) ?></a>
 
-		<div class="notice"><p><?php _e( 'Please use "Classic Checkout" block or [woocommerce_checkout] shortcode.', 'woo-bg' ) ?></p></div>
+		<div class="notice"><p><?php _e( 'Please use "Classic Checkout" block or [woocommerce_checkout] shortcode.', 'bulgarisation-for-woocommerce' ) ?></p></div>
 		
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
 		<?php		
@@ -61,7 +61,7 @@ class CVC_Tab extends Base_Tab {
 	public function load_fields() {
 		$fields = array(
 			'cvc' => array(
-				new Fields\Text_Field( 'token', __( 'API Token', 'woo-bg' ), __( 'Enter your token.', 'woo-bg' ), 'required' ),
+				new Fields\Text_Field( 'token', __( 'API Token', 'bulgarisation-for-woocommerce' ), __( 'Enter your token.', 'bulgarisation-for-woocommerce' ), 'required' ),
 			),
 		);
 
@@ -78,32 +78,32 @@ class CVC_Tab extends Base_Tab {
 			$cities = $this->container[ Client::CVC_CITIES ]->get_formatted_cities();
 
 			$fields[ 'cvc_sender' ] = [
-				new Fields\Text_Field( 'name', __( 'Name', 'woo-bg' ), __( 'Enter sender name.', 'woo-bg' ), 'required' ),
-				new Fields\Text_Field( 'phone', __( 'Phone', 'woo-bg' ), __( 'Enter sender phone.', 'woo-bg' ), 'required' ),
-				new Fields\Text_Field( 'email', __( 'E-mail', 'woo-bg' ), __( 'Enter sender email.', 'woo-bg' ), 'required|email' ),
-				new Fields\TrueFalse_Field( 'ppp', __( 'Cash on delivery as PPP.', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'contract_pay', __( 'Pay by contract', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'woo-bg' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'woo-bg' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'woo-bg' ) ),
-				new Fields\Select_Field( $cities, 'city', __( 'City', 'woo-bg' ) ),
+				new Fields\Text_Field( 'name', __( 'Name', 'bulgarisation-for-woocommerce' ), __( 'Enter sender name.', 'bulgarisation-for-woocommerce' ), 'required' ),
+				new Fields\Text_Field( 'phone', __( 'Phone', 'bulgarisation-for-woocommerce' ), __( 'Enter sender phone.', 'bulgarisation-for-woocommerce' ), 'required' ),
+				new Fields\Text_Field( 'email', __( 'E-mail', 'bulgarisation-for-woocommerce' ), __( 'Enter sender email.', 'bulgarisation-for-woocommerce' ), 'required|email' ),
+				new Fields\TrueFalse_Field( 'ppp', __( 'Cash on delivery as PPP.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'contract_pay', __( 'Pay by contract', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'bulgarisation-for-woocommerce' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'bulgarisation-for-woocommerce' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\Select_Field( $cities, 'city', __( 'City', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\Select_Field( 
 					array(
 						'office' => array(
 							'id' => 'office',
-							'label' => __( 'Office', 'woo-bg' ),
+							'label' => __( 'Office', 'bulgarisation-for-woocommerce' ),
 						),
 						'address' => array(
 							'id' => 'address',
-							'label' => __( 'Address', 'woo-bg' ),
+							'label' => __( 'Address', 'bulgarisation-for-woocommerce' ),
 						),
-					), 'send_from', __( 'Send From', 'woo-bg' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'woo-bg' ) 
+					), 'send_from', __( 'Send From', 'bulgarisation-for-woocommerce' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'bulgarisation-for-woocommerce' ) 
 				),
 			];
 
 			switch ( $send_from ) {
 				case 'address':
 					if ( !empty( $addresses ) ) {
-						$fields[ 'cvc_sender' ][] = new Fields\Select_Field( $addresses, 'address', __( 'Select Address', 'woo-bg' ) );
+						$fields[ 'cvc_sender' ][] = new Fields\Select_Field( $addresses, 'address', __( 'Select Address', 'bulgarisation-for-woocommerce' ) );
 					}
 
 					break;
@@ -112,7 +112,7 @@ class CVC_Tab extends Base_Tab {
 						$offices = $this->container[ Client::CVC_HUBS ]->get_formatted_hubs( $city );
 
 						if ( !empty( $offices ) ) {
-							$fields[ 'cvc_sender' ][] = new Fields\Select_Field( $offices, 'office', __( 'Office', 'woo-bg' ) );
+							$fields[ 'cvc_sender' ][] = new Fields\Select_Field( $offices, 'office', __( 'Office', 'bulgarisation-for-woocommerce' ) );
 						}
 					}
 					
@@ -134,7 +134,7 @@ class CVC_Tab extends Base_Tab {
 	public function get_groups_titles() {
 		$titles = apply_filters( 'woo_bg/admin/settings/cvc/groups_titles', array(
 			'cvc' => array(
-				'title' => __( 'General', 'woo-bg' ),
+				'title' => __( 'General', 'bulgarisation-for-woocommerce' ),
 			),
 		) );
 
@@ -144,7 +144,7 @@ class CVC_Tab extends Base_Tab {
 	public function add_send_from_group_title( $titles ) {
 		if ( $this->container[ Client::CVC_PROFILE ]->is_valid_profile( true ) ) {
 			$titles['cvc_sender'] = array(
-				'title' => __( 'Send From', 'woo-bg' ),
+				'title' => __( 'Send From', 'bulgarisation-for-woocommerce' ),
 			);
 		}
 
@@ -165,7 +165,7 @@ class CVC_Tab extends Base_Tab {
 		$error = '';
 
 		if ( !$this->container[ Client::CVC_PROFILE ]->is_valid_profile( true ) ) {
-			$error = __( 'API Token is incorrect.', 'woo-bg' );
+			$error = __( 'API Token is incorrect.', 'bulgarisation-for-woocommerce' );
 		}
 
 		return wpautop( $error );

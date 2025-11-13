@@ -17,8 +17,8 @@ class Method extends \WC_Shipping_Method {
 		$this->container          = woo_bg()->container();
 		$this->id                 = 'woo_bg_econt'; 
 		$this->instance_id        = absint( $instance_id );
-		$this->method_title       = __( 'Woo BG - Econt', 'woo-bg' );  // Title shown in admin
-		$this->method_description = __( 'Enables econt delivery and automatically calculate shipping price.', 'woo-bg' ); // Description shown in admin
+		$this->method_title       = __( 'Woo BG - Econt', 'bulgarisation-for-woocommerce' );  // Title shown in admin
+		$this->method_description = __( 'Enables econt delivery and automatically calculate shipping price.', 'bulgarisation-for-woocommerce' ); // Description shown in admin
 		$this->supports           = array(
 			'shipping-zones',
 			'instance-settings',
@@ -126,53 +126,53 @@ class Method extends \WC_Shipping_Method {
 	public function init_form_fields() {
 		$this->instance_form_fields = array(
 			'title'            => array(
-				'title'       => __( 'Title', 'woo-bg' ),
+				'title'       => __( 'Title', 'bulgarisation-for-woocommerce' ),
 				'type'        => 'text',
-				'description' => __( 'This controls the title which the user sees during checkout.', 'woo-bg' ),
+				'description' => __( 'This controls the title which the user sees during checkout.', 'bulgarisation-for-woocommerce' ),
 				'default'     => $this->method_title,
 				'desc_tip'    => true,
 			),
 			'delivery_type'    => array(
-				'title'             => __( 'Delivery Type', 'woo-bg' ),
+				'title'             => __( 'Delivery Type', 'bulgarisation-for-woocommerce' ),
 				'type'              => 'select',
 				'css'               => 'width: 400px;',
 				'default'           => '',
 				'options'           => array(
-					'office' => __( 'Office', 'woo-bg' ),
-					'address' => __( 'Address', 'woo-bg' ),
+					'office' => __( 'Office', 'bulgarisation-for-woocommerce' ),
+					'address' => __( 'Address', 'bulgarisation-for-woocommerce' ),
 				),
 			),
 			'test'    => array(
-				'title'             => __( 'Review and test', 'woo-bg' ),
+				'title'             => __( 'Review and test', 'bulgarisation-for-woocommerce' ),
 				'type'              => 'select',
 				'css'               => 'width: 400px;',
 				'default'           => 'no',
 				'options'           => woo_bg_get_shipping_tests_options(),
 			),
 			'sms'    => array(
-				'title'             => __( 'SMS notification', 'woo-bg' ),
+				'title'             => __( 'SMS notification', 'bulgarisation-for-woocommerce' ),
 				'type'              => 'select',
 				'css'               => 'width: 400px;',
 				'default'           => 'no',
 				'options'           => array(
-					'no' => __( 'No', 'woo-bg' ),
-					'yes' => __( 'Yes', 'woo-bg' ),
+					'no' => __( 'No', 'bulgarisation-for-woocommerce' ),
+					'yes' => __( 'Yes', 'bulgarisation-for-woocommerce' ),
 				),
-				'description' => __( 'Send customer notification for delivery.', 'woo-bg' ),
+				'description' => __( 'Send customer notification for delivery.', 'bulgarisation-for-woocommerce' ),
 			),
 			'free_shipping_over' => array(
-				'title'       => __( 'Free shipping over', 'woo-bg' ),
+				'title'       => __( 'Free shipping over', 'bulgarisation-for-woocommerce' ),
 				'type'        => 'number',
 				'placeholder' => '0',
-				'description' => __( 'Free shipping over total cart price.', 'woo-bg' ),
+				'description' => __( 'Free shipping over total cart price.', 'bulgarisation-for-woocommerce' ),
 				'default'     => '',
 				'desc_tip'    => true,
 			),
 			'fixed_price' => array(
-				'title'       => __( 'Maximum price payed by the client', 'woo-bg' ),
+				'title'       => __( 'Maximum price payed by the client', 'bulgarisation-for-woocommerce' ),
 				'type'        => 'number',
 				'placeholder' => '0',
-				'description' => __( 'Enter a fixed price that the users will pay. The remaining will be payed by you.', 'woo-bg' ) . __( 'Can be used only in Bulgaria', 'woo-bg' ),
+				'description' => __( 'Enter a fixed price that the users will pay. The remaining will be payed by you.', 'bulgarisation-for-woocommerce' ) . __( 'Can be used only in Bulgaria', 'bulgarisation-for-woocommerce' ),
 				'default'     => '',
 				'desc_tip'    => true,
 			)
@@ -531,10 +531,10 @@ class Method extends \WC_Shipping_Method {
 					$meta_data = $data->get_meta_data();
 
 					if ( !empty( $meta_data['errors'] ) && !empty( array_filter( $meta_data['errors'] ) ) ) {
-						$message = array_merge( array( __( 'Econt - ', 'woo-bg' ) ) , woo_bg()->container()[ Client::ECONT ]::add_error_message( $meta_data['errors'] ) );
+						$message = array_merge( array( __( 'Econt - ', 'bulgarisation-for-woocommerce' ) ) , woo_bg()->container()[ Client::ECONT ]::add_error_message( $meta_data['errors'] ) );
 						$errors->add( 'validation', implode( ' ', $message ) );
 					} else {
-						$errors->add( 'validation', __( 'Please choose delivery option!', 'woo-bg' ) );
+						$errors->add( 'validation', __( 'Please choose delivery option!', 'bulgarisation-for-woocommerce' ) );
 					}
 				} 
 
@@ -546,7 +546,7 @@ class Method extends \WC_Shipping_Method {
 						( !empty( $cookie_data['type'] ) && $cookie_data['type'] === 'office' ) &&  
 						empty( $cookie_data['selectedOffice'] ) 
 					) {
-						$errors->add( 'validation', __( 'Please choose a office.', 'woo-bg' ) );
+						$errors->add( 'validation', __( 'Please choose a office.', 'bulgarisation-for-woocommerce' ) );
 					}
 
 					if(
@@ -554,7 +554,7 @@ class Method extends \WC_Shipping_Method {
 						( !empty( $cookie_data['type'] ) && $cookie_data['type'] === 'address' ) &&  
 						empty( $cookie_data['selectedAddress'] ) 
 					) {
-						$errors->add( 'validation', __( 'Please choose address.', 'woo-bg' ) ); 
+						$errors->add( 'validation', __( 'Please choose address.', 'bulgarisation-for-woocommerce' ) ); 
 					}
 				}
 			}
@@ -661,11 +661,11 @@ class Method extends \WC_Shipping_Method {
 		$url = 'https://www.econt.com/services/track-shipment/' . $number;
 
 		$track_number_text = sprintf( 
-			__( 'Label number: %s. %s', 'woo-bg' ), 
+			__( 'Label number: %s. %s', 'bulgarisation-for-woocommerce' ), 
 			$number, 
 			sprintf( '<a href="%s" target="_blank">%s</a>',
 				$url,
-				__( 'Track your order.' , 'woo-bg' )
+				__( 'Track your order.' , 'bulgarisation-for-woocommerce' )
 			)
 		);
 

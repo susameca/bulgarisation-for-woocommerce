@@ -7,8 +7,8 @@ class Settings_Tab extends Base_Tab {
 	protected $fields, $localized_fields;
 	
 	public function __construct() {
-		$this->set_name( __( 'Settings', 'woo-bg' ) );
-		$this->set_description( __( 'Plugin Settings', 'woo-bg' ) );
+		$this->set_name( __( 'Settings', 'bulgarisation-for-woocommerce' ) );
+		$this->set_description( __( 'Plugin Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "settings" );
 
 		if ( 
@@ -41,16 +41,16 @@ class Settings_Tab extends Base_Tab {
 	public function load_fields() {
 		$fields = apply_filters( 'woo_bg/admin/settings/fields', array(
 			'apis' => array(
-				new Fields\TrueFalse_Field( 'enable_documents', __( 'Enable Documents Generation', 'woo-bg' ), null, null, __( 'If you want to generate invoices or enable N-18', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'enable_econt', __( 'Enable Econt Delivery? ', 'woo-bg' ), null, null, __( 'Enables Econt Shipping methods.', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'enable_speedy', __( 'Enable Speedy Delivery? ', 'woo-bg' ), null, null, __( 'Enables Speedy Shipping methods.', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'enable_boxnow', __( 'Enable BOX NOW Delivery? ', 'woo-bg' ), null, null, __( 'Enables BOX NOW Shipping method.', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'enable_cvc', __( 'Enable CVC Delivery? ', 'woo-bg' ), null, null, __( 'Enables CVC Shipping methods.', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'enable_nekorekten', __( 'Enable nekorekten.com API? ', 'woo-bg' ), null, null, __( 'If yes, you will receive information about the customer from nekorekten.com.', 'woo-bg' ) ),
-				new Fields\TrueFalse_Field( 'enable_multi_currency', __( 'Enable BGN/EUR dual price', 'woo-bg' ), null, null, __( 'Enables dual price showing for migrating to EUR.', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'enable_documents', __( 'Enable Documents Generation', 'bulgarisation-for-woocommerce' ), null, null, __( 'If you want to generate invoices or enable N-18', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'enable_econt', __( 'Enable Econt Delivery? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables Econt Shipping methods.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'enable_speedy', __( 'Enable Speedy Delivery? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables Speedy Shipping methods.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'enable_boxnow', __( 'Enable BOX NOW Delivery? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables BOX NOW Shipping method.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'enable_cvc', __( 'Enable CVC Delivery? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables CVC Shipping methods.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'enable_nekorekten', __( 'Enable nekorekten.com API? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'If yes, you will receive information about the customer from nekorekten.com.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'enable_multi_currency', __( 'Enable BGN/EUR dual price', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables dual price showing for migrating to EUR.', 'bulgarisation-for-woocommerce' ) ),
 			),
 			'checkout' => array(
-				new Fields\TrueFalse_Field( 'alternative_shipping_table', __( 'Alternative shipping options layout ( checkout )', 'woo-bg' ), null, null, __( 'Make shipping options on 2 rows and full width in the checkout table.', 'woo-bg' ) ),
+				new Fields\TrueFalse_Field( 'alternative_shipping_table', __( 'Alternative shipping options layout ( checkout )', 'bulgarisation-for-woocommerce' ), null, null, __( 'Make shipping options on 2 rows and full width in the checkout table.', 'bulgarisation-for-woocommerce' ) ),
 			)
 		) );
 
@@ -68,10 +68,10 @@ class Settings_Tab extends Base_Tab {
 	public function get_groups_titles() {
 		$titles = apply_filters( 'woo_bg/admin/settings/groups_titles', array(
 			'apis' => array(
-				'title' => __( 'Main functionalities', 'woo-bg' ),
+				'title' => __( 'Main functionalities', 'bulgarisation-for-woocommerce' ),
 			),
 			'checkout' => array(
-				'title' => __( 'Checkout Settings', 'woo-bg' ),
+				'title' => __( 'Checkout Settings', 'bulgarisation-for-woocommerce' ),
 			),
 		) );
 
@@ -102,7 +102,7 @@ class Settings_Tab extends Base_Tab {
 		wp_send_json_success( array(
 			'fields' => $tab->get_localized_fields(),
 			'groups_titles' => $tab->get_groups_titles(),
-			'message' => __( 'Settings saved successfully!', 'woo-bg' ),
+			'message' => __( 'Settings saved successfully!', 'bulgarisation-for-woocommerce' ),
 			'auth_errors' => $tab->auth_test(),
 		) );
 
