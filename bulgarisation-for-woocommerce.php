@@ -13,10 +13,9 @@ Text Domain:  bulgarisation-for-woocommerce
 License:      GPLv3 or later
 */
 
+defined( 'ABSPATH' ) || exit;
 define( 'WOO_BG_PHP_MINIMUM_VERSION', '7.4' );
 define( 'WOO_BG_WP_MINIMUM_VERSION', '4.8' );
-
-defined( 'ABSPATH' ) || exit;
 
 // Start the plugin
 add_action( 'plugins_loaded', 'woo_bg_init', 1, 0 );

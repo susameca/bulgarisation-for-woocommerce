@@ -44,7 +44,7 @@ class Admin_Menus {
 			__( 'Bulgarisation', 'bulgarisation-for-woocommerce' ), 
 			__( 'Bulgarisation', 'bulgarisation-for-woocommerce' ), 
 			'edit_others_shop_orders', 
-			'bulgarisation-for-woocommerce', 
+			'woo-bg', 
 			array( __CLASS__, 'settings_page_init' ) 
 		);
 	}

@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <p>
 	<?php if ( !empty( $data[ 'number' ] ) && is_array( $data ) ): ?>
 		<a target="_blank" href="<?php echo $data['link'] ?>">

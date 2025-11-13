@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-01 14:13+0000\n"
+"POT-Creation-Date: 2025-11-13 20:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -54,7 +54,7 @@ msgid_plural "%s orders documents were regenerated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/Shipping/Register.php:178 app/Shipping/Register.php:186
+#: app/Shipping/Register.php:179 app/Shipping/Register.php:187
 #, php-format
 msgid "%s: <span class=\"woocommerce-Price-amount\">%s</span>"
 msgstr ""
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Allow shipping to Greece and Romania for Econt and Speedy."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:53
+#: app/Admin/Tabs/Settings_Tab.php:54
 msgid "Alternative shipping options layout ( checkout )"
 msgstr ""
 
@@ -191,11 +191,11 @@ msgstr ""
 msgid "Billing Country"
 msgstr ""
 
-#: app/Invoice/PDF/view.php:78
+#: app/Invoice/PDF/view.php:81
 msgid "Billing from"
 msgstr ""
 
-#: app/Invoice/PDF/view.php:79
+#: app/Invoice/PDF/view.php:82
 msgid "Billing to"
 msgstr ""
 
@@ -230,11 +230,11 @@ msgstr ""
 msgid "Bulgarisation for WooCommerce"
 msgstr ""
 
-#: bulgarisation-for-woocommerce.php:47
+#: bulgarisation-for-woocommerce.php:46
 msgid "Bulgarisation for WooCommerce - Please enable WooCommerce first."
 msgstr ""
 
-#: app/Plugin.php:71
+#: app/Plugin.php:67
 #, php-format
 msgid ""
 "Bulgarisation for WooCommerce - Please review the options and save them "
@@ -317,7 +317,7 @@ msgstr ""
 msgid "Checkout Message"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:74
+#: app/Admin/Tabs/Settings_Tab.php:75
 msgid "Checkout Settings"
 msgstr ""
 
@@ -353,6 +353,10 @@ msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:74
 msgid "Client Secret"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:51
+msgid "Collection non-sensitive data"
 msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:126
@@ -813,8 +817,8 @@ msgstr ""
 msgid "Found: %s"
 msgstr ""
 
-#: app/Shipping/Register.php:161 app/Shipping/Register.php:162
-#: app/Shipping/Register.php:178
+#: app/Shipping/Register.php:162 app/Shipping/Register.php:163
+#: app/Shipping/Register.php:179
 msgid "Free shipping"
 msgstr ""
 
@@ -859,7 +863,7 @@ msgid "Generate Invoice"
 msgstr ""
 
 #: app/Admin/BoxNow.php:125 app/Admin/CVC.php:124 app/Admin/Econt.php:124
-#: app/Admin/Speedy.php:127 app/Admin/fragments/label-column.php:20
+#: app/Admin/Speedy.php:127 app/Admin/fragments/label-column.php:21
 msgid "Generate label"
 msgstr ""
 
@@ -1081,11 +1085,11 @@ msgstr ""
 msgid "Main Company Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:71
+#: app/Admin/Tabs/Settings_Tab.php:72
 msgid "Main functionalities"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:53
+#: app/Admin/Tabs/Settings_Tab.php:54
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr ""
 
@@ -1199,7 +1203,7 @@ msgstr ""
 msgid "Nonce was not provided!"
 msgstr ""
 
-#: app/Shipping/Register.php:164 app/Shipping/Register.php:186
+#: app/Shipping/Register.php:165 app/Shipping/Register.php:187
 msgid "Not calculated"
 msgstr ""
 
@@ -1289,7 +1293,7 @@ msgstr ""
 msgid "Packing list or invoice number"
 msgstr ""
 
-#: app/Invoice/PDF/view.php:174
+#: app/Invoice/PDF/view.php:177
 #, php-format
 msgid "Page %s of %s"
 msgstr ""
@@ -1376,7 +1380,7 @@ msgstr ""
 msgid "Please enter a city."
 msgstr ""
 
-#: bulgarisation-for-woocommerce.php:58
+#: bulgarisation-for-woocommerce.php:57
 msgid ""
 "Please run `composer install` in the plugin folder `bulgarisation-for-"
 "woocommerce`"
@@ -1646,6 +1650,12 @@ msgstr ""
 msgid "Send to"
 msgstr ""
 
+#: app/Admin/Tabs/Settings_Tab.php:51
+msgid ""
+"Send us non-sensitive data to improve user experience. This data include all "
+"of the above options ( what is enabled/disabled )"
+msgstr ""
+
 #: app/Admin/CVC.php:143 app/Admin/Econt.php:143 app/Admin/Speedy.php:146
 msgid "Sender"
 msgstr ""
@@ -1654,11 +1664,11 @@ msgstr ""
 msgid "Sender payment type"
 msgstr ""
 
-#: app/Plugin.php:71 app/Plugin.php:189 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:67 app/Plugin.php:185 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:145 app/Admin/Tabs/Settings_Tab.php:105
+#: app/Admin/Tabs/Pro_Tab.php:145 app/Admin/Tabs/Settings_Tab.php:106
 msgid "Settings saved successfully!"
 msgstr ""
 
@@ -2049,8 +2059,12 @@ msgstr ""
 msgid "Woo BG - Speedy"
 msgstr ""
 
+#: app/Admin/Admin_Menus.php:84
+msgid "WooCommerce"
+msgstr ""
+
 #. %1$s is minimum php version and %2$s is minimum WP version
-#: bulgarisation-for-woocommerce.php:38
+#: bulgarisation-for-woocommerce.php:37
 #, php-format
 msgid ""
 "WooCommerce - Bulgarisation requires PHP version %1$s+ and WP version %2$s+, "

@@ -44,6 +44,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 *   За да използвате методи на доставка с Еконт/BOX NOW/CVC/Спиди, трябва да включите опцията в главните настройки на плъгина. След запазване и презареждане на страницата ще се появи нов таб с настройките за Еконт/BOX NOW/CVC/Спиди. След това добавете желаните методи за доставка ( за адрес и офис трябва да имате 2 метода за доставка ) в зоните за доставка - WooCommerce >> Настройки >> Доставка >> Зони за доставка.
 
 [Facebook група](https://www.facebook.com/groups/bulgarisationforwoocommerce/)
+[GitHub](https://github.com/susameca/bulgarisation-for-woocommerce) хранилището на плъгина където можете да допринесете към развитието на плъгина.
 
 == Frequently Asked Questions ==
 

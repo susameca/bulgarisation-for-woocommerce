@@ -11,13 +11,6 @@ class Stats {
 	function __construct() {
 		add_action( 'wp', array( __CLASS__, 'cron_schedule' )  );
 		add_action( 'woo_bg/submit_stats', array( __CLASS__, 'submit_stats' ) );
-
-		if ( 
-			class_exists( 'Woo_BG_Pro\License' ) &&
-			get_transient( \Woo_BG_Pro\License::$transient ) === false
-		) {
-			self::submit_stats();
-		}
 	}
 
 	public static function cron_schedule() {
@@ -26,10 +19,10 @@ class Stats {
 		}
 	}
 
-	public static function submit_stats() {
+	public static function get_args() {
 		$container = woo_bg()->container();
 		
-		$args = [
+		$args = apply_filters( 'woo_bg/stats/args', [
 			'site_url' => esc_url( home_url( '/' ) ),
 			'has_pro' => woo_bg_is_pro_activated(),
 			'has_econt' => ( woo_bg_get_option( 'apis', 'enable_econt' ) === 'yes' ),
@@ -40,35 +33,18 @@ class Stats {
 			'has_nekorekten' => ( woo_bg_get_option( 'apis', 'enable_nekorekten' ) === 'yes' ),
 			'has_nra' => ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' && woo_bg_get_option( 'invoice', 'nra_n18' ) === 'yes' ),
 			'version' => Plugin::VERSION,
-		];
-		
-		if ( woo_bg_is_pro_activated() ) {
-			$args['license_key'] = woo_bg_get_option( 'pro', 'license_key' );
+		] );
 
-			if ( 
-				isset( woo_bg()->container()[ 'pro_plugin_dir' ] ) && 
-				file_exists( woo_bg()->container()[ 'pro_plugin_dir' ] . "app/License.php" ) 
-			) {
-				$args['pro_license_file_hash'] = hash_file( 'sha256', woo_bg()->container()[ 'pro_plugin_dir' ] . "app/License.php" );
-			}
+		return $args;
+	}
+
+	public static function submit_stats() {
+		if ( woo_bg_get_option( 'apis', 'enable_stats' ) !== 'yes' ) {
+			return;
 		}
 
-		$response = json_decode( wp_remote_retrieve_body( wp_remote_post( self::SERVER_URL . 'wp-json/woo-bg/v1/activity/', [
-			'body' => $args,
-		] ) ), 1 );
-
-		if ( isset( $response['is_pro_active'] ) && class_exists( '\Woo_BG_Pro\License' ) ) {
-			set_transient( \Woo_BG_Pro\License::$transient, $response['is_pro_active'], WEEK_IN_SECONDS * 2 );
-		}
-
-		if (
-			class_exists( '\Woo_BG_Pro\License' ) &&
-			(
-				( isset( $response['delete_pro'] ) && wc_string_to_bool( $response['delete_pro'] ) ) ||
-				!( isset( $response['valid_hash'] ) && wc_string_to_bool( $response['valid_hash'] ) )
-			)
-		) {
-			Plugin::delete_pro();
-		}
+		wp_remote_post( self::SERVER_URL . 'wp-json/woo-bg/v1/activity/', [
+			'body' => self::get_args(),
+		] );
 	}
 }

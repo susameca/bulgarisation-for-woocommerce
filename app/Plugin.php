@@ -39,10 +39,6 @@ class Plugin {
 
 		new Cron\Stats();
 
-		if ( woo_bg_is_pro_activated() ) {
-			add_action( 'woo_bg/init', array( $this, 'validate_pro' ), PHP_INT_MAX );
-		}
-
 		add_filter( 'plugin_action_links_' . plugin_basename( woo_bg()->plugin_dir_path() . 'woocommerce-bulgarisation.php' ), array( __CLASS__, 'plugin_action_links' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
@@ -255,45 +251,5 @@ class Plugin {
 		$args[ 'post_mime_type' ] = $accepted_mimes;
 
 		return $args;
-	}
-
-	public function validate_pro() {
-		if ( 
-			! ( file_exists( $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) && hash_file( 'sha256', $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'b8119085f703e59fcab82939c97e0ff5b014f6d88b91731a9689054a689807f3' ) || 
-			! ( class_exists( 'Woo_BG_Pro\License' ) && \Woo_BG_Pro\License::is_valid() )
-		) {
-			remove_filter( 'woocommerce_after_shipping_rate', 'Woo_BG_Pro\Shipping\CityStateField::pro_checkout', 15 );
-			remove_filter( 'woocommerce_locate_template', 'Woo_BG_Pro\Shipping\CheckoutLayout::change_cart_template', 999999 );
-			remove_action( 'wp_enqueue_scripts', 'Woo_BG_Pro\Assets::styles_and_js' );
-		}
-
-		$valid_pro_license_file_hash = null;
-
-		if (
-			isset( $this->container()[ 'pro_plugin_dir' ] ) && 
-			file_exists( $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) 
-		) {
-			$valid_pro_license_file_hash = hash_file( 'sha256', $this->container()[ 'pro_plugin_dir' ] . "app/License.php" ) === 'b8119085f703e59fcab82939c97e0ff5b014f6d88b91731a9689054a689807f3';
-		}
-
-		if ( !$valid_pro_license_file_hash ) {
-			self::delete_pro();
-		}
-	}
-
-	public static function delete_pro() {
-		global $wp_filesystem;
-
-		if ( ! $wp_filesystem ) {
-			require_once( ABSPATH . 'wp-admin/includes/file.php' );
-			WP_Filesystem();
-		}
-
-		if ( file_exists( woo_bg()->container()[ 'pro_plugin_dir' ] ) ) {
-			$wp_filesystem->delete( woo_bg()->container()[ 'pro_plugin_dir' ], true );
-		} else if ( $pro_class_file = new \ReflectionClass('Woo_BG_Pro\Checkout') ) {
-			$file_path_info = pathinfo( $pro_class_file->getFileName() );
-			$wp_filesystem->delete( $file_path_info['dirname'] . '/../', true );
-		}
 	}
 }

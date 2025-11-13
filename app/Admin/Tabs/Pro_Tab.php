@@ -150,10 +150,8 @@ class Pro_Tab extends Base_Tab {
 	}
 
 	public function auth_test() {
-		\Woo_BG\Cron\Stats::submit_stats();
-
-		if ( woo_bg_is_pro_activated() && !\Woo_BG_Pro\License::is_valid() ) {
-			return wpautop( __( 'License is invalid!', 'bulgarisation-for-woocommerce' ) );
-		}
+		ob_start();
+		do_action('woo_bg/auth_test');
+		return ob_get_clean();
 	}
 }

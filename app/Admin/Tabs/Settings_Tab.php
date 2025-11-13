@@ -48,6 +48,7 @@ class Settings_Tab extends Base_Tab {
 				new Fields\TrueFalse_Field( 'enable_cvc', __( 'Enable CVC Delivery? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables CVC Shipping methods.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'enable_nekorekten', __( 'Enable nekorekten.com API? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'If yes, you will receive information about the customer from nekorekten.com.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'enable_multi_currency', __( 'Enable BGN/EUR dual price', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables dual price showing for migrating to EUR.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'enable_stats', __( 'Collection non-sensitive data', 'bulgarisation-for-woocommerce' ), null, null, __( 'Send us non-sensitive data to improve user experience. This data include all of the above options ( what is enabled/disabled )', 'bulgarisation-for-woocommerce' ) ),
 			),
 			'checkout' => array(
 				new Fields\TrueFalse_Field( 'alternative_shipping_table', __( 'Alternative shipping options layout ( checkout )', 'bulgarisation-for-woocommerce' ), null, null, __( 'Make shipping options on 2 rows and full width in the checkout table.', 'bulgarisation-for-woocommerce' ) ),
