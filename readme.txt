@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.8
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.5.0
+Stable tag: 3.5.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,6 +82,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
   	- https://api.speedy.bg/
   	- https://services.speedy.bg/
   - BoxNow
+    - https://api.bulgarisation.bg/
   	- https://boxnow.bg/en/
   	- https://widget-v5.boxnow.bg/
   	- https://api-production.boxnow.bg/
