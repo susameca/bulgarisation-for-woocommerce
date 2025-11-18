@@ -295,6 +295,6 @@ class BaseDocument {
 			return;
 		}
 
-		echo $logo;
+		echo wp_kses_post( $logo );
 	}
 }

@@ -22,7 +22,7 @@ class Multi_Currency_Tab extends Base_Tab {
 		woo_bg_support_text();
 		?>
 
-		<div class="notice"><p><?php _e( 'Please use "Classic Checkout" and "Classic Cart" blocks or [woocommerce_checkout] and [woocommerce_cart] shortcodes.', 'bulgarisation-for-woocommerce' ) ?></p></div>
+		<div class="notice"><p><?php esc_html_e( 'Please use "Classic Checkout" and "Classic Cart" blocks or [woocommerce_checkout] and [woocommerce_cart] shortcodes.', 'bulgarisation-for-woocommerce' ) ?></p></div>
 
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
 
@@ -58,7 +58,7 @@ class Multi_Currency_Tab extends Base_Tab {
 				</div><!-- /.progress -->
 
 				<div class="messages">
-					<p><?php _e( 'Loading products...', 'bulgarisation-for-woocommerce' ) ?></p>
+					<p><?php esc_html_e( 'Loading products...', 'bulgarisation-for-woocommerce' ) ?></p>
 				</div>
 			</div>
 		</div><!-- /.wrap -->

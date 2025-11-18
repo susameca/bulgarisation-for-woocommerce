@@ -134,10 +134,10 @@ class EU_Vat {
 			return true;
 		}
 
-		$vat_prefix     = self::get_vat_number_prefix( $country );
+		$vat_prefix = self::get_vat_number_prefix( $country );
 		$vat_number = str_replace( array( ' ', '.', '-', ',', ', ' ), '', trim( $vat_number ) );
 		$vat_number = str_replace( $vat_prefix, '', $vat_number );
-		$transient_name = 'vat_number_' . $vat_prefix . $vat_number;
+		$transient_name = 'woo_bg_vat_number_' . $vat_prefix . $vat_number;
 		$cached_result  = get_transient( $transient_name );
 
 		if ( ! empty( $cached_result ) ) {
@@ -207,10 +207,10 @@ class EU_Vat {
 	public static function process_checkout() {
 		self::reset();
 
-		$billing_country  = wc_clean( $_POST['billing_country'] );
-		$shipping_country = wc_clean( ! empty( $_POST['shipping_country'] ) && ! empty( $_POST['ship_to_different_address'] ) ? $_POST['shipping_country'] : $_POST['billing_country'] );
+		$billing_country  = sanitize_text_field( $_POST['billing_country'] );
+		$shipping_country = sanitize_text_field( ! empty( $_POST['shipping_country'] ) && ! empty( $_POST['ship_to_different_address'] ) ? sanitize_text_field( $_POST['shipping_country'] ) : sanitize_text_field( $_POST['billing_country'] ) );
 
-		self::validate( wc_clean( $_POST['billing_vat_number'] ), $billing_country );
+		self::validate( sanitize_text_field( $_POST['billing_vat_number'] ), $billing_country );
 
 		if ( woo_bg_get_option('invoice', 'enable_vies' ) !== 'no' && !empty( $_POST[ 'billing_to_company' ] ) ) {
 			if ( false === self::$data['validation']['valid'] && isset( $_REQUEST[ 'billing_to_company' ] ) && sanitize_text_field( $_REQUEST[ 'billing_to_company' ] ) ) {
@@ -237,9 +237,9 @@ class EU_Vat {
 
 		if ( woo_bg_get_option('invoice', 'enable_vies' ) !== 'no' ) {
 			if ( in_array( $form_data['billing_country'], self::get_eu_countries() ) && ! empty( $form_data['billing_vat_number'] ) ) {
-				$shipping_country = wc_clean( ! empty( $form_data['shipping_country'] ) && ! empty( $form_data['ship_to_different_address'] ) ? $form_data['shipping_country'] : $form_data['billing_country'] );
+				$shipping_country = sanitize_text_field( ! empty( $form_data['shipping_country'] ) && ! empty( $form_data['ship_to_different_address'] ) ? $form_data['shipping_country'] : $form_data['billing_country'] );
 
-				self::validate( wc_clean( $form_data['billing_vat_number'] ), $form_data['billing_country'] );
+				self::validate( sanitize_text_field( $form_data['billing_vat_number'] ), $form_data['billing_country'] );
 
 				if ( true === (bool) self::$data['validation']['valid'] ) {
 					self::maybe_set_vat_exempt( true, $form_data['billing_country'], $shipping_country );

@@ -192,7 +192,14 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	public static function get_cookie_data() {
-		return ( isset( $_COOKIE[ 'woo-bg--econt-address' ] ) ) ? json_decode( stripslashes( urldecode( $_COOKIE[ 'woo-bg--econt-address' ] ) ), 1 ) : '';
+		$cookie_data = '';
+
+		if (  isset( $_COOKIE[ 'woo-bg--econt-address' ] ) ) {
+			$cookie_data = json_decode( stripslashes( urldecode( $_COOKIE[ 'woo-bg--econt-address' ] ) ), 1 );
+			$cookie_data = map_deep( $cookie_data, 'sanitize_text_field' );
+		}
+		
+		return $cookie_data;
 	}
 
 	public function calculate_shipping_price_from_api() {

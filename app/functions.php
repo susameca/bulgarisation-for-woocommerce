@@ -380,7 +380,7 @@ function woo_bg_format_phone( $phone, $country = 'BG' ) {
 function woo_bg_check_admin_label_actions() {
 	$errors = [];
 		
-	if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'woo_bg_admin_label' ) ) {
+	if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash ( $_REQUEST['nonce'] ) ), 'woo_bg_admin_label' ) ) {
 		$errors[] = __( 'Nonce was not provided!', 'bulgarisation-for-woocommerce' );
 	}
 

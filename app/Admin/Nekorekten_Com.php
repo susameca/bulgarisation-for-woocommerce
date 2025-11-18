@@ -43,7 +43,9 @@ class Nekorekten_Com {
 				<i class="woo-bg-icon woo-bg-icon--alert"></i>
 				
 				<a href="#woo_bg_nekorekten_reports">
-					 <?php _e( 'We have found negative reports about this customer. <br> Click for more information.', 'bulgarisation-for-woocommerce' ) ?>
+					<?php esc_html_e( 'We have found negative reports about this customer.', 'bulgarisation-for-woocommerce');?>
+					  <br> 
+					<?php esc_html_e( 'Click for more information.', 'bulgarisation-for-woocommerce' ) ?>
 				</a>
 			</p>
 			<?php
@@ -317,28 +319,28 @@ class Nekorekten_Com {
 							<label>
 								<?php esc_html_e('First Name:', 'bulgarisation-for-woocommerce') ?>
 
-								<input type="text" name="first_name" required value="<?php echo $order->get_billing_first_name() ?>">
+								<input type="text" name="first_name" required value="<?php echo esc_attr( $order->get_billing_first_name() ) ?>">
 							</label> 
 						</p> 
 						<p class="form-field" style="float: right; clear: none;">
 							<label>
 								<?php esc_html_e('Last Name:', 'bulgarisation-for-woocommerce') ?>
 
-								<input type="text" name="last_name" required value="<?php echo $order->get_billing_last_name() ?>">
+								<input type="text" name="last_name" required value="<?php echo esc_attr( $order->get_billing_last_name() ) ?>">
 							</label> 
 						</p>
 						<p class="form-field" style="clear: none;">
 							<label>
 								<?php esc_html_e('Phone:', 'bulgarisation-for-woocommerce') ?>
 
-								<input type="text" name="phone" required value="<?php echo $order->get_billing_phone() ?>">
+								<input type="text" name="phone" required value="<?php echo esc_attr( $order->get_billing_phone() ) ?>">
 							</label> 
 						</p>
 						<p class="form-field" style="float: right; clear: none;">
 							<label> 
 								<?php esc_html_e('E-mail:', 'bulgarisation-for-woocommerce') ?>
 
-								<input type="text" name="email" value="<?php echo $order->get_billing_email() ?>">
+								<input type="text" name="email" value="<?php echo sanitize_email( $order->get_billing_email() ) ?>">
 							</label> 
 						</p>
 
@@ -364,7 +366,7 @@ class Nekorekten_Com {
 	}
 
 	public static function submit_callback() {
-		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'woo_bg_nekorekten_submit' ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash ( $_REQUEST['_wpnonce'] ) ), 'woo_bg_nekorekten_submit' ) ) {
 			wp_send_json_error( [
 				'message' => __( 'Nonce was not provided!', 'bulgarisation-for-woocommerce' ),
 			] );

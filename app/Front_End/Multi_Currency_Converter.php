@@ -82,7 +82,7 @@ class Multi_Currency_Converter {
 	public static function verify_price_update() {
 		$errors = [];
 		
-		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'woo_bg_change_bgn_to_eur' ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash ( $_REQUEST['_wpnonce'] ) ), 'woo_bg_change_bgn_to_eur' ) ) {
 			$errors[] = __( 'Nonce was not provided!', 'bulgarisation-for-woocommerce' );
 		}
 

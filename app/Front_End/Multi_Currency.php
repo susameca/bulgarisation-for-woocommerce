@@ -94,19 +94,19 @@ class Multi_Currency {
 	public static function rate_message() {
 		$html = '<span class="rate_cart_page">' . __( 'Rate: 1 EUR = 1.95583 BGN', 'bulgarisation-for-woocommerce' ) . '</span>';
 
-		echo apply_filters( 'woo_bg/bgn_eur/rate_message', $html );
+		echo wp_kses_post( apply_filters( 'woo_bg/bgn_eur/rate_message', $html ) );
 	}
 
 	public static function rate_message_product() {
 		$html = '<span class="rate_cart_page">' . __( 'Rate: 1 EUR = 1.95583 BGN', 'bulgarisation-for-woocommerce' ) . '</span>';
 
-		echo apply_filters( 'woo_bg/bgn_eur/rate_message_product', $html );
+		echo wp_kses_post( apply_filters( 'woo_bg/bgn_eur/rate_message_product', $html ) );
 	}
 
 	public static function checkout_message() {
 		$html = '<div class="foreign-currency-checkout woocommerce-info">' . woo_bg_get_option( 'multi_currency', 'checkout_message' ) . '</div>';
 
-		echo apply_filters( 'woo_bg/bgn_eur/checkout_message', $html );
+		echo wp_kses_post( apply_filters( 'woo_bg/bgn_eur/checkout_message', $html ) );
 	}
 
 	public static function add_rate_row_email( $total_rows, $myorder_obj ) {

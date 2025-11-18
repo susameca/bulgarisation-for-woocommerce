@@ -761,7 +761,7 @@ class Speedy {
 	}
 
 	protected static function update_dimentions( $label, $order ) {
-		$new_dimentions = wc_clean( $_REQUEST['dimentions'] );
+		$dimentions = map_deep( $_REQUEST['dimentions'], 'sanitize_text_field' );
 		$current_dimentions = [];
 
 		foreach ( $new_dimentions as $type => $value ) {

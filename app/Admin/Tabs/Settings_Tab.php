@@ -80,7 +80,7 @@ class Settings_Tab extends Base_Tab {
 	}
 
 	public static function woo_bg_save_settings_callback() {
-		if ( !wp_verify_nonce( $_REQUEST['nonce'], 'woo_bg_settings' ) ) {
+		if ( !wp_verify_nonce( sanitize_text_field( wp_unslash ( $_REQUEST['nonce'] ) ), 'woo_bg_settings' ) ) {
 			wp_send_json_error();
 			wp_die();
 		}
