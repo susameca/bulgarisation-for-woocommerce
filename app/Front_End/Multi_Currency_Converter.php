@@ -14,7 +14,7 @@ class Multi_Currency_Converter {
 			'stats' => self::get_page_stats(),
 			'action' => 'woo_bg_change_bgn_to_eur',
 			'data' => [
-				'_wpnonce' => $_REQUEST['_wpnonce'],
+				'_wpnonce' => sanitize_text_field( $_REQUEST['_wpnonce'] ),
 			],
 		];
 

@@ -108,7 +108,7 @@ class Export_Tab extends Base_Tab {
 		if ( !empty( $generated_file['errors'] ) ) {
 			ob_start();
 			?>
-			<h2><?php _e( 'Found errors in file:', 'bulgarisation-for-woocommerce' ) ?></h2>
+			<h2><?php esc_html_e( 'Found errors in file:', 'bulgarisation-for-woocommerce' ) ?></h2>
 			<ul>
 				<?php foreach ( $generated_file['errors'] as $error ): ?>
 					<li><?php echo $error ?></li>

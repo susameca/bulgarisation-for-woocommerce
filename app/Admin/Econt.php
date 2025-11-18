@@ -267,8 +267,8 @@ class Econt {
 		woo_bg_check_admin_label_actions();
 
 		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
-		$shipment_status = $_REQUEST['shipmentStatus'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
+		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
 		$order = wc_get_order( $order_id );
 
 		if ( isset( $shipment_status['label']['shipmentNumber'] ) ) {
@@ -290,9 +290,9 @@ class Econt {
 		woo_bg_check_admin_label_actions();
 		
 		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
 		$order = wc_get_order( $order_id );
-		$shipment_status = $_REQUEST['shipmentStatus'];
+		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
 		$data = array();
 		$order_shipment_status = $order->get_meta( 'woo_bg_econt_shipment_status' );
 
@@ -315,8 +315,8 @@ class Econt {
 	public static function generate_label() {
 		woo_bg_check_admin_label_actions();
 
-		$order_id = $_REQUEST['orderId'];
-		$label = $_REQUEST['label_data'];
+		$order_id = $order_id = sanitize_text_field( $_REQUEST['orderId'] );
+		$label = map_deep( $_REQUEST['label_data'], 'sanitize_text_field' );
 
 		$label = self::update_sender( $label );
 		$label = self::update_receiver_address( $label );
@@ -397,16 +397,19 @@ class Econt {
 			$label['senderOfficeCode'] = str_replace( 'officeID-', '', $office );
 		}
 
-		if ( isset( $_REQUEST['send_from'] ) && isset( $_REQUEST['send_from_type'] ) ) {
-			switch ( $_REQUEST['send_from_type'] ) {
+		$new_send_from = map_deep( $_REQUEST['send_from'], 'sanitize_text_field' );
+		$new_send_from_type = sanitize_text_field( $_REQUEST['send_from_type'] );
+
+		if ( !empty( $new_send_from ) && !empty( $new_send_from_type ) ) {
+			switch ( $new_send_from_type ) {
 				case 'address':
 					$profile_addresses = $container[ Client::ECONT_PROFILE ]->get_profile_data()['addresses'];
 
-					$label['senderAddress'] = $profile_addresses[ $_REQUEST['send_from'] ];
+					$label['senderAddress'] = $profile_addresses[ $new_send_from ];
 					unset( $label['senderOfficeCode'] );
 					break;
 				case 'office':
-					$label['senderOfficeCode'] = str_replace( 'officeID-', '', $_REQUEST['send_from'] );
+					$label['senderOfficeCode'] = str_replace( 'officeID-', '', $new_send_from );
 					break;
 			}
 		}
@@ -431,10 +434,10 @@ class Econt {
 
 	protected static function update_receiver_address( $label ) {
 		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
 		$order = wc_get_order( $order_id );
-		$type = $_REQUEST['type'];
-		$cookie_data = $_REQUEST['cookie_data'];
+		$type = map_deep( $_REQUEST['type'], 'sanitize_text_field' );
+		$cookie_data = map_deep( $_REQUEST['cookie_data'], 'sanitize_text_field' );
 		$cookie_data['type'] = $type['id'];
 		$country = ( $order->get_shipping_country() ) ? $order->get_shipping_country() : $order->get_billing_country();
 
@@ -443,14 +446,14 @@ class Econt {
 
 		if ( $type['id'] === 'office' ) {
 			$label[ 'receiverDeliveryType' ] = 'office';
-			$office = $_REQUEST['office'];
+			$office = map_deep( $_REQUEST['office'], 'sanitize_text_field' );
 			$label['receiverOfficeCode'] = $office['code'];
 			$cookie_data['selectedOffice'] = $office['code'];
 		} else {
 			$label[ 'receiverDeliveryType' ] = 'door';
-			$cookie_data['selectedAddress'] = $_REQUEST['street'];
-			$cookie_data['streetNumber'] = $_REQUEST['streetNumber'];
-			$cookie_data['other'] = $_REQUEST['other'];
+			$cookie_data['selectedAddress'] = map_deep( $_REQUEST['street'], 'sanitize_text_field' );
+			$cookie_data['streetNumber'] = sanitize_text_field( $_REQUEST['streetNumber'] );
+			$cookie_data['other'] = sanitize_text_field( $_REQUEST['other'] );
 
 			$states = $container[ Client::ECONT_CITIES ]->get_regions( $country );
 			$state = $states[ $cookie_data['state'] ];
@@ -603,7 +606,7 @@ class Econt {
 	}
 
 	protected static function update_payment_by( $label, $order_id ) {
-		$payment_by = $_REQUEST['paymentBy'];
+		$payment_by = map_deep( $_REQUEST['paymentBy'], 'sanitize_text_field' );
 		$fixed_price = ( isset( $label['paymentReceiverAmount'] ) ) ? $label['paymentReceiverAmount'] : 0;
 		$sender_method = woo_bg()->container()[ Client::ECONT_PROFILE ]->get_sender_payment_method();
 
@@ -629,7 +632,7 @@ class Econt {
 	}
 
 	protected static function update_test_options( $label ) {
-		$payment_by = $_REQUEST['testOption'];
+		$payment_by = map_deep( $_REQUEST['testOption'], 'sanitize_text_field' );
 		$label['payAfterAccept'] = false;
 		$label['payAfterTest'] = false;
 
@@ -643,7 +646,7 @@ class Econt {
 			$label['payAfterAccept'] = true;
 			$label['payAfterTest'] = true;
 
-			if ( wc_string_to_bool( $_REQUEST['partialDelivery'] ) ) {
+			if ( wc_string_to_bool( sanitize_text_field( $_REQUEST['partialDelivery'] ) ) ) {
 				$label['partialDelivery'] = true;
 			}
 
@@ -653,7 +656,7 @@ class Econt {
 	}
 
 	protected static function update_shipment_type( $label ) {
-		$shipment_type = $_REQUEST['shipmentType'];
+		$shipment_type = map_deep( $_REQUEST['shipmentType'], 'sanitize_text_field' );
 		$label['shipmentType'] = strtolower( $shipment_type['id'] );
 		
 		return $label;
@@ -661,7 +664,7 @@ class Econt {
 
 	protected static function update_phone_and_names( $label, $order_id = null ) {
 		if ( !$order_id ) {
-			$order_id = $_REQUEST['orderId'];
+			$order_id = sanitize_text_field( $_REQUEST['orderId'] );
 		}
 
 		if ( !$order_id ) {
@@ -715,7 +718,7 @@ class Econt {
 		}
 
 		if ( $_REQUEST['declaredValue'] ) {
-			$label[ 'services' ]['declaredValueAmount'] = $_REQUEST['declaredValue'];
+			$label[ 'services' ]['declaredValueAmount'] = sanitize_text_field( $_REQUEST['declaredValue'] );
 			$label[ 'services' ]['declaredValueCurrency'] = 'BGN';
 		}
 
@@ -735,7 +738,9 @@ class Econt {
 			return;
 		}
 
-		if ( $payment_by = $_REQUEST['paymentBy'] ) {
+		$payment_by = map_deep( $_REQUEST['paymentBy'], 'sanitize_text_field' );
+
+		if ( !empty( $payment_by ) ) {
 			if ( $payment_by['id'] == 'buyer' ) {
 				$price = woo_bg_tax_based_price( $response['label']['receiverDueAmount'] );
 			} else if ( $payment_by['id'] == 'fixed' && !empty( $request_body['paymentReceiverAmount'] ) ) {

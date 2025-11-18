@@ -200,8 +200,8 @@ class CVC {
 		woo_bg_check_admin_label_actions();
 
 		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
-		$shipment_status = $_REQUEST['shipmentStatus'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
+		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
 		$order = wc_get_order( $order_id );
 		
 		$response = $container[ Client::CVC ]->api_call( $container[ Client::CVC ]::CANCEL_LABELS_ENDPOINT, array(
@@ -220,9 +220,9 @@ class CVC {
 		woo_bg_check_admin_label_actions();
 
 		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
+		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
 		$order = wc_get_order( $order_id );
-		$shipment_status = $_REQUEST['shipmentStatus'];
 
 		$response = $container[ Client::CVC ]->api_call( $container[ Client::CVC ]::ACTIONS_ENDPOINT, array(
 			'wb' => $shipment_status['wb'],
@@ -240,8 +240,8 @@ class CVC {
 	public static function generate_label() {
 		woo_bg_check_admin_label_actions();
 
-		$order_id = $_REQUEST['orderId'];
-		$label = $_REQUEST['label_data'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
+		$label = map_deep( $_REQUEST['label_data'], 'sanitize_text_field' );
 
 		$label = self::update_sender( $label );
 		$label = self::update_receiver_address( $label );
@@ -326,25 +326,27 @@ class CVC {
 
 	protected static function update_receiver_address( $label ) {
 		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
 		$order = wc_get_order( $order_id );
-		$type = $_REQUEST['type'];
-		$cookie_data = $_REQUEST['cookie_data'];
+		$type = sanitize_text_field( $_REQUEST['type'] );
+		$cookie_data = map_deep( $_REQUEST['cookie_data'], 'sanitize_text_field' );
 		$cookie_data['type'] = $type['id'];
 
 		$label = self::unset_rec_address_fields( $label );
 
 		if ( $type['id'] === 'address' ) {
-			if ( $_REQUEST['street']['type'] === 'streets' ) {
-				$label['rec']["street_id"] = str_replace('street-', '', $_REQUEST['street']['orig_key'] ); 
-				$label['rec']["num"] = $_REQUEST['streetNumber'];
-			} else if ( $_REQUEST['street']['type'] === 'quarters' ) {
-				$label['rec']["qt_id"] = str_replace('qtr-', '', $_REQUEST['street']['orig_key'] );
+			$street = map_deep( $_REQUEST['street'], 'sanitize_text_field' );
+			if ( $street['type'] === 'streets' ) {
+				$label['rec']["street_id"] = str_replace('street-', '', $street['orig_key'] ); 
+				$label['rec']["num"] = sanitize_text_field( $_REQUEST['streetNumber'] );
+			} else if ( $street['type'] === 'quarters' ) {
+				$label['rec']["qt_id"] = str_replace('qtr-', '', $street['orig_key'] );
 			}
 
 			$label = self::update_rec_other_fields( $label );
 		} else if ( $type['id'] === 'office' ) {
-			$label['rec']["office_id"] = $_REQUEST['office']['id'];
+			$office = map_deep( $_REQUEST['office'], 'sanitize_text_field' );
+			$label['rec']["office_id"] = $office['id'];
 		}
 
 		$order->update_meta_data( 'woo_bg_cvc_cookie_data', $cookie_data );
@@ -399,7 +401,7 @@ class CVC {
 
 	protected static function update_rec_other_fields( $label ) {
 		if ( !empty( $_REQUEST[ 'other' ] ) ) {
-			$parts = explode( ' ', $_REQUEST[ 'other' ] );
+			$other = sanitize_text_field( $_REQUEST[ 'other' ] );
 
 			$label['rec']["block"] = $parts[0];
 
@@ -426,7 +428,7 @@ class CVC {
 	}
 
 	protected static function update_payment_by( $label, $order_id ) {
-		$payment_by = $_REQUEST['paymentBy'];
+		$payment_by = sanitize_text_field( $_REQUEST['paymentBy'] );
 
 		if ( $payment_by['id'] === 'fixed'  ) {
 			$label['payer'] = 'sender';
@@ -444,7 +446,7 @@ class CVC {
 	}
 
 	protected static function update_test_options( $label ) {
-		$test_option = $_REQUEST['testOption']['id'];
+		$test_option = sanitize_text_field( $_REQUEST['testOption']['id'] );
 
 		if ( isset( $label['is_observe'] ) ) {
 			unset( $label['is_observe'] );
@@ -487,7 +489,7 @@ class CVC {
 	}
 
 	protected static function update_phone_and_names( $label ) {
-		$order = wc_get_order( $_REQUEST['orderId'] );
+		$order = wc_get_order( sanitize_text_field( $_REQUEST['orderId'] ) );
 		$phone = [];
 		$name = '';
 
@@ -510,8 +512,8 @@ class CVC {
 	}
 
 	protected static function update_os_value_and_cod( $label ) {
-		$cookie_data = $_REQUEST['cookie_data'];
-		$payment_by = $_REQUEST['paymentBy'];
+		$cookie_data = map_deep( $_REQUEST['cookie_data'], 'sanitize_text_field' );
+		$payment_by = map_deep( $_REQUEST['paymentBy'], 'sanitize_text_field' );
 
 		if ( isset( $label['cod_amount'] ) ) {
 			if ( !$label['cod_amount'] ) {
@@ -531,7 +533,7 @@ class CVC {
 		}
 
 		if ( $_REQUEST['declaredValue'] ) {
-			$label[ 'os_value' ] = $_REQUEST['declaredValue'];
+			$label[ 'os_value' ] = sanitize_text_field( $_REQUEST['declaredValue'] );
 		}
 
 		return $label;
@@ -550,7 +552,7 @@ class CVC {
 		}
 
 		if ( $payment_by = $_REQUEST['paymentBy'] ) {
-			$cookie_data = $_REQUEST['cookie_data'];
+			$cookie_data = map_deep( $_REQUEST['cookie_data'], 'sanitize_text_field' );
 
 			if ( $payment_by['id'] == 'rec' ) {
 				$price = ( wc_tax_enabled() ) ? $response['price'] : $response['price_with_vat'];

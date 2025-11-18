@@ -216,7 +216,7 @@ class BoxNow {
 		$box_size = ( woo_bg_get_option( 'boxnow_price', 'box_size' ) ) ? woo_bg_get_option( 'boxnow_price', 'box_size' ) : 'auto';
 
 		if ( !empty( $_REQUEST['boxSize'] ) ) {
-			$box_size = $_REQUEST['boxSize']['id'];
+			$box_size = sanitize_text_field( $_REQUEST['boxSize']['id'] );
 		}
 
 		return $box_size;
@@ -341,7 +341,7 @@ class BoxNow {
 			woo_bg_check_admin_label_actions();
 		}
 
-		$order_id = ( isset( $_REQUEST['orderId'] ) ) ? $_REQUEST['orderId'] : $order_id;
+		$order_id = ( isset( $_REQUEST['orderId'] ) ) ? sanitize_text_field( $_REQUEST['orderId'] ) : $order_id;
 
 		if ( !$order_id ) {
 			return;
@@ -351,16 +351,16 @@ class BoxNow {
 		$label_data = self::generate_label_data( $order->get_id() );
 
 		if ( isset( $_REQUEST['origin'] ) ) {
-			$label_data['origin']['locationId'] = $_REQUEST['origin']['id'];
+			$label_data['origin']['locationId'] = sanitize_text_field( $_REQUEST['origin']['id'] );
 		}
 
 		if ( isset( $_REQUEST['destination'] ) ) {
-			$label_data['destination']['locationId'] = $_REQUEST['destination']['id'];
+			$label_data['destination']['locationId'] = sanitize_text_field( $_REQUEST['destination']['id'] );
 		}
 
 		if ( isset( $_REQUEST['declaredValue'] ) ) {
 			if ( $_REQUEST['declaredValue'] > 0  ) {
-				$total = number_format( $_REQUEST['declaredValue'], 2, '.', '' );
+				$total = number_format( sanitize_text_field( $_REQUEST['declaredValue'] ), 2, '.', '' );
 
 				$label_data[ 'paymentMode' ] = 'cod';
 				$label_data[ 'invoiceValue' ] = $total;
@@ -373,7 +373,7 @@ class BoxNow {
 		}
 
 		if ( isset( $_REQUEST[ 'allowReturn' ] ) ) {
-			$label_data['allowReturn'] = wc_string_to_bool( $_REQUEST[ 'allowReturn' ] );
+			$label_data['allowReturn'] = wc_string_to_bool( sanitize_text_field( $_REQUEST[ 'allowReturn' ] ) );
 		}
 
 		$data = self::send_label_to_boxnow( $label_data, $order );
@@ -390,8 +390,16 @@ class BoxNow {
 		$data = [];
 		$container = woo_bg()->container();
 		$request_body = apply_filters( 'woo_bg/boxnow/create_label', $label, $order );
+		$request = wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/boxnow/create_label/', [
+			'body' => [
+				'client' => esc_url( home_url( '/' ) ),
+				'env' => $container[ Client::BOXNOW ]->get_env(),
+				'access_token' => $container[ Client::BOXNOW ]->get_access_token(),
+				'request_body' => $request_body,
+			]
+		] );
 
-		$response = $container[ Client::BOXNOW ]->api_call( $container[ Client::BOXNOW ]::CREATE_LABELS_ENDPOINT, $request_body );
+		$response = json_decode( wp_remote_retrieve_body( $request ), 1 );
 
 		if ( isset( $response['message'] ) ) {
 			$data['message'] = $response['message'];
@@ -413,8 +421,8 @@ class BoxNow {
 		woo_bg_check_admin_label_actions();
 
 		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
-		$shipment_status = $_REQUEST['shipmentStatus'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
+		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
 		$order = wc_get_order( $order_id );
 		
 		foreach ( $shipment_status['parcels'] as $parcel ) {

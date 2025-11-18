@@ -24,7 +24,7 @@ class Company {
 			$fields['billing']['billing_company']['class'] = array( 'woo-bg-company-info form-row-last' );
 		} else {
 			$fields['billing']['billing_company'] = array(
-				'label' => __( 'Company name', 'woocommerce' ),
+				'label' => __( 'Company name', 'bulgarisation-for-woocommerce' ),
 				'autocomplete' => 'organization',
 				'priority' => 121,
 				'required' => true,
@@ -99,7 +99,7 @@ class Company {
 		);
 
 		$fields['company'] = array(
-			'label' => __( 'Company', 'woocommerce' ),
+			'label' => __( 'Company', 'bulgarisation-for-woocommerce' ),
 			'show'  => false,
 			'wrapper_class' => '_billing_address_2_field'
 		);

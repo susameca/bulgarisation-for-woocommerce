@@ -64,7 +64,7 @@ class Actions {
 	
 	public static function pdf_regeneration_bulk_action_admin_notices() {
 		if ( isset( $_REQUEST[ 'processed_count' ] ) ) {
-			$count = intval( $_REQUEST[ 'processed_count' ] );
+			$count = intval( sanitize_text_field( $_REQUEST[ 'processed_count' ] ) );
 
 			printf(
 				'<div id="message" class="updated fade">' . wp_kses_post( wpautop( _n( '%s order documents were regenerated.', '%s orders documents were regenerated.', $count, 'bulgarisation-for-woocommerce' ) ) ) . '</div>',

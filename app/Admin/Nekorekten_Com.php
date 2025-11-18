@@ -89,7 +89,7 @@ class Nekorekten_Com {
 		} 
 		?>
 		<div class="panel-wrap woocommerce">
-			<input name="post_title" type="hidden" value="<?php echo empty( $post->post_title ) ? esc_html__( 'Order', 'woocommerce' ) : esc_attr( $post->post_title ); ?>" />
+			<input name="post_title" type="hidden" value="<?php echo empty( $post->post_title ) ? esc_html__( 'Order', 'bulgarisation-for-woocommerce' ) : esc_attr( $post->post_title ); ?>" />
 			<input name="post_status" type="hidden" value="<?php echo esc_attr( $post->post_status ); ?>" />
 			<div id="order_data" class="panel woocommerce-order-data">
 				<a href="<?php echo esc_url( add_query_arg( 'woo-bg--nekorekten-refresh', true ) ) ?>"><?php esc_html_e( 'Refresh data', 'bulgarisation-for-woocommerce' ) ?></a>
@@ -310,33 +310,33 @@ class Nekorekten_Com {
 		<div id="order_data" class="panel woocommerce-order-data">
 			<div class="order_data_column_container">
 				<div class="order_data_column order_data_column--half">
-					<h3><?php _e( 'Submit Review', 'bulgarisation-for-woocommerce' ); ?></h3> 
+					<h3><?php esc_html_e( 'Submit Review', 'bulgarisation-for-woocommerce' ); ?></h3> 
 					<form></form>
 					<form class="ajax-container" action="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ) ?>">
 						<p class="form-field" style="clear: none;">
 							<label>
-								<?php _e('First Name:', 'bulgarisation-for-woocommerce') ?>
+								<?php esc_html_e('First Name:', 'bulgarisation-for-woocommerce') ?>
 
 								<input type="text" name="first_name" required value="<?php echo $order->get_billing_first_name() ?>">
 							</label> 
 						</p> 
 						<p class="form-field" style="float: right; clear: none;">
 							<label>
-								<?php _e('Last Name:', 'bulgarisation-for-woocommerce') ?>
+								<?php esc_html_e('Last Name:', 'bulgarisation-for-woocommerce') ?>
 
 								<input type="text" name="last_name" required value="<?php echo $order->get_billing_last_name() ?>">
 							</label> 
 						</p>
 						<p class="form-field" style="clear: none;">
 							<label>
-								<?php _e('Phone:', 'bulgarisation-for-woocommerce') ?>
+								<?php esc_html_e('Phone:', 'bulgarisation-for-woocommerce') ?>
 
 								<input type="text" name="phone" required value="<?php echo $order->get_billing_phone() ?>">
 							</label> 
 						</p>
 						<p class="form-field" style="float: right; clear: none;">
 							<label> 
-								<?php _e('E-mail:', 'bulgarisation-for-woocommerce') ?>
+								<?php esc_html_e('E-mail:', 'bulgarisation-for-woocommerce') ?>
 
 								<input type="text" name="email" value="<?php echo $order->get_billing_email() ?>">
 							</label> 
@@ -344,7 +344,7 @@ class Nekorekten_Com {
 
 						<p class="form-field form-field-wide">
 							<label> 
-								<?php _e('Description', 'bulgarisation-for-woocommerce') ?>
+								<?php esc_html_e('Description', 'bulgarisation-for-woocommerce') ?>
 
 								<textarea name="description" required rows="4"></textarea>
 							</label> 
@@ -353,7 +353,7 @@ class Nekorekten_Com {
 						<input type="hidden" name="action" value="woo_bg_nekorekten_submit">
 						<?php wp_nonce_field( 'woo_bg_nekorekten_submit' ); ?>
 
-						<button type="submit" class="button-primary woocommerce-save-button"><?php _e('Submit', 'bulgarisation-for-woocommerce') ?></button>
+						<button type="submit" class="button-primary woocommerce-save-button"><?php esc_html_e('Submit', 'bulgarisation-for-woocommerce') ?></button>
 					</form>
 				</div>
 				

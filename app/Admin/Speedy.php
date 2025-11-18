@@ -288,8 +288,8 @@ class Speedy {
 		woo_bg_check_admin_label_actions();
 
 		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
-		$shipment_status = $_REQUEST['shipmentStatus'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
+		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
 		$order = wc_get_order( $order_id );
 		
 		$response = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::DELETE_LABELS_ENDPOINT, array(
@@ -309,9 +309,9 @@ class Speedy {
 		woo_bg_check_admin_label_actions();
 
 		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
 		$order = wc_get_order( $order_id );
-		$shipment_status = $_REQUEST['shipmentStatus'];
+		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
 		$data = array();
 
 		$response = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::TRACK_ENDPOINT, array(
@@ -330,8 +330,8 @@ class Speedy {
 	public static function generate_label() {
 		woo_bg_check_admin_label_actions();
 
-		$order = wc_get_order( $_REQUEST['orderId'] );
-		$label = $_REQUEST['label_data'];
+		$order = wc_get_order( sanitize_text_field( $_REQUEST['orderId'] ) );
+		$label = map_deep( $_REQUEST['label_data'], 'sanitize_text_field' );
 
 		$label = self::update_sender( $label );
 		$label = self::update_recipient_data( $label );
@@ -375,16 +375,19 @@ class Speedy {
 			$sender['dropoffOfficeId'] = str_replace( 'officeID-', '', woo_bg_get_option( 'speedy_send_from', 'office' ) );
 		}
 
-		if ( isset( $_REQUEST['send_from'] ) && isset( $_REQUEST['send_from_type'] ) ) {
-			switch ( $_REQUEST['send_from_type'] ) {
+		$new_send_from = map_deep( $_REQUEST['send_from'], 'sanitize_text_field' );
+		$new_send_from_type = sanitize_text_field( $_REQUEST['send_from_type'] );
+
+		if ( !empty( $new_send_from ) && !empty( $new_send_from_type ) ) {
+			switch ( $new_send_from_type ) {
 				case 'address':
 					$profiles = woo_bg_get_option( 'speedy', 'profile_data' );
-					$sender['clientId'] = $profiles['clients'][ $_REQUEST['send_from'] ]['clientId'];
+					$sender['clientId'] = $profiles['clients'][ $new_send_from ]['clientId'];
 
 					unset( $sender['dropoffOfficeId'] );
 					break;
 				case 'office':
-					$sender['dropoffOfficeId'] = str_replace( 'officeID-', '', $_REQUEST['send_from'] );
+					$sender['dropoffOfficeId'] = str_replace( 'officeID-', '', $new_send_from );
 					break;
 			}
 		}
@@ -495,10 +498,10 @@ class Speedy {
 
 	protected static function update_recipient_data( $label ) {
 		$container = woo_bg()->container();
-		$order_id = $_REQUEST['orderId'];
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
 		$order = wc_get_order( $order_id );
-		$type = $_REQUEST['type'];
-		$cookie_data = $_REQUEST['cookie_data'];
+		$type = map_deep( $_REQUEST['type'], 'sanitize_text_field' );
+		$cookie_data = map_deep( $_REQUEST['cookie_data'], 'sanitize_text_field' );
 		$cookie_data['type'] = $type['id'];
 
 		$label = self::update_phone_and_names( $label );
@@ -511,6 +514,7 @@ class Speedy {
 			$label[ 'recipient' ][ 'addressLocation' ] = self::generate_recipient_address( $order );
 			$label[ 'recipient' ][ 'address' ] = self::generate_recipient_address( $order );
 		} else if ( $cookie_data['type'] === 'office' ) {
+			$office = map_deep( $_REQUEST['office']['id'], 'sanitize_text_field' );
 			$label[ 'recipient' ][ 'pickupOfficeId' ] = $_REQUEST['office']['id'];
 		}
 
@@ -522,15 +526,17 @@ class Speedy {
 
 	protected static function generate_recipient_address( $order ) {
 		$container = woo_bg()->container();
-		$cookie_data = $cookie_data = $_REQUEST['cookie_data'];
+		$cookie_data = map_deep( $_REQUEST['cookie_data'], 'sanitize_text_field' );
 		$country_id = $container[ Client::SPEEDY_COUNTRIES ]->get_country_id( $order->get_billing_country() );
 		$cities_data = $container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $cookie_data['city'], $cookie_data['state'], $country_id );
 		$address['countryId'] = $country_id;
 		$address['siteId'] = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
+		$street = map_deep( $_REQUEST['street'] );
+		$other = sanitize_text_field( $_REQUEST[ 'other' ] );
 
-		if ( !empty( $_REQUEST['street']['type'] ) && $_REQUEST['street']['type'] === 'streets' ) {
-			$address["streetId"] = str_replace('street-', '', $_REQUEST['street']['orig_key'] ); 
-			$parts = explode( ',', $_REQUEST[ 'streetNumber' ] );
+		if ( !empty( $street['type'] ) && $street['type'] === 'streets' ) {
+			$address["streetId"] = str_replace('street-', '', $street['orig_key'] ); 
+			$parts = explode( ',', sanitize_text_field( $_REQUEST[ 'streetNumber' ] ) );
 			$address["streetNo"] = array_shift( $parts );
 
 			if ( !empty( $parts ) ) {
@@ -538,21 +544,21 @@ class Speedy {
 				$address["addressNote"] = implode( ' ', $parts );
 			}
 		} else if ( 
-			!empty( $_REQUEST['street']['type'] ) && $_REQUEST['street']['type'] === 'quarters' || 
-			!empty( $_REQUEST['cookie_data']['mysticQuarter'] )
+			!empty( $street['type'] ) && $street['type'] === 'quarters' || 
+			!empty( $cookie_data['mysticQuarter'] )
 		) {
-			if ( !empty( $_REQUEST['cookie_data']['mysticQuarter'] ) ) {
+			if ( !empty( $cookie_data['mysticQuarter'] ) ) {
 				if ( $country_id == '300' ) {
-					$address["addressLine1"] = $_REQUEST['cookie_data']['mysticQuarter'] . ' ' . $_REQUEST[ 'other' ];
+					$address["addressLine1"] = $cookie_data['mysticQuarter'] . ' ' . $other;
 					$address["postCode"] = $order->get_billing_postcode();
 				}
 				
-				$address["addressNote"] = $_REQUEST['cookie_data']['mysticQuarter'] . ' ' . $_REQUEST[ 'other' ];
+				$address["addressNote"] = $cookie_data['mysticQuarter'] . ' ' . $other;
 			} else {
-				$address["complexId"] = str_replace('qtr-', '', $_REQUEST['street']['orig_key'] );
+				$address["complexId"] = str_replace('qtr-', '', $street['orig_key'] );
 
-				if ( !empty( $_REQUEST[ 'other' ] ) ) {
-					$parts = explode( ' ', $_REQUEST[ 'other' ] );
+				if ( !empty( $other ) ) {
+					$parts = explode( ' ', $other );
 
 					$address["blockNo"] = $parts[0];
 
@@ -581,11 +587,10 @@ class Speedy {
 	}
 
 	protected static function update_payment_by( $label, $order ) {
+		$payment_by = map_deep( $_REQUEST['paymentBy'], 'sanitize_text_field' );
+		$cookie_data = map_deep( $_REQUEST['cookie_data'], 'sanitize_text_field' );
 		unset( $label['payment'] );
 		$order_id = $order->get_id();
-
-		$payment_by = $_REQUEST['paymentBy'];
-		$cookie_data = $_REQUEST['cookie_data'];
 
 		$recipient_country = '';
 		$bulgarian_id = 'BG';
@@ -624,11 +629,13 @@ class Speedy {
 	}
 
 	protected static function update_services( $label, $order ) {
-		$cookie_data = $_REQUEST['cookie_data'];
-		$payment_by = $_REQUEST['paymentBy'];
+		$payment_by = map_deep( $_REQUEST['paymentBy'], 'sanitize_text_field' );
+		$cookie_data = map_deep( $_REQUEST['cookie_data'], 'sanitize_text_field' );
 		$country = ( $order->get_shipping_country() ) ? $order->get_shipping_country() : $order->get_billing_country();
-
+		$declared_value = sanitize_text_field( $_REQUEST['declaredValue'] );
+		$test_option = sanitize_text_field( $_REQUEST['testOption']['id'] );
 		$service_id = '505';
+
 		if ( $country !== 'BG' ) {
 			$service_id = '202';
 		}
@@ -653,15 +660,13 @@ class Speedy {
 			}
 		}
 
-		if ( $_REQUEST['declaredValue'] ) {
+		if ( $declared_value ) {
 			$label['service']['additionalServices']['declaredValue'] = array(
-				'amount' => $_REQUEST['declaredValue'], 
+				'amount' => $declared_value, 
 				'fragile' => true, 
 				"ignoreIfNotApplicable" => true 
 			);
 		}
-
-		$test_option = $_REQUEST['testOption']['id'];
 
 		$test = '';
 
@@ -687,7 +692,7 @@ class Speedy {
 	}
 
 	protected static function update_phone_and_names( $label ) {
-		$order = wc_get_order( $_REQUEST['orderId'] );
+		$order = wc_get_order( sanitize_text_field( $_REQUEST['orderId'] ) );
 		$phone = [];
 		$name = '';
 
@@ -732,8 +737,10 @@ class Speedy {
 			return;
 		}
 
-		if ( $payment_by = $_REQUEST['paymentBy'] ) {
-			$cookie_data = $_REQUEST['cookie_data'];
+		$payment_by = map_deep( $_REQUEST['paymentBy'], 'sanitize_text_field' );
+
+		if ( !empty( $payment_by ) ) {
+			$cookie_data = map_deep( $_REQUEST['cookie_data'], 'sanitize_text_field' );
 
 			if ( $payment_by['id'] == 'RECIPIENT' ) {
 				$price = ( wc_tax_enabled() ) ? $response['price']['amount'] : $response['price']['total'];
@@ -816,9 +823,10 @@ class Speedy {
 
 	public static function print_labels_endpoint() {
 		$container = woo_bg()->container();
-		$labels = explode( '|', sanitize_text_field( $_REQUEST['parcels']) );
+		$labels = explode( '|', sanitize_text_field( $_REQUEST['parcels'] ) );
 		$size = sanitize_text_field( $_REQUEST['size'] );
 		$parcels = array();
+		$awbsc = sanitize_text_field( $_REQUEST['awbsc'] );
 
 		foreach ( $labels as $label ) {
 			$parcels[] = array(
@@ -833,8 +841,8 @@ class Speedy {
 			'parcels' => $parcels,
 		);
 
-		if ( !empty( $_REQUEST['awbsc'] ) ) {
-			$request_body['additionalWaybillSenderCopy'] = sanitize_text_field( $_REQUEST['awbsc'] );
+		if ( !empty( $awbsc ) ) {
+			$request_body['additionalWaybillSenderCopy'] = $awbsc;
 		}
 
 		$pdf_escaped = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::PRINT_LABELS_ENDPOINT, $request_body, 1 );
