@@ -72,27 +72,27 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Този плъгин използва външни услуги (API) с цел автоматизация на процесите в електронния магазин:
 
 - Създаване и управление на товарителници към куриерски услуги, добавяне на офис локатори и предоставяне на линкове за проследяване на пратките:
-  - Econt
-  	- https://www.econt.com/
-  	- http://ee.econt.com/
-  	- http://demo.econt.com/
-  	- https://officelocator.econt.com/
-  - Speedy
-  	- https://www.speedy.bg/
-  	- https://api.speedy.bg/
-  	- https://services.speedy.bg/
+  - Econt ( [terms-of-use](https://www.econt.com/econt-express/terms-of-use) ) 
+    - https://www.econt.com/
+    - http://ee.econt.com/
+    - http://demo.econt.com/
+    - https://officelocator.econt.com/
+  - Speedy ( [terms](https://api.speedy.bg/api/docs/#href-terms) )
+    - https://www.speedy.bg/
+    - https://api.speedy.bg/
+    - https://services.speedy.bg/
   - BoxNow
     - https://api.bulgarisation.bg/
-  	- https://boxnow.bg/en/
-  	- https://widget-v5.boxnow.bg/
-  	- https://api-production.boxnow.bg/
-  	- https://api-stage.boxnow.bg/
+    - https://boxnow.bg/en/
+    - https://widget-v5.boxnow.bg/
+    - https://api-production.boxnow.bg/
+    - https://api-stage.boxnow.bg/
   - CVC
-  	- https://lox.e-cvc.bg/
+    - https://lox.e-cvc.bg/
 
 - Проверка за некоректни клиенти чрез услугата:
-  - nekorekten.com
-  	- https://api.nekorekten.com/
+  - nekorekten.com ( [terms](https://nekorekten.com/bg/terms) )
+    - https://api.nekorekten.com/
 
 - При съгласие за подпомагане на разработката за плъгина се събира информация коя основна настройка е включена от плъгина към https://license.bulgarisation.bg/
 
@@ -100,7 +100,11 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 3.5.1 =
+Add sanitizations
+
 = 3.5.0 =
+Add sanitizations
 
 = 3.4.22 =
 Speedy: Label optimizations
