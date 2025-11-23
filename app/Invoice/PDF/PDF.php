@@ -43,7 +43,8 @@ class PDF {
 
 		ob_start();
 		$this->render_template();
-		$dompdf->loadHtml( ob_get_clean() );
+		$html = ob_get_clean();
+		$dompdf->loadHtml( $html );
 
 		$dompdf->render();
 		self::inject_page_count( $dompdf );

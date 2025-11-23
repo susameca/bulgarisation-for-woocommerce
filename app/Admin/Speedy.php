@@ -514,8 +514,8 @@ class Speedy {
 			$label[ 'recipient' ][ 'addressLocation' ] = self::generate_recipient_address( $order );
 			$label[ 'recipient' ][ 'address' ] = self::generate_recipient_address( $order );
 		} else if ( $cookie_data['type'] === 'office' ) {
-			$office = map_deep( $_REQUEST['office']['id'], 'sanitize_text_field' );
-			$label[ 'recipient' ][ 'pickupOfficeId' ] = $_REQUEST['office']['id'];
+			$office = map_deep( $_REQUEST['office'], 'sanitize_text_field' );
+			$label[ 'recipient' ][ 'pickupOfficeId' ] = $office['id'];
 		}
 
 		$order->update_meta_data( 'woo_bg_speedy_cookie_data', $cookie_data );
@@ -531,7 +531,7 @@ class Speedy {
 		$cities_data = $container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $cookie_data['city'], $cookie_data['state'], $country_id );
 		$address['countryId'] = $country_id;
 		$address['siteId'] = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
-		$street = map_deep( $_REQUEST['street'] );
+		$street = map_deep( $_REQUEST['street'], 'sanitize_text_field' );
 		$other = sanitize_text_field( $_REQUEST[ 'other' ] );
 
 		if ( !empty( $street['type'] ) && $street['type'] === 'streets' ) {

@@ -22,10 +22,9 @@ class Nekorekten_Com_Checkout {
 	        return $available_gateways;
 	    }
 
-	    parse_str( $_POST['post_data'], $data );
-
+	    $post_data = map_deep( $_POST['post_data'], 'sanitize_text_field' );
+	    parse_str( $post_data, $data );
 	    $phone = $data['billing_phone'];
-
 		$reports_by_phone = self::check_in_session( $phone );
 
 		$phone_counts = ( isset( $reports_by_phone['count'] ) ) ? $reports_by_phone['count'] : 0;

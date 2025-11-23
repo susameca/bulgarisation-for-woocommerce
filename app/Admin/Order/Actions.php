@@ -132,7 +132,7 @@ class Actions {
 
 	public static function add_order_meta_box_actions( $actions ) {
 		if ( OrderUtil::custom_orders_table_usage_is_enabled() && isset( $_GET['id'] ) ) {
-			$post = get_post( $_GET['id'] );
+			$post = get_post( sanitize_text_field( $_GET['id'] ) );
 		} else {
 			global $post;
 		}

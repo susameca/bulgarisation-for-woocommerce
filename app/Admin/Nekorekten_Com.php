@@ -66,7 +66,7 @@ class Nekorekten_Com {
 		global $theorder;
 
 		if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
-			$post = get_post( $_GET['id'] );
+			$post = get_post( sanitize_text_field( $_GET['id'] ) );
 		} else {
 			global $post;
 		}

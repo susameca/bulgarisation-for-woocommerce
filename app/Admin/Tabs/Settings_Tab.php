@@ -85,7 +85,7 @@ class Settings_Tab extends Base_Tab {
 			wp_die();
 		}
 
-		$tab_class_name = stripslashes( $_REQUEST['tab'] );
+		$tab_class_name = stripslashes( sanitize_text_field( $_REQUEST['tab'] ) );
 		$tab = new $tab_class_name();
 		$tab->load_fields();
 		$fields = $tab->get_fields();

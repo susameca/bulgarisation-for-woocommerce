@@ -141,8 +141,7 @@ class Method extends \WC_Shipping_Method {
 		$cookie_data = '';
 
 		if (  isset( $_COOKIE[ 'woo-bg--boxnow-apm' ] ) ) {
-			$cookie_data = json_decode( stripslashes( urldecode( $_COOKIE[ 'woo-bg--boxnow-apm' ] ) ), 1 );
-			$cookie_data = map_deep( $cookie_data, 'sanitize_text_field' );
+			$cookie_data = json_decode( stripslashes( urldecode( sanitize_text_field( $_COOKIE[ 'woo-bg--boxnow-apm' ] ) ) ), 1 );
 		}
 		
 		return $cookie_data;

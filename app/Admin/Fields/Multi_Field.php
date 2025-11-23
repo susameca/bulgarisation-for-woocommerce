@@ -51,6 +51,7 @@ class Multi_Field extends Base_Field {
 	}
 
 	public function save_value( $group ) {
-		update_option( 'woo_bg_settings_' . $group . '_' . $this->get_name(), json_encode( $_REQUEST[ 'options' ][ $group ][ $this->get_name() ][ 'value' ] ) );
+		$options = map_deep( $_REQUEST[ 'options' ], 'sanitize_text_field' );
+		update_option( 'woo_bg_settings_' . $group . '_' . $this->get_name(), json_encode( $options[ $group ][ $this->get_name() ][ 'value' ] ) );
 	}
 }

@@ -13,7 +13,7 @@ class BoxNow {
 		add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
 
-		add_action( 'wp_ajax_woo_bg_boxnow_generate_label', array( __CLASS__, 'generate_label' ) );
+		add_action( 'wp_ajax_woo_bg_boxnow_generate_label', array( __CLASS__, 'generate_label_ajax' ) );
 		add_action( 'wp_ajax_woo_bg_boxnow_print_label', array( __CLASS__, 'print_label_endpoint' ) );
 		add_action( 'wp_ajax_woo_bg_boxnow_delete_label', array( __CLASS__, 'delete_label' ) );
 	}
@@ -337,10 +337,6 @@ class BoxNow {
 	}
 
 	public static function generate_label( $order_id = '' ) {
-		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] === 'woo_bg_boxnow_generate_label' ) {
-			woo_bg_check_admin_label_actions();
-		}
-
 		$order_id = ( isset( $_REQUEST['orderId'] ) ) ? sanitize_text_field( $_REQUEST['orderId'] ) : $order_id;
 
 		if ( !$order_id ) {
@@ -382,8 +378,23 @@ class BoxNow {
 			wp_send_json_success( $data );
 			wp_die();
 		} else {
-			return $data;
+			
 		}
+
+		return $data;
+	}
+
+	public static function generate_label_ajax( $order_id = '' ) {
+		woo_bg_check_admin_label_actions();
+
+		$order_id = ( isset( $_REQUEST['orderId'] ) ) ? sanitize_text_field( $_REQUEST['orderId'] ) : $order_id;
+
+		if ( !$order_id ) {
+			return;
+		}
+
+		wp_send_json_success( self::generate_label( $order_id ) );
+		wp_die();
 	}
 
 	public static function send_label_to_boxnow( $label, $order ) {
