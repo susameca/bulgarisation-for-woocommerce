@@ -111,7 +111,7 @@ class Export_Tab extends Base_Tab {
 			<h2><?php esc_html_e( 'Found errors in file:', 'bulgarisation-for-woocommerce' ) ?></h2>
 			<ul>
 				<?php foreach ( $generated_file['errors'] as $error ): ?>
-					<li><?php echo $error ?></li>
+					<li><?php echo wp_kses_post( $error ) ?></li>
 				<?php endforeach ?>
 			</ul>
 			<?php

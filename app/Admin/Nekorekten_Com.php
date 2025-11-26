@@ -340,7 +340,7 @@ class Nekorekten_Com {
 							<label> 
 								<?php esc_html_e('E-mail:', 'bulgarisation-for-woocommerce') ?>
 
-								<input type="text" name="email" value="<?php echo sanitize_email( $order->get_billing_email() ) ?>">
+								<input type="text" name="email" value="<?php echo esc_attr( sanitize_email( $order->get_billing_email() ) ) ?>">
 							</label> 
 						</p>
 
