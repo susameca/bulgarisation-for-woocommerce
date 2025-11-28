@@ -86,7 +86,30 @@ class Settings_Tab extends Base_Tab {
 		}
 
 		$tab_class_name = stripslashes( sanitize_text_field( $_REQUEST['tab'] ) );
-		$tab = new $tab_class_name();
+		$allowed_classes = [
+			'Woo_BG\Admin\Tabs\Settings_Tab',
+			'Woo_BG\Admin\Tabs\Speedy_Tab',
+			'Woo_BG\Admin\Tabs\Pro_Tab',
+			'Woo_BG\Admin\Tabs\Nra_Tab',
+			'Woo_BG\Admin\Tabs\Nekorekten_Com_Tab',
+			'Woo_BG\Admin\Tabs\Multi_Currency_Tab',
+			'Woo_BG\Admin\Tabs\Help_Tab',
+			'Woo_BG\Admin\Tabs\Export_Tab',
+			'Woo_BG\Admin\Tabs\Econt_Tab',
+			'Woo_BG\Admin\Tabs\CVC_Tab',
+			'Woo_BG\Admin\Tabs\BoxNow_Tab',
+		];
+
+		if ( !in_array( $tab_class_name, $allowed_classes ) ) {
+			wp_send_json_success( array(
+				'message' => __( 'Tab parameter not allowed!', 'bulgarisation-for-woocommerce' ),
+			) );
+			
+			wp_die();
+		}
+		
+		$reflection = new \ReflectionClass( $tab_class_name );
+		$tab = $reflection->newInstanceWithoutConstructor();
 		$tab->load_fields();
 		$fields = $tab->get_fields();
 
