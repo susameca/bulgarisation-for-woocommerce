@@ -6,7 +6,7 @@
         "ext-soap": "*",
         "chillerlan/php-qrcode": "^4.3",
         "ddeboer/vatin": "^2.2",
-        "dompdf/dompdf": "^3.0",
+        "dompdf/dompdf": "3.0.0",
         "clegginabox/pdf-merger": "dev-master"
     },
     "extra": {
