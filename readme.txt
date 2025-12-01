@@ -81,7 +81,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
     - https://www.speedy.bg/
     - https://api.speedy.bg/
     - https://services.speedy.bg/
-  - BoxNow
+  - BoxNow 
     - https://api.bulgarisation.bg/
     - https://boxnow.bg/en/
     - https://widget-v5.boxnow.bg/
