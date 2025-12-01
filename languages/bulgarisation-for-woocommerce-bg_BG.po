@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2025-11-01 14:15+0000\n"
+"PO-Revision-Date: 2025-11-28 10:33+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.7.2; wp-6.8.2\n"
+"X-Loco-Version: 2.8.0; wp-6.8.3; php-8.3.4\n"
 "X-Domain: woo-bg"
 
 #: app/Admin/Tabs/BoxNow_Tab.php:124 app/Admin/Tabs/BoxNow_Tab.php:141
@@ -53,7 +53,7 @@ msgid_plural "%s orders documents were regenerated."
 msgstr[0] "На %s поръчка бяха регенерирани документите."
 msgstr[1] "На %s поръчки бяха регенерирани документите."
 
-#: app/Shipping/Register.php:178 app/Shipping/Register.php:186
+#: app/Shipping/Register.php:179 app/Shipping/Register.php:187
 #, php-format
 msgid "%s: <span class=\"woocommerce-Price-amount\">%s</span>"
 msgstr "%s: <span class=\"woocommerce-Price-amount\">%s</span>"
@@ -137,7 +137,7 @@ msgstr "Позволи връщане"
 msgid "Allow shipping to Greece and Romania for Econt and Speedy."
 msgstr "Добавяне на доставки до Гърция и Румъния за Еконт и Спиди."
 
-#: app/Admin/Tabs/Settings_Tab.php:53
+#: app/Admin/Tabs/Settings_Tab.php:54
 msgid "Alternative shipping options layout ( checkout )"
 msgstr "Алтернативно оформление на методите за доставка (чекаут)"
 
@@ -201,11 +201,11 @@ msgstr "BGN/EUR двойни цени"
 msgid "Billing Country"
 msgstr "Държава на фактуриране"
 
-#: app/Invoice/PDF/view.php:78
+#: app/Invoice/PDF/view.php:81
 msgid "Billing from"
 msgstr "Доставчик"
 
-#: app/Invoice/PDF/view.php:79
+#: app/Invoice/PDF/view.php:82
 msgid "Billing to"
 msgstr "Клиент"
 
@@ -242,11 +242,11 @@ msgstr "Българизация"
 msgid "Bulgarisation for WooCommerce"
 msgstr "Българизация за WooCommerce"
 
-#: bulgarisation-for-woocommerce.php:47
+#: bulgarisation-for-woocommerce.php:46
 msgid "Bulgarisation for WooCommerce - Please enable WooCommerce first."
 msgstr "Българизация за WooCommerce - Моля активирайте първо WooCommerce."
 
-#: app/Plugin.php:71
+#: app/Plugin.php:67
 #, php-format
 msgid ""
 "Bulgarisation for WooCommerce - Please review the options and save them "
@@ -258,17 +258,17 @@ msgstr ""
 msgid "Buyer"
 msgstr "Купувач"
 
-#: app/Admin/Nekorekten_Com.php:115
+#: app/Admin/Nekorekten_Com.php:117
 #, php-format
 msgid "By Email ( %s )"
 msgstr "По еmail ( %s )"
 
-#: app/Admin/Nekorekten_Com.php:103
+#: app/Admin/Nekorekten_Com.php:105
 #, php-format
 msgid "By Phone ( %s )"
 msgstr "По телефон ( %s )"
 
-#: app/Shipping/CVC/Method.php:225 app/Shipping/Speedy/Method.php:205
+#: app/Shipping/CVC/Method.php:231 app/Shipping/Speedy/Method.php:211
 msgid "Calculation failed. Please try again."
 msgstr "Неуспешно калкулиране. Моля опитайте отново."
 
@@ -337,7 +337,7 @@ msgstr "Провери на чекаут и изключи НП"
 msgid "Checkout Message"
 msgstr "Съобщение на чекаут"
 
-#: app/Admin/Tabs/Settings_Tab.php:74
+#: app/Admin/Tabs/Settings_Tab.php:75
 msgid "Checkout Settings"
 msgstr "Настройки на \"Страница за поръчка\""
 
@@ -367,6 +367,10 @@ msgstr "Град"
 msgid "Clear cache"
 msgstr "Изчисти кеша"
 
+#: app/Admin/Nekorekten_Com.php:48
+msgid "Click for more information."
+msgstr "Цъкни за повече информация."
+
 #: app/Admin/Tabs/BoxNow_Tab.php:73
 msgid "Client ID"
 msgstr "Client ID"
@@ -375,12 +379,24 @@ msgstr "Client ID"
 msgid "Client Secret"
 msgstr "Client Secret"
 
+#: app/Admin/Tabs/Settings_Tab.php:51
+msgid "Collection non-sensitive data"
+msgstr "Събиране на не сензитивна информация"
+
+#: app/Front_End/Checkout/Company.php:102
+msgid "Company"
+msgstr "Фирма"
+
 #: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:126
 msgid "Company Address"
 msgstr "Адрес на фирмата"
 
 #: app/Admin/Tabs/Nra_Tab.php:40
 msgid "Company Name"
+msgstr "Име на фирмата"
+
+#: app/Front_End/Checkout/Company.php:27
+msgid "Company name"
 msgstr "Име на фирмата"
 
 #: app/Admin/Tabs/Nra_Tab.php:45
@@ -423,7 +439,7 @@ msgstr "Кредитно известие - Копие"
 msgid "Credit Notice - Original"
 msgstr "Кредитно известие - Оригинал"
 
-#: app/Shipping/CVC/Method.php:450
+#: app/Shipping/CVC/Method.php:456
 #, php-format
 msgid "CVC - %s"
 msgstr "CVC - %s"
@@ -446,11 +462,11 @@ msgstr "cvc.com API настройки"
 msgid "Date of tax. event"
 msgstr "Дата на дан. събитие"
 
-#: app/Admin/Nekorekten_Com.php:176
+#: app/Admin/Nekorekten_Com.php:178
 msgid "Date:"
 msgstr "Дата:"
 
-#: app/Admin/Nekorekten_Com.php:138 app/Admin/Nekorekten_Com.php:152
+#: app/Admin/Nekorekten_Com.php:140 app/Admin/Nekorekten_Com.php:154
 #, php-format
 msgid "Date: %s"
 msgstr "Дата: %s"
@@ -495,7 +511,7 @@ msgid "Demo"
 msgstr "Демо"
 
 #: app/Admin/CVC.php:155 app/Admin/Econt.php:154
-#: app/Admin/Nekorekten_Com.php:347 app/Admin/Speedy.php:158
+#: app/Admin/Nekorekten_Com.php:349 app/Admin/Speedy.php:158
 msgid "Description"
 msgstr "Описание"
 
@@ -549,7 +565,7 @@ msgstr "Брой дни на падеж"
 msgid "E-mail"
 msgstr "Имейл"
 
-#: app/Admin/Nekorekten_Com.php:339 app/Admin/Tabs/Help_Tab.php:35
+#: app/Admin/Nekorekten_Com.php:341 app/Admin/Tabs/Help_Tab.php:35
 msgid "E-mail:"
 msgstr "Имейл"
 
@@ -562,7 +578,7 @@ msgstr "Имейл"
 msgid "E-mail: %s"
 msgstr "Имейл: %s"
 
-#: app/Shipping/Econt/Method.php:534
+#: app/Shipping/Econt/Method.php:540
 msgid "Econt - "
 msgstr "Еконт - "
 
@@ -590,7 +606,7 @@ msgstr "ЕИК на фирмата"
 msgid "EIK: %s"
 msgstr "ЕИК: %s"
 
-#: app/Admin/Nekorekten_Com.php:173
+#: app/Admin/Nekorekten_Com.php:175
 msgid "Email:"
 msgstr "Email:"
 
@@ -754,7 +770,7 @@ msgstr ""
 "Грешка при комуникацията със сървъра за валидиране на ДДС - моля, опитайте "
 "отново"
 
-#: app/Admin/Nekorekten_Com.php:142
+#: app/Admin/Nekorekten_Com.php:144
 #, php-format
 msgid "Error: \"%s\""
 msgstr "Грешка: \"%s\""
@@ -810,7 +826,7 @@ msgstr ""
 "Файла е генериран успешно! <a href=\"%s\" download target=\"_blank\">"
 "Изтегли</a>"
 
-#: app/Admin/Nekorekten_Com.php:170 app/Admin/Nekorekten_Com.php:318
+#: app/Admin/Nekorekten_Com.php:172 app/Admin/Nekorekten_Com.php:320
 msgid "First Name:"
 msgstr "Име:"
 
@@ -854,13 +870,13 @@ msgstr "Принудително добавяне на варияцията в �
 msgid "Found errors in file:"
 msgstr "Намерени грешки във файла:"
 
-#: app/Admin/Nekorekten_Com.php:157
+#: app/Admin/Nekorekten_Com.php:159
 #, php-format
 msgid "Found: %s"
 msgstr "Намерени: %s"
 
-#: app/Shipping/Register.php:161 app/Shipping/Register.php:162
-#: app/Shipping/Register.php:178
+#: app/Shipping/Register.php:162 app/Shipping/Register.php:163
+#: app/Shipping/Register.php:179
 msgid "Free shipping"
 msgstr "Безплатна доставка"
 
@@ -906,7 +922,7 @@ msgid "Generate Invoice"
 msgstr "Генерирай фактура"
 
 #: app/Admin/BoxNow.php:125 app/Admin/CVC.php:124 app/Admin/Econt.php:124
-#: app/Admin/Speedy.php:127 app/Admin/fragments/label-column.php:20
+#: app/Admin/Speedy.php:127 app/Admin/fragments/label-column.php:21
 msgid "Generate label"
 msgstr "Генерирай товарителница."
 
@@ -1047,7 +1063,7 @@ msgstr ""
 msgid "Incorrect Client ID or Client Secret."
 msgstr "Невалиден  Client ID или Client Secret"
 
-#: app/Admin/Nekorekten_Com.php:144
+#: app/Admin/Nekorekten_Com.php:146
 msgid "Invalid access."
 msgstr "Невалиден достъп."
 
@@ -1099,8 +1115,8 @@ msgstr "Товарителница"
 msgid "Label data"
 msgstr "Данни за товарителница"
 
-#: app/Shipping/BoxNow/Method.php:441 app/Shipping/CVC/Method.php:538
-#: app/Shipping/Econt/Method.php:664 app/Shipping/Speedy/Method.php:688
+#: app/Shipping/BoxNow/Method.php:447 app/Shipping/CVC/Method.php:544
+#: app/Shipping/Econt/Method.php:670 app/Shipping/Speedy/Method.php:694
 #, php-format
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
@@ -1109,7 +1125,7 @@ msgstr "Товарителница: %s. %s"
 msgid "Large Box"
 msgstr "Голяма кутия"
 
-#: app/Admin/Nekorekten_Com.php:171 app/Admin/Nekorekten_Com.php:325
+#: app/Admin/Nekorekten_Com.php:173 app/Admin/Nekorekten_Com.php:327
 msgid "Last Name:"
 msgstr "Фамилия:"
 
@@ -1120,10 +1136,6 @@ msgstr "Дължина"
 #: app/Admin/Tabs/Pro_Tab.php:114
 msgid "License"
 msgstr "Лиценз"
-
-#: app/Admin/Tabs/Pro_Tab.php:156
-msgid "License is invalid!"
-msgstr "Невалиден лиценз!"
 
 #: app/Admin/Tabs/Pro_Tab.php:96
 msgid "License Key"
@@ -1145,11 +1157,11 @@ msgstr "Локация"
 msgid "Main Company Settings"
 msgstr "Главни настройки на фирмата"
 
-#: app/Admin/Tabs/Settings_Tab.php:71
+#: app/Admin/Tabs/Settings_Tab.php:72
 msgid "Main functionalities"
 msgstr "Главни функционалности"
 
-#: app/Admin/Tabs/Settings_Tab.php:53
+#: app/Admin/Tabs/Settings_Tab.php:54
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr "Направете опциите за доставка на 2 реда и с пълна ширина в чекаут."
 
@@ -1190,7 +1202,7 @@ msgstr "Име"
 msgid "Name:"
 msgstr "Име"
 
-#: app/Admin/Nekorekten_Com.php:277
+#: app/Admin/Nekorekten_Com.php:279
 msgid "Nekorekten"
 msgstr "Nekorekten"
 
@@ -1241,11 +1253,11 @@ msgstr "Не бяха намерени профили. Моля свържете
 msgid "No profiles was found. Please contact with Speedy."
 msgstr "Не бяха намерени профили. Моля свържете се със Спиди."
 
-#: app/Admin/Nekorekten_Com.php:56
+#: app/Admin/Nekorekten_Com.php:58
 msgid "No reports was found for this customer!"
 msgstr "Няма намерени отзиви за този клиент."
 
-#: app/Admin/Nekorekten_Com.php:88
+#: app/Admin/Nekorekten_Com.php:90
 msgid "No reports was found."
 msgstr "Няма намерени отзиви."
 
@@ -1259,12 +1271,12 @@ msgstr "Няма намерени резултати"
 msgid "No results was found for this city"
 msgstr "Няма намерени резултати за този град"
 
-#: app/functions.php:384 app/Admin/Nekorekten_Com.php:369
+#: app/functions.php:384 app/Admin/Nekorekten_Com.php:371
 #: app/Front_End/Multi_Currency_Converter.php:86
 msgid "Nonce was not provided!"
 msgstr "Nonce не е предоставен!"
 
-#: app/Shipping/Register.php:164 app/Shipping/Register.php:186
+#: app/Shipping/Register.php:165 app/Shipping/Register.php:187
 msgid "Not calculated"
 msgstr "Не е калкулирано"
 
@@ -1309,7 +1321,7 @@ msgid "Option to include order ID in label."
 msgstr ""
 "Възможност за добавяне номера на поръчката в описанието на товарителницата."
 
-#: app/Admin/Order/Documents.php:78
+#: app/Admin/Nekorekten_Com.php:94 app/Admin/Order/Documents.php:78
 msgid "Order"
 msgstr "Поръчка"
 
@@ -1358,7 +1370,7 @@ msgstr "Опис"
 msgid "Packing list or invoice number"
 msgstr "Опис или номер на фактура"
 
-#: app/Invoice/PDF/view.php:174
+#: app/Invoice/PDF/view.php:177
 #, php-format
 msgid "Page %s of %s"
 msgstr "Страница %s от %s"
@@ -1405,7 +1417,7 @@ msgstr "PDF документи"
 msgid "Phone"
 msgstr "Телефон"
 
-#: app/Admin/Nekorekten_Com.php:172 app/Admin/Nekorekten_Com.php:332
+#: app/Admin/Nekorekten_Com.php:174 app/Admin/Nekorekten_Com.php:334
 msgid "Phone:"
 msgstr "Телефон:"
 
@@ -1424,21 +1436,21 @@ msgstr "Телефон: %s"
 msgid "Place of transaction"
 msgstr "Място на сделката"
 
-#: app/Shipping/BoxNow/Method.php:268
+#: app/Shipping/BoxNow/Method.php:274
 #| msgid "Please choose a APM."
 msgid "Please choose a automat."
 msgstr "Моля изберете автомат."
 
-#: app/Shipping/Econt/Method.php:549 app/Shipping/Speedy/Method.php:602
+#: app/Shipping/Econt/Method.php:555 app/Shipping/Speedy/Method.php:608
 msgid "Please choose a office."
 msgstr "Моля изберете офис."
 
-#: app/Shipping/Econt/Method.php:557
+#: app/Shipping/Econt/Method.php:563
 msgid "Please choose address."
 msgstr "Моля изберете адрес"
 
-#: app/Shipping/CVC/Method.php:452 app/Shipping/Econt/Method.php:537
-#: app/Shipping/Speedy/Method.php:592
+#: app/Shipping/CVC/Method.php:458 app/Shipping/Econt/Method.php:543
+#: app/Shipping/Speedy/Method.php:598
 msgid "Please choose delivery option!"
 msgstr "Моля изберете начин на доставка!"
 
@@ -1446,7 +1458,7 @@ msgstr "Моля изберете начин на доставка!"
 msgid "Please enter a city."
 msgstr "Моля въведете град."
 
-#: bulgarisation-for-woocommerce.php:58
+#: bulgarisation-for-woocommerce.php:57
 msgid ""
 "Please run `composer install` in the plugin folder `bulgarisation-for-"
 "woocommerce`"
@@ -1547,7 +1559,7 @@ msgstr "Препоръчителни настройки"
 msgid "Reflected with receipt"
 msgstr "Отразено с касова бележка"
 
-#: app/Admin/Nekorekten_Com.php:95
+#: app/Admin/Nekorekten_Com.php:97
 msgid "Refresh data"
 msgstr "Обнови данните"
 
@@ -1737,6 +1749,15 @@ msgstr "Изпратете запитване"
 msgid "Send to"
 msgstr "Изпрати до"
 
+#: app/Admin/Tabs/Settings_Tab.php:51
+msgid ""
+"Send us non-sensitive data to improve user experience. This data include all "
+"of the above options ( what is enabled/disabled )"
+msgstr ""
+"Изпращайте ни нечувствителни данни, за да подобрим потребителското "
+"изживяване. Тези данни включват всички горепосочени опции (какво е "
+"активирано/деактивирано)"
+
 #: app/Admin/CVC.php:143 app/Admin/Econt.php:143 app/Admin/Speedy.php:146
 msgid "Sender"
 msgstr "Изпращач"
@@ -1745,11 +1766,11 @@ msgstr "Изпращач"
 msgid "Sender payment type"
 msgstr "Метод на плащане на изпращача"
 
-#: app/Plugin.php:71 app/Plugin.php:189 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:67 app/Plugin.php:185 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
-#: app/Admin/Tabs/Pro_Tab.php:145 app/Admin/Tabs/Settings_Tab.php:105
+#: app/Admin/Tabs/Pro_Tab.php:168 app/Admin/Tabs/Settings_Tab.php:129
 msgid "Settings saved successfully!"
 msgstr "Настройките са запазени успешно!"
 
@@ -1814,7 +1835,7 @@ msgstr ""
 "Някои от поръчките не бяха добавени, защото метода на плащане не беше "
 "намерен или е изключен. Списък с ид на поръчките: %s"
 
-#: app/Shipping/Speedy/Method.php:590
+#: app/Shipping/Speedy/Method.php:596
 #, php-format
 msgid "Speedy - %s"
 msgstr "Спиди - %s"
@@ -1868,11 +1889,11 @@ msgstr "Улица или квартал"
 msgid "Street/Quarter"
 msgstr "Улица/Квартал"
 
-#: app/Admin/Nekorekten_Com.php:356
+#: app/Admin/Nekorekten_Com.php:358
 msgid "Submit"
 msgstr "Изпрати"
 
-#: app/Admin/Nekorekten_Com.php:313
+#: app/Admin/Nekorekten_Com.php:315
 msgid "Submit Review"
 msgstr "Пуснете сигнал"
 
@@ -1880,11 +1901,15 @@ msgstr "Пуснете сигнал"
 msgid "Supporting the development"
 msgstr "Подкрепете разработката"
 
+#: app/Admin/Tabs/Pro_Tab.php:144 app/Admin/Tabs/Settings_Tab.php:105
+msgid "Tab parameter not allowed!"
+msgstr "Този Tab параметър не е разрешен!"
+
 #: app/Admin/EU_Vat.php:27
 msgid "Tax Classes for Digital Goods"
 msgstr "Данъчни класове за цифрови стоки"
 
-#: app/Admin/Nekorekten_Com.php:178
+#: app/Admin/Nekorekten_Com.php:180
 msgid "Text:"
 msgstr "Текст:"
 
@@ -1921,7 +1946,7 @@ msgstr ""
 "Има разработена Про версия на плъгина като добавка ( допълнителен плъгин към "
 "безплатния )."
 
-#: app/Admin/Nekorekten_Com.php:79
+#: app/Admin/Nekorekten_Com.php:81
 msgid "There was some error in one of the reports."
 msgstr "Имаше грешка в някой от отзивите."
 
@@ -2023,8 +2048,8 @@ msgstr "Обща цена"
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
 
-#: app/Shipping/BoxNow/Method.php:445 app/Shipping/CVC/Method.php:542
-#: app/Shipping/Econt/Method.php:668 app/Shipping/Speedy/Method.php:692
+#: app/Shipping/BoxNow/Method.php:451 app/Shipping/CVC/Method.php:548
+#: app/Shipping/Econt/Method.php:674 app/Shipping/Speedy/Method.php:698
 msgid "Track your order."
 msgstr "Проследи пратката."
 
@@ -2119,17 +2144,9 @@ msgstr "Номер на виртуален ПОС терминал"
 msgid "Warehouse/Automat"
 msgstr "Склад/Автомат"
 
-#: app/Admin/Nekorekten_Com.php:83
+#: app/Admin/Nekorekten_Com.php:46 app/Admin/Nekorekten_Com.php:85
 msgid "We have found negative reports about this customer."
 msgstr "Намерихме негативни отзиви за този клиент."
-
-#: app/Admin/Nekorekten_Com.php:46
-msgid ""
-"We have found negative reports about this customer. <br> Click for more "
-"information."
-msgstr ""
-"Намерихме негативни отзиви за този клиент. <br> Кликнете за повече "
-"информация."
 
 #: app/Admin/Tabs/Nra_Tab.php:50
 msgid ""
@@ -2171,8 +2188,12 @@ msgstr "Woo BG - Еконт"
 msgid "Woo BG - Speedy"
 msgstr "Woo BG - Спиди"
 
+#: app/Admin/Admin_Menus.php:84
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
 #. %1$s is minimum php version and %2$s is minimum WP version
-#: bulgarisation-for-woocommerce.php:38
+#: bulgarisation-for-woocommerce.php:37
 #, php-format
 #| msgid ""
 #| "WooCommerce - Bulgarisation requires PHP version %s+ and WP version %s+, "

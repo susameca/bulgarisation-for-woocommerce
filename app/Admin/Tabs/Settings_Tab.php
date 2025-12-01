@@ -109,7 +109,7 @@ class Settings_Tab extends Base_Tab {
 		}
 		
 		$reflection = new \ReflectionClass( $tab_class_name );
-		$tab = $reflection->newInstanceWithoutConstructor();
+		$tab = $reflection->newInstance();
 		$tab->load_fields();
 		$fields = $tab->get_fields();
 

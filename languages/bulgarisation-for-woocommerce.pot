@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-13 20:34+0000\n"
+"POT-Creation-Date: 2025-11-28 09:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -245,17 +245,17 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:115
+#: app/Admin/Nekorekten_Com.php:117
 #, php-format
 msgid "By Email ( %s )"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:103
+#: app/Admin/Nekorekten_Com.php:105
 #, php-format
 msgid "By Phone ( %s )"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:225 app/Shipping/Speedy/Method.php:205
+#: app/Shipping/CVC/Method.php:231 app/Shipping/Speedy/Method.php:211
 msgid "Calculation failed. Please try again."
 msgstr ""
 
@@ -347,6 +347,10 @@ msgstr ""
 msgid "Clear cache"
 msgstr ""
 
+#: app/Admin/Nekorekten_Com.php:48
+msgid "Click for more information."
+msgstr ""
+
 #: app/Admin/Tabs/BoxNow_Tab.php:73
 msgid "Client ID"
 msgstr ""
@@ -359,12 +363,20 @@ msgstr ""
 msgid "Collection non-sensitive data"
 msgstr ""
 
+#: app/Front_End/Checkout/Company.php:102
+msgid "Company"
+msgstr ""
+
 #: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:126
 msgid "Company Address"
 msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:40
 msgid "Company Name"
+msgstr ""
+
+#: app/Front_End/Checkout/Company.php:27
+msgid "Company name"
 msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:45
@@ -407,7 +419,7 @@ msgstr ""
 msgid "Credit Notice - Original"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:450
+#: app/Shipping/CVC/Method.php:456
 #, php-format
 msgid "CVC - %s"
 msgstr ""
@@ -430,11 +442,11 @@ msgstr ""
 msgid "Date of tax. event"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:176
+#: app/Admin/Nekorekten_Com.php:178
 msgid "Date:"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:138 app/Admin/Nekorekten_Com.php:152
+#: app/Admin/Nekorekten_Com.php:140 app/Admin/Nekorekten_Com.php:154
 #, php-format
 msgid "Date: %s"
 msgstr ""
@@ -479,7 +491,7 @@ msgid "Demo"
 msgstr ""
 
 #: app/Admin/CVC.php:155 app/Admin/Econt.php:154
-#: app/Admin/Nekorekten_Com.php:347 app/Admin/Speedy.php:158
+#: app/Admin/Nekorekten_Com.php:349 app/Admin/Speedy.php:158
 msgid "Description"
 msgstr ""
 
@@ -533,7 +545,7 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:339 app/Admin/Tabs/Help_Tab.php:35
+#: app/Admin/Nekorekten_Com.php:341 app/Admin/Tabs/Help_Tab.php:35
 msgid "E-mail:"
 msgstr ""
 
@@ -546,7 +558,7 @@ msgstr ""
 msgid "E-mail: %s"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:534
+#: app/Shipping/Econt/Method.php:540
 msgid "Econt - "
 msgstr ""
 
@@ -574,7 +586,7 @@ msgstr ""
 msgid "EIK: %s"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:173
+#: app/Admin/Nekorekten_Com.php:175
 msgid "Email:"
 msgstr ""
 
@@ -723,7 +735,7 @@ msgstr ""
 msgid "Error communicating with the VAT validation server - please try again"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:142
+#: app/Admin/Nekorekten_Com.php:144
 #, php-format
 msgid "Error: \"%s\""
 msgstr ""
@@ -770,7 +782,7 @@ msgid ""
 "Download</a>"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:170 app/Admin/Nekorekten_Com.php:318
+#: app/Admin/Nekorekten_Com.php:172 app/Admin/Nekorekten_Com.php:320
 msgid "First Name:"
 msgstr ""
 
@@ -812,7 +824,7 @@ msgstr ""
 msgid "Found errors in file:"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:157
+#: app/Admin/Nekorekten_Com.php:159
 #, php-format
 msgid "Found: %s"
 msgstr ""
@@ -987,7 +999,7 @@ msgstr ""
 msgid "Incorrect Client ID or Client Secret."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:144
+#: app/Admin/Nekorekten_Com.php:146
 msgid "Invalid access."
 msgstr ""
 
@@ -1039,8 +1051,8 @@ msgstr ""
 msgid "Label data"
 msgstr ""
 
-#: app/Shipping/BoxNow/Method.php:441 app/Shipping/CVC/Method.php:538
-#: app/Shipping/Econt/Method.php:664 app/Shipping/Speedy/Method.php:688
+#: app/Shipping/BoxNow/Method.php:447 app/Shipping/CVC/Method.php:544
+#: app/Shipping/Econt/Method.php:670 app/Shipping/Speedy/Method.php:694
 #, php-format
 msgid "Label number: %s. %s"
 msgstr ""
@@ -1049,7 +1061,7 @@ msgstr ""
 msgid "Large Box"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:171 app/Admin/Nekorekten_Com.php:325
+#: app/Admin/Nekorekten_Com.php:173 app/Admin/Nekorekten_Com.php:327
 msgid "Last Name:"
 msgstr ""
 
@@ -1059,10 +1071,6 @@ msgstr ""
 
 #: app/Admin/Tabs/Pro_Tab.php:114
 msgid "License"
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:156
-msgid "License is invalid!"
 msgstr ""
 
 #: app/Admin/Tabs/Pro_Tab.php:96
@@ -1130,7 +1138,7 @@ msgstr ""
 msgid "Name:"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:277
+#: app/Admin/Nekorekten_Com.php:279
 msgid "Nekorekten"
 msgstr ""
 
@@ -1180,11 +1188,11 @@ msgstr ""
 msgid "No profiles was found. Please contact with Speedy."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:56
+#: app/Admin/Nekorekten_Com.php:58
 msgid "No reports was found for this customer!"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:88
+#: app/Admin/Nekorekten_Com.php:90
 msgid "No reports was found."
 msgstr ""
 
@@ -1198,7 +1206,7 @@ msgstr ""
 msgid "No results was found for this city"
 msgstr ""
 
-#: app/functions.php:384 app/Admin/Nekorekten_Com.php:369
+#: app/functions.php:384 app/Admin/Nekorekten_Com.php:371
 #: app/Front_End/Multi_Currency_Converter.php:86
 msgid "Nonce was not provided!"
 msgstr ""
@@ -1244,7 +1252,7 @@ msgstr ""
 msgid "Option to include order ID in label."
 msgstr ""
 
-#: app/Admin/Order/Documents.php:78
+#: app/Admin/Nekorekten_Com.php:94 app/Admin/Order/Documents.php:78
 msgid "Order"
 msgstr ""
 
@@ -1340,7 +1348,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:172 app/Admin/Nekorekten_Com.php:332
+#: app/Admin/Nekorekten_Com.php:174 app/Admin/Nekorekten_Com.php:334
 msgid "Phone:"
 msgstr ""
 
@@ -1359,20 +1367,20 @@ msgstr ""
 msgid "Place of transaction"
 msgstr ""
 
-#: app/Shipping/BoxNow/Method.php:268
+#: app/Shipping/BoxNow/Method.php:274
 msgid "Please choose a automat."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:549 app/Shipping/Speedy/Method.php:602
+#: app/Shipping/Econt/Method.php:555 app/Shipping/Speedy/Method.php:608
 msgid "Please choose a office."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:557
+#: app/Shipping/Econt/Method.php:563
 msgid "Please choose address."
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:452 app/Shipping/Econt/Method.php:537
-#: app/Shipping/Speedy/Method.php:592
+#: app/Shipping/CVC/Method.php:458 app/Shipping/Econt/Method.php:543
+#: app/Shipping/Speedy/Method.php:598
 msgid "Please choose delivery option!"
 msgstr ""
 
@@ -1475,7 +1483,7 @@ msgstr ""
 msgid "Reflected with receipt"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:95
+#: app/Admin/Nekorekten_Com.php:97
 msgid "Refresh data"
 msgstr ""
 
@@ -1668,7 +1676,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:145 app/Admin/Tabs/Settings_Tab.php:106
+#: app/Admin/Tabs/Pro_Tab.php:168 app/Admin/Tabs/Settings_Tab.php:129
 msgid "Settings saved successfully!"
 msgstr ""
 
@@ -1730,7 +1738,7 @@ msgid ""
 "not found or the payment method was disabled. List of orders id's: %s"
 msgstr ""
 
-#: app/Shipping/Speedy/Method.php:590
+#: app/Shipping/Speedy/Method.php:596
 #, php-format
 msgid "Speedy - %s"
 msgstr ""
@@ -1783,11 +1791,11 @@ msgstr ""
 msgid "Street/Quarter"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:356
+#: app/Admin/Nekorekten_Com.php:358
 msgid "Submit"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:313
+#: app/Admin/Nekorekten_Com.php:315
 msgid "Submit Review"
 msgstr ""
 
@@ -1795,11 +1803,15 @@ msgstr ""
 msgid "Supporting the development"
 msgstr ""
 
+#: app/Admin/Tabs/Pro_Tab.php:144 app/Admin/Tabs/Settings_Tab.php:105
+msgid "Tab parameter not allowed!"
+msgstr ""
+
 #: app/Admin/EU_Vat.php:27
 msgid "Tax Classes for Digital Goods"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:178
+#: app/Admin/Nekorekten_Com.php:180
 msgid "Text:"
 msgstr ""
 
@@ -1831,7 +1843,7 @@ msgid ""
 "free one )."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:79
+#: app/Admin/Nekorekten_Com.php:81
 msgid "There was some error in one of the reports."
 msgstr ""
 
@@ -1920,8 +1932,8 @@ msgstr ""
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr ""
 
-#: app/Shipping/BoxNow/Method.php:445 app/Shipping/CVC/Method.php:542
-#: app/Shipping/Econt/Method.php:668 app/Shipping/Speedy/Method.php:692
+#: app/Shipping/BoxNow/Method.php:451 app/Shipping/CVC/Method.php:548
+#: app/Shipping/Econt/Method.php:674 app/Shipping/Speedy/Method.php:698
 msgid "Track your order."
 msgstr ""
 
@@ -2010,14 +2022,8 @@ msgstr ""
 msgid "Warehouse/Automat"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:83
+#: app/Admin/Nekorekten_Com.php:46 app/Admin/Nekorekten_Com.php:85
 msgid "We have found negative reports about this customer."
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:46
-msgid ""
-"We have found negative reports about this customer. <br> Click for more "
-"information."
 msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:50
