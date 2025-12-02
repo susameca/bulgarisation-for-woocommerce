@@ -178,7 +178,7 @@
 							<input v-model="labelData.content.parcelsCount" type="number">
 						</p>
 
-						<p v-if="( typeof( labelData.service.additionalServices ) !== 'undefined' && typeof( labelData.service.additionalServices.cod) !== 'undefined' ) && paymentType === 'cod'" class="form-field" style="clear:none">
+						<p v-if="( typeof( labelData.service.additionalServices ) !== 'undefined' && typeof( labelData.service.additionalServices.cod) !== 'undefined' ) && paymentType === 'cod'" class="form-field form-field-wide">
 							<label>
 								{{i18n.cd}}:
 							</label>
@@ -186,7 +186,7 @@
 							<input v-model="labelData.service.additionalServices.cod.amount" type="number">
 						</p>
 
-						<p v-if="( typeof( labelData.service.additionalServices ) !== 'undefined' && typeof( labelData.service.additionalServices.cod) !== 'undefined' ) && paymentType === 'cod'" class="form-field" style="float:right; clear:none">
+						<p class="form-field form-field-wide">
 							<label>
 								{{i18n.declaredValue}}:
 							</label>
