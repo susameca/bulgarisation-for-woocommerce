@@ -477,11 +477,13 @@ function woo_bg_get_order_label( $order_id ) {
 			case 'woo_bg_boxnow':
 				$data = ['items'];
 
-				foreach ( $label_data['parcels'] as $parcel ) {
-					$data['items'][] = [
-						'number' => $parcel['id'],
-						'link' => admin_url( 'admin-ajax.php' ) . '?cache-buster=' . rand() . '&action=woo_bg_boxnow_print_label&parcel=' . $parcel['id'],
-					];
+				if ( isset( $label_data['parcels'] ) && is_array( $label_data['parcels'] ) ) {
+					foreach ( $label_data['parcels'] as $parcel ) {
+						$data['items'][] = [
+							'number' => $parcel['id'],
+							'link' => admin_url( 'admin-ajax.php' ) . '?cache-buster=' . rand() . '&action=woo_bg_boxnow_print_label&parcel=' . $parcel['id'],
+						];
+					}
 				}
 				
 				break;
