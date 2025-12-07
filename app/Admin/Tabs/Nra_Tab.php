@@ -40,6 +40,7 @@ class Nra_Tab extends Base_Tab {
 				new Fields\Text_Field( 'company_name', __( 'Company Name', 'bulgarisation-for-woocommerce' ), __( 'Your company name.', 'bulgarisation-for-woocommerce' ), 'required' ),
 				new Fields\Text_Field( 'mol', __( 'MOL', 'bulgarisation-for-woocommerce' ), __( 'Your company MOL.', 'bulgarisation-for-woocommerce' ), 'required' ),
 				new Fields\Text_Field( 'eik', __( 'EIK', 'bulgarisation-for-woocommerce' ), __( 'Your company EIK.', 'bulgarisation-for-woocommerce' ), 'required' ),
+				new Fields\TrueFalse_Field( 'vat_113_9', __( 'Company registered under Article 113(9) of the Bulgarian VAT Act', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\Text_Field( 'dds_number', __( 'VAT Number', 'bulgarisation-for-woocommerce' ), __( 'Your company VAT Number. To be filled in if you have a VAT registration.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'dds_number_required', __( 'VAT number required on checkout?', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\Text_Field( 'phone_number', __( 'Company phone Number', 'bulgarisation-for-woocommerce' ), __( 'Contact phone number of your company.', 'bulgarisation-for-woocommerce' ), 'required' ),

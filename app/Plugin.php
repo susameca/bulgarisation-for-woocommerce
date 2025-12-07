@@ -109,6 +109,10 @@ class Plugin {
 					new Admin\EU_Vat();
 				}
 			}
+
+			if ( woo_bg_get_option( 'nap', 'vat_113_9' ) === 'yes' ) {
+				new Invoice\Vat1139();
+			}
 		}
 
 		new Shipping\Register( $this->container );

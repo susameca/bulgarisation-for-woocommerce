@@ -118,60 +118,6 @@ class Pro_Tab extends Base_Tab {
 		return $titles;
 	}
 
-	public static function woo_bg_save_settings_callback() {
-		if ( !wp_verify_nonce( sanitize_text_field( wp_unslash ( $_REQUEST['nonce'] ) ), 'woo_bg_settings' ) ) {
-			wp_send_json_error();
-			wp_die();
-		}
-
-		$tab_class_name = stripslashes( sanitize_text_field( $_REQUEST['tab'] ) );
-		$allowed_classes = [
-			'Woo_BG\Admin\Tabs\Settings_Tab',
-			'Woo_BG\Admin\Tabs\Speedy_Tab',
-			'Woo_BG\Admin\Tabs\Pro_Tab',
-			'Woo_BG\Admin\Tabs\Nra_Tab',
-			'Woo_BG\Admin\Tabs\Nekorekten_Com_Tab',
-			'Woo_BG\Admin\Tabs\Multi_Currency_Tab',
-			'Woo_BG\Admin\Tabs\Help_Tab',
-			'Woo_BG\Admin\Tabs\Export_Tab',
-			'Woo_BG\Admin\Tabs\Econt_Tab',
-			'Woo_BG\Admin\Tabs\CVC_Tab',
-			'Woo_BG\Admin\Tabs\BoxNow_Tab',
-		];
-
-		if ( !in_array( $tab_class_name, $allowed_classes ) ) {
-			wp_send_json_success( array(
-				'message' => __( 'Tab parameter not allowed!', 'bulgarisation-for-woocommerce' ),
-			) );
-			
-			wp_die();
-		}
-		
-		$reflection = new \ReflectionClass( $tab_class_name );
-		$tab = $reflection->newInstanceWithoutConstructor();
-		$tab->load_fields();
-		$fields = $tab->get_fields();
-
-		foreach ( $fields as $group => $group_fields ) {
-			foreach ( $group_fields as $field ) {
-				$field->save_value( $group );
-			}
-		}
-
-		do_action( 'woo_bg/admin/settings/afte_save_fields/' . $tab_class_name );
-
-		$tab->load_fields();
-		
-		wp_send_json_success( array(
-			'fields' => $tab->get_localized_fields(),
-			'groups_titles' => $tab->get_groups_titles(),
-			'message' => __( 'Settings saved successfully!', 'bulgarisation-for-woocommerce' ),
-			'auth_errors' => $tab->auth_test(),
-		) );
-
-		wp_die();
-	}
-
 	public function auth_test() {
 		ob_start();
 		do_action('woo_bg/auth_test');
