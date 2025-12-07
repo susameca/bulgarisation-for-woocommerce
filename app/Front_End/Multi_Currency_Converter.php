@@ -46,8 +46,6 @@ class Multi_Currency_Converter {
 			}
 		}
 
-		$response['stats']['percents'] = 101;
-
 		if ( $response['stats']['percents'] < 100 ) {
 			$response['data']['step'] = $step + 1;
 			$response['loading_text'] = $response['stats']['percents'] . "%";
