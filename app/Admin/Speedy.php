@@ -410,7 +410,7 @@ class Speedy {
 					continue;
 				}
 				
-				$rate = woo_bg_get_order_item_vat_rate( $item, $order );
+				$rate = woo_bg_get_order_item_vat_rate( $item, $order, false, 0 );
 
 				$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
 					'description' => mb_substr( $item->get_name(), 0, 50 ),
@@ -426,7 +426,7 @@ class Speedy {
 						continue;
 					}
 					
-					$rate = woo_bg_get_order_item_vat_rate( $item, $order );
+					$rate = woo_bg_get_order_item_vat_rate( $item, $order, false, 0 );
 
 					$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
 						'description' => mb_substr( $item->get_name(), 0, 50 ),

@@ -245,11 +245,16 @@ function woo_bg_get_order_shipping_vat( $order, $show_group = false ) {
 	return apply_filters( 'woo_bg/order_item/shipping_vat_rate', $shipping_vat, $order );
 }
 
-function woo_bg_get_order_item_vat_rate( $item, $order, $show_group = false ) {
+function woo_bg_get_order_item_vat_rate( $item, $order, $show_group = false, $default_rate = false ) {
 	$tax_data = wc_tax_enabled() ? $item->get_taxes() : false;
-	$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
-	$vat_percentages     = woo_bg_get_vat_groups();
-	$rate = ( isset( $vat_percentages[ $vat_group ] ) ) ? $vat_percentages[ $vat_group ] : 0;
+
+	if ( $default_rate !== false ) {
+		$rate = $default_rate;
+	} else {
+		$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
+		$vat_percentages     = woo_bg_get_vat_groups();
+		$rate = ( isset( $vat_percentages[ $vat_group ] ) ) ? $vat_percentages[ $vat_group ] : 0;
+	}
 	
 	if ( $tax_data ) {
 		$founded = false;
