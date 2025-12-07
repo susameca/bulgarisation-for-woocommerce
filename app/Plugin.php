@@ -110,7 +110,7 @@ class Plugin {
 				}
 			}
 
-			if ( woo_bg_get_option( 'nap', 'vat_113_9' ) === 'yes' ) {
+			if ( woo_bg_get_option( 'nap', 'vat_113_9' ) === 'yes' && ! wc_tax_enabled() ) {
 				new Invoice\Vat1139();
 			}
 		}
