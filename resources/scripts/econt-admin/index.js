@@ -6,5 +6,7 @@ import '@styles/econt-admin';
 if ( $('#woo-bg--econt-admin').length ) {
 	let econtAdmin = () => import('./apps/app.js');
 
-	econtAdmin();
+	setTimeout(() => {
+		econtAdmin();
+	}, 250);
 }

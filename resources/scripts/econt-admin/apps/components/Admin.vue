@@ -183,7 +183,7 @@
 							</multiselect>
 						</p>
 
-						<p v-if="labelData.packCount" class="form-field form-field-wide">
+						<p v-if="typeof labelData.packCount !== 'undefined'" class="form-field form-field-wide">
 							<label>
 								{{i18n.packCount}}:
 							</label>
@@ -231,7 +231,7 @@
 							<input v-model="labelData.shipmentDimensionsH" type="number" step="0.1">
 						</p>
 
-						<p v-if="labelData.weight" class="form-field form-field-wide">
+						<p v-if="typeof labelData.weight !== undefined" class="form-field form-field-wide">
 							<label>
 								{{i18n.weight}}:
 							</label>
