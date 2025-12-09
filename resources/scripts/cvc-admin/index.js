@@ -4,7 +4,9 @@ import config from '@config';
 import '@styles/cvc-admin';
 
 if ( $('#woo-bg--cvc-admin').length ) {
-	let econtAdmin = () => import('./apps/app.js');
+	let cvcAdmin = () => import('./apps/app.js');
 
-	econtAdmin();
+	setTimeout(() => {
+		cvcAdmin();
+	}, 250);
 }

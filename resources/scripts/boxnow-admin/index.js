@@ -5,6 +5,8 @@ import '@styles/boxnow-admin';
 
 if ( $('#woo-bg--boxnow-admin').length ) {
 	let boxNowAdmin = () => import('./apps/app.js');
-
-	boxNowAdmin();
+	
+	setTimeout(() => {
+		boxNowAdmin();
+	}, 250);
 }
