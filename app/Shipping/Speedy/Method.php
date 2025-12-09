@@ -376,17 +376,16 @@ class Method extends \WC_Shipping_Method {
 	private function generate_content_data() {
 		$names = array();
 		$content = array(
-			'parcelsCount' => 1,
-			'totalWeight' => 0,
 			'package' => 'BOX',
 		);
 
+		$weigth = 0;
 		$sizes = [];
 		$auto_sizes = wc_string_to_bool( woo_bg_get_option( 'speedy', 'auto_size' ) );
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
 			if ( $item['data']->get_weight() ) {
-				$content['totalWeight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
+				$weigth += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
 			}
 
 			$force = woo_bg_get_option( 'speedy', 'force_variations_in_desc' );
@@ -410,30 +409,34 @@ class Method extends \WC_Shipping_Method {
 			}
 		}
 
-		if ( !$content['totalWeight'] ) {
-			$content['totalWeight'] = apply_filters( 'woo_bg/speedy/label/weight', 1, $this->package, $this );
+		if ( !$weigth ) {
+			$weigth = apply_filters( 'woo_bg/speedy/label/weight', 1, $this->package, $this );
 		}
 
 		$content['contents'] = mb_substr( implode( ',', $names ), 0, 100 );
 
-		$args = array(
-			'content' => $content,
-		);
+		$pack_sizes = apply_filters( 'woo_bg/speedy/label/sizes', [
+			'width' => 90,
+			'depth' => 90,
+			'height' => 90,
+		], $this->package, $this );
 
 		if ( $auto_sizes && !empty( $sizes ) ) {
 			$packer = new Carton_Packer();
 			$result = $packer->find_best_carton( $sizes );
 
-			$content['parcels'] = [ [
-				'seqNo' => 1,
-				'weight' => $content['totalWeight'],
-				'sizes' => [
-					'width' => wc_get_dimension( $result->W, 'cm', 'mm' ),
-					'depth' => wc_get_dimension( $result->L, 'cm', 'mm' ),
-					'height' => wc_get_dimension( $result->H, 'cm', 'mm' ),
-				],
-			]];
+			$pack_sizes = [
+				'width' => wc_get_dimension( $result->W, 'cm', 'mm' ),
+				'depth' => wc_get_dimension( $result->L, 'cm', 'mm' ),
+				'height' => wc_get_dimension( $result->H, 'cm', 'mm' ),
+			];
 		}
+
+		$content['parcels'] = [ [
+			'seqNo' => 1,
+			'weight' => $weigth,
+			'sizes' => $pack_sizes,
+		]];
 
 		return array(
 			'content' => $content,

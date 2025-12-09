@@ -6,5 +6,7 @@ import '@styles/speedy-admin';
 if ( $('#woo-bg--speedy-admin').length ) {
 	let speedyAdmin = () => import('./apps/app.js');
 
-	speedyAdmin();
+	setTimeout(() => {
+		speedyAdmin();
+	}, 250);
 }

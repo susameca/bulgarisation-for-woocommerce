@@ -1,5 +1,5 @@
 <template>
-	<div class="panel-wrap woocommerce woocommerce--speedy ajax-container" :data-loading="loading">
+	<div class="panel-wrap woocommerce woocommerce--speedy ajax-container woocommerce--woo-bg-label" :data-loading="loading">
 		<div id="order_data" class="panel woocommerce-order-data">
 			<div class="order_data_column_container">
 				<div class="order_data_column order_data_column--half">
@@ -170,12 +170,64 @@
 							</p>
 						</div>
 
-						<p v-if="labelData.content" class="form-field form-field-wide">
-							<label>
-								{{i18n.packCount}}:
-							</label>
+						<fieldset
+							v-for="(parsel, key) in labelData.content.parcels"
+							:key="key"
+						>
+							<legend>{{ i18n.pack }} {{ key + 1 }}</legend>
 
-							<input v-model="labelData.content.parcelsCount" type="number">
+							<p class="form-field form-field--1-of-3" style="clear:none">
+								<label>
+									{{i18n.length}} (cm):
+								</label>
+
+								<input v-model="parsel.sizes.depth" type="number" step="0.1">
+							</p>
+
+							<p class="form-field form-field--1-of-3" style="clear:none">
+								<label>
+									{{i18n.width}} (cm):
+								</label>
+
+								<input v-model="parsel.sizes.width" type="number" step="0.1">
+							</p>
+
+							<p class="form-field form-field--1-of-3" style="float:right; clear:none">
+								<label>
+									{{i18n.height}} (cm):
+								</label>
+
+								<input v-model="parsel.sizes.height" type="number" step="0.1">
+							</p>
+
+							<p v-if="typeof parsel.weight !== 'undefined'" class="form-field form-field-wide">
+								<label>
+									{{i18n.weight}}:
+								</label>
+
+								<input v-model="parsel.weight" type="number" step="0.001">
+							</p>
+
+							<p class="form-field form-field-wide">
+								<button
+									type="button"
+									@click="removeParcel(key)"
+									:disabled="labelData.content.parcels.length === 1"
+									class="button-secondary"
+								>
+									{{ i18n.removePack }}
+								</button>
+							</p>
+						</fieldset>
+
+						<p class="form-field form-field-wide">
+							<button
+								type="button"
+								@click="addParcel"
+								class="button-secondary"
+							>
+								{{ i18n.addPack }}
+							</button>
 						</p>
 
 						<p v-if="( typeof( labelData.service.additionalServices ) !== 'undefined' && typeof( labelData.service.additionalServices.cod) !== 'undefined' ) && paymentType === 'cod'" class="form-field form-field-wide">
@@ -192,38 +244,6 @@
 							</label>
 
 							<input v-model="declaredValue" type="number">
-						</p>
-
-						<p class="form-field form-field--1-of-3" style="clear:none">
-							<label>
-								{{i18n.length}} (cm):
-							</label>
-
-							<input v-model="dimentions.l" type="number" step="0.1">
-						</p>
-
-						<p class="form-field form-field--1-of-3" style="clear:none">
-							<label>
-								{{i18n.width}} (cm):
-							</label>
-
-							<input v-model="dimentions.w" type="number" step="0.1">
-						</p>
-
-						<p class="form-field form-field--1-of-3" style="float:right; clear:none">
-							<label>
-								{{i18n.height}} (cm):
-							</label>
-
-							<input v-model="dimentions.h" type="number" step="0.1">
-						</p>
-
-						<p v-if="labelData.content.totalWeight" class="form-field form-field-wide">
-							<label>
-								{{i18n.weight}}:
-							</label>
-
-							<input v-model="labelData.content.totalWeight" type="number" step="0.001">
 						</p>
 
 						<p class="form-field form-field-wide">
@@ -398,7 +418,6 @@ export default {
 			sendFromOffice: [],
 			sendFromAddress: [],
 			sendFrom: '',
-			dimentions: [],
 			sendFromType: '',
 			type: '',
 			types: [
@@ -496,8 +515,6 @@ export default {
 			this.shipmentStatus = wooBg_speedy.shipmentStatus;
 		}
 
-		this.dimentions = wooBg_speedy.dimentions;
-
 	  	this.document.on('change', 'input[name="label_size"]', function () {
 			_this.size = $(this).val();
 		});
@@ -568,6 +585,49 @@ export default {
 		}
 	},
 	methods: {
+		addParcel() {
+			const parcels = this.labelData.content.parcels || [];
+
+			let template;
+
+			if (parcels.length > 0) {
+				template = cloneDeep(parcels[0]);
+
+				if (template.id) {
+					delete template.id;
+				}
+			} else {
+				template = {
+					seqNo: 1,
+					weight: 1,
+					sizes: {
+						depth: '',
+						width: '',
+						height: '',
+					},
+				};
+			}
+
+			template.seqNo = parcels.length + 1;
+
+			parcels.push(template);
+			this.$set(this.labelData.content, 'parcels', parcels);
+		},
+
+		removeParcel(index) {
+			const parcels = this.labelData.content.parcels;
+
+			if (!Array.isArray(parcels) || parcels.length <= 1) {
+				return;
+			}
+
+			parcels.splice(index, 1);
+
+			parcels.forEach((parcel, idx) => {
+				// make sure Vue keeps it reactive
+				this.$set(parcel, 'seqNo', idx + 1);
+			});
+		},
 		asyncFind: debounce( function( query ) {
 			if ( !query ) {
 				return;
@@ -618,7 +678,6 @@ export default {
 				cookie_data: this.cookie_data,
 				orderId: wooBg_speedy.orderId,
 				declaredValue: this.declaredValue,
-				dimentions: this.dimentions,
 				action: 'woo_bg_speedy_generate_label',
 				nonce: wooBg_speedy.nonce,
 			};
