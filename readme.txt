@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.9
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.5.5
+Stable tag: 3.5.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -101,6 +101,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 == Changelog ==
 
 = 3.5.5 =
+
+
+= 3.5.6 =
 Invoice: Fix http links of images in doc logos
 Speedy: Fix declared value field
 Speedy: Fix fiscal items when no vat are applied
