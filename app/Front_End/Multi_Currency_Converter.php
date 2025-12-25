@@ -41,6 +41,8 @@ class Multi_Currency_Converter {
 		}
 
 		if ( !empty( $woo_bg_messages ) ) {
+			$response['log'] = '';
+
 			foreach ( $woo_bg_messages as $message ) {
 				$response['log'] .= wpautop( $message );
 			}
@@ -116,7 +118,7 @@ class Multi_Currency_Converter {
 
 			$product->update_meta_data( 'woo_bg_sale_price_bgn', $sale_price );
 			$product->set_sale_price( $new_sale_price );
-			$woo_bg_messages[] = sprintf( __( '%s - Change sale price from %s to %s', 'bulgarisation-for-woocommerce' ), $product_name, $sale_price, $new_sale_price );
+			$woo_bg_messages[] = sprintf( __( '%s - Change sale price from %s to %s', 'bulgarisation-for-woocommerce' ), $product->get_formatted_name(), $sale_price, $new_sale_price );
 		}
 
 		$product->update_meta_data( 'woo_bg_converted', 'yes' );
