@@ -108,7 +108,7 @@ class CurrencyToString {
         if ($lv >= 2000000000 )
             return "Твърде голямо число";
         $text  =  self::number_to_text($lv);
-        $text .= $lv == 1 ? " лев":" лева";
+        $text .= $lv == 1 ? " евро":" евро";
         if ($st <> 0 )
             $text = preg_replace( "/^един /","",$text );
         if ($st && $st != 0 ) {

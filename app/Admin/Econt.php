@@ -719,7 +719,7 @@ class Econt {
 
 		if ( $_REQUEST['declaredValue'] ) {
 			$label[ 'services' ]['declaredValueAmount'] = sanitize_text_field( $_REQUEST['declaredValue'] );
-			$label[ 'services' ]['declaredValueCurrency'] = 'BGN';
+			$label[ 'services' ]['declaredValueCurrency'] = get_woocommerce_currency();
 		}
 
 		return $label;
