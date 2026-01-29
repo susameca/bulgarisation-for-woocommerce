@@ -322,11 +322,16 @@ class Method extends \WC_Shipping_Method {
 	private function generate_receiver_data() {
 		$session_customer = WC()->session->get( 'customer' );
 
-		return array(
+		$data = array(
 			'name' => $this->cookie_data[ 'receiver' ],
 			'phones' => array( $this->cookie_data[ 'phone' ] ),
-			'email' => $session_customer[ 'email' ],
 		);
+
+		if ( !empty( $session_customer[ 'email' ] ) ) {
+			$data['email'] = $session_customer[ 'email' ];
+		}
+
+		return $data;
 	}
 
 	private function generate_receiver_address() {

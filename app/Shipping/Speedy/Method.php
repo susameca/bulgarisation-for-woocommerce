@@ -286,8 +286,11 @@ class Method extends \WC_Shipping_Method {
 			'phone1' => array(
 				'number' => woo_bg_format_phone( $this->cookie_data[ 'phone' ], $this->cookie_data[ 'country' ] ),
 			),
-			'email' => $session_customer[ 'email' ],
 		);
+
+		if ( !empty( $session_customer[ 'email' ] ) ) {
+			$recipient['email'] = $session_customer[ 'email' ];
+		}
 
 		if ( isset( $this->cookie_data['billing_to_company'] ) && $this->cookie_data['billing_to_company'] ) {
 			$recipient['privatePerson'] = false;
