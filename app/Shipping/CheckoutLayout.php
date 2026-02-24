@@ -13,7 +13,7 @@ class CheckoutLayout {
 	}
 
 	public static function change_shipping_package_name( $name, $i ) {
-		return __('Shipping', 'woocommerce');
+		return __('Shipping', 'bulgarisation-for-woocommerce');
 	}
 
 	public static function intercept_shipping_table_template( $template, $template_name, $template_path ) {

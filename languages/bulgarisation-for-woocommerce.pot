@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-09 17:39+0000\n"
+"POT-Creation-Date: 2026-02-24 19:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -27,12 +27,12 @@ msgstr ""
 msgid "%1$s is not found in %2$s region."
 msgstr ""
 
-#: app/Front_End/Multi_Currency_Converter.php:112
+#: app/Front_End/Multi_Currency_Converter.php:114
 #, php-format
 msgid "%s - Change regular price from %s to %s"
 msgstr ""
 
-#: app/Front_End/Multi_Currency_Converter.php:119
+#: app/Front_End/Multi_Currency_Converter.php:121
 #, php-format
 msgid "%s - Change sale price from %s to %s"
 msgstr ""
@@ -68,7 +68,7 @@ msgstr ""
 msgid "+ Add new row"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:216
+#: app/Invoice/Document/BaseDocument.php:218
 msgid "1 EUR = 1.95583 BGN"
 msgstr ""
 
@@ -104,7 +104,7 @@ msgstr ""
 #: app/Admin/CVC.php:139 app/Admin/Econt.php:139 app/Admin/Speedy.php:141
 #: app/Admin/Tabs/CVC_Tab.php:97 app/Admin/Tabs/Speedy_Tab.php:101
 #: app/Admin/Tabs/Econt_Tab.php:139 app/Shipping/CVC/Method.php:139
-#: app/Shipping/Econt/Method.php:142 app/Shipping/Speedy/Method.php:148
+#: app/Shipping/Econt/Method.php:141 app/Shipping/Speedy/Method.php:148
 #: app/Front_End/Checkout/Company.php:79
 msgid "Address"
 msgstr ""
@@ -187,7 +187,7 @@ msgstr ""
 msgid "Bank account"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:202
+#: app/Invoice/Document/BaseDocument.php:203
 msgid "Bank name"
 msgstr ""
 
@@ -267,7 +267,7 @@ msgstr ""
 msgid "Calculation failed. Please try again."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:175
+#: app/Shipping/Econt/Method.php:174
 msgid "Can be used only in Bulgaria"
 msgstr ""
 
@@ -489,7 +489,7 @@ msgstr ""
 msgid "Delivery is payed by"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:133 app/Shipping/Econt/Method.php:136
+#: app/Shipping/CVC/Method.php:133 app/Shipping/Econt/Method.php:135
 #: app/Shipping/Speedy/Method.php:142
 msgid "Delivery Type"
 msgstr ""
@@ -570,7 +570,7 @@ msgstr ""
 msgid "E-mail: %s"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:540
+#: app/Shipping/Econt/Method.php:542
 msgid "Econt - "
 msgstr ""
 
@@ -679,7 +679,7 @@ msgstr ""
 msgid "Enables Speedy Shipping methods."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:175 app/Shipping/Speedy/Method.php:170
+#: app/Shipping/Econt/Method.php:174 app/Shipping/Speedy/Method.php:170
 msgid ""
 "Enter a fixed price that the users will pay. The remaining will be payed by "
 "you."
@@ -847,12 +847,12 @@ msgid "Free shipping"
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:176 app/Shipping/CVC/Method.php:176
-#: app/Shipping/Econt/Method.php:164 app/Shipping/Speedy/Method.php:159
+#: app/Shipping/Econt/Method.php:163 app/Shipping/Speedy/Method.php:159
 msgid "Free shipping over"
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:176 app/Shipping/CVC/Method.php:179
-#: app/Shipping/Econt/Method.php:167 app/Shipping/Speedy/Method.php:162
+#: app/Shipping/Econt/Method.php:166 app/Shipping/Speedy/Method.php:162
 msgid "Free shipping over total cart price."
 msgstr ""
 
@@ -1063,8 +1063,8 @@ msgstr ""
 msgid "Label data"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:544 app/Shipping/Econt/Method.php:670
-#: app/Shipping/Speedy/Method.php:694 app/Shipping/BoxNow/Method.php:447
+#: app/Shipping/CVC/Method.php:544 app/Shipping/Econt/Method.php:672
+#: app/Shipping/Speedy/Method.php:700 app/Shipping/BoxNow/Method.php:447
 #, php-format
 msgid "Label number: %s. %s"
 msgstr ""
@@ -1117,7 +1117,7 @@ msgstr ""
 msgid "Manner of payment of the order according to the NRA system."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:172
+#: app/Shipping/Econt/Method.php:171
 msgid "Maximum price payed by the client"
 msgstr ""
 
@@ -1173,7 +1173,7 @@ msgstr ""
 
 #: app/functions.php:64 app/functions.php:223 app/Shipping/CVC/Method.php:148
 #: app/Shipping/CVC/Method.php:159 app/Shipping/CVC/Method.php:170
-#: app/Shipping/Econt/Method.php:158
+#: app/Shipping/Econt/Method.php:157
 msgid "No"
 msgstr ""
 
@@ -1219,7 +1219,7 @@ msgid "No results was found for this city"
 msgstr ""
 
 #: app/functions.php:389 app/Admin/Nekorekten_Com.php:371
-#: app/Front_End/Multi_Currency_Converter.php:84
+#: app/Front_End/Multi_Currency_Converter.php:86
 msgid "Nonce was not provided!"
 msgstr ""
 
@@ -1242,7 +1242,7 @@ msgstr ""
 #: app/Admin/Tabs/CVC_Tab.php:93 app/Admin/Tabs/CVC_Tab.php:115
 #: app/Admin/Tabs/Speedy_Tab.php:97 app/Admin/Tabs/Speedy_Tab.php:127
 #: app/Admin/Tabs/Econt_Tab.php:135 app/Admin/Tabs/Econt_Tab.php:174
-#: app/Shipping/CVC/Method.php:138 app/Shipping/Econt/Method.php:141
+#: app/Shipping/CVC/Method.php:138 app/Shipping/Econt/Method.php:140
 #: app/Shipping/Speedy/Method.php:147
 msgid "Office"
 msgstr ""
@@ -1383,16 +1383,16 @@ msgstr ""
 msgid "Please choose a automat."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:555 app/Shipping/Speedy/Method.php:608
+#: app/Shipping/Econt/Method.php:557 app/Shipping/Speedy/Method.php:614
 msgid "Please choose a office."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:563
+#: app/Shipping/Econt/Method.php:565
 msgid "Please choose address."
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:458 app/Shipping/Econt/Method.php:543
-#: app/Shipping/Speedy/Method.php:598
+#: app/Shipping/CVC/Method.php:458 app/Shipping/Econt/Method.php:545
+#: app/Shipping/Speedy/Method.php:604
 msgid "Please choose delivery option!"
 msgstr ""
 
@@ -1545,7 +1545,7 @@ msgstr ""
 
 #: app/functions.php:225 app/Admin/CVC.php:153 app/Admin/Econt.php:152
 #: app/Admin/Speedy.php:154 app/Shipping/CVC/Method.php:143
-#: app/Shipping/CVC/Method.php:150 app/Shipping/Econt/Method.php:146
+#: app/Shipping/CVC/Method.php:150 app/Shipping/Econt/Method.php:145
 #: app/Shipping/Speedy/Method.php:152
 msgid "Review and test"
 msgstr ""
@@ -1651,7 +1651,7 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:173 app/Shipping/Econt/Method.php:161
+#: app/Shipping/CVC/Method.php:173 app/Shipping/Econt/Method.php:160
 msgid "Send customer notification for delivery."
 msgstr ""
 
@@ -1710,6 +1710,10 @@ msgstr ""
 msgid "Shipment type"
 msgstr ""
 
+#: app/Shipping/CheckoutLayout.php:16
+msgid "Shipping"
+msgstr ""
+
 #: app/Admin/Tabs/Nra_Tab.php:155
 msgid "Shipping Methods Settings"
 msgstr ""
@@ -1719,7 +1723,7 @@ msgstr ""
 msgid "Shipping: %s"
 msgstr ""
 
-#: app/Front_End/Multi_Currency_Converter.php:142
+#: app/Front_End/Multi_Currency_Converter.php:144
 msgid "Shop currency changed to EUR"
 msgstr ""
 
@@ -1743,7 +1747,7 @@ msgstr ""
 msgid "Small Box"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:165 app/Shipping/Econt/Method.php:153
+#: app/Shipping/CVC/Method.php:165 app/Shipping/Econt/Method.php:152
 msgid "SMS notification"
 msgstr ""
 
@@ -1754,7 +1758,7 @@ msgid ""
 "not found or the payment method was disabled. List of orders id's: %s"
 msgstr ""
 
-#: app/Shipping/Speedy/Method.php:596
+#: app/Shipping/Speedy/Method.php:602
 #, php-format
 msgid "Speedy - %s"
 msgstr ""
@@ -1869,7 +1873,7 @@ msgstr ""
 msgid "There was some error in one of the reports."
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:128 app/Shipping/Econt/Method.php:131
+#: app/Shipping/CVC/Method.php:128 app/Shipping/Econt/Method.php:130
 #: app/Shipping/Speedy/Method.php:137 app/Shipping/BoxNow/Method.php:121
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
@@ -1911,7 +1915,7 @@ msgstr ""
 msgid "Time:"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:126 app/Shipping/Econt/Method.php:129
+#: app/Shipping/CVC/Method.php:126 app/Shipping/Econt/Method.php:128
 #: app/Shipping/Speedy/Method.php:135 app/Shipping/BoxNow/Method.php:119
 msgid "Title"
 msgstr ""
@@ -1954,8 +1958,8 @@ msgstr ""
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:548 app/Shipping/Econt/Method.php:674
-#: app/Shipping/Speedy/Method.php:698 app/Shipping/BoxNow/Method.php:451
+#: app/Shipping/CVC/Method.php:548 app/Shipping/Econt/Method.php:676
+#: app/Shipping/Speedy/Method.php:704 app/Shipping/BoxNow/Method.php:451
 msgid "Track your order."
 msgstr ""
 
@@ -2100,7 +2104,7 @@ msgid ""
 msgstr ""
 
 #: app/functions.php:68 app/Shipping/CVC/Method.php:160
-#: app/Shipping/CVC/Method.php:171 app/Shipping/Econt/Method.php:159
+#: app/Shipping/CVC/Method.php:171 app/Shipping/Econt/Method.php:158
 msgid "Yes"
 msgstr ""
 
@@ -2116,7 +2120,7 @@ msgstr ""
 msgid "You can review a demo at: %s"
 msgstr ""
 
-#: app/Front_End/Multi_Currency_Converter.php:88
+#: app/Front_End/Multi_Currency_Converter.php:90
 msgid "You cannot change the prices."
 msgstr ""
 
