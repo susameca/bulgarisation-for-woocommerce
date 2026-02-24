@@ -74,7 +74,6 @@ class Method extends \WC_Shipping_Method {
 		$rate['meta_data']['delivery_type'] = $this->delivery_type;
 		$rate['meta_data']['validated'] = false;
 		$chosen_shippings = WC()->session->get('chosen_shipping_methods');
-		$payment_by_data = $this->generate_payment_by_data();
 
 		if ( 
 			isset( $this->cookie_data['type'] ) && 
@@ -399,8 +398,6 @@ class Method extends \WC_Shipping_Method {
 		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'econt', 'declared_value' ) );
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
-			$_product = wc_get_product( $item[ 'product_id' ] );
-			
 			if ( $item['data']->get_weight() ) {
 				$cart['weight'] += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
 			}
