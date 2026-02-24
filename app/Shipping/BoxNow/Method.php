@@ -92,11 +92,14 @@ class Method extends \WC_Shipping_Method {
 					break;
 			}
 
-			$rate['cost'] = woo_bg_tax_based_price( $price );
-			
-			if ( wc_tax_enabled() ) {
-				$rate['taxes'] = woo_bg_get_shipping_rate_taxes( $rate['cost'] );
+			if ( $price ) {
+				$rate['cost'] = woo_bg_tax_based_price( $price );
+				
+				if ( wc_tax_enabled() ) {
+					$rate['taxes'] = woo_bg_get_shipping_rate_taxes( $rate['cost'] );
+				}
 			}
+
 		}
 
 		$rate['meta_data']['cookie_data'] = $this->cookie_data;
@@ -170,6 +173,10 @@ class Method extends \WC_Shipping_Method {
 		if ( $from_to_kg = woo_bg_get_option( 'boxnow_price', 'from_to_kg' ) ) {
 			$from_to_kg = json_decode( $from_to_kg, 1 );
 
+			if ( !$from_to_kg || empty( array_filter( $from_to_kg ) ) ) {
+				return;
+			}
+
 			foreach ( $from_to_kg as $row ) {
 				if ( !$row['from'] ) {
 					$row['from'] = 0;
@@ -196,6 +203,10 @@ class Method extends \WC_Shipping_Method {
 
 		if ( $from_to_total = woo_bg_get_option( 'boxnow_price', 'from_to_order_total' ) ) {
 			$from_to_total = json_decode( $from_to_total, 1 );
+
+			if ( !$from_to_total || empty( array_filter( $from_to_total ) ) ) {
+				return;
+			}
 
 			foreach ( $from_to_total as $row ) {
 				if ( !$row['to'] ) {
@@ -224,6 +235,10 @@ class Method extends \WC_Shipping_Method {
 
 		if ( $from_to = woo_bg_get_option( 'boxnow_price', 'from_to_kg_and_order_total' ) ) {
 			$from_to = json_decode( $from_to, 1 );
+			
+			if ( !$from_to || empty( array_filter( $from_to ) ) ) {
+				return;
+			}
 
 			foreach ( $from_to as $row ) {
 				if ( !$row['to_price'] ) {
