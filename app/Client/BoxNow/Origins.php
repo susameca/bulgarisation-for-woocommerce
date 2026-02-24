@@ -62,10 +62,11 @@ class Origins {
 
 		if ( !empty( $origins ) ) {
 			foreach ( $origins as $origin ) {
+				$address_line_2 = ( $origin['addressLine2'] ) ? str_replace( ' ', '', $origin['addressLine2'] ) : '';
 				$data[ 'originID-' . $origin['id'] ] = [
 					'id' => 'originID-' . $origin['id'],
 					'type' => $origin['type'],
-					'label' => $origin['name'] . ' (' . str_replace( ' ', '', $origin['addressLine2'] ) . ' ' . $origin['addressLine1'] . ')',
+					'label' => $origin['name'] . ' (' . $address_line_2 . ' ' . $origin['addressLine1'] . ')',
 				];
 			}
 		}

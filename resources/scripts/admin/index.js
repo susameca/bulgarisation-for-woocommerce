@@ -33,7 +33,6 @@ if ( $('#woo-bg-contact-form').length ) {
 	helpTab();
 }
 
-import './modules/convert-prices';
 import './modules/boxnow-notice';
 import './modules/nekorekten';
 import './modules/generate-label';
