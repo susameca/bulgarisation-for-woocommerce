@@ -196,13 +196,15 @@ class BaseDocument {
 			$bacs_info  = get_option( 'woocommerce_bacs_accounts');
 
 			ob_start();
-
-			foreach ( $bacs_info as $account ) {
-				?>
-				<strong><?php esc_html_e( 'Bank name', 'bulgarisation-for-woocommerce' ) ?>:</strong> <?php echo esc_html( $account['bank_name'] ) ?> <br>
-				<strong>IBAN:</strong> <?php echo esc_html( $account['iban'] ) ?> <br>
-				<strong>BIC:</strong> <?php echo esc_html( $account['bic'] ) ?> <br>
-				<?php
+			
+			if ( !empty( $bacs_info ) ) {
+				foreach ( $bacs_info as $account ) {
+					?>
+					<strong><?php esc_html_e( 'Bank name', 'bulgarisation-for-woocommerce' ) ?>:</strong> <?php echo esc_html( $account['bank_name'] ) ?> <br>
+					<strong>IBAN:</strong> <?php echo esc_html( $account['iban'] ) ?> <br>
+					<strong>BIC:</strong> <?php echo esc_html( $account['bic'] ) ?> <br>
+					<?php
+				}
 			}
 
 			$items[] = ob_get_clean();
