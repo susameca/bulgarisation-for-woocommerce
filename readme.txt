@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.9
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.5.7
+Stable tag: 3.5.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -99,6 +99,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 При работа с тези външни услуги могат да бъдат изпращани данни като: име и адрес на получателя, телефон, имейл, стойност на поръчката, наложен платеж, както и друга информация, необходима за създаване на товарителници и/или проверка на коректността на клиента. Данните се изпращат единствено с цел обработка и доставка на поръчката и проверка за потенциални злоупотреби.
 
 == Changelog ==
+
+= 3.5.8 =
+Checkout: Fix label for shippings
+Econt: Optimize packing list price
+Invoice: Optimize additional items ( bank info )
+BoxNow: Fix issue with empty price
+Multi currency: Remove converter functionality
 
 = 3.5.7 =
 Speedy:Update default pack size
