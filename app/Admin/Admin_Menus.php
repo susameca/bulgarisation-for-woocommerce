@@ -128,10 +128,6 @@ class Admin_Menus {
 			$tabs[] = new Tabs\CVC_Tab();
 		}
 
-		if ( woo_bg_get_option( 'apis', 'enable_nekorekten' ) === 'yes' ) {
-			$tabs[] = new Tabs\Nekorekten_Com_Tab();
-		}
-
 		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ) {
 			$tabs[] = new Tabs\Multi_Currency_Tab();
 		}

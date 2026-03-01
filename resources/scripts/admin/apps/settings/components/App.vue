@@ -5,7 +5,7 @@
 			<div v-if="auth_errors" v-html="auth_errors" class="notice notice-error"> </div>
 
 			<div v-for="(group, group_slug) in fields">
-	  		<h3>{{ groups_titles[ group_slug ].title }}</h3>
+	  		<h3 class="woo-bg--group-title">{{ groups_titles[ group_slug ].title }}</h3>
 
 			  <table class="form-table">
 					<tbody>

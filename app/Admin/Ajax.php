@@ -13,7 +13,6 @@ class Ajax {
 		add_action( 'wp_ajax_woo_bg_export_invoice_archive', array( 'Woo_BG\Admin\Tabs\Export_Tab', 'woo_bg_export_invoice_archive_callback' ) );
 
 		add_action( 'wp_ajax_woo_bg_generate_label_from_listing_page', array( 'Woo_BG\Admin\Order\Labels', 'generate_label_from_listing_page_callback') );
-		add_action( 'wp_ajax_woo_bg_nekorekten_submit', array( 'Woo_BG\Admin\Nekorekten_Com', 'submit_callback') );
 		add_action( 'wp_ajax_woo_bg_boxnow_message_dismiss', array( 'Woo_BG\Admin\BoxNow', 'message_dismiss_callback') );
 	}
 }

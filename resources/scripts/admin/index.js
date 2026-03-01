@@ -34,5 +34,4 @@ if ( $('#woo-bg-contact-form').length ) {
 }
 
 import './modules/boxnow-notice';
-import './modules/nekorekten';
 import './modules/generate-label';

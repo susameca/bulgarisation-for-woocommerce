@@ -91,8 +91,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
     - https://lox.e-cvc.bg/
 
 - Проверка за некоректни клиенти чрез услугата:
-  - nekorekten.com ( [terms](https://nekorekten.com/bg/terms) )
-    - https://api.nekorekten.com/
+  
 
 - При съгласие за подпомагане на разработката за плъгина се събира информация коя основна настройка е включена от плъгина към https://license.bulgarisation.bg/
 

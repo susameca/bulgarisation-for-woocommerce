@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 19:31+0000\n"
+"POT-Creation-Date: 2026-03-01 21:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -25,21 +25,6 @@ msgstr ""
 #: app/Shipping/Speedy/Office.php:64
 #, php-format
 msgid "%1$s is not found in %2$s region."
-msgstr ""
-
-#: app/Front_End/Multi_Currency_Converter.php:114
-#, php-format
-msgid "%s - Change regular price from %s to %s"
-msgstr ""
-
-#: app/Front_End/Multi_Currency_Converter.php:121
-#, php-format
-msgid "%s - Change sale price from %s to %s"
-msgstr ""
-
-#: app/Front_End/Multi_Currency_Converter.php:38
-#, php-format
-msgid "%s - price already updated."
 msgstr ""
 
 #: app/Shipping/Econt/Office.php:63
@@ -72,10 +57,10 @@ msgstr ""
 msgid "1 EUR = 1.95583 BGN"
 msgstr ""
 
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
+#: app/Admin/Tabs/Settings_Tab.php:54
 msgid ""
-"<strong>WARNING:</strong> Please notice that the server has limit of 10 "
-"calls per minute."
+"<strong>WARNING:</strong> Please notice that if you use Nekorekten.com API, "
+"the server has limit of 10 calls per minute."
 msgstr ""
 
 #: app/Admin/Speedy.php:158
@@ -93,7 +78,7 @@ msgid ""
 "want the variation data to be available in the label print and it's missing."
 msgstr ""
 
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:42
+#: app/Admin/Tabs/Settings_Tab.php:53
 msgid "Add column on orders list."
 msgstr ""
 
@@ -131,7 +116,7 @@ msgstr ""
 msgid "Allow shipping to Greece and Romania for Econt and Speedy."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:54
+#: app/Admin/Tabs/Settings_Tab.php:57
 msgid "Alternative shipping options layout ( checkout )"
 msgstr ""
 
@@ -145,10 +130,6 @@ msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:157
 msgid "and"
-msgstr ""
-
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:41
-msgid "API Key"
 msgstr ""
 
 #: app/Admin/Tabs/CVC_Tab.php:64
@@ -193,6 +174,10 @@ msgstr ""
 
 #: app/Admin/Tabs/Multi_Currency_Tab.php:10
 msgid "BGN/EUR dual price"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:11
+msgid "BGN/EUR Settings"
 msgstr ""
 
 #: app/Admin/EU_Vat.php:114
@@ -253,16 +238,6 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:117
-#, php-format
-msgid "By Email ( %s )"
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:105
-#, php-format
-msgid "By Phone ( %s )"
-msgstr ""
-
 #: app/Shipping/CVC/Method.php:231 app/Shipping/Speedy/Method.php:211
 msgid "Calculation failed. Please try again."
 msgstr ""
@@ -303,29 +278,25 @@ msgstr ""
 msgid "Cash on delivery with PPP"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:39
-msgid "Change product prices from BGN to EUR"
-msgstr ""
-
 #: app/Admin/Tabs/Pro_Tab.php:46
 msgid ""
 "Changing the default radio buttons for shipping methods with more stylish "
 "buttons."
 msgstr ""
 
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
+#: app/Admin/Tabs/Settings_Tab.php:54
 msgid "Check by phone number on checkout and disable COD payment method."
 msgstr ""
 
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:43
+#: app/Admin/Tabs/Settings_Tab.php:54
 msgid "Check on checkout and disable COD."
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:84
+#: app/Admin/Tabs/Multi_Currency_Tab.php:47
 msgid "Checkout Message"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:75
+#: app/Admin/Tabs/Settings_Tab.php:81
 msgid "Checkout Settings"
 msgstr ""
 
@@ -355,7 +326,7 @@ msgstr ""
 msgid "Clear cache"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:48
+#: app/Reports/Reports.php:108
 msgid "Click for more information."
 msgstr ""
 
@@ -363,11 +334,15 @@ msgstr ""
 msgid "Client ID"
 msgstr ""
 
+#: app/Admin/Tabs/Settings_Tab.php:78
+msgid "Client reports"
+msgstr ""
+
 #: app/Admin/Tabs/BoxNow_Tab.php:74
 msgid "Client Secret"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:51
+#: app/Admin/Tabs/Settings_Tab.php:50
 msgid "Collection non-sensitive data"
 msgstr ""
 
@@ -411,7 +386,7 @@ msgstr ""
 msgid "Contract"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:102
+#: app/Admin/Tabs/Multi_Currency_Tab.php:65
 msgid "Conversion rate message"
 msgstr ""
 
@@ -454,15 +429,6 @@ msgstr ""
 msgid "Date of tax. event"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:178
-msgid "Date:"
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:140 app/Admin/Nekorekten_Com.php:154
-#, php-format
-msgid "Date: %s"
-msgstr ""
-
 #: app/Admin/Tabs/Nra_Tab.php:82
 msgid "Days added to documents due date."
 msgstr ""
@@ -503,7 +469,6 @@ msgid "Demo"
 msgstr ""
 
 #: app/Admin/CVC.php:155 app/Admin/Econt.php:154 app/Admin/Speedy.php:157
-#: app/Admin/Nekorekten_Com.php:349
 msgid "Description"
 msgstr ""
 
@@ -557,7 +522,7 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:341 app/Admin/Tabs/Help_Tab.php:35
+#: app/Admin/Tabs/Help_Tab.php:35
 msgid "E-mail:"
 msgstr ""
 
@@ -598,11 +563,7 @@ msgstr ""
 msgid "EIK: %s"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:175
-msgid "Email:"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:50
+#: app/Admin/Tabs/Settings_Tab.php:49
 msgid "Enable BGN/EUR dual price"
 msgstr ""
 
@@ -624,10 +585,6 @@ msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:54
 msgid "Enable N-18"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:49
-msgid "Enable nekorekten.com API? "
 msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:54
@@ -659,7 +616,7 @@ msgstr ""
 msgid "Enables CVC Shipping methods."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:50
+#: app/Admin/Tabs/Settings_Tab.php:49
 msgid "Enables dual price showing for migrating to EUR."
 msgstr ""
 
@@ -709,10 +666,6 @@ msgstr ""
 msgid "Enter sender phone."
 msgstr ""
 
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:41
-msgid "Enter the generated API key."
-msgstr ""
-
 #: app/Admin/Tabs/Nra_Tab.php:83
 msgid ""
 "Enter the name of the compiler of the automatically generated documents, "
@@ -745,11 +698,6 @@ msgstr ""
 
 #: app/Front_End/Checkout/EU_Vat.php:162
 msgid "Error communicating with the VAT validation server - please try again"
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:144
-#, php-format
-msgid "Error: \"%s\""
 msgstr ""
 
 #: app/Admin/EU_Vat.php:52
@@ -794,10 +742,6 @@ msgid ""
 "Download</a>"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:172 app/Admin/Nekorekten_Com.php:320
-msgid "First Name:"
-msgstr ""
-
 #: app/Front_End/Multi_Currency.php:114
 #: app/Invoice/Document/BaseDocument.php:176
 msgid "Fixed conversion rate:"
@@ -810,11 +754,6 @@ msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:85
 msgid "Footer text"
-msgstr ""
-
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:41
-#, php-format
-msgid "For generating an API key, use this IP address: %s"
 msgstr ""
 
 #: app/Admin/Tabs/Pro_Tab.php:71
@@ -834,11 +773,6 @@ msgstr ""
 
 #: app/Admin/Tabs/Export_Tab.php:111
 msgid "Found errors in file:"
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:159
-#, php-format
-msgid "Found: %s"
 msgstr ""
 
 #: app/Shipping/Register.php:162 app/Shipping/Register.php:163
@@ -868,9 +802,8 @@ msgstr ""
 msgid "From/To Order Total"
 msgstr ""
 
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:61 app/Admin/Tabs/CVC_Tab.php:137
-#: app/Admin/Tabs/Speedy_Tab.php:151 app/Admin/Tabs/BoxNow_Tab.php:213
-#: app/Admin/Tabs/Econt_Tab.php:217
+#: app/Admin/Tabs/CVC_Tab.php:137 app/Admin/Tabs/Speedy_Tab.php:151
+#: app/Admin/Tabs/BoxNow_Tab.php:213 app/Admin/Tabs/Econt_Tab.php:217
 msgid "General"
 msgstr ""
 
@@ -976,11 +909,6 @@ msgid ""
 "XML export"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:49
-msgid ""
-"If yes, you will receive information about the customer from nekorekten.com."
-msgstr ""
-
 #: app/Admin/Tabs/Speedy_Tab.php:103
 msgid "If you choose \"Address\" the profile address will be used."
 msgstr ""
@@ -1009,10 +937,6 @@ msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:242
 msgid "Incorrect Client ID or Client Secret."
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:146
-msgid "Invalid access."
 msgstr ""
 
 #: app/Front_End/Checkout/EU_Vat.php:150
@@ -1064,17 +988,13 @@ msgid "Label data"
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:544 app/Shipping/Econt/Method.php:672
-#: app/Shipping/Speedy/Method.php:700 app/Shipping/BoxNow/Method.php:447
+#: app/Shipping/Speedy/Method.php:700 app/Shipping/BoxNow/Method.php:462
 #, php-format
 msgid "Label number: %s. %s"
 msgstr ""
 
 #: app/Admin/BoxNow.php:136 app/Admin/Tabs/BoxNow_Tab.php:193
 msgid "Large Box"
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:173 app/Admin/Nekorekten_Com.php:327
-msgid "Last Name:"
 msgstr ""
 
 #: app/Admin/Econt.php:158 app/Admin/Speedy.php:161
@@ -1093,10 +1013,6 @@ msgstr ""
 msgid "Live"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:61
-msgid "Loading products..."
-msgstr ""
-
 #: app/Admin/Tabs/BoxNow_Tab.php:91
 msgid "Location"
 msgstr ""
@@ -1105,11 +1021,11 @@ msgstr ""
 msgid "Main Company Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:72
+#: app/Admin/Tabs/Settings_Tab.php:75
 msgid "Main functionalities"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:54
+#: app/Admin/Tabs/Settings_Tab.php:57
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr ""
 
@@ -1150,19 +1066,6 @@ msgstr ""
 msgid "Name:"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:279
-msgid "Nekorekten"
-msgstr ""
-
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:11
-#: app/Admin/Tabs/Multi_Currency_Tab.php:11
-msgid "nekorekten.com API Settings"
-msgstr ""
-
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:10
-msgid "nekorekten.com Settings"
-msgstr ""
-
 #: app/Admin/Tabs/Nra_Tab.php:81
 msgid "Next Invoice/Credit notice Number"
 msgstr ""
@@ -1200,12 +1103,8 @@ msgstr ""
 msgid "No profiles was found. Please contact with Speedy."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:58
+#: app/Reports/Reports.php:118
 msgid "No reports was found for this customer!"
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:90
-msgid "No reports was found."
 msgstr ""
 
 #: app/Shipping/BoxNow/Apm.php:36
@@ -1218,20 +1117,12 @@ msgstr ""
 msgid "No results was found for this city"
 msgstr ""
 
-#: app/functions.php:389 app/Admin/Nekorekten_Com.php:371
-#: app/Front_End/Multi_Currency_Converter.php:86
+#: app/functions.php:389
 msgid "Nonce was not provided!"
 msgstr ""
 
 #: app/Shipping/Register.php:165 app/Shipping/Register.php:187
 msgid "Not calculated"
-msgstr ""
-
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:41
-msgid ""
-"Note that nekorekten.com may recognize you by another IP address. If so, "
-"you'll find a message where the reports appear. Copy the IP address from the "
-"error and generate a new API key."
 msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:50
@@ -1264,7 +1155,7 @@ msgstr ""
 msgid "Option to include order ID in label."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:94 app/Admin/Order/Documents.php:78
+#: app/Reports/Reports.php:77 app/Admin/Order/Documents.php:78
 msgid "Order"
 msgstr ""
 
@@ -1360,10 +1251,6 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:174 app/Admin/Nekorekten_Com.php:334
-msgid "Phone:"
-msgstr ""
-
 #: app/Invoice/Document/BaseDocument.php:116
 #: app/Invoice/Document/BaseDocument.php:139
 #: app/Invoice/Document/BaseDocument.php:149
@@ -1379,7 +1266,7 @@ msgstr ""
 msgid "Place of transaction"
 msgstr ""
 
-#: app/Shipping/BoxNow/Method.php:274
+#: app/Shipping/BoxNow/Method.php:289
 msgid "Please choose a automat."
 msgstr ""
 
@@ -1463,19 +1350,19 @@ msgstr ""
 msgid "Qty"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:83
+#: app/Admin/Tabs/Multi_Currency_Tab.php:46
 msgid "Rate message in Emails"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:81
+#: app/Admin/Tabs/Multi_Currency_Tab.php:44
 msgid "Rate message on Cart page"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:80
+#: app/Admin/Tabs/Multi_Currency_Tab.php:43
 msgid "Rate message on Product page"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:82
+#: app/Admin/Tabs/Multi_Currency_Tab.php:45
 msgid "Rate message on Shop page"
 msgstr ""
 
@@ -1495,7 +1382,7 @@ msgstr ""
 msgid "Reflected with receipt"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:97
+#: app/Reports/Reports.php:81
 msgid "Refresh data"
 msgstr ""
 
@@ -1535,7 +1422,7 @@ msgstr ""
 msgid "Remove Pack"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:34
+#: app/Reports/Reports.php:60 app/Reports/Reports.php:164
 msgid "Reports"
 msgstr ""
 
@@ -1674,7 +1561,7 @@ msgstr ""
 msgid "Send to"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:51
+#: app/Admin/Tabs/Settings_Tab.php:50
 msgid ""
 "Send us non-sensitive data to improve user experience. This data include all "
 "of the above options ( what is enabled/disabled )"
@@ -1688,11 +1575,11 @@ msgstr ""
 msgid "Sender payment type"
 msgstr ""
 
-#: app/Plugin.php:67 app/Plugin.php:189 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:67 app/Plugin.php:186 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:129
+#: app/Admin/Tabs/Settings_Tab.php:135
 msgid "Settings saved successfully!"
 msgstr ""
 
@@ -1723,23 +1610,19 @@ msgstr ""
 msgid "Shipping: %s"
 msgstr ""
 
-#: app/Front_End/Multi_Currency_Converter.php:144
-msgid "Shop currency changed to EUR"
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:83
+#: app/Admin/Tabs/Multi_Currency_Tab.php:46
 msgid "Show message about conversion rate in emails."
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:81
+#: app/Admin/Tabs/Multi_Currency_Tab.php:44
 msgid "Show message about conversion rate on the cart page."
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:80
+#: app/Admin/Tabs/Multi_Currency_Tab.php:43
 msgid "Show message about conversion rate on the product page."
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:82
+#: app/Admin/Tabs/Multi_Currency_Tab.php:45
 msgid "Show message about conversion rate on the shop page in each product."
 msgstr ""
 
@@ -1811,28 +1694,16 @@ msgstr ""
 msgid "Street/Quarter"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:358
-msgid "Submit"
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:315
-msgid "Submit Review"
-msgstr ""
-
 #: app/functions.php:214
 msgid "Supporting the development"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:105
+#: app/Admin/Tabs/Settings_Tab.php:111
 msgid "Tab parameter not allowed!"
 msgstr ""
 
 #: app/Admin/EU_Vat.php:27
 msgid "Tax Classes for Digital Goods"
-msgstr ""
-
-#: app/Admin/Nekorekten_Com.php:180
-msgid "Text:"
 msgstr ""
 
 #: app/Admin/Tabs/Help_Tab.php:54
@@ -1869,12 +1740,8 @@ msgid ""
 "free one )."
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:81
-msgid "There was some error in one of the reports."
-msgstr ""
-
 #: app/Shipping/CVC/Method.php:128 app/Shipping/Econt/Method.php:130
-#: app/Shipping/Speedy/Method.php:137 app/Shipping/BoxNow/Method.php:121
+#: app/Shipping/Speedy/Method.php:137 app/Shipping/BoxNow/Method.php:124
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
@@ -1884,12 +1751,10 @@ msgid ""
 " This affects the taxable location of the user as of 1st Jan 2015."
 msgstr ""
 
-#: app/Admin/Tabs/Nekorekten_Com_Tab.php:42
+#: app/Admin/Tabs/Settings_Tab.php:53
 msgid ""
 "This option will add a column with the customer status next to the shipping "
-"info column. Please notice that the maximum requests to nekorekten.com are 5 "
-"( 2 per order ), so if you see \"?\" icon please open the order details page,"
-" to generate the information again."
+"info column."
 msgstr ""
 
 #: app/Admin/Tabs/Nra_Tab.php:79
@@ -1916,7 +1781,7 @@ msgid "Time:"
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:126 app/Shipping/Econt/Method.php:128
-#: app/Shipping/Speedy/Method.php:135 app/Shipping/BoxNow/Method.php:119
+#: app/Shipping/Speedy/Method.php:135 app/Shipping/BoxNow/Method.php:122
 msgid "Title"
 msgstr ""
 
@@ -1959,7 +1824,7 @@ msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:548 app/Shipping/Econt/Method.php:676
-#: app/Shipping/Speedy/Method.php:704 app/Shipping/BoxNow/Method.php:451
+#: app/Shipping/Speedy/Method.php:704 app/Shipping/BoxNow/Method.php:466
 msgid "Track your order."
 msgstr ""
 
@@ -2048,7 +1913,7 @@ msgstr ""
 msgid "Warehouse/Automat"
 msgstr ""
 
-#: app/Admin/Nekorekten_Com.php:46 app/Admin/Nekorekten_Com.php:85
+#: app/Reports/Reports.php:106
 msgid "We have found negative reports about this customer."
 msgstr ""
 
@@ -2118,10 +1983,6 @@ msgstr ""
 #: app/Admin/Tabs/Pro_Tab.php:70
 #, php-format
 msgid "You can review a demo at: %s"
-msgstr ""
-
-#: app/Front_End/Multi_Currency_Converter.php:90
-msgid "You cannot change the prices."
 msgstr ""
 
 #: app/functions.php:393

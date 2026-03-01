@@ -8,7 +8,7 @@ class Multi_Currency_Tab extends Base_Tab {
 	
 	public function __construct() {
 		$this->set_name( __( 'BGN/EUR dual price', 'bulgarisation-for-woocommerce' ) );
-		$this->set_description( __( 'nekorekten.com API Settings', 'bulgarisation-for-woocommerce' ) );
+		$this->set_description( __( 'BGN/EUR Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "bgn-eur" );
 
 		if ( !empty( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] === $this->get_tab_slug() ) {
@@ -38,7 +38,7 @@ class Multi_Currency_Tab extends Base_Tab {
 	}
 
 	public function load_fields() {
-		$fields = apply_filters( 'woo_bg/admin/settings/nekorektencom/fields', array(
+		$fields = apply_filters( 'woo_bg/admin/settings/bgn-eur/fields', array(
 			'multi_currency' => array(
 				new Fields\TrueFalse_Field( 'product_rate_message', __( 'Rate message on Product page', 'bulgarisation-for-woocommerce' ), null, null, __( 'Show message about conversion rate on the product page.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'cart_rate_message', __( 'Rate message on Cart page', 'bulgarisation-for-woocommerce' ), null, null, __( 'Show message about conversion rate on the cart page.', 'bulgarisation-for-woocommerce' ) ),
@@ -60,7 +60,7 @@ class Multi_Currency_Tab extends Base_Tab {
 	}
 
 	public function get_groups_titles() {
-		$titles = apply_filters( 'woo_bg/admin/settings/nekorektencom/groups_titles', array(
+		$titles = apply_filters( 'woo_bg/admin/settings/bgn-eur/groups_titles', array(
 			'multi_currency' => array(
 				'title' => __( 'Conversion rate message', 'bulgarisation-for-woocommerce' ),
 			),
