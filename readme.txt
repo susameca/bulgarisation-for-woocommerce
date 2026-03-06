@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.9
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.5.8
+Stable tag: 3.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -61,8 +61,8 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 1. Страница за експорт
 2. Страница за настройки
 3. Бутони за PDF документи
-4. Колона със статус от nekorekten.com
-5. Отзиви в страницата на поръчката от nekorekten.com 
+4. Колона със статус за клиента
+5. Отзиви в страницата на поръчката
 6. Еконт Настройки
 7. Метод за доставка с Еконт
 8. Избор на метод за доставка
@@ -91,13 +91,22 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
     - https://lox.e-cvc.bg/
 
 - Проверка за некоректни клиенти чрез услугата:
-  
+  - Connectix.bg
+    - https://api-sandbox.connectix.bg/
+    - https://api.connectix.bg/trackings
+    - https://api.connectix.bg/shopper/check
+    - https://api.connectix.bg/integration/register
 
 - При съгласие за подпомагане на разработката за плъгина се събира информация коя основна настройка е включена от плъгина към https://license.bulgarisation.bg/
 
 При работа с тези външни услуги могат да бъдат изпращани данни като: име и адрес на получателя, телефон, имейл, стойност на поръчката, наложен платеж, както и друга информация, необходима за създаване на товарителници и/или проверка на коректността на клиента. Данните се изпращат единствено с цел обработка и доставка на поръчката и проверка за потенциални злоупотреби.
 
 == Changelog ==
+
+= 3.6.0 =
+Remove Nekorekten.com
+Add Client Reports system
+Client Reports: Add Connectix as provider
 
 = 3.5.8 =
 Checkout: Fix label for shippings

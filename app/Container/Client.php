@@ -34,6 +34,9 @@ use Woo_BG\Client\CVC\Quarters as CVC_Quarters;
 use Woo_BG\Client\CVC\Offices as CVC_Offices;
 use Woo_BG\Client\CVC\Hubs as CVC_Hubs;
 
+//Connectix Classes
+use Woo_BG\Client\Connectix;
+
 use Pimple\Container;
 
 class Client extends Provider {
@@ -65,6 +68,8 @@ class Client extends Provider {
 	const CVC_QUARTERS     = 'client.cvc.quarters';
 	const CVC_OFFICES      = 'client.cvc.offices';
 	const CVC_HUBS         = 'client.cvc.hubs';
+
+	const CONNECTIX        = 'client.connectix';
 
 	public function register( Container $container ) {
 		$container[ self::ECONT ] = function ( Container $container ) {
@@ -165,6 +170,10 @@ class Client extends Provider {
 
 		$container[ self::CVC_HUBS ] = function ( Container $container ) {
 			return new CVC_Hubs( $container );
+		};
+
+		$container[ self::CONNECTIX ] = function ( Container $container ) {
+			return new Connectix();
 		};
 		
 		remove_filter( 'woocommerce_after_shipping_rate', 'Woo_BG_Pro\Shipping\CityStateField::add_city_state_field', 15 );

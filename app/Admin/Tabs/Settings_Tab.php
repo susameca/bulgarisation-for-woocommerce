@@ -52,6 +52,7 @@ class Settings_Tab extends Base_Tab {
 			'reports' => array(
 				new Fields\TrueFalse_Field( 'column', __( 'Add column on orders list.', 'bulgarisation-for-woocommerce' ), null, null, __( 'This option will add a column with the customer status next to the shipping info column.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'check_on_checkout', __( 'Check on checkout and disable COD.', 'bulgarisation-for-woocommerce' ), null, null, __( 'Check by phone number on checkout and disable COD payment method.', 'bulgarisation-for-woocommerce' ) . '<br>' . __('<strong>WARNING:</strong> Please notice that if you use Nekorekten.com API, the server has limit of 10 calls per minute.', 'bulgarisation-for-woocommerce') ),
+				new Fields\TrueFalse_Field( 'enable_connectix', __( 'Enable connectix.bg API? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'If yes, you will receive information about the customer from connectix.bg.', 'bulgarisation-for-woocommerce' ) ),
 			),
 			'checkout' => array(
 				new Fields\TrueFalse_Field( 'alternative_shipping_table', __( 'Alternative shipping options layout ( checkout )', 'bulgarisation-for-woocommerce' ), null, null, __( 'Make shipping options on 2 rows and full width in the checkout table.', 'bulgarisation-for-woocommerce' ) ),
@@ -104,6 +105,7 @@ class Settings_Tab extends Base_Tab {
 			'Woo_BG\Admin\Tabs\Econt_Tab',
 			'Woo_BG\Admin\Tabs\CVC_Tab',
 			'Woo_BG\Admin\Tabs\BoxNow_Tab',
+			'Woo_BG\Admin\Tabs\Connectix_Tab',
 		];
 
 		if ( !in_array( $tab_class_name, $allowed_classes ) ) {

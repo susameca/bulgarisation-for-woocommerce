@@ -42,6 +42,10 @@ class Reports {
     
 	public static function get_providers() {
         $providers = array();
+
+		if ( woo_bg_get_option( 'reports', 'enable_connectix' ) === 'yes' ) {
+			$providers[] = new Providers\Connectix();
+		}
         
         $providers = array_filter( apply_filters( 'woo-bg/reports/providers', $providers ), function ( $provider ) {
             return ( is_a( $provider, 'Woo_BG\Reports\Providers\Provider_Base' ) );
@@ -96,7 +100,7 @@ class Reports {
 
     public static function customer_status_info( $order ) {
 		$reports = self::get_all_reports( $order, isset( $_GET[ 'woo-bg--reports-refresh' ] ) );
-
+		
 		if ( count( $reports ) > 0 ) {
 			?>
 			<p class="form-field form-field-wide woo-bg--centered-paragraph">
@@ -134,7 +138,7 @@ class Reports {
 
         foreach ( $providers as $provider ) {
             $provider_reports = $provider::get_all_reports( $order, $force );
-            $all_reports = array_merge( $provider_reports['reports'] );
+            $all_reports = array_merge( $all_reports, $provider_reports['reports'] );
         }
 
         return $all_reports;

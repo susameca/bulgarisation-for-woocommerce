@@ -32,6 +32,10 @@ class Admin_Menus {
 	public static function after_setup_theme() {
 		new Ajax();
 
+		if ( woo_bg_get_option( 'connectix', 'enable_tracking' ) === 'yes' ) {
+			new Connectix();
+		}
+
 		add_action( 'admin_menu', array( __CLASS__, 'admin_menu' ) );
 	}
 
@@ -130,6 +134,10 @@ class Admin_Menus {
 
 		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ) {
 			$tabs[] = new Tabs\Multi_Currency_Tab();
+		}
+
+		if ( woo_bg_get_option( 'reports', 'enable_connectix' ) === 'yes' ) {
+			$tabs[] = new Tabs\Connectix_Tab();
 		}
 
 		$tabs = apply_filters( 'woo_bg/admin/get_tabs_items', $tabs );

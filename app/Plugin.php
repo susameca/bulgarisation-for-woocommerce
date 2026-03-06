@@ -4,7 +4,7 @@ namespace Woo_BG;
 defined( 'ABSPATH' ) || exit;
 
 class Plugin {
-	const VERSION = '3.5.8';
+	const VERSION = '3.6.0';
 
 	protected static $_instance;
 
@@ -68,6 +68,10 @@ class Plugin {
 
 				echo wp_kses_post( sprintf( '<div class="error">%s</div>', wpautop( $message ) ) );
 			} );
+		}
+
+		if ( woo_bg_get_option( 'reports', 'enable_connectix' ) && !woo_bg_get_option( 'connectix', 'level_of_warning' )  ) {
+			woo_bg_set_option( 'connectix', 'level_of_warning', 'high' );
 		}
 
 		if ( !woo_bg_get_option( 'shippings', 'woo_bg_econt_is_courier' ) ) {
