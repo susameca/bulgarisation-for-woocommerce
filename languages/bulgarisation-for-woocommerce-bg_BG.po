@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2026-03-05 20:41+0000\n"
+"PO-Revision-Date: 2026-03-06 15:46+0000\n"
 "Last-Translator: Тихомир Парушев\n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -103,6 +103,10 @@ msgstr "Адрес"
 msgid "Adds declared value to the label if payment is COD."
 msgstr ""
 "Добавя \"Обявена стойност\" към товарителницата ако е с \"Наложен платеж\"."
+
+#: app/Admin/Tabs/Pro_Tab.php:58
+msgid "Adds nekorekten.com as a provider for client reports."
+msgstr "Добавя nekorekten.com като източник на отзиви за потребителите."
 
 #: app/Admin/Tabs/BoxNow_Tab.php:115
 msgid ""
@@ -771,6 +775,11 @@ msgstr ""
 "Грешка при комуникацията със сървъра за валидиране на ДДС - моля, опитайте "
 "отново"
 
+#: app/Reports/Providers/Connectix.php:47
+#, php-format
+msgid "Error: %s"
+msgstr "Грешка: %s"
+
 #: app/Admin/EU_Vat.php:52
 msgid "EU VAT"
 msgstr "ДДС номер"
@@ -836,7 +845,7 @@ msgstr "Фиксирана цена"
 msgid "Footer text"
 msgstr "Текст в края на документа"
 
-#: app/Admin/Tabs/Pro_Tab.php:71
+#: app/Admin/Tabs/Pro_Tab.php:74
 #, php-format
 msgid ""
 "For more information on how to get it, you can find at the plugin %s page."
@@ -1115,11 +1124,11 @@ msgstr "Дължина"
 msgid "Level of Warning"
 msgstr "Ниво на предупреждение"
 
-#: app/Admin/Tabs/Pro_Tab.php:114
+#: app/Admin/Tabs/Pro_Tab.php:117
 msgid "License"
 msgstr "Лиценз"
 
-#: app/Admin/Tabs/Pro_Tab.php:96
+#: app/Admin/Tabs/Pro_Tab.php:99
 msgid "License Key"
 msgstr "Лицензен ключ"
 
@@ -1605,11 +1614,11 @@ msgstr "Доставка в събота"
 msgid "Saturday delivery/pickup."
 msgstr "Доставка/взимане в събота."
 
-#: app/Admin/Tabs/Pro_Tab.php:59
+#: app/Admin/Tabs/Pro_Tab.php:62
 msgid "Screenshot of the options:"
 msgstr "Скрийншот на настройките:"
 
-#: app/Admin/Tabs/Pro_Tab.php:64
+#: app/Admin/Tabs/Pro_Tab.php:67
 msgid "Screenshots of the checkout:"
 msgstr "Скрийншоти на чекаута:"
 
@@ -1744,7 +1753,7 @@ msgstr "Изпращач"
 msgid "Sender payment type"
 msgstr "Метод на плащане на изпращача"
 
-#: app/Plugin.php:67 app/Plugin.php:191 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:67 app/Plugin.php:190 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
@@ -2195,7 +2204,7 @@ msgstr ""
 "target=\"_blank\" href=\"https://www.facebook."
 "com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
 
-#: app/Admin/Tabs/Pro_Tab.php:70
+#: app/Admin/Tabs/Pro_Tab.php:73
 #, php-format
 msgid "You can review a demo at: %s"
 msgstr "Можете да видите демо на: %s"
