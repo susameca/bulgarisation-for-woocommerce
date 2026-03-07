@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-06 15:38+0000\n"
+"POT-Creation-Date: 2026-03-07 19:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -120,7 +120,7 @@ msgstr ""
 msgid "Allow shipping to Greece and Romania for Econt and Speedy."
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:58
+#: app/Admin/Tabs/Settings_Tab.php:59
 msgid "Alternative shipping options layout ( checkout )"
 msgstr ""
 
@@ -134,6 +134,14 @@ msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:157
 msgid "and"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:45
+msgid "API Key"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:76
+msgid "API Key is incorrect."
 msgstr ""
 
 #: app/Admin/Tabs/CVC_Tab.php:64
@@ -162,6 +170,10 @@ msgstr ""
 
 #: app/Admin/BoxNow.php:133 app/Admin/Tabs/BoxNow_Tab.php:181
 msgid "Automatically pack products to boxes"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:47
+msgid "Automatically upload labels to nepostop.com"
 msgstr ""
 
 #. Author of the plugin
@@ -218,8 +230,8 @@ msgstr ""
 msgid "boxnow.bg API Settings"
 msgstr ""
 
-#: app/Admin/Admin_Menus.php:48 app/Admin/Admin_Menus.php:49
-#: app/Admin/Admin_Menus.php:61 app/Admin/Admin_Menus.php:91
+#: app/Admin/Admin_Menus.php:52 app/Admin/Admin_Menus.php:53
+#: app/Admin/Admin_Menus.php:65 app/Admin/Admin_Menus.php:95
 msgid "Bulgarisation"
 msgstr ""
 
@@ -246,6 +258,13 @@ msgstr ""
 msgid ""
 "By enabling this option, the plugin will send Speedy and Econt tracking "
 "numbers to Connectix.bg. This way, you will help the service work better."
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:47
+msgid ""
+"By enabling this option, the plugin will send Speedy and Econt tracking "
+"numbers to nepostop.com and you can track them from their platform. This way,"
+" you will help the service work better."
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:231 app/Shipping/Speedy/Method.php:211
@@ -306,7 +325,7 @@ msgstr ""
 msgid "Checkout Message"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:82
+#: app/Admin/Tabs/Settings_Tab.php:83
 msgid "Checkout Settings"
 msgstr ""
 
@@ -340,7 +359,7 @@ msgstr ""
 msgid "Clear cache"
 msgstr ""
 
-#: app/Reports/Reports.php:112
+#: app/Reports/Reports.php:116
 msgid "Click for more information."
 msgstr ""
 
@@ -348,7 +367,7 @@ msgstr ""
 msgid "Client ID"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:79
+#: app/Admin/Tabs/Settings_Tab.php:80
 msgid "Client reports"
 msgstr ""
 
@@ -388,7 +407,7 @@ msgstr ""
 msgid "Compiled by"
 msgstr ""
 
-#: app/Reports/Providers/Connectix.php:13
+#: app/Reports/Providers/Connectix.php:10
 msgid "Connectix"
 msgstr ""
 
@@ -475,6 +494,11 @@ msgstr ""
 #: app/Admin/CVC.php:125 app/Admin/Econt.php:125 app/Admin/Speedy.php:127
 #: app/Admin/BoxNow.php:126
 msgid "Delete label"
+msgstr ""
+
+#: app/Reports/Providers/NepoStop.php:71
+#, php-format
+msgid "Delivered shipments: %s ( %s%% )"
 msgstr ""
 
 #: app/Admin/CVC.php:130 app/Admin/Econt.php:130 app/Admin/Speedy.php:132
@@ -617,6 +641,10 @@ msgstr ""
 msgid "Enable N-18"
 msgstr ""
 
+#: app/Admin/Tabs/Settings_Tab.php:56
+msgid "Enable nepostop.com API? "
+msgstr ""
+
 #: app/Admin/Tabs/Nra_Tab.php:54
 msgid ""
 "Enable required documents for N-18 and enable the export tab for XML file."
@@ -684,6 +712,10 @@ msgid ""
 "signature."
 msgstr ""
 
+#: app/Admin/Tabs/NepoStop_Tab.php:46
+msgid "Enter how many percentages will trigger a warning or disable COD."
+msgstr ""
+
 #: app/Admin/Tabs/CVC_Tab.php:83
 msgid "Enter sender email."
 msgstr ""
@@ -700,6 +732,10 @@ msgstr ""
 msgid ""
 "Enter the name of the compiler of the automatically generated documents, "
 "which will be displayed in them."
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:45
+msgid "Enter the provided API key from nepostop.com."
 msgstr ""
 
 #: app/Admin/Tabs/Connectix_Tab.php:55
@@ -735,7 +771,7 @@ msgstr ""
 msgid "Error communicating with the VAT validation server - please try again"
 msgstr ""
 
-#: app/Reports/Providers/Connectix.php:47
+#: app/Reports/Providers/Connectix.php:43
 #, php-format
 msgid "Error: %s"
 msgstr ""
@@ -842,9 +878,9 @@ msgstr ""
 msgid "From/To Order Total"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:137 app/Admin/Tabs/Speedy_Tab.php:151
-#: app/Admin/Tabs/BoxNow_Tab.php:213 app/Admin/Tabs/Connectix_Tab.php:92
-#: app/Admin/Tabs/Econt_Tab.php:217
+#: app/Admin/Tabs/NepoStop_Tab.php:65 app/Admin/Tabs/CVC_Tab.php:137
+#: app/Admin/Tabs/Speedy_Tab.php:151 app/Admin/Tabs/BoxNow_Tab.php:213
+#: app/Admin/Tabs/Connectix_Tab.php:92 app/Admin/Tabs/Econt_Tab.php:217
 msgid "General"
 msgstr ""
 
@@ -959,6 +995,11 @@ msgid ""
 "If yes, you will receive information about the customer from connectix.bg."
 msgstr ""
 
+#: app/Admin/Tabs/Settings_Tab.php:56
+msgid ""
+"If yes, you will receive information about the customer from nepostop.com."
+msgstr ""
+
 #: app/Admin/Tabs/Speedy_Tab.php:103
 msgid "If you choose \"Address\" the profile address will be used."
 msgstr ""
@@ -983,6 +1024,10 @@ msgstr ""
 msgid ""
 "In addition, you will have separate option to enable Country field if you "
 "want to ship to Greece or Romania."
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:46
+msgid "In percentages"
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:242
@@ -1051,7 +1096,7 @@ msgstr ""
 msgid "Length"
 msgstr ""
 
-#: app/Admin/Tabs/Connectix_Tab.php:73
+#: app/Admin/Tabs/NepoStop_Tab.php:46 app/Admin/Tabs/Connectix_Tab.php:73
 msgid "Level of Warning"
 msgstr ""
 
@@ -1080,11 +1125,11 @@ msgstr ""
 msgid "Main Company Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:76
+#: app/Admin/Tabs/Settings_Tab.php:77
 msgid "Main functionalities"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:58
+#: app/Admin/Tabs/Settings_Tab.php:59
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr ""
 
@@ -1129,6 +1174,18 @@ msgstr ""
 msgid "Name:"
 msgstr ""
 
+#: app/Reports/Providers/NepoStop.php:10
+msgid "NepoStop"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:15
+msgid "NepoStop API Settings"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:14
+msgid "NepoStop Settings"
+msgstr ""
+
 #: app/Admin/Tabs/Nra_Tab.php:81
 msgid "Next Invoice/Credit notice Number"
 msgstr ""
@@ -1145,6 +1202,10 @@ msgstr ""
 
 #: app/Admin/Tabs/Econt_Tab.php:190
 msgid "No agreement"
+msgstr ""
+
+#: app/Reports/Providers/NepoStop.php:64
+msgid "No data found for this phone number."
 msgstr ""
 
 #: app/Client/Connectix.php:108
@@ -1170,7 +1231,7 @@ msgstr ""
 msgid "No profiles was found. Please contact with Speedy."
 msgstr ""
 
-#: app/Reports/Reports.php:122
+#: app/Reports/Reports.php:126
 msgid "No reports was found for this customer!"
 msgstr ""
 
@@ -1222,7 +1283,7 @@ msgstr ""
 msgid "Option to include order ID in label."
 msgstr ""
 
-#: app/Reports/Reports.php:81 app/Admin/Order/Documents.php:78
+#: app/Reports/Reports.php:85 app/Admin/Order/Documents.php:78
 msgid "Order"
 msgstr ""
 
@@ -1380,10 +1441,10 @@ msgstr ""
 msgid "Plugin Settings"
 msgstr ""
 
-#: app/Reports/Providers/Connectix.php:44
-#: app/Reports/Providers/Connectix.php:66
-#: app/Reports/Providers/Connectix.php:78
-#: app/Reports/Providers/Connectix.php:98
+#: app/Reports/Providers/Connectix.php:40
+#: app/Reports/Providers/Connectix.php:62
+#: app/Reports/Providers/Connectix.php:74
+#: app/Reports/Providers/Connectix.php:96
 #, php-format
 msgid "Possibility that the shipment will not be picked up: %s"
 msgstr ""
@@ -1457,7 +1518,7 @@ msgstr ""
 msgid "Reflected with receipt"
 msgstr ""
 
-#: app/Reports/Reports.php:85
+#: app/Reports/Reports.php:89
 msgid "Refresh data"
 msgstr ""
 
@@ -1497,7 +1558,7 @@ msgstr ""
 msgid "Remove Pack"
 msgstr ""
 
-#: app/Reports/Reports.php:64 app/Reports/Reports.php:168
+#: app/Reports/Reports.php:68 app/Reports/Reports.php:172
 msgid "Reports"
 msgstr ""
 
@@ -1658,11 +1719,11 @@ msgstr ""
 msgid "Sender payment type"
 msgstr ""
 
-#: app/Plugin.php:67 app/Plugin.php:190 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:67 app/Plugin.php:194 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:137
+#: app/Admin/Tabs/Settings_Tab.php:139
 msgid "Settings saved successfully!"
 msgstr ""
 
@@ -1781,7 +1842,7 @@ msgstr ""
 msgid "Supporting the development"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:113
+#: app/Admin/Tabs/Settings_Tab.php:115
 msgid "Tab parameter not allowed!"
 msgstr ""
 
@@ -1821,6 +1882,18 @@ msgstr ""
 msgid ""
 "There is a Pro version of the plugin as an addon ( additional plugin to the "
 "free one )."
+msgstr ""
+
+#: app/Reports/Providers/NepoStop.php:66
+#, php-format
+msgid ""
+"This client has %s%% undelivered shipments, which is below the set threshold."
+msgstr ""
+
+#: app/Reports/Providers/NepoStop.php:36 app/Reports/Providers/NepoStop.php:50
+#: app/Reports/Providers/NepoStop.php:62 app/Reports/Providers/NepoStop.php:94
+#, php-format
+msgid "This client has %s%% undelivered shipments."
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:128 app/Shipping/Econt/Method.php:130
@@ -1909,6 +1982,11 @@ msgstr ""
 msgid "Total price"
 msgstr ""
 
+#: app/Reports/Providers/NepoStop.php:70
+#, php-format
+msgid "Total shipments: %s"
+msgstr ""
+
 #: app/Export/Nra/Export.php:155
 #, php-format
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
@@ -1925,6 +2003,11 @@ msgstr ""
 
 #: app/Client/Connectix.php:124 app/Admin/Tabs/Connectix_Tab.php:71
 msgid "Ultra high"
+msgstr ""
+
+#: app/Reports/Providers/NepoStop.php:72
+#, php-format
+msgid "Undelivered shipments: %s ( %s%% )"
 msgstr ""
 
 #: app/Admin/EU_Vat.php:92 app/Admin/EU_Vat.php:109 app/Admin/EU_Vat.php:115
@@ -2008,7 +2091,7 @@ msgstr ""
 msgid "Warehouse/Automat"
 msgstr ""
 
-#: app/Reports/Reports.php:110
+#: app/Reports/Reports.php:114
 msgid "We have found negative reports about this customer."
 msgstr ""
 
@@ -2051,7 +2134,7 @@ msgstr ""
 msgid "Woo BG - Speedy"
 msgstr ""
 
-#: app/Admin/Admin_Menus.php:88
+#: app/Admin/Admin_Menus.php:92
 msgid "WooCommerce"
 msgstr ""
 

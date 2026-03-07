@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2026-03-06 15:46+0000\n"
-"Last-Translator: Тихомир Парушев\n"
+"PO-Revision-Date: 2026-03-07 19:57+0000\n"
+"Last-Translator: \n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.8.0; wp-6.8.3; php-8.3.4\n"
+"X-Loco-Version: 2.8.2; wp-6.9.1; php-8.2.29\n"
 "X-Domain: woo-bg"
 
 #: app/Admin/Tabs/BoxNow_Tab.php:124 app/Admin/Tabs/BoxNow_Tab.php:141
@@ -130,7 +130,7 @@ msgstr "Позволи връщане"
 msgid "Allow shipping to Greece and Romania for Econt and Speedy."
 msgstr "Добавяне на доставки до Гърция и Румъния за Еконт и Спиди."
 
-#: app/Admin/Tabs/Settings_Tab.php:58
+#: app/Admin/Tabs/Settings_Tab.php:59
 msgid "Alternative shipping options layout ( checkout )"
 msgstr "Алтернативно оформление на методите за доставка (чекаут)"
 
@@ -145,6 +145,14 @@ msgstr "Сума за плащане"
 #: app/Admin/Tabs/BoxNow_Tab.php:157
 msgid "and"
 msgstr "и"
+
+#: app/Admin/Tabs/NepoStop_Tab.php:45
+msgid "API Key"
+msgstr "API ключ"
+
+#: app/Admin/Tabs/NepoStop_Tab.php:76
+msgid "API Key is incorrect."
+msgstr "Невалиден API ключ."
 
 #: app/Admin/Tabs/CVC_Tab.php:64
 msgid "API Token"
@@ -173,6 +181,10 @@ msgstr "Автоматично пресметнете ДхШхВ на товар
 #: app/Admin/BoxNow.php:133 app/Admin/Tabs/BoxNow_Tab.php:181
 msgid "Automatically pack products to boxes"
 msgstr "Автоматично изчисли размера на кутията и броя на товарителниците"
+
+#: app/Admin/Tabs/NepoStop_Tab.php:47
+msgid "Automatically upload labels to nepostop.com"
+msgstr "Автоматично качване на товарителниците в nepostop.com"
 
 #. Author of the plugin
 msgid "Autopolis.bg"
@@ -230,8 +242,8 @@ msgstr "Размер на кутията"
 msgid "boxnow.bg API Settings"
 msgstr "boxnow.bg API настройки"
 
-#: app/Admin/Admin_Menus.php:48 app/Admin/Admin_Menus.php:49
-#: app/Admin/Admin_Menus.php:61 app/Admin/Admin_Menus.php:91
+#: app/Admin/Admin_Menus.php:52 app/Admin/Admin_Menus.php:53
+#: app/Admin/Admin_Menus.php:65 app/Admin/Admin_Menus.php:95
 msgid "Bulgarisation"
 msgstr "Българизация"
 
@@ -263,6 +275,16 @@ msgstr ""
 "С активиране на тази опция плъгинът ще изпраща номера за проследяване на "
 "Speedy и Econt към Connectix.bg. По този начин ще помогнете за по-добрата "
 "работа на услугата."
+
+#: app/Admin/Tabs/NepoStop_Tab.php:47
+msgid ""
+"By enabling this option, the plugin will send Speedy and Econt tracking "
+"numbers to nepostop.com and you can track them from their platform. This way,"
+" you will help the service work better."
+msgstr ""
+"С активиране на тази опция плъгинът ще изпраща номера за проследяване на "
+"Speedy и Econt към nepostop.com и ще можете да ги следите през тяхната "
+"платформа. По този начин ще помогнете за по-добрата работа на услугата. "
 
 #: app/Shipping/CVC/Method.php:231 app/Shipping/Speedy/Method.php:211
 msgid "Calculation failed. Please try again."
@@ -329,7 +351,7 @@ msgstr "Провери на чекаут и изключи НП"
 msgid "Checkout Message"
 msgstr "Съобщение на чекаут"
 
-#: app/Admin/Tabs/Settings_Tab.php:82
+#: app/Admin/Tabs/Settings_Tab.php:83
 msgid "Checkout Settings"
 msgstr "Настройки на \"Страница за поръчка\""
 
@@ -365,7 +387,7 @@ msgstr "Град"
 msgid "Clear cache"
 msgstr "Изчисти кеша"
 
-#: app/Reports/Reports.php:112
+#: app/Reports/Reports.php:116
 msgid "Click for more information."
 msgstr "Цъкни за повече информация."
 
@@ -373,7 +395,7 @@ msgstr "Цъкни за повече информация."
 msgid "Client ID"
 msgstr "Client ID"
 
-#: app/Admin/Tabs/Settings_Tab.php:79
+#: app/Admin/Tabs/Settings_Tab.php:80
 msgid "Client reports"
 msgstr "Отзиви за клиенти"
 
@@ -413,7 +435,7 @@ msgstr "Фирма с регистрация съгл. чл. 113(9) от ЗДД�
 msgid "Compiled by"
 msgstr "Съставил"
 
-#: app/Reports/Providers/Connectix.php:13
+#: app/Reports/Providers/Connectix.php:10
 msgid "Connectix"
 msgstr "Connectix"
 
@@ -501,6 +523,11 @@ msgstr "Размер на кутията по подразбиране"
 #: app/Admin/BoxNow.php:126
 msgid "Delete label"
 msgstr "Изтрий товарителница"
+
+#: app/Reports/Providers/NepoStop.php:71
+#, php-format
+msgid "Delivered shipments: %s ( %s%% )"
+msgstr "Взети пратки: %s ( %s%% )"
 
 #: app/Admin/CVC.php:130 app/Admin/Econt.php:130 app/Admin/Speedy.php:132
 msgid "Delivery is payed by"
@@ -644,6 +671,10 @@ msgstr "Включи доставки с Еконт?"
 msgid "Enable N-18"
 msgstr "Включи Наредба Н-18"
 
+#: app/Admin/Tabs/Settings_Tab.php:56
+msgid "Enable nepostop.com API? "
+msgstr "Включи nepostop.com API?"
+
 #: app/Admin/Tabs/Nra_Tab.php:54
 msgid ""
 "Enable required documents for N-18 and enable the export tab for XML file."
@@ -722,6 +753,12 @@ msgstr ""
 "Въведете идентификационен шифър във фактурите и кредитните известия "
 "заместващ подписа на съставителя."
 
+#: app/Admin/Tabs/NepoStop_Tab.php:46
+msgid "Enter how many percentages will trigger a warning or disable COD."
+msgstr ""
+"Въведете колко процента непотърсени пратки ще задействат предупреждение или "
+"ще деактивират COD."
+
 #: app/Admin/Tabs/CVC_Tab.php:83
 msgid "Enter sender email."
 msgstr "Въведете имейл на изпращач."
@@ -739,6 +776,10 @@ msgid ""
 "Enter the name of the compiler of the automatically generated documents, "
 "which will be displayed in them."
 msgstr "Името на съставителя на генерираните документи."
+
+#: app/Admin/Tabs/NepoStop_Tab.php:45
+msgid "Enter the provided API key from nepostop.com."
+msgstr "Въведете предоставения API ключ от nepostop.com."
 
 #: app/Admin/Tabs/Connectix_Tab.php:55
 msgid "Enter the provided token from connectix.bg."
@@ -775,7 +816,7 @@ msgstr ""
 "Грешка при комуникацията със сървъра за валидиране на ДДС - моля, опитайте "
 "отново"
 
-#: app/Reports/Providers/Connectix.php:47
+#: app/Reports/Providers/Connectix.php:43
 #, php-format
 msgid "Error: %s"
 msgstr "Грешка: %s"
@@ -893,9 +934,9 @@ msgstr "От/До в кг и сума на поръчката"
 msgid "From/To Order Total"
 msgstr "От/До сума на поръчката"
 
-#: app/Admin/Tabs/CVC_Tab.php:137 app/Admin/Tabs/Speedy_Tab.php:151
-#: app/Admin/Tabs/BoxNow_Tab.php:213 app/Admin/Tabs/Connectix_Tab.php:92
-#: app/Admin/Tabs/Econt_Tab.php:217
+#: app/Admin/Tabs/NepoStop_Tab.php:65 app/Admin/Tabs/CVC_Tab.php:137
+#: app/Admin/Tabs/Speedy_Tab.php:151 app/Admin/Tabs/BoxNow_Tab.php:213
+#: app/Admin/Tabs/Connectix_Tab.php:92 app/Admin/Tabs/Econt_Tab.php:217
 msgid "General"
 msgstr "Главни"
 
@@ -1021,6 +1062,11 @@ msgid ""
 "If yes, you will receive information about the customer from connectix.bg."
 msgstr "Ако отговорът е да, ще получите информация за клиента от connectix.bg."
 
+#: app/Admin/Tabs/Settings_Tab.php:56
+msgid ""
+"If yes, you will receive information about the customer from nepostop.com."
+msgstr "Ако отговорът е да, ще получите информация за клиента от nepostop.com."
+
 #: app/Admin/Tabs/Speedy_Tab.php:103
 msgid "If you choose \"Address\" the profile address will be used."
 msgstr "Ако изберете \"Адрес\" ще се използва адреса от профила."
@@ -1053,6 +1099,10 @@ msgid ""
 msgstr ""
 "В допълнение ще имате друга настройка, която да включи полето за държава ако "
 "искате да продавате в Гърция и Румъния."
+
+#: app/Admin/Tabs/NepoStop_Tab.php:46
+msgid "In percentages"
+msgstr "В проценти"
 
 #: app/Admin/Tabs/BoxNow_Tab.php:242
 msgid "Incorrect Client ID or Client Secret."
@@ -1120,7 +1170,7 @@ msgstr "Голяма кутия"
 msgid "Length"
 msgstr "Дължина"
 
-#: app/Admin/Tabs/Connectix_Tab.php:73
+#: app/Admin/Tabs/NepoStop_Tab.php:46 app/Admin/Tabs/Connectix_Tab.php:73
 msgid "Level of Warning"
 msgstr "Ниво на предупреждение"
 
@@ -1149,11 +1199,11 @@ msgstr "Ниско"
 msgid "Main Company Settings"
 msgstr "Главни настройки на фирмата"
 
-#: app/Admin/Tabs/Settings_Tab.php:76
+#: app/Admin/Tabs/Settings_Tab.php:77
 msgid "Main functionalities"
 msgstr "Главни функционалности"
 
-#: app/Admin/Tabs/Settings_Tab.php:58
+#: app/Admin/Tabs/Settings_Tab.php:59
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr "Направете опциите за доставка на 2 реда и с пълна ширина в чекаут."
 
@@ -1198,6 +1248,18 @@ msgstr "Име"
 msgid "Name:"
 msgstr "Име"
 
+#: app/Reports/Providers/NepoStop.php:10
+msgid "NepoStop"
+msgstr "NepoStop"
+
+#: app/Admin/Tabs/NepoStop_Tab.php:15
+msgid "NepoStop API Settings"
+msgstr "NepoStop API Настройки"
+
+#: app/Admin/Tabs/NepoStop_Tab.php:14
+msgid "NepoStop Settings"
+msgstr "NepoStop Настройки"
+
 #: app/Admin/Tabs/Nra_Tab.php:81
 msgid "Next Invoice/Credit notice Number"
 msgstr "Следващ номер на фактури/кредитни известия"
@@ -1215,6 +1277,13 @@ msgstr "Не"
 #: app/Admin/Tabs/Econt_Tab.php:190
 msgid "No agreement"
 msgstr "Без споразумение"
+
+#: app/Reports/Providers/NepoStop.php:64
+msgid "No data found for this phone number."
+msgstr ""
+"\n"
+"36\n"
+"Не са намерени данни за този телефонен номер."
 
 #: app/Client/Connectix.php:108
 msgid "No Info"
@@ -1239,7 +1308,7 @@ msgstr "Не бяха намерени профили. Моля свържете
 msgid "No profiles was found. Please contact with Speedy."
 msgstr "Не бяха намерени профили. Моля свържете се със Спиди."
 
-#: app/Reports/Reports.php:122
+#: app/Reports/Reports.php:126
 msgid "No reports was found for this customer!"
 msgstr "Няма намерени отзиви за този клиент."
 
@@ -1292,7 +1361,7 @@ msgid "Option to include order ID in label."
 msgstr ""
 "Възможност за добавяне номера на поръчката в описанието на товарителницата."
 
-#: app/Reports/Reports.php:81 app/Admin/Order/Documents.php:78
+#: app/Reports/Reports.php:85 app/Admin/Order/Documents.php:78
 msgid "Order"
 msgstr "Поръчка"
 
@@ -1457,10 +1526,10 @@ msgstr ""
 msgid "Plugin Settings"
 msgstr "Настройки на плъгина"
 
-#: app/Reports/Providers/Connectix.php:44
-#: app/Reports/Providers/Connectix.php:66
-#: app/Reports/Providers/Connectix.php:78
-#: app/Reports/Providers/Connectix.php:98
+#: app/Reports/Providers/Connectix.php:40
+#: app/Reports/Providers/Connectix.php:62
+#: app/Reports/Providers/Connectix.php:74
+#: app/Reports/Providers/Connectix.php:96
 #, php-format
 msgid "Possibility that the shipment will not be picked up: %s"
 msgstr "Възможност пратката да не бъде взета: %s"
@@ -1534,7 +1603,7 @@ msgstr "Препоръчителни настройки"
 msgid "Reflected with receipt"
 msgstr "Отразено с касова бележка"
 
-#: app/Reports/Reports.php:85
+#: app/Reports/Reports.php:89
 msgid "Refresh data"
 msgstr "Обнови данните"
 
@@ -1575,7 +1644,7 @@ msgstr "Премахване на доставките от документит
 msgid "Remove Pack"
 msgstr "Премахни пакет"
 
-#: app/Reports/Reports.php:64 app/Reports/Reports.php:168
+#: app/Reports/Reports.php:68 app/Reports/Reports.php:172
 msgid "Reports"
 msgstr "Отзиви"
 
@@ -1753,11 +1822,11 @@ msgstr "Изпращач"
 msgid "Sender payment type"
 msgstr "Метод на плащане на изпращача"
 
-#: app/Plugin.php:67 app/Plugin.php:190 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:67 app/Plugin.php:194 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
-#: app/Admin/Tabs/Settings_Tab.php:137
+#: app/Admin/Tabs/Settings_Tab.php:139
 msgid "Settings saved successfully!"
 msgstr "Настройките са запазени успешно!"
 
@@ -1880,7 +1949,7 @@ msgstr "Улица/Квартал"
 msgid "Supporting the development"
 msgstr "Подкрепете разработката"
 
-#: app/Admin/Tabs/Settings_Tab.php:113
+#: app/Admin/Tabs/Settings_Tab.php:115
 msgid "Tab parameter not allowed!"
 msgstr "Този Tab параметър не е разрешен!"
 
@@ -1926,6 +1995,18 @@ msgid ""
 msgstr ""
 "Има разработена Про версия на плъгина като добавка ( допълнителен плъгин към "
 "безплатния )."
+
+#: app/Reports/Providers/NepoStop.php:66
+#, php-format
+msgid ""
+"This client has %s%% undelivered shipments, which is below the set threshold."
+msgstr "Този клиент има %s%% недоставени пратки, което е под зададения праг."
+
+#: app/Reports/Providers/NepoStop.php:36 app/Reports/Providers/NepoStop.php:50
+#: app/Reports/Providers/NepoStop.php:62 app/Reports/Providers/NepoStop.php:94
+#, php-format
+msgid "This client has %s%% undelivered shipments."
+msgstr "Този клиент има %s%% недоставени пратки."
 
 #: app/Shipping/CVC/Method.php:128 app/Shipping/Econt/Method.php:130
 #: app/Shipping/Speedy/Method.php:137 app/Shipping/BoxNow/Method.php:124
@@ -2023,6 +2104,11 @@ msgstr "Общата цена изписана с текст"
 msgid "Total price"
 msgstr "Обща цена"
 
+#: app/Reports/Providers/NepoStop.php:70
+#, php-format
+msgid "Total shipments: %s"
+msgstr "Общо пратки: %s"
+
 #: app/Export/Nra/Export.php:155
 #, php-format
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
@@ -2040,6 +2126,11 @@ msgstr "Номер на транзакцията"
 #: app/Client/Connectix.php:124 app/Admin/Tabs/Connectix_Tab.php:71
 msgid "Ultra high"
 msgstr "Ултра високо"
+
+#: app/Reports/Providers/NepoStop.php:72
+#, php-format
+msgid "Undelivered shipments: %s ( %s%% )"
+msgstr "Невзети пратки: %s ( %s%% )"
 
 #: app/Admin/EU_Vat.php:92 app/Admin/EU_Vat.php:109 app/Admin/EU_Vat.php:115
 msgid "Unknown"
@@ -2128,7 +2219,7 @@ msgstr "Номер на виртуален ПОС терминал"
 msgid "Warehouse/Automat"
 msgstr "Склад/Автомат"
 
-#: app/Reports/Reports.php:110
+#: app/Reports/Reports.php:114
 msgid "We have found negative reports about this customer."
 msgstr "Намерихме негативни отзиви за този клиент."
 
@@ -2172,7 +2263,7 @@ msgstr "Woo BG - Еконт"
 msgid "Woo BG - Speedy"
 msgstr "Woo BG - Спиди"
 
-#: app/Admin/Admin_Menus.php:88
+#: app/Admin/Admin_Menus.php:92
 msgid "WooCommerce"
 msgstr "WooCommerce"
 

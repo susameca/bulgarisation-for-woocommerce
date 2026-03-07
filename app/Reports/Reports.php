@@ -46,6 +46,10 @@ class Reports {
 		if ( woo_bg_get_option( 'reports', 'enable_connectix' ) === 'yes' ) {
 			$providers[] = new Providers\Connectix();
 		}
+
+		if ( woo_bg_get_option( 'reports', 'enable_nepostop' ) === 'yes' ) {
+			$providers[] = new Providers\NepoStop();
+		}
         
         $providers = array_filter( apply_filters( 'woo-bg/reports/providers', $providers ), function ( $provider ) {
             return ( is_a( $provider, 'Woo_BG\Reports\Providers\Provider_Base' ) );

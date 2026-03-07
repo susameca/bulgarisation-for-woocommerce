@@ -36,6 +36,10 @@ class Admin_Menus {
 			new Connectix();
 		}
 
+		if ( woo_bg_get_option( 'nepostop', 'upload_labels' ) === 'yes' ) {
+			new NepoStop();
+		}
+
 		add_action( 'admin_menu', array( __CLASS__, 'admin_menu' ) );
 	}
 
@@ -138,6 +142,10 @@ class Admin_Menus {
 
 		if ( woo_bg_get_option( 'reports', 'enable_connectix' ) === 'yes' ) {
 			$tabs[] = new Tabs\Connectix_Tab();
+		}
+
+		if ( woo_bg_get_option( 'reports', 'enable_nepostop' ) === 'yes' ) {
+			$tabs[] = new Tabs\NepoStop_Tab();
 		}
 
 		$tabs = apply_filters( 'woo_bg/admin/get_tabs_items', $tabs );

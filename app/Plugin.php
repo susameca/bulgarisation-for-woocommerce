@@ -74,6 +74,10 @@ class Plugin {
 			woo_bg_set_option( 'connectix', 'level_of_warning', 'high' );
 		}
 
+		if ( woo_bg_get_option( 'reports', 'enable_nepostop' ) && !woo_bg_get_option( 'nepostop', 'level_of_warning' )  ) {
+			woo_bg_set_option( 'nepostop', 'level_of_warning', '20' );
+		}
+
 		if ( !woo_bg_get_option( 'shippings', 'woo_bg_econt_is_courier' ) ) {
 			woo_bg_set_option( 'shippings', 'woo_bg_econt_is_courier', 'yes' );
 			woo_bg_set_option( 'shippings', 'woo_bg_speedy_is_courier', 'yes' );

@@ -37,6 +37,9 @@ use Woo_BG\Client\CVC\Hubs as CVC_Hubs;
 //Connectix Classes
 use Woo_BG\Client\Connectix;
 
+//NepoStop Classes
+use Woo_BG\Client\NepoStop;
+
 use Pimple\Container;
 
 class Client extends Provider {
@@ -70,6 +73,8 @@ class Client extends Provider {
 	const CVC_HUBS         = 'client.cvc.hubs';
 
 	const CONNECTIX        = 'client.connectix';
+
+	const NEPOSTOP         = 'client.nepostop';
 
 	public function register( Container $container ) {
 		$container[ self::ECONT ] = function ( Container $container ) {
@@ -174,6 +179,10 @@ class Client extends Provider {
 
 		$container[ self::CONNECTIX ] = function ( Container $container ) {
 			return new Connectix();
+		};
+
+		$container[ self::NEPOSTOP ] = function ( Container $container ) {
+			return new NepoStop();
 		};
 		
 		remove_filter( 'woocommerce_after_shipping_rate', 'Woo_BG_Pro\Shipping\CityStateField::add_city_state_field', 15 );
