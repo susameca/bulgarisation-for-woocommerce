@@ -47,7 +47,7 @@
 	  	:placeholder="i18n.streetNumber" 
 	  	type="text" 
 	  	v-model="streetNumber" 
-	  	v-if="( selectedAddress.type && selectedAddress.type === 'streets' )"
+	  	v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'streets' )"
 	  	@keyup="streetNumberChanged"
 	  >
 
@@ -55,14 +55,14 @@
 	  	class="woo-bg-multiselect--additional-field input-text"
 	  	:placeholder="i18n.blVhEt" 
 	  	type="text" v-model="other" 
-	  	v-if="( selectedAddress.type && selectedAddress.type === 'quarters' ) || mysticQuarter"
+	  	v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'quarters' ) || mysticQuarter"
 	  	@keyup="streetNumberChanged"
 	  >
 	</div>
 </template>
 
 <script>
-import { getCookie,setCookie } from '../../../utils';
+import { setCookie } from '../../../utils';
 import cloneDeep from 'lodash/cloneDeep';
 import debounce from 'lodash/debounce';
 import axios from 'axios';
@@ -221,7 +221,7 @@ export default {
 				});
 		}, 200 ),
 		clearAll () {
-			this.selectedAddress = []
+			this.selectedAddress = cloneDeep([]);
 		},
 		loadCity() {
 			this.state = this.stateField.val();
@@ -248,7 +248,7 @@ export default {
 							_this.addresses = cloneDeep( response.data.data.streets );
 							_this.mysticQuarter = '';
 						} else {
-							_this.selectedAddress = [];
+							_this.selectedAddress = cloneDeep([]);
 						}
 					}
 
@@ -263,7 +263,7 @@ export default {
 			if ( !this.city ) {
 				this.city = option.label;
 				this.cityField.val( option.label );
-				this.addresses = [];
+				this.addresses = cloneDeep([]);
 				this.selectedAddress = cloneDeep([]);
 			}
 		},
@@ -279,7 +279,7 @@ export default {
 		}, 2000 ),
 		resetData() {
 			this.city = '';
-			this.selectedAddress = '';
+			this.selectedAddress = cloneDeep([]);
 			this.streetNumber = '';
 			this.mysticQuarter = '';
 			this.other = '';

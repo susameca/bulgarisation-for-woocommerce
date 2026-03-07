@@ -68,8 +68,6 @@ export default {
 		officeLocatorUrl() {
 			let url = 'https://services.speedy.bg/office_locator_widget_v3/office_locator.php?showOfficesList=0&selectOfficeButtonCaption=Избери';
 			let _this = this;
-
-			console.log( this.city );
 			
 			if ( this.selectedOffice && this.selectedOffice.id ) {
 				url += '&officeID=' + this.selectedOffice.id;
@@ -134,8 +132,6 @@ export default {
 			}
 
 			let officeID = message.data.id;
-
-			console.log(message.data);
 
 			if ( this.offices.length ) {
 				let _this = this;

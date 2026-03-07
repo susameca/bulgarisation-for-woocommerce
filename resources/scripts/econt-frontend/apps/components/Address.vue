@@ -37,14 +37,14 @@
 	  	:placeholder="i18n.streetNumber" 
 	  	type="text" 
 	  	v-model="streetNumber" 
-	  	v-if="( selectedAddress.type && selectedAddress.type === 'streets' )"
+	  	v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'streets' )"
 	  	@keyup="streetNumberChanged"
 	  >
 	  <input 
 	  	class="woo-bg-multiselect--additional-field input-text"
 	  	:placeholder="i18n.blVhEt" 
 	  	type="text" v-model="other" 
-	  	v-if="( selectedAddress.type && selectedAddress.type === 'quarters' )"
+	  	v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'quarters' )"
 	  	@keyup="streetNumberChanged"
 	  >
 	</div>
