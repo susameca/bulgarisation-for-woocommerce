@@ -39,9 +39,11 @@ i.woo-bg-icon--question { background-image: url(../../images/question-icon.png);
 
         .form-field._billing_to_company_field { width: 100% }
         .form-field._billing_company_field { width: 48%; clear: initial; }
-    }
 
-    .form-field--checkbox label { display: inline-block !important; }
+        .form-field--checkbox { float: none !important; }
+        .form-field--checkbox label { display: inline-block !important; margin: 15px 0;}
+        .form-field--checkbox input { width: auto !important; }
+    }
 }
 
 .multiselect__tags { padding: 0; }

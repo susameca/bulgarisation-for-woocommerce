@@ -81,7 +81,11 @@ class BoxNow {
 					$sender_data = self::generate_sender_data();
 					$shipment_status = $theorder->get_meta( 'woo_bg_boxnow_shipment_status' );
 					$box_size = ( woo_bg_get_option( 'boxnow_price', 'box_size' ) ) ? woo_bg_get_option( 'boxnow_price', 'box_size' ) : 'auto';
-					//$operations = $theorder->get_meta( 'woo_bg_boxnow_operations' );
+					$sizes = [
+						'small' => 1,
+						'medium' => 2,
+						'large' => 3,
+					];
 
 					if ( !$cookie_data ) {
 						foreach ( $shipping->get_meta_data() as $meta_data ) {
@@ -103,7 +107,7 @@ class BoxNow {
 						'origins' => self::get_origins(),
 						'orderId' => $theorder->get_id(),
 						'allowReturn' => wc_string_to_bool( woo_bg_get_option( 'boxnow_send_from', 'allow_return' ) ),
-						'box_size' => $box_size,
+						'compartmentSize' => ( isset( $sizes[ $box_size ] ) ) ? $sizes[ $box_size ] : 2,
 						'i18n' => self::get_i18n(),
 						'nonce' => wp_create_nonce( 'woo_bg_admin_label' ),
 					) );
@@ -134,6 +138,13 @@ class BoxNow {
 			'smallBox' => __( 'Small Box', 'bulgarisation-for-woocommerce' ),
 			'mediumBox' => __( 'Medium Box', 'bulgarisation-for-woocommerce' ),
 			'largeBox' => __( 'Large Box', 'bulgarisation-for-woocommerce' ),
+			'pack' => __('Pack', 'bulgarisation-for-woocommerce'),
+			'addPack' => __('Add Pack', 'bulgarisation-for-woocommerce'),
+			'removePack' => __('Remove Pack', 'bulgarisation-for-woocommerce'),
+			'weight' => __( 'Weight', 'bulgarisation-for-woocommerce' ),
+			'price' => __( 'Price', 'bulgarisation-for-woocommerce' ),
+			'name' => __( 'Name', 'bulgarisation-for-woocommerce' ),
+			'compartmentSize' => __( 'Compartment Size', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 
@@ -159,7 +170,6 @@ class BoxNow {
 			'orderNumber' => strval( mt_rand() . '-' . $order->get_id() ),
 			'origin' => self::generate_sender_data(),
 			'destination' => self::generate_receiver_data( $order, $cookie_data ),
-			'items' => self::generate_items( $order ),
 			'allowReturn' => wc_string_to_bool( woo_bg_get_option( 'boxnow_send_from', 'allow_return' ) ),
 			'invoiceValue' => '0.00',
 			'paymentMode' => 'prepaid',
@@ -170,6 +180,19 @@ class BoxNow {
 			$label_data[ 'paymentMode' ] = $order->get_payment_method();
 			$label_data[ 'invoiceValue' ] = $order->get_total();
 			$label_data[ 'amountToBeCollected' ] = $order->get_total();
+		}
+
+		if ( $cached_items = $order->get_meta( 'woo_bg--box-now-items' ) ) {
+			$label_data['items'] = $cached_items;
+			$label_data[ 'amountToBeCollected' ] = 0;
+
+			foreach ( $cached_items as $item ) {
+				$label_data[ 'amountToBeCollected' ] += $item['value'];
+			}
+
+			$label_data[ 'amountToBeCollected' ] += $order->get_shipping_total() + $order->get_shipping_tax();
+		} else {
+			$label_data['items'] = self::generate_items( $order );
 		}
 
 		return $label_data;
@@ -215,10 +238,6 @@ class BoxNow {
 	public static function get_box_size() {
 		$box_size = ( woo_bg_get_option( 'boxnow_price', 'box_size' ) ) ? woo_bg_get_option( 'boxnow_price', 'box_size' ) : 'auto';
 
-		if ( !empty( $_REQUEST['boxSize'] ) ) {
-			$box_size = sanitize_text_field( $_REQUEST['boxSize']['id'] );
-		}
-
 		return $box_size;
 	}
 
@@ -240,12 +259,6 @@ class BoxNow {
 			'weight' => 0,
 			'value' => 0,
 			'compartmentSize' => 0,
-		];
-
-		$current_size = [
-			'height' => 0,
-			'width' => 0,
-			'length' => 0,
 		];
 		
 		$current_volume = 0;
@@ -352,6 +365,11 @@ class BoxNow {
 
 		if ( isset( $_REQUEST['destination'] ) ) {
 			$label_data['destination']['locationId'] = sanitize_text_field( $_REQUEST['destination']['id'] );
+		}
+
+		if ( isset( $_REQUEST['items'] ) ) {
+			$label_data['items'] = map_deep( $_REQUEST['items'], 'sanitize_text_field' );
+			$order->update_meta_data( 'woo_bg--box-now-items', $label_data['items'] );
 		}
 
 		if ( isset( $_REQUEST['declaredValue'] ) ) {

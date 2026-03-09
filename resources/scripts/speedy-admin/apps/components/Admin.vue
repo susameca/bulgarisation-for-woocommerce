@@ -613,7 +613,6 @@ export default {
 			parcels.push(template);
 			this.$set(this.labelData.content, 'parcels', parcels);
 		},
-
 		removeParcel(index) {
 			const parcels = this.labelData.content.parcels;
 

@@ -52,6 +52,79 @@
 							</multiselect>
 						</p>
 
+						<fieldset
+							v-for="(parsel, key) in labelData.items"
+							:key="key"
+						>
+							<legend>{{ i18n.pack }} {{ key + 1 }}</legend>
+
+							<p class="form-field form-field-wide">
+								<label>
+									{{i18n.boxSize}}:
+								</label>
+
+								<multiselect 
+									v-model="parsel.compartmentSize" 
+									deselect-label="" 
+									selectLabel="" 
+									track-by="id" 
+									label="label" 
+									:selectedLabel="i18n.selected" 
+									:placeholder="i18n.choose"
+									:options="Object.values( boxSizes )" 
+									:searchable="true" 
+									:allow-empty="false"
+								>
+									<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
+								</multiselect>
+							</p>
+
+							<p v-if="typeof parsel.name !== 'undefined'" class="form-field form-field-wide">
+								<label>
+									{{i18n.name}}:
+								</label>
+
+								<input v-model="parsel.name" type="text">
+							</p>
+
+							<p v-if="typeof parsel.weight !== 'undefined'" class="form-field form-field-wide">
+								<label>
+									{{i18n.weight}}:
+								</label>
+
+								<input v-model="parsel.weight" type="number" step="0.001">
+							</p>
+
+							<p v-if="typeof parsel.value !== 'undefined'" class="form-field form-field-wide">
+								<label>
+									{{i18n.price}}:
+								</label>
+
+								<input v-model="parsel.value" type="number" step="0.01">
+							</p>
+
+							<p class="form-field form-field-wide">
+								<button
+									type="button"
+									@click="removeParcel(key)"
+									:disabled="labelData.items.length === 1"
+									class="button-secondary"
+								>
+									{{ i18n.removePack }}
+								</button>
+							</p>
+						</fieldset>
+
+						<p class="form-field form-field-wide">
+							<button
+								type="button"
+								@click="addParcel"
+								class="button-secondary"
+							>
+								{{ i18n.addPack }}
+							</button>
+						</p>
+
 						<p  class="form-field form-field-wide">
 							<label>
 								{{i18n.total}}:
@@ -68,31 +141,8 @@
 							<input v-model="allowReturn" type="checkbox">
 						</p>
 
-						<p class="form-field form-field-wide">
-							<label>
-								{{i18n.boxSize}}:
-							</label>
-
-							<multiselect 
-								v-model="boxSize" 
-								deselect-label="" 
-								selectLabel="" 
-								track-by="id" 
-								label="label" 
-								:selectedLabel="i18n.selected" 
-								:placeholder="i18n.choose"
-								:options="Object.values( boxSizes )" 
-								:searchable="true" 
-								:allow-empty="false"
-							>
-								<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.label }}</strong></template>
-							</multiselect>
-						</p>
-
 						<p class="form-field form-field-wide" v-if="shipmentStatus">
 							<button @click="deleteLabel" name="save" type="submit" :value="i18n.deleteLabel" class="button-secondary">{{i18n.deleteLabel}}</button>
-
-							<!-- <button @click="updateShipmentStatus" name="save" type="submit" :value="i18n.updateShipmentStatus" class="button-primary woocommerce-save-button">{{i18n.updateShipmentStatus}}</button> -->
 						</p>
 
 						<p v-else class="form-field form-field-wide">
@@ -142,7 +192,6 @@
 
 <script>
 import cloneDeep from 'lodash/cloneDeep';
-import debounce from 'lodash/debounce';
 import axios from 'axios';
 import Qs from 'qs';
 import Multiselect from 'vue-multiselect';
@@ -165,22 +214,18 @@ export default {
 			allowReturn: false,
 			message: '',
 			operations : [],
-			boxSize: wooBg_boxnow.box_size,
+			boxSize: '',
 			boxSizes: [
 				{
-					id: 'auto',
-					label: wooBg_boxnow.i18n.auto
-				},
-				{
-					id: 'small',
+					id: '1',
 					label: wooBg_boxnow.i18n.smallBox
 				},
 				{
-					id: 'medium',
+					id: '2',
 					label: wooBg_boxnow.i18n.mediumBox
 				},
 				{
-					id: 'large',
+					id: '3',
 					label: wooBg_boxnow.i18n.largeBox
 				},
 			],
@@ -248,10 +293,12 @@ export default {
 			}
 		});
 
-		this.boxSizes.forEach( function ( size ) {
-			if ( size.id == wooBg_boxnow.box_size ) {
-				_this.boxSize = size;
-			}
+		this.labelData.items.forEach( function ( item ) {
+			_this.boxSizes.forEach( function ( size ) {
+				if ( size.id == item.compartmentSize ) {
+					item.compartmentSize = size;
+				}
+			});
 		});
 
 		if ( typeof( wooBg_boxnow.label.amountToBeCollected ) !== 'undefined' ) {
@@ -267,6 +314,42 @@ export default {
 		}
 	},
 	methods: {
+		addParcel() {
+			const parcels = this.labelData.items || [];
+
+			let template;
+
+			if (parcels.length > 0) {
+				template = cloneDeep(parcels[0]);
+
+				if (template.id) {
+					delete template.id;
+				}
+			} else {
+				template = {
+					name: '',
+					value: 1,
+					weight: 1,
+					compartmentSize: {
+						id: '2',
+						label: wooBg_boxnow.i18n.mediumBox
+					},
+				};
+			}
+
+			parcels.push(template);
+			this.$set(this.labelData, 'items', parcels);
+		},
+		removeParcel(index) {
+			const parcels = this.labelData.items;
+
+			if (!Array.isArray(parcels) || parcels.length <= 1) {
+				return;
+			}
+
+			parcels.splice(index, 1);
+			this.$set(this.labelData, 'items', parcels);
+		},
 		updateLabel( e ) {
 			e.preventDefault();
 
@@ -274,12 +357,16 @@ export default {
 			let _this = this;
 			_this.message = '';
 
+			this.labelData.items.forEach( function ( item ) {
+				item.compartmentSize = item.compartmentSize.id;
+			});
+
 			let data = {
 				orderId: wooBg_boxnow.orderId,
 				origin: this.origin,
 				destination: this.destination,
 				declaredValue: this.declaredValue,
-				boxSize: this.boxSize,
+				items: this.labelData.items,
 				allowReturn: this.allowReturn,
 				action: 'woo_bg_boxnow_generate_label',
 				nonce: wooBg_boxnow.nonce,
@@ -293,6 +380,14 @@ export default {
 					} else {
 						_this.shipmentStatus = cloneDeep( response.data.data.shipmentStatus, true );
 						_this.labelData = cloneDeep( response.data.data.label, true );
+
+						_this.labelData.items.forEach( function ( item ) {
+							_this.boxSizes.forEach( function ( size ) {
+								if ( size.id == item.compartmentSize ) {
+									item.compartmentSize = size;
+								}
+							});
+						});
 					}
 				});
 		},

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2026-03-07 19:57+0000\n"
+"PO-Revision-Date: 2026-03-09 18:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -1280,10 +1280,7 @@ msgstr "Без споразумение"
 
 #: app/Reports/Providers/NepoStop.php:64
 msgid "No data found for this phone number."
-msgstr ""
-"\n"
-"36\n"
-"Не са намерени данни за този телефонен номер."
+msgstr "Не са намерени данни за този телефонен номер."
 
 #: app/Client/Connectix.php:108
 msgid "No Info"

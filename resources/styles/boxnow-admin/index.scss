@@ -28,9 +28,12 @@
 		border: 0!important; 
 	}
 
-	.form-field.form-field--checkbox { display:flex; align-items:center; gap: 4px;}
-	.form-field.form-field--checkbox input[type="checkbox"] { width: auto !important;  }
-
 	.woocommerce_order_status table { width:440px; text-align:left; }
+
+	fieldset {
+		border: 1px solid;
+		border-radius: 6px;
+		padding: 5px;
+	}
 }
 
