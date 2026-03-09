@@ -32,7 +32,7 @@ class NepoStop extends Provider_Base {
         
         $args['result'] = $result;
 
-        if ( $result['found'] && ( $result['stats']['undelivered_percentage'] >= $treshold ) )  {
+        if ( isset($result['found'] ) && ( $result['stats']['undelivered_percentage'] >= $treshold ) )  {
             $args['reports'] = [ sprintf( __('This client has %s%% undelivered shipments.', 'bulgarisation-for-woocommerce'), $result['stats']['undelivered_percentage'] ) ];
         }
 
@@ -46,7 +46,7 @@ class NepoStop extends Provider_Base {
         $result = $order->get_meta( $meta_key );
         $treshold = woo_bg_get_option( 'nepostop', 'level_of_warning' );
 
-        if ( !empty($result) && $result['found'] && ( $result['stats']['undelivered_percentage'] >= $treshold ) )  {
+        if ( !empty($result) && isset( $result['found'] ) && $result['found'] && ( $result['stats']['undelivered_percentage'] >= $treshold ) )  {
             $args['reports'] = [ sprintf( __('This client has %s%% undelivered shipments.', 'bulgarisation-for-woocommerce'), $result['stats']['undelivered_percentage'] ) ];
         }
 
@@ -58,9 +58,9 @@ class NepoStop extends Provider_Base {
         $description = '';
         $treshold = woo_bg_get_option( 'nepostop', 'level_of_warning' );
 
-        if ( $reports['result']['found'] && ( $reports['result']['stats']['undelivered_percentage'] >= $treshold ) )  {
+        if ( isset($reports['result']['found'] ) && ( $reports['result']['stats']['undelivered_percentage'] >= $treshold ) )  {
             $title = sprintf( __('This client has %s%% undelivered shipments.', 'bulgarisation-for-woocommerce'), $reports['result']['stats']['undelivered_percentage'] );
-        }  elseif ( !$reports['result']['found'] ) {
+        }  elseif ( !isset($reports['result']['found'] ) || !$reports['result']['found'] ) {
             $title = __( 'No data found for this phone number.', 'bulgarisation-for-woocommerce' );
         } else {
             $title = sprintf( __('This client has %s%% undelivered shipments, which is below the set threshold.', 'bulgarisation-for-woocommerce'), $reports['result']['stats']['undelivered_percentage'] );
