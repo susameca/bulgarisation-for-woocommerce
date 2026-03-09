@@ -590,3 +590,45 @@ function woo_bg_get_next_document_number( $meta_field ) {
 
 	return $largest_number + 1;
 }
+
+function woo_bg_strip_street_prefix( $street ) {
+    $prefixes = [
+        'ул.',   
+        'бул.',  
+        'пл.',   
+        'пр.',   
+        'кв.',   
+        'ж.к.',  
+        'ж.к',
+        'жк.',
+        'жк',
+        'ul.',   
+        'ul ',
+        'bul.',  
+        'bul ',
+        'pl.',   
+        'pl ',
+        'pr.',   
+        'pr ',
+        'kv.',   
+        'kv ',
+        'zh.k.', 
+        'zh.k',
+        'zhk.',
+        'zhk',
+        'j.k.',  
+        'j.k',
+        'jk.',
+        'jk',
+    ];
+
+    foreach ( $prefixes as $prefix ) {
+        if ( mb_stripos( $street, $prefix ) === 0 ) {
+            $street = mb_substr( $street, mb_strlen( $prefix ) );
+            $street = ltrim( $street ); 
+            break;
+        }
+    }
+
+    return $street;
+}

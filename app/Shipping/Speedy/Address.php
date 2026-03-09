@@ -59,6 +59,8 @@ class Address {
 			$query = sanitize_text_field( $_POST['query'] );
 		}
 
+		$query = woo_bg_strip_street_prefix( $query );
+
 		$raw_city = sanitize_text_field( $_POST['city'] );
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state, $country_id );
