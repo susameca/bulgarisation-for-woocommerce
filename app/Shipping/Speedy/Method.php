@@ -453,13 +453,7 @@ class Method extends \WC_Shipping_Method {
 			'serviceIds' => array( $service_id ),
 			'additionalServices' => [],
 		);
-
-		$os_value = 0;
 		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'speedy', 'declared_value' ) );
-
-		foreach ( $this->package[ 'contents' ] as $key => $item ) {
-			$_product = wc_get_product( $item[ 'product_id' ] );
-		}
 
 		if ( $is_fragile ) {
 			$services['additionalServices']['declaredValue'] = array(

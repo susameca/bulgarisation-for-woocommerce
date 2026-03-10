@@ -70,8 +70,6 @@ class Speedy {
 
 		if ( ! is_object( $theorder ) ) {
 			$theorder = wc_get_order( $post->ID );
-		} else {
-			$order = $theorder;
 		}
 
 		if ( !empty( $theorder->get_items( 'shipping' ) ) ) {
@@ -97,6 +95,10 @@ class Speedy {
 							}
 						}	
 					}
+
+					if ( $theorder->get_payment_method() === 'cod' && !isset( $label_data['service']['additionalServices'] ) ) {
+						$label_data = self::fix_cod_data( $label_data, $theorder );
+					}
 					
 					wp_localize_script( 'woo-bg-js-admin', 'wooBg_speedy', array(
 						'label' => $label_data,
@@ -117,6 +119,34 @@ class Speedy {
 				}
 			}
 		}
+	}
+
+	public static function fix_cod_data( $label_data, $order ) {
+		$service_id = $label_data['service']['serviceId'] ?? null;
+
+		if ( $service_id === '505' ) {
+			$cod_data = array(
+				'amount' => $order->get_total(),
+				'processingType' => ( wc_string_to_bool( woo_bg_get_option( 'speedy', 'ppp' ) ) ) ? 'POSTAL_MONEY_TRANSFER' : 'CASH',
+			);
+		} else {
+			$cod_data = array(
+				'amount' => $order->get_total(),
+			);
+		}
+
+		$label_data['service']['additionalServices']['cod'] = $cod_data;
+		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'speedy', 'declared_value' ) );
+
+		if ( $is_fragile ) {
+			$label_data['service']['additionalServices']['declaredValue'] = array(
+				'amount' => $order->get_total(), 
+				'fragile' => $is_fragile, 
+				"ignoreIfNotApplicable" => true 
+			);
+		}
+		
+		return $label_data;
 	}
 
 	protected static function get_i18n() {
