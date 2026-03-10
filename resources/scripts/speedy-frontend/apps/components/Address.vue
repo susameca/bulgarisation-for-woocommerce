@@ -42,20 +42,13 @@
 	  	@keyup="mysticQuarterChanged"
 	  >
 
-	  <input 
+	  <!-- Always visible: shows streetNumber by default, switches to bl.vh.et. for quarters -->
+	  <input
 	  	class="woo-bg-multiselect--additional-field input-text"
-	  	:placeholder="i18n.streetNumber" 
-	  	type="text" 
-	  	v-model="streetNumber" 
-	  	v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'streets' )"
-	  	@keyup="streetNumberChanged"
-	  >
-
-	  <input 
-	  	class="woo-bg-multiselect--additional-field input-text"
-	  	:placeholder="i18n.blVhEt" 
-	  	type="text" v-model="other" 
-	  	v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'quarters' ) || mysticQuarter"
+	  	:placeholder="isQuarter ? i18n.blVhEt : i18n.streetNumber"
+	  	type="text"
+	  	:value="isQuarter ? other : streetNumber"
+	  	@input="onAdditionalFieldInput"
 	  	@keyup="streetNumberChanged"
 	  >
 	</div>
@@ -96,9 +89,23 @@ export default {
 			i18n: wooBg_speedy_address.i18n,
 		}
 	},
+	watch: {
+		selectedAddress( newAddr ) {
+			if ( newAddr && newAddr.type ) {
+				if ( newAddr.type === 'streets' ) {
+					this.other = '';
+				} else if ( newAddr.type === 'quarters' ) {
+					this.streetNumber = '';
+				}
+			}
+		}
+	},
 	computed: {
 		closeOnSelect() {
 			return ( this.city ) ? true : false ;
+		},
+		isQuarter() {
+			return this.selectedAddress && this.selectedAddress.type === 'quarters';
 		},
 	},
 	mounted() {
@@ -265,6 +272,13 @@ export default {
 				this.cityField.val( option.label );
 				this.addresses = cloneDeep([]);
 				this.selectedAddress = cloneDeep([]);
+			}
+		},
+		onAdditionalFieldInput( event ) {
+			if ( this.isQuarter ) {
+				this.other = event.target.value;
+			} else {
+				this.streetNumber = event.target.value;
 			}
 		},
 		streetNumberChanged: debounce( function () {
