@@ -186,11 +186,13 @@ class BoxNow {
 			$label_data['items'] = $cached_items;
 			$label_data[ 'amountToBeCollected' ] = 0;
 
-			foreach ( $cached_items as $item ) {
-				$label_data[ 'amountToBeCollected' ] += $item['value'];
-			}
+			if ( isset( $label_data['paymentMode'] ) && $label_data['paymentMode'] === 'cod' ) {
+				foreach ( $cached_items as $item ) {
+					$label_data[ 'amountToBeCollected' ] += $item['value'];
+				}
 
-			$label_data[ 'amountToBeCollected' ] += $order->get_shipping_total() + $order->get_shipping_tax();
+				$label_data[ 'amountToBeCollected' ] += $order->get_shipping_total() + $order->get_shipping_tax();
+			}
 		} else {
 			$label_data['items'] = self::generate_items( $order );
 		}
@@ -294,10 +296,13 @@ class BoxNow {
 			}
 
 			$weight = ( $_product->get_weight() ) ? wc_get_weight( $_product->get_weight(), 'kg' ) : 1;
-			$new_price = (float) $items[ $box_count ][ 'value' ] + number_format( $order_item->get_total() + $order_item->get_total_tax(), 2, '.', '' );
 
 			$items[ $box_count ][ 'weight' ] += (float) $weight;
 			$items[ $box_count ][ 'name' ] .= $order_item->get_name() . ";";
+
+			$item_price = number_format( $order_item->get_total(), 2, '.', '') + number_format( $order_item->get_total_tax(), 2, '.', '' );
+			$new_price = (float) $items[ $box_count ][ 'value' ] + ( $item_price / $order_item['quantity'] );
+
 			$items[ $box_count ][ 'value' ] = (string) number_format( $new_price, 2, '.', '' );
 
 			if ( $item_sizes['size'] ) {
@@ -327,7 +332,7 @@ class BoxNow {
 		foreach ( $order->get_items() as $order_item ) {
 			$_product = $order_item->get_product();
 			$weight = ( $_product->get_weight() ) ? wc_get_weight( $_product->get_weight(), 'kg' ) : 1;
-			$price = (float) $items[0][ 'value' ] + number_format( $order_item->get_total() + $order_item->get_total_tax(), 2, '.', '' );
+			$price = (float) $items[0][ 'value' ] + number_format( $order_item->get_total(), 2, '.', '') + number_format( $order_item->get_total_tax(), 2, '.', '' );
 
 			$items[0][ 'weight' ] += (float) $weight * $order_item['quantity'];
 			$items[0][ 'name' ] .= $order_item->get_name() . ";";
