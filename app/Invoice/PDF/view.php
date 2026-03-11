@@ -126,23 +126,17 @@ $bgn_eur = ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' );
 
 	<div class="w-100">
 		<div class="fz-12">
-			<div class="<?php echo ( $bgn_eur ) ? 'w-70' : 'w-80' ?>  float-left" align="right">
+			<div align="right">
 				<?php 
 				foreach ( $this->document->order->get_total_items() as $item ) {
-					echo wp_kses_post( wpautop( $item['label'] ) );
+					?>
+					<p style="line-height: 8px">
+						<?php echo wp_kses_post( '<strong>' . $item['label'] . '</strong> ' . wp_strip_all_tags( $item['value'] ) ); ?>
+					</p>
+					<?php 
 				}
 				?>
 			</div>
-
-			<div class="<?php echo ( $bgn_eur ) ? 'w-30' : 'w-20' ?> float-left text-bold" align="right">
-				<?php 
-				foreach ( $this->document->order->get_total_items() as $item ) {
-					echo wp_kses_post( wpautop( $item['value'] ) );
-				}
-				?>
-			</div>
-
-			<div style="clear: both;"></div>
 		</div> 
 	</div>
 
