@@ -57,6 +57,10 @@ class Pro_Tab extends Base_Tab {
 					<li>
 						<?php echo wp_kses_post( wpautop( " - " .  __( 'Adds nekorekten.com as a provider for client reports.', 'bulgarisation-for-woocommerce' ) ) ); ?>
 					</li>
+
+					<li>
+						<?php echo wp_kses_post( wpautop( " - " .  __( 'Allow automatically filling company info from EIK.', 'bulgarisation-for-woocommerce' ) ) ); ?>
+					</li>
 				</ul>
 				<?php
 				echo wp_kses_post( wpautop( __( 'Screenshot of the options:', 'bulgarisation-for-woocommerce' ) ) );

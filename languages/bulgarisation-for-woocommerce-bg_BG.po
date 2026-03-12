@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2026-03-12 12:29+0000\n"
+"PO-Revision-Date: 2026-03-12 13:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -119,6 +119,12 @@ msgid ""
 msgstr ""
 "След като изберете опцията, трябва да запазите настройките, за да се покажат "
 "правилните ценови настройки."
+
+#: app/Admin/Tabs/Pro_Tab.php:62
+msgid "Allow automatically filling company info from EIK."
+msgstr ""
+"Добавя възможност за автоматично попълване на данните за фирмата според "
+"въведения ЕИК."
 
 #: app/Admin/Tabs/Pro_Tab.php:55
 msgid "Allow automatically update order statuses based on label status."
@@ -890,7 +896,7 @@ msgstr "Фиксирана цена"
 msgid "Footer text"
 msgstr "Текст в края на документа"
 
-#: app/Admin/Tabs/Pro_Tab.php:74
+#: app/Admin/Tabs/Pro_Tab.php:78
 #, php-format
 msgid ""
 "For more information on how to get it, you can find at the plugin %s page."
@@ -1178,11 +1184,11 @@ msgstr "Дължина"
 msgid "Level of Warning"
 msgstr "Ниво на предупреждение"
 
-#: app/Admin/Tabs/Pro_Tab.php:117
+#: app/Admin/Tabs/Pro_Tab.php:121
 msgid "License"
 msgstr "Лиценз"
 
-#: app/Admin/Tabs/Pro_Tab.php:99
+#: app/Admin/Tabs/Pro_Tab.php:103
 msgid "License Key"
 msgstr "Лицензен ключ"
 
@@ -1686,11 +1692,11 @@ msgstr "Доставка в събота"
 msgid "Saturday delivery/pickup."
 msgstr "Доставка/взимане в събота."
 
-#: app/Admin/Tabs/Pro_Tab.php:62
+#: app/Admin/Tabs/Pro_Tab.php:66
 msgid "Screenshot of the options:"
 msgstr "Скрийншот на настройките:"
 
-#: app/Admin/Tabs/Pro_Tab.php:67
+#: app/Admin/Tabs/Pro_Tab.php:71
 msgid "Screenshots of the checkout:"
 msgstr "Скрийншоти на чекаута:"
 
@@ -2299,7 +2305,7 @@ msgstr ""
 "target=\"_blank\" href=\"https://www.facebook."
 "com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
 
-#: app/Admin/Tabs/Pro_Tab.php:73
+#: app/Admin/Tabs/Pro_Tab.php:77
 #, php-format
 msgid "You can review a demo at: %s"
 msgstr "Можете да видите демо на: %s"

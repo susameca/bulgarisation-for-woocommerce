@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bulgarisation for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-12 12:28+0000\n"
+"POT-Creation-Date: 2026-03-12 13:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -110,6 +110,10 @@ msgstr ""
 msgid ""
 "After you select the option, you must save the settings in order the correct "
 "price settings to be shown."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:62
+msgid "Allow automatically filling company info from EIK."
 msgstr ""
 
 #: app/Admin/Tabs/Pro_Tab.php:55
@@ -836,7 +840,7 @@ msgstr ""
 msgid "Footer text"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:74
+#: app/Admin/Tabs/Pro_Tab.php:78
 #, php-format
 msgid ""
 "For more information on how to get it, you can find at the plugin %s page."
@@ -1104,11 +1108,11 @@ msgstr ""
 msgid "Level of Warning"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:117
+#: app/Admin/Tabs/Pro_Tab.php:121
 msgid "License"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:99
+#: app/Admin/Tabs/Pro_Tab.php:103
 msgid "License Key"
 msgstr ""
 
@@ -1603,11 +1607,11 @@ msgstr ""
 msgid "Saturday delivery/pickup."
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:62
+#: app/Admin/Tabs/Pro_Tab.php:66
 msgid "Screenshot of the options:"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:67
+#: app/Admin/Tabs/Pro_Tab.php:71
 msgid "Screenshots of the checkout:"
 msgstr ""
 
@@ -2165,7 +2169,7 @@ msgid ""
 "com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:73
+#: app/Admin/Tabs/Pro_Tab.php:77
 #, php-format
 msgid "You can review a demo at: %s"
 msgstr ""
