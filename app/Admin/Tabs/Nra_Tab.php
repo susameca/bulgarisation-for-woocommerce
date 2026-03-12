@@ -57,6 +57,10 @@ class Nra_Tab extends Base_Tab {
 						'id' => 'disable',
 						'label' => __( 'Disable invoice generation', 'bulgarisation-for-woocommerce' ),
 					),
+					'only_fields' => array(
+						'id' => 'only_fields',
+						'label' => __( 'Add only fields on checkout', 'bulgarisation-for-woocommerce' ),
+					),
 					'only_for_company' => array(
 						'id' => 'only_for_company',
 						'label' => __( 'Only for companies', 'bulgarisation-for-woocommerce' ),

@@ -30,7 +30,7 @@ class Documents {
 	public static function generate_proforma( $order_id ) {
 		$order = wc_get_order( $order_id );
 
-		if ( self::maybe_generate_invoice( $order ) && $order->get_payment_method() === 'bacs' ) {
+		if ( self::maybe_generate_proforma( $order ) && $order->get_payment_method() === 'bacs' ) {
 			( new Document\Proforma( $order ) )->generate_file();
 		}
 	}
@@ -45,6 +45,10 @@ class Documents {
 		);
 
 		return apply_filters( 'woo_bg/admin/order/maybe_generate_invoice', $generate_invoice, $order );
+	}
+
+	public static function maybe_generate_proforma( $order ) {
+		return apply_filters( 'woo_bg/admin/order/maybe_generate_proforma', self::maybe_generate_invoice( $order ), $order );
 	}
 
 	public static function generate_refunded_documents( $refund_id, $order_id ) {
