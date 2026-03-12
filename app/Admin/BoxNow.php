@@ -144,7 +144,6 @@ class BoxNow {
 			'weight' => __( 'Weight', 'bulgarisation-for-woocommerce' ),
 			'price' => __( 'Price', 'bulgarisation-for-woocommerce' ),
 			'name' => __( 'Name', 'bulgarisation-for-woocommerce' ),
-			'compartmentSize' => __( 'Compartment Size', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 
