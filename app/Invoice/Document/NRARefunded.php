@@ -90,6 +90,10 @@ class NRARefunded extends BaseDocument {
 			$items[] = $this->transaction_id;
 		}
 
+		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ) {
+			$items[] = __( '1 EUR = 1.95583 BGN', 'bulgarisation-for-woocommerce' );
+		}
+
 		$items[] = $this->prepared_by . " " . $this->identification_code;
 		$items[] = $this->parent_order->get_billing_first_name() . ' ' . $this->parent_order->get_billing_last_name();
 
