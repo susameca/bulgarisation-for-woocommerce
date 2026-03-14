@@ -593,39 +593,46 @@ function woo_bg_get_next_document_number( $meta_field ) {
 
 function woo_bg_strip_street_prefix( $street ) {
     $prefixes = [
-        'ул.',   
-        'бул.',  
-        'пл.',   
-        'пр.',   
-        'кв.',   
-        'ж.к.',  
+        // Cyrillic prefixes
+        'ул.',
+        'бул.',
+        'пл.',
+        'пр.',
+        'кв.',
+        'ж.к.',
         'ж.к',
         'жк.',
         'жк',
-        'ul.',   
+        // Latin prefixes (stripped before transliteration)
+        'ul.',
         'ul ',
-        'bul.',  
+        'bul.',
         'bul ',
-        'pl.',   
+        'pl.',
         'pl ',
-        'pr.',   
+        'pr.',
         'pr ',
-        'kv.',   
+        'kv.',
         'kv ',
-        'zh.k.', 
+        'zh.k.',
         'zh.k',
         'zhk.',
         'zhk',
-        'j.k.',  
+        'j.k.',
         'j.k',
         'jk.',
         'jk',
     ];
 
+    // Normalize dots — add space after dot when followed directly by a letter
+    // e.g. "пл.св.неделя" → "пл. св. неделя" so Speedy API can match it
+    $street = preg_replace( '/\.(?=\S)/u', '. ', $street );
+
+    // Strip leading street/quarter type prefix
     foreach ( $prefixes as $prefix ) {
         if ( mb_stripos( $street, $prefix ) === 0 ) {
             $street = mb_substr( $street, mb_strlen( $prefix ) );
-            $street = ltrim( $street ); 
+            $street = ltrim( $street );
             break;
         }
     }
