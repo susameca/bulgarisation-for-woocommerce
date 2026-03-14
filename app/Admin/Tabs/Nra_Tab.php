@@ -88,6 +88,8 @@ class Nra_Tab extends Base_Tab {
 				new Fields\Text_Field( 'identification_code', __( 'Identification code', 'bulgarisation-for-woocommerce' ), null, null, __( "Enter an ID in the invoices and credit memos that replace the compiler's signature.", 'bulgarisation-for-woocommerce' ) ),
 				new Fields\Text_Field( 'footer_text', __( 'Footer text', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'total_text', __( 'Total in text', 'bulgarisation-for-woocommerce' ), null, null, __( 'Print order total after the table. Works only in levs.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'separate_copy_documents', __( 'Generate separate copy documents', 'bulgarisation-for-woocommerce' ), null, null, __( 'When enabled, invoice and credit notice copies will be generated as separate documents instead of being merged with the original. The copies can be sent to an accountant email.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\Text_Field( 'accountant_email', __( 'Accountant email', 'bulgarisation-for-woocommerce' ), __( 'Email address to send invoice and credit notice copies to. Separate multiple emails with commas. Only used when separate copy documents are enabled.', 'bulgarisation-for-woocommerce' ), null ),
 			),
 			'shop' => array(
 				new Fields\Select_Field( array(

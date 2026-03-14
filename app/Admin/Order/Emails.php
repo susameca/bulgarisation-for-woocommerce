@@ -8,6 +8,13 @@ class Emails {
 		add_filter( 'woocommerce_email_attachments', array( __CLASS__, 'attach_invoice_to_mail' ), 10, 4 );
 		add_filter( 'woocommerce_email_attachments', array( __CLASS__, 'attach_proform_to_mail' ), 10, 4 );
 		add_filter( 'woocommerce_email_attachments', array( __CLASS__, 'attach_refund_pdfs_to_mail' ), 10, 4 );
+		add_filter( 'woocommerce_email_classes', array( __CLASS__, 'register_accountant_email' ) );
+	}
+
+	public static function register_accountant_email( $email_classes ) {
+		$email_classes['WC_Email_Woo_BG_Accountant'] = new Accountant_Email();
+
+		return $email_classes;
 	}
 
 	public static function attach_invoice_to_mail( $attachments, $email_id, $order, $email ) {

@@ -56,6 +56,14 @@ class CreditNotice extends NRARefunded {
 	}
 
 	public function generate_file() {
+		if ( woo_bg_get_option( 'invoice', 'separate_copy_documents' ) === 'yes' ) {
+			parent::generate_file();
+		} else {
+			$this->generate_merged_original_and_copy();
+		}
+	}
+
+	protected function generate_merged_original_and_copy() {
 		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
 		$upload_dir = wp_upload_dir();
 

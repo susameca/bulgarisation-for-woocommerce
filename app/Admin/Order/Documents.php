@@ -18,6 +18,8 @@ class Documents {
 			if ( $order->get_payment_method() === 'bacs' ) {
 				( new Document\Proforma( $order ) )->generate_file();
 			}
+
+			self::maybe_generate_invoice_copy( $order );
 		}
 
 		if ( $refunds = $order->get_refunds() ) {
@@ -60,7 +62,55 @@ class Documents {
 
 		if ( self::maybe_generate_invoice( $order ) ) {
 			( new Document\CreditNotice( $refund_id ) )->generate_file();
+
+			self::maybe_generate_credit_notice_copy( $refund_id, $order_id );
 		}
+	}
+
+	public static function maybe_generate_invoice_copy( $order ) {
+		if ( woo_bg_get_option( 'invoice', 'separate_copy_documents' ) !== 'yes' ) {
+			return;
+		}
+
+		$copy = new Document\InvoiceCopy( $order );
+		$copy->generate_file();
+
+		self::send_accountant_email( $order->get_id(), $copy );
+	}
+
+	public static function maybe_generate_credit_notice_copy( $refund_id, $order_id ) {
+		if ( woo_bg_get_option( 'invoice', 'separate_copy_documents' ) !== 'yes' ) {
+			return;
+		}
+
+		$copy = new Document\CreditNoticeCopy( $refund_id );
+		$copy->generate_file();
+
+		self::send_accountant_email( $order_id, $copy );
+	}
+
+	public static function send_accountant_email( $order_id, $document ) {
+		$accountant_email = woo_bg_get_option( 'invoice', 'accountant_email' );
+
+		if ( ! $accountant_email ) {
+			return;
+		}
+
+		$attach_id = $document->woo_order->get_meta( $document->meta );
+
+		if ( ! $attach_id ) {
+			return;
+		}
+
+		$file_path = get_attached_file( $attach_id );
+
+		if ( ! $file_path || ! file_exists( $file_path ) ) {
+			return;
+		}
+
+		WC()->mailer();
+		$email = new Accountant_Email();
+		$email->trigger( $order_id, array( $file_path ) );
 	}
 
 	public static function get_order_documents( $main_order ) {
@@ -92,6 +142,14 @@ class Documents {
 				);
 			}
 
+			if ( $invoice_copy_pdf = $order->get_meta( 'woo_bg_invoice_copy_document' ) ) {
+				$files[] = array(
+					'meta' => 'woo_bg_invoice_copy_document',
+					'name' => __( 'Invoice Copy', 'bulgarisation-for-woocommerce' ),
+					'file_url' => wp_get_attachment_url( $invoice_copy_pdf ),
+				);
+			}
+
 			if ( $refunded_order_pdf = $order->get_meta( 'woo_bg_refunded_order_document' ) ) {
 				$files[] = array(
 					'meta' => 'woo_bg_refunded_order_document',
@@ -105,6 +163,14 @@ class Documents {
 					'meta' => 'woo_bg_refunded_invoice_document',
 					'name' => __( 'Refunded Invoice', 'bulgarisation-for-woocommerce' ),
 					'file_url' => wp_get_attachment_url( $refunded_invoice_pdf ),
+				);
+			}
+
+			if ( $refunded_invoice_copy_pdf = $order->get_meta( 'woo_bg_refunded_invoice_copy_document' ) ) {
+				$files[] = array(
+					'meta' => 'woo_bg_refunded_invoice_copy_document',
+					'name' => __( 'Refunded Invoice Copy', 'bulgarisation-for-woocommerce' ),
+					'file_url' => wp_get_attachment_url( $refunded_invoice_copy_pdf ),
 				);
 			}
 
