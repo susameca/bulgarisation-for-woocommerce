@@ -1,35 +1,538 @@
-#, fuzzy
+# Copyright (C) 2026 Autopolis.bg
+# This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Bulgarisation for WooCommerce\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-12 13:20+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: Bulgarisation for WooCommerce 3.6.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bulgarisation-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.0; wp-5.6\n"
-"X-Domain: woo-bg"
+"POT-Creation-Date: 2026-03-14T12:39:24+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: bulgarisation-for-woocommerce\n"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:124 app/Admin/Tabs/BoxNow_Tab.php:141
-#: app/Admin/Tabs/BoxNow_Tab.php:158
-msgid " to "
+#. Plugin Name of the plugin
+#: bulgarisation-for-woocommerce.php
+msgid "Bulgarisation for WooCommerce"
 msgstr ""
 
-#. %1$s is the city and %2$s is the state
-#: app/Shipping/Speedy/Office.php:64
-#, php-format
-msgid "%1$s is not found in %2$s region."
+#. Description of the plugin
+#: bulgarisation-for-woocommerce.php
+msgid "Everything necessary for your online store to work in Bulgaria and according to Bulgarian regulations. Includes a light regime for Ordinance - H-18 and Econt, BOX NOW, CVC and Speedy shipping method."
 msgstr ""
 
-#: app/Shipping/Econt/Office.php:63
+#. Author of the plugin
+#: bulgarisation-for-woocommerce.php
+msgid "Autopolis.bg"
+msgstr ""
+
+#. Author URI of the plugin
+#: bulgarisation-for-woocommerce.php
+msgid "https://autopolis.bg/"
+msgstr ""
+
+#: app/Admin/Admin_Menus.php:52
+#: app/Admin/Admin_Menus.php:53
+#: app/Admin/Admin_Menus.php:65
+#: app/Admin/Admin_Menus.php:95
+msgid "Bulgarisation"
+msgstr ""
+
+#: app/Admin/Admin_Menus.php:92
+msgid "WooCommerce"
+msgstr ""
+
+#: app/Admin/BoxNow.php:58
+msgid "BOX NOW Delivery"
+msgstr ""
+
+#: app/Admin/BoxNow.php:122
+msgid "Send to"
+msgstr ""
+
+#: app/Admin/BoxNow.php:123
+#: app/Admin/Econt.php:157
+#: app/Admin/Speedy.php:190
+#: app/Admin/Tabs/BoxNow_Tab.php:223
+#: app/Admin/Tabs/CVC_Tab.php:99
+#: app/Admin/Tabs/CVC_Tab.php:147
+#: app/Admin/Tabs/Econt_Tab.php:141
+#: app/Admin/Tabs/Econt_Tab.php:227
+#: app/Admin/Tabs/Speedy_Tab.php:103
+msgid "Send From"
+msgstr ""
+
+#: app/Admin/BoxNow.php:124
+msgid "Warehouse/Automat"
+msgstr ""
+
+#: app/Admin/BoxNow.php:125
+msgid "Automat"
+msgstr ""
+
+#: app/Admin/BoxNow.php:126
+msgid "Total price"
+msgstr ""
+
+#: app/Admin/BoxNow.php:127
+#: app/Admin/Tabs/BoxNow_Tab.php:93
+msgid "Allow returns"
+msgstr ""
+
+#: app/Admin/BoxNow.php:128
+#: app/Admin/CVC.php:122
+#: app/Admin/Econt.php:122
+#: app/Admin/Speedy.php:154
+msgid "Update shipment status"
+msgstr ""
+
+#: app/Admin/BoxNow.php:129
+#: app/Admin/CVC.php:124
+#: app/Admin/Econt.php:124
+#: app/Admin/fragments/label-column.php:21
+#: app/Admin/Speedy.php:156
+msgid "Generate label"
+msgstr ""
+
+#: app/Admin/BoxNow.php:130
+#: app/Admin/CVC.php:125
+#: app/Admin/Econt.php:125
+#: app/Admin/Speedy.php:157
+msgid "Delete label"
+msgstr ""
+
+#: app/Admin/BoxNow.php:131
+#: app/Admin/CVC.php:126
+#: app/Admin/Econt.php:126
+#: app/Admin/Order/Columns.php:29
+#: app/Admin/Speedy.php:158
+msgid "Label"
+msgstr ""
+
+#: app/Admin/BoxNow.php:132
+#: app/Admin/CVC.php:128
+#: app/Admin/Econt.php:128
+#: app/Admin/Speedy.php:160
+#: app/Shipping/BoxNow/Apm.php:32
+#: app/Shipping/CVC/Address.php:38
+#: app/Shipping/CVC/Office.php:34
+#: app/Shipping/Econt/Address.php:38
+#: app/Shipping/Econt/Office.php:34
+#: app/Shipping/Speedy/Address.php:38
+#: app/Shipping/Speedy/Office.php:34
+msgid "Selected"
+msgstr ""
+
+#: app/Admin/BoxNow.php:133
+#: app/Admin/CVC.php:129
+#: app/Admin/Econt.php:129
+#: app/Admin/Speedy.php:161
+#: app/Shipping/BoxNow/Apm.php:33
+#: app/Shipping/CVC/Address.php:39
+#: app/Shipping/CVC/Office.php:35
+#: app/Shipping/Econt/Address.php:39
+#: app/Shipping/Econt/Office.php:35
+#: app/Shipping/Speedy/Address.php:39
+#: app/Shipping/Speedy/Office.php:35
+msgid "Choose"
+msgstr ""
+
+#: app/Admin/BoxNow.php:134
+#: app/Admin/CVC.php:141
+#: app/Admin/Econt.php:141
+#: app/Admin/Speedy.php:173
+msgid "Label data"
+msgstr ""
+
+#: app/Admin/BoxNow.php:135
+#: app/Admin/CVC.php:149
+#: app/Admin/Econt.php:148
+#: app/Admin/Speedy.php:180
+msgid "Shipment status"
+msgstr ""
+
+#: app/Admin/BoxNow.php:136
+#: app/Admin/Tabs/BoxNow_Tab.php:195
+msgid "Box size"
+msgstr ""
+
+#: app/Admin/BoxNow.php:137
+#: app/Admin/Tabs/BoxNow_Tab.php:181
+msgid "Automatically pack products to boxes"
+msgstr ""
+
+#: app/Admin/BoxNow.php:138
+#: app/Admin/Tabs/BoxNow_Tab.php:185
+msgid "Small Box"
+msgstr ""
+
+#: app/Admin/BoxNow.php:139
+#: app/Admin/Tabs/BoxNow_Tab.php:189
+msgid "Medium Box"
+msgstr ""
+
+#: app/Admin/BoxNow.php:140
+#: app/Admin/Tabs/BoxNow_Tab.php:193
+msgid "Large Box"
+msgstr ""
+
+#: app/Admin/BoxNow.php:141
+#: app/Admin/Econt.php:166
+#: app/Admin/Speedy.php:194
+msgid "Pack"
+msgstr ""
+
+#: app/Admin/BoxNow.php:142
+#: app/Admin/Speedy.php:195
+msgid "Add Pack"
+msgstr ""
+
+#: app/Admin/BoxNow.php:143
+#: app/Admin/Speedy.php:196
+msgid "Remove Pack"
+msgstr ""
+
+#: app/Admin/BoxNow.php:144
+#: app/Admin/CVC.php:145
+#: app/Admin/Econt.php:144
+#: app/Admin/Speedy.php:176
+msgid "Weight"
+msgstr ""
+
+#: app/Admin/BoxNow.php:145
+#: app/Admin/Tabs/BoxNow_Tab.php:125
+#: app/Admin/Tabs/BoxNow_Tab.php:143
+#: app/Admin/Tabs/BoxNow_Tab.php:159
+#: app/Invoice/Document/BaseDocument.php:97
+msgid "Price"
+msgstr ""
+
+#: app/Admin/BoxNow.php:146
+#: app/Admin/Tabs/BoxNow_Tab.php:85
+#: app/Admin/Tabs/CVC_Tab.php:81
+#: app/Admin/Tabs/Econt_Tab.php:94
+#: app/Admin/Tabs/Speedy_Tab.php:84
+msgid "Name"
+msgstr ""
+
+#: app/Admin/CVC.php:58
+msgid "CVC Delivery"
+msgstr ""
+
+#: app/Admin/CVC.php:123
+#: app/Admin/Econt.php:123
+#: app/Admin/Speedy.php:155
+msgid "Update label"
+msgstr ""
+
+#: app/Admin/CVC.php:127
+#: app/Admin/Econt.php:127
+#: app/Admin/Speedy.php:159
+msgid "Default"
+msgstr ""
+
+#: app/Admin/CVC.php:130
+#: app/Admin/Econt.php:130
+#: app/Admin/Speedy.php:162
+msgid "Delivery is payed by"
+msgstr ""
+
+#: app/Admin/CVC.php:131
+#: app/Admin/Econt.php:131
+#: app/Admin/Speedy.php:163
+msgid "Cash on delivery"
+msgstr ""
+
+#: app/Admin/CVC.php:132
+#: app/Admin/Econt.php:132
+#: app/Admin/Speedy.php:164
+msgid "Pack count"
+msgstr ""
+
+#: app/Admin/CVC.php:133
+#: app/Admin/Econt.php:133
+#: app/Admin/Speedy.php:165
+msgid "Shipment type"
+msgstr ""
+
+#: app/Admin/CVC.php:134
+#: app/Admin/Econt.php:134
+#: app/Admin/Speedy.php:166
+#: app/functions.php:55
+#: app/functions.php:93
+msgid "Other"
+msgstr ""
+
+#: app/Admin/CVC.php:135
+#: app/Admin/Econt.php:135
+#: app/Admin/Speedy.php:167
+#: app/Shipping/CVC/Address.php:45
+#: app/Shipping/Econt/Address.php:45
+#: app/Shipping/Speedy/Address.php:45
+msgid "bl. vh. et."
+msgstr ""
+
+#: app/Admin/CVC.php:136
+#: app/Admin/Econt.php:136
+#: app/Admin/Speedy.php:168
+#: app/Shipping/CVC/Address.php:44
+#: app/Shipping/Econt/Address.php:44
+#: app/Shipping/Speedy/Address.php:44
+msgid "Street number"
+msgstr ""
+
+#: app/Admin/CVC.php:137
+#: app/Admin/Econt.php:137
+#: app/Admin/Speedy.php:169
+msgid "Street/Quarter"
+msgstr ""
+
+#: app/Admin/CVC.php:138
+#: app/Admin/Econt.php:138
+#: app/Admin/Speedy.php:170
+#: app/Admin/Tabs/CVC_Tab.php:93
+#: app/Admin/Tabs/CVC_Tab.php:115
+#: app/Admin/Tabs/Econt_Tab.php:135
+#: app/Admin/Tabs/Econt_Tab.php:174
+#: app/Admin/Tabs/Speedy_Tab.php:97
+#: app/Admin/Tabs/Speedy_Tab.php:127
+#: app/Shipping/CVC/Method.php:138
+#: app/Shipping/Econt/Method.php:140
+#: app/Shipping/Speedy/Method.php:147
+msgid "Office"
+msgstr ""
+
+#: app/Admin/CVC.php:139
+#: app/Admin/Econt.php:139
+#: app/Admin/Speedy.php:171
+#: app/Admin/Tabs/CVC_Tab.php:97
+#: app/Admin/Tabs/Econt_Tab.php:139
+#: app/Admin/Tabs/Speedy_Tab.php:101
+#: app/Front_End/Checkout/Company.php:79
+#: app/Shipping/CVC/Method.php:139
+#: app/Shipping/Econt/Method.php:141
+#: app/Shipping/Speedy/Method.php:148
+msgid "Address"
+msgstr ""
+
+#: app/Admin/CVC.php:140
+#: app/Admin/Econt.php:140
+#: app/Admin/Speedy.php:172
+msgid "Delivery type"
+msgstr ""
+
+#: app/Admin/CVC.php:142
+#: app/Admin/Econt.php:142
+#: app/Admin/Speedy.php:174
+msgid "Buyer"
+msgstr ""
+
+#: app/Admin/CVC.php:143
+#: app/Admin/Econt.php:143
+#: app/Admin/Speedy.php:175
+msgid "Sender"
+msgstr ""
+
+#: app/Admin/CVC.php:144
+msgid "Contract"
+msgstr ""
+
+#: app/Admin/CVC.php:146
+#: app/Admin/Econt.php:145
+#: app/Admin/Speedy.php:177
+#: app/Shipping/CVC/Method.php:184
+#: app/Shipping/Speedy/Method.php:167
+msgid "Fixed price"
+msgstr ""
+
+#: app/Admin/CVC.php:147
+#: app/Admin/Econt.php:146
+#: app/Admin/Speedy.php:178
+msgid "Copy Label Data"
+msgstr ""
+
+#: app/Admin/CVC.php:148
+msgid "You just copied the label data used for the cvc API."
+msgstr ""
+
+#: app/Admin/CVC.php:150
+#: app/Admin/Econt.php:149
+#: app/Admin/Speedy.php:181
+msgid "Time:"
+msgstr ""
+
+#: app/Admin/CVC.php:151
+#: app/Admin/Econt.php:150
+#: app/Admin/Speedy.php:182
+msgid "Event:"
+msgstr ""
+
+#: app/Admin/CVC.php:152
+#: app/Admin/Econt.php:151
+#: app/Admin/Speedy.php:183
+msgid "Details:"
+msgstr ""
+
+#: app/Admin/CVC.php:153
+#: app/Admin/Econt.php:152
+#: app/Admin/Speedy.php:184
+#: app/functions.php:225
+#: app/Shipping/CVC/Method.php:143
+#: app/Shipping/CVC/Method.php:150
+#: app/Shipping/Econt/Method.php:145
+#: app/Shipping/Speedy/Method.php:152
+msgid "Review and test"
+msgstr ""
+
+#: app/Admin/CVC.php:154
+#: app/Admin/Econt.php:153
+#: app/Admin/Speedy.php:185
+#: app/Admin/Tabs/Econt_Tab.php:99
+#: app/Admin/Tabs/Speedy_Tab.php:91
+msgid "Declared value"
+msgstr ""
+
+#: app/Admin/CVC.php:155
+#: app/Admin/Econt.php:154
+#: app/Admin/Speedy.php:187
+msgid "Description"
+msgstr ""
+
+#: app/Admin/Econt.php:58
+msgid "Econt Delivery"
+msgstr ""
+
+#: app/Admin/Econt.php:147
+msgid "You just copied the label data used for the Econt API."
+msgstr ""
+
+#: app/Admin/Econt.php:155
+#: app/Admin/Tabs/Econt_Tab.php:121
+msgid "Invoice number"
+msgstr ""
+
+#: app/Admin/Econt.php:156
+msgid "Partial delivery"
+msgstr ""
+
+#: app/Admin/Econt.php:158
+#: app/Admin/Speedy.php:191
+msgid "Length"
+msgstr ""
+
+#: app/Admin/Econt.php:159
+#: app/Admin/Speedy.php:192
+msgid "Width"
+msgstr ""
+
+#: app/Admin/Econt.php:160
+#: app/Admin/Speedy.php:193
+msgid "Height"
+msgstr ""
+
+#: app/Admin/Econt.php:167
+msgid "Document"
+msgstr ""
+
+#: app/Admin/Econt.php:168
+msgid "Pallet"
+msgstr ""
+
+#: app/Admin/Econt.php:169
+msgid "Cargo"
+msgstr ""
+
+#: app/Admin/Econt.php:170
+msgid "Document-Pallet"
+msgstr ""
+
+#: app/Admin/EU_Vat.php:24
+msgid "Enable VIES validation"
+msgstr ""
+
+#: app/Admin/EU_Vat.php:24
+msgid "Validate the VAT number with the European VIES system or only with regex."
+msgstr ""
+
+#: app/Admin/EU_Vat.php:27
+msgid "Tax Classes for Digital Goods"
+msgstr ""
+
+#: app/Admin/EU_Vat.php:27
+msgid "This option tells the plugin which of your tax classes are for digital goods. This affects the taxable location of the user as of 1st Jan 2015."
+msgstr ""
+
+#: app/Admin/EU_Vat.php:38
+#: app/Admin/EU_Vat.php:79
+#: app/Front_End/Checkout/EU_Vat.php:81
+#: app/Front_End/Checkout/EU_Vat.php:217
+msgid "VAT number"
+msgstr ""
+
+#: app/Admin/EU_Vat.php:52
+msgid "EU VAT"
+msgstr ""
+
+#: app/Admin/EU_Vat.php:68
+msgid "This order is out of scope for EU VAT."
+msgstr ""
+
+#: app/Admin/EU_Vat.php:83
+msgid "Validation was not possible"
+msgstr ""
+
+#: app/Admin/EU_Vat.php:91
+msgid "IP Address"
+msgstr ""
+
+#: app/Admin/EU_Vat.php:92
+#: app/Admin/EU_Vat.php:109
+#: app/Admin/EU_Vat.php:115
+msgid "Unknown"
+msgstr ""
+
+#: app/Admin/EU_Vat.php:96
+msgid "IP Country"
+msgstr ""
+
+#: app/Admin/EU_Vat.php:104
+msgid "(self-declared)"
+msgstr ""
+
+#: app/Admin/EU_Vat.php:114
+msgid "Billing Country"
+msgstr ""
+
+#: app/Admin/Order/Accountant_Email.php:9
+msgid "Accountant Document Copies"
+msgstr ""
+
+#: app/Admin/Order/Accountant_Email.php:10
+msgid "This email sends invoice and credit notice copies to the accountant."
+msgstr ""
+
+#: app/Admin/Order/Accountant_Email.php:11
+#: app/Admin/Order/Accountant_Email.php:93
+msgid "Document Copy"
+msgstr ""
+
+#: app/Admin/Order/Accountant_Email.php:12
+#: app/Admin/Order/Accountant_Email.php:89
+msgid "[{site_title}]: Document copy for order #{order_number}"
+msgstr ""
+
+#: app/Admin/Order/Accountant_Email.php:69
+#: app/Admin/Order/Accountant_Email.php:83
 #, php-format
-msgid "%s is not found in %s region."
+msgid "Please find attached the document copies for order #%s."
+msgstr ""
+
+#: app/Admin/Order/Actions.php:45
+#: app/Admin/Order/Actions.php:158
+msgid "Regenerate PDF's"
 msgstr ""
 
 #: app/Admin/Order/Actions.php:70
@@ -39,28 +542,76 @@ msgid_plural "%s orders documents were regenerated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/Shipping/Register.php:179 app/Shipping/Register.php:187
-#, php-format
-msgid "%s: <span class=\"woocommerce-Price-amount\">%s</span>"
+#: app/Admin/Order/Actions.php:92
+msgid "Invoice PDF"
 msgstr ""
 
-#: app/Admin/EU_Vat.php:104
-msgid "(self-declared)"
+#: app/Admin/Order/Actions.php:100
+msgid "Invoice Copy PDF"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:126 app/Admin/Tabs/BoxNow_Tab.php:142
-#: app/Admin/Tabs/BoxNow_Tab.php:160
-msgid "+ Add new row"
+#: app/Admin/Order/Actions.php:108
+msgid "Refunded Invoice PDF"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:218
-msgid "1 EUR = 1.95583 BGN"
+#: app/Admin/Order/Actions.php:116
+msgid "Refunded Invoice Copy PDF"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:54
-msgid ""
-"<strong>WARNING:</strong> Please notice that if you use Nekorekten.com API, "
-"the server has limit of 10 calls per minute."
+#: app/Admin/Order/Actions.php:157
+msgid "Generate Invoice"
+msgstr ""
+
+#: app/Admin/Order/Columns.php:25
+#: app/Admin/Tabs/Nra_Tab.php:10
+msgid "Documents"
+msgstr ""
+
+#: app/Admin/Order/Documents.php:132
+#: app/Reports/Reports.php:85
+msgid "Order"
+msgstr ""
+
+#: app/Admin/Order/Documents.php:140
+msgid "Invoice"
+msgstr ""
+
+#: app/Admin/Order/Documents.php:148
+msgid "Invoice Copy"
+msgstr ""
+
+#: app/Admin/Order/Documents.php:156
+msgid "Refunded Order"
+msgstr ""
+
+#: app/Admin/Order/Documents.php:164
+msgid "Refunded Invoice"
+msgstr ""
+
+#: app/Admin/Order/Documents.php:172
+msgid "Refunded Invoice Copy"
+msgstr ""
+
+#: app/Admin/Order/Documents.php:180
+#: app/Invoice/Document/Proforma.php:10
+msgid "Pro forma"
+msgstr ""
+
+#: app/Admin/Order/MetaBox.php:19
+msgid "PDF Files"
+msgstr ""
+
+#: app/Admin/Speedy.php:59
+msgid "Speedy Delivery"
+msgstr ""
+
+#: app/Admin/Speedy.php:179
+msgid "You just copied the label data used for the Speedy API."
+msgstr ""
+
+#: app/Admin/Speedy.php:186
+#: app/Shipping/Speedy/Address.php:46
+msgid "Street or quarter"
 msgstr ""
 
 #: app/Admin/Speedy.php:188
@@ -71,352 +622,181 @@ msgstr ""
 msgid "A4 with copy on single page"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Speedy_Tab.php:89
-#: app/Admin/Tabs/Econt_Tab.php:97
-msgid ""
-"Add additional variations information. Please use this option only if you "
-"want the variation data to be available in the label print and it's missing."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:53
-msgid "Add column on orders list."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:62
-msgid "Add only fields on checkout"
-msgstr ""
-
-#: app/Admin/Speedy.php:195 app/Admin/BoxNow.php:142
-msgid "Add Pack"
-msgstr ""
-
-#: app/Admin/CVC.php:139 app/Admin/Econt.php:139 app/Admin/Speedy.php:171
-#: app/Admin/Tabs/CVC_Tab.php:97 app/Admin/Tabs/Speedy_Tab.php:101
-#: app/Admin/Tabs/Econt_Tab.php:139 app/Shipping/CVC/Method.php:139
-#: app/Shipping/Econt/Method.php:141 app/Shipping/Speedy/Method.php:148
-#: app/Front_End/Checkout/Company.php:79
-msgid "Address"
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:91 app/Admin/Tabs/Econt_Tab.php:99
-msgid "Adds declared value to the label if payment is COD."
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:58
-msgid "Adds nekorekten.com as a provider for client reports."
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:115
-msgid ""
-"After you select the option, you must save the settings in order the correct "
-"price settings to be shown."
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:62
-msgid "Allow automatically filling company info from EIK."
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:55
-msgid "Allow automatically update order statuses based on label status."
-msgstr ""
-
-#: app/Admin/BoxNow.php:127 app/Admin/Tabs/BoxNow_Tab.php:93
-msgid "Allow returns"
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:49
-msgid "Allow shipping to Greece and Romania for Econt and Speedy."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:59
-msgid "Alternative shipping options layout ( checkout )"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:70
-msgid "Always"
-msgstr ""
-
-#: app/Invoice/Vat1139.php:36
-msgid "Amount due"
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:157
-msgid "and"
-msgstr ""
-
-#: app/Admin/Tabs/NepoStop_Tab.php:45
-msgid "API Key"
-msgstr ""
-
-#: app/Admin/Tabs/NepoStop_Tab.php:76
-msgid "API Key is incorrect."
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:64
-msgid "API Token"
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:168
-msgid "API Token is incorrect."
-msgstr ""
-
-#: app/Admin/BoxNow.php:125
-msgid "Automat"
-msgstr ""
-
-#: app/Shipping/BoxNow/Apm.php:38
-msgid "Automat locator"
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:92 app/Admin/Tabs/Econt_Tab.php:100
-msgid "Automatically calculate box size"
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:92 app/Admin/Tabs/Econt_Tab.php:100
-msgid "Automatically calculate LxWxH of the box for the parcel."
-msgstr ""
-
-#: app/Admin/BoxNow.php:137 app/Admin/Tabs/BoxNow_Tab.php:181
-msgid "Automatically pack products to boxes"
-msgstr ""
-
-#: app/Admin/Tabs/NepoStop_Tab.php:47
-msgid "Automatically upload labels to nepostop.com"
-msgstr ""
-
-#. Author of the plugin
-msgid "Autopolis.bg"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:168
-msgid "Bank account"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:203
-msgid "Bank name"
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:10
-msgid "BGN/EUR dual price"
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:11
-msgid "BGN/EUR Settings"
-msgstr ""
-
-#: app/Admin/EU_Vat.php:114
-msgid "Billing Country"
-msgstr ""
-
-#: app/Invoice/PDF/view.php:81
-msgid "Billing from"
-msgstr ""
-
-#: app/Invoice/PDF/view.php:82
-msgid "Billing to"
-msgstr ""
-
-#: app/Admin/CVC.php:135 app/Admin/Econt.php:135 app/Admin/Speedy.php:167
-#: app/Shipping/CVC/Address.php:45 app/Shipping/Econt/Address.php:45
-#: app/Shipping/Speedy/Address.php:45
-msgid "bl. vh. et."
-msgstr ""
-
-#: app/Admin/BoxNow.php:58
-msgid "BOX NOW Delivery"
-msgstr ""
-
 #: app/Admin/Tabs/BoxNow_Tab.php:15
 msgid "BOX NOW Settings"
-msgstr ""
-
-#: app/Admin/BoxNow.php:136 app/Admin/Tabs/BoxNow_Tab.php:195
-msgid "Box size"
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:16
 msgid "boxnow.bg API Settings"
 msgstr ""
 
-#: app/Admin/Admin_Menus.php:52 app/Admin/Admin_Menus.php:53
-#: app/Admin/Admin_Menus.php:65 app/Admin/Admin_Menus.php:95
-msgid "Bulgarisation"
-msgstr ""
-
-#. Name of the plugin
-msgid "Bulgarisation for WooCommerce"
-msgstr ""
-
-#: bulgarisation-for-woocommerce.php:46
-msgid "Bulgarisation for WooCommerce - Please enable WooCommerce first."
-msgstr ""
-
-#: app/Plugin.php:67
-#, php-format
-msgid ""
-"Bulgarisation for WooCommerce - Please review the options and save them "
-"again from \"%s\"."
-msgstr ""
-
-#: app/Admin/CVC.php:142 app/Admin/Econt.php:142 app/Admin/Speedy.php:174
-msgid "Buyer"
-msgstr ""
-
-#: app/Admin/Tabs/Connectix_Tab.php:74
-msgid ""
-"By enabling this option, the plugin will send Speedy and Econt tracking "
-"numbers to Connectix.bg. This way, you will help the service work better."
-msgstr ""
-
-#: app/Admin/Tabs/NepoStop_Tab.php:47
-msgid ""
-"By enabling this option, the plugin will send Speedy and Econt tracking "
-"numbers to nepostop.com and you can track them from their platform. This way,"
-" you will help the service work better."
-msgstr ""
-
-#: app/Shipping/CVC/Method.php:231 app/Shipping/Speedy/Method.php:211
-msgid "Calculation failed. Please try again."
-msgstr ""
-
-#: app/Shipping/Econt/Method.php:174
-msgid "Can be used only in Bulgaria"
-msgstr ""
-
-#: app/functions.php:47
-msgid "Card"
-msgstr ""
-
-#: app/Admin/Econt.php:169
-msgid "Cargo"
-msgstr ""
-
-#: app/functions.php:51 app/Admin/Tabs/Econt_Tab.php:112
-msgid "Cash"
-msgstr ""
-
-#: app/Admin/CVC.php:131 app/Admin/Econt.php:131 app/Admin/Speedy.php:163
-msgid "Cash on delivery"
-msgstr ""
-
-#: app/Admin/Tabs/Econt_Tab.php:101
-msgid "Cash on delivery agreement"
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Speedy_Tab.php:86
-msgid "Cash on delivery as PPP."
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:87
-msgid "Cash on delivery with cash receipt."
-msgstr ""
-
-#: app/functions.php:85
-msgid "Cash on delivery with PPP"
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:46
-msgid ""
-"Changing the default radio buttons for shipping methods with more stylish "
-"buttons."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:54
-msgid "Check by phone number on checkout and disable COD payment method."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:54
-msgid "Check on checkout and disable COD."
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:47
-msgid "Checkout Message"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:83
-msgid "Checkout Settings"
-msgstr ""
-
-#: app/Admin/CVC.php:129 app/Admin/Econt.php:129 app/Admin/Speedy.php:161
-#: app/Admin/BoxNow.php:133 app/Shipping/CVC/Address.php:39
-#: app/Shipping/CVC/Office.php:35 app/Shipping/Econt/Address.php:39
-#: app/Shipping/Econt/Office.php:35 app/Shipping/Speedy/Address.php:39
-#: app/Shipping/Speedy/Office.php:35 app/Shipping/BoxNow/Apm.php:33
-msgid "Choose"
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:130 app/Admin/Tabs/Econt_Tab.php:177
-msgid "Choose a city and save in order to show offices."
-msgstr ""
-
-#: app/Admin/Tabs/Econt_Tab.php:101
-msgid "Choose cash on delivery agreement"
-msgstr ""
-
-#: app/Admin/Tabs/Connectix_Tab.php:73
-msgid "Choose level of warning that will trigger notification or disable COD."
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:88 app/Admin/Tabs/Speedy_Tab.php:119
-#: app/Admin/Tabs/Econt_Tab.php:167
-msgid "City"
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:43 app/Admin/Tabs/Speedy_Tab.php:43
-#: app/Admin/Tabs/BoxNow_Tab.php:42 app/Admin/Tabs/Econt_Tab.php:44
+#: app/Admin/Tabs/BoxNow_Tab.php:42
+#: app/Admin/Tabs/CVC_Tab.php:43
+#: app/Admin/Tabs/Econt_Tab.php:44
+#: app/Admin/Tabs/Speedy_Tab.php:43
 msgid "Clear cache"
 msgstr ""
 
-#: app/Reports/Reports.php:116
-msgid "Click for more information."
+#: app/Admin/Tabs/BoxNow_Tab.php:44
+#: app/Admin/Tabs/CVC_Tab.php:45
+#: app/Admin/Tabs/Econt_Tab.php:46
+#: app/Admin/Tabs/Speedy_Tab.php:45
+msgid "Please use \"Classic Checkout\" block or [woocommerce_checkout] shortcode."
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:66
+#: app/Admin/Tabs/Econt_Tab.php:68
+msgid "Demo"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:70
+#: app/Admin/Tabs/Connectix_Tab.php:48
+#: app/Admin/Tabs/Econt_Tab.php:72
+msgid "Live"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:72
+#: app/Admin/Tabs/Connectix_Tab.php:54
+#: app/Admin/Tabs/Econt_Tab.php:74
+msgid "Environment"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:72
+#: app/Admin/Tabs/Connectix_Tab.php:54
+msgid "Select used environment."
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:73
 msgid "Client ID"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:80
-msgid "Client reports"
+#: app/Admin/Tabs/BoxNow_Tab.php:73
+msgid "Enter your Client ID."
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:74
 msgid "Client Secret"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:50
-msgid "Collection non-sensitive data"
+#: app/Admin/Tabs/BoxNow_Tab.php:74
+msgid "Enter your Client Secret."
 msgstr ""
 
-#: app/Front_End/Checkout/Company.php:102
-msgid "Company"
+#: app/Admin/Tabs/BoxNow_Tab.php:86
+#: app/Admin/Tabs/CVC_Tab.php:82
+#: app/Admin/Tabs/Econt_Tab.php:95
+#: app/Admin/Tabs/Speedy_Tab.php:85
+msgid "Phone"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:48 app/Front_End/Checkout/Company.php:126
-msgid "Company Address"
+#: app/Admin/Tabs/BoxNow_Tab.php:87
+#: app/Admin/Tabs/CVC_Tab.php:83
+msgid "E-mail"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:40
-msgid "Company Name"
+#: app/Admin/Tabs/BoxNow_Tab.php:91
+msgid "Location"
 msgstr ""
 
-#: app/Front_End/Checkout/Company.php:27
-msgid "Company name"
+#: app/Admin/Tabs/BoxNow_Tab.php:94
+#: app/Admin/Tabs/CVC_Tab.php:87
+#: app/Admin/Tabs/Econt_Tab.php:98
+#: app/Admin/Tabs/Speedy_Tab.php:90
+msgid "Generate label after checkout"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:46
-msgid "Company phone Number"
+#: app/Admin/Tabs/BoxNow_Tab.php:94
+#: app/Admin/Tabs/CVC_Tab.php:87
+#: app/Admin/Tabs/Econt_Tab.php:98
+#: app/Admin/Tabs/Speedy_Tab.php:90
+msgid "This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:43
-msgid "Company registered under Article 113(9) of the Bulgarian VAT Act"
+#: app/Admin/Tabs/BoxNow_Tab.php:100
+#: app/Admin/Tabs/BoxNow_Tab.php:132
+msgid "From/To in kg"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:180
-msgid "Compiled by"
+#: app/Admin/Tabs/BoxNow_Tab.php:104
+#: app/Admin/Tabs/BoxNow_Tab.php:147
+msgid "From/To Order Total"
 msgstr ""
 
-#: app/Reports/Providers/Connectix.php:10
-msgid "Connectix"
+#: app/Admin/Tabs/BoxNow_Tab.php:108
+#: app/Admin/Tabs/BoxNow_Tab.php:167
+msgid "From/To kg and Order Total"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:112
+msgid "Price type"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:115
+msgid "After you select the option, you must save the settings in order the correct price settings to be shown."
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:123
+#: app/Admin/Tabs/BoxNow_Tab.php:155
+msgid "kg"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:124
+#: app/Admin/Tabs/BoxNow_Tab.php:141
+#: app/Admin/Tabs/BoxNow_Tab.php:158
+msgid " to "
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:126
+#: app/Admin/Tabs/BoxNow_Tab.php:142
+#: app/Admin/Tabs/BoxNow_Tab.php:160
+msgid "+ Add new row"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:157
+msgid "and"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:175
+msgid "Hide shipping over cart total price"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:175
+msgid "If filled will hide the shipping method if the cart total price is over the sum."
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:176
+#: app/Shipping/CVC/Method.php:176
+#: app/Shipping/Econt/Method.php:163
+#: app/Shipping/Speedy/Method.php:159
+msgid "Free shipping over"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:176
+#: app/Shipping/CVC/Method.php:179
+#: app/Shipping/Econt/Method.php:166
+#: app/Shipping/Speedy/Method.php:162
+msgid "Free shipping over total cart price."
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:195
+msgid "Default box size"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:213
+#: app/Admin/Tabs/Connectix_Tab.php:92
+#: app/Admin/Tabs/CVC_Tab.php:137
+#: app/Admin/Tabs/Econt_Tab.php:217
+#: app/Admin/Tabs/NepoStop_Tab.php:65
+#: app/Admin/Tabs/Speedy_Tab.php:151
+msgid "General"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:226
+msgid "Price options"
+msgstr ""
+
+#: app/Admin/Tabs/BoxNow_Tab.php:242
+msgid "Incorrect Client ID or Client Secret."
 msgstr ""
 
 #: app/Admin/Tabs/Connectix_Tab.php:14
@@ -427,45 +807,57 @@ msgstr ""
 msgid "Connectix.bg API Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:49
-msgid "Contact email"
+#: app/Admin/Tabs/Connectix_Tab.php:52
+msgid "Sandbox"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:46
-msgid "Contact phone number of your company."
+#: app/Admin/Tabs/Connectix_Tab.php:55
+msgid "Token"
 msgstr ""
 
-#: app/Admin/CVC.php:144
-msgid "Contract"
+#: app/Admin/Tabs/Connectix_Tab.php:55
+msgid "Enter the provided token from connectix.bg."
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:65
-msgid "Conversion rate message"
+#: app/Admin/Tabs/Connectix_Tab.php:59
+#: app/Client/Connectix.php:112
+msgid "Low"
 msgstr ""
 
-#: app/Admin/CVC.php:147 app/Admin/Econt.php:146 app/Admin/Speedy.php:178
-msgid "Copy Label Data"
+#: app/Admin/Tabs/Connectix_Tab.php:63
+#: app/Client/Connectix.php:116
+msgid "Medium"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:108
-msgid "Credit"
+#: app/Admin/Tabs/Connectix_Tab.php:67
+#: app/Client/Connectix.php:120
+msgid "High"
 msgstr ""
 
-#: app/Invoice/Document/CreditNotice.php:68
-msgid "Credit Notice - Copy"
+#: app/Admin/Tabs/Connectix_Tab.php:71
+#: app/Client/Connectix.php:124
+msgid "Ultra high"
 msgstr ""
 
-#: app/Invoice/Document/CreditNotice.php:16
-msgid "Credit Notice - Original"
+#: app/Admin/Tabs/Connectix_Tab.php:73
+#: app/Admin/Tabs/NepoStop_Tab.php:46
+msgid "Level of Warning"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:456
-#, php-format
-msgid "CVC - %s"
+#: app/Admin/Tabs/Connectix_Tab.php:73
+msgid "Choose level of warning that will trigger notification or disable COD."
 msgstr ""
 
-#: app/Admin/CVC.php:58
-msgid "CVC Delivery"
+#: app/Admin/Tabs/Connectix_Tab.php:74
+msgid "Send tracking information"
+msgstr ""
+
+#: app/Admin/Tabs/Connectix_Tab.php:74
+msgid "By enabling this option, the plugin will send Speedy and Econt tracking numbers to Connectix.bg. This way, you will help the service work better."
+msgstr ""
+
+#: app/Admin/Tabs/Connectix_Tab.php:103
+msgid "Token is incorrect."
 msgstr ""
 
 #: app/Admin/Tabs/CVC_Tab.php:15
@@ -476,256 +868,12 @@ msgstr ""
 msgid "cvc.com API Settings"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:62
-#: app/Invoice/Document/NRARefunded.php:37
-#: app/Invoice/Document/CreditNotice.php:40
-msgid "Date of tax. event"
+#: app/Admin/Tabs/CVC_Tab.php:64
+msgid "API Token"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:86
-msgid "Days added to documents due date."
-msgstr ""
-
-#: app/Admin/CVC.php:154 app/Admin/Econt.php:153 app/Admin/Speedy.php:185
-#: app/Admin/Tabs/Speedy_Tab.php:91 app/Admin/Tabs/Econt_Tab.php:99
-msgid "Declared value"
-msgstr ""
-
-#: app/Admin/CVC.php:127 app/Admin/Econt.php:127 app/Admin/Speedy.php:159
-msgid "Default"
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:195
-msgid "Default box size"
-msgstr ""
-
-#: app/Admin/CVC.php:125 app/Admin/Econt.php:125 app/Admin/Speedy.php:157
-#: app/Admin/BoxNow.php:130
-msgid "Delete label"
-msgstr ""
-
-#: app/Reports/Providers/NepoStop.php:71
-#, php-format
-msgid "Delivered shipments: %s ( %s%% )"
-msgstr ""
-
-#: app/Admin/CVC.php:130 app/Admin/Econt.php:130 app/Admin/Speedy.php:162
-msgid "Delivery is payed by"
-msgstr ""
-
-#: app/Shipping/CVC/Method.php:133 app/Shipping/Econt/Method.php:135
-#: app/Shipping/Speedy/Method.php:142
-msgid "Delivery Type"
-msgstr ""
-
-#: app/Admin/CVC.php:140 app/Admin/Econt.php:140 app/Admin/Speedy.php:172
-msgid "Delivery type"
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:66 app/Admin/Tabs/Econt_Tab.php:68
-msgid "Demo"
-msgstr ""
-
-#: app/Admin/CVC.php:155 app/Admin/Econt.php:154 app/Admin/Speedy.php:187
-msgid "Description"
-msgstr ""
-
-#: app/Admin/CVC.php:152 app/Admin/Econt.php:151 app/Admin/Speedy.php:183
-msgid "Details:"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:58
-msgid "Disable invoice generation"
-msgstr ""
-
-#: app/Invoice/Order/Order.php:191
-msgid "Discount"
-msgstr ""
-
-#: app/Front_End/Checkout/Company.php:37 app/Front_End/Checkout/Company.php:97
-msgid "Do you want a company invoice?"
-msgstr ""
-
-#: app/Admin/Econt.php:167
-msgid "Document"
-msgstr ""
-
-#: app/Admin/Econt.php:170
-msgid "Document-Pallet"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:10 app/Admin/Order/Columns.php:25
-msgid "Documents"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:153
-msgid "Documents Settings"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:51
-msgid "Domain Name"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:66
-#: app/Invoice/Document/NRARefunded.php:41
-#: app/Invoice/Document/CreditNotice.php:44
-msgid "Due date"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:86
-msgid "Due days"
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:83 app/Admin/Tabs/BoxNow_Tab.php:87
-msgid "E-mail"
-msgstr ""
-
-#: app/Admin/Tabs/Help_Tab.php:35
-msgid "E-mail:"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:117
-#: app/Invoice/Document/BaseDocument.php:140
-#: app/Invoice/Document/BaseDocument.php:150
-#: app/Invoice/Document/NRARefunded.php:66
-#: app/Invoice/Document/NRARefunded.php:75
-#, php-format
-msgid "E-mail: %s"
-msgstr ""
-
-#: app/Shipping/Econt/Method.php:542
-msgid "Econt - "
-msgstr ""
-
-#: app/Admin/Econt.php:58
-msgid "Econt Delivery"
-msgstr ""
-
-#: app/Admin/Tabs/Econt_Tab.php:15
-msgid "Econt Settings"
-msgstr ""
-
-#: app/Admin/Tabs/Econt_Tab.php:16
-msgid "econt.com API Settings"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:42 app/Front_End/Checkout/Company.php:57
-#: app/Front_End/Checkout/Company.php:114
-msgid "EIK"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:110
-#: app/Invoice/Document/BaseDocument.php:125
-#: app/Invoice/Document/NRARefunded.php:59
-#, php-format
-msgid "EIK: %s"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:49
-msgid "Enable BGN/EUR dual price"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:47
-msgid "Enable BOX NOW Delivery? "
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:55
-msgid "Enable connectix.bg API? "
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:48
-msgid "Enable CVC Delivery? "
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:44
-msgid "Enable Documents Generation"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:45
-msgid "Enable Econt Delivery? "
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:54
-msgid "Enable N-18"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:56
-msgid "Enable nepostop.com API? "
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:54
-msgid ""
-"Enable required documents for N-18 and enable the export tab for XML file."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:46
-msgid "Enable Speedy Delivery? "
-msgstr ""
-
-#: app/Admin/EU_Vat.php:24
-msgid "Enable VIES validation"
-msgstr ""
-
-#: app/Shipping/BoxNow/Method.php:17
-msgid "Enables BOX NOW delivery."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:47
-msgid "Enables BOX NOW Shipping method."
-msgstr ""
-
-#: app/Shipping/CVC/Method.php:16
-msgid "Enables CVC delivery and automatically calculate shipping price."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:48
-msgid "Enables CVC Shipping methods."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:49
-msgid "Enables dual price showing for migrating to EUR."
-msgstr ""
-
-#: app/Shipping/Econt/Method.php:21
-msgid "Enables econt delivery and automatically calculate shipping price."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:45
-msgid "Enables Econt Shipping methods."
-msgstr ""
-
-#: app/Shipping/Speedy/Method.php:20
-msgid "Enables Speedy delivery and automatically calculate shipping price."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:46
-msgid "Enables Speedy Shipping methods."
-msgstr ""
-
-#: app/Shipping/Econt/Method.php:174 app/Shipping/Speedy/Method.php:170
-msgid ""
-"Enter a fixed price that the users will pay. The remaining will be payed by "
-"you."
-msgstr ""
-
-#: app/Shipping/CVC/Method.php:187
-msgid ""
-"Enter a fixed price that will be payed by you, and will be included in the "
-"order."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:88
-msgid ""
-"Enter an ID in the invoices and credit memos that replace the compiler's "
-"signature."
-msgstr ""
-
-#: app/Admin/Tabs/NepoStop_Tab.php:46
-msgid "Enter how many percentages will trigger a warning or disable COD."
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:83
-msgid "Enter sender email."
+#: app/Admin/Tabs/CVC_Tab.php:64
+msgid "Enter your token."
 msgstr ""
 
 #: app/Admin/Tabs/CVC_Tab.php:81
@@ -736,601 +884,137 @@ msgstr ""
 msgid "Enter sender phone."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:87
-msgid ""
-"Enter the name of the compiler of the automatically generated documents, "
-"which will be displayed in them."
+#: app/Admin/Tabs/CVC_Tab.php:83
+msgid "Enter sender email."
 msgstr ""
 
-#: app/Admin/Tabs/NepoStop_Tab.php:45
-msgid "Enter the provided API key from nepostop.com."
+#: app/Admin/Tabs/CVC_Tab.php:84
+#: app/Admin/Tabs/Speedy_Tab.php:86
+msgid "Cash on delivery as PPP."
 msgstr ""
 
-#: app/Admin/Tabs/Connectix_Tab.php:55
-msgid "Enter the provided token from connectix.bg."
+#: app/Admin/Tabs/CVC_Tab.php:85
+msgid "Pay by contract"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:73
-msgid "Enter your Client ID."
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:74
-msgid "Enter your Client Secret."
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:68 app/Admin/Tabs/Econt_Tab.php:76
-msgid "Enter your password."
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:64
-msgid "Enter your token."
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:67 app/Admin/Tabs/Econt_Tab.php:75
-msgid "Enter your username."
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:72 app/Admin/Tabs/Connectix_Tab.php:54
-#: app/Admin/Tabs/Econt_Tab.php:74
-msgid "Environment"
-msgstr ""
-
-#: app/Front_End/Checkout/EU_Vat.php:162
-msgid "Error communicating with the VAT validation server - please try again"
-msgstr ""
-
-#: app/Reports/Providers/Connectix.php:43
-#, php-format
-msgid "Error: %s"
-msgstr ""
-
-#: app/Admin/EU_Vat.php:52
-msgid "EU VAT"
-msgstr ""
-
-#: app/Admin/CVC.php:151 app/Admin/Econt.php:150 app/Admin/Speedy.php:182
-msgid "Event:"
-msgstr ""
-
-#. Description of the plugin
-msgid ""
-"Everything necessary for your online store to work in Bulgaria and according "
-"to Bulgarian regulations. Includes a light regime for Ordinance - H-18 and "
-"Econt, BOX NOW, CVC and Speedy shipping method."
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:13
-msgid "Export"
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:64
-msgid "Export archive with invoices for selected month"
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:49
-msgid "Export documents"
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:56
-msgid "Export documents for Microinvest"
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:14
-msgid "Exporting XML"
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:124 app/Admin/Tabs/Export_Tab.php:144
-#, php-format
-msgid ""
-"File generated successfully! <a href=\"%s\" download target=\"_blank\">"
-"Download</a>"
-msgstr ""
-
-#: app/Front_End/Multi_Currency.php:114
-#: app/Invoice/Document/BaseDocument.php:176
-msgid "Fixed conversion rate:"
-msgstr ""
-
-#: app/Admin/CVC.php:146 app/Admin/Econt.php:145 app/Admin/Speedy.php:177
-#: app/Shipping/CVC/Method.php:184 app/Shipping/Speedy/Method.php:167
-msgid "Fixed price"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:89
-msgid "Footer text"
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:78
-#, php-format
-msgid ""
-"For more information on how to get it, you can find at the plugin %s page."
-msgstr ""
-
-#: app/functions.php:216
-msgid "For single donation as development support you can send at "
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Speedy_Tab.php:89
+#: app/Admin/Tabs/CVC_Tab.php:86
 #: app/Admin/Tabs/Econt_Tab.php:97
+#: app/Admin/Tabs/Speedy_Tab.php:89
 msgid "Force variations in label"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:111
-msgid "Found errors in file:"
+#: app/Admin/Tabs/CVC_Tab.php:86
+#: app/Admin/Tabs/Econt_Tab.php:97
+#: app/Admin/Tabs/Speedy_Tab.php:89
+msgid "Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it's missing."
 msgstr ""
 
-#: app/Shipping/Register.php:162 app/Shipping/Register.php:163
-#: app/Shipping/Register.php:179
-msgid "Free shipping"
+#: app/Admin/Tabs/CVC_Tab.php:88
+#: app/Admin/Tabs/Econt_Tab.php:167
+#: app/Admin/Tabs/Speedy_Tab.php:119
+msgid "City"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:176 app/Shipping/CVC/Method.php:176
-#: app/Shipping/Econt/Method.php:163 app/Shipping/Speedy/Method.php:159
-msgid "Free shipping over"
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:176 app/Shipping/CVC/Method.php:179
-#: app/Shipping/Econt/Method.php:166 app/Shipping/Speedy/Method.php:162
-msgid "Free shipping over total cart price."
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:100 app/Admin/Tabs/BoxNow_Tab.php:132
-msgid "From/To in kg"
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:108 app/Admin/Tabs/BoxNow_Tab.php:167
-msgid "From/To kg and Order Total"
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:104 app/Admin/Tabs/BoxNow_Tab.php:147
-msgid "From/To Order Total"
-msgstr ""
-
-#: app/Admin/Tabs/NepoStop_Tab.php:65 app/Admin/Tabs/CVC_Tab.php:137
-#: app/Admin/Tabs/Speedy_Tab.php:151 app/Admin/Tabs/BoxNow_Tab.php:213
-#: app/Admin/Tabs/Connectix_Tab.php:92 app/Admin/Tabs/Econt_Tab.php:217
-msgid "General"
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:48
-msgid "Generate an XML file"
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:47
-msgid "Generate documents for orders before the plugin was installed?"
-msgstr ""
-
-#: app/Admin/Order/Actions.php:141
-msgid "Generate Invoice"
-msgstr ""
-
-#: app/Admin/CVC.php:124 app/Admin/Econt.php:124 app/Admin/Speedy.php:156
-#: app/Admin/BoxNow.php:129 app/Admin/fragments/label-column.php:21
-msgid "Generate label"
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:87 app/Admin/Tabs/Speedy_Tab.php:90
-#: app/Admin/Tabs/BoxNow_Tab.php:94 app/Admin/Tabs/Econt_Tab.php:98
-msgid "Generate label after checkout"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:156
-msgid "Global Shop Settings"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:106
-msgid ""
-"group \"A\" - for goods and services, the sales of which are exempt from "
-"taxation, for goods and services, the sales of which are subject to 0% VAT, "
-"as well as for sales, for which VAT is not charged; group \"B\" - for goods "
-"and services, the sales of which are subject to 20% value added tax; group "
-"\"D\" - for goods and services, the sales of which are subject to 9% value "
-"added tax; combined - the group is determined for each product in the store "
-"separately."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:96
-msgid "Group - A"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:100
-msgid "Group - B"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:104
-msgid "Group - G"
-msgstr ""
-
-#: app/Admin/Econt.php:160 app/Admin/Speedy.php:193
-msgid "Height"
-msgstr ""
-
-#: app/Admin/Tabs/Help_Tab.php:8
-msgid "Help"
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:175
-msgid "Hide shipping over cart total price"
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:42
-msgid ""
-"Hides most of the unwanted fields as Country, City, State, Postcode, Address "
-"1/2 and in their replacement add one field for city that is a dropdown field "
-"with all cities from the courier API. The user also have a search for that "
-"field."
-msgstr ""
-
-#: app/Client/Connectix.php:120 app/Admin/Tabs/Connectix_Tab.php:67
-msgid "High"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:107
-msgid "How to return the amount when the client cancel the order."
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://autopolis.bg/"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:88
-msgid "Identification code"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:176
-msgid "Identifier"
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:175
-msgid ""
-"If filled will hide the shipping method if the cart total price is over the "
-"sum."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:85
-msgid ""
-"If it' filled the invoices will have different number than the NRA documents."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:192
-msgid ""
-"If set to yes, all deliveries with PPP will be removed from documents and "
-"XML export"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:55
-msgid ""
-"If yes, you will receive information about the customer from connectix.bg."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:56
-msgid ""
-"If yes, you will receive information about the customer from nepostop.com."
-msgstr ""
-
+#: app/Admin/Tabs/CVC_Tab.php:99
+#: app/Admin/Tabs/Econt_Tab.php:141
 #: app/Admin/Tabs/Speedy_Tab.php:103
-msgid "If you choose \"Address\" the profile address will be used."
+msgid "Select from where you will send the packages and save to show more options."
 msgstr ""
 
-#: app/Admin/Tabs/Help_Tab.php:9
-msgid "If you need help"
+#: app/Admin/Tabs/CVC_Tab.php:106
+#: app/Admin/Tabs/Econt_Tab.php:163
+msgid "Select Address"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:44
-msgid "If you want to generate invoices or enable N-18"
+#: app/Admin/Tabs/CVC_Tab.php:168
+msgid "API Token is incorrect."
 msgstr ""
 
-#: app/Admin/Tabs/Help_Tab.php:22
-msgid ""
-"If your shop is in group B or G, we suggest you to enable the default "
-"WooCommerce settings at \"Settings >> General >> Enable taxes\". After that "
-"go to \"Settings >> Tax >> Yes, I will enter prices inclusive of tax\". Also,"
-" go to \"Standard rates\" submenu and add your rate ( 20% or 9% )."
+#: app/Admin/Tabs/Econt_Tab.php:15
+msgid "Econt Settings"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:43
-msgid ""
-"In addition, you will have separate option to enable Country field if you "
-"want to ship to Greece or Romania."
+#: app/Admin/Tabs/Econt_Tab.php:16
+msgid "econt.com API Settings"
 msgstr ""
 
-#: app/Admin/Tabs/NepoStop_Tab.php:46
-msgid "In percentages"
+#: app/Admin/Tabs/Econt_Tab.php:74
+msgid "Select used environment. For demo you can use Username: \"iasp-dev\" and Password: \"1Asp-dev\". For live environment use your credentials or create a registration at <a target=\"_blank\" href=\"https://login.econt.com/register/\">Econt Delivery</a>"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:242
-msgid "Incorrect Client ID or Client Secret."
+#: app/Admin/Tabs/Econt_Tab.php:75
+#: app/Admin/Tabs/Speedy_Tab.php:67
+msgid "Username"
 msgstr ""
 
-#: app/Front_End/Checkout/EU_Vat.php:150
-msgid "Invalid country code"
+#: app/Admin/Tabs/Econt_Tab.php:75
+#: app/Admin/Tabs/Speedy_Tab.php:67
+msgid "Enter your username."
 msgstr ""
 
-#: app/Container/Provider.php:18
-#, php-format
-msgid "Invalid identifier: %s has already been set."
+#: app/Admin/Tabs/Econt_Tab.php:76
+#: app/Admin/Tabs/Speedy_Tab.php:68
+msgid "Password"
 msgstr ""
 
-#: app/Admin/Order/Documents.php:90
-msgid "Invoice"
+#: app/Admin/Tabs/Econt_Tab.php:76
+#: app/Admin/Tabs/Speedy_Tab.php:68
+msgid "Enter your password."
 msgstr ""
 
-#: app/Admin/Econt.php:155 app/Admin/Tabs/Econt_Tab.php:121
-msgid "Invoice number"
+#: app/Admin/Tabs/Econt_Tab.php:92
+#: app/Admin/Tabs/Speedy_Tab.php:82
+msgid "Select profile"
 msgstr ""
 
-#: app/Admin/Order/Actions.php:92
-msgid "Invoice PDF"
+#: app/Admin/Tabs/Econt_Tab.php:92
+#: app/Admin/Tabs/Speedy_Tab.php:82
+msgid "Select the profile you want to use and save to show or update the other options."
 msgstr ""
 
-#: app/Admin/EU_Vat.php:91
-msgid "IP Address"
+#: app/Admin/Tabs/Econt_Tab.php:96
+#: app/Admin/Tabs/Speedy_Tab.php:88
+msgid "Remove APT from offices"
 msgstr ""
 
-#: app/Admin/EU_Vat.php:96
-msgid "IP Country"
+#: app/Admin/Tabs/Econt_Tab.php:99
+#: app/Admin/Tabs/Speedy_Tab.php:91
+msgid "Adds declared value to the label if payment is COD."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:191
-#, php-format
-msgid "Is %s courier?"
+#: app/Admin/Tabs/Econt_Tab.php:100
+#: app/Admin/Tabs/Speedy_Tab.php:92
+msgid "Automatically calculate box size"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:123 app/Admin/Tabs/BoxNow_Tab.php:155
-msgid "kg"
+#: app/Admin/Tabs/Econt_Tab.php:100
+#: app/Admin/Tabs/Speedy_Tab.php:92
+msgid "Automatically calculate LxWxH of the box for the parcel."
 msgstr ""
 
-#: app/Admin/CVC.php:126 app/Admin/Econt.php:126 app/Admin/Speedy.php:158
-#: app/Admin/BoxNow.php:131 app/Admin/Order/Columns.php:29
-msgid "Label"
+#: app/Admin/Tabs/Econt_Tab.php:101
+msgid "Cash on delivery agreement"
 msgstr ""
 
-#: app/Admin/CVC.php:141 app/Admin/Econt.php:141 app/Admin/Speedy.php:173
-#: app/Admin/BoxNow.php:134
-msgid "Label data"
+#: app/Admin/Tabs/Econt_Tab.php:101
+msgid "Choose cash on delivery agreement"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:544 app/Shipping/Econt/Method.php:672
-#: app/Shipping/Speedy/Method.php:694 app/Shipping/BoxNow/Method.php:462
-#, php-format
-msgid "Label number: %s. %s"
+#: app/Admin/Tabs/Econt_Tab.php:108
+msgid "Credit"
 msgstr ""
 
-#: app/Admin/BoxNow.php:140 app/Admin/Tabs/BoxNow_Tab.php:193
-msgid "Large Box"
+#: app/Admin/Tabs/Econt_Tab.php:112
+#: app/functions.php:51
+msgid "Cash"
 msgstr ""
 
-#: app/Admin/Econt.php:158 app/Admin/Speedy.php:191
-msgid "Length"
+#: app/Admin/Tabs/Econt_Tab.php:114
+msgid "Sender payment type"
 msgstr ""
 
-#: app/Admin/Tabs/NepoStop_Tab.php:46 app/Admin/Tabs/Connectix_Tab.php:73
-msgid "Level of Warning"
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:121
-msgid "License"
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:103
-msgid "License Key"
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:70 app/Admin/Tabs/Connectix_Tab.php:48
-#: app/Admin/Tabs/Econt_Tab.php:72
-msgid "Live"
-msgstr ""
-
-#: app/Admin/Tabs/BoxNow_Tab.php:91
-msgid "Location"
-msgstr ""
-
-#: app/Client/Connectix.php:112 app/Admin/Tabs/Connectix_Tab.php:59
-msgid "Low"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:150
-msgid "Main Company Settings"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:77
-msgid "Main functionalities"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:59
-msgid "Make shipping options on 2 rows and full width in the checkout table."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:174
-msgid "Manner of payment of the order according to the NRA system."
-msgstr ""
-
-#: app/Shipping/Econt/Method.php:171
-msgid "Maximum price payed by the client"
-msgstr ""
-
-#: app/Client/Connectix.php:116 app/Admin/Tabs/Connectix_Tab.php:63
-msgid "Medium"
-msgstr ""
-
-#: app/Admin/BoxNow.php:139 app/Admin/Tabs/BoxNow_Tab.php:189
-msgid "Medium Box"
-msgstr ""
-
-#: app/Admin/Tabs/Help_Tab.php:36
-msgid "Message:"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:41 app/Front_End/Checkout/Company.php:46
-#: app/Front_End/Checkout/Company.php:108
-msgid "MOL"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:112
-#: app/Invoice/Document/BaseDocument.php:133
-#: app/Invoice/Document/NRARefunded.php:61
-#, php-format
-msgid "MOL: %s"
-msgstr ""
-
-#: app/Admin/BoxNow.php:146 app/Admin/Tabs/CVC_Tab.php:81
-#: app/Admin/Tabs/Speedy_Tab.php:84 app/Admin/Tabs/BoxNow_Tab.php:85
-#: app/Admin/Tabs/Econt_Tab.php:94
-msgid "Name"
-msgstr ""
-
-#: app/Admin/Tabs/Help_Tab.php:34
-msgid "Name:"
-msgstr ""
-
-#: app/Reports/Providers/NepoStop.php:10
-msgid "NepoStop"
-msgstr ""
-
-#: app/Admin/Tabs/NepoStop_Tab.php:15
-msgid "NepoStop API Settings"
-msgstr ""
-
-#: app/Admin/Tabs/NepoStop_Tab.php:14
-msgid "NepoStop Settings"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:85
-msgid "Next Invoice/Credit notice Number"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:84
-msgid "Next NRA Document Number"
-msgstr ""
-
-#: app/functions.php:64 app/functions.php:223 app/Shipping/CVC/Method.php:148
-#: app/Shipping/CVC/Method.php:159 app/Shipping/CVC/Method.php:170
-#: app/Shipping/Econt/Method.php:157
-msgid "No"
-msgstr ""
-
-#: app/Admin/Tabs/Econt_Tab.php:190
-msgid "No agreement"
-msgstr ""
-
-#: app/Reports/Providers/NepoStop.php:64
-msgid "No data found for this phone number."
-msgstr ""
-
-#: app/Client/Connectix.php:108
-msgid "No Info"
-msgstr ""
-
-#. %s is the city
-#: app/Shipping/Econt/Office.php:70 app/Shipping/Speedy/Office.php:78
-#, php-format
-msgid "No offices were found at %s."
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:91 app/Admin/Tabs/Export_Tab.php:139
-#: app/Admin/Tabs/Export_Tab.php:160
-msgid "No orders found for this month."
-msgstr ""
-
-#: app/Admin/Tabs/Econt_Tab.php:271
-msgid "No profiles was found. Please contact with Econt."
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:203
-msgid "No profiles was found. Please contact with Speedy."
-msgstr ""
-
-#: app/Reports/Reports.php:126
-msgid "No reports was found for this customer!"
-msgstr ""
-
-#: app/Shipping/BoxNow/Apm.php:36
-msgid "No results was found"
-msgstr ""
-
-#: app/Shipping/CVC/Address.php:42 app/Shipping/CVC/Office.php:38
-#: app/Shipping/Econt/Address.php:42 app/Shipping/Econt/Office.php:38
-#: app/Shipping/Speedy/Address.php:42 app/Shipping/Speedy/Office.php:38
-msgid "No results was found for this city"
-msgstr ""
-
-#: app/functions.php:389
-msgid "Nonce was not provided!"
-msgstr ""
-
-#: app/Shipping/Register.php:165 app/Shipping/Register.php:187
-msgid "Not calculated"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:50
-msgid "NRA unique number"
-msgstr ""
-
-#: app/Admin/CVC.php:138 app/Admin/Econt.php:138 app/Admin/Speedy.php:170
-#: app/Admin/Tabs/CVC_Tab.php:93 app/Admin/Tabs/CVC_Tab.php:115
-#: app/Admin/Tabs/Speedy_Tab.php:97 app/Admin/Tabs/Speedy_Tab.php:127
-#: app/Admin/Tabs/Econt_Tab.php:135 app/Admin/Tabs/Econt_Tab.php:174
-#: app/Shipping/CVC/Method.php:138 app/Shipping/Econt/Method.php:140
-#: app/Shipping/Speedy/Method.php:147
-msgid "Office"
-msgstr ""
-
-#: app/Shipping/CVC/Office.php:40 app/Shipping/Econt/Office.php:40
-#: app/Shipping/Speedy/Office.php:40
-msgid "Office locator"
-msgstr ""
-
-#: app/functions.php:43
-msgid "On a payment account"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:66
-msgid "Only for companies"
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:52
-msgid "Option to include order ID in label."
-msgstr ""
-
-#: app/Reports/Reports.php:85 app/Admin/Order/Documents.php:82
-msgid "Order"
-msgstr ""
-
-#: app/Invoice/Document/NRA.php:13
-msgid "Order - Original"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:80
-msgid "Order completed"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:76
-msgid "Order created"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:58
-#: app/Invoice/Document/NRARefunded.php:33
-#: app/Invoice/Document/CreditNotice.php:36
-msgid "Order date"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:74
-#: app/Invoice/Document/NRARefunded.php:49
-#: app/Invoice/Document/CreditNotice.php:52
-msgid "Order Number"
-msgstr ""
-
-#: app/functions.php:55 app/functions.php:93 app/Admin/CVC.php:134
-#: app/Admin/Econt.php:134 app/Admin/Speedy.php:166
-msgid "Other"
-msgstr ""
-
-#: app/Admin/Econt.php:166 app/Admin/Speedy.php:194 app/Admin/BoxNow.php:141
-msgid "Pack"
-msgstr ""
-
-#: app/Admin/CVC.php:132 app/Admin/Econt.php:132 app/Admin/Speedy.php:164
-msgid "Pack count"
+#: app/Admin/Tabs/Econt_Tab.php:114
+msgid "Select how you will pay for the shipments."
 msgstr ""
 
 #: app/Admin/Tabs/Econt_Tab.php:125
@@ -1341,51 +1025,928 @@ msgstr ""
 msgid "Packing list or invoice number"
 msgstr ""
 
-#: app/Invoice/PDF/view.php:171
+#: app/Admin/Tabs/Econt_Tab.php:127
+msgid "Select if you want to have packing list or invoice number in the label."
+msgstr ""
+
+#: app/Admin/Tabs/Econt_Tab.php:177
+#: app/Admin/Tabs/Speedy_Tab.php:130
+msgid "Choose a city and save in order to show offices."
+msgstr ""
+
+#: app/Admin/Tabs/Econt_Tab.php:190
+msgid "No agreement"
+msgstr ""
+
+#: app/Admin/Tabs/Econt_Tab.php:263
 #, php-format
-msgid "Page %s of %s"
+msgid "Username and password are incorrect. Please generate API keys from \"Integration for online shops\" %s"
 msgstr ""
 
-#: app/Admin/Econt.php:168
-msgid "Pallet"
+#: app/Admin/Tabs/Econt_Tab.php:271
+msgid "No profiles was found. Please contact with Econt."
 msgstr ""
 
-#: app/Admin/Econt.php:156
-msgid "Partial delivery"
+#: app/Admin/Tabs/Export_Tab.php:13
+msgid "Export"
 msgstr ""
 
-#: app/Admin/Tabs/Speedy_Tab.php:68 app/Admin/Tabs/Econt_Tab.php:76
-msgid "Password"
+#: app/Admin/Tabs/Export_Tab.php:14
+msgid "Exporting XML"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:85
-msgid "Pay by contract"
+#: app/Admin/Tabs/Export_Tab.php:46
+msgid "Select a month for the report"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:161
-msgid "Payment method"
+#: app/Admin/Tabs/Export_Tab.php:47
+msgid "Generate documents for orders before the plugin was installed?"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:128
+#: app/Admin/Tabs/Export_Tab.php:48
+msgid "Generate an XML file"
+msgstr ""
+
+#: app/Admin/Tabs/Export_Tab.php:49
+msgid "Export documents"
+msgstr ""
+
+#: app/Admin/Tabs/Export_Tab.php:56
+msgid "Export documents for Microinvest"
+msgstr ""
+
+#: app/Admin/Tabs/Export_Tab.php:64
+msgid "Export archive with invoices for selected month"
+msgstr ""
+
+#: app/Admin/Tabs/Export_Tab.php:72
+msgid "Standardized audit file according to Annex № 38"
+msgstr ""
+
+#: app/Admin/Tabs/Export_Tab.php:91
+#: app/Admin/Tabs/Export_Tab.php:139
+#: app/Admin/Tabs/Export_Tab.php:160
+msgid "No orders found for this month."
+msgstr ""
+
+#: app/Admin/Tabs/Export_Tab.php:99
+#, php-format
+msgid "Some of the orders was not included because the payment method options was not found or the payment method was disabled. List of orders id's: %s"
+msgstr ""
+
+#: app/Admin/Tabs/Export_Tab.php:111
+msgid "Found errors in file:"
+msgstr ""
+
+#: app/Admin/Tabs/Export_Tab.php:124
+#: app/Admin/Tabs/Export_Tab.php:144
+#, php-format
+msgid "File generated successfully! <a href=\"%s\" download target=\"_blank\">Download</a>"
+msgstr ""
+
+#: app/Admin/Tabs/Help_Tab.php:8
+msgid "Help"
+msgstr ""
+
+#: app/Admin/Tabs/Help_Tab.php:9
+msgid "If you need help"
+msgstr ""
+
+#: app/Admin/Tabs/Help_Tab.php:19
+msgid "Recommended settings"
+msgstr ""
+
+#: app/Admin/Tabs/Help_Tab.php:22
+msgid "If your shop is in group B or G, we suggest you to enable the default WooCommerce settings at \"Settings >> General >> Enable taxes\". After that go to \"Settings >> Tax >> Yes, I will enter prices inclusive of tax\". Also, go to \"Standard rates\" submenu and add your rate ( 20% or 9% )."
+msgstr ""
+
+#: app/Admin/Tabs/Help_Tab.php:22
+msgid "You can find more help in the official Facebook Group for the plugin: <a target=\"_blank\" href=\"https://www.facebook.com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
+msgstr ""
+
+#: app/Admin/Tabs/Help_Tab.php:34
+msgid "Name:"
+msgstr ""
+
+#: app/Admin/Tabs/Help_Tab.php:35
+msgid "E-mail:"
+msgstr ""
+
+#: app/Admin/Tabs/Help_Tab.php:36
+msgid "Message:"
+msgstr ""
+
+#: app/Admin/Tabs/Help_Tab.php:37
+msgid "Send Request"
+msgstr ""
+
+#: app/Admin/Tabs/Help_Tab.php:54
+msgid "Thank you for your message! We'll contact you shortly."
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:10
+msgid "BGN/EUR dual price"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:11
+msgid "BGN/EUR Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:25
+msgid "Please use \"Classic Checkout\" and \"Classic Cart\" blocks or [woocommerce_checkout] and [woocommerce_cart] shortcodes."
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:43
+msgid "Rate message on Product page"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:43
+msgid "Show message about conversion rate on the product page."
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:44
+msgid "Rate message on Cart page"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:44
+msgid "Show message about conversion rate on the cart page."
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:45
+msgid "Rate message on Shop page"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:45
+msgid "Show message about conversion rate on the shop page in each product."
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:46
+msgid "Rate message in Emails"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:46
+msgid "Show message about conversion rate in emails."
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:47
+msgid "Checkout Message"
+msgstr ""
+
+#: app/Admin/Tabs/Multi_Currency_Tab.php:65
+msgid "Conversion rate message"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:14
+msgid "NepoStop Settings"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:15
+msgid "NepoStop API Settings"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:45
+msgid "API Key"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:45
+msgid "Enter the provided API key from nepostop.com."
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:46
+msgid "In percentages"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:46
+msgid "Enter how many percentages will trigger a warning or disable COD."
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:47
+msgid "Automatically upload labels to nepostop.com"
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:47
+msgid "By enabling this option, the plugin will send Speedy and Econt tracking numbers to nepostop.com and you can track them from their platform. This way, you will help the service work better."
+msgstr ""
+
+#: app/Admin/Tabs/NepoStop_Tab.php:76
+msgid "API Key is incorrect."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:40
+msgid "Company Name"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:40
+msgid "Your company name."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:41
+#: app/Front_End/Checkout/Company.php:46
+#: app/Front_End/Checkout/Company.php:108
+msgid "MOL"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:41
+msgid "Your company MOL."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:42
+#: app/Front_End/Checkout/Company.php:57
+#: app/Front_End/Checkout/Company.php:114
+msgid "EIK"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:42
+msgid "Your company EIK."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:43
+msgid "Company registered under Article 113(9) of the Bulgarian VAT Act"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:44
+msgid "VAT Number"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:44
+msgid "Your company VAT Number. To be filled in if you have a VAT registration."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:45
+msgid "VAT number required on checkout?"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:46
+msgid "Company phone Number"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:46
+msgid "Contact phone number of your company."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:47
+#: app/Front_End/Checkout/Company.php:68
+#: app/Front_End/Checkout/Company.php:120
+msgid "Settlement"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:47
+msgid "The place of registration of your company."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:48
+#: app/Front_End/Checkout/Company.php:126
+msgid "Company Address"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:48
+msgid "The registration address of your company."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:49
+msgid "Contact email"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:50
+msgid "NRA unique number"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:50
+msgid "The number received by the NRA when submitting information under Art. 52p according to Annex № 33."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:51
+msgid "Domain Name"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:51
+msgid "Web address of the e-shop. It is introduced in the same way as when submitting information under Art. 52p according to Annex № 33 in the portal for electronic services of the NRA."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:54
+msgid "Enable N-18"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:54
+msgid "Enable required documents for N-18 and enable the export tab for XML file."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:58
+msgid "Disable invoice generation"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:62
+msgid "Add only fields on checkout"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:66
+msgid "Only for companies"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:70
+msgid "Always"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:72
+msgid "When to generate invoices?"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:76
+msgid "Order created"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:80
+msgid "Order completed"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:82
+msgid "When to generate documents?"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:83
+msgid "Remove delivery from documents"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:83
+msgid "This option will remove the delivery from invoices and XML file."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:84
+msgid "Next NRA Document Number"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:84
+msgid "The document number of the next order."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:85
+msgid "Next Invoice/Credit notice Number"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:85
+msgid "If it' filled the invoices will have different number than the NRA documents."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:86
+msgid "Due days"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:86
+msgid "Days added to documents due date."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:87
+msgid "Prepared by"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:87
+msgid "Enter the name of the compiler of the automatically generated documents, which will be displayed in them."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:88
+msgid "Identification code"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:88
+msgid "Enter an ID in the invoices and credit memos that replace the compiler's signature."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:89
+msgid "Footer text"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:90
+msgid "Total in text"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:90
+msgid "Print order total after the table. Works only in levs."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:91
+msgid "Generate separate copy documents"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:91
+msgid "When enabled, invoice and credit notice copies will be generated as separate documents instead of being merged with the original. The copies can be sent to an accountant email."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:92
+msgid "Accountant email"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:92
+msgid "Email address to send invoice and credit notice copies to. Separate multiple emails with commas. Only used when separate copy documents are enabled."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:98
+msgid "Group - A"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:102
+msgid "Group - B"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:106
+msgid "Group - G"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:108
+msgid "Vat Group"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:108
+msgid "group \"A\" - for goods and services, the sales of which are exempt from taxation, for goods and services, the sales of which are subject to 0% VAT, as well as for sales, for which VAT is not charged; group \"B\" - for goods and services, the sales of which are subject to 20% value added tax; group \"D\" - for goods and services, the sales of which are subject to 9% value added tax; combined - the group is determined for each product in the store separately."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:109
+msgid "Return method"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:109
+msgid "How to return the amount when the client cancel the order."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:130
 #, php-format
 msgid "Payment method: %s"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:152
+msgid "Main Company Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:155
+msgid "Documents Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:158
+msgid "Global Shop Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:161
+msgid "Shipping Methods Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:176
+msgid "Payment Type"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:176
+msgid "Manner of payment of the order according to the NRA system."
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:177
+msgid "Virtual POS №"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:178
+msgid "Identifier"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:193
+#, php-format
+msgid "Is %s courier?"
+msgstr ""
+
+#: app/Admin/Tabs/Nra_Tab.php:194
+msgid "If set to yes, all deliveries with PPP will be removed from documents and XML export"
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:11
+#: app/Admin/Tabs/Pro_Tab.php:31
+msgid "Pro Addon"
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:35
+msgid "There is a Pro version of the plugin as an addon ( additional plugin to the free one )."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:36
+msgid "This version of the plugin adds a couple of checkout functionalities:"
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:42
+msgid "Hides most of the unwanted fields as Country, City, State, Postcode, Address 1/2 and in their replacement add one field for city that is a dropdown field with all cities from the courier API. The user also have a search for that field."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:43
+msgid "In addition, you will have separate option to enable Country field if you want to ship to Greece or Romania."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:46
+msgid "Changing the default radio buttons for shipping methods with more stylish buttons."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:49
+msgid "Allow shipping to Greece and Romania for Econt and Speedy."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:52
+msgid "Option to include order ID in label."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:55
+msgid "Allow automatically update order statuses based on label status."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:58
+msgid "Adds nekorekten.com as a provider for client reports."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:62
+msgid "Allow automatically filling company info from EIK."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:66
+msgid "Screenshot of the options:"
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:71
+msgid "Screenshots of the checkout:"
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:77
+#, php-format
+msgid "You can review a demo at: %s"
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:78
+#, php-format
+msgid "For more information on how to get it, you can find at the plugin %s page."
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:103
+msgid "License Key"
+msgstr ""
+
+#: app/Admin/Tabs/Pro_Tab.php:121
+msgid "License"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:67
+#: app/Plugin.php:194
+msgid "Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:11
+msgid "Plugin Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:44
+msgid "Enable Documents Generation"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:44
+msgid "If you want to generate invoices or enable N-18"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:45
+msgid "Enable Econt Delivery? "
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:45
+msgid "Enables Econt Shipping methods."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:46
+msgid "Enable Speedy Delivery? "
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:46
+msgid "Enables Speedy Shipping methods."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:47
+msgid "Enable BOX NOW Delivery? "
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:47
+msgid "Enables BOX NOW Shipping method."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:48
+msgid "Enable CVC Delivery? "
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:48
+msgid "Enables CVC Shipping methods."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:49
+msgid "Enable BGN/EUR dual price"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:49
+msgid "Enables dual price showing for migrating to EUR."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:50
+msgid "Collection non-sensitive data"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:50
+msgid "Send us non-sensitive data to improve user experience. This data include all of the above options ( what is enabled/disabled )"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:53
+msgid "Add column on orders list."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:53
+msgid "This option will add a column with the customer status next to the shipping info column."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:54
+msgid "Check on checkout and disable COD."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:54
+msgid "Check by phone number on checkout and disable COD payment method."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:54
+msgid "<strong>WARNING:</strong> Please notice that if you use Nekorekten.com API, the server has limit of 10 calls per minute."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:55
+msgid "Enable connectix.bg API? "
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:55
+msgid "If yes, you will receive information about the customer from connectix.bg."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:56
+msgid "Enable nepostop.com API? "
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:56
+msgid "If yes, you will receive information about the customer from nepostop.com."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:59
+msgid "Alternative shipping options layout ( checkout )"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:59
+msgid "Make shipping options on 2 rows and full width in the checkout table."
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:77
+msgid "Main functionalities"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:80
+msgid "Client reports"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:83
+msgid "Checkout Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:115
+msgid "Tab parameter not allowed!"
+msgstr ""
+
+#: app/Admin/Tabs/Settings_Tab.php:139
+msgid "Settings saved successfully!"
+msgstr ""
+
+#: app/Admin/Tabs/Speedy_Tab.php:15
+msgid "Speedy Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Speedy_Tab.php:16
+msgid "speedy.bg API Settings"
+msgstr ""
+
+#: app/Admin/Tabs/Speedy_Tab.php:47
+msgid "Use credentials for API."
+msgstr ""
+
+#: app/Admin/Tabs/Speedy_Tab.php:87
+msgid "Cash on delivery with cash receipt."
+msgstr ""
+
+#: app/Admin/Tabs/Speedy_Tab.php:103
+msgid "If you choose \"Address\" the profile address will be used."
+msgstr ""
+
+#: app/Admin/Tabs/Speedy_Tab.php:161
+msgid "Send From office"
+msgstr ""
+
+#: app/Admin/Tabs/Speedy_Tab.php:198
+msgid "Username and password are incorrect."
+msgstr ""
+
+#: app/Admin/Tabs/Speedy_Tab.php:203
+msgid "No profiles was found. Please contact with Speedy."
+msgstr ""
+
+#: app/Client/Connectix.php:108
+msgid "No Info"
+msgstr ""
+
+#: app/Container/Provider.php:18
+#, php-format
+msgid "Invalid identifier: %s has already been set."
+msgstr ""
+
+#: app/Export/Nra/Export.php:155
+#, php-format
+msgid "Total: %s | Total vat: %s | Returned Total: %s"
+msgstr ""
+
+#: app/Export/Nra/Order.php:131
+#: app/Invoice/Order/Order.php:123
+#, php-format
+msgid "Shipping: %s"
+msgstr ""
+
+#: app/Front_End/Checkout/Company.php:27
+msgid "Company name"
+msgstr ""
+
+#: app/Front_End/Checkout/Company.php:37
+#: app/Front_End/Checkout/Company.php:97
+msgid "Do you want a company invoice?"
+msgstr ""
+
+#: app/Front_End/Checkout/Company.php:102
+msgid "Company"
+msgstr ""
+
+#: app/Front_End/Checkout/EU_Vat.php:150
+msgid "Invalid country code"
+msgstr ""
+
+#: app/Front_End/Checkout/EU_Vat.php:162
+msgid "Error communicating with the VAT validation server - please try again"
+msgstr ""
+
+#: app/Front_End/Checkout/EU_Vat.php:217
+#, php-format
+msgid "You have entered an invalid %1$s (%2$s) for your billing country (%3$s)."
+msgstr ""
+
+#: app/Front_End/Checkout/EU_Vat.php:247
+#, php-format
+msgid "You have entered an invalid VAT number (%1$s) for your billing country (%2$s)."
+msgstr ""
+
+#: app/Front_End/Multi_Currency.php:95
+#: app/Front_End/Multi_Currency.php:101
+msgid "Rate: 1 EUR = 1.95583 BGN"
+msgstr ""
+
+#: app/Front_End/Multi_Currency.php:114
+#: app/Invoice/Document/BaseDocument.php:176
+msgid "Fixed conversion rate:"
+msgstr ""
+
+#: app/functions.php:43
+msgid "On a payment account"
+msgstr ""
+
+#: app/functions.php:47
+msgid "Card"
+msgstr ""
+
+#: app/functions.php:64
+#: app/functions.php:223
+#: app/Shipping/CVC/Method.php:148
+#: app/Shipping/CVC/Method.php:159
+#: app/Shipping/CVC/Method.php:170
+#: app/Shipping/Econt/Method.php:157
+msgid "No"
+msgstr ""
+
+#: app/functions.php:68
+#: app/Shipping/CVC/Method.php:160
+#: app/Shipping/CVC/Method.php:171
+#: app/Shipping/Econt/Method.php:158
+msgid "Yes"
+msgstr ""
+
+#: app/functions.php:77
+msgid "Released under Art. 3 payment without PPP"
+msgstr ""
+
+#: app/functions.php:81
+msgid "Virtual POS terminal"
+msgstr ""
+
+#: app/functions.php:85
+msgid "Cash on delivery with PPP"
 msgstr ""
 
 #: app/functions.php:89
 msgid "Payment service provider"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:174
-msgid "Payment Type"
+#: app/functions.php:97
+msgid "Reflected with receipt"
 msgstr ""
 
-#: app/Admin/Order/MetaBox.php:19
-msgid "PDF Files"
+#: app/functions.php:119
+msgid "Standard"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:82 app/Admin/Tabs/Speedy_Tab.php:85
-#: app/Admin/Tabs/BoxNow_Tab.php:86 app/Admin/Tabs/Econt_Tab.php:95
-msgid "Phone"
+#: app/functions.php:214
+msgid "Supporting the development"
+msgstr ""
+
+#: app/functions.php:216
+msgid "For single donation as development support you can send at "
+msgstr ""
+
+#: app/functions.php:224
+#: app/Shipping/CVC/Method.php:149
+msgid "Review only"
+msgstr ""
+
+#: app/functions.php:389
+msgid "Nonce was not provided!"
+msgstr ""
+
+#: app/functions.php:393
+msgid "You cannot create labels."
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:58
+#: app/Invoice/Document/CreditNotice.php:36
+#: app/Invoice/Document/CreditNoticeCopy.php:32
+#: app/Invoice/Document/NRARefunded.php:33
+msgid "Order date"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:62
+#: app/Invoice/Document/CreditNotice.php:40
+#: app/Invoice/Document/CreditNoticeCopy.php:36
+#: app/Invoice/Document/NRARefunded.php:37
+msgid "Date of tax. event"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:66
+#: app/Invoice/Document/CreditNotice.php:44
+#: app/Invoice/Document/CreditNoticeCopy.php:40
+#: app/Invoice/Document/NRARefunded.php:41
+msgid "Due date"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:70
+#: app/Invoice/Document/CreditNotice.php:48
+#: app/Invoice/Document/CreditNoticeCopy.php:44
+#: app/Invoice/Document/NRARefunded.php:45
+msgid "Place of transaction"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:74
+#: app/Invoice/Document/CreditNotice.php:52
+#: app/Invoice/Document/CreditNoticeCopy.php:48
+#: app/Invoice/Document/NRARefunded.php:49
+msgid "Order Number"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:85
+msgid "Product"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:89
+msgid "Qty"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:93
+msgid "Vat"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:101
+#: app/Invoice/Vat1139.php:35
+msgid "Total amount"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:110
+#: app/Invoice/Document/BaseDocument.php:125
+#: app/Invoice/Document/NRARefunded.php:59
+#, php-format
+msgid "EIK: %s"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:111
+#: app/Invoice/Document/BaseDocument.php:129
+#: app/Invoice/Document/NRARefunded.php:60
+#, php-format
+msgid "VAT Number: %s"
+msgstr ""
+
+#: app/Invoice/Document/BaseDocument.php:112
+#: app/Invoice/Document/BaseDocument.php:133
+#: app/Invoice/Document/NRARefunded.php:61
+#, php-format
+msgid "MOL: %s"
 msgstr ""
 
 #: app/Invoice/Document/BaseDocument.php:116
@@ -1397,57 +1958,116 @@ msgstr ""
 msgid "Phone: %s"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:70
-#: app/Invoice/Document/NRARefunded.php:45
-#: app/Invoice/Document/CreditNotice.php:48
-msgid "Place of transaction"
+#: app/Invoice/Document/BaseDocument.php:117
+#: app/Invoice/Document/BaseDocument.php:140
+#: app/Invoice/Document/BaseDocument.php:150
+#: app/Invoice/Document/NRARefunded.php:66
+#: app/Invoice/Document/NRARefunded.php:75
+#, php-format
+msgid "E-mail: %s"
 msgstr ""
 
-#: app/Shipping/BoxNow/Method.php:289
-msgid "Please choose a automat."
+#: app/Invoice/Document/BaseDocument.php:161
+msgid "Payment method"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:557 app/Shipping/Speedy/Method.php:608
-msgid "Please choose a office."
+#: app/Invoice/Document/BaseDocument.php:168
+msgid "Bank account"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:565
-msgid "Please choose address."
+#: app/Invoice/Document/BaseDocument.php:172
+msgid "Transaction ID"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:458 app/Shipping/Econt/Method.php:545
-#: app/Shipping/Speedy/Method.php:598
-msgid "Please choose delivery option!"
+#: app/Invoice/Document/BaseDocument.php:180
+msgid "Compiled by"
 msgstr ""
 
-#: app/Shipping/Econt/Office.php:61 app/Shipping/Speedy/Office.php:61
-msgid "Please enter a city."
+#: app/Invoice/Document/BaseDocument.php:183
+msgid "Received"
 msgstr ""
 
-#: bulgarisation-for-woocommerce.php:57
-msgid ""
-"Please run `composer install` in the plugin folder `bulgarisation-for-"
-"woocommerce`"
+#: app/Invoice/Document/BaseDocument.php:203
+msgid "Bank name"
 msgstr ""
 
-#: app/Shipping/Econt/Office.php:59 app/Shipping/Speedy/Office.php:59
-msgid "Please select region."
+#: app/Invoice/Document/BaseDocument.php:218
+#: app/Invoice/Document/NRARefunded.php:94
+msgid "1 EUR = 1.95583 BGN"
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:25
-msgid ""
-"Please use \"Classic Checkout\" and \"Classic Cart\" blocks or "
-"[woocommerce_checkout] and [woocommerce_cart] shortcodes."
+#: app/Invoice/Document/CreditNotice.php:16
+msgid "Credit Notice - Original"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:45 app/Admin/Tabs/Speedy_Tab.php:45
-#: app/Admin/Tabs/BoxNow_Tab.php:44 app/Admin/Tabs/Econt_Tab.php:46
-msgid ""
-"Please use \"Classic Checkout\" block or [woocommerce_checkout] shortcode."
+#: app/Invoice/Document/CreditNotice.php:28
+#: app/Invoice/Document/CreditNoticeCopy.php:24
+msgid "To invoice №"
 msgstr ""
 
-#: app/Admin/Tabs/Settings_Tab.php:11
-msgid "Plugin Settings"
+#: app/Invoice/Document/CreditNotice.php:76
+#: app/Invoice/Document/CreditNoticeCopy.php:12
+msgid "Credit Notice - Copy"
+msgstr ""
+
+#: app/Invoice/Document/Invoice.php:14
+msgid "Sale Invoice - Original"
+msgstr ""
+
+#: app/Invoice/Document/Invoice.php:41
+#: app/Invoice/Document/InvoiceCopy.php:12
+msgid "Sale Invoice - Copy"
+msgstr ""
+
+#: app/Invoice/Document/NRA.php:13
+msgid "Order - Original"
+msgstr ""
+
+#: app/Invoice/Document/NRARefunded.php:20
+msgid "Refunded Order - Original"
+msgstr ""
+
+#: app/Invoice/Order/Order.php:191
+msgid "Discount"
+msgstr ""
+
+#: app/Invoice/Order/Order.php:195
+#: app/Invoice/Order/Order.php:200
+msgid "Total"
+msgstr ""
+
+#: app/Invoice/Order/Order.php:216
+msgid "Total due"
+msgstr ""
+
+#: app/Invoice/PDF/view.php:81
+msgid "Billing from"
+msgstr ""
+
+#: app/Invoice/PDF/view.php:82
+msgid "Billing to"
+msgstr ""
+
+#: app/Invoice/PDF/view.php:171
+#, php-format
+msgid "Page %s of %s"
+msgstr ""
+
+#: app/Invoice/Vat1139.php:36
+msgid "Amount due"
+msgstr ""
+
+#: app/Invoice/Vat1139.php:43
+msgid "The invoice has been issued on the basis of Article 113, paragraph 9 of the Bulgarian VAT Act."
+msgstr ""
+
+#: app/Plugin.php:67
+#, php-format
+msgid "Bulgarisation for WooCommerce - Please review the options and save them again from \"%s\"."
+msgstr ""
+
+#: app/Reports/Providers/Connectix.php:10
+msgid "Connectix"
 msgstr ""
 
 #: app/Reports/Providers/Connectix.php:40
@@ -1458,145 +2078,176 @@ msgstr ""
 msgid "Possibility that the shipment will not be picked up: %s"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:87
-msgid "Prepared by"
+#: app/Reports/Providers/Connectix.php:43
+#, php-format
+msgid "Error: %s"
 msgstr ""
 
-#: app/Admin/BoxNow.php:145 app/Admin/Tabs/BoxNow_Tab.php:125
-#: app/Admin/Tabs/BoxNow_Tab.php:143 app/Admin/Tabs/BoxNow_Tab.php:159
-#: app/Invoice/Document/BaseDocument.php:97
-msgid "Price"
+#: app/Reports/Providers/NepoStop.php:10
+msgid "NepoStop"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:226
-msgid "Price options"
+#: app/Reports/Providers/NepoStop.php:36
+#: app/Reports/Providers/NepoStop.php:50
+#: app/Reports/Providers/NepoStop.php:62
+#: app/Reports/Providers/NepoStop.php:94
+#, php-format
+msgid "This client has %s%% undelivered shipments."
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:112
-msgid "Price type"
+#: app/Reports/Providers/NepoStop.php:64
+msgid "No data found for this phone number."
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:90
-msgid "Print order total after the table. Works only in levs."
+#: app/Reports/Providers/NepoStop.php:66
+#, php-format
+msgid "This client has %s%% undelivered shipments, which is below the set threshold."
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:11 app/Admin/Tabs/Pro_Tab.php:31
-msgid "Pro Addon"
+#: app/Reports/Providers/NepoStop.php:70
+#, php-format
+msgid "Total shipments: %s"
 msgstr ""
 
-#: app/Admin/Order/Documents.php:114 app/Invoice/Document/Proforma.php:10
-msgid "Pro forma"
+#: app/Reports/Providers/NepoStop.php:71
+#, php-format
+msgid "Delivered shipments: %s ( %s%% )"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:85
-msgid "Product"
+#: app/Reports/Providers/NepoStop.php:72
+#, php-format
+msgid "Undelivered shipments: %s ( %s%% )"
 msgstr ""
 
-#: app/Invoice/Document/BaseDocument.php:89
-msgid "Qty"
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:46
-msgid "Rate message in Emails"
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:44
-msgid "Rate message on Cart page"
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:43
-msgid "Rate message on Product page"
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:45
-msgid "Rate message on Shop page"
-msgstr ""
-
-#: app/Front_End/Multi_Currency.php:95 app/Front_End/Multi_Currency.php:101
-msgid "Rate: 1 EUR = 1.95583 BGN"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:183
-msgid "Received"
-msgstr ""
-
-#: app/Admin/Tabs/Help_Tab.php:19
-msgid "Recommended settings"
-msgstr ""
-
-#: app/functions.php:97
-msgid "Reflected with receipt"
+#: app/Reports/Reports.php:68
+#: app/Reports/Reports.php:172
+msgid "Reports"
 msgstr ""
 
 #: app/Reports/Reports.php:89
 msgid "Refresh data"
 msgstr ""
 
-#: app/Admin/Order/Documents.php:106
-msgid "Refunded Invoice"
+#: app/Reports/Reports.php:114
+msgid "We have found negative reports about this customer."
 msgstr ""
 
-#: app/Admin/Order/Actions.php:100
-msgid "Refunded Invoice PDF"
+#: app/Reports/Reports.php:116
+msgid "Click for more information."
 msgstr ""
 
-#: app/Admin/Order/Documents.php:98
-msgid "Refunded Order"
+#: app/Reports/Reports.php:126
+msgid "No reports was found for this customer!"
 msgstr ""
 
-#: app/Invoice/Document/NRARefunded.php:20
-msgid "Refunded Order - Original"
+#: app/Shipping/BoxNow/Apm.php:34
+msgid "Search Automat"
 msgstr ""
 
-#: app/Admin/Order/Actions.php:45 app/Admin/Order/Actions.php:142
-msgid "Regenerate PDF's"
+#: app/Shipping/BoxNow/Apm.php:35
+#: app/Shipping/CVC/Address.php:41
+#: app/Shipping/CVC/Office.php:37
+#: app/Shipping/Econt/Address.php:41
+#: app/Shipping/Econt/Office.php:37
+#: app/Shipping/Speedy/Address.php:41
+#: app/Shipping/Speedy/Office.php:37
+msgid "Select"
 msgstr ""
 
-#: app/functions.php:77
-msgid "Released under Art. 3 payment without PPP"
+#: app/Shipping/BoxNow/Apm.php:36
+msgid "No results was found"
 msgstr ""
 
-#: app/Admin/Tabs/Speedy_Tab.php:88 app/Admin/Tabs/Econt_Tab.php:96
-msgid "Remove APT from offices"
+#: app/Shipping/BoxNow/Apm.php:37
+msgid "Start typing Automat"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:83
-msgid "Remove delivery from documents"
+#: app/Shipping/BoxNow/Apm.php:38
+msgid "Automat locator"
 msgstr ""
 
-#: app/Admin/Speedy.php:196 app/Admin/BoxNow.php:143
-msgid "Remove Pack"
+#: app/Shipping/BoxNow/Apm.php:39
+msgid "To Automat: "
 msgstr ""
 
-#: app/Reports/Reports.php:68 app/Reports/Reports.php:172
-msgid "Reports"
+#: app/Shipping/BoxNow/Method.php:16
+msgid "Woo BG - BOX NOW"
 msgstr ""
 
-#: app/Admin/Tabs/Nra_Tab.php:107
-msgid "Return method"
+#: app/Shipping/BoxNow/Method.php:17
+msgid "Enables BOX NOW delivery."
 msgstr ""
 
-#: app/functions.php:225 app/Admin/CVC.php:153 app/Admin/Econt.php:152
-#: app/Admin/Speedy.php:184 app/Shipping/CVC/Method.php:143
-#: app/Shipping/CVC/Method.php:150 app/Shipping/Econt/Method.php:145
-#: app/Shipping/Speedy/Method.php:152
-msgid "Review and test"
+#: app/Shipping/BoxNow/Method.php:122
+#: app/Shipping/CVC/Method.php:126
+#: app/Shipping/Econt/Method.php:128
+#: app/Shipping/Speedy/Method.php:135
+msgid "Title"
 msgstr ""
 
-#: app/functions.php:224 app/Shipping/CVC/Method.php:149
-msgid "Review only"
+#: app/Shipping/BoxNow/Method.php:124
+#: app/Shipping/CVC/Method.php:128
+#: app/Shipping/Econt/Method.php:130
+#: app/Shipping/Speedy/Method.php:137
+msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: app/Invoice/Document/Invoice.php:33
-msgid "Sale Invoice - Copy"
+#: app/Shipping/BoxNow/Method.php:289
+msgid "Please choose a automat."
 msgstr ""
 
-#: app/Invoice/Document/Invoice.php:14
-msgid "Sale Invoice - Original"
+#: app/Shipping/BoxNow/Method.php:462
+#: app/Shipping/CVC/Method.php:544
+#: app/Shipping/Econt/Method.php:672
+#: app/Shipping/Speedy/Method.php:694
+#, php-format
+msgid "Label number: %s. %s"
 msgstr ""
 
-#: app/Admin/Tabs/Connectix_Tab.php:52
-msgid "Sandbox"
+#: app/Shipping/BoxNow/Method.php:466
+#: app/Shipping/CVC/Method.php:548
+#: app/Shipping/Econt/Method.php:676
+#: app/Shipping/Speedy/Method.php:698
+msgid "Track your order."
+msgstr ""
+
+#: app/Shipping/CheckoutLayout.php:16
+msgid "Shipping"
+msgstr ""
+
+#: app/Shipping/CVC/Address.php:40
+#: app/Shipping/Econt/Address.php:40
+#: app/Shipping/Speedy/Address.php:40
+msgid "Search address"
+msgstr ""
+
+#: app/Shipping/CVC/Address.php:42
+#: app/Shipping/CVC/Office.php:38
+#: app/Shipping/Econt/Address.php:42
+#: app/Shipping/Econt/Office.php:38
+#: app/Shipping/Speedy/Address.php:42
+#: app/Shipping/Speedy/Office.php:38
+msgid "No results was found for this city"
+msgstr ""
+
+#: app/Shipping/CVC/Address.php:43
+#: app/Shipping/Econt/Address.php:43
+#: app/Shipping/Speedy/Address.php:43
+msgid "Start typing street or quarter"
+msgstr ""
+
+#: app/Shipping/CVC/Method.php:15
+msgid "Woo BG - CVC"
+msgstr ""
+
+#: app/Shipping/CVC/Method.php:16
+msgid "Enables CVC delivery and automatically calculate shipping price."
+msgstr ""
+
+#: app/Shipping/CVC/Method.php:133
+#: app/Shipping/Econt/Method.php:135
+#: app/Shipping/Speedy/Method.php:142
+msgid "Delivery Type"
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:154
@@ -1607,192 +2258,139 @@ msgstr ""
 msgid "Saturday delivery/pickup."
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:66
-msgid "Screenshot of the options:"
+#: app/Shipping/CVC/Method.php:165
+#: app/Shipping/Econt/Method.php:152
+msgid "SMS notification"
 msgstr ""
 
-#: app/Admin/Tabs/Pro_Tab.php:71
-msgid "Screenshots of the checkout:"
+#: app/Shipping/CVC/Method.php:173
+#: app/Shipping/Econt/Method.php:160
+msgid "Send customer notification for delivery."
 msgstr ""
 
-#: app/Shipping/CVC/Address.php:40 app/Shipping/Econt/Address.php:40
-#: app/Shipping/Speedy/Address.php:40
-msgid "Search address"
+#: app/Shipping/CVC/Method.php:187
+msgid "Enter a fixed price that will be payed by you, and will be included in the order."
 msgstr ""
 
-#: app/Shipping/BoxNow/Apm.php:34
-msgid "Search Automat"
+#: app/Shipping/CVC/Method.php:231
+#: app/Shipping/Speedy/Method.php:211
+msgid "Calculation failed. Please try again."
 msgstr ""
 
-#: app/Shipping/CVC/Office.php:36 app/Shipping/Econt/Office.php:36
+#: app/Shipping/CVC/Method.php:456
+#, php-format
+msgid "CVC - %s"
+msgstr ""
+
+#: app/Shipping/CVC/Method.php:458
+#: app/Shipping/Econt/Method.php:545
+#: app/Shipping/Speedy/Method.php:598
+msgid "Please choose delivery option!"
+msgstr ""
+
+#: app/Shipping/CVC/Office.php:36
+#: app/Shipping/Econt/Office.php:36
 #: app/Shipping/Speedy/Office.php:36
 msgid "Search office"
 msgstr ""
 
-#: app/Shipping/CVC/Address.php:41 app/Shipping/CVC/Office.php:37
-#: app/Shipping/Econt/Address.php:41 app/Shipping/Econt/Office.php:37
-#: app/Shipping/Speedy/Address.php:41 app/Shipping/Speedy/Office.php:37
-#: app/Shipping/BoxNow/Apm.php:35
-msgid "Select"
+#: app/Shipping/CVC/Office.php:39
+#: app/Shipping/Econt/Office.php:39
+#: app/Shipping/Speedy/Office.php:39
+msgid "Start typing office"
 msgstr ""
 
-#: app/Admin/Tabs/Export_Tab.php:46
-msgid "Select a month for the report"
+#: app/Shipping/CVC/Office.php:40
+#: app/Shipping/Econt/Office.php:40
+#: app/Shipping/Speedy/Office.php:40
+msgid "Office locator"
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:106 app/Admin/Tabs/Econt_Tab.php:163
-msgid "Select Address"
+#: app/Shipping/CVC/Office.php:41
+#: app/Shipping/Econt/Office.php:41
+#: app/Shipping/Speedy/Office.php:41
+msgid "To Office: "
 msgstr ""
 
-#: app/Admin/Tabs/CVC_Tab.php:99 app/Admin/Tabs/Speedy_Tab.php:103
-#: app/Admin/Tabs/Econt_Tab.php:141
-msgid ""
-"Select from where you will send the packages and save to show more options."
+#: app/Shipping/Econt/Method.php:20
+msgid "Woo BG - Econt"
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:114
-msgid "Select how you will pay for the shipments."
+#: app/Shipping/Econt/Method.php:21
+msgid "Enables econt delivery and automatically calculate shipping price."
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:127
-msgid "Select if you want to have packing list or invoice number in the label."
+#: app/Shipping/Econt/Method.php:171
+msgid "Maximum price payed by the client"
 msgstr ""
 
-#: app/Admin/Tabs/Speedy_Tab.php:82 app/Admin/Tabs/Econt_Tab.php:92
-msgid "Select profile"
+#: app/Shipping/Econt/Method.php:174
+#: app/Shipping/Speedy/Method.php:170
+msgid "Enter a fixed price that the users will pay. The remaining will be payed by you."
 msgstr ""
 
-#: app/Admin/Tabs/Speedy_Tab.php:82 app/Admin/Tabs/Econt_Tab.php:92
-msgid ""
-"Select the profile you want to use and save to show or update the other "
-"options."
+#: app/Shipping/Econt/Method.php:174
+msgid "Can be used only in Bulgaria"
 msgstr ""
 
-#: app/Admin/Tabs/BoxNow_Tab.php:72 app/Admin/Tabs/Connectix_Tab.php:54
-msgid "Select used environment."
+#: app/Shipping/Econt/Method.php:542
+msgid "Econt - "
 msgstr ""
 
-#: app/Admin/Tabs/Econt_Tab.php:74
-msgid ""
-"Select used environment. For demo you can use Username: \"iasp-dev\" and "
-"Password: \"1Asp-dev\". For live environment use your credentials or create "
-"a registration at <a target=\"_blank\" href=\"https://login.econt."
-"com/register/\">Econt Delivery</a>"
+#: app/Shipping/Econt/Method.php:557
+#: app/Shipping/Speedy/Method.php:608
+msgid "Please choose a office."
 msgstr ""
 
-#: app/Admin/CVC.php:128 app/Admin/Econt.php:128 app/Admin/Speedy.php:160
-#: app/Admin/BoxNow.php:132 app/Shipping/CVC/Address.php:38
-#: app/Shipping/CVC/Office.php:34 app/Shipping/Econt/Address.php:38
-#: app/Shipping/Econt/Office.php:34 app/Shipping/Speedy/Address.php:38
-#: app/Shipping/Speedy/Office.php:34 app/Shipping/BoxNow/Apm.php:32
-msgid "Selected"
+#: app/Shipping/Econt/Method.php:565
+msgid "Please choose address."
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:173 app/Shipping/Econt/Method.php:160
-msgid "Send customer notification for delivery."
+#: app/Shipping/Econt/Office.php:59
+#: app/Shipping/Speedy/Office.php:59
+msgid "Please select region."
 msgstr ""
 
-#: app/Admin/Econt.php:157 app/Admin/Speedy.php:190 app/Admin/BoxNow.php:123
-#: app/Admin/Tabs/CVC_Tab.php:99 app/Admin/Tabs/CVC_Tab.php:147
-#: app/Admin/Tabs/Speedy_Tab.php:103 app/Admin/Tabs/BoxNow_Tab.php:223
-#: app/Admin/Tabs/Econt_Tab.php:141 app/Admin/Tabs/Econt_Tab.php:227
-msgid "Send From"
+#: app/Shipping/Econt/Office.php:61
+#: app/Shipping/Speedy/Office.php:61
+msgid "Please enter a city."
 msgstr ""
 
-#: app/Admin/Tabs/Speedy_Tab.php:161
-msgid "Send From office"
-msgstr ""
-
-#: app/Admin/Tabs/Help_Tab.php:37
-msgid "Send Request"
-msgstr ""
-
-#: app/Admin/BoxNow.php:122
-msgid "Send to"
-msgstr ""
-
-#: app/Admin/Tabs/Connectix_Tab.php:74
-msgid "Send tracking information"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:50
-msgid ""
-"Send us non-sensitive data to improve user experience. This data include all "
-"of the above options ( what is enabled/disabled )"
-msgstr ""
-
-#: app/Admin/CVC.php:143 app/Admin/Econt.php:143 app/Admin/Speedy.php:175
-msgid "Sender"
-msgstr ""
-
-#: app/Admin/Tabs/Econt_Tab.php:114
-msgid "Sender payment type"
-msgstr ""
-
-#: app/Plugin.php:67 app/Plugin.php:194 app/Admin/Tabs/Settings_Tab.php:10
-msgid "Settings"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:139
-msgid "Settings saved successfully!"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:47 app/Front_End/Checkout/Company.php:68
-#: app/Front_End/Checkout/Company.php:120
-msgid "Settlement"
-msgstr ""
-
-#: app/Admin/CVC.php:149 app/Admin/Econt.php:148 app/Admin/Speedy.php:180
-#: app/Admin/BoxNow.php:135
-msgid "Shipment status"
-msgstr ""
-
-#: app/Admin/CVC.php:133 app/Admin/Econt.php:133 app/Admin/Speedy.php:165
-msgid "Shipment type"
-msgstr ""
-
-#: app/Shipping/CheckoutLayout.php:16
-msgid "Shipping"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:159
-msgid "Shipping Methods Settings"
-msgstr ""
-
-#: app/Export/Nra/Order.php:131 app/Invoice/Order/Order.php:123
+#: app/Shipping/Econt/Office.php:63
 #, php-format
-msgid "Shipping: %s"
+msgid "%s is not found in %s region."
 msgstr ""
 
-#: app/Admin/Tabs/Multi_Currency_Tab.php:46
-msgid "Show message about conversion rate in emails."
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:44
-msgid "Show message about conversion rate on the cart page."
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:43
-msgid "Show message about conversion rate on the product page."
-msgstr ""
-
-#: app/Admin/Tabs/Multi_Currency_Tab.php:45
-msgid "Show message about conversion rate on the shop page in each product."
-msgstr ""
-
-#: app/Admin/BoxNow.php:138 app/Admin/Tabs/BoxNow_Tab.php:185
-msgid "Small Box"
-msgstr ""
-
-#: app/Shipping/CVC/Method.php:165 app/Shipping/Econt/Method.php:152
-msgid "SMS notification"
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:99
+#. translators: %s is the city
+#: app/Shipping/Econt/Office.php:70
+#: app/Shipping/Speedy/Office.php:78
 #, php-format
-msgid ""
-"Some of the orders was not included because the payment method options was "
-"not found or the payment method was disabled. List of orders id's: %s"
+msgid "No offices were found at %s."
+msgstr ""
+
+#: app/Shipping/Register.php:162
+#: app/Shipping/Register.php:163
+#: app/Shipping/Register.php:179
+msgid "Free shipping"
+msgstr ""
+
+#: app/Shipping/Register.php:165
+#: app/Shipping/Register.php:187
+msgid "Not calculated"
+msgstr ""
+
+#: app/Shipping/Register.php:179
+#: app/Shipping/Register.php:187
+#, php-format
+msgid "%s: <span class=\"woocommerce-Price-amount\">%s</span>"
+msgstr ""
+
+#: app/Shipping/Speedy/Method.php:19
+msgid "Woo BG - Speedy"
+msgstr ""
+
+#: app/Shipping/Speedy/Method.php:20
+msgid "Enables Speedy delivery and automatically calculate shipping price."
 msgstr ""
 
 #: app/Shipping/Speedy/Method.php:596
@@ -1800,422 +2398,22 @@ msgstr ""
 msgid "Speedy - %s"
 msgstr ""
 
-#: app/Admin/Speedy.php:59
-msgid "Speedy Delivery"
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:15
-msgid "Speedy Settings"
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:16
-msgid "speedy.bg API Settings"
-msgstr ""
-
-#: app/functions.php:119
-msgid "Standard"
-msgstr ""
-
-#: app/Admin/Tabs/Export_Tab.php:72
-msgid "Standardized audit file according to Annex № 38"
-msgstr ""
-
-#: app/Shipping/BoxNow/Apm.php:37
-msgid "Start typing Automat"
-msgstr ""
-
-#: app/Shipping/CVC/Office.php:39 app/Shipping/Econt/Office.php:39
-#: app/Shipping/Speedy/Office.php:39
-msgid "Start typing office"
-msgstr ""
-
-#: app/Shipping/CVC/Address.php:43 app/Shipping/Econt/Address.php:43
-#: app/Shipping/Speedy/Address.php:43
-msgid "Start typing street or quarter"
-msgstr ""
-
-#: app/Admin/CVC.php:136 app/Admin/Econt.php:136 app/Admin/Speedy.php:168
-#: app/Shipping/CVC/Address.php:44 app/Shipping/Econt/Address.php:44
-#: app/Shipping/Speedy/Address.php:44
-msgid "Street number"
-msgstr ""
-
-#: app/Admin/Speedy.php:186 app/Shipping/Speedy/Address.php:46
-msgid "Street or quarter"
-msgstr ""
-
-#: app/Admin/CVC.php:137 app/Admin/Econt.php:137 app/Admin/Speedy.php:169
-msgid "Street/Quarter"
-msgstr ""
-
-#: app/functions.php:214
-msgid "Supporting the development"
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:115
-msgid "Tab parameter not allowed!"
-msgstr ""
-
-#: app/Admin/EU_Vat.php:27
-msgid "Tax Classes for Digital Goods"
-msgstr ""
-
-#: app/Admin/Tabs/Help_Tab.php:54
-msgid "Thank you for your message! We'll contact you shortly."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:84
-msgid "The document number of the next order."
-msgstr ""
-
-#: app/Invoice/Vat1139.php:43
-msgid ""
-"The invoice has been issued on the basis of Article 113, paragraph 9 of the "
-"Bulgarian VAT Act."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:50
-msgid ""
-"The number received by the NRA when submitting information under Art. 52p "
-"according to Annex № 33."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:47
-msgid "The place of registration of your company."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:48
-msgid "The registration address of your company."
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:35
-msgid ""
-"There is a Pro version of the plugin as an addon ( additional plugin to the "
-"free one )."
-msgstr ""
-
-#: app/Reports/Providers/NepoStop.php:66
+#. translators: %1$s is the city and %2$s is the state
+#: app/Shipping/Speedy/Office.php:64
 #, php-format
-msgid ""
-"This client has %s%% undelivered shipments, which is below the set threshold."
+msgid "%1$s is not found in %2$s region."
 msgstr ""
 
-#: app/Reports/Providers/NepoStop.php:36 app/Reports/Providers/NepoStop.php:50
-#: app/Reports/Providers/NepoStop.php:62 app/Reports/Providers/NepoStop.php:94
-#, php-format
-msgid "This client has %s%% undelivered shipments."
-msgstr ""
-
-#: app/Shipping/CVC/Method.php:128 app/Shipping/Econt/Method.php:130
-#: app/Shipping/Speedy/Method.php:137 app/Shipping/BoxNow/Method.php:124
-msgid "This controls the title which the user sees during checkout."
-msgstr ""
-
-#: app/Admin/EU_Vat.php:27
-msgid ""
-"This option tells the plugin which of your tax classes are for digital goods."
-" This affects the taxable location of the user as of 1st Jan 2015."
-msgstr ""
-
-#: app/Admin/Tabs/Settings_Tab.php:53
-msgid ""
-"This option will add a column with the customer status next to the shipping "
-"info column."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:83
-msgid "This option will remove the delivery from invoices and XML file."
-msgstr ""
-
-#: app/Admin/Tabs/CVC_Tab.php:87 app/Admin/Tabs/Speedy_Tab.php:90
-#: app/Admin/Tabs/BoxNow_Tab.php:94 app/Admin/Tabs/Econt_Tab.php:98
-msgid ""
-"This option will try to generate your label immediately after user checkout. "
-"Also, will add the tracking number in the order email."
-msgstr ""
-
-#: app/Admin/EU_Vat.php:68
-msgid "This order is out of scope for EU VAT."
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:36
-msgid "This version of the plugin adds a couple of checkout functionalities:"
-msgstr ""
-
-#: app/Admin/CVC.php:150 app/Admin/Econt.php:149 app/Admin/Speedy.php:181
-msgid "Time:"
-msgstr ""
-
-#: app/Shipping/CVC/Method.php:126 app/Shipping/Econt/Method.php:128
-#: app/Shipping/Speedy/Method.php:135 app/Shipping/BoxNow/Method.php:122
-msgid "Title"
-msgstr ""
-
-#: app/Shipping/BoxNow/Apm.php:39
-msgid "To Automat: "
-msgstr ""
-
-#: app/Invoice/Document/CreditNotice.php:28
-msgid "To invoice №"
-msgstr ""
-
-#: app/Shipping/CVC/Office.php:41 app/Shipping/Econt/Office.php:41
-#: app/Shipping/Speedy/Office.php:41
-msgid "To Office: "
-msgstr ""
-
-#: app/Admin/Tabs/Connectix_Tab.php:55
-msgid "Token"
-msgstr ""
-
-#: app/Admin/Tabs/Connectix_Tab.php:103
-msgid "Token is incorrect."
-msgstr ""
-
-#: app/Invoice/Order/Order.php:195 app/Invoice/Order/Order.php:200
-msgid "Total"
-msgstr ""
-
-#: app/Invoice/Vat1139.php:35 app/Invoice/Document/BaseDocument.php:101
-msgid "Total amount"
-msgstr ""
-
-#: app/Invoice/Order/Order.php:216
-msgid "Total due"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:90
-msgid "Total in text"
-msgstr ""
-
-#: app/Admin/BoxNow.php:126
-msgid "Total price"
-msgstr ""
-
-#: app/Reports/Providers/NepoStop.php:70
-#, php-format
-msgid "Total shipments: %s"
-msgstr ""
-
-#: app/Export/Nra/Export.php:155
-#, php-format
-msgid "Total: %s | Total vat: %s | Returned Total: %s"
-msgstr ""
-
-#: app/Shipping/CVC/Method.php:548 app/Shipping/Econt/Method.php:676
-#: app/Shipping/Speedy/Method.php:698 app/Shipping/BoxNow/Method.php:466
-msgid "Track your order."
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:172
-msgid "Transaction ID"
-msgstr ""
-
-#: app/Client/Connectix.php:124 app/Admin/Tabs/Connectix_Tab.php:71
-msgid "Ultra high"
-msgstr ""
-
-#: app/Reports/Providers/NepoStop.php:72
-#, php-format
-msgid "Undelivered shipments: %s ( %s%% )"
-msgstr ""
-
-#: app/Admin/EU_Vat.php:92 app/Admin/EU_Vat.php:109 app/Admin/EU_Vat.php:115
-msgid "Unknown"
-msgstr ""
-
-#: app/Admin/CVC.php:123 app/Admin/Econt.php:123 app/Admin/Speedy.php:155
-msgid "Update label"
-msgstr ""
-
-#: app/Admin/CVC.php:122 app/Admin/Econt.php:122 app/Admin/Speedy.php:154
-#: app/Admin/BoxNow.php:128
-msgid "Update shipment status"
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:47
-msgid "Use credentials for API."
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:67 app/Admin/Tabs/Econt_Tab.php:75
-msgid "Username"
-msgstr ""
-
-#: app/Admin/Tabs/Speedy_Tab.php:198
-msgid "Username and password are incorrect."
-msgstr ""
-
-#: app/Admin/Tabs/Econt_Tab.php:263
-#, php-format
-msgid ""
-"Username and password are incorrect. Please generate API keys from "
-"\"Integration for online shops\" %s"
-msgstr ""
-
-#: app/Admin/EU_Vat.php:24
-msgid ""
-"Validate the VAT number with the European VIES system or only with regex."
-msgstr ""
-
-#: app/Admin/EU_Vat.php:83
-msgid "Validation was not possible"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:93
-msgid "Vat"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:106
-msgid "Vat Group"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:44
-msgid "VAT Number"
-msgstr ""
-
-#: app/Admin/EU_Vat.php:38 app/Admin/EU_Vat.php:79
-#: app/Front_End/Checkout/EU_Vat.php:81 app/Front_End/Checkout/EU_Vat.php:217
-msgid "VAT number"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:45
-msgid "VAT number required on checkout?"
-msgstr ""
-
-#: app/Invoice/Document/BaseDocument.php:111
-#: app/Invoice/Document/BaseDocument.php:129
-#: app/Invoice/Document/NRARefunded.php:60
-#, php-format
-msgid "VAT Number: %s"
-msgstr ""
-
-#: app/functions.php:81
-msgid "Virtual POS terminal"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:175
-msgid "Virtual POS №"
-msgstr ""
-
-#: app/Admin/BoxNow.php:124
-msgid "Warehouse/Automat"
-msgstr ""
-
-#: app/Reports/Reports.php:114
-msgid "We have found negative reports about this customer."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:51
-msgid ""
-"Web address of the e-shop. It is introduced in the same way as when "
-"submitting information under Art. 52p according to Annex № 33 in the portal "
-"for electronic services of the NRA."
-msgstr ""
-
-#: app/Admin/CVC.php:145 app/Admin/Econt.php:144 app/Admin/Speedy.php:176
-#: app/Admin/BoxNow.php:144
-msgid "Weight"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:82
-msgid "When to generate documents?"
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:72
-msgid "When to generate invoices?"
-msgstr ""
-
-#: app/Admin/Econt.php:159 app/Admin/Speedy.php:192
-msgid "Width"
-msgstr ""
-
-#: app/Shipping/BoxNow/Method.php:16
-msgid "Woo BG - BOX NOW"
-msgstr ""
-
-#: app/Shipping/CVC/Method.php:15
-msgid "Woo BG - CVC"
-msgstr ""
-
-#: app/Shipping/Econt/Method.php:20
-msgid "Woo BG - Econt"
-msgstr ""
-
-#: app/Shipping/Speedy/Method.php:19
-msgid "Woo BG - Speedy"
-msgstr ""
-
-#: app/Admin/Admin_Menus.php:92
-msgid "WooCommerce"
-msgstr ""
-
-#. %1$s is minimum php version and %2$s is minimum WP version
+#. translators: %1$s is minimum php version and %2$s is minimum WP version
 #: bulgarisation-for-woocommerce.php:37
 #, php-format
-msgid ""
-"WooCommerce - Bulgarisation requires PHP version %1$s+ and WP version %2$s+, "
-"plugin is currently NOT RUNNING."
+msgid "WooCommerce - Bulgarisation requires PHP version %1$s+ and WP version %2$s+, plugin is currently NOT RUNNING."
 msgstr ""
 
-#: app/functions.php:68 app/Shipping/CVC/Method.php:160
-#: app/Shipping/CVC/Method.php:171 app/Shipping/Econt/Method.php:158
-msgid "Yes"
+#: bulgarisation-for-woocommerce.php:46
+msgid "Bulgarisation for WooCommerce - Please enable WooCommerce first."
 msgstr ""
 
-#: app/Admin/Tabs/Help_Tab.php:22
-msgid ""
-"You can find more help in the official Facebook Group for the plugin: <a "
-"target=\"_blank\" href=\"https://www.facebook."
-"com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
-msgstr ""
-
-#: app/Admin/Tabs/Pro_Tab.php:77
-#, php-format
-msgid "You can review a demo at: %s"
-msgstr ""
-
-#: app/functions.php:393
-msgid "You cannot create labels."
-msgstr ""
-
-#: app/Front_End/Checkout/EU_Vat.php:217
-#, php-format
-msgid ""
-"You have entered an invalid %1$s (%2$s) for your billing country (%3$s)."
-msgstr ""
-
-#: app/Front_End/Checkout/EU_Vat.php:247
-#, php-format
-msgid ""
-"You have entered an invalid VAT number (%1$s) for your billing country (%2$s)"
-"."
-msgstr ""
-
-#: app/Admin/CVC.php:148
-msgid "You just copied the label data used for the cvc API."
-msgstr ""
-
-#: app/Admin/Econt.php:147
-msgid "You just copied the label data used for the Econt API."
-msgstr ""
-
-#: app/Admin/Speedy.php:179
-msgid "You just copied the label data used for the Speedy API."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:42
-msgid "Your company EIK."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:41
-msgid "Your company MOL."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:40
-msgid "Your company name."
-msgstr ""
-
-#: app/Admin/Tabs/Nra_Tab.php:44
-msgid ""
-"Your company VAT Number. To be filled in if you have a VAT registration."
+#: bulgarisation-for-woocommerce.php:57
+msgid "Please run `composer install` in the plugin folder `bulgarisation-for-woocommerce`"
 msgstr ""

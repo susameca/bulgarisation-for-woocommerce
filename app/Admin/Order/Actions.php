@@ -94,10 +94,26 @@ class Actions {
 					</p>
 				<?php endif ?>
 
+				<?php if ( $invoice_copy_pdf = $order->get_meta( 'woo_bg_invoice_copy_document' ) ): ?>
+					<p>
+						<a target="_blank" href="<?php echo esc_url( wp_get_attachment_url( $invoice_copy_pdf ) ); ?>" class="woo-bg button button--pdf">
+							<?php esc_html_e('Invoice Copy PDF', 'bulgarisation-for-woocommerce') ?>
+						</a>
+					</p>
+				<?php endif ?>
+
 				<?php if ( $refunded_invoice_pdf = $order->get_meta( 'woo_bg_refunded_invoice_document' ) ): ?>
 					<p>
 						<a target="_blank" href="<?php echo esc_url( wp_get_attachment_url( $refunded_invoice_pdf ) ); ?>" class="woo-bg button button--pdf">
 							<?php esc_html_e('Refunded Invoice PDF', 'bulgarisation-for-woocommerce') ?>
+						</a>
+					</p>
+				<?php endif ?>
+
+				<?php if ( $refunded_invoice_copy_pdf = $order->get_meta( 'woo_bg_refunded_invoice_copy_document' ) ): ?>
+					<p>
+						<a target="_blank" href="<?php echo esc_url( wp_get_attachment_url( $refunded_invoice_copy_pdf ) ); ?>" class="woo-bg button button--pdf">
+							<?php esc_html_e('Refunded Invoice Copy PDF', 'bulgarisation-for-woocommerce') ?>
 						</a>
 					</p>
 				<?php endif ?>

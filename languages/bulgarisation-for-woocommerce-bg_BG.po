@@ -2357,3 +2357,59 @@ msgstr "Името на вашата фирма."
 msgid ""
 "Your company VAT Number. To be filled in if you have a VAT registration."
 msgstr "ДДС № на вашата фирма. Попълва се ако имате регистрация по ЗДДС."
+
+#: app/Admin/Order/Accountant_Email.php:9
+msgid "Accountant Document Copies"
+msgstr "Копия на документи за счетоводител"
+
+#: app/Admin/Order/Accountant_Email.php:10
+msgid "This email sends invoice and credit notice copies to the accountant."
+msgstr "Този имейл изпраща копия на фактури и кредитни известия до счетоводителя."
+
+#: app/Admin/Order/Accountant_Email.php:11
+#: app/Admin/Order/Accountant_Email.php:93
+msgid "Document Copy"
+msgstr "Копие на документ"
+
+#: app/Admin/Order/Accountant_Email.php:12
+#: app/Admin/Order/Accountant_Email.php:89
+msgid "[{site_title}]: Document copy for order #{order_number}"
+msgstr "[{site_title}]: Копие на документ за поръчка #{order_number}"
+
+#: app/Admin/Order/Accountant_Email.php:69
+#: app/Admin/Order/Accountant_Email.php:83
+#, php-format
+msgid "Please find attached the document copies for order #%s."
+msgstr "Моля, вижте прикачените копия на документите за поръчка #%s."
+
+#: app/Admin/Order/Actions.php:100
+msgid "Invoice Copy PDF"
+msgstr "Копие на фактура PDF"
+
+#: app/Admin/Order/Actions.php:116
+msgid "Refunded Invoice Copy PDF"
+msgstr "Копие на кредитно известие PDF"
+
+#: app/Admin/Order/Documents.php:149
+msgid "Invoice Copy"
+msgstr "Копие на фактура"
+
+#: app/Admin/Order/Documents.php:173
+msgid "Refunded Invoice Copy"
+msgstr "Копие на кредитно известие"
+
+#: app/Admin/Tabs/Nra_Tab.php:91
+msgid "Generate separate copy documents"
+msgstr "Генериране на отделни копия на документи"
+
+#: app/Admin/Tabs/Nra_Tab.php:91
+msgid "When enabled, invoice and credit notice copies will be generated as separate documents instead of being merged with the original. The copies can be sent to an accountant email."
+msgstr "Когато е включено, копията на фактури и кредитни известия ще се генерират като отделни документи, вместо да се обединяват с оригинала. Копията могат да бъдат изпратени на имейл на счетоводител."
+
+#: app/Admin/Tabs/Nra_Tab.php:92
+msgid "Accountant email"
+msgstr "Имейл на счетоводител"
+
+#: app/Admin/Tabs/Nra_Tab.php:92
+msgid "Email address to send invoice and credit notice copies to. Separate multiple emails with commas. Only used when separate copy documents are enabled."
+msgstr "Имейл адрес за изпращане на копия на фактури и кредитни известия. Разделете няколко имейла със запетаи. Използва се само когато е включено генерирането на отделни копия."
