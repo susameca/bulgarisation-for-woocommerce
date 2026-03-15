@@ -52,14 +52,15 @@ class Address {
 		$args = [];
 		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( sanitize_text_field( $_POST['country'] ) );
 		$query = '';
-		
-		if ( $country_id === '100' ) {
-			$query = Transliteration::latin2cyrillic( sanitize_text_field( $_POST['query'] ) );
-		} else {
-			$query = sanitize_text_field( $_POST['query'] );
-		}
 
-		$query = woo_bg_strip_street_prefix( $query );
+		// Strip prefix BEFORE transliteration so both "pl." and "пл." are handled correctly
+		$raw_query = woo_bg_strip_street_prefix( sanitize_text_field( $_POST['query'] ) );
+
+		if ( $country_id === '100' ) {
+			$query = Transliteration::latin2cyrillic( $raw_query );
+		} else {
+			$query = $raw_query;
+		}
 
 		$raw_city = sanitize_text_field( $_POST['city'] );
 		$raw_state = sanitize_text_field( $_POST['state'] );
