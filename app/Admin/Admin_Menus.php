@@ -132,6 +132,10 @@ class Admin_Menus {
 			$tabs[] = new Tabs\BoxNow_Tab();
 		}
 
+		if ( woo_bg_get_option( 'apis', 'enable_pigeon' ) === 'yes' ) {
+			$tabs[] = new Tabs\Pigeon_Tab();
+		}
+
 		if ( woo_bg_get_option( 'apis', 'enable_cvc' ) === 'yes' ) {
 			$tabs[] = new Tabs\CVC_Tab();
 		}

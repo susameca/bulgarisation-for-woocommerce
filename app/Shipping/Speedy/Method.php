@@ -167,7 +167,7 @@ class Method extends \WC_Shipping_Method {
 				'title'       => __( 'Fixed price', 'bulgarisation-for-woocommerce' ),
 				'type'        => 'number',
 				'placeholder' => '0',
-				'description' => __( 'Enter a fixed price that the users will pay. The remaining will be payed by you.', 'bulgarisation-for-woocommerce' ),
+				'description' => __( 'Enter a fixed price that will be payed by the client, and will be included in the COD.', 'bulgarisation-for-woocommerce' ),
 				'default'     => '',
 				'desc_tip'    => true,
 			),

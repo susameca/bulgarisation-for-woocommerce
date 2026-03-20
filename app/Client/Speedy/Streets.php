@@ -65,7 +65,7 @@ class Streets {
 		$formatted = [];
 
 		foreach ( $streets as $street ) {
-			$formatted[ 'street-' . $street['id'] ] = $street['type'] . " " . $street['name'];
+			$formatted[ 'street-' . $street['id'] ] = $street['type'] . " " . woo_bg_title_case_bg( $street['name'] );
 		}
 		
 		return $formatted;

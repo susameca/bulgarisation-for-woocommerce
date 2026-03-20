@@ -420,6 +420,7 @@ function woo_bg_is_shipping_enabled() {
 		woo_bg_get_option( 'apis', 'enable_econt' ) === 'yes' || 
 		woo_bg_get_option( 'apis', 'enable_cvc' ) === 'yes' || 
 		woo_bg_get_option( 'apis', 'enable_boxnow' ) === 'yes' || 
+		woo_bg_get_option( 'apis', 'enable_pigeon' ) === 'yes' || 
 		woo_bg_get_option( 'apis', 'enable_speedy' ) === 'yes' 
 	) {
 		$enabled = true;
@@ -638,4 +639,49 @@ function woo_bg_strip_street_prefix( $street ) {
     }
 
     return $street;
+}
+
+function woo_bg_title_case_bg(string $string, string $encoding = 'UTF-8') {
+    $smallWords = [
+        'и', 'или', 'а', 'но', 'че',
+        'в', 'във', 'с', 'със', 'у', 'към',
+        'на', 'за', 'от', 'до', 'по', 'под', 'над', 'пред', 'при', 'през',
+        'без', 'след', 'преди', 'между', 'сред', 'чрез'
+    ];
+
+    $string = trim(preg_replace('/\s+/u', ' ', $string));
+    $string = mb_strtolower($string, $encoding);
+
+    $parts = preg_split('/(\s+)/u', $string, -1, PREG_SPLIT_DELIM_CAPTURE);
+    $result = [];
+    $wordIndex = 0;
+
+    foreach ($parts as $part) {
+        if (preg_match('/^\s+$/u', $part)) {
+            $result[] = $part;
+            continue;
+        }
+
+        $word = $part;
+
+        // Главна първа буква на думата
+        $word = preg_replace_callback('/^\p{L}/u', function ($m) use ($encoding) {
+            return mb_strtoupper($m[0], $encoding);
+        }, $word);
+
+        // Главна буква след точка, ако след нея има буква
+        $word = preg_replace_callback('/(\.)(\p{L})/u', function ($m) use ($encoding) {
+            return $m[1] . mb_strtoupper($m[2], $encoding);
+        }, $word);
+
+        // Малки служебни думи, освен ако са първа дума
+        if ($wordIndex > 0 && in_array($part, $smallWords, true)) {
+            $word = $part;
+        }
+
+        $result[] = $word;
+        $wordIndex++;
+    }
+
+    return implode('', $result);
 }

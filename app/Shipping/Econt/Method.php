@@ -102,7 +102,7 @@ class Method extends \WC_Shipping_Method {
 				}
 			}
 
-			if ( !$rate['cost'] ) {
+			if ( !$rate['cost'] && $rate['meta_data']['validated'] ) {
 				$this->free_shipping = true;
 			}
 		}

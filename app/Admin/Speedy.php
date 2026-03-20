@@ -804,7 +804,7 @@ class Speedy {
 		$labels = explode( '|', sanitize_text_field( $_REQUEST['parcels'] ) );
 		$size = sanitize_text_field( $_REQUEST['size'] );
 		$parcels = array();
-		$awbsc = sanitize_text_field( $_REQUEST['awbsc'] );
+		$awbsc = isset( $_REQUEST['awbsc'] ) ? sanitize_text_field( $_REQUEST['awbsc'] ) : '';
 
 		foreach ( $labels as $label ) {
 			$parcels[] = array(
