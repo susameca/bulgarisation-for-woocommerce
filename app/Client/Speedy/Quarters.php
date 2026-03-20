@@ -65,7 +65,7 @@ class Quarters {
 		$formatted = [];
 
 		foreach ( $quarters as $qtr ) {
-			$formatted[ 'qtr-' . $qtr['id'] ] = $qtr['type'] . " " . $qtr['name'];
+			$formatted[ 'qtr-' . $qtr['id'] ] = $qtr['type'] . " " . woo_bg_title_case_bg( $qtr['name'] );
 		}
 
 		return $formatted;

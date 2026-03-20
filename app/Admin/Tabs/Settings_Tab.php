@@ -45,6 +45,7 @@ class Settings_Tab extends Base_Tab {
 				new Fields\TrueFalse_Field( 'enable_econt', __( 'Enable Econt Delivery? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables Econt Shipping methods.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'enable_speedy', __( 'Enable Speedy Delivery? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables Speedy Shipping methods.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'enable_boxnow', __( 'Enable BOX NOW Delivery? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables BOX NOW Shipping method.', 'bulgarisation-for-woocommerce' ) ),
+				new Fields\TrueFalse_Field( 'enable_pigeon', __( 'Enable Pigeon Express Delivery? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables Pigeon Express Shipping method.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'enable_cvc', __( 'Enable CVC Delivery? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables CVC Shipping methods.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'enable_multi_currency', __( 'Enable BGN/EUR dual price', 'bulgarisation-for-woocommerce' ), null, null, __( 'Enables dual price showing for migrating to EUR.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'enable_stats', __( 'Collection non-sensitive data', 'bulgarisation-for-woocommerce' ), null, null, __( 'Send us non-sensitive data to improve user experience. This data include all of the above options ( what is enabled/disabled )', 'bulgarisation-for-woocommerce' ) ),
@@ -106,6 +107,7 @@ class Settings_Tab extends Base_Tab {
 			'Woo_BG\Admin\Tabs\Econt_Tab',
 			'Woo_BG\Admin\Tabs\CVC_Tab',
 			'Woo_BG\Admin\Tabs\BoxNow_Tab',
+			'Woo_BG\Admin\Tabs\Pigeon_Tab',
 			'Woo_BG\Admin\Tabs\Connectix_Tab',
 			'Woo_BG\Admin\Tabs\NepoStop_Tab',
 		];

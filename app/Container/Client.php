@@ -40,6 +40,13 @@ use Woo_BG\Client\Connectix;
 //NepoStop Classes
 use Woo_BG\Client\NepoStop;
 
+//Pigeon Express Classes
+use Woo_BG\Client\Pigeon;
+use Woo_BG\Client\Pigeon\Cities as Pigeon_Cities;
+use Woo_BG\Client\Pigeon\Offices as Pigeon_Offices;
+use Woo_BG\Client\Pigeon\Lockers as Pigeon_Lockers;
+use Woo_BG\Client\Pigeon\Streets as Pigeon_Streets;
+
 use Pimple\Container;
 
 class Client extends Provider {
@@ -75,6 +82,12 @@ class Client extends Provider {
 	const CONNECTIX        = 'client.connectix';
 
 	const NEPOSTOP         = 'client.nepostop';
+
+	const PIGEON           = 'client.pigeon';
+	const PIGEON_CITIES    = 'client.pigeon.cities';
+	const PIGEON_OFFICES   = 'client.pigeon.offices';
+	const PIGEON_LOCKERS   = 'client.pigeon.lockers';
+	const PIGEON_STREETS   = 'client.pigeon.streets';
 
 	public function register( Container $container ) {
 		$container[ self::ECONT ] = function ( Container $container ) {
@@ -183,6 +196,26 @@ class Client extends Provider {
 
 		$container[ self::NEPOSTOP ] = function ( Container $container ) {
 			return new NepoStop();
+		};
+
+		$container[ self::PIGEON ] = function ( Container $container ) {
+			return new Pigeon();
+		};
+
+		$container[ self::PIGEON_CITIES ] = function ( Container $container ) {
+			return new Pigeon_Cities( $container );
+		};
+
+		$container[ self::PIGEON_OFFICES ] = function ( Container $container ) {
+			return new Pigeon_Offices( $container );
+		};
+
+		$container[ self::PIGEON_LOCKERS ] = function ( Container $container ) {
+			return new Pigeon_Lockers( $container );
+		};
+
+		$container[ self::PIGEON_STREETS ] = function ( Container $container ) {
+			return new Pigeon_Streets( $container );
 		};
 		
 		remove_filter( 'woocommerce_after_shipping_rate', 'Woo_BG_Pro\Shipping\CityStateField::add_city_state_field', 15 );
