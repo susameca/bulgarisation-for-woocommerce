@@ -129,8 +129,7 @@ class Cities {
 	}
 
 	public function get_state_name( $state_code, $country_code = 'BG' ) {
-		$countries = new \WC_Countries();
-		$states = $countries->get_states( $country_code );
+		$states = $this->get_regions( $country_code );
 
 		return $states[ $state_code ];
 	}
