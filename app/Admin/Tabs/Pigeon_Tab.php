@@ -17,8 +17,8 @@ class Pigeon_Tab extends Base_Tab {
 		$this->set_tab_slug( "pigeon" );
 
 		add_action( 'woo_bg/admin/settings/afte_save_fields/'. $this->tab_name, array( $this, 'after_save_fields' ) );
-		add_filter( 'woo_bg/admin/settings/pigeon/fields', array( $this, 'add_additional_fields' ), 10 );
-		add_filter( 'woo_bg/admin/settings/pigeon/fields', array( $this, 'add_send_from_fields' ), 20 );
+		add_filter( 'woo_bg/admin/settings/pigeon/fields', array( $this, 'add_send_from_fields' ), 10 );
+		add_filter( 'woo_bg/admin/settings/pigeon/fields', array( $this, 'add_additional_fields' ), 20 );
 		add_filter( 'woo_bg/admin/settings/pigeon/groups_titles', array( $this, 'add_send_from_group_title' ) );
 
 		if ( !empty( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] === $this->get_tab_slug() ) {
@@ -85,13 +85,6 @@ class Pigeon_Tab extends Base_Tab {
 		if ( $this->container[ Client::PIGEON ]->is_valid_access( true ) ) {
 			//$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'bulgarisation-for-woocommerce' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'bulgarisation-for-woocommerce' ) );
 			$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'auto_size', __( 'Automatically calculate box size', 'bulgarisation-for-woocommerce' ), null, null, __( 'Automatically calculate LxWxH of the box for the parcel.', 'bulgarisation-for-woocommerce' ) );
-			$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'declared_value', __( 'Declared value', 'bulgarisation-for-woocommerce' ), null, null, __( 'Adds declared value to the label if payment is COD.', 'bulgarisation-for-woocommerce' ) );
-			$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'paper_return_receipt', __( 'Paper Return Receipt', 'bulgarisation-for-woocommerce' ), null, null, __( 'Request for a paper receipt', 'bulgarisation-for-woocommerce' ) );
-			$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'return_receipt', __( 'Return Receipt', 'bulgarisation-for-woocommerce' ), null, null, __( 'Request for a return receipt in electronic format', 'bulgarisation-for-woocommerce' ) );
-			$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'service_return_documents', __( 'Service Return Documents', 'bulgarisation-for-woocommerce' ), null, null, __( 'Return of original documents from the recipient to the sender after signing.', 'bulgarisation-for-woocommerce' ) );
-			$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'id_verification_and_document_signature', __( 'ID Verification and Document Signature', 'bulgarisation-for-woocommerce' ), null, null, __( 'Verify ID and sign documents electronically.', 'bulgarisation-for-woocommerce' ) );
-			$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'cod_card_fee', __( 'COD Card Fee', 'bulgarisation-for-woocommerce' ), null, null, __( 'Charge a fee for COD card payments.', 'bulgarisation-for-woocommerce' ) );
-			
 			$fields[ 'pigeon' ][] = new Fields\Select_Field( 
 				array(
 					'office' => array(
@@ -104,6 +97,15 @@ class Pigeon_Tab extends Base_Tab {
 					),
 				), 'send_from', __( 'Send From', 'bulgarisation-for-woocommerce' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'bulgarisation-for-woocommerce' ) 
 			);
+			
+			$fields[ 'pigeon_services' ][] = new Fields\TrueFalse_Field( 'declared_value', __( 'Declared value', 'bulgarisation-for-woocommerce' ), null, null, __( 'Adds declared value to the label if payment is COD.', 'bulgarisation-for-woocommerce' ) );
+			$fields[ 'pigeon_services' ][] = new Fields\TrueFalse_Field( 'paper_return_receipt', __( 'Paper Return Receipt', 'bulgarisation-for-woocommerce' ), null, null, __( 'Request for a paper receipt', 'bulgarisation-for-woocommerce' ) );
+			$fields[ 'pigeon_services' ][] = new Fields\TrueFalse_Field( 'return_receipt', __( 'Return Receipt', 'bulgarisation-for-woocommerce' ), null, null, __( 'Request for a return receipt in electronic format', 'bulgarisation-for-woocommerce' ) );
+			$fields[ 'pigeon_services' ][] = new Fields\TrueFalse_Field( 'service_return_documents', __( 'Service Return Documents', 'bulgarisation-for-woocommerce' ), null, null, __( 'Return of original documents from the recipient to the sender after signing.', 'bulgarisation-for-woocommerce' ) );
+			$fields[ 'pigeon_services' ][] = new Fields\TrueFalse_Field( 'id_verification_and_document_signature', __( 'ID Verification and Document Signature', 'bulgarisation-for-woocommerce' ), null, null, __( 'Verify ID and sign documents electronically.', 'bulgarisation-for-woocommerce' ) );
+			$fields[ 'pigeon_services' ][] = new Fields\TrueFalse_Field( 'cod_card_fee', __( 'COD Card Fee', 'bulgarisation-for-woocommerce' ), null, null, __( 'Charge a fee for COD card payments.', 'bulgarisation-for-woocommerce' ) );
+			
+			
 		}
 
 		return $fields;
@@ -157,6 +159,11 @@ class Pigeon_Tab extends Base_Tab {
 		if ( $this->container[ Client::PIGEON ]->is_valid_access( true ) ) {
 			$titles['pigeon_send_from'] = array(
 				'title' => __( 'Send From', 'bulgarisation-for-woocommerce' ),
+			);
+
+			$titles['pigeon_services'] = array(
+				'title' => __( 'Additional Services', 'bulgarisation-for-woocommerce' ),
+				'description' => sprintf( __( 'You can see the current prices on the <a href="%s" target="_blank">Pigeon Express website</a> or according to your agreed upon terms.', 'bulgarisation-for-woocommerce' ), 'https://pigeonexpress.com/prices-and-taxes/' ),	
 			);
 		}
 

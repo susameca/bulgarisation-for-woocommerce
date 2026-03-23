@@ -6,8 +6,10 @@
 
 			<div v-for="(group, group_slug) in fields">
 	  		<h3 class="woo-bg--group-title">{{ groups_titles[ group_slug ].title }}</h3>
-
-			  <table class="form-table">
+			
+			<p v-if= "groups_titles[ group_slug ].description" class="woo-bg--group-description" v-html="groups_titles[ group_slug ].description"></p>
+			
+			<table class="form-table">
 					<tbody>
 						<tr v-if="field.type === 'text'" valign="top" v-for="(field, field_slug) in group">
 							<th scope="row" class="titledesc">

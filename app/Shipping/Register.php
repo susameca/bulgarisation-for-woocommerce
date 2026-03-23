@@ -13,7 +13,7 @@ use Woo_BG\Cron\Speedy as Speedy_Cron;
 use Woo_BG\Admin\BoxNow as BoxNow_Admin;
 use Woo_BG\Cron\BoxNow as BoxNow_Cron;
 
-//use Woo_BG\Admin\Pigeon as Pigeon_Admin;
+use Woo_BG\Admin\Pigeon as Pigeon_Admin;
 use Woo_BG\Cron\Pigeon as Pigeon_Cron;
 
 defined( 'ABSPATH' ) || exit;
@@ -134,7 +134,7 @@ class Register {
 		new Pigeon\Address();
 		new Pigeon\Office();
 		new Pigeon\Locker();
-		//new Pigeon_Admin();
+		new Pigeon_Admin();
 
 		add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'register_pigeon_method' ) );
 		add_action( 'woocommerce_after_checkout_validation', array( 'Woo_BG\Shipping\Pigeon\Method', 'validate_pigeon_method' ), 20, 2 );

@@ -254,7 +254,7 @@ export default {
 			let shippingAddress = "";
 
 			if ( this.selectedOffice && this.selectedOffice.name ) {
-				shippingAddress = this.i18n.toOffice + this.selectedOffice.name + ' ( ' + this.selectedOffice.address.fullAddress + ' ) ';
+				shippingAddress = this.i18n.toOffice + this.selectedOffice.name + ' ( ' + this.selectedOffice.address + ' ) ';
 			}
 
 			this.Address1Field.val( shippingAddress );

@@ -23,6 +23,19 @@ $current_tab_object = $tabs[ $current_tab_key ];
 			?>
 		</nav>
 
+		<?php if ( ! get_option( 'woo_bg_pigeon_express_message_dismiss' ) ): ?>
+			<div class="notice notice-success is-dismissible notice-pigeon-express">
+				<div style=" display: flex; align-items: center; ">
+					<img src="https://pigeonexpress.com/_design/assets/images/logo.svg" alt="Pigeon Express Logo" width="152" style="margin-right: 10px;">
+					<h3>НОВО Интеграция с Pigeon Express</h3>
+				</div>
+
+				<p>Новият модерен куриер на България е тук! Интегрирайте <strong>Pigeon Express</strong> във вашия сайт и автоматизирайте създаването, управлението и проследяването на пратките.</p>
+				<p>С над 800 АПС, 200+ офиса и 250+ мобилни куриера в страната, <strong>Pigeon Express</strong> осигурява национално покритие и гъвкави възможности за доставка до адрес, офис или АПС. Мрежа, създадена да работи бързо, предвидимо и в синхрон с нуждите на бизнесa ви. Избрани централни офиси работят с удължено работно време до 22:00 и 00:00, а доставките се извършват всеки ден – включително уикенди и празници. Така пратките ви се движат без прекъсване и достигат до клиентите възможно най-бързо.</p>
+				<p>Услугите SMS, Viber и имейл известия, както и уикенд доставките са без допълнително заплащане.</p><p> <a class="button button-primary" href="https://client.pigeonexpress.com/" target="_blank">Активирайте Pigeon Express</a> ( След сключване на договор активирайте интеграцията от таб "Настройки" )</p>
+			</div>
+		<?php endif ?>
+
 		<?php if ( ! get_option( 'woo_bg_boxnow_message_dismiss' ) ): ?>
 			<div class="notice notice-success is-dismissible notice-boxnow">
 				<h3>Интеграция с BOX NOW</h3>

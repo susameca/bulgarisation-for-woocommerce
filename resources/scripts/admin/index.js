@@ -34,4 +34,5 @@ if ( $('#woo-bg-contact-form').length ) {
 }
 
 import './modules/boxnow-notice';
+import './modules/pigeon-notice';
 import './modules/generate-label';

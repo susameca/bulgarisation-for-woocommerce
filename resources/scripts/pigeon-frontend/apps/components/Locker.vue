@@ -63,7 +63,7 @@ export default {
 			city: '',
 			error: '',
 			document: $( document.body ),
-			i18n: wooBg_pigeon.i18n,
+			i18n: wooBg_pigeon_locker.i18n,
 		}
 	},
 	mounted() {
@@ -254,7 +254,7 @@ export default {
 			let shippingAddress = "";
 
 			if ( this.selectedLocker && this.selectedLocker.name ) {
-				shippingAddress = this.i18n.toLocker + this.selectedLocker.name + ' ( ' + this.selectedLocker.address.fullAddress + ' ) ';
+				shippingAddress = this.i18n.toLocker + this.selectedLocker.name + ' ( ' + this.selectedLocker.address + ' ) ';
 			}
 
 			this.Address1Field.val( shippingAddress );

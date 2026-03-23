@@ -181,7 +181,7 @@
 									{{i18n.length}} (cm):
 								</label>
 
-								<input v-model="parsel.sizes.depth" type="number" step="0.1">
+								<input v-model="parsel.size.depth" type="number" step="0.1">
 							</p>
 
 							<p class="form-field form-field--1-of-3" style="clear:none">
@@ -189,7 +189,7 @@
 									{{i18n.width}} (cm):
 								</label>
 
-								<input v-model="parsel.sizes.width" type="number" step="0.1">
+								<input v-model="parsel.size.width" type="number" step="0.1">
 							</p>
 
 							<p class="form-field form-field--1-of-3" style="float:right; clear:none">
@@ -197,7 +197,7 @@
 									{{i18n.height}} (cm):
 								</label>
 
-								<input v-model="parsel.sizes.height" type="number" step="0.1">
+								<input v-model="parsel.size.height" type="number" step="0.1">
 							</p>
 
 							<p v-if="typeof parsel.weight !== 'undefined'" class="form-field form-field-wide">
@@ -600,7 +600,7 @@ export default {
 				template = {
 					seqNo: 1,
 					weight: 1,
-					sizes: {
+					size: {
 						depth: '',
 						width: '',
 						height: '',

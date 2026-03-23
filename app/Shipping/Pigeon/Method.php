@@ -288,7 +288,7 @@ class Method extends \WC_Shipping_Method {
 
 		$receiver_address = [
 			'city_id' => $city_id,
-			'street_id' => str_replace( 'street-', '', $this->cookie_data[ 'selectedAddress' ][ 'id' ] ),
+			'street_id' => str_replace( 'street-', '', $this->cookie_data[ 'selectedAddress' ]['orig_key'] ),
 			'additional_info' => $this->cookie_data[ 'streetNumber' ],
 		];
 
@@ -389,29 +389,29 @@ class Method extends \WC_Shipping_Method {
 			'service_codes' => [],
 		];
 
-		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'pigeon', 'declared_value' ) );
+		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'pigeon_services', 'declared_value' ) );
 	
 		if ( $is_fragile && $this->cookie_data[ 'type' ] !== 'locker' ) {
 			$other_data['service_codes']['declared_value'] = woo_bg_get_package_total();
 		}
 		
-		if ( woo_bg_get_option( 'pigeon', 'paper_return_receipt' ) === 'yes' ) {
+		if ( woo_bg_get_option( 'pigeon_services', 'paper_return_receipt' ) === 'yes' ) {
 			$other_data['service_codes']['paper_return_receipt'] = true;
 		}
 
-		if ( woo_bg_get_option( 'pigeon', 'return_receipt' ) === 'yes' ) {
+		if ( woo_bg_get_option( 'pigeon_services', 'return_receipt' ) === 'yes' ) {
 			$other_data['service_codes']['return_receipt'] = true;
 		}
 		
-		if ( woo_bg_get_option( 'pigeon', 'service_return_documents' ) === 'yes' ) {
+		if ( woo_bg_get_option( 'pigeon_services', 'service_return_documents' ) === 'yes' ) {
 			$other_data['service_codes']['service_return_documents'] = true;
 		}
 		
-		if ( woo_bg_get_option( 'pigeon', 'id_verification_and_document_signature' ) === 'yes' ) {
+		if ( woo_bg_get_option( 'pigeon_services', 'id_verification_and_document_signature' ) === 'yes' ) {
 			$other_data['service_codes']['ID_verification_and_document_signature'] = true;
 		}
 		
-		if ( woo_bg_get_option( 'pigeon', 'cod_card_fee' ) === 'yes' ) {
+		if ( woo_bg_get_option( 'pigeon_services', 'cod_card_fee' ) === 'yes' ) {
 			$other_data['service_codes']['cod_card_fee'] = true;
 		}
 		
@@ -562,6 +562,10 @@ class Method extends \WC_Shipping_Method {
 
 		wp_localize_script( 'woo-bg-js-pigeon', 'wooBg_pigeon', array(
 			'i18n' => Office::get_i18n(),
+		) );
+
+		wp_localize_script( 'woo-bg-js-pigeon', 'wooBg_pigeon_locker', array(
+			'i18n' => Locker::get_i18n(),
 		) );
 
 		wp_enqueue_style(

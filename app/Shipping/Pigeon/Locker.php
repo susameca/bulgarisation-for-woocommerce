@@ -39,7 +39,7 @@ class Locker {
 			'noResult' => __( 'No results was found for this city', 'bulgarisation-for-woocommerce' ),
 			'noOptions' => __( 'Start typing locker', 'bulgarisation-for-woocommerce' ), 
 			'lockerLocator' => __( 'locker locator', 'bulgarisation-for-woocommerce' ),
-			'tolocker' => __( 'To locker: ', 'bulgarisation-for-woocommerce' ),
+			'toLocker' => __( 'To locker: ', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 
