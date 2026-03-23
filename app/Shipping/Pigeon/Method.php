@@ -429,7 +429,7 @@ class Method extends \WC_Shipping_Method {
 			'who_pays' => 'receiver',
 		];
 
-		if ( $this->cookie_data['payment'] === 'cod' ) {
+		if ( isset( $this->cookie_data['payment'] ) && $this->cookie_data['payment'] === 'cod' ) {
 			$payment['service_codes']['cod_amount'] = woo_bg_get_package_total();
 		}
 

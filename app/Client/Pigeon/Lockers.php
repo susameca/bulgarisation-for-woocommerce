@@ -33,7 +33,7 @@ class Lockers {
 			$all_lockers = [];
 			$data = $this->get_page( $page, $args );
 			
-			if ( $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
+			if ( isset( $data['success'] ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
 				$all_lockers = array_merge( $all_lockers, $data['data'] );
 				$current_page = $data['meta']['current_page'];
 				$total_pages = $data['meta']['last_page'];
@@ -42,7 +42,7 @@ class Lockers {
 					$page++;
 					$data = $this->get_page( $page, $args );
 
-					if ( $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
+					if ( isset( $data['success'] ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
 						$all_lockers = array_merge( $all_lockers, $data['data'] );
 						$current_page = $data['meta']['current_page'];
 						$total_pages = $data['meta']['last_page'];

@@ -81,7 +81,7 @@ class Cities {
 				'name' => $query,
 			] );
 
-			if ( $request['success'] && isset( $request['data'] ) && is_array( $request['data'] ) ) {
+			if ( isset( $request['success'] ) && $request['success'] && isset( $request['data'] ) && is_array( $request['data'] ) ) {
 				$city_search = wp_json_encode( $request['data'] );
 
 				File::put_to_file( $city_file, $city_search );

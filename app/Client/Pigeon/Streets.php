@@ -29,7 +29,7 @@ class Streets {
 			$all_streets = [];
 			$data = $this->get_page( $city_id, $page, $query );
 			
-			if ( $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
+			if ( isset( $data['success'] ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
 				$all_streets = array_merge( $all_streets, $data['data'] );
 				$current_page = $data['meta']['current_page'];
 				$total_pages = $data['meta']['last_page'];
@@ -38,7 +38,7 @@ class Streets {
 					$page++;
 					$data = $this->get_page( $city_id, $page, $query );
 
-					if ( $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
+					if ( isset( $data['success'] ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
 						$all_streets = array_merge( $all_streets, $data['data'] );
 						$current_page = $data['meta']['current_page'];
 						$total_pages = $data['meta']['last_page'];
