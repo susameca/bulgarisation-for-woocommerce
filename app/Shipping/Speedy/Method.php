@@ -438,7 +438,7 @@ class Method extends \WC_Shipping_Method {
 		$content['parcels'] = [ [
 			'seqNo' => 1,
 			'weight' => $weigth,
-			'sizes' => $pack_sizes,
+			'size' => $pack_sizes,
 		]];
 
 		return array(
