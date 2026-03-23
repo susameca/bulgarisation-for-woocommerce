@@ -573,6 +573,10 @@ class Method extends \WC_Shipping_Method {
 			}
 		}
 
+		if ( woo_bg_get_option( 'speedy', 'administrative_fee' ) === 'yes' ) {
+			$payment["administrativeFee"] = true;
+		}
+
 		return array(
 			'payment' => $payment,
 		);

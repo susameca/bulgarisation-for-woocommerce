@@ -84,6 +84,15 @@ class Speedy {
 
 					if ( $label = $theorder->get_meta( 'woo_bg_speedy_label' ) ) {
 						$label_data = $label;
+
+						if ( $label_data['content']['parcels'] ) {
+							foreach ( $label_data['content']['parcels'] as $key => &$parcel ) {
+								if ( isset( $parcel['sizes'] ) ) {
+									$parcel['size'] = $parcel['sizes'];
+									unset( $parcel['sizes'] );
+								}
+							}
+						}
 					}
 
 					if ( !$cookie_data ) {
@@ -634,6 +643,10 @@ class Speedy {
 		if ( $payment[ 'courierServicePayer' ] === 'SENDER' ) {
 			$payment[ 'declaredValuePayer' ] = 'SENDER';
 			$payment[ 'packagePayer' ] = 'SENDER';
+		}
+		
+		if ( woo_bg_get_option( 'speedy', 'administrative_fee' ) === 'yes' ) {
+			$payment["administrativeFee"] = true;
 		}
 
 		$label['payment'] = $payment;
