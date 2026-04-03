@@ -85,7 +85,7 @@ class Method extends \WC_Shipping_Method {
 				( isset( $this->cookie_data['other'] ) && $this->cookie_data['other'] && $this->cookie_data['selectedAddress'] ) || 
 				( isset( $this->cookie_data['streetNumber']) && $this->cookie_data['streetNumber'] && $this->cookie_data['selectedAddress'] ) || 
 				( isset( $this->cookie_data['selectedOffice'] ) && $this->cookie_data['selectedOffice'] ) ||
-				( isset( $this->cookie_data['mysticQuarter'] ) && $this->cookie_data['other'] )
+				( isset( $this->cookie_data['mysticQuarter'] ) && ( $this->cookie_data['other'] || $this->cookie_data['streetNumber'] ) )
 			) 
 		) {
 			$request_data = $this->calculate_shipping_price_from_api();
@@ -401,14 +401,16 @@ class Method extends \WC_Shipping_Method {
 			$names[] = $name;
 
 			if ( $auto_sizes && $item['data']->get_length() && $item['data']->get_width() && $item['data']->get_height() ) {
-				$sizes[] = new Product( 
-					$name, 
-					new Size( 
-						wc_get_dimension( $item['data']->get_length(), 'mm', get_option( 'woocommerce_dimension_unit' ) ), 
-						wc_get_dimension( $item['data']->get_width(), 'mm', get_option( 'woocommerce_dimension_unit' ) ), 
-						wc_get_dimension( $item['data']->get_height(), 'mm', get_option( 'woocommerce_dimension_unit' ) ),
-					) 
-				);
+				foreach ( range( 1, $item['quantity'] ) as $i ) {
+					$sizes[] = new Product( 
+						$name, 
+						new Size( 
+							wc_get_dimension( $item['data']->get_length(), 'mm', get_option( 'woocommerce_dimension_unit' ) ), 
+							wc_get_dimension( $item['data']->get_width(), 'mm', get_option( 'woocommerce_dimension_unit' ) ), 
+							wc_get_dimension( $item['data']->get_height(), 'mm', get_option( 'woocommerce_dimension_unit' ) ),
+						) 
+					);
+				}
 			}
 		}
 
