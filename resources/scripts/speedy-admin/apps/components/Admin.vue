@@ -137,18 +137,18 @@
 							<p class="form-field form-field-wide">
 								<input 
 									class="woo-bg-multiselect--additional-field"
-									:placeholder="i18n.streetNumber" 
-									type="text" 
-									v-model="streetNumber" 
-									v-if="( street.type && street.type === 'streets' )"
-								>
-								
-								<input 
-									class="woo-bg-multiselect--additional-field"
 									:placeholder="i18n.mysticQuarter" 
 									type="text" 
 									v-model="cookie_data.mysticQuarter" 
 									v-if="!streets.length"
+								>
+
+								<input 
+									class="woo-bg-multiselect--additional-field"
+									:placeholder="i18n.streetNumber" 
+									type="text" 
+									v-model="streetNumber" 
+									v-if="( street.type && street.type === 'streets' || !streets.length )"
 								>
 
 								<input 

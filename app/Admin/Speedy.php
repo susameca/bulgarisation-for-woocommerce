@@ -420,7 +420,10 @@ class Speedy {
 	}
 
 	public static function update_fiscal_items( $label, $order ) {
+		$country = ( $order->get_shipping_country() ) ? $order->get_shipping_country() : $order->get_billing_country();
+
 		if ( 
+			$country === 'BG' &&
 			wc_string_to_bool( woo_bg_get_option( 'speedy', 'kb' ) ) && 
 			$order->get_payment_method() === 'cod'
 		) {
@@ -574,7 +577,8 @@ class Speedy {
 		) {
 			if ( !empty( $cookie_data['mysticQuarter'] ) ) {
 				if ( $country_id == '300' ) {
-					$address["addressLine1"] = $cookie_data['mysticQuarter'] . ' ' . $other;
+					$street_number = sanitize_text_field( $_REQUEST[ 'streetNumber' ] );
+					$address["addressLine1"] = $cookie_data['mysticQuarter'] . ' ' . $other . ' ' . $street_number;
 					$address["postCode"] = $order->get_billing_postcode();
 				}
 				

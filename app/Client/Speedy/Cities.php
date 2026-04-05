@@ -100,6 +100,10 @@ class Cities {
 	}
 
 	public function get_cities_by_region( $region_code, $country_id = 100 ) {
+		if ( !$region_code ) {
+			return [];
+		}
+
 		$region = self::get_regions( $country_id )[ $region_code ];
 
 		return array_values( $this->get_cities( $region, $country_id ) );
@@ -135,15 +139,14 @@ class Cities {
 				break;
 			}
 		}
-
-
+		
 		return [
 			'city' => $city,
 			'cities' => $cities,
 			'cities_only_names' => $cities_only_names,
 			'cities_search_names' => $cities_search_names,
 			'cities_only_names_dropdowns' => $cities_only_names_dropdowns,
-			'city_key' => $city_key,
+			'city_key' => $city_key ?? null,
 		];
 	}
 
