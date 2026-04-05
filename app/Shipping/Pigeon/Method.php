@@ -143,7 +143,7 @@ class Method extends \WC_Shipping_Method {
 				'default'           => '',
 				'options'           => array(
 					'office' => __( 'Office', 'bulgarisation-for-woocommerce' ),
-					'locker' => __( 'Locker', 'bulgarisation-for-woocommerce' ),
+					'locker' => __( 'APS', 'bulgarisation-for-woocommerce' ),
 					'address' => __( 'Address', 'bulgarisation-for-woocommerce' ),
 				),
 			),
@@ -208,9 +208,9 @@ class Method extends \WC_Shipping_Method {
 		WC()->session->set( 'woo-bg-pigeon-label' , $request_body );
 
 		$request = $this->container[ Client::PIGEON ]->api_call( $this->container[ Client::PIGEON ]::CALCULATE_ENDPOINT, $request_body, 'POST' );
-
+		
 		if ( isset( $request['success'] ) && !$request['success'] ) {
-			$data['errors'] = $request['errors'];
+			$data['errors'] = isset( $request['errors'] ) ? $request['errors'] : [ [ $request['message'] ] ];
 		} else if ( isset( $request['data']['total_price'] ) ) {
 			$data['price'] = woo_bg_tax_based_price( $request['data']['total_price'] );
 		}
@@ -282,6 +282,10 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_receiver_address() {
+		if ( empty( $this->cookie_data['state'] ) ) {
+			return [];
+		}
+		
 		$raw_city = Transliteration::latin2cyrillic( $this->cookie_data[ 'city' ] );
 		$cities_data = $this->container[ Client::PIGEON_CITIES ]->get_filtered_cities( $raw_city, $this->cookie_data[ 'state' ] ) ;
 		$city_id = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
@@ -304,7 +308,6 @@ class Method extends \WC_Shipping_Method {
 	}
 
 	private function generate_cart_data() {
-		$names = array();
 		$cart_data = [
 			'packages' => [
 				[
@@ -318,6 +321,8 @@ class Method extends \WC_Shipping_Method {
 		$auto_sizes = wc_string_to_bool( woo_bg_get_option( 'pigeon', 'auto_size' ) );
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
+			$item_weight = 0;
+			
 			if ( $item['data']->get_weight() ) {
 				$item_weight = wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
 			}
@@ -346,17 +351,17 @@ class Method extends \WC_Shipping_Method {
 				'quantity' => $item['quantity'],
 			);
 
-			$names[] = $name;
-
 			if ( $auto_sizes && $item['data']->get_length() && $item['data']->get_width() && $item['data']->get_height() ) {
-				$sizes[] = new Product( 
-					$name, 
-					new Size( 
-						wc_get_dimension( $item['data']->get_length(), 'mm', get_option( 'woocommerce_dimension_unit' ) ), 
-						wc_get_dimension( $item['data']->get_width(), 'mm', get_option( 'woocommerce_dimension_unit' ) ), 
-						wc_get_dimension( $item['data']->get_height(), 'mm', get_option( 'woocommerce_dimension_unit' ) ),
-					) 
-				);
+				foreach ( range( 1, $item['quantity'] ) as $i ) {
+					$sizes[] = new Product( 
+						$name, 
+						new Size( 
+							wc_get_dimension( $item['data']->get_length(), 'mm', get_option( 'woocommerce_dimension_unit' ) ), 
+							wc_get_dimension( $item['data']->get_width(), 'mm', get_option( 'woocommerce_dimension_unit' ) ), 
+							wc_get_dimension( $item['data']->get_height(), 'mm', get_option( 'woocommerce_dimension_unit' ) ),
+						) 
+					);
+				}
 			}
 		}
 
@@ -391,7 +396,7 @@ class Method extends \WC_Shipping_Method {
 
 		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'pigeon_services', 'declared_value' ) );
 	
-		if ( $is_fragile && $this->cookie_data[ 'type' ] !== 'locker' ) {
+		if ( $is_fragile  ) {
 			$other_data['service_codes']['declared_value'] = woo_bg_get_package_total();
 		}
 		
@@ -420,6 +425,8 @@ class Method extends \WC_Shipping_Method {
 				$other_data['service_codes']['shipment_test_before_payment'] = true;
 			}
 		}
+
+		$other_data['note'] = '';
 
 		return $other_data;
 	}

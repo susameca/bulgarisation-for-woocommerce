@@ -135,6 +135,17 @@ class Cities {
 	}
 
 	public function get_filtered_cities( $query, $state ) {
+		if ( empty( $state ) ) {
+			return [
+				'city' => '',
+				'cities' => [],
+				'cities_only_names' => [],
+				'cities_search_names' => [],
+				'cities_only_names_dropdowns' => [],
+				'city_key' => null,
+			];
+		}
+
 		$city = mb_strtolower( Transliteration::latin2cyrillic( trim( $query ) ) );
 		$state_name = $this->get_state_name( $state );
 		$cities = $this->find_city( $query );

@@ -193,8 +193,13 @@ class Register {
 	}
 
 	public static function change_price_label_if_not_calculated( $output, $method ) {
+		$chosen_methods = WC()->session->get( 'chosen_shipping_methods', array() );
+		$chosen_method = $chosen_methods[0] ?? '';
+
 		if ( strpos( $method->label, __('Free shipping', 'bulgarisation-for-woocommerce') ) !== false ) {
 			$output = __( 'Free shipping', 'bulgarisation-for-woocommerce' );
+		} else if( $chosen_method !== $method->get_id() && $method->cost <= 0 ) {
+			$output = __( 'Choose to calculate', 'bulgarisation-for-woocommerce' );	
 		} else if ( strpos( $method->get_method_id(), 'woo_bg' ) !== false && $method->cost <= 0 ) {
 			$output = __( 'Not calculated', 'bulgarisation-for-woocommerce' );
 		}
@@ -207,6 +212,11 @@ class Register {
 			return $label;
 		}
 
+		$chosen_methods = WC()->session->get( 'chosen_shipping_methods', array() );
+
+		$chosen_method = $chosen_methods[0] ?? '';
+
+
 		$meta_data = $rate->get_meta_data();
 
 		if ( !empty( $meta_data['free_shipping'] ) && $meta_data['free_shipping'] == true ) {
@@ -218,7 +228,11 @@ class Register {
 			) && 
 			empty( $rate->get_cost() )
 		) {
-			$label = sprintf( __( '%s: <span class="woocommerce-Price-amount">%s</span>', 'bulgarisation-for-woocommerce' ), $label, __( 'Not calculated', 'bulgarisation-for-woocommerce' ) );
+			if ( $chosen_method !== $rate->get_id() ) {
+				$label = sprintf( __( '%s: <span class="woocommerce-Price-amount">%s</span>', 'bulgarisation-for-woocommerce' ), $label, __( 'Choose to calculate', 'bulgarisation-for-woocommerce' ) );	
+			} else {
+				$label = sprintf( __( '%s: <span class="woocommerce-Price-amount">%s</span>', 'bulgarisation-for-woocommerce' ), $label, __( 'Not calculated', 'bulgarisation-for-woocommerce' ) );
+			}
 		}
 
 		return $label;

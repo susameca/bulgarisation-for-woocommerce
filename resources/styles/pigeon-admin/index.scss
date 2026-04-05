@@ -2,19 +2,19 @@
 	Vendor
 \* ------------------------------------------------------------ */
 
-@import '~@styles/speedy-admin.config.scss';
+@import '~@styles/pigeon-admin.config.scss';
 
-#woo_bg_speedy #order_data { padding: 0 }
+#woo_bg_pigeon #order_data { padding: 0 }
 
-.panel-wrap.woocommerce--speedy {
+.panel-wrap.woocommerce--pigeon {
 	.multiselect__option--highlight:not( .multiselect__option--selected ) {
-		background: $color-speedy-red;
+		background: $color-pigeon-orange;
 	}
 	.multiselect__option--highlight.multiselect__option--selected {
 		background: $color-red;
 	}
 
-	#woo-bg--speedy-label-print { 
+	#woo-bg--pigeon-label-print { 
 		min-height: 600px; 
 		width: 100%; 
 		margin-top: 30px;

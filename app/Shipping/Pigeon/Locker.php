@@ -34,12 +34,12 @@ class Locker {
 		return array(
 			'selected' => __( 'Selected', 'bulgarisation-for-woocommerce' ),
 			'choose' => __( 'Choose', 'bulgarisation-for-woocommerce' ),
-			'searchlocker' => __( 'Search locker', 'bulgarisation-for-woocommerce' ), 
+			'searchAPS' => __( 'Search APS', 'bulgarisation-for-woocommerce' ), 
 			'select' => __( 'Select', 'bulgarisation-for-woocommerce' ), 
 			'noResult' => __( 'No results was found for this city', 'bulgarisation-for-woocommerce' ),
-			'noOptions' => __( 'Start typing locker', 'bulgarisation-for-woocommerce' ), 
-			'lockerLocator' => __( 'locker locator', 'bulgarisation-for-woocommerce' ),
-			'toLocker' => __( 'To locker: ', 'bulgarisation-for-woocommerce' ),
+			'noOptions' => __( 'Start typing APS', 'bulgarisation-for-woocommerce' ), 
+			'apsLocator' => __( 'APS locator', 'bulgarisation-for-woocommerce' ),
+			'toAPS' => __( 'To APS: ', 'bulgarisation-for-woocommerce' ),
 		);
 	}
 

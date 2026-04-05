@@ -10,16 +10,17 @@
     "speedy-admin",
     "boxnow-frontend",
     "boxnow-admin",
-    "pigeon-frontend"
+    "pigeon-frontend",
+    "pigeon-admin"
   ],
   "variables": {
     "color": {
       "red": "#d63638",
       "econt-blue": "#234182",
-      "speedy-blue": "#234182",
-      "boxnow-blue": "#234182",
+      "speedy-red": "#dc0032",
+      "boxnow-green": "#72d34c",
       "cvc-blue": "#234182",
-      "pigeon-blue": "#234182"
+      "pigeon-orange": "#f7941d"
     }
   },
   "development": {

@@ -8,6 +8,7 @@ defined( 'ABSPATH' ) || exit;
 class Pigeon {
 	const LIVE_URL = 'https://api-demo.pigeonexpress.com/api/external/v1';
     const DEMO_URL = 'https://api-demo.pigeonexpress.com/api/external/v1';
+    const CREATE_LABEL_ENDPOINT = '/shipments';
     const CALCULATE_ENDPOINT = '/shipments/calculate';
     
     const CACHE_FOLDER = File::CACHE_FOLDER . 'pigeon' . DIRECTORY_SEPARATOR;
@@ -35,7 +36,6 @@ class Pigeon {
 	    }
 
 		$url = $this->get_base_endpoint() . $endpoint;
-
 		$request_args = array(
 			'timeout' => 15,
 			'headers' => array(

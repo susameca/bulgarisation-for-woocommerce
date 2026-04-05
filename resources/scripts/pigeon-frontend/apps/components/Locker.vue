@@ -28,7 +28,7 @@
 
 				<span slot="noResult">{{i18n.noResult}}</span>
 				<span slot="noOptions">{{i18n.noOptions}}</span>
-				<span slot="placeholder">{{i18n.searchLocker}}</span>
+				<span slot="placeholder">{{i18n.searchAPS}}</span>
 			</multiselect>
 		</div>
 	</div><!-- /.section__contact -->
@@ -254,7 +254,7 @@ export default {
 			let shippingAddress = "";
 
 			if ( this.selectedLocker && this.selectedLocker.name ) {
-				shippingAddress = this.i18n.toLocker + this.selectedLocker.name + ' ( ' + this.selectedLocker.address + ' ) ';
+				shippingAddress = this.i18n.toAPS + this.selectedLocker.name + ' ( ' + this.selectedLocker.address + ' ) ';
 			}
 
 			this.Address1Field.val( shippingAddress );
