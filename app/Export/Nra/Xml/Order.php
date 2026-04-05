@@ -19,6 +19,12 @@ class Order {
      */
     private array $items;
 
+    private string $total;
+    
+    private string $totalVat;
+    
+    private string $subtotal;
+
     private ?string $virtualPosNumber;
 
     private ?string $transactionNumber;
@@ -33,6 +39,9 @@ class Order {
         float $totalDiscount,
         string $paymentType,
         array $items,
+        string $total,
+        string $totalVat,
+        string $subtotal,
         ?string $virtualPosNumber,
         ?string $transactionNumber,
         ?string $paymentProcessorIdentifier
@@ -44,6 +53,9 @@ class Order {
         $this->totalDiscount = $totalDiscount;
         $this->paymentType = $paymentType;
         $this->items = $items;
+        $this->total = $total;
+        $this->totalVat = $totalVat;
+        $this->subtotal = $subtotal;
         $this->virtualPosNumber = $virtualPosNumber;
         $this->transactionNumber = $transactionNumber;
         $this->paymentProcessorIdentifier = $paymentProcessorIdentifier;
@@ -134,33 +146,23 @@ class Order {
         $this->items[] = $item;
     }
 
-    public function getTotalWithoutVat(): float
+    public function getTotalWithoutVat()
     {
-        $total = 0;
-        foreach($this->items as $item){
-            $total+=$item->getSubPrice() * $item->getQuantity();
-        }
+        return $this->total - $this->totalVat;
+    }
 
-        return $total;
+    public function getTotal1()
+    {
+        return $this->subtotal;
     }
 
     public function getOrderTotalVat()
     {
-        $total = 0;
-        foreach($this->items as $item){
-            $total+=$item->getVat();
-        }
-
-        return $total;
+        return $this->totalVat;
     }
 
     public function getOrderTotal()
     {
-        $total = 0;
-        foreach($this->items as $item){
-            $total+=$item->getFinalPrice();
-        }
-
-        return $total;
+        return $this->total;
     }
 }

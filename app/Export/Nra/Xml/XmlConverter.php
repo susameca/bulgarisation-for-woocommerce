@@ -31,22 +31,23 @@ class XmlConverter {
             $xml->writeElement('doc_date', $order->getDocumentDate()->format('Y-m-d'));
 
             $xml->startElement('art');
+
             foreach ($order->getItems() as $item) {
                 $xml->startElement('artenum');
                 $xml->writeElement('art_name', $item->getName());
                 $xml->writeElement('art_quant', (string)$item->getQuantity());
-                $xml->writeElement('art_price', number_format($item->getSubPrice(), 2, '.', ''));
+                $xml->writeElement('art_price', number_format(round($item->getSubPrice(), 2, PHP_ROUND_HALF_DOWN), 2, '.', ''));
                 $xml->writeElement('art_vat_rate', (string)$item->getVatRate());
-                $xml->writeElement('art_vat', number_format($item->getSubVat(), 2, '.', ''));
-                $xml->writeElement('art_sum', number_format($item->getFinalSubPrice(), 2, '.', ''));
+                $xml->writeElement('art_vat', number_format(round($item->getVat(), 2, PHP_ROUND_HALF_DOWN), 2, '.', ''));
+                $xml->writeElement('art_sum', number_format(round($item->getFinalPrice(), 2, PHP_ROUND_HALF_DOWN), 2, '.', ''));
                 $xml->endElement();
             }
             $xml->endElement();
 
-            $xml->writeElement('ord_total1', number_format($order->getTotalWithoutVat(), 2, '.', ''));
-            $xml->writeElement('ord_disc', number_format($order->getTotalDiscount(), 2, '.', ''));
-            $xml->writeElement('ord_vat', number_format($order->getOrderTotalVat(), 2, '.', ''));
-            $xml->writeElement('ord_total2', number_format($order->getOrderTotal(), 2, '.', ''));
+            $xml->writeElement('ord_total1', number_format(round($order->getTotal1(), 2, PHP_ROUND_HALF_DOWN), 2, '.', ''));
+            $xml->writeElement('ord_disc', number_format(round($order->getTotalDiscount(), 2, PHP_ROUND_HALF_DOWN), 2, '.', ''));
+            $xml->writeElement('ord_vat', number_format(round($order->getOrderTotalVat(), 2, PHP_ROUND_HALF_DOWN), 2, '.', ''));
+            $xml->writeElement('ord_total2', number_format(round($order->getOrderTotal(), 2, PHP_ROUND_HALF_DOWN), 2, '.', ''));
             $xml->writeElement('paym', (string)$order->getPaymentType()::CODE);
             if ($order->getVirtualPosNumber()) {
                 $xml->writeElement('pos_n', $order->getVirtualPosNumber());
@@ -63,14 +64,14 @@ class XmlConverter {
         $xml->endElement();
 
         $xml->writeElement('r_ord', (string)count($shop->getReturnedOrders()));
-        $xml->writeElement('r_total', number_format($shop->getTotalAmountReturnedOrders(), 2, '.', ''));
+        $xml->writeElement('r_total', number_format(round($shop->getTotalAmountReturnedOrders(), 2, PHP_ROUND_HALF_DOWN), 2, '.', ''));
 
         if (count($shop->getReturnedOrders())) {
             $xml->startElement('rorder');
             foreach ($shop->getReturnedOrders() as $returnedOrder) {
                 $xml->startElement('rorderenum');
                 $xml->writeElement('r_ord_n', $returnedOrder->getOrderNumber());
-                $xml->writeElement('r_amount', number_format($returnedOrder->getOrderAmount(), 2, '.', ''));
+                $xml->writeElement('r_amount', number_format(round($returnedOrder->getOrderAmount(), 2, PHP_ROUND_HALF_DOWN), 2, '.', ''));
                 $xml->writeElement('r_date', $returnedOrder->getOrderDate()->format('Y-m-d'));
                 $xml->writeElement('r_paym', (string)$returnedOrder->getReturnMethod()::CODE);
                 $xml->endElement();

@@ -12,6 +12,8 @@ class Item {
 
     private int $vatRate;
 
+    private float $vatAmount;
+
     private bool $addVat;
 
     public function __construct(
@@ -19,6 +21,7 @@ class Item {
         float $quantity,
         float $subPrice,
         float $price,
+        float $vatAmount,
         int $vatRate = 20,
         bool $addVat = true
     ) {
@@ -27,6 +30,7 @@ class Item {
         $this->subPrice = $subPrice;
         $this->price = $price;
         $this->vatRate = $vatRate;
+        $this->vatAmount = $vatAmount;
         $this->addVat = $addVat;
     }
 
@@ -59,13 +63,7 @@ class Item {
      */
     public function getSubPrice(): float
     {
-        $sub_price = $this->subPrice;
-        
-        if ( $this->needToRemoveVat( $this->subPrice, $this->getFinalSubPrice() ) ) {
-            $sub_price -= woo_bg_calculate_vat_from_price( $sub_price, $this->getVatRate() );
-        }
-
-        return $sub_price;
+        return $this->subPrice;
     }
 
     /**
@@ -78,52 +76,32 @@ class Item {
 
     public function getVat(): float
     {
-        $vat = ( $this->vatRate * $this->price / 100 ) * $this->quantity;
-
-        if ( $this->needToRemoveVat( $this->price, $this->getFinalprice() ) ) {
-            $vat = woo_bg_calculate_vat_from_price( $this->price, $this->getVatRate() ) * $this->quantity;
-        }
-
-        return $vat;
+        return $this->vatAmount;
     }
 
-    public function getSubVat(): float
-    {
-        $sub_vat = ( $this->vatRate * $this->subPrice / 100 ) * $this->quantity;
-
-        if ( $this->needToRemoveVat( $this->subPrice, $this->getFinalSubPrice() ) ) {
-            $sub_vat = woo_bg_calculate_vat_from_price( $this->subPrice, $this->getVatRate() ) * $this->quantity;
-        }
-
-        return $sub_vat;
-    }
-
-    public function getFinalPrice(): float
-    {
+    public function getSinglePrice(): float {
         $single_price = $this->price;
 
         if ( $this->addVat ) {
             $single_price = $this->price * (1+($this->vatRate / 100));
         }
 
-        return $single_price * $this->quantity;
+        return $single_price;
+    }
+
+    public function getFinalPrice(): float
+    {
+        return $this->getSinglePrice() * $this->quantity;
     }
 
     public function getFinalSubPrice(): float
     {
-        $single_price = $this->subPrice;
+        $single_price = $this->getSubPrice();
 
         if ( $this->addVat ) {
-            $single_price = $this->subPrice * (1+($this->vatRate / 100));
+            $single_price = $this->getSubPrice() * (1+($this->vatRate / 100));
         }
         
         return $single_price * $this->quantity;
-    }
-
-    public function needToRemoveVat( $single_price, $total ) {
-        return ( 
-            $this->getVatRate() != 0 &&
-            number_format( $single_price * $this->getQuantity(), 2, '.', '') ===  number_format( $total, 2, '.', '') 
-        );
     }
 }
