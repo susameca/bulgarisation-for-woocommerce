@@ -315,7 +315,7 @@ class Speedy {
 		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
 		$order = wc_get_order( $order_id );
 		
-		$response = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::DELETE_LABELS_ENDPOINT, array(
+		$response = $container[ Client::SPEEDY ]->label_request( 'delete', array(
 			'shipmentId' => $shipment_status['id'],
 			'comment' => 'Нулиране'
 		) );
@@ -500,7 +500,11 @@ class Speedy {
 		$request_body = $generated_data['request_body'];
 
 		if ( isset( $response['error'] ) ) {
-			$data['message'] = $response['error']['message'];
+			if ( isset( $response['success'] ) && !$response['success'] ) {
+				$data['message'] = $response['error'];
+			} else {
+				$data['message'] = $response['error']['message'];
+			}
 		} else {
 			$request_body['id'] = $response['id'];
 			$data['shipmentStatus'] = $response;
@@ -519,7 +523,6 @@ class Speedy {
 	}
 
 	protected static function update_recipient_data( $label ) {
-		$container = woo_bg()->container();
 		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
 		$order = wc_get_order( $order_id );
 		$type = map_deep( $_REQUEST['type'], 'sanitize_text_field' );
@@ -610,7 +613,6 @@ class Speedy {
 
 	protected static function update_payment_by( $label, $order ) {
 		$payment_by = map_deep( $_REQUEST['paymentBy'], 'sanitize_text_field' );
-		$cookie_data = map_deep( $_REQUEST['cookie_data'], 'sanitize_text_field' );
 		unset( $label['payment'] );
 		$order_id = $order->get_id();
 
@@ -797,13 +799,12 @@ class Speedy {
 
 			$request_body = apply_filters( 'woo_bg/speedy/update_label', $label, $order );
 
-			$response = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::UPDATE_LABELS_ENDPOINT, $request_body );
+			$response = $container[ Client::SPEEDY ]->label_request( 'update', $request_body );
 		} else {
 			unset( $label['id'] );
 			
 			$request_body = apply_filters( 'woo_bg/speedy/create_label', $label, $order );
-
-			$response = $container[ Client::SPEEDY ]->api_call( $container[ Client::SPEEDY ]::CREATE_LABELS_ENDPOINT, $request_body );
+			$response = $container[ Client::SPEEDY ]->label_request( 'create', $request_body );
 		}
 
 		return [

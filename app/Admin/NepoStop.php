@@ -17,6 +17,10 @@ class NepoStop {
     }
 
     public static function send_econt_tracking_code( $data, $order ) {
+        if ( empty( $data['label']['shipmentNumber'] ) ) {
+            return;
+        }
+        
         $tracking_code = $data['label']['shipmentNumber'];
         $phone = ( $order->get_shipping_phone() ) ? $order->get_shipping_phone() : $order->get_billing_phone();
 
@@ -26,6 +30,10 @@ class NepoStop {
     }
 
     public static function send_speedy_tracking_code( $data, $order ) {
+        if ( empty( $data['shipmentStatus']['id'] ) ) {
+            return;
+        }
+
         $tracking_code = $data['shipmentStatus']['id'];
         $phone = ( $order->get_shipping_phone() ) ? $order->get_shipping_phone() : $order->get_billing_phone();
 

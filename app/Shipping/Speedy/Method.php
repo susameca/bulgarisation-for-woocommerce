@@ -205,13 +205,15 @@ class Method extends \WC_Shipping_Method {
 
 		WC()->session->set( 'woo-bg-speedy-label' , $request_body );
 
-		$request = $this->container[ Client::SPEEDY ]->api_call( $this->container[ Client::SPEEDY ]::CALC_LABELS_ENDPOINT, $request_body );
+		$request = $this->container[ Client::SPEEDY ]->label_request( 'calculate', $request_body );
 
 		if ( !isset( $request ) ) {
 			$data['errors'] = __( 'Calculation failed. Please try again.', 'bulgarisation-for-woocommerce' );
 		} else if ( isset( $request['error'] ) || isset( $request['calculations'][0]['error'] ) ) {
 			if ( isset( $request['calculations'][0]['error'] ) ) {
 				$data['errors'] = $request['calculations'][0]['error']['message'];
+			} else if ( isset( $request['success'] ) && !$request['success'] && isset( $request['error'] ) ) {
+				$data['errors'] = $request['error'];
 			} else {
 				$data['errors'] = $request['error']['message'];
 			}

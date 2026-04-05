@@ -44,9 +44,10 @@ class Apm {
 		self::$container = woo_bg()->container();
 		$apm_size = Method::get_allowed_apm_size();
 		$apms = self::$container[ Client::BOXNOW_DESTINATIONS ]->get_destinations( $apm_size['max_size'] );
+		$country = sanitize_text_field( $_REQUEST['country'] );
 
-		$apms = array_filter( $apms, function( $apm ) {
-			return ( $apm['country'] === 'BG' );
+		$apms = array_filter( $apms, function( $apm ) use ( $country ) {
+			return ( $apm['country'] === $country );
 		} );
 
 		$apms = array_values( $apms );

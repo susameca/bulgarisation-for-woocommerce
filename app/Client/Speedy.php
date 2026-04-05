@@ -7,10 +7,6 @@ defined( 'ABSPATH' ) || exit;
 
 class Speedy {
 	const BASE_ENDPOINT = 'https://api.speedy.bg/v1/';
-	const CALC_LABELS_ENDPOINT = 'calculate';
-	const CREATE_LABELS_ENDPOINT = 'shipment';
-	const UPDATE_LABELS_ENDPOINT = 'shipment/update';
-	const DELETE_LABELS_ENDPOINT = 'shipment/cancel';
 	const PRINT_LABELS_ENDPOINT = 'print';
 	const TRACK_ENDPOINT = 'track';
 	const CACHE_FOLDER = File::CACHE_FOLDER . 'speedy' . DIRECTORY_SEPARATOR;
@@ -47,6 +43,20 @@ class Speedy {
 		if ( $return_plain ) {
 			return wp_remote_retrieve_body( $request );
 		}
+
+		return json_decode( wp_remote_retrieve_body( $request ), 1 );
+	}
+
+	public function label_request( $type, $request_body ) {
+		$request = wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/speedy/label_request/', [
+			'body' => [
+				'client' => esc_url( home_url( '/' ) ),
+				'type' => $type,
+				'user' => $this->get_user(),
+				'password' => $this->get_password(),
+				'request_body' => $request_body,
+			]
+		] );
 
 		return json_decode( wp_remote_retrieve_body( $request ), 1 );
 	}

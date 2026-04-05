@@ -391,31 +391,6 @@ export default {
 					}
 				});
 		},
-		updateShipmentStatus( e ) {
-			e.preventDefault();
-
-			this.loading = true;
-			let _this = this;
-			_this.message = '';
-
-			let data = {
-				orderId: wooBg_boxnow.orderId,
-				shipmentStatus: this.shipmentStatus,
-				action: 'woo_bg_speedy_update_shipment_status',
-				nonce: wooBg_boxnow.nonce,
-			};
-
-			axios.post( woocommerce_admin.ajax_url, Qs.stringify( data ) )
-				.then(function( response ) {
-					_this.loading = false;
-
-					if ( response.data.data.message ) {
-						_this.message = response.data.data.message;
-					} else {
-						_this.operations = cloneDeep( response.data.data.operations, true );
-					}
-				});
-		},
 		deleteLabel( e ) {
 			e.preventDefault();
 

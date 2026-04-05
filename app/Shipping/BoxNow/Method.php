@@ -131,6 +131,10 @@ class Method extends \WC_Shipping_Method {
 	public function is_available( $package ) {
 		$countries = array( 'BG' );
 
+		if ( woo_bg_is_pro_activated() ) {
+			$countries = apply_filters( 'woo_bg/boxnow/available_countries', array( 'BG' ) );
+		}
+
 		if ( in_array( $package['destination']['country'], $countries ) ) {
 			return true;
 		}

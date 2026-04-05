@@ -46,6 +46,7 @@ export default {
 	components: { Multiselect },
 	data() {
 		return {
+			countryField: $('#billing_country'),
 			Address1Field: '',
 			selectedApm: [],
       		apms: [],
@@ -56,7 +57,7 @@ export default {
 	},
 	computed: {
 		apmLocatorUrl() {
-			let url = 'https://widget-v5.boxnow.bg/popup.html?gps=yes&autoselect=yes&autoclose=yes';
+			let url = this.baseIframeUrl + '/popup.html?gps=yes&autoselect=yes&autoclose=yes';
 			let _this = this;
 
 			setTimeout(function() {
@@ -65,6 +66,17 @@ export default {
 
 			return url;
 		},
+		baseIframeUrl() {
+			let url = 'https://widget-v5.boxnow.bg';
+			
+			if ( this.countryField.val() === 'GR' ) {
+				url = 'https://widget-v5.boxnow.gr';
+			} else if ( this.countryField.val() === 'CY' ) {
+				url = 'https://widget-v5.boxnow.cy';
+			}
+			
+			return url;
+		}
 	},
 	mounted() {
 		let _this = this;
@@ -90,7 +102,7 @@ export default {
 	},
 	methods: {
 		setApmFromLocator( message ) {
-			if ( message.origin !== 'https://widget-v5.boxnow.bg' ) {
+			if ( message.origin !== this.baseIframeUrl ) {
 				return;
 			}
 
@@ -113,7 +125,7 @@ export default {
 				type:'iframe',
 				midClick: true,
 				iframe: {
-					markup: '<iframe class="mfp-iframe" src="https://widget-v5.boxnow.bg/popup.html?gps=yes&autoselect=yes&autoclose=yes" frameborder="0" allowfullscreen></iframe>',
+					markup: `<iframe class="mfp-iframe" src="${this.baseIframeUrl}/popup.html?gps=yes&autoselect=yes&autoclose=yes" frameborder="0" allowfullscreen></iframe>`,
 				},
 				callbacks: {
 					open: function(){
@@ -135,8 +147,10 @@ export default {
 		checkFields() {
 
 			if ( $('#ship-to-different-address-checkbox').is(":checked") ) {
+				this.countryField = $( '#shipping_country' );
 				this.Address1Field = $( '#shipping_address_1' );
 			} else {
+				this.countryField = $( '#billing_country' );
 				this.Address1Field = $( '#billing_address_1' );
 			}
 		},
@@ -153,7 +167,8 @@ export default {
 
 			let _this = this;
 			let data = {
-				action: 'woo_bg_boxnow_load_apms'
+				action: 'woo_bg_boxnow_load_apms',
+				country: this.countryField.val(),
 			}
 
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
