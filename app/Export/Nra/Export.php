@@ -124,7 +124,6 @@ class Export {
 
 	protected function upload_xml( $args ) {
 		$data = self::generate_xml_file( $args );
-
 		$errors = '';
 		$totals = '';
 
@@ -163,7 +162,7 @@ class Export {
 		}
 
 		return array(
-			'file' => wp_get_attachment_url( $attach_id ),
+			'file' => ( isset($attach_id) ) ? wp_get_attachment_url( $attach_id ) : '',
 			'not_included_orders' => $this->not_included_orders,
 			'totals' => $totals,
 			'errors' => $errors,

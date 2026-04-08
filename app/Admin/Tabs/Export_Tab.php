@@ -90,6 +90,10 @@ class Export_Tab extends Base_Tab {
 			wp_send_json_success( array(
 				"message" => __( 'No orders found for this month.', 'bulgarisation-for-woocommerce' ),
 			) );
+		} else if ( empty( $generated_file['file'] ) ) {
+			wp_send_json_success( array(
+				"message" => $generated_file['errors'],
+			) );
 		}
 
 		$additional_message = '';
