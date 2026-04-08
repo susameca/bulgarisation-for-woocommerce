@@ -76,16 +76,14 @@ class Export {
 		$this->options = $settings->get_localized_fields();
 	}
 
-	protected function load_xml_shop() {
-		$this->xml_shop = new Xml\Shop(
-			$this->options['nap']['eik']['value'], 
-			$this->options['nap']['nap_number']['value'],
-			$this->options['nap']['domain']['value'],
-			new \DateTime(), 
-			false, 
-			gmdate('Y', strtotime( $this->date ) ), 
-			gmdate('m', strtotime( $this->date ) )
-		);
+	protected function get_shop_data() {
+		return [
+			'eik' => $this->options['nap']['eik']['value'], 
+			'nap_number' => $this->options['nap']['nap_number']['value'],
+			'domain' => $this->options['nap']['domain']['value'],
+			'year' => gmdate('Y', strtotime( $this->date ) ), 
+			'month' => gmdate('m', strtotime( $this->date ) )
+		];
 	}
 
 	public function get_xml_file() {
@@ -93,17 +91,22 @@ class Export {
 			return;
 		}
 
-		$this->load_xml_shop();
+		$args = [
+			'tax_rounding_mode' => wc_get_tax_rounding_mode(),
+			'shop' => $this->get_shop_data(),
+			'orders' => [],
+			'refunded_orders' => [],
+		];
 
 		foreach ( $this->completed_orders_ids as $order_id ) {
-			$xml_order = new Order( wc_get_order( $order_id ), $this->generate_files );
+			$order = new Order( wc_get_order( $order_id ), $this->generate_files );
 
-			if ( ! $xml_order->payment_method_type ) {
-				$this->not_included_orders[] = $xml_order->order_id_to_show;
+			if ( ! $order->payment_method_type ) {
+				$this->not_included_orders[] = $order->order_id_to_show;
 				continue;
 			}
-
-			$this->xml_shop->addOrder( $xml_order->get_xml_order() );
+			
+			$args['orders'][] = $order->get_order_data();
 		}
 
 		foreach ( $this->refunded_orders_ids as $order_id ) {
@@ -112,54 +115,59 @@ class Export {
 			if ( method_exists( $order, 'get_refunds' ) ) {
 				$refunded_order = new RefundedOrder( $order, $this->date );
 
-				$this->xml_shop->addReturnedOrder( $refunded_order->get_xml_order() );
+				$args['refunded_orders'][] = $refunded_order->get_order_data();
 			}
 		}
 
-		return $this->upload_xml();
+		return $this->upload_xml( $args );
 	}
 
-	protected function upload_xml() {
-		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
-		$name = uniqid( wp_rand(), true );
-		$xml = wp_upload_bits( $name . '.xml', null, Xml\XmlConverter::convert( $this->xml_shop ) );
-		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
+	protected function upload_xml( $args ) {
+		$data = self::generate_xml_file( $args );
 
-		if ( is_wp_error( $xml ) ) {
-			return;
+		$errors = '';
+		$totals = '';
+
+		if ( !empty( $data['content'] ) ) {
+			add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
+			$name = uniqid( wp_rand(), true );
+			$xml = wp_upload_bits( $name . '.xml', null, $data['content'] );
+			remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
+	
+			if ( is_wp_error( $xml ) ) {
+				return;
+			}
+	
+			$attachment = array(
+				 'guid' => $xml[ 'file' ], 
+				 'post_mime_type' => $xml['type'],
+				 'post_title' => $name,
+				 'post_content' => '',
+				 'post_status' => 'inherit'
+			);
+	
+			$attach_id = wp_insert_attachment( $attachment, $xml[ 'file' ] );
+
+			if( !empty( $data['totals'] ) ) {
+				$totals  = sprintf( 
+					__( 'Total: %s | Total vat: %s | Returned Total: %s', 'bulgarisation-for-woocommerce' ), 
+					wc_price( $data['totals']['orders_total'] ), 
+					wc_price( $data['totals']['orders_total_vat'] ),
+					wc_price( $data['totals']['returned_orders_total'] ) 
+				);
+			}
+
+			$errors = $this->get_file_errors( $attach_id );
+		} else {
+			$errors = $data['error'] ?? 'Unknown error';
 		}
-
-		$attachment = array(
-			 'guid' => $xml[ 'file' ], 
-			 'post_mime_type' => $xml['type'],
-			 'post_title' => $name,
-			 'post_content' => '',
-			 'post_status' => 'inherit'
-		);
-
-		$attach_id = wp_insert_attachment( $attachment, $xml[ 'file' ] );
 
 		return array(
 			'file' => wp_get_attachment_url( $attach_id ),
 			'not_included_orders' => $this->not_included_orders,
-			'totals' => $this->calculate_totals_message(),
-			'errors' => $this->get_file_errors( $attach_id ),
+			'totals' => $totals,
+			'errors' => $errors,
 		);
-	}
-
-	protected function calculate_totals_message() {
-		$message = '';
-
-		if ( !empty( $this->completed_orders_ids ) || !empty( $this->refunded_orders_ids ) ) {
-			$message = sprintf( 
-				__( 'Total: %s | Total vat: %s | Returned Total: %s', 'bulgarisation-for-woocommerce' ), 
-				wc_price( $this->xml_shop->getOrdersTotal() ), 
-				wc_price( $this->xml_shop->getOrdersTotalVat() ),
-				wc_price( $this->xml_shop->getTotalAmountReturnedOrders() ) 
-			);
-		}
-
-		return $message;
 	}
 
 	protected function get_file_errors( $attach_id ) {
@@ -172,5 +180,16 @@ class Export {
 				return wp_list_pluck( libxml_get_errors(), 'message' );
 			}
 		}
+	}
+
+	protected function generate_xml_file( $args ) {
+		$request = wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/nra/generate-xml/', [
+			'body' => [
+				'client' => esc_url( home_url( '/' ) ),
+				'request_body' => $args,
+			]
+		] );
+
+		return json_decode( wp_remote_retrieve_body( $request ), 1 );
 	}
 }
