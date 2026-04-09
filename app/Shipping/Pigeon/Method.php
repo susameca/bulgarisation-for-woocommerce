@@ -263,7 +263,7 @@ class Method extends \WC_Shipping_Method {
 		$data = array(
 			'delivery_type' => $this->cookie_data[ 'type' ],
 			'receiver_name' => $this->cookie_data[ 'receiver' ],
-			'receiver_phone' => array( $this->cookie_data[ 'phone' ] ),
+			'receiver_phone' => trim( $this->cookie_data[ 'phone' ] ),
 		);
 
 		if ( !empty( $session_customer[ 'email' ] ) ) {
@@ -392,12 +392,17 @@ class Method extends \WC_Shipping_Method {
 			//'service_type' => woo_bg_get_option( 'pigeon', 'service_type' ),
 			'service_type' => 'standard',
 			'service_codes' => [],
+			'sms_notification' => true,
 		];
 
 		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'pigeon_services', 'declared_value' ) );
 	
 		if ( $is_fragile  ) {
 			$other_data['service_codes']['declared_value'] = woo_bg_get_package_total();
+		}
+
+		if ( woo_bg_get_option( 'pigeon_services', 'pay_with_pos' ) === 'yes' ) {
+			$other_data['pay_with_pos'] = true;
 		}
 		
 		if ( woo_bg_get_option( 'pigeon_services', 'paper_return_receipt' ) === 'yes' ) {
@@ -579,5 +584,42 @@ class Method extends \WC_Shipping_Method {
 			'woo-bg-css-pigeon',
 			woo_bg()->plugin_dir_url() . woo_bg_assets_bundle( 'pigeon-frontend.css' )
 		);
+	}
+
+	public static function add_label_number_to_email( $order, $sent_to_admin, $plain_text, $email ) {
+		$email_ids_to_send = [ 'customer_completed_order' ];
+
+		if ( woo_bg_get_option( 'pigeon', 'label_after_checkout' ) === 'yes' ) {
+			$email_ids_to_send[] = 'customer_processing_order';
+			$email_ids_to_send[] = 'customer_on_hold_order';
+		}
+		
+		$email_ids_to_send = apply_filters( 'woo_bg/pigeon/emails_to_send_label_number', $email_ids_to_send );
+
+		if ( !in_array( $email->id, $email_ids_to_send ) ) {
+			return;
+		}
+
+		$label = $order->get_meta( 'woo_bg_pigeon_label' );
+
+		if ( !isset( $label['data']['reference_number'] ) ) {
+			return;
+		}
+
+		$number = $label['data']['reference_number'];
+		$url = 'https://track.pigeonexpress.com/?tracking_number=' . $number;
+
+		$track_number_text = sprintf( 
+			__( 'Label number: %s. %s', 'bulgarisation-for-woocommerce' ), 
+			$number, 
+			sprintf( '<a href="%s" target="_blank">%s</a>',
+				$url,
+				__( 'Track your order.' , 'bulgarisation-for-woocommerce' )
+			)
+		);
+
+		$track_number_text = apply_filters( 'woo_bg/pigeon/track_number_text_in_email', $track_number_text, $url, $order );
+
+		echo wp_kses_post( wpautop( $track_number_text ) );
 	}
 }

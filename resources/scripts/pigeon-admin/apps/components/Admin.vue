@@ -303,14 +303,21 @@
 
 				<div class="order_data_column order_data_column--half">
 					<div class="generated-label" v-if="shipmentStatus">
-						<h3>{{i18n.label}}: {{shipmentStatus.id}}</h3>
+						<h3>{{i18n.referenceNumber}}: {{shipmentStatus.data.reference_number}}</h3>
+
+						<p>
+							{{i18n.trackingCodes}}:
+							<span v-for="(single_package, key) in shipmentStatus.data.packages" :key="key">
+								{{single_package.tracking_number}}<span v-if="key < shipmentStatus.data.packages.length - 1">, </span>
+							</span>
+						</p>
 
 						<iframe id="woo-bg--pigeon-label-print" :src="iframeUrl"></iframe>
 					</div>
 				</div><!-- /.order_data_column order_data_column-/-half -->
 			</div><!-- /.order_data_column_container -->
 
-			<!-- <div class="woocommerce_order_status" v-if="statuses.length">
+			<div class="woocommerce_order_status" v-if="statuses.length">
 				<h3>{{i18n.shipmentStatus}}</h3>
 
 				<table>
@@ -327,7 +334,7 @@
 						</tr>
 					</tbody>
 				</table>
-			</div> -->
+			</div>
 		</div>
 
 		<div class="clear"></div>
@@ -415,43 +422,35 @@ export default {
 			let parcels = [];
 			let link = '';
 
-			if ( this.shipmentStatus.id !== "undefined" ) {
-				this.shipmentStatus.parcels.forEach( function ( parcel ) {
-					parcels.push( parcel.id );
-				});
-
-				link = woocommerce_admin.ajax_url + '?cache-buster=' + Math.random()  + '&action=woo_bg_pigeon_print_labels&parcels=' + parcels.join('|') + "&size=" + this.size;
+			if ( this.shipmentStatus.reference_number !== "undefined" ) {
+				link = woocommerce_admin.ajax_url + '?cache-buster=' + Math.random()  + '&action=woo_bg_pigeon_print_labels&order-id=' + wooBg_pigeon.orderId;
 			}
 
-			return ( parcels.length ) ? link : '';
+			return link;
 		},
 		labelJSON() {
 			return JSON.stringify( this.labelData );
 		},
-		// statuses() {
-		// 	let statuses = [];
+		statuses() {
+			let statuses = [];
 
-		// 	if ( this.operations.length ) {
-		// 		this.operations.forEach( function ( status ) {
-		// 			let details = status.description;
+			if ( this.operations.length ) {
+				this.operations.forEach( function ( status ) {
+					let details = status.status;
 
-		// 			if ( typeof status.comment !== 'undefined' ) {
-		// 				details += ' - ' + status.comment;
-		// 			}
+					let time = new Date( status.created_at ).toLocaleString();
 
-		// 			let time = new Date( status.dateTime ).toLocaleString();
+					statuses.push({
+						time,
+						details,
+					} );
+				});
 
-		// 			statuses.push({
-		// 				time,
-		// 				details,
-		// 			} );
-		// 		});
+				statuses.reverse();
+			}
 
-		// 		statuses.reverse();
-		// 	}
-
-		// 	return statuses;
-		// }
+			return statuses;
+		}
 	},
 	mounted() {
 		let _this = this;
@@ -481,14 +480,20 @@ export default {
 			}
 		});
 
-		if ( wooBg_pigeon.cookie_data.type == 'office' ) {
+		if ( wooBg_pigeon.cookie_data.type == 'locker' ) {
+			Object.values(this.lockers).forEach( function ( locker ) {
+				if ( locker.id == 'lockerID-' + wooBg_pigeon.cookie_data.selectedLocker ) {
+					_this.locker = locker;
+				}
+			});
+		} else if ( wooBg_pigeon.cookie_data.type == 'office' ) {
 			Object.values(this.offices).forEach( function ( office ) {
 				if ( office.id == 'officeID-' + wooBg_pigeon.cookie_data.selectedOffice ) {
 					_this.office = office;
 				}
 			});
-		} else {
-			this.other = wooBg_pigeon.label.receiver_address.additional_info;
+		} else if ( wooBg_pigeon.cookie_data.type == 'address' ) {
+			this.other = wooBg_pigeon.label.pickup_address.additional_info;
 			this.streets.forEach( function ( street ) {
 				if ( street.orig_key == wooBg_pigeon.cookie_data.selectedAddress.orig_key ) {
 					_this.street = street;
@@ -512,9 +517,9 @@ export default {
 			this.returnAtMyExpense = wooBg_pigeon.label.return_at_my_expense;
 		}
 
-		// if ( wooBg_pigeon.operations ) {
-		// 	this.operations = wooBg_pigeon.operations;
-		// }
+		if ( wooBg_pigeon.operations ) {
+			this.operations = wooBg_pigeon.operations;
+		}
 	},
 	methods: {
 		addParcel() {

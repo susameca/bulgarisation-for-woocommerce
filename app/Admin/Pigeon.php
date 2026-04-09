@@ -83,8 +83,8 @@ class Pigeon {
 
 					$label_data = array();
 					$cookie_data = $theorder->get_meta( 'woo_bg_pigeon_cookie_data' );
-					//$shipment_status = $theorder->get_meta( 'woo_bg_pigeon_shipment_status' );
-					//$operations = $theorder->get_meta( 'woo_bg_pigeon_operations' );
+					$shipment_status = $theorder->get_meta( 'woo_bg_pigeon_shipment_status' );
+					$operations = $theorder->get_meta( 'woo_bg_pigeon_operations' );
 
 					if ( $label = $theorder->get_meta( 'woo_bg_pigeon_label' ) ) {
 						$label_data = $label;
@@ -102,8 +102,8 @@ class Pigeon {
 					
 					wp_localize_script( 'woo-bg-js-admin', 'wooBg_pigeon', array(
 						'label' => $label_data,
-						//'shipmentStatus' => $shipment_status,
-						//'operations' => $operations,
+						'shipmentStatus' => $shipment_status,
+						'operations' => $operations,
 						'cookie_data' => $cookie_data,
 						'paymentType' => $theorder->get_payment_method(),
 						'sendFrom' => self::get_send_from_data(),
@@ -230,6 +230,8 @@ class Pigeon {
 			'copyLabelData' => __( 'Copy Label Data', 'bulgarisation-for-woocommerce' ),
 			'copyLabelDataMessage' => __( 'You just copied the label data used for the Pigeon Express API.', 'bulgarisation-for-woocommerce' ),
 			'shipmentStatus' => __( 'Shipment status', 'bulgarisation-for-woocommerce' ),
+			'referenceNumber' => __( 'Reference number', 'bulgarisation-for-woocommerce' ),
+			'trackingCodes' => __( 'Tracking codes', 'bulgarisation-for-woocommerce' ),
 			'time' => __( 'Time:', 'bulgarisation-for-woocommerce' ),
 			'event' => __( 'Event:', 'bulgarisation-for-woocommerce' ),
 			'details' => __( 'Details:', 'bulgarisation-for-woocommerce' ),
@@ -255,6 +257,19 @@ class Pigeon {
 
 	public static function message_dismiss_callback() {
 		update_option( 'woo_bg_pigeon_express_message_dismiss', true );
+	}
+
+	public static function generate_label_after_order_generated( $order_id ) {
+		$order = wc_get_order( $order_id );
+		$label = $order->get_meta( 'woo_bg_pigeon_label' );
+		if ( !$label ) {
+			return;
+		}
+
+		$label = self::update_sender( $label );
+		$label = self::update_services( $label );
+
+		self::send_label_to_pigeon( $label, $order );
 	}
 
 	public static function generate_label() {
@@ -339,7 +354,7 @@ class Pigeon {
 
 		$label['delivery_type'] = $type['id'];
 		$label['receiver_name'] = $name;
-		$label['receiver_phone'] = $phone;
+		$label['receiver_phone'] = trim( $phone );
 		$label['receiver_email'] = $order->get_billing_email();
 
 		unset( $label['delivery_address'] );
@@ -412,9 +427,10 @@ class Pigeon {
 	}
 
 	private static function update_services( $label ) {
-		$type = map_deep( $_REQUEST['type'], 'sanitize_text_field' );
 		$declared_value = sanitize_text_field( $_REQUEST['declaredValue'] );
 		$test = sanitize_text_field( $_REQUEST['testOption'] );
+
+		$label['sms_notification'] = wc_string_to_bool( $label['sms_notification'] );
 
 		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'pigeon_services', 'declared_value' ) );
 	
@@ -441,6 +457,12 @@ class Pigeon {
 		} else if ( isset( $label['service_codes']['service_return_documents'] ) ) {
 			unset( $label['service_codes']['service_return_documents'] );
 		}
+
+		if ( woo_bg_get_option( 'pigeon_services', 'pay_with_pos' ) === 'yes' ) {
+			$label['pay_with_pos'] = true;
+		} else if ( isset( $label['pay_with_pos'] ) ) {
+			unset( $label['pay_with_pos'] );
+		}
 		
 		if ( woo_bg_get_option( 'pigeon_services', 'id_verification_and_document_signature' ) === 'yes' ) {
 			$label['service_codes']['ID_verification_and_document_signature'] = true;
@@ -454,14 +476,19 @@ class Pigeon {
 			unset( $label['service_codes']['cod_card_fee'] );
 		}
 		
-		if ( $type !== 'locker' ) {
-			if ( $test === 'yes' ) {
-				$label['service_codes']['shipment_test_before_payment'] = true;
+		if ( isset( $_REQUEST['type'] ) ) {
+			$type = map_deep( $_REQUEST['type'], 'sanitize_text_field' );
+			$type = $type['id'];
+
+			if ( $type !== 'locker' ) {
+				if ( $test === 'yes' ) {
+					$label['service_codes']['shipment_test_before_payment'] = true;
+				} else if ( isset( $label['service_codes']['shipment_test_before_payment'] ) ) {
+					unset( $label['service_codes']['shipment_test_before_payment'] );
+				}
 			} else if ( isset( $label['service_codes']['shipment_test_before_payment'] ) ) {
 				unset( $label['service_codes']['shipment_test_before_payment'] );
 			}
-		} else if ( isset( $label['service_codes']['shipment_test_before_payment'] ) ) {
-			unset( $label['service_codes']['shipment_test_before_payment'] );
 		}
 
 		return $label;
@@ -487,10 +514,19 @@ class Pigeon {
 		$response = $container[ Client::PIGEON ]->api_call( $container[ Client::PIGEON ]::CREATE_LABEL_ENDPOINT, $request_body, 'POST' );
 		
 		if ( isset( $response['success'] ) && !$response['success'] ) {
-			$errors = isset( $response['errors'] ) ? $response['errors'] : [ [ $response['message'] ] ];
-			$data['message'] = wp_list_pluck( $errors, 0 );
+			if ( isset( $response['message'] ) ) {
+				$errors = [ $response['message'] ];
+			}
+
+			if ( isset( $response['errors'] ) ) {
+				foreach ( $response['errors'] as $key => $error ) {
+					$errors[] = $key . ": " . implode( " ", $error );
+				}
+			}
+
+			$data['message'] = implode( ", ", $errors );
 		} else {
-			$data['price'] = woo_bg_tax_based_price( $response['data']['total_price'] );
+			//$data['price'] = woo_bg_tax_based_price( $response['data']['total_price'] );
 			$data['label'] = $request_body;
 			$data['shipmentStatus'] = $response;
 
@@ -502,5 +538,63 @@ class Pigeon {
 		do_action( 'woo_bg/pigeon/after_send_label', $data, $order );
 
 		return $data;
+	}
+
+	public static function print_labels_endpoint() {
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( __( 'You do not have permission to perform this action.', 'bulgarisation-for-woocommerce' ) );
+			wp_die();
+		}
+		
+		$order_id = sanitize_text_field( $_REQUEST['order-id'] );
+		$order = wc_get_order( $order_id );
+		$shipment_status = $order->get_meta( 'woo_bg_pigeon_shipment_status' );
+
+		$pdf_escaped = base64_decode( $shipment_status['data']['label_pdf'] );
+
+		header('Content-Type: application/pdf');
+		header('Content-Length: '.strlen( $pdf_escaped ));
+		header('Content-disposition: inline; filename="' . $shipment_status['data']['reference_number'] . '.pdf"');
+
+		echo $pdf_escaped;
+
+		wp_die();
+	}
+
+	public static function delete_label() {
+		woo_bg_check_admin_label_actions();
+
+		$container = woo_bg()->container();
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
+		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
+		$order = wc_get_order( $order_id );
+		
+		$response = $container[ Client::PIGEON ]->api_call( $container[ Client::PIGEON ]::CREATE_LABEL_ENDPOINT . "/" . $shipment_status['data']['reference_number'] . "/cancel", [], 'POST' );
+
+		$order->update_meta_data( 'woo_bg_pigeon_shipment_status', '' );
+		$order->update_meta_data( 'woo_bg_pigeon_operations', '' );
+		$order->save();
+		
+		wp_send_json_success( $response );
+		wp_die();
+	}
+
+	public static function update_shipment_status() {
+		woo_bg_check_admin_label_actions();
+
+		$container = woo_bg()->container();
+		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
+		$order = wc_get_order( $order_id );
+		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
+
+		$response = $container[ Client::PIGEON ]->api_call( $container[ Client::PIGEON ]::CREATE_LABEL_ENDPOINT . "/" . $shipment_status['data']['reference_number'] . "/track", [] );
+
+		$order_shipment_status = $response['data']['tracking'];
+		
+		$order->update_meta_data( 'woo_bg_pigeon_operations', $order_shipment_status );
+		$order->save();
+
+		wp_send_json_success( array( 'operations' => $order_shipment_status ) );
+		wp_die();
 	}
 }

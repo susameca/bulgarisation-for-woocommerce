@@ -83,7 +83,7 @@ class Pigeon_Tab extends Base_Tab {
 
 	public function add_additional_fields( $fields ) {
 		if ( $this->container[ Client::PIGEON ]->is_valid_access( true ) ) {
-			//$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'bulgarisation-for-woocommerce' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'bulgarisation-for-woocommerce' ) );
+			$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'bulgarisation-for-woocommerce' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'bulgarisation-for-woocommerce' ) );
 			$fields[ 'pigeon' ][] = new Fields\TrueFalse_Field( 'auto_size', __( 'Automatically calculate box size', 'bulgarisation-for-woocommerce' ), null, null, __( 'Automatically calculate LxWxH of the box for the parcel.', 'bulgarisation-for-woocommerce' ) );
 			$fields[ 'pigeon' ][] = new Fields\Select_Field( 
 				array(
@@ -98,6 +98,7 @@ class Pigeon_Tab extends Base_Tab {
 				), 'send_from', __( 'Send From', 'bulgarisation-for-woocommerce' ), null, null, __( 'Select from where you will send the packages and save to show more options.', 'bulgarisation-for-woocommerce' ) 
 			);
 			
+			$fields[ 'pigeon_services' ][] = new Fields\TrueFalse_Field( 'pay_with_pos', __( 'Pay with POS', 'bulgarisation-for-woocommerce' ), null, null, __( 'POS payment available.', 'bulgarisation-for-woocommerce' ) );
 			$fields[ 'pigeon_services' ][] = new Fields\TrueFalse_Field( 'declared_value', __( 'Declared value', 'bulgarisation-for-woocommerce' ), null, null, __( 'Adds declared value to the label if payment is COD.', 'bulgarisation-for-woocommerce' ) );
 			$fields[ 'pigeon_services' ][] = new Fields\TrueFalse_Field( 'paper_return_receipt', __( 'Paper Return Receipt', 'bulgarisation-for-woocommerce' ), null, null, __( 'Request for a paper receipt', 'bulgarisation-for-woocommerce' ) );
 			$fields[ 'pigeon_services' ][] = new Fields\TrueFalse_Field( 'return_receipt', __( 'Return Receipt', 'bulgarisation-for-woocommerce' ), null, null, __( 'Request for a return receipt in electronic format', 'bulgarisation-for-woocommerce' ) );
