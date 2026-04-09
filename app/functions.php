@@ -1,5 +1,4 @@
 <?php
-use Woo_BG\Export\Nra\Xml\PaymentTypes;
 use Woo_BG\File;
 
 function woo_bg_assets_bundle( $path ) {
@@ -101,12 +100,12 @@ function woo_bg_get_payment_types() {
 
 function woo_bg_get_payment_types_for_meta() {
 	return array(
-		'1' => PaymentTypes\WithoutPostPayment::class, //1
-		'2' => PaymentTypes\VirtualPOSTerminal::class, //2
-		'3' => PaymentTypes\WithPostPayment::class, //3
-		'4' => PaymentTypes\PaymentService::class, //4
-		'5' => PaymentTypes\Other::class, //5
-		'6' => PaymentTypes\ReflectedWithReceipt::class, //5
+		'1' => 'WithoutPostPayment', //1
+		'2' => 'VirtualPOSTerminal', //2
+		'3' => 'WithPostPayment', //3
+		'4' => 'PaymentService', //4
+		'5' => 'Other', //5
+		'6' => 'ReflectedWithReceipt', //6
 	);
 }
 
@@ -312,17 +311,17 @@ function woo_bg_get_vat_group_from_rate( $rate ) {
 	return $group;
 }
 
-function woo_bg_tax_based_price( $price, $rate = 20 ) {
-	if ( wc_tax_enabled() ) {
-		$price = round( $price - woo_bg_calculate_vat_from_price( $price, $rate ), 2, PHP_ROUND_HALF_DOWN );
+function woo_bg_tax_based_price( $price, $rate = 20, $force = false ) {
+	if ( wc_tax_enabled() || $force ) {
+		$price = $price - woo_bg_calculate_vat_from_price( $price, $rate );
 	}
 
-	return number_format( $price, 2 );
+	return number_format( round($price, 2), 2, '.', '' );
 }
 
 function woo_bg_calculate_vat_from_price( $price, $rate = 20 ) {
 	$vat = (new \WC_Tax)::calc_tax( $price, array( array('compound' => 'yes', 'rate' => $rate ) ), true )[0];
-    $vat = round( $vat, 3, PHP_ROUND_HALF_DOWN );
+    $vat = round( $vat, 3, PHP_ROUND_HALF_UP );
     $vat = number_format( $vat, 2, '.', '');
     
     return $vat;
@@ -451,12 +450,10 @@ function woo_bg_get_order_label( $order_id ) {
 		switch ( $method ) {
 			case 'woo_bg_speedy':
 				$shipment_status = $order->get_meta( 'woo_bg_speedy_shipment_status' );
-				
+
 				if ( $shipment_status && $label_data['id'] ) {
-					$data = [
-						'number' => $label_data['id'],
-						'link' => admin_url( 'admin-ajax.php' ) . '?cache-buster=' . rand() . '&action=woo_bg_speedy_print_labels&parcels=' . implode('|', wp_list_pluck( $shipment_status['parcels'], 'id' ) ) . "&size=A6",
-					];
+					$data['number'] = $label_data['id'];
+					$data['link'] = admin_url( 'admin-ajax.php' ) . '?cache-buster=' . rand() . '&action=woo_bg_speedy_print_labels&parcels=' . implode('|', wp_list_pluck( $shipment_status['parcels'], 'id' ) ) . "&size=A6";
 				}
 				break;
 			case 'woo_bg_econt':
@@ -471,9 +468,9 @@ function woo_bg_get_order_label( $order_id ) {
 				break;
 			case 'woo_bg_cvc':
 				$shipment_status = $order->get_meta( 'woo_bg_cvc_shipment_status' );
-
 				if ( $shipment_status && !empty( $shipment_status['pdf'] ) ) {
 					$data = [
+						'courier' => __( 'CVC', 'bulgarisation-for-woocommerce' ),
 						'number' => $label_data['wb'],
 						'link' => $shipment_status['pdf'],
 					];
@@ -481,8 +478,6 @@ function woo_bg_get_order_label( $order_id ) {
 				
 				break;
 			case 'woo_bg_boxnow':
-				$data = ['items'];
-
 				if ( isset( $label_data['parcels'] ) && is_array( $label_data['parcels'] ) ) {
 					foreach ( $label_data['parcels'] as $parcel ) {
 						$data['items'][] = [
@@ -493,11 +488,44 @@ function woo_bg_get_order_label( $order_id ) {
 				}
 				
 				break;
+			case 'woo_bg_pigeon':
+				$shipment_status = $order->get_meta( 'woo_bg_pigeon_shipment_status' );
+				if ( $shipment_status && !empty( $label_data['data']['reference_number'] ) ) {
+					$data = [
+						'number' => $label_data['data']['reference_number'],
+						'link' => admin_url( 'admin-ajax.php' ) . '?cache-buster=' . rand() . '&action=woo_bg_pigeon_print_labels&order-id=' . $order->get_id(),
+					];
+				}
+				
+				break;
 		}
 	}
 
 	if ( $method ) {
 		$data['method'] = $method;
+
+		switch ( $method ) {
+			case 'woo_bg_speedy':
+				$data['courier'] = __( 'Speedy', 'bulgarisation-for-woocommerce' );
+
+				break;
+			case 'woo_bg_econt':
+				$data['courier'] = __( 'Econt', 'bulgarisation-for-woocommerce' );
+
+				break;
+			case 'woo_bg_cvc':
+				$data['courier'] = __( 'CVC', 'bulgarisation-for-woocommerce' );
+
+				break;
+			case 'woo_bg_boxnow':
+				$data['courier'] = __( 'BOX NOW', 'bulgarisation-for-woocommerce' );
+				
+				break;
+			case 'woo_bg_pigeon':
+				$data['courier'] = __( 'Pigeon Express', 'bulgarisation-for-woocommerce' );
+				
+				break;
+		}
 	}
 
 	return apply_filters( 'woo_bg/column/order/shipment_status_data', $data, $order );
@@ -521,6 +549,10 @@ function woo_bg_get_label_data_for_shipping_method( $shipping ) {
 		}
 	} elseif ( $shipping['method_id'] === 'woo_bg_boxnow' ) {
 		if ( $label = $order->get_meta( 'woo_bg_boxnow_shipment_status' ) ) {
+			$label_data = $label;
+		}
+	} elseif ( $shipping['method_id'] === 'woo_bg_pigeon' ) {
+		if ( $label = $order->get_meta( 'woo_bg_pigeon_shipment_status' ) ) {
 			$label_data = $label;
 		}
 	}
