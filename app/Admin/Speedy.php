@@ -818,6 +818,11 @@ class Speedy {
 	}
 
 	public static function print_labels_endpoint() {
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( __( 'You do not have permission to perform this action.', 'bulgarisation-for-woocommerce' ) );
+			wp_die();
+		}
+		
 		$container = woo_bg()->container();
 		$labels = explode( '|', sanitize_text_field( $_REQUEST['parcels'] ) );
 		$size = sanitize_text_field( $_REQUEST['size'] );

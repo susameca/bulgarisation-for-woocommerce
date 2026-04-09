@@ -471,6 +471,11 @@ class BoxNow {
 	}
 
 	public static function print_label_endpoint() {
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( __( 'You do not have permission to perform this action.', 'bulgarisation-for-woocommerce' ) );
+			wp_die();
+		}
+		
 		$container = woo_bg()->container();
 		$parcel = sanitize_text_field( $_REQUEST['parcel'] );
 
