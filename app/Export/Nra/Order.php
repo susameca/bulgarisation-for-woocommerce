@@ -71,38 +71,25 @@ class Order {
 			if ( ! $item->get_total() ) {
 				continue;
 			}
-
-			$tax_data = wc_tax_enabled() ? $item->get_taxes() : false;
+			
 			$item_vat_rate = woo_bg_get_order_item_vat_rate( $item, $this->woo_order );
 
 			if ( is_a( $item, 'WC_Order_Item_Fee' ) ) {
-				$price = $item->get_total();
-				
-				if ( !$tax_data  ) {
-					$price = woo_bg_tax_based_price( $item->get_total(), $item_vat_rate, true );
-				}
+				$total = $item->get_total() + $item->get_total_tax();
 
 				$items[] = array(
 					'name' => $item->get_name(),
 					'qty' => $item->get_quantity(),
-					'subtotal' => $price,
-					'price' => apply_filters( 'woo_bg/admin/export/item_price', $price, $item, $this->woo_order ),
+					'total' => $total,
 					'vat_rate' => apply_filters( 'woo_bg/admin/export/item_vat', $item_vat_rate, $item, $this->woo_order ),
 				);
 			} else {
-				$price = $item->get_total();
-				$subtotal = $this->woo_order->get_item_subtotal( $item, false, true );
-
-				if ( !$tax_data  ) {
-					$price = woo_bg_tax_based_price( $price, $item_vat_rate, true );
-					$subtotal = woo_bg_tax_based_price( $subtotal, $item_vat_rate, true );
-				}
+				$total = round( $item->get_subtotal() + $item->get_subtotal_tax(), 2 );
 
 				$items[] = array(
 					'name' => $item->get_name(),
 					'qty' => $item->get_quantity(),
-					'subtotal' => $subtotal,
-					'price' => apply_filters( 'woo_bg/admin/export/item_price', $price, $item, $this->woo_order ),
+					'total' => $total,
 					'vat_rate' => apply_filters( 'woo_bg/admin/export/item_vat', $item_vat_rate, $item, $this->woo_order ),
 				);
 			}
@@ -114,15 +101,13 @@ class Order {
 				$price = 0;
 			}
 
-			$price = $item->get_total();
+			$price = $item->get_total() + $item->get_total_tax();
 			$item_vat = $this->vat_groups[ $this->vat_group ];
 
 			if ( wc_tax_enabled() ) {
 				if ( $item->get_total_tax() ) {
 					$item_vat = $shipping_vat;
 				}
-			} else {
-				$price = woo_bg_tax_based_price( $price, $item_vat, true );
 			}
 
 			$price = apply_filters( 'woo_bg/admin/export/item_price', $price, $item, $this->woo_order );
@@ -131,8 +116,7 @@ class Order {
 			$items[] = array(
 				'name' => sprintf( __( 'Shipping: %s', 'bulgarisation-for-woocommerce' ), $item->get_name() ),
 				'qty' => $item->get_quantity(),
-				'subtotal' => $price,
-				'price' => $price,
+				'total' => $price,
 				'vat_rate' => $item_vat,
 			);
 		}
@@ -157,7 +141,7 @@ class Order {
 			'date_created' => $this->woo_order->get_date_created()->format('Y-m-d'), 
 			'order_document_number' => $this->order_document_number,
 			'date_modified' => $this->woo_order->get_date_modified()->format('Y-m-d'),
-			'total_discount' => apply_filters( 'woo_bg/admin/nra_export/order_total_discount', $this->woo_order->get_total_discount(), $this->woo_order ), 
+			'total_discount' => apply_filters( 'woo_bg/admin/nra_export/order_total_discount', $this->woo_order->get_total_discount( false ), $this->woo_order ), 
 			'payment_method_type' => $this->payment_method_type,
 			'pos_number' => $this->pos_number,
 			'transaction_id' => $this->woo_order->get_transaction_id(), 
@@ -169,9 +153,9 @@ class Order {
 			foreach ( $shipping_items as $item_id => $item ) {
 				if ( $metas = $item->get_meta_data() ) {
 					foreach ( $metas as $meta ) {
-						$data = $meta->get_data();
+						$meta_data = $meta->get_data();
 
-						$item->add_meta_data( $data['key'], $data['value'], true );
+						$item->add_meta_data( $meta_data['key'], $meta_data['value'], true );
 					}
 				}
 				

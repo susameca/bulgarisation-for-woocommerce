@@ -183,9 +183,10 @@ class Export {
 
 	protected function generate_xml_file( $args ) {
 		$request = wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/nra/generate-xml/', [
+			'timeout' => 60,
 			'body' => [
 				'client' => esc_url( home_url( '/' ) ),
-				'request_body' => $args,
+				'request_body' => json_encode( $args ),
 			]
 		] );
 
