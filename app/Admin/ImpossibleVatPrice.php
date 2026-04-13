@@ -409,14 +409,18 @@ class ImpossibleVatPrice {
 			return null;
 		}
 
-		if ( 'yes' !== get_option( 'woocommerce_prices_include_tax' ) ) {
-			return null;
-		}
+		$prices_include_tax = ( 'yes' === get_option( 'woocommerce_prices_include_tax' ) ) && wc_tax_enabled();
 
-		$tax_percent = self::get_single_tax_rate_percent_for_product( $product );
+		if ( $prices_include_tax ) {
+			$tax_percent = self::get_single_tax_rate_percent_for_product( $product );
 
-		if ( null === $tax_percent ) {
-			return null;
+			if ( null === $tax_percent ) {
+				return null;
+			}
+		} else {
+			$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
+			$vat_percentages     = woo_bg_get_vat_groups();
+			$tax_percent = ( isset( $vat_percentages[ $vat_group ] ) ) ? $vat_percentages[ $vat_group ] : 0;
 		}
 
 		if ( self::is_gross_price_mathematically_possible( $price, $tax_percent ) ) {
