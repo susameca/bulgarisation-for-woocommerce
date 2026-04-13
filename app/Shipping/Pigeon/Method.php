@@ -210,7 +210,13 @@ class Method extends \WC_Shipping_Method {
 		$request = $this->container[ Client::PIGEON ]->api_call( $this->container[ Client::PIGEON ]::CALCULATE_ENDPOINT, $request_body, 'POST' );
 		
 		if ( isset( $request['success'] ) && !$request['success'] ) {
-			$data['errors'] = isset( $request['errors'] ) ? $request['errors'] : [ [ $request['message'] ] ];
+			if ( isset( $request['errors'] ) ) {
+				$data['errors'] = $request['errors'];
+			} else if ( isset( $request['message'] ) ) {
+				$data['errors'] = [ [ $request['message'] ] ];
+			} else {
+				$data['errors'] = [ [ __( 'An error occurred while calculating the shipping price. Please try again later.', 'bulgarisation-for-woocommerce' ) ] ];
+			}
 		} else if ( isset( $request['data']['total_price'] ) ) {
 			$data['price'] = woo_bg_tax_based_price( $request['data']['total_price'] );
 		}
