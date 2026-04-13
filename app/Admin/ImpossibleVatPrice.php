@@ -97,7 +97,10 @@ class ImpossibleVatPrice {
 		<div class="wrap">
 			<h1><?php echo esc_html__( 'Mathematically impossible prices', 'bulgarisation-for-woocommerce' ); ?></h1>
 
-			<p><?php echo esc_html__( 'This tool scans products and shows only problematic prices.', 'bulgarisation-for-woocommerce' ); ?></p>
+			<p>
+				<?php echo esc_html__( 'This tool scans products and shows only problematic prices.', 'bulgarisation-for-woocommerce' ); ?>
+				<?php echo wp_kses_post( sprintf( __( 'You can learn more about this problem <a target="_blank" href="%s">here</a>.', 'bulgarisation-for-woocommerce' ), 'https://ddskalkulator.com/art/%D0%B7%D0%B0%D0%BA%D1%80%D1%8A%D0%B3%D0%BB%D1%8F%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BF%D1%80%D0%B8-%D0%B8%D0%B7%D1%87%D0%B8%D1%81%D0%BB%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%B4%D0%B4%D1%81-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8-%D0%BD%D0%B5%D0%B2%D1%8A%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%B8-%D1%86%D0%B5%D0%BD%D0%B8' ) ); ?>
+			</p>
 
 			<p>
 				<strong><?php echo esc_html__( 'Store setting:', 'bulgarisation-for-woocommerce' ); ?></strong>

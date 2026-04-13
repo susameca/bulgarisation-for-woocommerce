@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2026-04-13 14:11+0000\n"
+"PO-Revision-Date: 2026-04-13 15:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -89,7 +89,7 @@ msgstr "Копия на документи за счетоводител"
 msgid "Accountant email"
 msgstr "Имейл на счетоводител"
 
-#: app/Admin/ImpossibleVatPrice.php:136
+#: app/Admin/ImpossibleVatPrice.php:145
 msgid "Actions"
 msgstr "Действия"
 
@@ -151,11 +151,11 @@ msgstr ""
 "След като изберете опцията, трябва да запазите настройките, за да се покажат "
 "правилните ценови настройки."
 
-#: app/Admin/ImpossibleVatPrice.php:70
+#: app/Admin/ImpossibleVatPrice.php:76
 msgid "AJAX error"
 msgstr "AJAX грешка"
 
-#: app/Admin/ImpossibleVatPrice.php:59
+#: app/Admin/ImpossibleVatPrice.php:65
 msgid "AJAX error during scanning."
 msgstr "AJAX грешка по време на сканирането."
 
@@ -191,7 +191,7 @@ msgstr "Винаги"
 msgid "Amount due"
 msgstr "Сума за плащане"
 
-#: app/Admin/ImpossibleVatPrice.php:58
+#: app/Admin/ImpossibleVatPrice.php:64
 msgid "An error occurred during scanning."
 msgstr "Възникна грешка по време на сканирането."
 
@@ -429,7 +429,7 @@ msgstr ""
 msgid "Check on checkout and disable COD."
 msgstr "Провери на чекаут и изключи НП"
 
-#: app/Admin/ImpossibleVatPrice.php:62
+#: app/Admin/ImpossibleVatPrice.php:68
 #, php-format
 msgid "Checked: %1$s | Problematic: %2$s"
 msgstr "Проверени: %1$s | Проблемни: %2$s"
@@ -703,7 +703,7 @@ msgstr "Настройки на документи"
 msgid "Domain Name"
 msgstr "Име на домейна"
 
-#: app/Admin/ImpossibleVatPrice.php:133
+#: app/Admin/ImpossibleVatPrice.php:142
 msgid "Down"
 msgstr "Надолу"
 
@@ -755,7 +755,7 @@ msgstr "Еконт настройки"
 msgid "econt.com API Settings"
 msgstr "econt.com API настройки"
 
-#: app/Admin/ImpossibleVatPrice.php:66
+#: app/Admin/ImpossibleVatPrice.php:72
 msgid "Edit"
 msgstr "Редактирай"
 
@@ -978,7 +978,7 @@ msgstr "Въведете вашият ключ."
 msgid "Enter your username."
 msgstr "Въведете потребителско име."
 
-#: app/Admin/ImpossibleVatPrice.php:130
+#: app/Admin/ImpossibleVatPrice.php:139
 msgid "Entered price"
 msgstr "Въведена цена"
 
@@ -987,7 +987,7 @@ msgstr "Въведена цена"
 msgid "Environment"
 msgstr "Работна среда"
 
-#: app/Admin/ImpossibleVatPrice.php:71
+#: app/Admin/ImpossibleVatPrice.php:77
 msgid "Error"
 msgstr "Грешка"
 
@@ -1045,7 +1045,7 @@ msgstr "Експорт на документите за Microinvest"
 msgid "Exporting XML"
 msgstr "Експортиране на XML"
 
-#: app/Admin/ImpossibleVatPrice.php:129
+#: app/Admin/ImpossibleVatPrice.php:138
 msgid "Field"
 msgstr "Поле"
 
@@ -1058,15 +1058,15 @@ msgstr ""
 "Файла е генериран успешно! <a href=\"%s\" download target=\"_blank\">"
 "Изтегли</a>"
 
-#: app/Admin/ImpossibleVatPrice.php:65
+#: app/Admin/ImpossibleVatPrice.php:71
 msgid "Fix"
 msgstr "Поправи"
 
-#: app/Admin/ImpossibleVatPrice.php:63 app/Admin/ImpossibleVatPrice.php:109
+#: app/Admin/ImpossibleVatPrice.php:69 app/Admin/ImpossibleVatPrice.php:118
 msgid "Fix all"
 msgstr "Поправи всички"
 
-#: app/Admin/ImpossibleVatPrice.php:68
+#: app/Admin/ImpossibleVatPrice.php:74
 msgid "Fixed"
 msgstr "Поправено"
 
@@ -1081,17 +1081,17 @@ msgstr "Фиксиран обменен курс:"
 msgid "Fixed price"
 msgstr "Фиксирана цена"
 
-#: app/Admin/ImpossibleVatPrice.php:76
+#: app/Admin/ImpossibleVatPrice.php:82
 #, php-format
 msgid "Fixed: %1$s | Not fixed: %2$s"
 msgstr "Поправени: %1$s | Непоправени: %2$s"
 
-#: app/Admin/ImpossibleVatPrice.php:75
+#: app/Admin/ImpossibleVatPrice.php:81
 #, php-format
 msgid "Fixing all... %1$s / %2$s"
 msgstr "Поправяне на всички... %1$s / %2$s"
 
-#: app/Admin/ImpossibleVatPrice.php:64 app/Admin/ImpossibleVatPrice.php:77
+#: app/Admin/ImpossibleVatPrice.php:70 app/Admin/ImpossibleVatPrice.php:83
 msgid "Fixing..."
 msgstr "Поправяне..."
 
@@ -1248,7 +1248,7 @@ msgstr "Начин на връщане на сумата при отказ на 
 msgid "https://autopolis.bg/"
 msgstr "https://autopolis.bg/"
 
-#: app/Admin/ImpossibleVatPrice.php:125
+#: app/Admin/ImpossibleVatPrice.php:134
 msgid "ID"
 msgstr "ID"
 
@@ -1342,7 +1342,7 @@ msgstr "Невалиден  Client ID или Client Secret"
 msgid "Invalid country code"
 msgstr "Невалиден код на държавата"
 
-#: app/Admin/ImpossibleVatPrice.php:228
+#: app/Admin/ImpossibleVatPrice.php:237
 msgid "Invalid data."
 msgstr "Невалидни данни."
 
@@ -1460,7 +1460,7 @@ msgid "Manner of payment of the order according to the NRA system."
 msgstr "Начин на плащане на поръчката според системата на НАП."
 
 #: app/Admin/ImpossibleVatPrice.php:26 app/Admin/ImpossibleVatPrice.php:27
-#: app/Admin/ImpossibleVatPrice.php:92
+#: app/Admin/ImpossibleVatPrice.php:98
 msgid "Mathematically impossible prices"
 msgstr "Математически невъзможни цени"
 
@@ -1480,7 +1480,7 @@ msgstr "Средна кутия"
 msgid "Message:"
 msgstr "Съобщение:"
 
-#: app/Admin/ImpossibleVatPrice.php:69
+#: app/Admin/ImpossibleVatPrice.php:75
 msgid "Missing target price"
 msgstr "Липсваща целева цена"
 
@@ -1506,7 +1506,7 @@ msgstr "Име"
 msgid "Name:"
 msgstr "Име"
 
-#: app/Admin/ImpossibleVatPrice.php:132
+#: app/Admin/ImpossibleVatPrice.php:141
 msgid "Nearest"
 msgstr "Най-близко"
 
@@ -1565,11 +1565,11 @@ msgstr "Не бяха намерени офиси в %s."
 msgid "No orders found for this month."
 msgstr "Няма намерени поръчки за този месец."
 
-#: app/Admin/ImpossibleVatPrice.php:72
+#: app/Admin/ImpossibleVatPrice.php:78
 msgid "No problematic prices found."
 msgstr "Не са открити проблемни цени."
 
-#: app/Admin/ImpossibleVatPrice.php:73
+#: app/Admin/ImpossibleVatPrice.php:79
 msgid "No problematic prices remain."
 msgstr "Няма останали проблемни цени."
 
@@ -1605,7 +1605,7 @@ msgstr "Nonce не е предоставен!"
 msgid "Not calculated"
 msgstr "Не е калкулирано"
 
-#: app/Admin/ImpossibleVatPrice.php:55 app/Admin/ImpossibleVatPrice.php:117
+#: app/Admin/ImpossibleVatPrice.php:61 app/Admin/ImpossibleVatPrice.php:126
 msgid "Not started."
 msgstr "Не е започнато."
 
@@ -1877,7 +1877,7 @@ msgstr "Възможност пратката да не бъде взета: %s"
 msgid "Prepared by"
 msgstr "Съставил документа"
 
-#: app/Admin/ImpossibleVatPrice.php:54
+#: app/Admin/ImpossibleVatPrice.php:60
 msgid "Preparing..."
 msgstr "Подготовка..."
 
@@ -1895,11 +1895,11 @@ msgstr "Настройки на цените"
 msgid "Price type"
 msgstr "Тип на цените"
 
-#: app/Admin/ImpossibleVatPrice.php:98
+#: app/Admin/ImpossibleVatPrice.php:107
 msgid "Prices are entered excluding tax"
 msgstr "Цените са въведени без ДДС"
 
-#: app/Admin/ImpossibleVatPrice.php:98
+#: app/Admin/ImpossibleVatPrice.php:107
 msgid "Prices are entered including tax"
 msgstr "Цените са въведени с включен ДДС"
 
@@ -1915,11 +1915,11 @@ msgstr "Про добавка"
 msgid "Pro forma"
 msgstr "Проформа"
 
-#: app/Admin/ImpossibleVatPrice.php:67
+#: app/Admin/ImpossibleVatPrice.php:73
 msgid "Problematic"
 msgstr "Проблемно"
 
-#: app/Admin/ImpossibleVatPrice.php:126
+#: app/Admin/ImpossibleVatPrice.php:135
 #: app/Invoice/Document/BaseDocument.php:85
 msgid "Product"
 msgstr "Продукт"
@@ -1997,7 +1997,7 @@ msgstr "Отказана Поръчка - Оригинал"
 msgid "Regenerate PDF's"
 msgstr "Регенерирай PDF"
 
-#: app/Admin/ImpossibleVatPrice.php:248 app/Admin/ImpossibleVatPrice.php:313
+#: app/Admin/ImpossibleVatPrice.php:257 app/Admin/ImpossibleVatPrice.php:322
 msgid "Regular price"
 msgstr "Редовна цена"
 
@@ -2067,7 +2067,7 @@ msgstr "Фактура - Копие"
 msgid "Sale Invoice - Original"
 msgstr "Фактура - Оригинал"
 
-#: app/Admin/ImpossibleVatPrice.php:250 app/Admin/ImpossibleVatPrice.php:324
+#: app/Admin/ImpossibleVatPrice.php:259 app/Admin/ImpossibleVatPrice.php:333
 msgid "Sale price"
 msgstr "Промоционална цена"
 
@@ -2083,19 +2083,19 @@ msgstr "Доставка в събота"
 msgid "Saturday delivery/pickup."
 msgstr "Доставка/взимане в събота."
 
-#: app/Admin/ImpossibleVatPrice.php:56 app/Admin/ImpossibleVatPrice.php:108
+#: app/Admin/ImpossibleVatPrice.php:62 app/Admin/ImpossibleVatPrice.php:117
 msgid "Scan products"
 msgstr "Сканиране на продукти"
 
-#: app/Admin/ImpossibleVatPrice.php:60
+#: app/Admin/ImpossibleVatPrice.php:66
 msgid "Scanning finished."
 msgstr "Сканирането е завършено."
 
-#: app/Admin/ImpossibleVatPrice.php:57
+#: app/Admin/ImpossibleVatPrice.php:63
 msgid "Scanning..."
 msgstr "Сканиране..."
 
-#: app/Admin/ImpossibleVatPrice.php:61
+#: app/Admin/ImpossibleVatPrice.php:67
 #, php-format
 msgid "Scanning... page %1$s of %2$s"
 msgstr "Сканиране... страница %1$s от %2$s"
@@ -2307,7 +2307,7 @@ msgid "Show message about conversion rate on the shop page in each product."
 msgstr ""
 "Покажи съобщение за обменния курс в каталожната страница под всеки продукт."
 
-#: app/Admin/ImpossibleVatPrice.php:128
+#: app/Admin/ImpossibleVatPrice.php:137
 msgid "SKU"
 msgstr "Код"
 
@@ -2376,11 +2376,11 @@ msgstr "Започнете да търсите офис"
 msgid "Start typing street or quarter"
 msgstr "Започнете да търсите квартал или улица"
 
-#: app/Admin/ImpossibleVatPrice.php:135
+#: app/Admin/ImpossibleVatPrice.php:144
 msgid "Status"
 msgstr "Статус"
 
-#: app/Admin/ImpossibleVatPrice.php:97
+#: app/Admin/ImpossibleVatPrice.php:106
 msgid "Store setting:"
 msgstr "Настройка на магазина:"
 
@@ -2409,7 +2409,7 @@ msgstr "Подкрепете разработката"
 msgid "Tab parameter not allowed!"
 msgstr "Този Tab параметър не е разрешен!"
 
-#: app/Admin/ImpossibleVatPrice.php:131
+#: app/Admin/ImpossibleVatPrice.php:140
 msgid "Tax"
 msgstr "Данък"
 
@@ -2444,15 +2444,15 @@ msgstr "Номерът получен от НАП."
 msgid "The place of registration of your company."
 msgstr "Населеното място на регистрация на вашата фирма."
 
-#: app/Admin/ImpossibleVatPrice.php:256
+#: app/Admin/ImpossibleVatPrice.php:265
 msgid "The price is no longer problematic."
 msgstr "Цената вече не е проблемна."
 
-#: app/Admin/ImpossibleVatPrice.php:292
+#: app/Admin/ImpossibleVatPrice.php:301
 msgid "The price was fixed."
 msgstr "Цената беше фиксирана."
 
-#: app/Admin/ImpossibleVatPrice.php:239
+#: app/Admin/ImpossibleVatPrice.php:248
 msgid "The product was not found."
 msgstr "Продуктът не беше намерен."
 
@@ -2461,15 +2461,15 @@ msgid "The registration address of your company."
 msgstr "Адресът на регистрация на вашата фирма."
 
 #. %s: sale price
-#: app/Admin/ImpossibleVatPrice.php:400
+#: app/Admin/ImpossibleVatPrice.php:409
 #, php-format
 msgid "The sale price was adjusted to %s so it stays below the regular price."
 msgstr ""
 "Цената на промоцията беше коригирана на %s, така че остава под редовната "
 "цена."
 
-#: app/Admin/ImpossibleVatPrice.php:379 app/Admin/ImpossibleVatPrice.php:386
-#: app/Admin/ImpossibleVatPrice.php:393
+#: app/Admin/ImpossibleVatPrice.php:388 app/Admin/ImpossibleVatPrice.php:395
+#: app/Admin/ImpossibleVatPrice.php:402
 msgid ""
 "The sale price was cleared because it was greater than or equal to the "
 "regular price."
@@ -2477,11 +2477,11 @@ msgstr ""
 "Продажната цена беше изчистена, защото беше по-висока или равна на редовната "
 "цена."
 
-#: app/Admin/ImpossibleVatPrice.php:265
+#: app/Admin/ImpossibleVatPrice.php:274
 msgid "The target price no longer matches."
 msgstr "Целевата цена вече не съвпада."
 
-#: app/Admin/ImpossibleVatPrice.php:74
+#: app/Admin/ImpossibleVatPrice.php:80
 msgid "There are no rows to fix."
 msgstr "Няма редове за поправяне."
 
@@ -2493,7 +2493,7 @@ msgstr ""
 "Има разработена Про версия на плъгина като добавка ( допълнителен плъгин към "
 "безплатния )."
 
-#: app/Admin/ImpossibleVatPrice.php:103
+#: app/Admin/ImpossibleVatPrice.php:112
 msgid "This check is mainly applicable when prices are entered including tax."
 msgstr ""
 "Тази проверка е приложима главно когато цените се въвеждат с включен ДДС."
@@ -2559,7 +2559,7 @@ msgstr ""
 msgid "This order is out of scope for EU VAT."
 msgstr "Тази поръчка е извън обхвата на ДДС в ЕС."
 
-#: app/Admin/ImpossibleVatPrice.php:94
+#: app/Admin/ImpossibleVatPrice.php:101
 msgid "This tool scans products and shows only problematic prices."
 msgstr "Този инструмент сканира продукти и показва само проблемни цени."
 
@@ -2648,7 +2648,7 @@ msgstr "Kодове за проследяване"
 msgid "Transaction ID"
 msgstr "Номер на транзакцията"
 
-#: app/Admin/ImpossibleVatPrice.php:127
+#: app/Admin/ImpossibleVatPrice.php:136
 msgid "Type"
 msgstr "Вид"
 
@@ -2665,7 +2665,7 @@ msgstr "Невзети пратки: %s ( %s%% )"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: app/Admin/ImpossibleVatPrice.php:134
+#: app/Admin/ImpossibleVatPrice.php:143
 msgid "Up"
 msgstr "Нагоре"
 
@@ -2857,6 +2857,15 @@ msgstr ""
 "target=\"_blank\" href=\"https://www.facebook."
 "com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
 
+#: app/Admin/ImpossibleVatPrice.php:102
+#, php-format
+msgid ""
+"You can learn more about this problem <a target=\"_blank\" href=\"%s\">"
+"here</a>."
+msgstr ""
+"Може да научите повече за този проблем <a target=\"_blank\" href=\"%s\">"
+"тук</a>."
+
 #: app/Admin/Tabs/Pro_Tab.php:77
 #, php-format
 msgid "You can review a demo at: %s"
@@ -2875,7 +2884,7 @@ msgstr ""
 msgid "You cannot create labels."
 msgstr "Нямате права да генерирате товарителници."
 
-#: app/Admin/ImpossibleVatPrice.php:86
+#: app/Admin/ImpossibleVatPrice.php:92
 msgid "You do not have permission to access this page."
 msgstr "Нямате разрешение за достъп до тази страница."
 
@@ -2883,7 +2892,7 @@ msgstr "Нямате разрешение за достъп до тази стр
 msgid "You do not have permission to perform this action."
 msgstr "Нямате разрешение да извършите това действие."
 
-#: app/Admin/ImpossibleVatPrice.php:150 app/Admin/ImpossibleVatPrice.php:213
+#: app/Admin/ImpossibleVatPrice.php:159 app/Admin/ImpossibleVatPrice.php:222
 msgid "You do not have permission."
 msgstr "Нямате разрешение."
 

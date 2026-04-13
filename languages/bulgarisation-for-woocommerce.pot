@@ -11,7 +11,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-13 14:10+0000\n"
+"POT-Creation-Date: 2026-04-13 15:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: bulgarisation-for-woocommerce\n"
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Accountant email"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:136
+#: app/Admin/ImpossibleVatPrice.php:145
 msgid "Actions"
 msgstr ""
 
@@ -145,11 +145,11 @@ msgid ""
 "price settings to be shown."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:70
+#: app/Admin/ImpossibleVatPrice.php:76
 msgid "AJAX error"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:59
+#: app/Admin/ImpossibleVatPrice.php:65
 msgid "AJAX error during scanning."
 msgstr ""
 
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Amount due"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:58
+#: app/Admin/ImpossibleVatPrice.php:64
 msgid "An error occurred during scanning."
 msgstr ""
 
@@ -403,7 +403,7 @@ msgstr ""
 msgid "Check on checkout and disable COD."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:62
+#: app/Admin/ImpossibleVatPrice.php:68
 #, php-format
 msgid "Checked: %1$s | Problematic: %2$s"
 msgstr ""
@@ -675,7 +675,7 @@ msgstr ""
 msgid "Domain Name"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:133
+#: app/Admin/ImpossibleVatPrice.php:142
 msgid "Down"
 msgstr ""
 
@@ -727,7 +727,7 @@ msgstr ""
 msgid "econt.com API Settings"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:66
+#: app/Admin/ImpossibleVatPrice.php:72
 msgid "Edit"
 msgstr ""
 
@@ -929,7 +929,7 @@ msgstr ""
 msgid "Enter your username."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:130
+#: app/Admin/ImpossibleVatPrice.php:139
 msgid "Entered price"
 msgstr ""
 
@@ -938,7 +938,7 @@ msgstr ""
 msgid "Environment"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:71
+#: app/Admin/ImpossibleVatPrice.php:77
 msgid "Error"
 msgstr ""
 
@@ -987,7 +987,7 @@ msgstr ""
 msgid "Exporting XML"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:129
+#: app/Admin/ImpossibleVatPrice.php:138
 msgid "Field"
 msgstr ""
 
@@ -998,15 +998,15 @@ msgid ""
 "Download</a>"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:65
+#: app/Admin/ImpossibleVatPrice.php:71
 msgid "Fix"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:63 app/Admin/ImpossibleVatPrice.php:109
+#: app/Admin/ImpossibleVatPrice.php:69 app/Admin/ImpossibleVatPrice.php:118
 msgid "Fix all"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:68
+#: app/Admin/ImpossibleVatPrice.php:74
 msgid "Fixed"
 msgstr ""
 
@@ -1021,17 +1021,17 @@ msgstr ""
 msgid "Fixed price"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:76
+#: app/Admin/ImpossibleVatPrice.php:82
 #, php-format
 msgid "Fixed: %1$s | Not fixed: %2$s"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:75
+#: app/Admin/ImpossibleVatPrice.php:81
 #, php-format
 msgid "Fixing all... %1$s / %2$s"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:64 app/Admin/ImpossibleVatPrice.php:77
+#: app/Admin/ImpossibleVatPrice.php:70 app/Admin/ImpossibleVatPrice.php:83
 msgid "Fixing..."
 msgstr ""
 
@@ -1181,7 +1181,7 @@ msgstr ""
 msgid "https://autopolis.bg/"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:125
+#: app/Admin/ImpossibleVatPrice.php:134
 msgid "ID"
 msgstr ""
 
@@ -1262,7 +1262,7 @@ msgstr ""
 msgid "Invalid country code"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:228
+#: app/Admin/ImpossibleVatPrice.php:237
 msgid "Invalid data."
 msgstr ""
 
@@ -1380,7 +1380,7 @@ msgid "Manner of payment of the order according to the NRA system."
 msgstr ""
 
 #: app/Admin/ImpossibleVatPrice.php:26 app/Admin/ImpossibleVatPrice.php:27
-#: app/Admin/ImpossibleVatPrice.php:92
+#: app/Admin/ImpossibleVatPrice.php:98
 msgid "Mathematically impossible prices"
 msgstr ""
 
@@ -1400,7 +1400,7 @@ msgstr ""
 msgid "Message:"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:69
+#: app/Admin/ImpossibleVatPrice.php:75
 msgid "Missing target price"
 msgstr ""
 
@@ -1426,7 +1426,7 @@ msgstr ""
 msgid "Name:"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:132
+#: app/Admin/ImpossibleVatPrice.php:141
 msgid "Nearest"
 msgstr ""
 
@@ -1485,11 +1485,11 @@ msgstr ""
 msgid "No orders found for this month."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:72
+#: app/Admin/ImpossibleVatPrice.php:78
 msgid "No problematic prices found."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:73
+#: app/Admin/ImpossibleVatPrice.php:79
 msgid "No problematic prices remain."
 msgstr ""
 
@@ -1525,7 +1525,7 @@ msgstr ""
 msgid "Not calculated"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:55 app/Admin/ImpossibleVatPrice.php:117
+#: app/Admin/ImpossibleVatPrice.php:61 app/Admin/ImpossibleVatPrice.php:126
 msgid "Not started."
 msgstr ""
 
@@ -1789,7 +1789,7 @@ msgstr ""
 msgid "Prepared by"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:54
+#: app/Admin/ImpossibleVatPrice.php:60
 msgid "Preparing..."
 msgstr ""
 
@@ -1807,11 +1807,11 @@ msgstr ""
 msgid "Price type"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:98
+#: app/Admin/ImpossibleVatPrice.php:107
 msgid "Prices are entered excluding tax"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:98
+#: app/Admin/ImpossibleVatPrice.php:107
 msgid "Prices are entered including tax"
 msgstr ""
 
@@ -1827,11 +1827,11 @@ msgstr ""
 msgid "Pro forma"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:67
+#: app/Admin/ImpossibleVatPrice.php:73
 msgid "Problematic"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:126
+#: app/Admin/ImpossibleVatPrice.php:135
 #: app/Invoice/Document/BaseDocument.php:85
 msgid "Product"
 msgstr ""
@@ -1908,7 +1908,7 @@ msgstr ""
 msgid "Regenerate PDF's"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:248 app/Admin/ImpossibleVatPrice.php:313
+#: app/Admin/ImpossibleVatPrice.php:257 app/Admin/ImpossibleVatPrice.php:322
 msgid "Regular price"
 msgstr ""
 
@@ -1977,7 +1977,7 @@ msgstr ""
 msgid "Sale Invoice - Original"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:250 app/Admin/ImpossibleVatPrice.php:324
+#: app/Admin/ImpossibleVatPrice.php:259 app/Admin/ImpossibleVatPrice.php:333
 msgid "Sale price"
 msgstr ""
 
@@ -1993,19 +1993,19 @@ msgstr ""
 msgid "Saturday delivery/pickup."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:56 app/Admin/ImpossibleVatPrice.php:108
+#: app/Admin/ImpossibleVatPrice.php:62 app/Admin/ImpossibleVatPrice.php:117
 msgid "Scan products"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:60
+#: app/Admin/ImpossibleVatPrice.php:66
 msgid "Scanning finished."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:57
+#: app/Admin/ImpossibleVatPrice.php:63
 msgid "Scanning..."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:61
+#: app/Admin/ImpossibleVatPrice.php:67
 #, php-format
 msgid "Scanning... page %1$s of %2$s"
 msgstr ""
@@ -2199,7 +2199,7 @@ msgstr ""
 msgid "Show message about conversion rate on the shop page in each product."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:128
+#: app/Admin/ImpossibleVatPrice.php:137
 msgid "SKU"
 msgstr ""
 
@@ -2265,11 +2265,11 @@ msgstr ""
 msgid "Start typing street or quarter"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:135
+#: app/Admin/ImpossibleVatPrice.php:144
 msgid "Status"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:97
+#: app/Admin/ImpossibleVatPrice.php:106
 msgid "Store setting:"
 msgstr ""
 
@@ -2298,7 +2298,7 @@ msgstr ""
 msgid "Tab parameter not allowed!"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:131
+#: app/Admin/ImpossibleVatPrice.php:140
 msgid "Tax"
 msgstr ""
 
@@ -2330,15 +2330,15 @@ msgstr ""
 msgid "The place of registration of your company."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:256
+#: app/Admin/ImpossibleVatPrice.php:265
 msgid "The price is no longer problematic."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:292
+#: app/Admin/ImpossibleVatPrice.php:301
 msgid "The price was fixed."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:239
+#: app/Admin/ImpossibleVatPrice.php:248
 msgid "The product was not found."
 msgstr ""
 
@@ -2347,23 +2347,23 @@ msgid "The registration address of your company."
 msgstr ""
 
 #. %s: sale price
-#: app/Admin/ImpossibleVatPrice.php:400
+#: app/Admin/ImpossibleVatPrice.php:409
 #, php-format
 msgid "The sale price was adjusted to %s so it stays below the regular price."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:379 app/Admin/ImpossibleVatPrice.php:386
-#: app/Admin/ImpossibleVatPrice.php:393
+#: app/Admin/ImpossibleVatPrice.php:388 app/Admin/ImpossibleVatPrice.php:395
+#: app/Admin/ImpossibleVatPrice.php:402
 msgid ""
 "The sale price was cleared because it was greater than or equal to the "
 "regular price."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:265
+#: app/Admin/ImpossibleVatPrice.php:274
 msgid "The target price no longer matches."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:74
+#: app/Admin/ImpossibleVatPrice.php:80
 msgid "There are no rows to fix."
 msgstr ""
 
@@ -2373,7 +2373,7 @@ msgid ""
 "free one )."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:103
+#: app/Admin/ImpossibleVatPrice.php:112
 msgid "This check is mainly applicable when prices are entered including tax."
 msgstr ""
 
@@ -2427,7 +2427,7 @@ msgstr ""
 msgid "This order is out of scope for EU VAT."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:94
+#: app/Admin/ImpossibleVatPrice.php:101
 msgid "This tool scans products and shows only problematic prices."
 msgstr ""
 
@@ -2516,7 +2516,7 @@ msgstr ""
 msgid "Transaction ID"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:127
+#: app/Admin/ImpossibleVatPrice.php:136
 msgid "Type"
 msgstr ""
 
@@ -2533,7 +2533,7 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:134
+#: app/Admin/ImpossibleVatPrice.php:143
 msgid "Up"
 msgstr ""
 
@@ -2705,6 +2705,13 @@ msgid ""
 "com/groups/bulgarisationforwoocommerce/\">Bulgarisation For WooCommerce</a>."
 msgstr ""
 
+#: app/Admin/ImpossibleVatPrice.php:102
+#, php-format
+msgid ""
+"You can learn more about this problem <a target=\"_blank\" href=\"%s\">"
+"here</a>."
+msgstr ""
+
 #: app/Admin/Tabs/Pro_Tab.php:77
 #, php-format
 msgid "You can review a demo at: %s"
@@ -2721,7 +2728,7 @@ msgstr ""
 msgid "You cannot create labels."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:86
+#: app/Admin/ImpossibleVatPrice.php:92
 msgid "You do not have permission to access this page."
 msgstr ""
 
@@ -2729,7 +2736,7 @@ msgstr ""
 msgid "You do not have permission to perform this action."
 msgstr ""
 
-#: app/Admin/ImpossibleVatPrice.php:150 app/Admin/ImpossibleVatPrice.php:213
+#: app/Admin/ImpossibleVatPrice.php:159 app/Admin/ImpossibleVatPrice.php:222
 msgid "You do not have permission."
 msgstr ""
 
