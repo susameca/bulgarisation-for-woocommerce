@@ -36,3 +36,5 @@ if ( $('#woo-bg-contact-form').length ) {
 import './modules/boxnow-notice';
 import './modules/pigeon-notice';
 import './modules/generate-label';
+import './modules/impossible-prices';
+import './modules/impossible-prices-scan';

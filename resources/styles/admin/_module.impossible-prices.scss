@@ -1,0 +1,66 @@
+p.form-field.woo-bg-impossible-price-anchor {
+    display: block;
+    clear: both;
+    margin: 8px 0 0 0 !important;
+    padding: 0 !important;
+}
+
+p.form-field.woo-bg-impossible-price-anchor::before,
+p.form-field.woo-bg-impossible-price-anchor::after {
+    content: "";
+    display: table;
+}
+
+p.form-field.woo-bg-impossible-price-anchor::after {
+    clear: both;
+}
+
+.woo-bg-impossible-price-notice,
+.woo-bg-impossible-price-success {
+    display: block;
+    clear: both;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.woo-bg-impossible-price-notice {
+    padding: 10px 12px;
+    border-left: 4px solid #dba617;
+    background: #fff8e5;
+    border-radius: 4px;
+}
+
+.woo-bg-impossible-price-notice__text {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #1d2327;
+}
+
+.woo-bg-impossible-price-notice__actions {
+    display: block;
+}
+
+.woo-bg-impossible-price-notice__actions .button.button-primary.woo-bg-apply-corrected-price {
+    background: #46b450;
+    border-color: #46b450;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.woo-bg-impossible-price-notice__actions .button.button-primary.woo-bg-apply-corrected-price:hover,
+.woo-bg-impossible-price-notice__actions .button.button-primary.woo-bg-apply-corrected-price:focus {
+    background: #389e41;
+    border-color: #389e41;
+}
+
+.woo-bg-impossible-price-success {
+    padding: 10px 12px;
+    border-left: 4px solid #46b450;
+    background: #edfaef;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #1d2327;
+}

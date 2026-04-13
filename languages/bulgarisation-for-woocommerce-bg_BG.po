@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2026-04-07 15:38+0000\n"
+"PO-Revision-Date: 2026-04-13 14:11+0000\n"
 "Last-Translator: \n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -39,8 +39,8 @@ msgid_plural "%s orders documents were regenerated."
 msgstr[0] "На %s поръчка бяха регенерирани документите."
 msgstr[1] "На %s поръчки бяха регенерирани документите."
 
-#: app/Shipping/Register.php:223 app/Shipping/Register.php:232
-#: app/Shipping/Register.php:234
+#: app/Shipping/Register.php:222 app/Shipping/Register.php:231
+#: app/Shipping/Register.php:233
 #, php-format
 msgid "%s: <span class=\"woocommerce-Price-amount\">%s</span>"
 msgstr "%s: <span class=\"woocommerce-Price-amount\">%s</span>"
@@ -88,6 +88,10 @@ msgstr "Копия на документи за счетоводител"
 #: app/Admin/Tabs/Nra_Tab.php:92
 msgid "Accountant email"
 msgstr "Имейл на счетоводител"
+
+#: app/Admin/ImpossibleVatPrice.php:136
+msgid "Actions"
+msgstr "Действия"
 
 #: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Speedy_Tab.php:90
 #: app/Admin/Tabs/Econt_Tab.php:97
@@ -147,6 +151,14 @@ msgstr ""
 "След като изберете опцията, трябва да запазите настройките, за да се покажат "
 "правилните ценови настройки."
 
+#: app/Admin/ImpossibleVatPrice.php:70
+msgid "AJAX error"
+msgstr "AJAX грешка"
+
+#: app/Admin/ImpossibleVatPrice.php:59
+msgid "AJAX error during scanning."
+msgstr "AJAX грешка по време на сканирането."
+
 #: app/Admin/Tabs/Pro_Tab.php:62
 msgid "Allow automatically filling company info from EIK."
 msgstr ""
@@ -178,6 +190,10 @@ msgstr "Винаги"
 #: app/Invoice/Vat1139.php:36
 msgid "Amount due"
 msgstr "Сума за плащане"
+
+#: app/Admin/ImpossibleVatPrice.php:58
+msgid "An error occurred during scanning."
+msgstr "Възникна грешка по време на сканирането."
 
 #: app/Admin/Tabs/BoxNow_Tab.php:157
 msgid "and"
@@ -280,6 +296,10 @@ msgstr "Клиент"
 msgid "bl. vh. et."
 msgstr "бл. вх. ет. ап."
 
+#: app/functions.php:521
+msgid "BOX NOW"
+msgstr "BOX NOW"
+
 #: app/Admin/BoxNow.php:58
 #| msgid "BoxNow Delivery"
 msgid "BOX NOW Delivery"
@@ -351,7 +371,7 @@ msgstr "Неуспешно калкулиране. Моля опитайте о�
 msgid "Can be used only in Bulgaria"
 msgstr "Може да се ползва само в България"
 
-#: app/functions.php:47
+#: app/functions.php:46
 msgid "Card"
 msgstr "По карта"
 
@@ -359,7 +379,7 @@ msgstr "По карта"
 msgid "Cargo"
 msgstr "Карго"
 
-#: app/functions.php:51 app/Admin/Tabs/Econt_Tab.php:112
+#: app/functions.php:50 app/Admin/Tabs/Econt_Tab.php:112
 msgid "Cash"
 msgstr "В кеш"
 
@@ -380,7 +400,7 @@ msgstr "Наложен платеж с ППП"
 msgid "Cash on delivery with cash receipt."
 msgstr "Наложен платеж с Касова бележка"
 
-#: app/functions.php:85
+#: app/functions.php:84
 msgid "Cash on delivery with PPP"
 msgstr "Наложен платеж с ППП"
 
@@ -408,6 +428,11 @@ msgstr ""
 #: app/Admin/Tabs/Settings_Tab.php:55
 msgid "Check on checkout and disable COD."
 msgstr "Провери на чекаут и изключи НП"
+
+#: app/Admin/ImpossibleVatPrice.php:62
+#, php-format
+msgid "Checked: %1$s | Problematic: %2$s"
+msgstr "Проверени: %1$s | Проблемни: %2$s"
 
 #: app/Admin/Tabs/Multi_Currency_Tab.php:47
 msgid "Checkout Message"
@@ -442,7 +467,7 @@ msgstr ""
 "Изберете ниво на предупреждение, което ще задейства известието или ще "
 "деактивира COD."
 
-#: app/Shipping/Register.php:202 app/Shipping/Register.php:232
+#: app/Shipping/Register.php:201 app/Shipping/Register.php:231
 msgid "Choose to calculate"
 msgstr "Избери за калкулация"
 
@@ -554,6 +579,10 @@ msgstr "Кредитно известие - Копие"
 #: app/Invoice/Document/CreditNotice.php:16
 msgid "Credit Notice - Original"
 msgstr "Кредитно известие - Оригинал"
+
+#: app/functions.php:473 app/functions.php:517
+msgid "CVC"
+msgstr "CVC"
 
 #: app/Shipping/CVC/Method.php:456
 #, php-format
@@ -674,6 +703,10 @@ msgstr "Настройки на документи"
 msgid "Domain Name"
 msgstr "Име на домейна"
 
+#: app/Admin/ImpossibleVatPrice.php:133
+msgid "Down"
+msgstr "Надолу"
+
 #: app/Invoice/Document/BaseDocument.php:66
 #: app/Invoice/Document/NRARefunded.php:41
 #: app/Invoice/Document/CreditNoticeCopy.php:40
@@ -702,6 +735,10 @@ msgstr "Имейл"
 msgid "E-mail: %s"
 msgstr "Имейл: %s"
 
+#: app/functions.php:513
+msgid "Econt"
+msgstr "Еконт"
+
 #: app/Shipping/Econt/Method.php:546
 msgid "Econt - "
 msgstr "Еконт - "
@@ -717,6 +754,10 @@ msgstr "Еконт настройки"
 #: app/Admin/Tabs/Econt_Tab.php:16
 msgid "econt.com API Settings"
 msgstr "econt.com API настройки"
+
+#: app/Admin/ImpossibleVatPrice.php:66
+msgid "Edit"
+msgstr "Редактирай"
 
 #: app/Admin/Tabs/Nra_Tab.php:42 app/Front_End/Checkout/Company.php:57
 #: app/Front_End/Checkout/Company.php:114
@@ -937,10 +978,18 @@ msgstr "Въведете вашият ключ."
 msgid "Enter your username."
 msgstr "Въведете потребителско име."
 
+#: app/Admin/ImpossibleVatPrice.php:130
+msgid "Entered price"
+msgstr "Въведена цена"
+
 #: app/Admin/Tabs/BoxNow_Tab.php:72 app/Admin/Tabs/Connectix_Tab.php:54
 #: app/Admin/Tabs/Pigeon_Tab.php:73 app/Admin/Tabs/Econt_Tab.php:74
 msgid "Environment"
 msgstr "Работна среда"
+
+#: app/Admin/ImpossibleVatPrice.php:71
+msgid "Error"
+msgstr "Грешка"
 
 #: app/Front_End/Checkout/EU_Vat.php:162
 msgid "Error communicating with the VAT validation server - please try again"
@@ -996,7 +1045,11 @@ msgstr "Експорт на документите за Microinvest"
 msgid "Exporting XML"
 msgstr "Експортиране на XML"
 
-#: app/Admin/Tabs/Export_Tab.php:124 app/Admin/Tabs/Export_Tab.php:144
+#: app/Admin/ImpossibleVatPrice.php:129
+msgid "Field"
+msgstr "Поле"
+
+#: app/Admin/Tabs/Export_Tab.php:128 app/Admin/Tabs/Export_Tab.php:148
 #, php-format
 msgid ""
 "File generated successfully! <a href=\"%s\" download target=\"_blank\">"
@@ -1004,6 +1057,18 @@ msgid ""
 msgstr ""
 "Файла е генериран успешно! <a href=\"%s\" download target=\"_blank\">"
 "Изтегли</a>"
+
+#: app/Admin/ImpossibleVatPrice.php:65
+msgid "Fix"
+msgstr "Поправи"
+
+#: app/Admin/ImpossibleVatPrice.php:63 app/Admin/ImpossibleVatPrice.php:109
+msgid "Fix all"
+msgstr "Поправи всички"
+
+#: app/Admin/ImpossibleVatPrice.php:68
+msgid "Fixed"
+msgstr "Поправено"
 
 #: app/Front_End/Multi_Currency.php:114
 #: app/Invoice/Document/BaseDocument.php:176
@@ -1015,6 +1080,20 @@ msgstr "Фиксиран обменен курс:"
 #: app/Shipping/Pigeon/Method.php:169 app/Shipping/Speedy/Method.php:167
 msgid "Fixed price"
 msgstr "Фиксирана цена"
+
+#: app/Admin/ImpossibleVatPrice.php:76
+#, php-format
+msgid "Fixed: %1$s | Not fixed: %2$s"
+msgstr "Поправени: %1$s | Непоправени: %2$s"
+
+#: app/Admin/ImpossibleVatPrice.php:75
+#, php-format
+msgid "Fixing all... %1$s / %2$s"
+msgstr "Поправяне на всички... %1$s / %2$s"
+
+#: app/Admin/ImpossibleVatPrice.php:64 app/Admin/ImpossibleVatPrice.php:77
+msgid "Fixing..."
+msgstr "Поправяне..."
 
 #: app/Admin/Tabs/Nra_Tab.php:89
 msgid "Footer text"
@@ -1028,7 +1107,7 @@ msgstr ""
 "За повече информация как да се сдобиете с плъгина можете да намерите на %s "
 "страницата."
 
-#: app/functions.php:216
+#: app/functions.php:215
 msgid "For single donation as development support you can send at "
 msgstr "За еднократна помощ като подкрепа за развитие, можете да дарите в "
 
@@ -1037,12 +1116,12 @@ msgstr "За еднократна помощ като подкрепа за ра
 msgid "Force variations in label"
 msgstr "Принудително добавяне на варияцията в товарителницата"
 
-#: app/Admin/Tabs/Export_Tab.php:111
+#: app/Admin/Tabs/Export_Tab.php:115
 msgid "Found errors in file:"
 msgstr "Намерени грешки във файла:"
 
-#: app/Shipping/Register.php:199 app/Shipping/Register.php:200
-#: app/Shipping/Register.php:223
+#: app/Shipping/Register.php:198 app/Shipping/Register.php:199
+#: app/Shipping/Register.php:222
 msgid "Free shipping"
 msgstr "Безплатна доставка"
 
@@ -1097,7 +1176,8 @@ msgid "Generate label"
 msgstr "Генерирай товарителница."
 
 #: app/Admin/Tabs/CVC_Tab.php:87 app/Admin/Tabs/Speedy_Tab.php:91
-#: app/Admin/Tabs/BoxNow_Tab.php:94 app/Admin/Tabs/Econt_Tab.php:98
+#: app/Admin/Tabs/BoxNow_Tab.php:94 app/Admin/Tabs/Pigeon_Tab.php:86
+#: app/Admin/Tabs/Econt_Tab.php:98
 msgid "Generate label after checkout"
 msgstr "Генерирай товарителница след чекаут"
 
@@ -1167,6 +1247,10 @@ msgstr "Начин на връщане на сумата при отказ на 
 #. Author URI of the plugin
 msgid "https://autopolis.bg/"
 msgstr "https://autopolis.bg/"
+
+#: app/Admin/ImpossibleVatPrice.php:125
+msgid "ID"
+msgstr "ID"
 
 #: app/Admin/Tabs/Pigeon_Tab.php:106
 msgid "ID Verification and Document Signature"
@@ -1258,6 +1342,10 @@ msgstr "Невалиден  Client ID или Client Secret"
 msgid "Invalid country code"
 msgstr "Невалиден код на държавата"
 
+#: app/Admin/ImpossibleVatPrice.php:228
+msgid "Invalid data."
+msgstr "Невалидни данни."
+
 #: app/Container/Provider.php:18
 #, php-format
 msgid "Invalid identifier: %s has already been set."
@@ -1311,8 +1399,9 @@ msgstr "Товарителница"
 msgid "Label data"
 msgstr "Данни за товарителница"
 
-#: app/Shipping/CVC/Method.php:544 app/Shipping/Econt/Method.php:676
-#: app/Shipping/Speedy/Method.php:702 app/Shipping/BoxNow/Method.php:466
+#: app/Shipping/CVC/Method.php:544 app/Shipping/Pigeon/Method.php:613
+#: app/Shipping/Econt/Method.php:676 app/Shipping/Speedy/Method.php:702
+#: app/Shipping/BoxNow/Method.php:466
 #, php-format
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
@@ -1370,6 +1459,11 @@ msgstr "Направете опциите за доставка на 2 реда 
 msgid "Manner of payment of the order according to the NRA system."
 msgstr "Начин на плащане на поръчката според системата на НАП."
 
+#: app/Admin/ImpossibleVatPrice.php:26 app/Admin/ImpossibleVatPrice.php:27
+#: app/Admin/ImpossibleVatPrice.php:92
+msgid "Mathematically impossible prices"
+msgstr "Математически невъзможни цени"
+
 #: app/Shipping/Econt/Method.php:171
 msgid "Maximum price payed by the client"
 msgstr "Максимална цена, която ще плати клиента"
@@ -1385,6 +1479,10 @@ msgstr "Средна кутия"
 #: app/Admin/Tabs/Help_Tab.php:36
 msgid "Message:"
 msgstr "Съобщение:"
+
+#: app/Admin/ImpossibleVatPrice.php:69
+msgid "Missing target price"
+msgstr "Липсваща целева цена"
 
 #: app/Admin/Tabs/Nra_Tab.php:41 app/Front_End/Checkout/Company.php:46
 #: app/Front_End/Checkout/Company.php:108
@@ -1408,6 +1506,10 @@ msgstr "Име"
 msgid "Name:"
 msgstr "Име"
 
+#: app/Admin/ImpossibleVatPrice.php:132
+msgid "Nearest"
+msgstr "Най-близко"
+
 #: app/Reports/Providers/NepoStop.php:10
 msgid "NepoStop"
 msgstr "NepoStop"
@@ -1428,7 +1530,7 @@ msgstr "Следващ номер на фактури/кредитни изве�
 msgid "Next NRA Document Number"
 msgstr "Следващ номер на документи по Н-18"
 
-#: app/functions.php:64 app/functions.php:223 app/Shipping/CVC/Method.php:148
+#: app/functions.php:63 app/functions.php:222 app/Shipping/CVC/Method.php:148
 #: app/Shipping/CVC/Method.php:159 app/Shipping/CVC/Method.php:170
 #: app/Shipping/Pigeon/Method.php:156 app/Shipping/Econt/Method.php:157
 msgid "No"
@@ -1458,10 +1560,18 @@ msgstr "Не бяха намерени автомати в %s."
 msgid "No offices were found at %s."
 msgstr "Не бяха намерени офиси в %s."
 
-#: app/Admin/Tabs/Export_Tab.php:91 app/Admin/Tabs/Export_Tab.php:139
-#: app/Admin/Tabs/Export_Tab.php:160
+#: app/Admin/Tabs/Export_Tab.php:91 app/Admin/Tabs/Export_Tab.php:143
+#: app/Admin/Tabs/Export_Tab.php:164
 msgid "No orders found for this month."
 msgstr "Няма намерени поръчки за този месец."
+
+#: app/Admin/ImpossibleVatPrice.php:72
+msgid "No problematic prices found."
+msgstr "Не са открити проблемни цени."
+
+#: app/Admin/ImpossibleVatPrice.php:73
+msgid "No problematic prices remain."
+msgstr "Няма останали проблемни цени."
 
 #: app/Admin/Tabs/Econt_Tab.php:271
 msgid "No profiles was found. Please contact with Econt."
@@ -1487,13 +1597,17 @@ msgstr "Няма намерени резултати"
 msgid "No results was found for this city"
 msgstr "Няма намерени резултати за този град"
 
-#: app/functions.php:389
+#: app/functions.php:388
 msgid "Nonce was not provided!"
 msgstr "Nonce не е предоставен!"
 
-#: app/Shipping/Register.php:204 app/Shipping/Register.php:234
+#: app/Shipping/Register.php:203 app/Shipping/Register.php:233
 msgid "Not calculated"
 msgstr "Не е калкулирано"
+
+#: app/Admin/ImpossibleVatPrice.php:55 app/Admin/ImpossibleVatPrice.php:117
+msgid "Not started."
+msgstr "Не е започнато."
 
 #: app/Admin/Pigeon.php:250
 msgid "Note for courier"
@@ -1519,7 +1633,7 @@ msgstr "Офис"
 msgid "Office locator"
 msgstr "Офис локатор"
 
-#: app/functions.php:43
+#: app/functions.php:42
 msgid "On a payment account"
 msgstr "По платежна сметка"
 
@@ -1562,7 +1676,7 @@ msgstr "Дата на Фактура"
 msgid "Order Number"
 msgstr "Номер на поръчка"
 
-#: app/functions.php:55 app/functions.php:93 app/Admin/CVC.php:134
+#: app/functions.php:54 app/functions.php:92 app/Admin/CVC.php:134
 #: app/Admin/Econt.php:134 app/Admin/Speedy.php:175 app/Admin/Pigeon.php:217
 msgid "Other"
 msgstr "Друг"
@@ -1623,7 +1737,7 @@ msgstr "Метод на плащане"
 msgid "Payment method: %s"
 msgstr "Метод на плащане: %s"
 
-#: app/functions.php:89
+#: app/functions.php:88
 msgid "Payment service provider"
 msgstr "Доставчик на платежни услуги"
 
@@ -1649,7 +1763,7 @@ msgstr "Телефон"
 msgid "Phone: %s"
 msgstr "Телефон: %s"
 
-#: app/Admin/Pigeon.php:63
+#: app/functions.php:525 app/Admin/Pigeon.php:63
 msgid "Pigeon Express"
 msgstr "Pigeon Express"
 
@@ -1763,6 +1877,10 @@ msgstr "Възможност пратката да не бъде взета: %s"
 msgid "Prepared by"
 msgstr "Съставил документа"
 
+#: app/Admin/ImpossibleVatPrice.php:54
+msgid "Preparing..."
+msgstr "Подготовка..."
+
 #: app/Admin/BoxNow.php:145 app/Admin/Tabs/BoxNow_Tab.php:125
 #: app/Admin/Tabs/BoxNow_Tab.php:143 app/Admin/Tabs/BoxNow_Tab.php:159
 #: app/Invoice/Document/BaseDocument.php:97
@@ -1777,6 +1895,14 @@ msgstr "Настройки на цените"
 msgid "Price type"
 msgstr "Тип на цените"
 
+#: app/Admin/ImpossibleVatPrice.php:98
+msgid "Prices are entered excluding tax"
+msgstr "Цените са въведени без ДДС"
+
+#: app/Admin/ImpossibleVatPrice.php:98
+msgid "Prices are entered including tax"
+msgstr "Цените са въведени с включен ДДС"
+
 #: app/Admin/Tabs/Nra_Tab.php:90
 msgid "Print order total after the table. Works only in levs."
 msgstr "Показва общата цена на документа под таблицата."
@@ -1789,6 +1915,11 @@ msgstr "Про добавка"
 msgid "Pro forma"
 msgstr "Проформа"
 
+#: app/Admin/ImpossibleVatPrice.php:67
+msgid "Problematic"
+msgstr "Проблемно"
+
+#: app/Admin/ImpossibleVatPrice.php:126
 #: app/Invoice/Document/BaseDocument.php:85
 msgid "Product"
 msgstr "Продукт"
@@ -1829,7 +1960,7 @@ msgstr "Препоръчителни настройки"
 msgid "Reference number"
 msgstr "Референтен номер"
 
-#: app/functions.php:97
+#: app/functions.php:96
 msgid "Reflected with receipt"
 msgstr "Отразено с касова бележка"
 
@@ -1866,7 +1997,11 @@ msgstr "Отказана Поръчка - Оригинал"
 msgid "Regenerate PDF's"
 msgstr "Регенерирай PDF"
 
-#: app/functions.php:77
+#: app/Admin/ImpossibleVatPrice.php:248 app/Admin/ImpossibleVatPrice.php:313
+msgid "Regular price"
+msgstr "Редовна цена"
+
+#: app/functions.php:76
 msgid "Released under Art. 3 payment without PPP"
 msgstr "Освободено по чл. 3 плащане без ППП"
 
@@ -1912,7 +2047,7 @@ msgstr ""
 msgid "Return Receipt"
 msgstr "Обратна разписка (електронна)"
 
-#: app/functions.php:225 app/Admin/CVC.php:153 app/Admin/Econt.php:152
+#: app/functions.php:224 app/Admin/CVC.php:153 app/Admin/Econt.php:152
 #: app/Admin/Speedy.php:193 app/Admin/Pigeon.php:238
 #: app/Shipping/CVC/Method.php:143 app/Shipping/CVC/Method.php:150
 #: app/Shipping/Pigeon/Method.php:151 app/Shipping/Econt/Method.php:145
@@ -1920,7 +2055,7 @@ msgstr "Обратна разписка (електронна)"
 msgid "Review and test"
 msgstr "Преглед и тест"
 
-#: app/functions.php:224 app/Shipping/CVC/Method.php:149
+#: app/functions.php:223 app/Shipping/CVC/Method.php:149
 msgid "Review only"
 msgstr "Само преглед"
 
@@ -1931,6 +2066,10 @@ msgstr "Фактура - Копие"
 #: app/Invoice/Document/Invoice.php:14
 msgid "Sale Invoice - Original"
 msgstr "Фактура - Оригинал"
+
+#: app/Admin/ImpossibleVatPrice.php:250 app/Admin/ImpossibleVatPrice.php:324
+msgid "Sale price"
+msgstr "Промоционална цена"
 
 #: app/Admin/Tabs/Connectix_Tab.php:52 app/Admin/Tabs/Pigeon_Tab.php:71
 msgid "Sandbox"
@@ -1943,6 +2082,23 @@ msgstr "Доставка в събота"
 #: app/Shipping/CVC/Method.php:162
 msgid "Saturday delivery/pickup."
 msgstr "Доставка/взимане в събота."
+
+#: app/Admin/ImpossibleVatPrice.php:56 app/Admin/ImpossibleVatPrice.php:108
+msgid "Scan products"
+msgstr "Сканиране на продукти"
+
+#: app/Admin/ImpossibleVatPrice.php:60
+msgid "Scanning finished."
+msgstr "Сканирането е завършено."
+
+#: app/Admin/ImpossibleVatPrice.php:57
+msgid "Scanning..."
+msgstr "Сканиране..."
+
+#: app/Admin/ImpossibleVatPrice.php:61
+#, php-format
+msgid "Scanning... page %1$s of %2$s"
+msgstr "Сканиране... страница %1$s от %2$s"
 
 #: app/Admin/Tabs/Pro_Tab.php:66
 msgid "Screenshot of the options:"
@@ -2098,7 +2254,7 @@ msgstr "Метод на плащане на изпращача"
 msgid "Service Return Documents"
 msgstr "Обратни документи"
 
-#: app/Plugin.php:67 app/Plugin.php:194 app/Admin/Tabs/Settings_Tab.php:10
+#: app/Plugin.php:67 app/Plugin.php:198 app/Admin/Tabs/Settings_Tab.php:10
 msgid "Settings"
 msgstr "Настройки"
 
@@ -2129,7 +2285,7 @@ msgstr "Доставка"
 msgid "Shipping Methods Settings"
 msgstr "Настройки за доставки"
 
-#: app/Export/Nra/Order.php:150 app/Invoice/Order/Order.php:123
+#: app/Export/Nra/Order.php:117 app/Invoice/Order/Order.php:123
 #, php-format
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
@@ -2151,6 +2307,10 @@ msgid "Show message about conversion rate on the shop page in each product."
 msgstr ""
 "Покажи съобщение за обменния курс в каталожната страница под всеки продукт."
 
+#: app/Admin/ImpossibleVatPrice.php:128
+msgid "SKU"
+msgstr "Код"
+
 #: app/Admin/BoxNow.php:138 app/Admin/Tabs/BoxNow_Tab.php:185
 msgid "Small Box"
 msgstr "Малка кутия"
@@ -2159,7 +2319,7 @@ msgstr "Малка кутия"
 msgid "SMS notification"
 msgstr "SMS известия"
 
-#: app/Admin/Tabs/Export_Tab.php:99
+#: app/Admin/Tabs/Export_Tab.php:103
 #, php-format
 msgid ""
 "Some of the orders was not included because the payment method options was "
@@ -2167,6 +2327,10 @@ msgid ""
 msgstr ""
 "Някои от поръчките не бяха добавени, защото метода на плащане не беше "
 "намерен или е изключен. Списък с ид на поръчките: %s"
+
+#: app/functions.php:509
+msgid "Speedy"
+msgstr "Спиди"
 
 #: app/Shipping/Speedy/Method.php:604
 #, php-format
@@ -2185,7 +2349,7 @@ msgstr "Спиди настройки"
 msgid "speedy.bg API Settings"
 msgstr "speedy.bg API настройки"
 
-#: app/functions.php:119
+#: app/functions.php:118
 msgid "Standard"
 msgstr "Страндартна"
 
@@ -2212,6 +2376,14 @@ msgstr "Започнете да търсите офис"
 msgid "Start typing street or quarter"
 msgstr "Започнете да търсите квартал или улица"
 
+#: app/Admin/ImpossibleVatPrice.php:135
+msgid "Status"
+msgstr "Статус"
+
+#: app/Admin/ImpossibleVatPrice.php:97
+msgid "Store setting:"
+msgstr "Настройка на магазина:"
+
 #: app/Admin/CVC.php:136 app/Admin/Econt.php:136 app/Admin/Speedy.php:177
 #: app/Admin/Pigeon.php:219 app/Shipping/CVC/Address.php:44
 #: app/Shipping/Pigeon/Address.php:44 app/Shipping/Econt/Address.php:44
@@ -2229,13 +2401,17 @@ msgstr "Улица или квартал"
 msgid "Street/Quarter"
 msgstr "Улица/Квартал"
 
-#: app/functions.php:214
+#: app/functions.php:213
 msgid "Supporting the development"
 msgstr "Подкрепете разработката"
 
 #: app/Admin/Tabs/Settings_Tab.php:117
 msgid "Tab parameter not allowed!"
 msgstr "Този Tab параметър не е разрешен!"
+
+#: app/Admin/ImpossibleVatPrice.php:131
+msgid "Tax"
+msgstr "Данък"
 
 #: app/Admin/EU_Vat.php:27
 msgid "Tax Classes for Digital Goods"
@@ -2268,9 +2444,46 @@ msgstr "Номерът получен от НАП."
 msgid "The place of registration of your company."
 msgstr "Населеното място на регистрация на вашата фирма."
 
+#: app/Admin/ImpossibleVatPrice.php:256
+msgid "The price is no longer problematic."
+msgstr "Цената вече не е проблемна."
+
+#: app/Admin/ImpossibleVatPrice.php:292
+msgid "The price was fixed."
+msgstr "Цената беше фиксирана."
+
+#: app/Admin/ImpossibleVatPrice.php:239
+msgid "The product was not found."
+msgstr "Продуктът не беше намерен."
+
 #: app/Admin/Tabs/Nra_Tab.php:48
 msgid "The registration address of your company."
 msgstr "Адресът на регистрация на вашата фирма."
+
+#. %s: sale price
+#: app/Admin/ImpossibleVatPrice.php:400
+#, php-format
+msgid "The sale price was adjusted to %s so it stays below the regular price."
+msgstr ""
+"Цената на промоцията беше коригирана на %s, така че остава под редовната "
+"цена."
+
+#: app/Admin/ImpossibleVatPrice.php:379 app/Admin/ImpossibleVatPrice.php:386
+#: app/Admin/ImpossibleVatPrice.php:393
+msgid ""
+"The sale price was cleared because it was greater than or equal to the "
+"regular price."
+msgstr ""
+"Продажната цена беше изчистена, защото беше по-висока или равна на редовната "
+"цена."
+
+#: app/Admin/ImpossibleVatPrice.php:265
+msgid "The target price no longer matches."
+msgstr "Целевата цена вече не съвпада."
+
+#: app/Admin/ImpossibleVatPrice.php:74
+msgid "There are no rows to fix."
+msgstr "Няма редове за поправяне."
 
 #: app/Admin/Tabs/Pro_Tab.php:35
 msgid ""
@@ -2279,6 +2492,11 @@ msgid ""
 msgstr ""
 "Има разработена Про версия на плъгина като добавка ( допълнителен плъгин към "
 "безплатния )."
+
+#: app/Admin/ImpossibleVatPrice.php:103
+msgid "This check is mainly applicable when prices are entered including tax."
+msgstr ""
+"Тази проверка е приложима главно когато цените се въвеждат с включен ДДС."
 
 #: app/Reports/Providers/NepoStop.php:66
 #, php-format
@@ -2327,7 +2545,8 @@ msgstr ""
 "файл."
 
 #: app/Admin/Tabs/CVC_Tab.php:87 app/Admin/Tabs/Speedy_Tab.php:91
-#: app/Admin/Tabs/BoxNow_Tab.php:94 app/Admin/Tabs/Econt_Tab.php:98
+#: app/Admin/Tabs/BoxNow_Tab.php:94 app/Admin/Tabs/Pigeon_Tab.php:86
+#: app/Admin/Tabs/Econt_Tab.php:98
 msgid ""
 "This option will try to generate your label immediately after user checkout. "
 "Also, will add the tracking number in the order email."
@@ -2339,6 +2558,10 @@ msgstr ""
 #: app/Admin/EU_Vat.php:68
 msgid "This order is out of scope for EU VAT."
 msgstr "Тази поръчка е извън обхвата на ДДС в ЕС."
+
+#: app/Admin/ImpossibleVatPrice.php:94
+msgid "This tool scans products and shows only problematic prices."
+msgstr "Този инструмент сканира продукти и показва само проблемни цени."
 
 #: app/Admin/Tabs/Pro_Tab.php:36
 msgid "This version of the plugin adds a couple of checkout functionalities:"
@@ -2406,13 +2629,14 @@ msgstr "Обща цена"
 msgid "Total shipments: %s"
 msgstr "Общо пратки: %s"
 
-#: app/Export/Nra/Export.php:155
+#: app/Export/Nra/Export.php:152
 #, php-format
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
 
-#: app/Shipping/CVC/Method.php:548 app/Shipping/Econt/Method.php:680
-#: app/Shipping/Speedy/Method.php:706 app/Shipping/BoxNow/Method.php:470
+#: app/Shipping/CVC/Method.php:548 app/Shipping/Pigeon/Method.php:617
+#: app/Shipping/Econt/Method.php:680 app/Shipping/Speedy/Method.php:706
+#: app/Shipping/BoxNow/Method.php:470
 msgid "Track your order."
 msgstr "Проследи пратката."
 
@@ -2423,6 +2647,10 @@ msgstr "Kодове за проследяване"
 #: app/Invoice/Document/BaseDocument.php:172
 msgid "Transaction ID"
 msgstr "Номер на транзакцията"
+
+#: app/Admin/ImpossibleVatPrice.php:127
+msgid "Type"
+msgstr "Вид"
 
 #: app/Client/Connectix.php:124 app/Admin/Tabs/Connectix_Tab.php:71
 msgid "Ultra high"
@@ -2436,6 +2664,10 @@ msgstr "Невзети пратки: %s ( %s%% )"
 #: app/Admin/EU_Vat.php:92 app/Admin/EU_Vat.php:109 app/Admin/EU_Vat.php:115
 msgid "Unknown"
 msgstr "Неизвестно"
+
+#: app/Admin/ImpossibleVatPrice.php:134
+msgid "Up"
+msgstr "Нагоре"
 
 #: app/Admin/CVC.php:123 app/Admin/Econt.php:123 app/Admin/Speedy.php:164
 #: app/Admin/Pigeon.php:206
@@ -2521,7 +2753,7 @@ msgstr "ДДС номер: %s"
 msgid "Verify ID and sign documents electronically."
 msgstr "Верни данни и подпис върху документ"
 
-#: app/functions.php:81
+#: app/functions.php:80
 msgid "Virtual POS terminal"
 msgstr "Виртуален ПОС терминал"
 
@@ -2609,7 +2841,7 @@ msgstr ""
 "WooCommerce - Българизация изисква PHP версия %s+ и WP версия %s+, плъгина "
 "за сега НЕ РАБОТИ!"
 
-#: app/functions.php:68 app/Shipping/CVC/Method.php:160
+#: app/functions.php:67 app/Shipping/CVC/Method.php:160
 #: app/Shipping/CVC/Method.php:171 app/Shipping/Pigeon/Method.php:157
 #: app/Shipping/Econt/Method.php:158
 msgid "Yes"
@@ -2639,13 +2871,21 @@ msgstr ""
 "Актуалните цени можете да видите на сайта на <a href=\"%s\" "
 "target=\"_blank\">Pigeon Express</a> или съгласно договорените ви отношения."
 
-#: app/functions.php:393
+#: app/functions.php:392
 msgid "You cannot create labels."
 msgstr "Нямате права да генерирате товарителници."
 
-#: app/Admin/Speedy.php:822 app/Admin/Pigeon.php:529 app/Admin/BoxNow.php:475
+#: app/Admin/ImpossibleVatPrice.php:86
+msgid "You do not have permission to access this page."
+msgstr "Нямате разрешение за достъп до тази страница."
+
+#: app/Admin/Speedy.php:822 app/Admin/Pigeon.php:545 app/Admin/BoxNow.php:475
 msgid "You do not have permission to perform this action."
 msgstr "Нямате разрешение да извършите това действие."
+
+#: app/Admin/ImpossibleVatPrice.php:150 app/Admin/ImpossibleVatPrice.php:213
+msgid "You do not have permission."
+msgstr "Нямате разрешение."
 
 #: app/Front_End/Checkout/EU_Vat.php:217
 #, php-format

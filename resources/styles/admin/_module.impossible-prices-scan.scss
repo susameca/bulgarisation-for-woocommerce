@@ -1,0 +1,30 @@
+#woo-bg-progress-wrap{
+	max-width:700px;
+	height:22px;
+	background:#e5e5e5;
+	border-radius:4px;
+	overflow:hidden;
+	margin:12px 0 8px;
+}
+#woo-bg-progress-bar{
+	width:0%;
+	height:100%;
+	background:#2271b1;
+	transition:width .2s ease;
+}
+#woo-bg-progress-text{
+	font-weight:600;
+}
+#woo-bg-results-wrap{
+	margin-top:20px;
+	display:none;
+}
+#woo-bg-results .woo-bg-row-fixed{
+	opacity:.7;
+}
+#woo-bg-results td{
+	vertical-align:middle;
+}
+#woo-bg-results .woo-bg-row-status{
+	max-width:260px;
+}

@@ -16,5 +16,8 @@ class Ajax {
 		add_action( 'wp_ajax_woo_bg_boxnow_message_dismiss', array( 'Woo_BG\Admin\BoxNow', 'message_dismiss_callback') );
 
 		add_action( 'wp_ajax_woo_bg_pigeon_express_message_dismiss', array( 'Woo_BG\Admin\Pigeon', 'message_dismiss_callback') );
+
+		add_action( 'wp_ajax_woo_bg_scan_impossible_prices_batch', array( 'Woo_BG\Admin\ImpossibleVatPrice', 'ajax_scan_batch' ) );
+		add_action( 'wp_ajax_woo_bg_fix_impossible_price', array( 'Woo_BG\Admin\ImpossibleVatPrice', 'ajax_fix_price' ) );
 	}
 }

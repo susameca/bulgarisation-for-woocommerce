@@ -657,11 +657,8 @@ function woo_bg_strip_street_prefix( $street ) {
         'jk',
     ];
 
-    // Normalize dots — add space after dot when followed directly by a letter
-    // e.g. "пл.св.неделя" → "пл. св. неделя" so Speedy API can match it
     $street = preg_replace( '/\.(?=\S)/u', '. ', $street );
 
-    // Strip leading street/quarter type prefix
     foreach ( $prefixes as $prefix ) {
         if ( mb_stripos( $street, $prefix ) === 0 ) {
             $street = mb_substr( $street, mb_strlen( $prefix ) );
@@ -695,18 +692,14 @@ function woo_bg_title_case_bg(string $string, string $encoding = 'UTF-8') {
         }
 
         $word = $part;
-
-        // Главна първа буква на думата
         $word = preg_replace_callback('/^\p{L}/u', function ($m) use ($encoding) {
             return mb_strtoupper($m[0], $encoding);
         }, $word);
 
-        // Главна буква след точка, ако след нея има буква
         $word = preg_replace_callback('/(\.)(\p{L})/u', function ($m) use ($encoding) {
             return $m[1] . mb_strtoupper($m[2], $encoding);
         }, $word);
 
-        // Малки служебни думи, освен ако са първа дума
         if ($wordIndex > 0 && in_array($part, $smallWords, true)) {
             $word = $part;
         }
@@ -716,4 +709,42 @@ function woo_bg_title_case_bg(string $string, string $encoding = 'UTF-8') {
     }
 
     return implode('', $result);
+}
+
+function woo_bg_impossible_prices_get_tax_classes_data() {
+	if ( ! function_exists( 'WC' ) ) {
+		return array();
+	}
+
+	$data = array();
+	$standard_rates = WC_Tax::get_rates( '' );
+	$standard_total = 0.0;
+
+	if ( ! empty( $standard_rates ) ) {
+		foreach ( $standard_rates as $rate ) {
+			if ( isset( $rate['rate'] ) ) {
+				$standard_total += (float) $rate['rate'];
+			}
+		}
+	}
+
+	$data[''] = $standard_total / 100;
+	$tax_class_slugs = WC_Tax::get_tax_class_slugs();
+
+	foreach ( $tax_class_slugs as $tax_class_slug ) {
+		$rates = WC_Tax::get_rates( $tax_class_slug );
+		$total = 0.0;
+
+		if ( ! empty( $rates ) ) {
+			foreach ( $rates as $rate ) {
+				if ( isset( $rate['rate'] ) ) {
+					$total += (float) $rate['rate'];
+				}
+			}
+		}
+
+		$data[ (string) $tax_class_slug ] = $total / 100;
+	}
+
+	return $data;
 }
