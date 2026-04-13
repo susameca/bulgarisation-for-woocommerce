@@ -32,13 +32,19 @@ class ImpossibleVatPrice {
 	}
 
 	public static function enqueue_admin_assets() {
+		$vat_group           = woo_bg_get_option( 'shop', 'vat_group' );
+		$vat_percentages     = woo_bg_get_vat_groups();
+		$rate = ( isset( $vat_percentages[ $vat_group ] ) ) ? $vat_percentages[ $vat_group ] : 0;
+	
 		wp_localize_script(
 			'woo-bg-js-admin',
 			'wooBgImpossiblePrices',
 			array(
 				'ajaxUrl'           => admin_url( 'admin-ajax.php' ),
 				'pricesIncludeTax'  => ( 'yes' === get_option( 'woocommerce_prices_include_tax' ) ),
-				'fallbackTaxRate'   => 0.20,
+				'fallbackTaxRate'   => $rate / 100,
+				'parentTaxRate'     => (float) woo_bg_impossible_prices_get_product_tax_rate(),
+				'taxesEnabled'      => wc_tax_enabled(),
 				'priceDecimals'     => (int) wc_get_price_decimals(),
 				'decimalSeparator'  => wc_get_price_decimal_separator(),
 				'thousandSeparator' => wc_get_price_thousand_separator(),

@@ -87,61 +87,74 @@ function getFieldWrap($input) {
 }
 
 function getTaxRateForInput($input) {
-	var pricesIncludeTax = !!wooBgImpossiblePrices.pricesIncludeTax;
-	var fallbackTaxRate  = parseFloat(wooBgImpossiblePrices.fallbackTaxRate || 0.20) || 0.20;
+    var pricesIncludeTax = !!wooBgImpossiblePrices.pricesIncludeTax;
+    var taxesEnabled     = !!wooBgImpossiblePrices.taxesEnabled;
+    var fallbackTaxRate  = parseFloat(wooBgImpossiblePrices.fallbackTaxRate);
 
-	function getRateByClassSlug(taxClass) {
-		taxClass = String(taxClass || '');
+    if (!isFinite(fallbackTaxRate) || fallbackTaxRate <= 0) {
+        fallbackTaxRate = 0.20;
+    }
 
-		if (typeof wooBgImpossiblePrices.taxRates[taxClass] !== 'undefined') {
-			return parseFloat(wooBgImpossiblePrices.taxRates[taxClass]) || 0;
-		}
+    if (!taxesEnabled || !pricesIncludeTax) {
+        return fallbackTaxRate;
+    }
 
-		return 0;
-	}
+    var parentTaxRate = parseFloat(wooBgImpossiblePrices.parentTaxRate);
 
-	function getParentTaxClass() {
-		var $mainTaxClass = $('#_tax_class');
+    if (!isFinite(parentTaxRate) || parentTaxRate < 0) {
+        parentTaxRate = 0;
+    }
 
-		if ($mainTaxClass.length) {
-			return String($mainTaxClass.val() || '');
-		}
+    function getRateByClassSlug(taxClass) {
+        taxClass = String(taxClass || '');
 
-		return '';
-	}
+        if (Object.prototype.hasOwnProperty.call(wooBgImpossiblePrices.taxRates, taxClass)) {
+            var rate = parseFloat(wooBgImpossiblePrices.taxRates[taxClass]);
 
-	if (!pricesIncludeTax) {
-		return fallbackTaxRate;
-	}
+            if (isFinite(rate) && rate >= 0) {
+                return rate;
+            }
+        }
 
-	var $variation = $input.closest('.woocommerce_variation');
-	var taxClass = '';
+        return null;
+    }
 
-	if ($variation.length) {
-		var $variationTaxClass = $variation.find('select[name^="variable_tax_class"]');
+    var $variation = $input.closest('.woocommerce_variation');
 
-		if ($variationTaxClass.length) {
-			taxClass = String($variationTaxClass.val() || '');
-		}
+    if ($variation.length) {
+        var $variationTaxClass = $variation.find('select[name^="variable_tax_class"]');
+        var variationTaxClass = $variationTaxClass.length ? String($variationTaxClass.val() || '') : '';
 
-		if (!taxClass || taxClass === 'parent') {
-			taxClass = getParentTaxClass();
-		}
-	} else {
-		taxClass = getParentTaxClass();
-	}
+        if (!variationTaxClass || variationTaxClass === 'parent') {
+            if (parentTaxRate > 0) {
+                return parentTaxRate;
+            }
 
-	if (taxClass === 'parent') {
-		taxClass = '';
-	}
+            return fallbackTaxRate;
+        }
 
-	var resolvedRate = getRateByClassSlug(taxClass);
+        var variationRate = getRateByClassSlug(variationTaxClass);
 
-	if (!resolvedRate && taxClass !== '') {
-		resolvedRate = getRateByClassSlug('');
-	}
+        if (variationRate !== null) {
+            return variationRate;
+        }
 
-	return resolvedRate || fallbackTaxRate;
+        return fallbackTaxRate;
+    }
+
+    var $mainTaxClass = $('#_tax_class');
+    var mainTaxClass = $mainTaxClass.length ? String($mainTaxClass.val() || '') : '';
+    var mainRate = getRateByClassSlug(mainTaxClass);
+
+    if (mainRate !== null) {
+        return mainRate;
+    }
+
+    if (mainTaxClass === '' && parentTaxRate > 0) {
+        return parentTaxRate;
+    }
+
+    return fallbackTaxRate;
 }
 
 function findNearestPossibleGross(grossPrice, taxRate, decimals) {

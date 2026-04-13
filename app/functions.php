@@ -717,6 +717,7 @@ function woo_bg_impossible_prices_get_tax_classes_data() {
 	}
 
 	$data = array();
+
 	$standard_rates = WC_Tax::get_rates( '' );
 	$standard_total = 0.0;
 
@@ -729,7 +730,12 @@ function woo_bg_impossible_prices_get_tax_classes_data() {
 	}
 
 	$data[''] = $standard_total / 100;
-	$tax_class_slugs = WC_Tax::get_tax_class_slugs();
+
+	if ( method_exists( 'WC_Tax', 'get_tax_class_slugs' ) ) {
+		$tax_class_slugs = WC_Tax::get_tax_class_slugs();
+	} else {
+		$tax_class_slugs = array();
+	}
 
 	foreach ( $tax_class_slugs as $tax_class_slug ) {
 		$rates = WC_Tax::get_rates( $tax_class_slug );
@@ -747,4 +753,36 @@ function woo_bg_impossible_prices_get_tax_classes_data() {
 	}
 
 	return $data;
+}
+
+function woo_bg_impossible_prices_get_product_tax_rate() {
+	global $post;
+
+	if ( ! $post || 'product' !== get_post_type( $post ) ) {
+		return 0.0;
+	}
+
+	$product = wc_get_product( $post->ID );
+
+	if ( ! $product instanceof WC_Product ) {
+		return 0.0;
+	}
+
+	if ( 'taxable' !== $product->get_tax_status() ) {
+		return 0.0;
+	}
+
+	$tax_class = $product->get_tax_class();
+	$rates     = WC_Tax::get_rates( $tax_class );
+	$total     = 0.0;
+
+	if ( ! empty( $rates ) ) {
+		foreach ( $rates as $rate ) {
+			if ( isset( $rate['rate'] ) ) {
+				$total += (float) $rate['rate'];
+			}
+		}
+	}
+
+	return $total / 100;
 }
