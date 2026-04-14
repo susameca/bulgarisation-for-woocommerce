@@ -99,14 +99,17 @@ class Export {
 		];
 
 		foreach ( $this->completed_orders_ids as $order_id ) {
-			$order = new Order( wc_get_order( $order_id ), $this->generate_files );
+			$wc_order = wc_get_order( $order_id );
+			$order = new Order( $wc_order, $this->generate_files );
 
 			if ( ! $order->payment_method_type ) {
 				$this->not_included_orders[] = $order->order_id_to_show;
 				continue;
 			}
-			
-			$args['orders'][] = $order->get_order_data();
+
+			if ( $wc_order->get_total() > 0 ) {
+				$args['orders'][] = $order->get_order_data();
+			}
 		}
 
 		foreach ( $this->refunded_orders_ids as $order_id ) {
