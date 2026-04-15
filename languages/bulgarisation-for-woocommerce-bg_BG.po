@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2026-04-14 18:27+0000\n"
+"PO-Revision-Date: 2026-04-15 19:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -1108,7 +1108,7 @@ msgstr "Поправяне..."
 msgid "Footer text"
 msgstr "Текст в края на документа"
 
-#: app/Admin/Tabs/Pro_Tab.php:78
+#: app/Admin/Tabs/Pro_Tab.php:82
 #, php-format
 msgid ""
 "For more information on how to get it, you can find at the plugin %s page."
@@ -1427,11 +1427,11 @@ msgstr "Дължина"
 msgid "Level of Warning"
 msgstr "Ниво на предупреждение"
 
-#: app/Admin/Tabs/Pro_Tab.php:121
+#: app/Admin/Tabs/Pro_Tab.php:125
 msgid "License"
 msgstr "Лиценз"
 
-#: app/Admin/Tabs/Pro_Tab.php:103
+#: app/Admin/Tabs/Pro_Tab.php:107
 msgid "License Key"
 msgstr "Лицензен ключ"
 
@@ -2026,6 +2026,10 @@ msgstr "Премахване на доставките от документит
 msgid "Remove Pack"
 msgstr "Премахни пакет"
 
+#: app/Admin/Tabs/Pro_Tab.php:66
+msgid "Remove the limit of 100 orders for NRA XML Export for N-18"
+msgstr "Премахва лимита от 100 поръчки за одиторския файл за Наредба Н-18."
+
 #: app/Reports/Reports.php:68 app/Reports/Reports.php:172
 msgid "Reports"
 msgstr "Отзиви"
@@ -2109,11 +2113,11 @@ msgstr "Сканиране..."
 msgid "Scanning... page %1$s of %2$s"
 msgstr "Сканиране... страница %1$s от %2$s"
 
-#: app/Admin/Tabs/Pro_Tab.php:66
+#: app/Admin/Tabs/Pro_Tab.php:70
 msgid "Screenshot of the options:"
 msgstr "Скрийншот на настройките:"
 
-#: app/Admin/Tabs/Pro_Tab.php:71
+#: app/Admin/Tabs/Pro_Tab.php:75
 msgid "Screenshots of the checkout:"
 msgstr "Скрийншоти на чекаута:"
 
@@ -2875,7 +2879,7 @@ msgstr ""
 "Може да научите повече за този проблем <a target=\"_blank\" href=\"%s\">"
 "тук</a>."
 
-#: app/Admin/Tabs/Pro_Tab.php:77
+#: app/Admin/Tabs/Pro_Tab.php:81
 #, php-format
 msgid "You can review a demo at: %s"
 msgstr "Можете да видите демо на: %s"
