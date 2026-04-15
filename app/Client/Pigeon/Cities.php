@@ -29,7 +29,7 @@ class Cities {
 			$all_cities = [];
 			$data = $this->get_page( $page );
 
-			if ( $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
+			if ( is_array( $data ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
 				$all_cities = array_merge( $all_cities, $data['data'] );
 				$current_page = $data['meta']['current_page'];
 				$total_pages = $data['meta']['last_page'];
@@ -38,7 +38,7 @@ class Cities {
 					$page++;
 					$data = $this->get_page( $page );
 
-					if ( $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
+					if ( is_array( $data ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
 						$all_cities = array_merge( $all_cities, $data['data'] );
 						$current_page = $data['meta']['current_page'];
 						$total_pages = $data['meta']['last_page'];
@@ -97,24 +97,26 @@ class Cities {
 		$cities = $this->get_cities( $country_code );
 		$formatted = [];
 
-		foreach ( $cities['cities'] as $city ) {
-			$label = $city['name'];
-
-			if ( $city['district'] && $city['district'] !== $city['name'] ) {
-				$label = $city['district'] . " - " . $label;
+		if ( is_array( $cities ) && isset( $cities['cities'] ) && is_array( $cities['cities'] ) ) {
+			foreach ( $cities['cities'] as $city ) {
+				$label = $city['name'];
+	
+				if ( $city['district'] && $city['district'] !== $city['name'] ) {
+					$label = $city['district'] . " - " . $label;
+				}
+	
+				if ( $city['name'] && $city['district'] ) {
+					$formatted[ 'cityID-' . $city['id'] ] = array(
+						'id' => 'cityID-' . $city['id'],
+						'label' => $label,
+					);
+				}
 			}
-
-			if ( $city['name'] && $city['district'] ) {
-				$formatted[ 'cityID-' . $city['id'] ] = array(
-					'id' => 'cityID-' . $city['id'],
-					'label' => $label,
-				);
-			}
+	
+			uasort( $formatted, function( $a, $b ) {
+				return strcmp( $a["label"], $b["label"] );
+			} );
 		}
-
-		uasort( $formatted, function( $a, $b ) {
-			return strcmp( $a["label"], $b["label"] );
-		} );
 
 		return $formatted;
 	}
