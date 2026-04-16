@@ -188,12 +188,18 @@ class Export {
 	}
 
 	protected function generate_xml_file( $args ) {
+		$body = [
+			'client' => esc_url( home_url( '/' ) ),
+			'request_body' => json_encode( $args ),
+		];
+
+		if ( woo_bg_is_pro_activated() && $license_key = woo_bg_get_option( 'pro', 'license_key' ) ) {
+			$body['license_key'] = $license_key;
+		}
+		
 		$request = wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/nra/generate-xml/', [
 			'timeout' => 60,
-			'body' => [
-				'client' => esc_url( home_url( '/' ) ),
-				'request_body' => json_encode( $args ),
-			]
+			'body' => $body
 		] );
 
 		return json_decode( wp_remote_retrieve_body( $request ), 1 );
