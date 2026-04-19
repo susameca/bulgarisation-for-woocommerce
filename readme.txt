@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.9
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 3.7.0
+Stable tag: 4.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -99,7 +99,8 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
     - https://api-production.boxnow.bg/
     - https://api-stage.boxnow.bg/
   - Pigeon Express
-    - https://api-demo.pigeonexpress.com/
+    - https://api.pigeonexpress.com/v1
+    - https://api-demo.pigeonexpress.com/v1
   - CVC
     - https://lox.e-cvc.bg/
 
@@ -119,9 +120,14 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
-= 3.7.0 =
+= 4.0.0 =
 Add integration with Pigeon express
+Add impossible vat prices functionality
 Add separate invoice/credit notice copy documents with accountant email
+Speedy,BoxNow: Optimize label pdf rendering
+Order Columns: Optimize labels text
+NRA export: Optimizations
+Speedy: Optimizations
 
 = 3.6.3 =
 Invoices: View file optimizations

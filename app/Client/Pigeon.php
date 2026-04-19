@@ -6,8 +6,8 @@ use Woo_BG\Cron\Stats;
 defined( 'ABSPATH' ) || exit;
 
 class Pigeon {
-	const LIVE_URL = 'https://api-demo.pigeonexpress.com/api/external/v1';
-    const DEMO_URL = 'https://api-demo.pigeonexpress.com/api/external/v1';
+	const LIVE_URL = 'https://api.pigeonexpress.com/v1';
+    const DEMO_URL = 'https://api-demo.pigeonexpress.com/v1';
     const CREATE_LABEL_ENDPOINT = '/shipments';
     const CALCULATE_ENDPOINT = '/shipments/calculate';
     
