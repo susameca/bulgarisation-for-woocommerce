@@ -7,7 +7,7 @@
 	<?php elseif( empty( $data[ 'number' ] ) && !empty( $data['items'] ) ): ?>
 		<?php foreach ( $data['items'] as $label ): ?>
 			<a target="_blank" href="<?php echo esc_url( $label['link'] ) ?>">
-				<?php echo esc_html( $label['courier'] . ': ' . $label['number'] ) ?>
+				<?php echo esc_html( $data['courier'] . ': ' . $label['number'] ) ?>
 			</a>
 		<?php endforeach ?>
 	<?php else: ?>

@@ -1,4 +1,3 @@
-
 var wooBgImpossiblePriceTimers = {};
 
 function debounce(key, callback, delay) {
