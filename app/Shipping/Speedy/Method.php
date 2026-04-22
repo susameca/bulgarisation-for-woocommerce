@@ -423,9 +423,9 @@ class Method extends \WC_Shipping_Method {
 		$content['contents'] = mb_substr( implode( ',', $names ), 0, 100 );
 
 		$pack_sizes = apply_filters( 'woo_bg/speedy/label/sizes', [
-			'width' => 40,
-			'depth' => 40,
-			'height' => 40,
+			'width' => 30,
+			'depth' => 30,
+			'height' => 30,
 		], $this->package, $this );
 
 		if ( $auto_sizes && !empty( $sizes ) ) {
