@@ -43,6 +43,7 @@ class Pigeon_Tab extends Base_Tab {
 		<a href="<?php echo esc_html( add_query_arg( 'clear-cache', true ) ) ?>" class="button-secondary"><?php esc_html_e( 'Clear cache', 'bulgarisation-for-woocommerce' ) ?></a>
 
 		<div class="notice"><p><?php esc_html_e( 'Please use "Classic Checkout" block or [woocommerce_checkout] shortcode.', 'bulgarisation-for-woocommerce' ) ?></p></div>
+		<div class="notice"><p>За да сключите договор с <strong>Pigeon Express</strong> и да получите данни за интеграция, моля свържете се с нас на e-mail: <a href="mailto:wordpress@pigeonexpress.com">wordpress@pigeonexpress.com</a></p></div>
 		
 		<div id="woo-bg-settings"></div><!-- /#woo-bg-export -->
 		<?php
