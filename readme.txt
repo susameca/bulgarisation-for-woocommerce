@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 6.9
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 4.0.0
+Stable tag: 4.0.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -89,6 +89,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
     - http://demo.econt.com/
     - https://officelocator.econt.com/
   - Speedy ( [terms](https://api.speedy.bg/api/docs/#href-terms) )
+    - https://api.bulgarisation.bg/
     - https://www.speedy.bg/
     - https://api.speedy.bg/
     - https://services.speedy.bg/
@@ -119,6 +120,10 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 При работа с тези външни услуги могат да бъдат изпращани данни като: име и адрес на получателя, телефон, имейл, стойност на поръчката, наложен платеж, както и друга информация, необходима за създаване на товарителници и/или проверка на коректността на клиента. Данните се изпращат единствено с цел обработка и доставка на поръчката и проверка за потенциални злоупотреби.
 
 == Changelog ==
+
+= 4.0.1 =
+Couriers: Fix labels in admin column
+Speedy: Fix package default size to fits in APS
 
 = 4.0.0 =
 Add integration with Pigeon express
