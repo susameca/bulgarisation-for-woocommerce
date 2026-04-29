@@ -397,8 +397,8 @@ class Speedy {
 			$sender['dropoffOfficeId'] = str_replace( 'officeID-', '', woo_bg_get_option( 'speedy_send_from', 'office' ) );
 		}
 
-		$new_send_from = map_deep( $_REQUEST['send_from'], 'sanitize_text_field' );
-		$new_send_from_type = sanitize_text_field( $_REQUEST['send_from_type'] );
+		$new_send_from = ( isset( $_REQUEST['send_from'] ) ) ? map_deep( $_REQUEST['send_from'], 'sanitize_text_field' ) : '';
+		$new_send_from_type = ( isset( $_REQUEST['send_from_type'] ) ) ? sanitize_text_field( $_REQUEST['send_from_type'] ) : '';
 
 		if ( !empty( $new_send_from ) && !empty( $new_send_from_type ) ) {
 			switch ( $new_send_from_type ) {
