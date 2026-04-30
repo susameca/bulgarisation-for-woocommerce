@@ -609,7 +609,8 @@ class Method extends \WC_Shipping_Method {
 								$label['label']['paymentSenderMethod'] = $container[ Client::ECONT_PROFILE ]->get_sender_payment_method();
 							} else if ( 
 								$cookie_data['country'] !== 'BG' && 
-								!$shipping->free_shipping
+								!$shipping->free_shipping &&
+								empty( $cookie_data['fixed_price'] )
 							) {
 								$label['label']['paymentReceiverMethod'] = 'cash';
 							}	
