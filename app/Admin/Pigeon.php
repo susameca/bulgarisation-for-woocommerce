@@ -268,6 +268,7 @@ class Pigeon {
 
 		$label = self::update_sender( $label );
 		$label = self::update_services( $label );
+		$label = self::update_customer_note( $label, $order );
 
 		self::send_label_to_pigeon( $label, $order );
 	}
@@ -283,6 +284,7 @@ class Pigeon {
 		$label = self::update_services( $label );
 		$label = self::update_items( $label, $order );
 		$label = self::update_payment_by( $label, $order );
+		$label = self::update_customer_note( $label, $order );
 
 		$data = self::send_label_to_pigeon( $label, $order );
 
@@ -509,6 +511,16 @@ class Pigeon {
 				'description' => $item->get_name(),
 				'quantity' => $item['quantity'],
 			);
+		}
+
+		return $label;
+	}
+
+	protected static function update_customer_note( $label, $order ) {
+		if ( $order->get_customer_note() ) {
+			$label['note'] = mb_substr( $order->get_customer_note(), 0, 1000 );
+		} else {
+			unset( $label['note'] );
 		}
 
 		return $label;
