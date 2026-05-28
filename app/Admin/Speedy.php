@@ -357,6 +357,7 @@ class Speedy {
 		$label = map_deep( $_REQUEST['label_data'], 'sanitize_text_field' );
 
 		$label = self::update_sender( $label );
+		$label = self::update_customer_note( $label, $order );
 		$label = self::update_recipient_data( $label );
 		$label = self::update_payment_by( $label, $order );
 		$label = self::update_services( $label, $order );
@@ -376,6 +377,7 @@ class Speedy {
 		}
 
 		$label = self::update_sender( $label );
+		$label = self::update_customer_note( $label, $order );
 		$label = self::update_cod( $label, $order );
 		$label = self::update_fiscal_items( $label, $order );
 
@@ -790,6 +792,16 @@ class Speedy {
 		$order->calculate_shipping();
 		$order->calculate_totals();
 		$order->save();
+	}
+
+	protected static function update_customer_note( $label, $order ) {
+		if ( $order->get_customer_note() ) {
+			$label['shipmentNote'] = mb_substr( $order->get_customer_note(), 0, 200 );
+		} else {
+			unset( $label['shipmentNote'] );
+		}
+
+		return $label;
 	}
 
 	protected static function generate_response( $label, $order ) {
