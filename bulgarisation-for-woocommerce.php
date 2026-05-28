@@ -8,7 +8,7 @@ Version:      4.0.1
 Author URI:   https://autopolis.bg/
 Requires PHP: 7.4
 WC requires at least: 9.4.0
-WC tested up to: 10.7
+WC tested up to: 10.8
 Text Domain:  bulgarisation-for-woocommerce
 License:      GPLv3 or later
 */
