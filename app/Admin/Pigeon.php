@@ -295,7 +295,7 @@ class Pigeon {
 		$label['pickup_type'] = $send_from;
 
 		if ( $send_from == 'office' ) {
-			$label['pickup_office_id'] = self::update_sender_office_code();
+			$label['pickup_office_id'] = str_replace( 'officeID-', '', woo_bg_get_option( 'pigeon_send_from', 'office' ) );
 		} else {
 			$label['pickup_address'] = [
 				'city_id' => str_replace( 'cityID-', '', woo_bg_get_option( 'pigeon_send_from', 'city' ) ),
@@ -427,19 +427,26 @@ class Pigeon {
 	}
 
 	private static function update_services( $label ) {
-		$declared_value = sanitize_text_field( $_REQUEST['declaredValue'] );
-		$test = sanitize_text_field( $_REQUEST['testOption'] );
+		if ( isset( $_REQUEST['declaredValue'] ) ) {
+			$declared_value = sanitize_text_field( $_REQUEST['declaredValue'] );
+		}
+
+		if ( isset( $_REQUEST['testOption'] ) ) {
+			$test = sanitize_text_field( $_REQUEST['testOption'] );
+		}
 
 		$label['sms_notification'] = wc_string_to_bool( $label['sms_notification'] );
 
 		$is_fragile = wc_string_to_bool( woo_bg_get_option( 'pigeon_services', 'declared_value' ) );
-	
-		if ( $declared_value && $is_fragile ) {
-			$label['service_codes']['declared_value'] = $declared_value;
-		} else {
-			unset( $label['service_codes']['declared_value'] );
-		}
 		
+		if ( isset( $_REQUEST['declaredValue'] ) ) {
+			if ( $declared_value && $is_fragile ) {
+				$label['service_codes']['declared_value'] = $declared_value;
+			} else {
+				unset( $label['service_codes']['declared_value'] );
+			}
+		}
+
 		if ( woo_bg_get_option( 'pigeon_services', 'paper_return_receipt' ) === 'yes' ) {
 			$label['service_codes']['paper_return_receipt'] = true;
 		} else if ( isset( $label['service_codes']['paper_return_receipt'] ) ) {

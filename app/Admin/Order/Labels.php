@@ -3,6 +3,7 @@ namespace Woo_BG\Admin\Order;
 
 use Woo_BG\Admin\Speedy;
 use Woo_BG\Admin\Econt;
+use Woo_BG\Admin\Pigeon;
 use Woo_BG\Admin\CVC;
 use Woo_BG\Admin\BoxNow;
 use Woo_BG\Admin\Admin_Menus;
@@ -32,6 +33,10 @@ class Labels {
 				break;
 			case 'woo_bg_boxnow':
 				BoxNow::generate_label( $order_id );
+
+				break;
+			case 'woo_bg_pigeon':
+				Pigeon::generate_label_after_order_generated( $order_id );
 
 				break;
 		}
