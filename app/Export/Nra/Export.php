@@ -2,7 +2,6 @@
 namespace Woo_BG\Export\Nra;
 
 use Woo_BG\Admin\Tabs\Nra_Tab;
-use Woo_BG\Admin\Order\Documents;
 use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
@@ -201,6 +200,10 @@ class Export {
 			'timeout' => 60,
 			'body' => $body
 		] );
+		
+		if( is_wp_error( $request ) ) {
+		    return [ 'error' => $request->get_error_message() ];
+		}
 
 		return json_decode( wp_remote_retrieve_body( $request ), 1 );
 	}
