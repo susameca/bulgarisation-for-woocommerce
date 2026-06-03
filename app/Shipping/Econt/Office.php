@@ -91,7 +91,6 @@ class Office {
 					$offices = array_values( array_filter( $offices, function( $office ) {
 						return ( $office['isAPS'] === true );
 					} ) );
-					$offices = [];
 				} else if ( $delivery_type === 'office' ) {
 					$offices = array_values( array_filter( $offices, function( $office ) {
 						return ( $office['isAPS'] === false );
