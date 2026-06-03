@@ -93,7 +93,6 @@ class Econt_Tab extends Base_Tab {
 				);
 				$fields[ 'econt' ][] = new Fields\Text_Field( 'name', __( 'Name', 'bulgarisation-for-woocommerce' ) );
 				$fields[ 'econt' ][] = new Fields\Text_Field( 'phone', __( 'Phone', 'bulgarisation-for-woocommerce' ) );
-				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'disable_apt', __( 'Remove APT from offices', 'bulgarisation-for-woocommerce' ) );
 				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'force_variations_in_desc', __( 'Force variations in label', 'bulgarisation-for-woocommerce' ), null, null, __( 'Add additional variations information. Please use this option only if you want the variation data to be available in the label print and it\'s missing.', 'bulgarisation-for-woocommerce' ) );
 				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'label_after_checkout', __( 'Generate label after checkout', 'bulgarisation-for-woocommerce' ), null, null, __( 'This option will try to generate your label immediately after user checkout. Also, will add the tracking number in the order email.', 'bulgarisation-for-woocommerce' ) );
 				$fields[ 'econt' ][] = new Fields\TrueFalse_Field( 'declared_value', __( 'Declared value', 'bulgarisation-for-woocommerce' ), null, null, __( 'Adds declared value to the label if payment is COD.', 'bulgarisation-for-woocommerce' ) );

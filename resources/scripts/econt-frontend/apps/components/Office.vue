@@ -46,6 +46,12 @@ import 'magnific-popup';
 
 export default {
 	components: { Multiselect },
+	props: {
+		deliveryType: {
+			type: String,
+			default: 'office'
+		}
+	},
 	data() {
 		return {
 			countryField: $('#billing_country'),
@@ -65,12 +71,13 @@ export default {
 			city: '',
 			error: '',
 			document: $( document.body ),
-			i18n: wooBg_econt.i18n,
+			i18n: this.deliveryType === 'automat' ? wooBg_econt_automat.i18n : wooBg_econt.i18n,
 		}
 	},
 	computed: {
 		officeLocatorUrl() {
-			let url = 'https://officelocator.econt.com/?city=' + this.city + '&officeType=office&shopUrl=' + window.location.href;
+			let officeType = this.deliveryType === 'automat' ? 'aps' : 'office';
+			let url = 'https://officelocator.econt.com/?city=' + this.city + '&officeType=' + officeType + '&shopUrl=' + window.location.href;
 			let _this = this;
 
 			setTimeout(function() {
@@ -119,9 +126,9 @@ export default {
 			_this.loadOffices();
 		});
 		
-		if ( window.econtOfficeInitialUpdate ) {
+		if ( this.isInitialUpdate() ) {
 			this.document.trigger('update_checkout');
-			window.econtOfficeInitialUpdate = false;
+			this.setInitialUpdate( false );
 			this.setAddress1FieldData();
 		}
 	},
@@ -166,6 +173,19 @@ export default {
 		compileLabel({ name, address }) {
 		  return `${name} (${address.fullAddress})`;
 		},
+		getStorageKey() {
+			return 'woo-bg--econt-' + this.deliveryType;
+		},
+		isInitialUpdate() {
+			return this.deliveryType === 'automat' ? window.econtAutomatInitialUpdate : window.econtOfficeInitialUpdate;
+		},
+		setInitialUpdate( value ) {
+			if ( this.deliveryType === 'automat' ) {
+				window.econtAutomatInitialUpdate = value;
+			} else {
+				window.econtOfficeInitialUpdate = value;
+			}
+		},
 		checkFields() {
 			$('#billing_address_1').attr('disabled', false);
 			$('#shipping_address_1').attr('disabled', false);
@@ -195,7 +215,7 @@ export default {
 			}
 		},
 		loadLocalStorage(){
-			let localStorageData = localStorage.getItem( 'woo-bg--econt-office' );
+			let localStorageData = localStorage.getItem( this.getStorageKey() );
 			if ( localStorageData ) {
 				localStorageData = JSON.parse( localStorageData );
 				this.selectedOffice = cloneDeep( localStorageData.selectedOffice );
@@ -215,7 +235,8 @@ export default {
 				action: 'woo_bg_econt_load_offices',
 				state: this.state,
 				city: this.city,
-				country: this.countryField.val()
+				country: this.countryField.val(),
+				delivery_type: this.deliveryType
 			}
 
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
@@ -271,7 +292,7 @@ export default {
 				billing_company_mol: formData.billing_company_mol,
 				billing_company: this.companyField.val(),
 				billing_vat_number: formData.billing_vat_number,
-				type: 'office',
+				type: this.deliveryType,
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
 				selectedOffice: ( this.selectedOffice ) ? this.selectedOffice.code : null,
@@ -294,14 +315,14 @@ export default {
 				city: this.city,
 			}
 
-			localStorage.setItem( 'woo-bg--econt-office', JSON.stringify( localStorageData ) );
+			localStorage.setItem( this.getStorageKey(), JSON.stringify( localStorageData ) );
 		},
 		resetData() {
 			this.offices = [];
 			this.selectedOffice = '';
 			this.streetNumber = '';
 			this.other = '';
-			localStorage.removeItem( 'woo-bg--econt-office' );
+			localStorage.removeItem( this.getStorageKey() );
 			this.setCookieData();
 		},
 		setAddress1FieldData() {

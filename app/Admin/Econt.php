@@ -136,6 +136,7 @@ class Econt {
 			'streetNumber' => __( 'Street number', 'bulgarisation-for-woocommerce' ),
 			'streetQuarter' => __( 'Street/Quarter', 'bulgarisation-for-woocommerce' ),
 			'office' => __( 'Office', 'bulgarisation-for-woocommerce' ),
+			'automat' => __( 'Automat', 'bulgarisation-for-woocommerce' ),
 			'address' => __( 'Address', 'bulgarisation-for-woocommerce' ),
 			'deliveryType' => __( 'Delivery type', 'bulgarisation-for-woocommerce' ),
 			'labelData' => __( 'Label data', 'bulgarisation-for-woocommerce' ),
@@ -444,11 +445,12 @@ class Econt {
 		unset( $label[ 'receiverOfficeCode' ] );
 		unset( $label[ 'receiverAddress' ] );
 
-		if ( $type['id'] === 'office' ) {
+		if ( in_array( $type['id'], [ 'office', 'automat' ], true ) ) {
 			$label[ 'receiverDeliveryType' ] = 'office';
 			$office = map_deep( $_REQUEST['office'], 'sanitize_text_field' );
 			$label['receiverOfficeCode'] = $office['code'];
 			$cookie_data['selectedOffice'] = $office['code'];
+			$cookie_data['selectedOfficeIsAPS'] = $office['isAPS'];
 		} else {
 			$label[ 'receiverDeliveryType' ] = 'door';
 			$cookie_data['selectedAddress'] = map_deep( $_REQUEST['street'], 'sanitize_text_field' );

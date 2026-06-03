@@ -9,6 +9,7 @@ econt.then( function ( promise ) {
 	let instance;
 	window.econtAddressInitialUpdate = true;
 	window.econtOfficeInitialUpdate = true;
+	window.econtAutomatInitialUpdate = true;
 
 	$( document.body ).on( 'updated_checkout', function( data ){
 		let $shipping_method = $( 'input[name^="shipping_method"]:checked' );
@@ -37,15 +38,22 @@ econt.then( function ( promise ) {
 			setTimeout( function() {
 				if ( type === 'address' ) {
 					window.econtOfficeInitialUpdate = true;
+					window.econtAutomatInitialUpdate = true;
 					instance = new promise.address({ el: '#' + $target.attr('id') });
 				} else if ( type === 'office' ) {
 					window.econtAddressInitialUpdate = true;
+					window.econtAutomatInitialUpdate = true;
 					instance = new promise.office({ el: '#' + $target.attr('id') });
+				} else if ( type === 'automat' ) {
+					window.econtAddressInitialUpdate = true;
+					window.econtOfficeInitialUpdate = true;
+					instance = new promise.automat({ el: '#' + $target.attr('id') });
 				}
 			}, 5 );
 		} else if ( typeof instance === 'object' ) {
 			window.econtAddressInitialUpdate = true;
 			window.econtOfficeInitialUpdate = true;
+			window.econtAutomatInitialUpdate = true;
 
 			instance.$destroy();
 		}

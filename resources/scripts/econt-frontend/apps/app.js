@@ -8,5 +8,17 @@ export const address = Vue.extend({
 });
 
 export const office = Vue.extend({
-	render: h => h( Office ),
+	render: h => h( Office, {
+		props: {
+			deliveryType: 'office'
+		}
+	} ),
+});
+
+export const automat = Vue.extend({
+	render: h => h( Office, {
+		props: {
+			deliveryType: 'automat'
+		}
+	} ),
 });

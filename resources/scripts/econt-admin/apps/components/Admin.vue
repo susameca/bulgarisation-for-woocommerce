@@ -19,7 +19,7 @@
 								label="label" 
 								:selectedLabel="i18n.selected" 
 								:placeholder="i18n.choose"
-								:options="Object.values( types )" 
+								:options="Object.values( sendFromTypes )" 
 								:searchable="true" 
 								:allow-empty="false"
 							>
@@ -90,9 +90,9 @@
 							</multiselect>
 						</p>
 
-						<p v-if="( type.id == 'office' )" class="form-field form-field-wide">
+						<p v-if="( type.id == 'office' || type.id == 'automat' )" class="form-field form-field-wide">
 							<label>
-								{{i18n.office}}:
+								{{ type.id == 'automat' ? i18n.automat : i18n.office }}:
 							</label>
 
 							<multiselect 
@@ -103,7 +103,7 @@
 								label="name" 
 								:selectedLabel="i18n.selected" 
 								:placeholder="i18n.choose"
-								:options="Object.values( offices )" 
+								:options="Object.values( recipientOffices )" 
 								:searchable="true" 
 								:allow-empty="false"
 							>
@@ -405,10 +405,24 @@ export default {
 			sendFrom: '',
 			sendFromType: '',
 			type: '',
+			sendFromTypes: [
+				{
+					id: 'office',
+					label: wooBg_econt.i18n.office
+				},
+				{
+					id: 'address',
+					label: wooBg_econt.i18n.address
+				}
+			],
 			types: [
 				{
 					id: 'office',
 					label: wooBg_econt.i18n.office
+				},
+				{
+					id: 'automat',
+					label: wooBg_econt.i18n.automat
 				},
 				{
 					id: 'address',
@@ -495,6 +509,17 @@ export default {
 				statuses.reverse();
 			}
 			return statuses;
+		},
+		recipientOffices() {
+			if ( this.type.id === 'automat' ) {
+				return this.offices.filter( office => office.isAPS === true );
+			}
+
+			if ( this.type.id === 'office' ) {
+				return this.offices.filter( office => office.isAPS === false );
+			}
+
+			return this.offices;
 		}
 	},
 	mounted() {
@@ -512,7 +537,9 @@ export default {
 			if ( type.id == wooBg_econt.cookie_data.type ) {
 				_this.type = type;
 			}
+		});
 
+		this.sendFromTypes.forEach( function ( type ) {
 			if ( type.id == wooBg_econt.sendFrom.type ) {
 				_this.sendFromType = type;
 			}
@@ -548,7 +575,7 @@ export default {
 			}
 		});
 
-		if ( wooBg_econt.cookie_data.type == 'office' ) {
+		if ( wooBg_econt.cookie_data.type == 'office' || wooBg_econt.cookie_data.type == 'automat' ) {
 			this.offices.forEach( function ( office ) {
 				if ( office.code == wooBg_econt.cookie_data.selectedOffice ) {
 					_this.office = office;
