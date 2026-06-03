@@ -66,6 +66,7 @@ class Office {
 		$states = self::$container[ Client::SPEEDY_CITIES ]->get_regions( $country_id );
 		$state = $states[ $raw_state ];
 		$cities_data = self::$container[ Client::SPEEDY_CITIES ]->get_filtered_cities( $raw_city, $raw_state, $country_id );
+		$not_found_message = $delivery_type === 'automat' ? __( 'No automats were found at %s.', 'bulgarisation-for-woocommerce' ) : __( 'No offices were found at %s.', 'bulgarisation-for-woocommerce' );
 
 		if ( $country_id !== '300' && !in_array( $cities_data['city'], $cities_data['cities_only_names'] ) || !$raw_city ) {
 			$args[ 'status' ] = 'invalid-city';
@@ -90,7 +91,7 @@ class Office {
 			if ( empty( $offices ) ) {
 				$offices = [];
 				/* translators: %s is the city */
-				$args[ 'error' ] = sprintf( __( 'No offices were found at %s.', 'bulgarisation-for-woocommerce' ), $raw_city );
+				$args[ 'error' ] = sprintf( $not_found_message, $raw_city );
 			} else {
 				$offices = $offices['offices'];
 
@@ -106,7 +107,7 @@ class Office {
 
 				if ( empty( $offices ) ) {
 					/* translators: %s is the city */
-					$args[ 'error' ] = sprintf( __( 'No offices were found at %s.', 'bulgarisation-for-woocommerce' ), $raw_city );
+					$args[ 'error' ] = sprintf( $not_found_message, $raw_city );
 				}
 			}
 
