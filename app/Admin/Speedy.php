@@ -177,6 +177,7 @@ class Speedy {
 			'streetNumber' => __( 'Street number', 'bulgarisation-for-woocommerce' ),
 			'streetQuarter' => __( 'Street/Quarter', 'bulgarisation-for-woocommerce' ),
 			'office' => __( 'Office', 'bulgarisation-for-woocommerce' ),
+			'automat' => __( 'Automat', 'bulgarisation-for-woocommerce' ),
 			'address' => __( 'Address', 'bulgarisation-for-woocommerce' ),
 			'deliveryType' => __( 'Delivery type', 'bulgarisation-for-woocommerce' ),
 			'labelData' => __( 'Label data', 'bulgarisation-for-woocommerce' ),
@@ -543,7 +544,7 @@ class Speedy {
 		if ( $cookie_data['type'] === 'address' ) {
 			$label[ 'recipient' ][ 'addressLocation' ] = self::generate_recipient_address( $order );
 			$label[ 'recipient' ][ 'address' ] = self::generate_recipient_address( $order );
-		} else if ( $cookie_data['type'] === 'office' ) {
+		} else if ( in_array( $cookie_data['type'], [ 'office', 'automat' ], true ) ) {
 			$office = map_deep( $_REQUEST['office'], 'sanitize_text_field' );
 			$label[ 'recipient' ][ 'pickupOfficeId' ] = $office['id'];
 		}

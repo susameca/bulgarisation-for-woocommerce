@@ -9,6 +9,7 @@ speedy.then( function ( promise ) {
 	let instance;
 	window.speedyAddressInitialUpdate = true;
 	window.speedyOfficeInitialUpdate = true;
+	window.speedyAutomatInitialUpdate = true;
 
 	$( document.body ).on( 'updated_checkout', function( data ){
 		let $shipping_method = $( 'input[name^="shipping_method"]:checked' );
@@ -37,15 +38,22 @@ speedy.then( function ( promise ) {
 			setTimeout( function() {
 				if ( type === 'address' ) {
 					window.speedyOfficeInitialUpdate = true;
+					window.speedyAutomatInitialUpdate = true;
 					instance = new promise.address({ el: '#' + $target.attr('id') });
 				} else if ( type === 'office' ) {
 					window.speedyAddressInitialUpdate = true;
+					window.speedyAutomatInitialUpdate = true;
 					instance = new promise.office({ el: '#' + $target.attr('id') });
+				} else if ( type === 'automat' ) {
+					window.speedyAddressInitialUpdate = true;
+					window.speedyOfficeInitialUpdate = true;
+					instance = new promise.automat({ el: '#' + $target.attr('id') });
 				}
 			}, 5 );
 		} else if ( typeof instance === 'object' ) {
 			window.speedyAddressInitialUpdate = true;
 			window.speedyOfficeInitialUpdate = true;
+			window.speedyAutomatInitialUpdate = true;
 			
 			instance.$destroy();
 		}

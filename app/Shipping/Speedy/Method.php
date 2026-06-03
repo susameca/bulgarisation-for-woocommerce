@@ -145,6 +145,7 @@ class Method extends \WC_Shipping_Method {
 				'default'           => '',
 				'options'           => array(
 					'office' => __( 'Office', 'bulgarisation-for-woocommerce' ),
+					'automat' => __( 'Automat', 'bulgarisation-for-woocommerce' ),
 					'address' => __( 'Address', 'bulgarisation-for-woocommerce' ),
 				),
 			),
@@ -304,7 +305,7 @@ class Method extends \WC_Shipping_Method {
 		if ( $this->cookie_data['type'] === 'address' ) {
 			$recipient[ 'addressLocation' ] = $this->generate_recipient_address();
 			$recipient[ 'address' ] = $this->generate_recipient_address();
-		} else if ( $this->cookie_data['type'] === 'office' ) {
+		} else if ( in_array( $this->cookie_data['type'], [ 'office', 'automat' ], true ) ) {
 			$recipient[ 'pickupOfficeId' ] = $this->generate_recipient_office_code();
 			$recipient[ 'country' ] = $this->cookie_data[ 'country' ];
 		}
@@ -615,6 +616,14 @@ class Method extends \WC_Shipping_Method {
 					) {
 						$errors->add( 'validation', __( 'Please choose a office.', 'bulgarisation-for-woocommerce' ) );
 					}	
+
+					if ( 
+						!empty( $cookie_data ) && 
+						( !empty($cookie_data['type'] ) && $cookie_data['type'] === 'automat' ) &&  
+						empty( $cookie_data['selectedOffice'] ) 
+					) {
+						$errors->add( 'validation', __( 'Please choose a automat.', 'bulgarisation-for-woocommerce' ) );
+					}	
 				}
 			}
 		}
@@ -667,6 +676,10 @@ class Method extends \WC_Shipping_Method {
 
 		wp_localize_script( 'woo-bg-js-speedy', 'wooBg_speedy', array(
 			'i18n' => Office::get_i18n(),
+		) );
+
+		wp_localize_script( 'woo-bg-js-speedy', 'wooBg_speedy_automat', array(
+			'i18n' => Office::get_automat_i18n(),
 		) );
 
 		wp_enqueue_style(

@@ -16,8 +16,9 @@ class Office {
 
 	public static function delivery_with_speedy_render_form_button( $method, $index ) {
 		if ( $method->get_method_id() === Method::METHOD_ID ) {
-			if ( $method->meta_data['delivery_type'] === 'office' ) {
-				echo wp_kses( '<div data-cache="' . wp_rand() . '" id="woo-bg-speedy-shipping-to--office" class="woo-bg-additional-fields" data-type="office"></div>', [
+			if ( in_array( $method->meta_data['delivery_type'], [ 'office', 'automat' ], true ) ) {
+				$delivery_type = $method->meta_data['delivery_type'];
+				echo wp_kses( '<div data-cache="' . wp_rand() . '" id="woo-bg-speedy-shipping-to--' . esc_attr( $delivery_type ) . '" class="woo-bg-additional-fields" data-type="' . esc_attr( $delivery_type ) . '"></div>', [
 					'div' => [
 						'data-cache' => [],
 						'data-type' => [],
@@ -42,11 +43,25 @@ class Office {
 		);
 	}
 
+	public static function get_automat_i18n() {
+		return array(
+			'selected' => __( 'Selected', 'bulgarisation-for-woocommerce' ),
+			'choose' => __( 'Choose', 'bulgarisation-for-woocommerce' ),
+			'searchOffice' => __( 'Search Automat', 'bulgarisation-for-woocommerce' ), 
+			'select' => __( 'Select', 'bulgarisation-for-woocommerce' ), 
+			'noResult' => __( 'No results was found for this city', 'bulgarisation-for-woocommerce' ),
+			'noOptions' => __( 'Start typing Automat', 'bulgarisation-for-woocommerce' ), 
+			'officeLocator' => __( 'Automat locator', 'bulgarisation-for-woocommerce' ),
+			'toOffice' => __( 'To Automat: ', 'bulgarisation-for-woocommerce' ),
+		);
+	}
+
 	public static function load_offices() {
 		self::$container = woo_bg()->container();
 		$args = [];
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$raw_city = sanitize_text_field( $_POST['city'] );
+		$delivery_type = isset( $_POST['delivery_type'] ) ? sanitize_text_field( $_POST['delivery_type'] ) : 'office';
 		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( sanitize_text_field( $_POST[ 'country' ] ) );
 		$states = self::$container[ Client::SPEEDY_CITIES ]->get_regions( $country_id );
 		$state = $states[ $raw_state ];
@@ -79,10 +94,19 @@ class Office {
 			} else {
 				$offices = $offices['offices'];
 
-				if ( woo_bg_get_option( 'speedy', 'disable_apt' ) === 'yes' ) {
+				if ( $delivery_type === 'automat' ) {
+					$offices = array_values( array_filter( $offices, function( $office ) {
+						return ( $office['type'] === 'APT' );
+					} ) );
+				} else if ( $delivery_type === 'office' ) {
 					$offices = array_values( array_filter( $offices, function( $office ) {
 						return ( $office['type'] !== 'APT' );
 					} ) );
+				}
+
+				if ( empty( $offices ) ) {
+					/* translators: %s is the city */
+					$args[ 'error' ] = sprintf( __( 'No offices were found at %s.', 'bulgarisation-for-woocommerce' ), $raw_city );
 				}
 			}
 

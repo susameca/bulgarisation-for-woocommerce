@@ -44,6 +44,12 @@ import 'magnific-popup';
 
 export default {
 	components: { Multiselect },
+	props: {
+		deliveryType: {
+			type: String,
+			default: 'office',
+		},
+	},
 	data() {
 		return {
 			countryField: $('#billing_country'),
@@ -61,7 +67,7 @@ export default {
 			cityId: '0',
 			error: '',
 			document: $( document.body ),
-			i18n: wooBg_speedy.i18n,
+			i18n: this.deliveryType === 'automat' ? wooBg_speedy_automat.i18n : wooBg_speedy.i18n,
 		}
 	},
 	computed: {
@@ -86,6 +92,8 @@ export default {
 	},
 	mounted() {
 		let _this = this;
+		let initialUpdateFlag = this.deliveryType === 'automat' ? 'speedyAutomatInitialUpdate' : 'speedyOfficeInitialUpdate';
+
 		this.loadLocalStorage();
 
 		this.checkFields();
@@ -119,9 +127,9 @@ export default {
 			_this.loadOffices();
 		});
 
-		if ( window.speedyOfficeInitialUpdate ) {
+		if ( window[initialUpdateFlag] ) {
 			this.document.trigger('update_checkout');
-			window.speedyOfficeInitialUpdate = false;
+			window[initialUpdateFlag] = false;
 			this.setAddress1FieldData();
 		}
 	},
@@ -185,7 +193,7 @@ export default {
 			}
 		},
 		loadLocalStorage(){
-			let localStorageData = localStorage.getItem( 'woo-bg--speedy-office' );
+			let localStorageData = localStorage.getItem( this.getStorageKey() );
 			if ( localStorageData ) {
 				localStorageData = JSON.parse( localStorageData );
 				this.offices = cloneDeep( localStorageData.offices );
@@ -205,7 +213,8 @@ export default {
 				action: 'woo_bg_speedy_load_offices',
 				state: this.state,
 				city: this.city,
-				country: this.countryField.val()
+				country: this.countryField.val(),
+				delivery_type: this.deliveryType
 			}
 
 			axios.post( woocommerce_params.ajax_url, Qs.stringify( data ) )
@@ -258,7 +267,7 @@ export default {
 			let cookie = {
 				billing_to_company: this.toCompanyField.val(),
 				billing_company: this.companyField.val(),
-				type: 'office',
+				type: this.deliveryType,
 				receiver: first_name + ' ' + last_name,
 				phone: phone,
 				selectedOffice: ( this.selectedOffice ) ? this.selectedOffice.id : null,
@@ -281,15 +290,18 @@ export default {
 				city: this.city,
 			}
 
-			localStorage.setItem( 'woo-bg--speedy-office', JSON.stringify( localStorageData ) );
+			localStorage.setItem( this.getStorageKey(), JSON.stringify( localStorageData ) );
 		},
 		resetData() {
 			this.offices = cloneDeep( [] );
 			this.selectedOffice = '';
 			this.streetNumber = '';
 			this.other = '';
-			localStorage.removeItem( 'woo-bg--speedy-office' );
+			localStorage.removeItem( this.getStorageKey() );
 			this.setCookieData();
+		},
+		getStorageKey() {
+			return 'woo-bg--speedy-' + this.deliveryType;
 		},
 		setAddress1FieldData() {
 			let shippingAddress = "";
