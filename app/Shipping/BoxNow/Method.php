@@ -330,7 +330,11 @@ class Method extends \WC_Shipping_Method {
 
 		foreach ( WC()->cart->get_cart_contents() as $cart_item ) {
 			$_product = $cart_item['data'];
-			$item_data = self::determine_item_size( $_product->get_height(), $_product->get_width(), $_product->get_length() );
+			$item_data = self::determine_item_size( 
+				wc_get_dimension( $_product->get_height(), 'sm', get_option( 'woocommerce_dimension_unit' ) ),
+				wc_get_dimension( $_product->get_width(), 'sm', get_option( 'woocommerce_dimension_unit' ) ),
+				wc_get_dimension( $_product->get_length(), 'sm', get_option( 'woocommerce_dimension_unit' ) )
+			);
 			
 			if ( $item_data['oversize'] ) {
 				$has_oversize_item = true;

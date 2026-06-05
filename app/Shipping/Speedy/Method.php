@@ -61,6 +61,10 @@ class Method extends \WC_Shipping_Method {
 		$this->cookie_data = self::get_cookie_data();
 		$this->package = $package;
 
+		if( $this->delivery_type === 'automat' && self::is_apm_not_allowed()) {
+			return;
+		}
+
 		do_action( 'woo_bg/speedy/rate/before_calculate', $this );
 
 		if ( is_array( $this->cookie_data ) ) {
@@ -585,6 +589,61 @@ class Method extends \WC_Shipping_Method {
 		return array(
 			'payment' => $payment,
 		);
+	}
+
+	public static function is_apm_not_allowed() {
+		$has_oversize_item = false;
+		$weight = 0;
+		
+		foreach ( WC()->cart->get_cart_contents() as $cart_item ) {
+			$_product = $cart_item['data'];
+			$has_oversize_item = self::determine_item_size( 
+				wc_get_dimension( $_product->get_height(), 'sm', get_option( 'woocommerce_dimension_unit' ) ),
+				wc_get_dimension( $_product->get_width(), 'sm', get_option( 'woocommerce_dimension_unit' ) ),
+				wc_get_dimension( $_product->get_length(), 'sm', get_option( 'woocommerce_dimension_unit' ) )
+			);
+			
+			$weight += wc_get_weight( $_product->get_weight(), 'kg' ) * $cart_item['quantity'];
+		}
+		
+		if ( $weight > 20 ) {
+			$has_oversize_item = true;
+		}
+
+		return $has_oversize_item;
+	}
+
+	public static function determine_item_size( $height, $width, $length ) {
+		$max_diagonal = 78.70;
+
+		$dimensions = [
+			[
+				'box_size' => 3,
+				'height' => 37,
+				'width' => 35,
+				'length' => 60,
+			],
+		];
+
+		$oversize = false;
+
+		foreach ( $dimensions as $size ) {
+			if (
+				$height > $size['height'] &&
+				$width > $size['width'] &&
+				$length > $size['length']
+			) {
+				$oversize = true;
+			} else {
+				$max_side = max( $length, $width, $height );
+				
+				if ( $max_side > $max_diagonal ) {
+					$oversize = true;
+				}
+			}
+		}
+
+		return $oversize;
 	}
 
 	public static function validate_speedy_method( $fields, $errors ) {
