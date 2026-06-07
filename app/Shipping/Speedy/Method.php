@@ -61,7 +61,9 @@ class Method extends \WC_Shipping_Method {
 		$this->cookie_data = self::get_cookie_data();
 		$this->package = $package;
 
-		if( $this->delivery_type === 'automat' && self::is_apm_not_allowed()) {
+		$disable_aps = ( $this->delivery_type === 'automat' && $this->is_aps_not_allowed( $this->package ) );
+
+		if( apply_filters( 'woo_bg/speedy/rate/disable_aps', $disable_aps, $this ) ) {
 			return;
 		}
 
@@ -591,22 +593,24 @@ class Method extends \WC_Shipping_Method {
 		);
 	}
 
-	public static function is_apm_not_allowed() {
+	public function is_aps_not_allowed( $package ) {
 		$has_oversize_item = false;
-		$weight = 0;
+		$weight_limit = 0;
 		
-		foreach ( WC()->cart->get_cart_contents() as $cart_item ) {
+		foreach ( $package[ 'contents' ] as $key => $cart_item ) {
 			$_product = $cart_item['data'];
 			$has_oversize_item = self::determine_item_size( 
-				wc_get_dimension( $_product->get_height(), 'sm', get_option( 'woocommerce_dimension_unit' ) ),
-				wc_get_dimension( $_product->get_width(), 'sm', get_option( 'woocommerce_dimension_unit' ) ),
-				wc_get_dimension( $_product->get_length(), 'sm', get_option( 'woocommerce_dimension_unit' ) )
+				wc_get_dimension( $_product->get_height(), 'cm', get_option( 'woocommerce_dimension_unit' ) ),
+				wc_get_dimension( $_product->get_width(), 'cm', get_option( 'woocommerce_dimension_unit' ) ),
+				wc_get_dimension( $_product->get_length(), 'cm', get_option( 'woocommerce_dimension_unit' ) )
 			);
 			
-			$weight += wc_get_weight( $_product->get_weight(), 'kg' ) * $cart_item['quantity'];
+			$weight_limit += wc_get_weight( $_product->get_weight(), 'kg' ) * $cart_item['quantity'];
 		}
+
+		$weight_limit = apply_filters( 'woo_bg/speedy/rate/aps_weight_limit', $weight_limit, $this );
 		
-		if ( $weight > 20 ) {
+		if ( $weight_limit > 20 ) {
 			$has_oversize_item = true;
 		}
 
