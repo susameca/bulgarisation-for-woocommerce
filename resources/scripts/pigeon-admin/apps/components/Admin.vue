@@ -493,7 +493,10 @@ export default {
 				}
 			});
 		} else if ( wooBg_pigeon.cookie_data.type == 'address' ) {
-			this.other = wooBg_pigeon.label.pickup_address.additional_info;
+			if ( typeof wooBg_pigeon.label.pickup_address !== 'undefined' && typeof wooBg_pigeon.label.pickup_address.additional_info !== 'undefined' ) {
+				this.other = wooBg_pigeon.label.pickup_address.additional_info;
+			}
+
 			this.streets.forEach( function ( street ) {
 				if ( street.orig_key == wooBg_pigeon.cookie_data.selectedAddress.orig_key ) {
 					_this.street = street;

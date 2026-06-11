@@ -137,6 +137,10 @@ class Pigeon {
 	}
 
 	private static function get_city_id( $order ) {
+		if ( !self::$container ) {
+			self::$container = woo_bg()->container();
+		}
+
 		$city_id = false;
 		$state = $order->get_billing_state();
 		$city = $order->get_billing_city();
