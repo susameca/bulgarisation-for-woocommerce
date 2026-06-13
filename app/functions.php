@@ -486,6 +486,19 @@ function woo_bg_get_order_label( $order_id ) {
 						];
 					}
 				}
+
+				if ( $other_labels = $order->get_meta( 'woo_bg_boxnow_other_labels_data' ) ) {
+					$data['other_labels'] = $other_labels;
+					
+					foreach ( $other_labels as $other_label ) {
+						foreach ( $other_label['shipmentStatus']['parcels'] as $parcel ) {
+							$data['items'][] = [
+								'number' => $parcel['id'],
+								'link' => admin_url( 'admin-ajax.php' ) . '?cache-buster=' . rand() . '&action=woo_bg_boxnow_print_label&parcel=' . $parcel['id'],
+							];
+						}
+					}
+				}
 				
 				break;
 			case 'woo_bg_pigeon':

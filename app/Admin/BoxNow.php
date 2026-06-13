@@ -99,6 +99,7 @@ class BoxNow {
 					
 					wp_localize_script( 'woo-bg-js-admin', 'wooBg_boxnow', array(
 						'label' => $label,
+						'othersLabels' => $theorder->get_meta( 'woo_bg_boxnow_other_labels' ),
 						'shipmentStatus' => $shipment_status,
 						'cookie_data' => $cookie_data,
 						'paymentType' => $theorder->get_payment_method(),
@@ -183,15 +184,6 @@ class BoxNow {
 
 		if ( $cached_items = $order->get_meta( 'woo_bg--box-now-items' ) ) {
 			$label_data['items'] = $cached_items;
-			$label_data[ 'amountToBeCollected' ] = 0;
-
-			if ( isset( $label_data['paymentMode'] ) && $label_data['paymentMode'] === 'cod' ) {
-				foreach ( $cached_items as $item ) {
-					$label_data[ 'amountToBeCollected' ] += $item['value'];
-				}
-
-				$label_data[ 'amountToBeCollected' ] += $order->get_shipping_total() + $order->get_shipping_tax();
-			}
 		} else {
 			$label_data['items'] = self::generate_items( $order );
 		}
@@ -295,17 +287,13 @@ class BoxNow {
 			}
 
 			$weight = ( $_product->get_weight() ) ? wc_get_weight( $_product->get_weight(), 'kg' ) : 1;
-
 			$items[ $box_count ][ 'weight' ] += (float) $weight;
 			$items[ $box_count ][ 'name' ] .= $order_item->get_name() . ";";
 
-			$item_price = number_format( $order_item->get_total(), 2, '.', '') + number_format( $order_item->get_total_tax(), 2, '.', '' );
-			$new_price = (float) $items[ $box_count ][ 'value' ] + ( $item_price / $order_item['quantity'] );
-
-			$items[ $box_count ][ 'value' ] = (string) number_format( $new_price, 2, '.', '' );
-
 			if ( $item_sizes['size'] ) {
 				$items[ $box_count ][ 'compartmentSize' ] = Method::determine_item_size_by_volume( $current_volume );
+			} else {
+				$items[ $box_count ][ 'compartmentSize' ] = '1';
 			}
 		}
 
@@ -331,11 +319,8 @@ class BoxNow {
 		foreach ( $order->get_items() as $order_item ) {
 			$_product = $order_item->get_product();
 			$weight = ( $_product->get_weight() ) ? wc_get_weight( $_product->get_weight(), 'kg' ) : 1;
-			$price = (float) $items[0][ 'value' ] + number_format( $order_item->get_total(), 2, '.', '') + number_format( $order_item->get_total_tax(), 2, '.', '' );
-
 			$items[0][ 'weight' ] += (float) $weight * $order_item['quantity'];
 			$items[0][ 'name' ] .= $order_item->get_name() . ";";
-			$items[0][ 'value' ] = (string) number_format( $price, 2, '.', '' );
 		}
 
 		return $items;
@@ -421,25 +406,46 @@ class BoxNow {
 
 	public static function send_label_to_boxnow( $label, $order ) {
 		$data = [];
-		$container = woo_bg()->container();
 		$request_body = apply_filters( 'woo_bg/boxnow/create_label', $label, $order );
-		$request = wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/boxnow/create_label/', [
-			'body' => [
-				'client' => esc_url( home_url( '/' ) ),
-				'env' => $container[ Client::BOXNOW ]->get_env(),
-				'access_token' => $container[ Client::BOXNOW ]->get_access_token(),
-				'request_body' => $request_body,
-			]
-		] );
+		$orig_items = $request_body['items'];
+		$other_labels = [];
 
+		if ( count( $request_body['items'] ) > 1 ) {
+			$first_item = array_shift( $request_body['items'] );
+			$other_labels_items = $request_body['items'];
+			$request_body['items'] = [ $first_item ];
+			$other_labels = [];
+
+			foreach ( $other_labels_items as $key => $item ) {
+				$new_label = $request_body;
+				$new_label['orderNumber'] .= '-' . ($key + 2);
+				$new_label['items'] = [ $item ];
+				$other_labels[] = $new_label;
+			}
+		}
+
+		if ( $order->get_payment_method() === 'cod' && !empty( $other_labels ) ) {
+			return [
+				'message' => __( 'Cash on delivery orders cannot be split into multiple packets.', 'bulgarisation-for-woocommerce' ),
+			];
+		}
+
+		$request = self::send_label_request( $request_body );
 		$response = json_decode( wp_remote_retrieve_body( $request ), 1 );
 
 		if ( isset( $response['message'] ) ) {
 			$data['message'] = $response['message'];
 		} else {
+
+			if ( !empty( $other_labels ) ) {
+				$data['otherLabels'] = self::send_other_labels( $other_labels, $order );
+			}
+
+			$request_body['items'] = $orig_items;
+
 			$data['label'] = $request_body;
 			$data['shipmentStatus'] = $response;
-
+			
 			$order->update_meta_data( 'woo_bg_boxnow_label', $request_body );
 			$order->update_meta_data( 'woo_bg_boxnow_shipment_status', $response );
 			$order->save();
@@ -448,6 +454,43 @@ class BoxNow {
 		do_action( 'woo_bg/boxnow/after_send_label', $data, $order );
 
 		return $data;
+	}
+	
+	public static function send_other_labels ( $other_labels, $order ) {
+		$order->update_meta_data( 'woo_bg_boxnow_other_labels', $other_labels );
+		$other_labels_data = [];
+
+		foreach ( $other_labels as $label ) {
+			$request = self::send_label_request( $label );
+			$response = json_decode( wp_remote_retrieve_body( $request ), 1 );
+
+			if ( isset( $response['message'] ) ) {
+				continue;
+			}
+
+			$other_labels_data[] = [
+				'label' => $label,
+				'shipmentStatus' => $response,
+			];
+		}
+
+		$order->update_meta_data( 'woo_bg_boxnow_other_labels', $other_labels_data );
+		$order->save();
+
+		return $other_labels_data;
+	}
+ 
+	public static function send_label_request( $label ) {
+		$container = woo_bg()->container();
+
+		return wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/boxnow/create_label/', [
+			'body' => [
+				'client' => esc_url( home_url( '/' ) ),
+				'env' => $container[ Client::BOXNOW ]->get_env(),
+				'access_token' => $container[ Client::BOXNOW ]->get_access_token(),
+				'request_body' => $label,
+			]
+		] );
 	}
 
 	public static function delete_label() {
@@ -464,6 +507,18 @@ class BoxNow {
 
 		$order->update_meta_data( 'woo_bg_boxnow_shipment_status', '' );
 		$order->update_meta_data( 'woo_bg_boxnow_operations', '' );
+
+
+		if ( $other_labels = $order->get_meta( 'woo_bg_boxnow_other_labels' ) ) {
+			foreach ( $other_labels as $other_label ) {
+				foreach ( $other_label['shipmentStatus']['parcels'] as $parcel ) {
+					$response = $container[ Client::BOXNOW ]->api_call( '/api/v1/parcels/' . $parcel['id'] . ":cancel", [] );
+				}
+			}
+
+			$order->update_meta_data( 'woo_bg_boxnow_other_labels', '' );
+		}
+
 		$order->save();
 		
 		wp_send_json_success( $response );

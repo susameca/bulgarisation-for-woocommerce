@@ -210,6 +210,7 @@ export default {
 		setCookieData() {
 			let cookie = {
 				selectedApm: ( this.selectedApm ) ? this.selectedApm.id : null,
+				payment: $('input[name="payment_method"]:checked').val(),
 			};
 
 			cookie = encodeURIComponent( JSON.stringify( cookie ) );

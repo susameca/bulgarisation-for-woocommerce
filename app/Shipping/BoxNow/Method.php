@@ -57,8 +57,11 @@ class Method extends \WC_Shipping_Method {
 		$weight = $this->get_total_weight();
 		$apm_size = self::get_allowed_apm_size();
 		$hide_over = woo_bg_get_option( 'boxnow_price', 'hide_over' );
-
-		if ( 
+		
+		
+		if ( !empty( $this->cookie_data['payment'] ) && $this->cookie_data['payment'] === 'cod' && $this->has_more_than_one_box() ) {
+			return;
+		} else if ( 
 			$weight > 20 || 
 			$apm_size['has_oversize_item'] ||
 			( $hide_over && woo_bg_get_package_total() >= $hide_over )
@@ -152,6 +155,44 @@ class Method extends \WC_Shipping_Method {
 		}
 		
 		return $cookie_data;
+	}
+
+	public function has_more_than_one_box() {
+		$default_box_values = [
+			'name' => '',
+			'weight' => 0,
+			'value' => 0,
+			'compartmentSize' => 0,
+		];
+		
+		$current_volume = 0;
+
+		$items = [ $default_box_values ];
+
+		foreach ( $this->package[ 'contents' ] as $order_item ) {
+			for ( $i = 0; $i < $order_item['quantity']; $i++ ) { 
+				$order_items[] = $order_item;
+			}
+		}
+
+		$current_volume = 0;
+
+		foreach ( $order_items as $key => $order_item ) {
+			$_product = $order_item['data'];
+
+			$height = ( $_product->get_height() ) ? (float) $_product->get_height() : 7;
+			$width = ( $_product->get_height() ) ? (float) $_product->get_width() : 44;
+			$length = ( $_product->get_height() ) ? (float) $_product->get_width() : 58;
+
+			$item_sizes = self::determine_item_size( $height, $width, $length );
+			$current_volume += $item_sizes['volume'];
+
+			if ( $item_sizes['oversize'] || $item_sizes['volume'] > 89320 || $current_volume > 89320 ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public function get_total_weight() {

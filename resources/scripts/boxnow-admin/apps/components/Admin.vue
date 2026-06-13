@@ -95,14 +95,6 @@
 								<input v-model="parsel.weight" type="number" step="0.001">
 							</p>
 
-							<p v-if="typeof parsel.value !== 'undefined'" class="form-field form-field-wide">
-								<label>
-									{{i18n.price}}:
-								</label>
-
-								<input v-model="parsel.value" type="number" step="0.01">
-							</p>
-
 							<p class="form-field form-field-wide">
 								<button
 									type="button"
@@ -162,6 +154,12 @@
 
 							<iframe id="woo-bg--boxnow-label-print" :src="iframe"></iframe>
 						</div>
+
+						<div v-for="(iframe, key) in otherIframes" v-if="otherIframes.length">
+							<h3>{{i18n.label}}: {{otherLabels[key].shipmentStatus.parcels[0].id}}</h3>
+
+							<iframe id="woo-bg--boxnow-label-print" :src="iframe"></iframe>
+						</div>
 					</div>
 				</div><!-- /.order_data_column order_data_column-/-half -->
 			</div><!-- /.order_data_column_container -->
@@ -203,6 +201,7 @@ export default {
 			loading: false,
 			shipmentStatus : '',
 			labelData : wooBg_boxnow.label,
+			otherLabels: wooBg_boxnow.othersLabels ? wooBg_boxnow.othersLabels : [],
 			document: $( document.body ),
 			destination: '',
 			destinations: cloneDeep( wooBg_boxnow.destinations ),
@@ -241,6 +240,18 @@ export default {
 					links.push( link );
 				});
 
+			}
+
+			return links;
+		},
+		otherIframes() {
+			let links = [];
+			
+			if ( this.otherLabels.length ) {
+				this.otherLabels.forEach( function ( label ) {
+					let link = woocommerce_admin.ajax_url + '?cache-buster=' + Math.random()  + '&action=woo_bg_boxnow_print_label&parcel=' + label.shipmentStatus.parcels[0].id;
+					links.push( link );
+				});
 			}
 
 			return links;
@@ -377,6 +388,14 @@ export default {
 					_this.loading = false;
 					if ( response.data.data.message ) {
 						_this.message = response.data.data.message;
+
+						_this.labelData.items.forEach( function ( item ) {
+							_this.boxSizes.forEach( function ( size ) {
+								if ( size.id == item.compartmentSize ) {
+									item.compartmentSize = size;
+								}
+							});
+						});
 					} else {
 						_this.shipmentStatus = cloneDeep( response.data.data.shipmentStatus, true );
 						_this.labelData = cloneDeep( response.data.data.label, true );
@@ -388,6 +407,10 @@ export default {
 								}
 							});
 						});
+
+						if ( response.data.data.otherLabels ) {
+							_this.otherLabels = cloneDeep( response.data.data.otherLabels, true );
+						}
 					}
 				});
 		},
