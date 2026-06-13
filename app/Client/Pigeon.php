@@ -42,6 +42,7 @@ class Pigeon {
 				'content-type' => 'application/json',
 				'X-API-Key' => $this->get_api_key(),
 				'X-API-Secret' => $this->get_api_secret(),
+				'X-Platform' => 'Wordpress Bulgarisation',
 			),
 			'body' => wp_json_encode( $args ),
 		);
