@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 7.0
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 4.0.2
+Stable tag: 4.0.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -121,6 +121,16 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
+= 4.0.3 =
+Export ZIP: Fix bytes, Add clearstatcache
+Pigeon: Add bulgarisation header
+Pigeon: Fix label generation and fields loading in admin
+BoxNow: Change packages to be separate labels
+Add filter for aps disabling
+Econt, Speedy: Change automat type to not be added if package dimentions cannot fit
+Econt, Speedy: Separate office and automat delivery types
+Econt: Separate office and automat delivery types
+
 = 4.0.2 =
 Speedy: Optimizations
 Speedy: Add customer notes to label
@@ -140,116 +150,3 @@ Speedy,BoxNow: Optimize label pdf rendering
 Order Columns: Optimize labels text
 NRA export: Optimizations
 Speedy: Optimizations
-
-= 3.6.3 =
-Invoices: View file optimizations
-Invoices: Add option to have company fields without generating invoice
-
-= 3.6.2 =
-Speedy: Optimize label
-Speedy: Optimize street search
-BoxNow: Add fields for each package
-BoxNow: Optimize automatically generated boxes
-Nepostop: Fix warnings
-
-= 3.6.1 =
-Econt/Speedy: Fix issue with address fields
-Client Reports: Add nepostop.bg as provider
-
-= 3.6.0 =
-Remove Nekorekten.com
-Add Client Reports system
-Client Reports: Add Connectix as provider
-
-= 3.5.8 =
-Checkout: Fix label for shippings
-Econt: Optimize packing list price
-Invoice: Optimize additional items ( bank info )
-BoxNow: Fix issue with empty price
-Multi currency: Remove converter functionality
-
-= 3.5.7 =
-Speedy:Update default pack size
-BGN-EUR: Fix issues
-Fix warnings
-
-= 3.5.6 =
-Invoice: Fix http links of images in doc logos
-Speedy: Fix declared value field
-Speedy: Fix fiscal items when no vat are applied
-BOXNOW: Fix label column in orders
-Multy currency: Fix converter steps
-Add option for company registration at 113(9)
-
-= 3.5.4 =
-Fix dompdf
-
-= 3.4.22 =
-Speedy: Label optimizations
-Econt: Label optimizations
-
-= 3.4.21 =
-Speedy: Optimize fiscal items
-Econt: Optimize packing list
-Invoice PDF: Optimize items
-Speedy: Fix office locator
-Export: Add archive export for invoices
-
-= 3.4.20 =
-Econt: Optimize attributes in description
-Speedy: Fix fiscal items and fixed price
-Multy Currency: Add eur to bgn only for BG locale
-
-= 3.4.19 =
-Multi Currency: Add option to convert product prices from bgn to eur.
-NRA: Optimizations
-Invoice PDF: Add filter for shipping items
-Invoice PDF: Discounts optimizations
-Invoice PDF: Order optimization
-Speedy: Optimize fiscal generation
-
-= 3.4.18 = 
-Econt: Get actual option for auto size
-Econt: Fix partial delivery
-NRA: Fix item rate if tax is 0
-Checkout: Remove required for state field
-Orders documents: add meta info for each document
-BOXNOW: Add option to hide method over price
-
-= 3.4.17 = 
-BOXNOW: Fix label generation
-Speedy: Optimization
-Invoice: PDF Optimization
-
-= 3.4.16 = 
-Checkout: Reorder states alphabetically and return required for state field.
-Econt, Speedy: Add dimensions fields and automatically calculation option
-BOXNOW: Optimization
-
-= 3.4.15 = 
-Couriers labels: Prevent duplication
-Couriers: Change declared value as Courier option
-Speedy, Econt: Add filters for label before save.
-
-= 3.4.14 = 
-Econt: Fix critical issue with fixed prices
-
-= 3.4.13 = 
-Speedy: Optimize clients objects
-Couriers: Optimize additional labels
-Invoice: Optimize VAT field
-
-= 3.4.12 = 
-Speedy: Add ability to change "send from" options in order settings
-Econt: Add ability to change "send from" options in order settings
-Multi_Currency: Fix double second price in documents
-Speedy: Delete fiscal items if option is disabled
-PDF: Optimize view file
-
-= 3.4.11 = 
-Speedy: Label Optimizations
-Dual price: Ajax Optimizations
-Dual price: CURCY compatibility fix
-
-= 3.4.10 = 
-Global urgent update
