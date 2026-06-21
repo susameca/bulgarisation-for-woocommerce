@@ -449,7 +449,8 @@ class Method extends \WC_Shipping_Method {
 
 		if ( $auto_sizes && !empty( $sizes ) ) {
 			$packer = new Carton_Packer();
-			$result = $packer->find_best_carton( $sizes, self::get_aps_box_sizes_for_packer() );
+			$carton_sizes = $this->delivery_type === 'automat' ? self::get_aps_box_sizes_for_packer() : array();
+			$result = $packer->find_best_carton( $sizes, $carton_sizes );
 
 			$pack_sizes = [
 				'width' => wc_get_dimension( $result->W, 'cm', 'mm' ),
