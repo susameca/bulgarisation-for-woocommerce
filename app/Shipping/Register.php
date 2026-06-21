@@ -31,6 +31,7 @@ class Register {
 			add_filter( 'wc_cart_totals_shipping_method_cost', array( __CLASS__, 'change_price_label_if_not_calculated' ), 10, 2 );
 			add_filter( 'woocommerce_shipping_rate_label', array( __CLASS__, 'add_fsh_nc_labels' ), 100, 2 );
 			add_action( 'woocommerce_order_item_shipping_after_calculate_taxes', array( __CLASS__, 'set_shipping_rate_taxes_for_recalculation' ), 10, 2 );
+			add_action( 'woocommerce_cart_calculate_fees', array( __CLASS__, 'update_session' ), 0 );
 		}
 	}
 
@@ -42,6 +43,7 @@ class Register {
 		new Econt_Cron();
 		new Econt\Address();
 		new Econt\Office();
+		new Econt\APSBoxes();
 		new Econt_Admin();
 
 		add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'register_econt_method' ) );
@@ -134,6 +136,7 @@ class Register {
 		new Pigeon\Address();
 		new Pigeon\Office();
 		new Pigeon\Locker();
+		new Pigeon\APSBoxes();
 		new Pigeon_Admin();
 
 		add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'register_pigeon_method' ) );
@@ -243,7 +246,180 @@ class Register {
 		}
 
 		if ( wc_tax_enabled() ) {
-			$method->set_taxes( woo_bg_get_shipping_rate_taxes( $method->get_total() ) );
+			$country = $calculate_tax_for['country'] ?? 'BG';
+			$method->set_taxes( woo_bg_get_shipping_rate_taxes( $method->get_total(), $country ) );
 		}
+	}
+
+	public static function update_session( $source = null ) {
+		if ( ! function_exists( 'WC' ) ) {
+			return;
+		}
+
+		$wc = WC();
+
+		if ( ! $wc || ! $wc->session || ! $wc->customer ) {
+			return;
+		}
+
+		$post_data = self::get_checkout_post_data( $source );
+
+		if ( empty( $post_data ) ) {
+			return;
+		}
+
+		if ( isset( $post_data['payment_method'] ) && is_string( $post_data['payment_method'] ) ) {
+			$wc->session->set( 'chosen_payment_method', $post_data['payment_method'] );
+		}
+
+		self::update_chosen_shipping_methods( $post_data['shipping_method'] ?? array() );
+
+		$customer_props = self::get_customer_address_props( $post_data, 'billing' );
+		$shipping_from  = ( wc_ship_to_billing_address_only() || empty( $post_data['ship_to_different_address'] ) ) ? 'billing' : 'shipping';
+
+		$customer_props = array_merge(
+			$customer_props,
+			self::get_customer_address_props( $post_data, $shipping_from, 'shipping' )
+		);
+
+		$should_save_customer = ! empty( $customer_props );
+
+		if ( $customer_props ) {
+			$wc->customer->set_props( $customer_props );
+		}
+
+		if ( array_key_exists( 'has_full_address', $post_data ) && is_scalar( $post_data['has_full_address'] ) ) {
+			$wc->customer->set_calculated_shipping( wc_string_to_bool( $post_data['has_full_address'] ) );
+			$should_save_customer = true;
+		}
+
+		if ( $should_save_customer ) {
+			$wc->customer->save();
+		}
+	}
+
+	private static function get_checkout_post_data( $source ) {
+		$parsed_data = array();
+
+		if ( is_string( $source ) && '' !== $source ) {
+			$parsed_data = self::parse_post_data_string( $source );
+		} elseif ( is_array( $source ) ) {
+			$parsed_data = self::clean_post_value( $source );
+		} elseif ( isset( $_POST['post_data'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$raw_post_data = $_POST['post_data']; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+			if ( is_string( $raw_post_data ) ) {
+				$parsed_data = self::parse_post_data_string( $raw_post_data );
+			}
+		}
+
+		$posted_data = array();
+
+		foreach ( $_POST as $key => $value ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			if ( 'post_data' === $key ) {
+				continue;
+			}
+
+			$posted_data[ $key ] = self::clean_post_value( $value );
+		}
+
+		return self::normalize_checkout_post_data( array_replace_recursive( $parsed_data, $posted_data ) );
+	}
+
+	private static function parse_post_data_string( $post_data ) {
+		$parsed = array();
+
+		parse_str( $post_data, $parsed );
+
+		return self::clean_post_value( $parsed );
+	}
+
+	private static function clean_post_value( $value ) {
+		return wc_clean( wp_unslash( $value ) );
+	}
+
+	private static function normalize_checkout_post_data( $post_data ) {
+		$aliases = array(
+			'billing_country'    => 'country',
+			'billing_state'      => 'state',
+			'billing_postcode'   => 'postcode',
+			'billing_city'       => 'city',
+			'billing_address_1'  => 'address',
+			'billing_address_2'  => 'address_2',
+			'shipping_country'   => 's_country',
+			'shipping_state'     => 's_state',
+			'shipping_postcode'  => 's_postcode',
+			'shipping_city'      => 's_city',
+			'shipping_address_1' => 's_address',
+			'shipping_address_2' => 's_address_2',
+		);
+
+		foreach ( $aliases as $canonical_key => $alias_key ) {
+			if (
+				( ! array_key_exists( $canonical_key, $post_data ) || null === $post_data[ $canonical_key ] )
+				&& array_key_exists( $alias_key, $post_data )
+			) {
+				$post_data[ $canonical_key ] = $post_data[ $alias_key ];
+			}
+		}
+
+		return $post_data;
+	}
+
+	private static function update_chosen_shipping_methods( $posted_shipping_methods ) {
+		if ( is_string( $posted_shipping_methods ) ) {
+			$posted_shipping_methods = array( 0 => $posted_shipping_methods );
+		}
+
+		if ( ! is_array( $posted_shipping_methods ) ) {
+			return;
+		}
+
+		$chosen_shipping_methods = WC()->session->get( 'chosen_shipping_methods', array() );
+		$updated                 = false;
+
+		if ( ! is_array( $chosen_shipping_methods ) ) {
+			$chosen_shipping_methods = array();
+		}
+
+		foreach ( $posted_shipping_methods as $index => $method_id ) {
+			if ( ! is_string( $method_id ) ) {
+				continue;
+			}
+
+			if (
+				! array_key_exists( $index, $chosen_shipping_methods )
+				|| $chosen_shipping_methods[ $index ] !== $method_id
+			) {
+				$chosen_shipping_methods[ $index ] = $method_id;
+				$updated = true;
+			}
+		}
+
+		if ( $updated ) {
+			WC()->session->set( 'chosen_shipping_methods', $chosen_shipping_methods );
+		}
+	}
+
+	private static function get_customer_address_props( $post_data, $source_prefix, $target_prefix = null ) {
+		$target_prefix = $target_prefix ?: $source_prefix;
+		$props         = array();
+		$fields        = array( 'country', 'state', 'postcode', 'city', 'address_1', 'address_2' );
+
+		foreach ( $fields as $field ) {
+			$source_key = "{$source_prefix}_{$field}";
+
+			if ( ! array_key_exists( $source_key, $post_data ) ) {
+				continue;
+			}
+
+			$value = $post_data[ $source_key ];
+
+			if ( null !== $value && is_scalar( $value ) ) {
+				$props[ "{$target_prefix}_{$field}" ] = $value;
+			}
+		}
+
+		return $props;
 	}
 }
