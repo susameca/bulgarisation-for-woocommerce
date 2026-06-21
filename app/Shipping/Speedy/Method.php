@@ -15,9 +15,9 @@ class Method extends \WC_Shipping_Method {
 	private static $aps_box_sizes = array(
 		array(
 			'name'       => 'APS',
-			'length'     => 60,
-			'width'      => 35,
-			'height'     => 37,
+			'length'     => 62,
+			'width'      => 36,
+			'height'     => 38,
 			'max_weight' => 20,
 		),
 	);
@@ -221,7 +221,7 @@ class Method extends \WC_Shipping_Method {
 		);
 		
 		$request_body = apply_filters( 'woo_bg/speedy/calculate_label', $this->generate_label(), $this );
-
+		
 		WC()->session->set( 'woo-bg-speedy-label' , $request_body );
 
 		$request = $this->container[ Client::SPEEDY ]->label_request( 'calculate', $request_body );
@@ -449,7 +449,7 @@ class Method extends \WC_Shipping_Method {
 
 		if ( $auto_sizes && !empty( $sizes ) ) {
 			$packer = new Carton_Packer();
-			$result = $packer->find_best_carton( $sizes );
+			$result = $packer->find_best_carton( $sizes, self::get_aps_box_sizes_for_packer() );
 
 			$pack_sizes = [
 				'width' => wc_get_dimension( $result->W, 'cm', 'mm' ),
@@ -467,6 +467,21 @@ class Method extends \WC_Shipping_Method {
 		return array(
 			'content' => $content,
 		);
+	}
+
+	private static function get_aps_box_sizes_for_packer() {
+		$box_sizes = array();
+
+		foreach ( self::$aps_box_sizes as $box_size ) {
+			$box_sizes[] = array(
+				'name'   => $box_size['name'],
+				'length' => wc_get_dimension( $box_size['length'], 'mm', 'cm' ),
+				'width'  => wc_get_dimension( $box_size['width'], 'mm', 'cm' ),
+				'height' => wc_get_dimension( $box_size['height'], 'mm', 'cm' ),
+			);
+		}
+
+		return $box_sizes;
 	}
 
 	private function generate_services_data( $service_id = '505', $country = 'BG' ) {
