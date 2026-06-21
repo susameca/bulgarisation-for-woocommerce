@@ -183,12 +183,64 @@
 							</multiselect>
 						</p>
 
-						<p v-if="typeof labelData.packCount !== 'undefined'" class="form-field form-field-wide">
-							<label>
-								{{i18n.packCount}}:
-							</label>
+						<fieldset
+							v-for="(pack, key) in labelData.packs"
+							:key="key"
+						>
+							<legend>{{ i18n.pack }} {{ key + 1 }}</legend>
 
-							<input v-model="labelData.packCount" type="number">
+							<p class="form-field form-field--1-of-3" style="clear:none">
+								<label>
+									{{i18n.length}} (cm):
+								</label>
+
+								<input v-model="pack.length" type="number" step="0.1">
+							</p>
+
+							<p class="form-field form-field--1-of-3" style="clear:none">
+								<label>
+									{{i18n.width}} (cm):
+								</label>
+
+								<input v-model="pack.width" type="number" step="0.1">
+							</p>
+
+							<p class="form-field form-field--1-of-3" style="float:right; clear:none">
+								<label>
+									{{i18n.height}} (cm):
+								</label>
+
+								<input v-model="pack.height" type="number" step="0.1">
+							</p>
+
+							<p class="form-field form-field-wide">
+								<label>
+									{{i18n.weight}}:
+								</label>
+
+								<input v-model="pack.weight" type="number" step="0.001">
+							</p>
+
+							<p class="form-field form-field-wide">
+								<button
+									type="button"
+									@click="removePack(key)"
+									:disabled="labelData.packs.length === 1"
+									class="button-secondary"
+								>
+									{{ i18n.removePack }}
+								</button>
+							</p>
+						</fieldset>
+
+						<p class="form-field form-field-wide">
+							<button
+								type="button"
+								@click="addPack"
+								class="button-secondary"
+							>
+								{{ i18n.addPack }}
+							</button>
 						</p>
 
 						<p v-if="paymentType === 'cod'" class="form-field form-field-wide">
@@ -206,39 +258,6 @@
 
 							<input v-model="declaredValue" type="number">
 						</p>
-
-						<p class="form-field form-field--1-of-3" style="clear:none">
-							<label>
-								{{i18n.length}} (cm):
-							</label>
-
-							<input v-model="labelData.shipmentDimensionsL" type="number" step="0.1">
-						</p>
-
-						<p class="form-field form-field--1-of-3" style="clear:none">
-							<label>
-								{{i18n.width}} (cm):
-							</label>
-
-							<input v-model="labelData.shipmentDimensionsW" type="number" step="0.1">
-						</p>
-
-						<p class="form-field form-field--1-of-3" style="float:right; clear:none">
-							<label>
-								{{i18n.height}} (cm):
-							</label>
-
-							<input v-model="labelData.shipmentDimensionsH" type="number" step="0.1">
-						</p>
-
-						<p v-if="typeof labelData.weight !== undefined" class="form-field form-field-wide">
-							<label>
-								{{i18n.weight}}:
-							</label>
-
-							<input v-model="labelData.weight" type="number" step="0.001">
-						</p>
-
 
 						<p class="form-field form-field-wide">
 							<label>
@@ -610,13 +629,69 @@ export default {
 				this.labelData.services.invoiceNum = wooBg_econt.invoiceNumber;
 			}
 		}
+
+		this.normalizePacks();
 	},
 	methods: {
+		normalizePacks() {
+			if (!Array.isArray(this.labelData.packs) || this.labelData.packs.length === 0) {
+				this.$set(this.labelData, 'packs', [
+					{
+						width: this.labelData.shipmentDimensionsW || '20',
+						height: this.labelData.shipmentDimensionsH || '20',
+						length: this.labelData.shipmentDimensionsL || '20',
+						weight: this.labelData.weight || 1,
+					},
+				]);
+			}
+
+			this.syncPackCount();
+		},
+		syncPackCount() {
+			this.$set(this.labelData, 'packCount', this.labelData.packs.length);
+		},
+		removeLegacyPackDimensions() {
+			this.$delete(this.labelData, 'shipmentDimensionsW');
+			this.$delete(this.labelData, 'shipmentDimensionsL');
+			this.$delete(this.labelData, 'shipmentDimensionsH');
+			this.$delete(this.labelData, 'weight');
+		},
+		addPack() {
+			const packs = this.labelData.packs || [];
+			let template;
+
+			if (packs.length > 0) {
+				template = cloneDeep(packs[0]);
+			} else {
+				template = {
+					width: '20',
+					height: '20',
+					length: '20',
+					weight: 1,
+				};
+			}
+
+			packs.push(template);
+			this.$set(this.labelData, 'packs', packs);
+			this.syncPackCount();
+		},
+		removePack(index) {
+			const packs = this.labelData.packs;
+
+			if (!Array.isArray(packs) || packs.length <= 1) {
+				return;
+			}
+
+			packs.splice(index, 1);
+			this.syncPackCount();
+		},
 		onCopy: function (e) {
 	      alert( this.i18n.copyLabelDataMessage );
 	    },
 		updateLabel( e ) {
 			e.preventDefault();
+			this.normalizePacks();
+			this.removeLegacyPackDimensions();
 
 			this.loading = true;
 			let _this = this;

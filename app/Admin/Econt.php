@@ -159,6 +159,9 @@ class Econt {
 			'length' => __('Length', 'bulgarisation-for-woocommerce'),
 			'width' => __('Width', 'bulgarisation-for-woocommerce'),
 			'height' => __('Height', 'bulgarisation-for-woocommerce'),
+			'pack' => __('Pack', 'bulgarisation-for-woocommerce'),
+			'addPack' => __('Add Pack', 'bulgarisation-for-woocommerce'),
+			'removePack' => __('Remove Pack', 'bulgarisation-for-woocommerce'),
 		);
 	}
 
@@ -327,6 +330,7 @@ class Econt {
 		$label = self::update_shipment_type( $label );
 		$label = self::update_phone_and_names( $label );
 		$label = self::update_os_value( $label );
+		$label = self::update_weight( $label );
 
 		$data = self::send_label_to_econt( $label, $order_id );
 
@@ -344,6 +348,7 @@ class Econt {
 
 		$label = $label['label'];
 		$label = self::update_sender( $label );
+		$label = self::update_weight( $label );
 		$label = self::update_label_pay_options( $label, $order_id );
 		$label = self::update_phone_and_names( $label, $order_id );
 
@@ -414,6 +419,23 @@ class Econt {
 					break;
 			}
 		}
+
+		return $label;
+	}
+
+	public static function update_weight( $label ) {
+		$weight = 0;
+		
+		if ( !empty( $label['packs'] ) ) {
+			foreach ( $label['packs'] as $pack ) {
+				$weight += isset( $pack['weight'] ) ? floatval( $pack['weight'] ) : 0;
+			}
+	
+			$label['weight'] = $weight;
+		} else {
+			$label['weight'] = apply_filters( 'woo_bg/econt/default_weight', 0.100 );
+		}
+
 
 		return $label;
 	}
