@@ -763,10 +763,12 @@ class Econt {
 		$payment_by = map_deep( $_REQUEST['paymentBy'], 'sanitize_text_field' );
 
 		if ( !empty( $payment_by ) ) {
+			$tax_rate = apply_filters('woo_bg/econt/fixed_price_tax_rate', 20, $order->get_shipping_country() );
+
 			if ( $payment_by['id'] == 'buyer' ) {
-				$price = woo_bg_tax_based_price( $response['label']['receiverDueAmount'] );
+				$price = woo_bg_tax_based_price( $response['label']['receiverDueAmount'], $tax_rate );
 			} else if ( $payment_by['id'] == 'fixed' && !empty( $request_body['paymentReceiverAmount'] ) ) {
-				$price = woo_bg_tax_based_price( $request_body['paymentReceiverAmount'] );
+				$price = woo_bg_tax_based_price( $request_body['paymentReceiverAmount'], $tax_rate );
 			}
 		}
 

@@ -780,7 +780,8 @@ class Speedy {
 			if ( $payment_by['id'] == 'RECIPIENT' ) {
 				$price = ( wc_tax_enabled() ) ? $response['price']['amount'] : $response['price']['total'];
 			} else if ( $payment_by['id'] == 'fixed' && $cookie_data['fixed_price'] ) {
-				$price = woo_bg_tax_based_price( $cookie_data['fixed_price'] );
+				$tax_rate = apply_filters('woo_bg/speedy/fixed_price_tax_rate', 20, $order->get_shipping_country() );
+				$price = woo_bg_tax_based_price( $cookie_data['fixed_price'], $tax_rate );
 			}
 		}
 
@@ -789,8 +790,7 @@ class Speedy {
 			$item->calculate_taxes();
 			$item->save();
 		}
-
-		$order->calculate_shipping();
+		
 		$order->calculate_totals();
 		$order->save();
 	}

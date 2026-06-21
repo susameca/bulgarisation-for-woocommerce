@@ -71,6 +71,8 @@ class Method extends \WC_Shipping_Method {
 
 		do_action( 'woo_bg/boxnow/rate/before_calculate', $this );
 
+		$country = apply_filters('woo_bg/boxnow/country_for_validation', $package['destination']['country'], $this );
+		
 		$rate = array(
 			'label' => $this->title,
 			'cost' => 0,
@@ -96,10 +98,11 @@ class Method extends \WC_Shipping_Method {
 			}
 
 			if ( $price ) {
-				$rate['cost'] = woo_bg_tax_based_price( $price );
+				$tax_rate = apply_filters('woo_bg/shipping/fixed_price_tax_rate', 20, $country );
+				$rate['cost'] = woo_bg_tax_based_price( $price, $tax_rate );
 				
 				if ( wc_tax_enabled() ) {
-					$rate['taxes'] = woo_bg_get_shipping_rate_taxes( $rate['cost'] );
+					$rate['taxes'] = woo_bg_get_shipping_rate_taxes( $rate['cost'], $country );
 				}
 			}
 

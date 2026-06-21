@@ -48,6 +48,8 @@ class Speedy {
 	}
 
 	public function label_request( $type, $request_body ) {
+		woo_bg_remove_api_filters();
+
 		$request = wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/speedy/label_request/', [
 			'body' => [
 				'client' => esc_url( home_url( '/' ) ),

@@ -3,6 +3,7 @@ namespace Woo_BG\Shipping\Speedy;
 use Woo_BG\Container\Client;
 
 use Woo_BG\Shipping\Packer\Carton_Packer;
+use Woo_BG\Shipping\Packer\APSPackage;
 use Woo_BG\Shipping\Packer\Product;
 use Woo_BG\Shipping\Packer\Size;
 
@@ -11,6 +12,15 @@ defined( 'ABSPATH' ) || exit;
 class Method extends \WC_Shipping_Method {
 	const METHOD_ID = "woo_bg_speedy";
 	public $container, $cookie_data, $package, $delivery_type, $free_shipping_over, $fixed_price, $test, $tax_status, $free_shipping = false;
+	private static $aps_box_sizes = array(
+		array(
+			'name'       => 'APS',
+			'length'     => 60,
+			'width'      => 35,
+			'height'     => 37,
+			'max_weight' => 20,
+		),
+	);
 
 	public function __construct( $instance_id = 0 ) {
 		$this->container          = woo_bg()->container();
@@ -61,7 +71,7 @@ class Method extends \WC_Shipping_Method {
 		$this->cookie_data = self::get_cookie_data();
 		$this->package = $package;
 
-		$disable_aps = ( $this->delivery_type === 'automat' && $this->is_aps_not_allowed( $this->package ) );
+		$disable_aps = ( $this->delivery_type === 'automat' && ! APSPackage::package_fits_largest_box( $this->package, self::$aps_box_sizes ) );
 
 		if( apply_filters( 'woo_bg/speedy/rate/disable_aps', $disable_aps, $this ) ) {
 			return;
@@ -82,6 +92,7 @@ class Method extends \WC_Shipping_Method {
 		$rate['meta_data']['validated'] = false;
 		$payment_by_data = $this->generate_payment_by_data();
 		$chosen_shippings = WC()->session->get('chosen_shipping_methods');
+		$country = apply_filters('woo_bg/speedy/country_for_validation', $package['destination']['country'], $this );
 
 		if ( 
 			isset( $this->cookie_data['type'] ) && 
@@ -105,7 +116,7 @@ class Method extends \WC_Shipping_Method {
 				$rate['cost'] = $request_data['price'];
 
 				if ( wc_tax_enabled() ) {
-					$rate[ 'taxes' ] = woo_bg_get_shipping_rate_taxes( $request_data['price'] );
+					$rate[ 'taxes' ] = woo_bg_get_shipping_rate_taxes( $request_data['price'], $country );
 				}
 			}
 		}
@@ -118,10 +129,11 @@ class Method extends \WC_Shipping_Method {
 		} 
 
 		if ( !$this->free_shipping && !empty( $this->fixed_price ) ) {
-			$rate[ 'cost' ] = woo_bg_tax_based_price( $this->fixed_price );
+			$tax_rate = apply_filters('woo_bg/shipping/fixed_price_tax_rate', 20, $country );
+			$rate[ 'cost' ] = woo_bg_tax_based_price( $this->fixed_price, $tax_rate );
 			
 			if ( wc_tax_enabled() ) {
-				$rate[ 'taxes' ] = woo_bg_get_shipping_rate_taxes( $rate[ 'cost' ] );
+				$rate[ 'taxes' ] = woo_bg_get_shipping_rate_taxes( $rate[ 'cost' ], $country );
 			}
 		}
 
@@ -591,63 +603,6 @@ class Method extends \WC_Shipping_Method {
 		return array(
 			'payment' => $payment,
 		);
-	}
-
-	public function is_aps_not_allowed( $package ) {
-		$has_oversize_item = false;
-		$weight_limit = 0;
-		
-		foreach ( $package[ 'contents' ] as $key => $cart_item ) {
-			$_product = $cart_item['data'];
-			$has_oversize_item = self::determine_item_size( 
-				wc_get_dimension( $_product->get_height(), 'cm', get_option( 'woocommerce_dimension_unit' ) ),
-				wc_get_dimension( $_product->get_width(), 'cm', get_option( 'woocommerce_dimension_unit' ) ),
-				wc_get_dimension( $_product->get_length(), 'cm', get_option( 'woocommerce_dimension_unit' ) )
-			);
-			
-			$weight_limit += wc_get_weight( $_product->get_weight(), 'kg' ) * $cart_item['quantity'];
-		}
-
-		$weight_limit = apply_filters( 'woo_bg/speedy/rate/aps_weight_limit', $weight_limit, $this );
-		
-		if ( $weight_limit > 20 ) {
-			$has_oversize_item = true;
-		}
-
-		return $has_oversize_item;
-	}
-
-	public static function determine_item_size( $height, $width, $length ) {
-		$max_diagonal = 78.70;
-
-		$dimensions = [
-			[
-				'box_size' => 3,
-				'height' => 37,
-				'width' => 35,
-				'length' => 60,
-			],
-		];
-
-		$oversize = false;
-
-		foreach ( $dimensions as $size ) {
-			if (
-				$height > $size['height'] &&
-				$width > $size['width'] &&
-				$length > $size['length']
-			) {
-				$oversize = true;
-			} else {
-				$max_side = max( $length, $width, $height );
-				
-				if ( $max_side > $max_diagonal ) {
-					$oversize = true;
-				}
-			}
-		}
-
-		return $oversize;
 	}
 
 	public static function validate_speedy_method( $fields, $errors ) {

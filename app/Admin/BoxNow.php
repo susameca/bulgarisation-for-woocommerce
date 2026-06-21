@@ -482,6 +482,7 @@ class BoxNow {
  
 	public static function send_label_request( $label ) {
 		$container = woo_bg()->container();
+		woo_bg_remove_api_filters();
 
 		return wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/boxnow/create_label/', [
 			'body' => [
