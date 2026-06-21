@@ -30,7 +30,7 @@ class Pigeon {
 		$this->load_base_endpoint();
 	}
 
-	public function api_call( $endpoint, $args, $method = 'GET' ) {
+	public function api_call( $endpoint, $args, $method = 'GET', $plain = false ) {
 		if ( empty( $this->get_api_key() ) || empty( $this->get_api_secret() ) ) {
 	        return;
 	    }
@@ -55,7 +55,11 @@ class Pigeon {
 			$request = wp_remote_post( $url, $request_args );
 		}
 
-		return json_decode( wp_remote_retrieve_body( $request ), 1 );
+		if ( $plain ) {
+			return wp_remote_retrieve_body( $request );
+		} else {
+			return json_decode( wp_remote_retrieve_body( $request ), 1 );
+		}
 	}
 
 	public function is_valid_access( $forced = false ) {

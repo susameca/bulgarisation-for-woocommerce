@@ -549,6 +549,7 @@ class Pigeon {
 
 			$data['message'] = implode( ", ", $errors );
 		} else {
+			unset( $response['data']['label_pdf'] );
 			//$data['price'] = woo_bg_tax_based_price( $response['data']['total_price'] );
 			$data['label'] = $request_body;
 			$data['shipmentStatus'] = $response;
@@ -569,12 +570,12 @@ class Pigeon {
 			wp_die();
 		}
 		
+		$container = woo_bg()->container();
 		$order_id = sanitize_text_field( $_REQUEST['order-id'] );
 		$order = wc_get_order( $order_id );
 		$shipment_status = $order->get_meta( 'woo_bg_pigeon_shipment_status' );
-
-		$pdf_escaped = base64_decode( $shipment_status['data']['label_pdf'] );
-
+		$pdf_escaped = $container[ Client::PIGEON ]->api_call( $container[ Client::PIGEON ]::CREATE_LABEL_ENDPOINT . "/" . $shipment_status['data']['reference_number'] . "/label", [], 'GET', true );
+		
 		header('Content-Type: application/pdf');
 		header('Content-Length: '.strlen( $pdf_escaped ));
 		header('Content-disposition: inline; filename="' . $shipment_status['data']['reference_number'] . '.pdf"');

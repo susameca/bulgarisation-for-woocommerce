@@ -63,7 +63,8 @@ class Method extends \WC_Shipping_Method {
 		$this->package = $package;
 
 		$disable_aps = ( $this->delivery_type === 'locker' && ! APSBoxes::package_fits_largest_locker( $this->package ) );
-
+		$disable_aps = false;
+		
 		if( apply_filters( 'woo_bg/pigeon/rate/disable_aps', $disable_aps, $this ) ) {
 			return;
 		}

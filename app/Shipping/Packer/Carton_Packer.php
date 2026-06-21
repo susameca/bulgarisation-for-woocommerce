@@ -6,11 +6,12 @@ class Carton_Packer {
      * Try multiple base candidates and return the best-volume solution.
      *
      * @param Product[] $products Products to pack.
+     * @param array<int,array<string,mixed>>|array<string,mixed> $cartons Optional max carton size(s).
      * @return Pack_Result
      */
-    public function find_best_carton( array $products ): Pack_Result {
+    public function find_best_carton( array $products, array $cartons = array() ): Pack_Result {
         if ( empty( $products ) ) {
-            throw new InvalidArgumentException( 'Products list cannot be empty.' );
+            throw new \InvalidArgumentException( 'Products list cannot be empty.' );
         }
 
         $area_lb  = 0;
@@ -22,6 +23,10 @@ class Carton_Packer {
             $side_lb   = max( $side_lb, $p->size->min_max_base_side() );
             $total_vol += $p->size->volume();
         }
+
+        $cartons = $this->normalize_cartons( $cartons );
+        $best    = $this->find_homogeneous_carton( $products, $total_vol, $cartons );
+        $bestVol = null !== $best ? $best->L * $best->W * $best->H : PHP_INT_MAX;
 
         // Generate base candidates from aspect ratios + per-item face candidates.
         $ratios     = array( 1.0, 4 / 3, 3 / 2, 16 / 10, 2.0, 5 / 3, 3.0, 16 / 9 );
@@ -65,16 +70,32 @@ class Carton_Packer {
         $add_candidate( $candidates, $L, $W );
 
         // Per-item exact face candidates to allow tight fit for single items and mixes.
+        $orientation_bases = array();
+
         foreach ( $products as $p ) {
             foreach ( $p->size->orientations() as $o ) {
                 $add_candidate( $candidates, $o[0], $o[1] );
                 // +5% slack to be robust to fragmentation.
                 $add_candidate( $candidates, (int) ceil( $o[0] * 1.05 ), (int) ceil( $o[1] * 1.05 ) );
+
+                $orientation_bases[ "{$o[0]}×{$o[1]}" ] = array( $o[0], $o[1] );
             }
         }
 
-        $best    = null;
-        $bestVol = PHP_INT_MAX;
+        foreach ( $orientation_bases as $base ) {
+            for ( $columns = 1; $columns <= count( $products ); $columns++ ) {
+                $L = $base[0] * $columns;
+                $W = (int) ceil( $area_lb / $L );
+
+                $add_candidate( $candidates, $L, $W );
+            }
+        }
+
+        foreach ( $cartons as $carton ) {
+            $add_candidate( $candidates, $carton['length'], $carton['width'] );
+            $add_candidate( $candidates, $carton['length'], $carton['height'] );
+            $add_candidate( $candidates, $carton['width'], $carton['height'] );
+        }
 
         foreach ( $candidates as $base ) {
             $L = $base[0];
@@ -88,6 +109,10 @@ class Carton_Packer {
             $H   = $attempt['H'];
             $vol = $L * $W * $H;
 
+            if ( ! empty( $cartons ) && ! $this->fits_any_carton( $L, $W, $H, $cartons ) ) {
+                continue;
+            }
+
             if ( $vol < $bestVol || ( $vol === $bestVol && ( null !== $best && ( $H < $best->H || ( $H === $best->H && $L < $best->L ) ) ) ) ) {
                 $fill  = $total_vol / $vol;
                 $best  = new Pack_Result( $L, $W, $H, $attempt['placements'], $fill );
@@ -96,10 +121,183 @@ class Carton_Packer {
         }
 
         if ( null === $best ) {
-            throw new RuntimeException( 'Failed to pack with generated candidates. Try increasing slack or check items.' );
+            throw new \RuntimeException( empty( $cartons ) ? 'Failed to pack with generated candidates. Try increasing slack or check items.' : 'Failed to pack inside the supplied carton size.' );
         }
 
         return $best;
+    }
+
+    private function find_homogeneous_carton( array $products, int $total_vol, array $cartons ): ?Pack_Result {
+        if ( ! $this->has_equal_product_sizes( $products ) ) {
+            return null;
+        }
+
+        $best         = null;
+        $best_vol     = PHP_INT_MAX;
+        $product      = reset( $products );
+        $product_count = count( $products );
+
+        foreach ( $this->unique_orientations( $product->size->orientations() ) as $orientation ) {
+            $x = $orientation[0];
+            $y = $orientation[1];
+            $z = $orientation[2];
+
+            for ( $columns = 1; $columns <= $product_count; $columns++ ) {
+                for ( $rows = 1; $rows <= (int) ceil( $product_count / $columns ); $rows++ ) {
+                    $layers = (int) ceil( $product_count / ( $columns * $rows ) );
+                    $dims   = $this->canonical_dimensions( $columns * $x, $rows * $y, $layers * $z );
+                    $L      = $dims[0];
+                    $W      = $dims[1];
+                    $H      = $dims[2];
+
+                    if ( ! empty( $cartons ) && ! $this->fits_any_carton( $L, $W, $H, $cartons ) ) {
+                        continue;
+                    }
+
+                    $vol = $L * $W * $H;
+
+                    if ( $this->is_better_carton( $L, $W, $H, $vol, $best, $best_vol ) ) {
+                        $best     = new Pack_Result( $L, $W, $H, array(), $total_vol / $vol );
+                        $best_vol = $vol;
+                    }
+                }
+            }
+        }
+
+        return $best;
+    }
+
+    private function has_equal_product_sizes( array $products ): bool {
+        $first = reset( $products );
+
+        if ( ! $first instanceof Product ) {
+            return false;
+        }
+
+        $first_dimensions = $this->sorted_dimensions( $first->size->l, $first->size->w, $first->size->h );
+
+        foreach ( $products as $product ) {
+            if ( ! $product instanceof Product ) {
+                return false;
+            }
+
+            if ( $first_dimensions !== $this->sorted_dimensions( $product->size->l, $product->size->w, $product->size->h ) ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function unique_orientations( array $orientations ): array {
+        $unique = array();
+
+        foreach ( $orientations as $orientation ) {
+            $unique[ implode( 'x', $orientation ) ] = $orientation;
+        }
+
+        return array_values( $unique );
+    }
+
+    private function canonical_dimensions( int $L, int $W, int $H ): array {
+        $dimensions = array( $L, $W, $H );
+        rsort( $dimensions );
+
+        return $dimensions;
+    }
+
+    private function sorted_dimensions( int $L, int $W, int $H ): array {
+        $dimensions = array( $L, $W, $H );
+        sort( $dimensions );
+
+        return $dimensions;
+    }
+
+    private function is_better_carton( int $L, int $W, int $H, int $vol, ?Pack_Result $best, int $best_vol ): bool {
+        if ( null === $best ) {
+            return true;
+        }
+
+        if ( $vol !== $best_vol ) {
+            return $vol < $best_vol;
+        }
+
+        $max_side      = max( $L, $W, $H );
+        $best_max_side = max( $best->L, $best->W, $best->H );
+
+        if ( $max_side !== $best_max_side ) {
+            return $max_side < $best_max_side;
+        }
+
+        if ( $H !== $best->H ) {
+            return $H < $best->H;
+        }
+
+        return $L < $best->L;
+    }
+
+    private function normalize_cartons( array $cartons ): array {
+        if ( empty( $cartons ) ) {
+            return array();
+        }
+
+        if ( isset( $cartons['length'] ) || isset( $cartons['depth'] ) || isset( $cartons['width'] ) || isset( $cartons['height'] ) ) {
+            $cartons = array( $cartons );
+        }
+
+        $normalized = array();
+
+        foreach ( $cartons as $carton ) {
+            if ( ! is_array( $carton ) ) {
+                continue;
+            }
+
+            $length = $this->get_carton_dimension( $carton, array( 'length', 'depth', 'l', 'L' ) );
+            $width  = $this->get_carton_dimension( $carton, array( 'width', 'w', 'W' ) );
+            $height = $this->get_carton_dimension( $carton, array( 'height', 'h', 'H' ) );
+
+            if ( null === $length || null === $width || null === $height ) {
+                continue;
+            }
+
+            $normalized[] = array(
+                'length' => $length,
+                'width'  => $width,
+                'height' => $height,
+            );
+        }
+
+        return $normalized;
+    }
+
+    private function get_carton_dimension( array $carton, array $keys ): ?int {
+        foreach ( $keys as $key ) {
+            if ( isset( $carton[ $key ] ) && is_numeric( $carton[ $key ] ) && (float) $carton[ $key ] > 0 ) {
+                return (int) ceil( (float) $carton[ $key ] );
+            }
+        }
+
+        return null;
+    }
+
+    private function fits_any_carton( int $L, int $W, int $H, array $cartons ): bool {
+        foreach ( $cartons as $carton ) {
+            if ( $this->fits_carton( $L, $W, $H, $carton ) ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function fits_carton( int $L, int $W, int $H, array $carton ): bool {
+        $result_dimensions = array( $L, $W, $H );
+        $carton_dimensions = array( $carton['length'], $carton['width'], $carton['height'] );
+
+        sort( $result_dimensions );
+        sort( $carton_dimensions );
+
+        return $result_dimensions[0] <= $carton_dimensions[0] && $result_dimensions[1] <= $carton_dimensions[1] && $result_dimensions[2] <= $carton_dimensions[2];
     }
 
     /**
