@@ -400,14 +400,71 @@ function woo_bg_check_admin_label_actions() {
 	}
 }
 
-function woo_bg_get_package_total() {
-	$total = floatval( WC()->cart->get_cart_contents_total() ) + floatval( WC()->cart->get_cart_contents_tax() );
+function woo_bg_prime_cart_fee_totals( WC_Cart $cart ) {
+	static $is_calculating = false;
 
-	if ( apply_filters('woo_bg/shipping/package_total_includes_fees', true ) ) {
-		$total += floatval( WC()->cart->get_fee_total() ) + floatval( WC()->cart->get_fee_tax() );
+	if ( $is_calculating ) {
+		return;
 	}
 
-	$total = number_format( $total, 2, '.', '' );
+	$is_calculating = true;
+
+	try {
+		$fees_api      = $cart->fees_api();
+		$customer      = $cart->get_customer();
+		$calculate_tax = wc_tax_enabled() && ( ! $customer || ! $customer->get_is_vat_exempt() );
+
+		$fees_api->remove_all_fees();
+		$cart->calculate_fees();
+
+		$fee_total     = 0.0;
+		$fee_tax_total = 0.0;
+		$fee_taxes     = array();
+
+		foreach ( $cart->get_fees() as $fee ) {
+			$amount    = isset( $fee->amount ) ? (float) $fee->amount : 0.0;
+			$taxes     = array();
+			$tax_total = 0.0;
+
+			$fee_total += $amount;
+
+			if ( $calculate_tax && 0 < $amount && ! empty( $fee->taxable ) ) {
+				$tax_class = isset( $fee->tax_class ) ? (string) $fee->tax_class : '';
+				$taxes     = WC_Tax::calc_tax( $amount, WC_Tax::get_rates( $tax_class, $customer ), false );
+
+				foreach ( $taxes as $rate_id => $tax_amount ) {
+					$taxes[ $rate_id ] = wc_round_tax_total( $tax_amount );
+				}
+
+				$tax_total     = array_sum( $taxes );
+				$fee_tax_total += $tax_total;
+				$fee_taxes     = wc_array_merge_recursive_numeric( $fee_taxes, $taxes );
+			}
+
+			$fee->total    = wc_format_decimal( $amount );
+			$fee->tax      = wc_format_decimal( $tax_total );
+			$fee->tax_data = $taxes;
+		}
+
+		$cart->set_fee_total( $fee_total );
+		$cart->set_fee_tax( $fee_tax_total );
+		$cart->set_fee_taxes( $fee_taxes );
+	} finally {
+		$is_calculating = false;
+	}
+}
+
+function woo_bg_get_package_total() {
+	$includes_fees = apply_filters( 'woo_bg/shipping/package_total_includes_fees', true );
+	$total = (float) WC()->cart->get_cart_contents_total() + (float) WC()->cart->get_cart_contents_tax();
+
+	if ( $includes_fees ) {
+		woo_bg_prime_cart_fee_totals( WC()->cart );
+
+		$total += (float) WC()->cart->get_fee_total() + (float) WC()->cart->get_fee_tax();
+	}
+
+	$total = wc_format_decimal( $total, wc_get_price_decimals() );
 
 	return apply_filters( 'woo_bg/shipping/package_total', $total );
 }
@@ -798,4 +855,17 @@ function woo_bg_impossible_prices_get_product_tax_rate() {
 	}
 
 	return $total / 100;
+}
+
+function woo_bg_remove_api_filters() {
+	$hooks_to_disable = array(
+		'http_request_args',
+		'pre_http_request',
+		'http_api_curl',
+		'requests-curl.before_send',
+	);
+
+	foreach ( $hooks_to_disable as $hook ) {
+		remove_all_filters( $hook );
+	}
 }
