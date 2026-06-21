@@ -27,11 +27,10 @@ class Register {
 		self::maybe_register_cvc();
 
 		if ( woo_bg_is_shipping_enabled() ) {
-			add_action( 'woocommerce_checkout_update_order_review', array( __CLASS__, 'update_order_review' ), 1, 2 );
+			add_action( 'woocommerce_checkout_update_order_review', array( __CLASS__, 'update_order_review' ), 0 );
 			add_filter( 'wc_cart_totals_shipping_method_cost', array( __CLASS__, 'change_price_label_if_not_calculated' ), 10, 2 );
 			add_filter( 'woocommerce_shipping_rate_label', array( __CLASS__, 'add_fsh_nc_labels' ), 100, 2 );
 			add_action( 'woocommerce_order_item_shipping_after_calculate_taxes', array( __CLASS__, 'set_shipping_rate_taxes_for_recalculation' ), 10, 2 );
-			add_action( 'woocommerce_cart_calculate_fees', array( __CLASS__, 'update_session' ), 0 );
 		}
 	}
 
@@ -181,7 +180,9 @@ class Register {
 		return $methods;
 	}
 
-	public static function update_order_review( $array ) {
+	public static function update_order_review( $source ) {
+		self::update_session( $source );
+		
 	    $packages = WC()->cart->get_shipping_packages();
 
 	    foreach ( $packages as $key => $value ) {
