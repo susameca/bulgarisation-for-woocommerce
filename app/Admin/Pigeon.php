@@ -574,7 +574,14 @@ class Pigeon {
 		$order_id = sanitize_text_field( $_REQUEST['order-id'] );
 		$order = wc_get_order( $order_id );
 		$shipment_status = $order->get_meta( 'woo_bg_pigeon_shipment_status' );
-		$pdf_escaped = $container[ Client::PIGEON ]->api_call( $container[ Client::PIGEON ]::CREATE_LABEL_ENDPOINT . "/" . $shipment_status['data']['reference_number'] . "/label", [], 'GET', true );
+		$size = isset( $_REQUEST['size'] ) ? sanitize_key( $_REQUEST['size'] ) : '';
+		$request_args = array();
+
+		if ( 'a4' === $size ) {
+			$request_args['format'] = 'a4';
+		}
+
+		$pdf_escaped = $container[ Client::PIGEON ]->api_call( $container[ Client::PIGEON ]::CREATE_LABEL_ENDPOINT . "/" . $shipment_status['data']['reference_number'] . "/label", $request_args, 'GET', true );
 		
 		header('Content-Type: application/pdf');
 		header('Content-Length: '.strlen( $pdf_escaped ));

@@ -312,6 +312,18 @@
 							</span>
 						</p>
 
+						<div>
+							<span class="woo-bg--radio">
+								<input id="pigeon_label_size_default" type="radio" name="label_size" value="" checked>
+								<label for="pigeon_label_size_default"> {{i18n.default}}</label>
+							</span>
+
+							<span class="woo-bg--radio">
+								<input id="pigeon_label_size_a4" type="radio" name="label_size" value="a4" >
+								<label for="pigeon_label_size_a4">A4</label>
+							</span>
+						</div>
+
 						<iframe id="woo-bg--pigeon-label-print" :src="iframeUrl"></iframe>
 					</div>
 				</div><!-- /.order_data_column order_data_column-/-half -->
@@ -398,6 +410,7 @@ export default {
 					label: wooBg_pigeon.i18n.fixedPrice
 				}
 			],
+			size: '',
 			shipmentStatus : '',
 			labelData : wooBg_pigeon.label,
 			document: $( document.body ),
@@ -424,6 +437,10 @@ export default {
 
 			if ( this.shipmentStatus.reference_number !== "undefined" ) {
 				link = woocommerce_admin.ajax_url + '?cache-buster=' + Math.random()  + '&action=woo_bg_pigeon_print_labels&order-id=' + wooBg_pigeon.orderId;
+
+				if ( this.size ) {
+					link += '&size=' + this.size;
+				}
 			}
 
 			return link;
@@ -458,6 +475,10 @@ export default {
 		if ( wooBg_pigeon.shipmentStatus ) {
 			this.shipmentStatus = wooBg_pigeon.shipmentStatus;
 		}
+
+		this.document.on('change', 'input[name="label_size"]', function () {
+			_this.size = $(this).val();
+		});
 
 		this.types.forEach( function ( type ) {
 			if ( type.id == wooBg_pigeon.cookie_data.type ) {
