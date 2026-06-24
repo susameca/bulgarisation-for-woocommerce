@@ -869,3 +869,9 @@ function woo_bg_remove_api_filters() {
 		remove_all_filters( $hook );
 	}
 }
+
+function woo_bg_normalize_text_for_label( $text, $max_length = 200 ) {
+	$text = preg_replace( '/[^\p{Cyrillic}a-zA-Z0-9 ]/u', '', htmlspecialchars( $text, ENT_XML1 ) );
+
+	return mb_substr( $text, 0, $max_length, 'UTF-8' );
+}

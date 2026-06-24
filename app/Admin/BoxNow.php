@@ -288,7 +288,7 @@ class BoxNow {
 
 			$weight = ( $_product->get_weight() ) ? wc_get_weight( $_product->get_weight(), 'kg' ) : 1;
 			$items[ $box_count ][ 'weight' ] += (float) $weight;
-			$items[ $box_count ][ 'name' ] .= $order_item->get_name() . ";";
+			$items[ $box_count ][ 'name' ] .= woo_bg_normalize_text_for_label( $order_item->get_name() . ";" );
 
 			if ( $item_sizes['size'] ) {
 				$items[ $box_count ][ 'compartmentSize' ] = Method::determine_item_size_by_volume( $current_volume );
@@ -320,7 +320,7 @@ class BoxNow {
 			$_product = $order_item->get_product();
 			$weight = ( $_product->get_weight() ) ? wc_get_weight( $_product->get_weight(), 'kg' ) : 1;
 			$items[0][ 'weight' ] += (float) $weight * $order_item['quantity'];
-			$items[0][ 'name' ] .= $order_item->get_name() . ";";
+			$items[0][ 'name' ] .= woo_bg_normalize_text_for_label( $order_item->get_name() . ";" );
 		}
 
 		return $items;

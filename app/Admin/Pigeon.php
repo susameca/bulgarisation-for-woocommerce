@@ -512,7 +512,7 @@ class Pigeon {
 
 		foreach ( $order->get_items() as $item ) {
 			$label['inventory_items'][] = array(
-				'description' => $item->get_name(),
+				'description' => woo_bg_normalize_text_for_label( $item->get_name() ),
 				'quantity' => $item['quantity'],
 			);
 		}
@@ -522,7 +522,7 @@ class Pigeon {
 
 	protected static function update_customer_note( $label, $order ) {
 		if ( $order->get_customer_note() ) {
-			$label['note'] = mb_substr( $order->get_customer_note(), 0, 1000 );
+			$label['note'] = woo_bg_normalize_text_for_label( $order->get_customer_note(), 1000 );
 		} else {
 			unset( $label['note'] );
 		}

@@ -548,7 +548,7 @@ class Econt {
 
 						$label["packingList"][] = [
 							'inventoryNum' => $key,
-							'description' => $item->get_name() . " x " . $item->get_quantity(),
+							'description' => woo_bg_normalize_text_for_label( $item->get_name() . " x " . $item->get_quantity() ),
 							'weight' => number_format( $item_weight, 3 ),
 							'count' => 1,
 							'price' => number_format( $item->get_total(), 2, '.', '' ) + number_format( $item->get_total_tax(), 2, '.', '' ),
@@ -567,7 +567,7 @@ class Econt {
 
 							$label["packingList"][] = [
 								'inventoryNum' => $key,
-								'description' => $item->get_name() . " x " . $item->get_quantity(),
+								'description' => woo_bg_normalize_text_for_label( $item->get_name() . " x " . $item->get_quantity() ),
 								'weight' => 0.05,
 								'count' => 1,
 								'price' => number_format( $item->get_total(), 2, '.', '' ) + number_format( $item->get_total_tax(), 2, '.', '' ),

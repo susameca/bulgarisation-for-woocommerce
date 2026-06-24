@@ -361,6 +361,8 @@ class Method extends \WC_Shipping_Method {
 				}
 			}
 
+			$name = woo_bg_normalize_text_for_label( $name );
+
 			$cart_data['inventory_items'][] = array(
 				'description' => $name,
 				'quantity' => $item['quantity'],

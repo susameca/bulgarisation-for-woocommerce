@@ -430,6 +430,7 @@ class Method extends \WC_Shipping_Method {
 				}
 			}
 
+			$name = woo_bg_normalize_text_for_label( $name );
 			$names[] = $name;
 
 			if ( $auto_sizes && $item['data']->get_length() && $item['data']->get_width() && $item['data']->get_height() ) {
@@ -448,7 +449,7 @@ class Method extends \WC_Shipping_Method {
 			$cart['weight'] = apply_filters( 'woo_bg/econt/label/weight', 1, $this->package, $this );
 		}
 
-		$cart['shipmentDescription'] = implode( ', ', $names );
+		$cart['shipmentDescription'] = woo_bg_normalize_text_for_label( implode( ', ', $names ), 500 );
 		
 		if ( $auto_sizes && $this->delivery_type !== 'automat' ) {
 			$pack = array(

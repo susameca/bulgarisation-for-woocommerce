@@ -441,7 +441,7 @@ class Speedy {
 				$rate = woo_bg_get_order_item_vat_rate( $item, $order, false, 0 );
 
 				$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
-					'description' => mb_substr( $item->get_name(), 0, 50 ),
+					'description' => woo_bg_normalize_text_for_label( $item->get_name(), 49 ),
 					'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
 					'amount' => number_format( $item->get_total(), 2, '.', '' ),
 					'amountWithVat' => number_format( $item->get_total() + $item->get_total_tax(), 2, '.', '' ),
@@ -457,7 +457,7 @@ class Speedy {
 					$rate = woo_bg_get_order_item_vat_rate( $item, $order, false, 0 );
 
 					$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
-						'description' => mb_substr( $item->get_name(), 0, 50 ),
+						'description' => woo_bg_normalize_text_for_label( $item->get_name(), 49 ),
 						'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
 						'amount' => number_format( $item->get_total(), 2, '.', '' ),
 						'amountWithVat' => number_format( $item->get_total() + $item->get_total_tax(), 2, '.', '' ),
@@ -469,7 +469,7 @@ class Speedy {
 				$rate = ( wc_tax_enabled() ) ? 20 : 0;
 
 				$label['service']['additionalServices']['cod']['fiscalReceiptItems'][] = [
-					'description' => mb_substr( 'Доставка', 0, 50 ),
+					'description' => woo_bg_normalize_text_for_label( 'Доставка', 49 ),
 					'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
 					'amount' => woo_bg_tax_based_price( $cookie_data['fixed_price'] ),
 					'amountWithVat' => number_format( $cookie_data['fixed_price'], 2, '.', '' ),

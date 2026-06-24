@@ -419,6 +419,7 @@ class Method extends \WC_Shipping_Method {
 				$name .= ' - ' . $item['data']->get_attribute_summary();
 			}
 
+			$name = woo_bg_normalize_text_for_label( $name );
 			$names[] = $name;
 
 			if ( $auto_sizes && $item['data']->get_length() && $item['data']->get_width() && $item['data']->get_height() ) {
@@ -439,7 +440,7 @@ class Method extends \WC_Shipping_Method {
 			$weigth = apply_filters( 'woo_bg/speedy/label/weight', 1, $this->package, $this );
 		}
 
-		$content['contents'] = mb_substr( implode( ',', $names ), 0, 100 );
+		$content['contents'] = woo_bg_normalize_text_for_label( implode( ',', $names ), 99 );
 
 		$pack_sizes = apply_filters( 'woo_bg/speedy/label/sizes', [
 			'width' => 30,
@@ -528,7 +529,7 @@ class Method extends \WC_Shipping_Method {
 					
 					$rate = round( ( $cart_item['line_tax'] / $cart_item['line_total'] ) * 100 );
 					$services['additionalServices']['cod']['fiscalReceiptItems'][] = [
-						'description' => mb_substr( $cart_item['data']->get_name(), 0, 50 ),
+						'description' => woo_bg_normalize_text_for_label( $name, 49 ),
 						'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
 						'amount' => number_format( $cart_item['line_total'], 2, '.', '' ),
 						'amountWithVat' => number_format( $cart_item['line_total'] + $cart_item['line_tax'], 2, '.', '' ),
@@ -541,7 +542,7 @@ class Method extends \WC_Shipping_Method {
 					$rate = round( ( $tax / $total ) * 100 );
 
 					$services['additionalServices']['cod']['fiscalReceiptItems'][] = [
-						'description' => mb_substr( 'Fees', 0, 50 ),
+						'description' => __( 'Fees', 'bulgarisation-for-woocommerce' ),
 						'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
 						'amount' => number_format( $total, 2, '.', '' ),
 						'amountWithVat' => number_format( $total + $tax, 2, '.', '' ),
