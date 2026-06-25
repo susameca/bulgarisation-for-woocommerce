@@ -529,7 +529,7 @@ class Method extends \WC_Shipping_Method {
 					
 					$rate = round( ( $cart_item['line_tax'] / $cart_item['line_total'] ) * 100 );
 					$services['additionalServices']['cod']['fiscalReceiptItems'][] = [
-						'description' => woo_bg_normalize_text_for_label( $name, 49 ),
+						'description' => woo_bg_normalize_text_for_label( $cart_item['data']->get_name(), 49 ),
 						'vatGroup' => woo_bg_get_vat_group_from_rate( $rate ),
 						'amount' => number_format( $cart_item['line_total'], 2, '.', '' ),
 						'amountWithVat' => number_format( $cart_item['line_total'] + $cart_item['line_tax'], 2, '.', '' ),
