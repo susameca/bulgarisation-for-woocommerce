@@ -60,7 +60,7 @@ class APSBoxes {
 	}
 
 	public static function package_fits_largest_locker( $package ) {
-		return APSPackage::package_fits_largest_box( $package, self::$box_sizes );
+		return APSPackage::package_products_fit_largest_box( $package, self::$box_sizes );
 	}
 
 	private static function should_handle_method( $method ) {

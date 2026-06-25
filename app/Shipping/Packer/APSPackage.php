@@ -30,6 +30,33 @@ class APSPackage {
 		return count( $packed_boxes ) === 1;
 	}
 
+	public static function package_products_fit_largest_box( $package, array $box_sizes ): bool {
+		$products = self::get_products_from_package( $package );
+
+		if ( empty( $products ) ) {
+			return true;
+		}
+
+		$largest_box = self::get_largest_box_size( $box_sizes );
+		$packer      = new APSPacker();
+
+		foreach ( $products as $product ) {
+			$product['quantity'] = 1;
+
+			try {
+				$packed_boxes = $packer->pack( array( $product ), array( $largest_box ) );
+			} catch ( \Throwable $e ) {
+				return false;
+			}
+
+			if ( count( $packed_boxes ) !== 1 ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	private static function get_largest_box_size( array $box_sizes ): array {
 		if ( empty( $box_sizes ) ) {
 			return array();
