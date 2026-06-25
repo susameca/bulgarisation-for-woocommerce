@@ -403,20 +403,22 @@ class Econt {
 			$label['senderOfficeCode'] = str_replace( 'officeID-', '', $office );
 		}
 
-		$new_send_from = map_deep( $_REQUEST['send_from'], 'sanitize_text_field' );
-		$new_send_from_type = sanitize_text_field( $_REQUEST['send_from_type'] );
+		if ( isset( $_REQUEST['send_from'] ) && isset( $_REQUEST['send_from_type'] ) ) {
+			$new_send_from = map_deep( $_REQUEST['send_from'], 'sanitize_text_field' );
+			$new_send_from_type = sanitize_text_field( $_REQUEST['send_from_type'] );
 
-		if ( !empty( $new_send_from ) && !empty( $new_send_from_type ) ) {
-			switch ( $new_send_from_type ) {
-				case 'address':
-					$profile_addresses = $container[ Client::ECONT_PROFILE ]->get_profile_data()['addresses'];
+			if ( !empty( $new_send_from ) && !empty( $new_send_from_type ) ) {
+				switch ( $new_send_from_type ) {
+					case 'address':
+						$profile_addresses = $container[ Client::ECONT_PROFILE ]->get_profile_data()['addresses'];
 
-					$label['senderAddress'] = $profile_addresses[ $new_send_from ];
-					unset( $label['senderOfficeCode'] );
-					break;
-				case 'office':
-					$label['senderOfficeCode'] = str_replace( 'officeID-', '', $new_send_from );
-					break;
+						$label['senderAddress'] = $profile_addresses[ $new_send_from ];
+						unset( $label['senderOfficeCode'] );
+						break;
+					case 'office':
+						$label['senderOfficeCode'] = str_replace( 'officeID-', '', $new_send_from );
+						break;
+				}
 			}
 		}
 
