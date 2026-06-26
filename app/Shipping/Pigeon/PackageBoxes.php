@@ -12,6 +12,7 @@ class PackageBoxes {
 	const MAX_WIDTH    = 200;
 	const MAX_HEIGHT   = 200;
 	const MAX_WEIGHT   = 30;
+	const MAX_SHIPMENT_WEIGHT = 400;
 	const DEFAULT_SIZE = 20;
 
 	public function __construct() {
@@ -36,6 +37,10 @@ class PackageBoxes {
 		$label['packages'] = $packages;
 
 		return $label;
+	}
+
+	public static function package_weight_fits_shipment( $package, $method = null ) {
+		return self::get_package_weight( $package, $method ) <= self::MAX_SHIPMENT_WEIGHT;
 	}
 
 	private static function should_handle_method( $method ) {

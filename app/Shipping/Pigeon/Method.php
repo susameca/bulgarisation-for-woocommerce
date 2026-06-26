@@ -69,8 +69,16 @@ class Method extends \WC_Shipping_Method {
 				! APSBoxes::package_weight_fits_locker( $this->package )
 			)
 		);
+
+		$disable_packages = (
+			in_array( $this->delivery_type, array( 'office', 'address' ), true ) &&
+			! PackageBoxes::package_weight_fits_shipment( $this->package, $this )
+		);
 		
-		if( apply_filters( 'woo_bg/pigeon/rate/disable_aps', $disable_aps, $this ) ) {
+		if(
+			apply_filters( 'woo_bg/pigeon/rate/disable_aps', $disable_aps, $this ) ||
+			apply_filters( 'woo_bg/pigeon/rate/disable_packages', $disable_packages, $this )
+		) {
 			return;
 		}
 
