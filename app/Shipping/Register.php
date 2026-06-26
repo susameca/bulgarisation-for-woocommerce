@@ -136,6 +136,7 @@ class Register {
 		new Pigeon\Office();
 		new Pigeon\Locker();
 		new Pigeon\APSBoxes();
+		new Pigeon\PackageBoxes();
 		new Pigeon_Admin();
 
 		add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'register_pigeon_method' ) );

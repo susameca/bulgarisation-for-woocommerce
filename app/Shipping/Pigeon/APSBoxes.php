@@ -8,6 +8,7 @@ defined( 'ABSPATH' ) || exit;
 
 class APSBoxes {
 	const OPTION_NAME = 'auto_size';
+	const MAX_LOCKER_WEIGHT = 30;
 
 	private static $box_sizes = array(
 		array(
@@ -63,6 +64,10 @@ class APSBoxes {
 		return APSPackage::package_products_fit_largest_box( $package, self::$box_sizes );
 	}
 
+	public static function package_weight_fits_locker( $package ) {
+		return self::get_package_weight( $package ) <= self::MAX_LOCKER_WEIGHT;
+	}
+
 	private static function should_handle_method( $method ) {
 		return isset( $method->delivery_type ) && $method->delivery_type === 'locker' && ! empty( $method->package );
 	}
@@ -82,5 +87,24 @@ class APSBoxes {
 		}
 
 		return $packages;
+	}
+
+	private static function get_package_weight( $package ) {
+		$weight = 0;
+
+		if ( empty( $package['contents'] ) ) {
+			return $weight;
+		}
+
+		foreach ( $package['contents'] as $cart_item ) {
+			if ( empty( $cart_item['data'] ) || ! is_a( $cart_item['data'], 'WC_Product' ) || ! $cart_item['data']->get_weight() ) {
+				continue;
+			}
+
+			$quantity = ! empty( $cart_item['quantity'] ) ? absint( $cart_item['quantity'] ) : 1;
+			$weight  += wc_get_weight( $cart_item['data']->get_weight(), 'kg' ) * $quantity;
+		}
+
+		return (float) $weight;
 	}
 }

@@ -62,7 +62,13 @@ class Method extends \WC_Shipping_Method {
 		$this->cookie_data = self::get_cookie_data();
 		$this->package = $package;
 
-		$disable_aps = ( $this->delivery_type === 'locker' && ! APSBoxes::package_fits_largest_locker( $this->package ) );
+		$disable_aps = (
+			$this->delivery_type === 'locker' &&
+			(
+				! APSBoxes::package_fits_largest_locker( $this->package ) ||
+				! APSBoxes::package_weight_fits_locker( $this->package )
+			)
+		);
 		
 		if( apply_filters( 'woo_bg/pigeon/rate/disable_aps', $disable_aps, $this ) ) {
 			return;
@@ -217,10 +223,11 @@ class Method extends \WC_Shipping_Method {
 
 		$request = $this->container[ Client::PIGEON ]->api_call( $this->container[ Client::PIGEON ]::CALCULATE_ENDPOINT, $request_body, 'POST' );
 		
+
 		if ( isset( $request['success'] ) && !$request['success'] ) {
-			if ( isset( $request['errors'] ) ) {
+			if ( !empty( $request['errors'] ) ) {
 				$data['errors'] = $request['errors'];
-			} else if ( isset( $request['message'] ) ) {
+			} else if ( !empty( $request['message'] ) ) {
 				$data['errors'] = [ [ $request['message'] ] ];
 			} else {
 				$data['errors'] = [ [ __( 'An error occurred while calculating the shipping price. Please try again later.', 'bulgarisation-for-woocommerce' ) ] ];
@@ -388,9 +395,9 @@ class Method extends \WC_Shipping_Method {
 		$cart_data['packages'][0]['weight'] = $weight;
 
 		if ( empty( $sizes ) ) {
-			$cart_data['packages'][0]['width'] = 20;
-			$cart_data['packages'][0]['length'] = 20;
-			$cart_data['packages'][0]['height'] = 20;
+			$cart_data['packages'][0]['width'] = 17;
+			$cart_data['packages'][0]['length'] = 17;
+			$cart_data['packages'][0]['height'] = 17;
 		} else if ( ( $auto_sizes || $this->cookie_data['type'] === 'locker' ) && !empty( $sizes ) ) {
 			$packer = new Carton_Packer();
 			$result = $packer->find_best_carton( $sizes );

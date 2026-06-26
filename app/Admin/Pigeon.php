@@ -21,6 +21,8 @@ class Pigeon {
 		add_action( 'wp_ajax_woo_bg_pigeon_delete_label', array( __CLASS__, 'delete_label' ) );
 		add_action( 'wp_ajax_woo_bg_pigeon_update_shipment_status', array( __CLASS__, 'update_shipment_status' ) );
 		add_action( 'wp_ajax_woo_bg_pigeon_print_labels', array( __CLASS__, 'print_labels_endpoint' ) );
+
+		add_filter( 'woo_bg/pigeon/calculate_label', array( __CLASS__, 'set_min_package_weight' ), 30 );
 	}
 
 	public static function admin_enqueue_scripts() {
@@ -516,6 +518,24 @@ class Pigeon {
 				'quantity' => $item['quantity'],
 			);
 		}
+
+		return $label;
+	}
+
+	public static function set_min_package_weight( $label ) {
+		if ( empty( $label['packages'] ) || ! is_array( $label['packages'] ) ) {
+			return $label;
+		}
+
+		$min_weight = (float) apply_filters( 'woo_bg/pigeon/min_package_weight', 0.100 );
+
+		foreach ( $label['packages'] as &$package ) {
+			if ( ! isset( $package['weight'] ) || ! is_numeric( $package['weight'] ) || (float) $package['weight'] < $min_weight ) {
+				$package['weight'] = $min_weight;
+			}
+		}
+
+		unset( $package );
 
 		return $label;
 	}
