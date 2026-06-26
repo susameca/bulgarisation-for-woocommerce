@@ -122,6 +122,12 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 == Changelog ==
 
 = 4.0.3 =
+Fix WooCommerce session on update checkpout
+Econt: Add packs array
+Econt, Pigeon, Speedy: Automatically fit order in multiple automats
+
+
+= 4.0.3 =
 Export ZIP: Fix bytes, Add clearstatcache
 Pigeon: Add bulgarisation header
 Pigeon: Fix label generation and fields loading in admin
