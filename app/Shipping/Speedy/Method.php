@@ -11,7 +11,11 @@ defined( 'ABSPATH' ) || exit;
 
 class Method extends \WC_Shipping_Method {
 	const METHOD_ID = "woo_bg_speedy";
+	const VOLUMETRIC_WEIGHT_DIVISOR = 5000;
+	const MAX_PARCELS = 10;
+
 	public $container, $cookie_data, $package, $delivery_type, $free_shipping_over, $fixed_price, $test, $tax_status, $free_shipping = false;
+	private $content_data = null;
 	private static $aps_box_sizes = array(
 		array(
 			'name'       => 'APS',
@@ -70,10 +74,15 @@ class Method extends \WC_Shipping_Method {
 	public function calculate_shipping( $package = Array() ) {
 		$this->cookie_data = self::get_cookie_data();
 		$this->package = $package;
+		$this->content_data = null;
 
-		$disable_aps = ( $this->delivery_type === 'automat' && ! APSPackage::package_fits_largest_box( $this->package, self::$aps_box_sizes ) );
+		$disable_aps = ( $this->delivery_type === 'automat' && ! APSPackage::package_fits_largest_box( $this->package, self::$aps_box_sizes, self::VOLUMETRIC_WEIGHT_DIVISOR ) );
 
 		if( apply_filters( 'woo_bg/speedy/rate/disable_aps', $disable_aps, $this ) ) {
+			return;
+		}
+
+		if ( ! $this->package_fits_max_parcels() ) {
 			return;
 		}
 
@@ -225,7 +234,7 @@ class Method extends \WC_Shipping_Method {
 		WC()->session->set( 'woo-bg-speedy-label' , $request_body );
 
 		$request = $this->container[ Client::SPEEDY ]->label_request( 'calculate', $request_body );
-
+		
 		if ( !isset( $request ) ) {
 			$data['errors'] = __( 'Calculation failed. Please try again.', 'bulgarisation-for-woocommerce' );
 		} else if ( isset( $request['error'] ) || isset( $request['calculations'][0]['error'] ) ) {
@@ -272,9 +281,25 @@ class Method extends \WC_Shipping_Method {
 			$payment_by_data = $this->generate_payment_by_data();
 		}
 
-		$content_data = $this->generate_content_data();
+		$content_data = $this->get_content_data();
 
 		return array_merge( $label, $content_data, $services_data, $payment_by_data );
+	}
+
+	private function get_content_data() {
+		if ( null === $this->content_data ) {
+			$this->content_data = $this->generate_content_data();
+		}
+
+		return $this->content_data;
+	}
+
+	private function package_fits_max_parcels(): bool {
+		$content_data = $this->get_content_data();
+		$parcels = $content_data['content']['parcels'] ?? array();
+		$max_parcels = (int) apply_filters( 'woo_bg/speedy/max_parcels', self::MAX_PARCELS, $this->package, $this );
+
+		return $max_parcels <= 0 || count( $parcels ) <= $max_parcels;
 	}
 
 	private function generate_sender_data() {
@@ -403,13 +428,17 @@ class Method extends \WC_Shipping_Method {
 			'package' => 'BOX',
 		);
 
-		$weigth = 0;
-		$sizes = [];
+		$weigth          = 0;
+		$sizes           = [];
+		$product_weights = [];
 		$auto_sizes = wc_string_to_bool( woo_bg_get_option( 'speedy', 'auto_size' ) );
 
 		foreach ( $this->package[ 'contents' ] as $key => $item ) {
+			$item_weight = 0;
+
 			if ( $item['data']->get_weight() ) {
-				$weigth += wc_get_weight( $item['data']->get_weight(), 'kg' ) * $item['quantity'];
+				$item_weight = wc_get_weight( $item['data']->get_weight(), 'kg' );
+				$weigth += $item_weight * $item['quantity'];
 			}
 
 			$force = woo_bg_get_option( 'speedy', 'force_variations_in_desc' );
@@ -423,7 +452,9 @@ class Method extends \WC_Shipping_Method {
 			$names[] = $name;
 
 			if ( $auto_sizes && $item['data']->get_length() && $item['data']->get_width() && $item['data']->get_height() ) {
-				foreach ( range( 1, $item['quantity'] ) as $i ) {
+				$quantity = ! empty( $item['quantity'] ) ? max( 1, (int) $item['quantity'] ) : 1;
+
+				foreach ( range( 1, $quantity ) as $i ) {
 					$sizes[] = new Product( 
 						$name, 
 						new Size( 
@@ -432,6 +463,7 @@ class Method extends \WC_Shipping_Method {
 							wc_get_dimension( $item['data']->get_height(), 'mm', get_option( 'woocommerce_dimension_unit' ) ),
 						) 
 					);
+					$product_weights[] = $item_weight;
 				}
 			}
 		}
@@ -442,33 +474,180 @@ class Method extends \WC_Shipping_Method {
 
 		$content['contents'] = woo_bg_normalize_text_for_label( implode( ',', $names ), 99 );
 
-		$pack_sizes = apply_filters( 'woo_bg/speedy/label/sizes', [
-			'width' => 30,
-			'depth' => 30,
-			'height' => 30,
-		], $this->package, $this );
+		$pack_sizes = $auto_sizes ? apply_filters( 'woo_bg/speedy/label/sizes', [
+			'width' => 17,
+			'depth' => 17,
+			'height' => 17,
+		], $this->package, $this ) : array();
+		$max_weight = self::get_max_parcel_weight( $this->delivery_type, woo_bg_get_option( 'speedy', 'send_from' ) );
 
 		if ( $auto_sizes && !empty( $sizes ) ) {
-			$packer = new Carton_Packer();
 			$carton_sizes = $this->delivery_type === 'automat' ? self::get_aps_box_sizes_for_packer() : array();
-			$result = $packer->find_best_carton( $sizes, $carton_sizes );
-
-			$pack_sizes = [
-				'width' => wc_get_dimension( $result->W, 'cm', 'mm' ),
-				'depth' => wc_get_dimension( $result->L, 'cm', 'mm' ),
-				'height' => wc_get_dimension( $result->H, 'cm', 'mm' ),
-			];
+			$content['parcels'] = self::generate_parcels_from_products( $sizes, $product_weights, $carton_sizes, $max_weight );
+		} else {
+			$content['parcels'] = self::generate_parcels( $weigth, $pack_sizes, $max_weight );
 		}
-
-		$content['parcels'] = [ [
-			'seqNo' => 1,
-			'weight' => $weigth,
-			'size' => $pack_sizes,
-		]];
 
 		return array(
 			'content' => $content,
 		);
+	}
+
+	private static function generate_parcels_from_products( array $products, array $product_weights, array $carton_sizes, float $max_weight ): array {
+		$packer      = new Carton_Packer();
+		$groups      = array();
+		$group_items = array();
+		$group_weights = array();
+
+		foreach ( $products as $index => $product ) {
+			$product_weight    = isset( $product_weights[ $index ] ) ? (float) $product_weights[ $index ] : 0;
+			$candidate_items   = array_merge( $group_items, array( $product ) );
+			$candidate_weights = array_merge( $group_weights, array( $product_weight ) );
+
+			if ( empty( $group_items ) || self::products_fit_parcel_weight( $packer, $candidate_items, $candidate_weights, $carton_sizes, $max_weight ) ) {
+				$group_items   = $candidate_items;
+				$group_weights = $candidate_weights;
+				continue;
+			}
+
+			$groups[] = array(
+				'products' => $group_items,
+				'weights'  => $group_weights,
+			);
+
+			$group_items   = array( $product );
+			$group_weights = array( $product_weight );
+		}
+
+		if ( ! empty( $group_items ) ) {
+			$groups[] = array(
+				'products' => $group_items,
+				'weights'  => $group_weights,
+			);
+		}
+
+		$parcels = array();
+
+		foreach ( $groups as $group ) {
+			$result     = $packer->find_best_carton( $group['products'], $carton_sizes );
+			$pack_sizes = self::get_pack_sizes_from_result( $result );
+			$weight     = array_sum( $group['weights'] );
+
+			foreach ( self::generate_parcels( $weight, $pack_sizes, $max_weight ) as $parcel ) {
+				$parcels[] = $parcel;
+			}
+		}
+
+		foreach ( $parcels as $key => &$parcel ) {
+			$parcel['seqNo'] = $key + 1;
+		}
+
+		unset( $parcel );
+
+		return $parcels;
+	}
+
+	private static function products_fit_parcel_weight( Carton_Packer $packer, array $products, array $weights, array $carton_sizes, float $max_weight ): bool {
+		if ( $max_weight <= 0 ) {
+			return true;
+		}
+
+		$weight = array_sum( $weights );
+
+		if ( self::use_volumetric_weight_for_parcels() ) {
+			$result     = $packer->find_best_carton( $products, $carton_sizes );
+			$pack_sizes = self::get_pack_sizes_from_result( $result );
+			$weight     = self::get_parcel_count_weight( $weight, $pack_sizes );
+		}
+
+		return $weight <= $max_weight;
+	}
+
+	private static function get_pack_sizes_from_result( $result ): array {
+		return array(
+			'width'  => wc_get_dimension( $result->W, 'cm', 'mm' ),
+			'depth'  => wc_get_dimension( $result->L, 'cm', 'mm' ),
+			'height' => wc_get_dimension( $result->H, 'cm', 'mm' ),
+		);
+	}
+
+	private static function generate_parcels( $weight, array $pack_sizes, float $max_weight ): array {
+		$min_weight = (float) apply_filters( 'woo_bg/speedy/min_parcel_weight', 0.100 );
+		$weight     = is_numeric( $weight ) ? (float) $weight : $min_weight;
+		$weight     = max( $min_weight, $weight );
+		$count_weight = max( $min_weight, self::get_parcel_count_weight( $weight, $pack_sizes ) );
+		$parcels    = array();
+
+		if ( $max_weight <= 0 ) {
+			return array( self::generate_parcel( 1, $weight, $pack_sizes ) );
+		}
+
+		if ( abs( $count_weight - $weight ) > 0.0001 ) {
+			$parcel_count = (int) ceil( $count_weight / $max_weight );
+			$parcel_count = max( 1, $parcel_count );
+			$parcel_weight = $weight / $parcel_count;
+
+			for ( $i = 1; $i <= $parcel_count; $i++ ) {
+				$parcels[] = self::generate_parcel( $i, max( $min_weight, $parcel_weight ), $pack_sizes );
+			}
+
+			return $parcels;
+		}
+
+		while ( $count_weight > $max_weight ) {
+			$parcels[] = self::generate_parcel( count( $parcels ) + 1, $max_weight, $pack_sizes );
+			$count_weight -= $max_weight;
+			$weight       -= $max_weight;
+		}
+
+		$parcels[] = self::generate_parcel( count( $parcels ) + 1, max( $min_weight, $weight ), $pack_sizes );
+
+		return $parcels;
+	}
+
+	private static function generate_parcel( int $seq_no, float $weight, array $pack_sizes ): array {
+		$parcel = array(
+			'seqNo'  => $seq_no,
+			'weight' => round( $weight, 3 ),
+		);
+
+		if ( ! empty( $pack_sizes ) ) {
+			$parcel['size'] = $pack_sizes;
+		}
+
+		return $parcel;
+	}
+
+	public static function get_max_parcel_weight( $delivery_type = null, $send_from_type = null ): float {
+		$max_weight = self::use_volumetric_weight_for_parcels() || $delivery_type !== 'address' || $send_from_type === 'office' ? 32 : 50;
+
+		return (float) apply_filters( 'woo_bg/speedy/max_parcel_weight', $max_weight, $delivery_type, $send_from_type );
+	}
+
+	public static function use_volumetric_weight_for_parcels(): bool {
+		return wc_string_to_bool( woo_bg_get_option( 'speedy', 'declared_value' ) );
+	}
+
+	public static function get_parcel_volumetric_weight( array $pack_sizes ): float {
+		if (
+			empty( $pack_sizes['width'] ) ||
+			empty( $pack_sizes['depth'] ) ||
+			empty( $pack_sizes['height'] )
+		) {
+			return 0;
+		}
+
+		return ( (float) $pack_sizes['width'] * (float) $pack_sizes['depth'] * (float) $pack_sizes['height'] ) / self::VOLUMETRIC_WEIGHT_DIVISOR;
+	}
+
+	private static function get_parcel_count_weight( float $real_weight, array $pack_sizes ): float {
+		if ( ! self::use_volumetric_weight_for_parcels() ) {
+			return $real_weight;
+		}
+
+		$volumetric_weight = self::get_parcel_volumetric_weight( $pack_sizes );
+
+		return $volumetric_weight > 0 ? $volumetric_weight : $real_weight;
 	}
 
 	private static function get_aps_box_sizes_for_packer() {

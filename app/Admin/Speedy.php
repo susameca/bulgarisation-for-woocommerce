@@ -17,6 +17,10 @@ class Speedy {
 		add_action( 'wp_ajax_woo_bg_speedy_delete_label', array( __CLASS__, 'delete_label' ) );
 		add_action( 'wp_ajax_woo_bg_speedy_update_shipment_status', array( __CLASS__, 'update_shipment_status' ) );
 		add_action( 'wp_ajax_woo_bg_speedy_print_labels', array( __CLASS__, 'print_labels_endpoint' ) );
+
+		add_filter( 'woo_bg/speedy/calculate_label', array( __CLASS__, 'set_min_parcel_weight' ), 30, 2 );
+		//add_filter( 'woo_bg/speedy/create_label', array( __CLASS__, 'set_min_parcel_weight' ), 30 );
+		//add_filter( 'woo_bg/speedy/update_label', array( __CLASS__, 'set_min_parcel_weight' ), 30 );
 	}
 
 	public static function admin_enqueue_scripts() {
@@ -121,6 +125,7 @@ class Speedy {
 						'orderId' => $theorder->get_id(),
 						'testsOptions' => woo_bg_return_array_for_select( woo_bg_get_shipping_tests_options() ),
 						'testOption' => self::get_test_option( $label_data ),
+						'maxParcels' => \Woo_BG\Shipping\Speedy\Method::MAX_PARCELS,
 						'i18n' => self::get_i18n(),
 						'nonce' => wp_create_nonce( 'woo_bg_admin_label' ),
 					) );
@@ -183,7 +188,9 @@ class Speedy {
 			'labelData' => __( 'Label data', 'bulgarisation-for-woocommerce' ),
 			'buyer' => __( 'Buyer', 'bulgarisation-for-woocommerce' ),
 			'sender' => __( 'Sender', 'bulgarisation-for-woocommerce' ),
-			'weight' => __( 'Weight', 'bulgarisation-for-woocommerce' ),
+			'weight' => __( 'Physical Weight', 'bulgarisation-for-woocommerce' ),
+			'volumetricWeight' => __( 'Volumetric weight', 'bulgarisation-for-woocommerce' ),
+			'chargeableWeight' => __( 'Chargeable weight', 'bulgarisation-for-woocommerce' ),
 			'fixedPrice' => __( 'Fixed price', 'bulgarisation-for-woocommerce' ),
 			'copyLabelData' => __( 'Copy Label Data', 'bulgarisation-for-woocommerce' ),
 			'copyLabelDataMessage' => __( 'You just copied the label data used for the Speedy API.', 'bulgarisation-for-woocommerce' ),
@@ -496,6 +503,81 @@ class Speedy {
 		}
 
 		return $label;
+	}
+
+	public static function set_min_parcel_weight( $label, $context = null ) {
+		if ( empty( $label['content']['parcels'] ) || ! is_array( $label['content']['parcels'] ) ) {
+			return $label;
+		}
+
+		$min_weight = (float) apply_filters( 'woo_bg/speedy/min_parcel_weight', 0.100 );
+		$max_weight = self::get_max_parcel_weight( $label, $context );
+		$parcels    = array();
+
+		foreach ( $label['content']['parcels'] as $parcel ) {
+			$weight = isset( $parcel['weight'] ) && is_numeric( $parcel['weight'] ) ? (float) $parcel['weight'] : $min_weight;
+			$weight = max( $min_weight, $weight );
+
+			if ( $max_weight <= 0 ) {
+				$parcel['weight'] = round( $weight, 3 );
+				$parcels[]        = $parcel;
+				continue;
+			}
+
+			while ( $weight > $max_weight ) {
+				$parcel['weight'] = round( $max_weight, 3 );
+				$parcels[]        = $parcel;
+				$weight          -= $max_weight;
+			}
+
+			$parcel['weight'] = round( max( $min_weight, $weight ), 3 );
+			$parcels[]        = $parcel;
+		}
+
+		foreach ( $parcels as $key => &$parcel ) {
+			$parcel['seqNo'] = $key + 1;
+		}
+
+		unset( $parcel );
+
+		$label['content']['parcels'] = $parcels;
+
+		return $label;
+	}
+
+	private static function get_max_parcel_weight( $label, $context = null ): float {
+		if ( ! empty( $label['service']['additionalServices']['declaredValue'] ) ) {
+			return (float) apply_filters( 'woo_bg/speedy/max_parcel_weight', 32, self::get_delivery_type( $label, $context ), self::get_send_from_type( $context ) );
+		}
+
+		return \Woo_BG\Shipping\Speedy\Method::get_max_parcel_weight(
+			self::get_delivery_type( $label, $context ),
+			self::get_send_from_type( $context )
+		);
+	}
+
+	private static function get_delivery_type( $label, $context = null ): string {
+		if ( is_object( $context ) && ! empty( $context->delivery_type ) ) {
+			return $context->delivery_type;
+		}
+
+		if ( ! empty( $_REQUEST['type']['id'] ) ) {
+			return sanitize_text_field( $_REQUEST['type']['id'] );
+		}
+
+		if ( ! empty( $label['recipient']['address'] ) || ! empty( $label['recipient']['addressLocation'] ) ) {
+			return 'address';
+		}
+
+		return 'office';
+	}
+
+	private static function get_send_from_type( $context = null ): string {
+		if ( ! empty( $_REQUEST['send_from_type'] ) ) {
+			return sanitize_text_field( $_REQUEST['send_from_type'] );
+		}
+
+		return woo_bg_get_option( 'speedy', 'send_from' );
 	}
 
 	public static function send_label_to_speedy( $label, $order ) {

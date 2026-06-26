@@ -4,6 +4,14 @@ namespace Woo_BG\Shipping\Packer;
 defined( 'ABSPATH' ) || exit;
 
 class APSPacker {
+	private $volumetric_weight_divisor;
+
+	public function __construct( $volumetric_weight_divisor = null ) {
+		$this->volumetric_weight_divisor = ( is_numeric( $volumetric_weight_divisor ) && (float) $volumetric_weight_divisor > 0 )
+			? (float) $volumetric_weight_divisor
+			: null;
+	}
+
 	public function pack( array $products, array $box_sizes ): array {
 		$products = $this->normalize_products( $products );
 
@@ -87,10 +95,11 @@ class APSPacker {
 
 			for ( $i = 1; $i <= $quantity; $i++ ) {
 				$copy                   = $item;
-				$copy['weight']         = $weight;
-				$copy['source_index']   = $index;
-				$copy['quantity_index'] = $i;
-				$normalized[]           = $copy;
+				$copy['weight']             = $weight;
+				$copy['chargeable_weight'] = $this->get_chargeable_weight( $item, $weight );
+				$copy['source_index']       = $index;
+				$copy['quantity_index']     = $i;
+				$normalized[]               = $copy;
 			}
 		}
 
@@ -200,6 +209,14 @@ class APSPacker {
 		}
 
 		return (float) $weight;
+	}
+
+	private function get_chargeable_weight( array $item, float $weight ): float {
+		if ( null === $this->volumetric_weight_divisor ) {
+			return $weight;
+		}
+
+		return max( $weight, $item['volume'] / $this->volumetric_weight_divisor );
 	}
 
 	private function get_max_weight( $item, int $index ): float {
@@ -434,11 +451,11 @@ class APSPacker {
 		return $volume;
 	}
 
-	private function products_weight( array $products ): float {
+	private function products_weight( array $products, bool $chargeable = true ): float {
 		$weight = 0.0;
 
 		foreach ( $products as $product ) {
-			$weight += $product['weight'];
+			$weight += $chargeable && isset( $product['chargeable_weight'] ) ? $product['chargeable_weight'] : $product['weight'];
 		}
 
 		return $weight;
@@ -487,7 +504,7 @@ class APSPacker {
 
 	private function build_packed_box( array $box, array $products, array $placements ): array {
 		$total_volume = $this->products_volume( $products );
-		$total_weight = $this->products_weight( $products );
+		$total_weight = $this->products_weight( $products, false );
 
 		return array(
 			'box'        => array(

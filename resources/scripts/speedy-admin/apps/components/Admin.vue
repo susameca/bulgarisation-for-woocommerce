@@ -200,12 +200,28 @@
 								<input v-model="parsel.size.height" type="number" step="0.1">
 							</p>
 
-							<p v-if="typeof parsel.weight !== 'undefined'" class="form-field form-field-wide">
+							<p v-if="typeof parsel.weight !== 'undefined'" class="form-field form-field--1-of-3" style="clear:none">
 								<label>
 									{{i18n.weight}}:
 								</label>
 
 								<input v-model="parsel.weight" type="number" step="0.001">
+							</p>
+
+							<p class="form-field form-field--1-of-3" style="clear:none">
+								<label>
+									{{i18n.volumetricWeight}}:
+								</label>
+
+								<input :value="getParcelVolumetricWeight(parsel)" type="number" step="0.001" disabled>
+							</p>
+
+							<p class="form-field form-field--1-of-3 form-field--highlight" style="float:right; clear:none">
+								<label>
+									{{i18n.chargeableWeight}}:
+								</label>
+
+								<input :value="getParcelChargeableWeight(parsel)" type="number" step="0.001" disabled>
 							</p>
 
 							<p class="form-field form-field-wide">
@@ -224,6 +240,7 @@
 							<button
 								type="button"
 								@click="addParcel"
+								:disabled="labelData.content.parcels.length >= maxParcels"
 								class="button-secondary"
 							>
 								{{ i18n.addPack }}
@@ -477,6 +494,7 @@ export default {
 			cookie_data: cloneDeep( wooBg_speedy.cookie_data ),
 			declaredValue: '',
 			operations : [],
+			maxParcels: wooBg_speedy.maxParcels || 10,
 		}
 	},
 	computed: {
@@ -610,10 +628,16 @@ export default {
 		if ( wooBg_speedy.operations ) {
 			this.operations = wooBg_speedy.operations;
 		}
+
+		this.normalizeParcels();
 	},
 	methods: {
 		addParcel() {
 			const parcels = this.labelData.content.parcels || [];
+
+			if (parcels.length >= this.maxParcels) {
+				return;
+			}
 
 			let template;
 
@@ -635,6 +659,7 @@ export default {
 				};
 			}
 
+			this.ensureParcelSize(template);
 			template.seqNo = parcels.length + 1;
 
 			parcels.push(template);
@@ -653,6 +678,72 @@ export default {
 				// make sure Vue keeps it reactive
 				this.$set(parcel, 'seqNo', idx + 1);
 			});
+		},
+		normalizeParcels() {
+			if (!this.labelData.content || !Array.isArray(this.labelData.content.parcels)) {
+				return;
+			}
+
+			this.labelData.content.parcels.forEach((parcel) => {
+				this.ensureParcelSize(parcel);
+			});
+		},
+		ensureParcelSize(parcel) {
+			if (!parcel.size) {
+				this.$set(parcel, 'size', {
+					depth: '',
+					width: '',
+					height: '',
+				});
+
+				return;
+			}
+
+			['depth', 'width', 'height'].forEach((key) => {
+				if (typeof parcel.size[key] === 'undefined') {
+					this.$set(parcel.size, key, '');
+				}
+			});
+		},
+		hasParcelDimensions(parcel) {
+			if (!parcel.size) {
+				return false;
+			}
+
+			return ['depth', 'width', 'height'].every((key) => this.getNumber(parcel.size[key]) > 0);
+		},
+		getNumber(value) {
+			const number = parseFloat(value);
+
+			return isFinite(number) ? number : 0;
+		},
+		formatWeight(value) {
+			const weight = parseFloat(value);
+
+			if (!isFinite(weight)) {
+				return '';
+			}
+
+			return (Math.round(weight * 1000) / 1000).toFixed(3);
+		},
+		getParcelVolumetricWeight(parcel) {
+			if (!this.hasParcelDimensions(parcel)) {
+				return '';
+			}
+
+			const size = parcel.size;
+			const volumetricWeight = (this.getNumber(size.depth) * this.getNumber(size.width) * this.getNumber(size.height)) / 5000;
+
+			return this.formatWeight(volumetricWeight);
+		},
+		getParcelChargeableWeight(parcel) {
+			const volumetricWeight = this.getParcelVolumetricWeight(parcel);
+
+			if (volumetricWeight !== '') {
+				return volumetricWeight;
+			}
+
+			return this.formatWeight(parcel.weight);
 		},
 		asyncFind: debounce( function( query ) {
 			if ( !query ) {
@@ -716,6 +807,7 @@ export default {
 					} else {
 						_this.shipmentStatus = cloneDeep( response.data.data.shipmentStatus, true );
 						_this.labelData = cloneDeep( response.data.data.label, true );
+						_this.normalizeParcels();
 					}
 				});
 		},

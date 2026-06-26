@@ -4,17 +4,17 @@ namespace Woo_BG\Shipping\Packer;
 defined( 'ABSPATH' ) || exit;
 
 class APSPackage {
-	public static function pack_package( $package, array $box_sizes ): array {
+	public static function pack_package( $package, array $box_sizes, $volumetric_weight_divisor = null ): array {
 		$products = self::get_products_from_package( $package );
 
 		if ( empty( $products ) ) {
 			return array();
 		}
 
-		return ( new APSPacker() )->pack( $products, $box_sizes );
+		return ( new APSPacker( $volumetric_weight_divisor ) )->pack( $products, $box_sizes );
 	}
 
-	public static function package_fits_largest_box( $package, array $box_sizes ): bool {
+	public static function package_fits_largest_box( $package, array $box_sizes, $volumetric_weight_divisor = null ): bool {
 		$products = self::get_products_from_package( $package );
 
 		if ( empty( $products ) ) {
@@ -22,7 +22,7 @@ class APSPackage {
 		}
 
 		try {
-			$packed_boxes = ( new APSPacker() )->pack( $products, array( self::get_largest_box_size( $box_sizes ) ) );
+			$packed_boxes = ( new APSPacker( $volumetric_weight_divisor ) )->pack( $products, array( self::get_largest_box_size( $box_sizes ) ) );
 		} catch ( \Throwable $e ) {
 			return false;
 		}
