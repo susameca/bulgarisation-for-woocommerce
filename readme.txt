@@ -125,7 +125,10 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Fix WooCommerce session on update checkpout
 Econt: Add packs array
 Econt, Pigeon, Speedy: Automatically fit order in multiple automats
-
+Pigeon: Fix labels pdf
+Pigeon: Add ability to print labels in different sizes
+Couriers: normalize text in labels
+Couriers: Optimize logic for methods visibility based on size and kg of order
 
 = 4.0.3 =
 Export ZIP: Fix bytes, Add clearstatcache
