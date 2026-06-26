@@ -226,7 +226,14 @@ class Method extends \WC_Shipping_Method {
 
 		$request = $this->container[ Client::ECONT ]->api_call( $this->container[ Client::ECONT ]::LABELS_ENDPOINT, $request_body );
 
-		if ( isset( $request['type'] ) && $request['type'] === 'ExInvalidParam' ) {
+		if ( 
+			isset( $request['type'] ) && 
+			( 
+				$request['type'] === 'ExInvalidParam' ||
+				$request['type'] === 'ExException' ||
+				$request['type'] === 'ExInvalidData' 
+			)
+		) {
 			$data['errors'] = $request;
 		} else if ( $this->cookie_data[ 'country' ] !== 'BG' ) {
 			$data['price'] = woo_bg_tax_based_price( $request['label']['senderDueAmount'] );
@@ -457,9 +464,9 @@ class Method extends \WC_Shipping_Method {
 		
 		if ( $auto_sizes && $this->delivery_type !== 'automat' ) {
 			$pack = array(
-				'width'  => 20,
-				'height' => 20,
-				'length' => 20,
+				'width'  => 17,
+				'height' => 17,
+				'length' => 17,
 				'weight' => $cart['weight'],
 			);
 
@@ -478,9 +485,9 @@ class Method extends \WC_Shipping_Method {
 			$cart['packCount'] = 1;
 			$cart['packs']     = [
 				[
-					'width'  => 20,
-					'height' => 20,
-					'length' => 20,
+					'width'  => 17,
+					'height' => 17,
+					'length' => 17,
 					'weight' => $cart['weight']
 				]
 			];

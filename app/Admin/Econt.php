@@ -16,6 +16,10 @@ class Econt {
 		add_action( 'wp_ajax_woo_bg_econt_generate_label', array( __CLASS__, 'generate_label' ) );
 		add_action( 'wp_ajax_woo_bg_econt_delete_label', array( __CLASS__, 'delete_label' ) );
 		add_action( 'wp_ajax_woo_bg_econt_update_shipment_status', array( __CLASS__, 'update_shipment_status' ) );
+
+		add_filter( 'woo_bg/econt/calculate_label', array( __CLASS__, 'set_min_pack_weight' ), 30 );
+		add_filter( 'woo_bg/econt/create_label', array( __CLASS__, 'set_min_pack_weight' ), 30 );
+		add_filter( 'woo_bg/econt/update_label', array( __CLASS__, 'set_min_pack_weight' ), 30 );
 	}
 
 	public static function admin_enqueue_scripts() {
@@ -440,6 +444,33 @@ class Econt {
 
 
 		return $label;
+	}
+
+	public static function set_min_pack_weight( $request_body ) {
+		if ( empty( $request_body['label'] ) || ! is_array( $request_body['label'] ) ) {
+			return $request_body;
+		}
+
+		$min_weight = (float) apply_filters( 'woo_bg/econt/min_pack_weight', 0.100 );
+		$weight     = 0;
+
+		if ( ! empty( $request_body['label']['packs'] ) && is_array( $request_body['label']['packs'] ) ) {
+			foreach ( $request_body['label']['packs'] as &$pack ) {
+				if ( ! isset( $pack['weight'] ) || ! is_numeric( $pack['weight'] ) || (float) $pack['weight'] < $min_weight ) {
+					$pack['weight'] = $min_weight;
+				}
+
+				$weight += (float) $pack['weight'];
+			}
+
+			unset( $pack );
+
+			$request_body['label']['weight'] = round( $weight, 3 );
+		} elseif ( isset( $request_body['label']['weight'] ) && ( ! is_numeric( $request_body['label']['weight'] ) || (float) $request_body['label']['weight'] < $min_weight ) ) {
+			$request_body['label']['weight'] = $min_weight;
+		}
+
+		return $request_body;
 	}
 
 	public static function generate_sender_address() {
