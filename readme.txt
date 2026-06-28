@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 7.0
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 4.0.3
+Stable tag: 4.0.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -121,7 +121,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
-= 4.0.3 =
+= 4.0.5 =
 Fix WooCommerce session on update checkpout
 Econt: Add packs array
 Econt, Pigeon, Speedy: Automatically fit order in multiple automats
