@@ -491,19 +491,23 @@ class BoxNow {
 
 		return $other_labels_data;
 	}
- 
+
 	public static function send_label_request( $label ) {
 		$container = woo_bg()->container();
-		woo_bg_remove_api_filters();
+		$api_filters = woo_bg_remove_api_filters();
 
-		return wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/boxnow/create_label/', [
-			'body' => [
-				'client' => esc_url( home_url( '/' ) ),
-				'env' => $container[ Client::BOXNOW ]->get_env(),
-				'access_token' => $container[ Client::BOXNOW ]->get_access_token(),
-				'request_body' => $label,
-			]
-		] );
+		try {
+			return wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/boxnow/create_label/', [
+				'body' => [
+					'client' => esc_url( home_url( '/' ) ),
+					'env' => $container[ Client::BOXNOW ]->get_env(),
+					'access_token' => $container[ Client::BOXNOW ]->get_access_token(),
+					'request_body' => $label,
+				]
+			] );
+		} finally {
+			woo_bg_restore_api_filters( $api_filters );
+		}
 	}
 
 	public static function delete_label() {

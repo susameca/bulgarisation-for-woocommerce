@@ -48,17 +48,21 @@ class Speedy {
 	}
 
 	public function label_request( $type, $request_body ) {
-		woo_bg_remove_api_filters();
+		$api_filters = woo_bg_remove_api_filters();
 
-		$request = wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/speedy/label_request/', [
-			'body' => [
-				'client' => esc_url( home_url( '/' ) ),
-				'type' => $type,
-				'user' => $this->get_user(),
-				'password' => $this->get_password(),
-				'request_body' => $request_body,
-			]
-		] );
+		try {
+			$request = wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/speedy/label_request/', [
+				'body' => [
+					'client' => esc_url( home_url( '/' ) ),
+					'type' => $type,
+					'user' => $this->get_user(),
+					'password' => $this->get_password(),
+					'request_body' => $request_body,
+				]
+			] );
+		} finally {
+			woo_bg_restore_api_filters( $api_filters );
+		}
 
 		return json_decode( wp_remote_retrieve_body( $request ), 1 );
 	}

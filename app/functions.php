@@ -857,16 +857,51 @@ function woo_bg_impossible_prices_get_product_tax_rate() {
 	return $total / 100;
 }
 
-function woo_bg_remove_api_filters() {
-	$hooks_to_disable = array(
+function woo_bg_api_filter_hooks() {
+	return array(
 		'http_request_args',
 		'pre_http_request',
 		'http_api_curl',
 		'requests-curl.before_send',
 	);
+}
 
-	foreach ( $hooks_to_disable as $hook ) {
+function woo_bg_remove_api_filters() {
+	global $wp_filter;
+
+	$removed_filters = array();
+
+	foreach ( woo_bg_api_filter_hooks() as $hook ) {
+		$removed_filters[ $hook ] = null;
+
+		if ( isset( $wp_filter[ $hook ] ) ) {
+			$removed_filters[ $hook ] = is_object( $wp_filter[ $hook ] ) ? clone $wp_filter[ $hook ] : $wp_filter[ $hook ];
+		}
+
 		remove_all_filters( $hook );
+	}
+
+	return $removed_filters;
+}
+
+function woo_bg_restore_api_filters( $removed_filters ) {
+	global $wp_filter;
+
+	if ( ! is_array( $removed_filters ) ) {
+		return;
+	}
+
+	foreach ( woo_bg_api_filter_hooks() as $hook ) {
+		if ( ! array_key_exists( $hook, $removed_filters ) ) {
+			continue;
+		}
+
+		if ( null === $removed_filters[ $hook ] ) {
+			unset( $wp_filter[ $hook ] );
+			continue;
+		}
+
+		$wp_filter[ $hook ] = $removed_filters[ $hook ];
 	}
 }
 
