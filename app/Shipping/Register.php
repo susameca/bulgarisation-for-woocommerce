@@ -119,7 +119,7 @@ class Register {
 		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\BoxNow\Method', 'save_label_data_to_order' ), 20, 2 );
 		
 		if ( woo_bg_get_option( 'boxnow_send_from', 'label_after_checkout' ) === 'yes' ) {
-			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\BoxNow', 'generate_label' ), 25 );
+			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\BoxNow', 'generate_label_after_order_generated' ), 25 );
 		}
 
 		add_action( 'woocommerce_email_order_details', array( 'Woo_BG\Shipping\BoxNow\Method', 'add_label_number_to_email' ), 1, 4 );

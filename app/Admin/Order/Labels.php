@@ -32,7 +32,7 @@ class Labels {
 
 				break;
 			case 'woo_bg_boxnow':
-				BoxNow::generate_label( $order_id );
+				BoxNow::generate_label_after_order_generated( $order_id );
 
 				break;
 			case 'woo_bg_pigeon':

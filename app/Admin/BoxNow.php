@@ -339,29 +339,50 @@ class BoxNow {
 	}
 
 	public static function generate_label( $order_id = '' ) {
-		$order_id = ( isset( $_REQUEST['orderId'] ) ) ? sanitize_text_field( $_REQUEST['orderId'] ) : $order_id;
+		return self::generate_label_for_order( $order_id );
+	}
 
+	public static function generate_label_after_order_generated( $order_id ) {
+		return self::generate_label( $order_id );
+	}
+
+	private static function generate_label_for_order( $order_id = '', $use_request_data = false ) {
 		if ( !$order_id ) {
 			return;
 		}
 
-		$order = wc_get_order( $order_id );
+		$order = wc_get_order( absint( $order_id ) );
+
+		if ( !$order ) {
+			return;
+		}
+
 		$label_data = self::generate_label_data( $order->get_id() );
 
-		if ( isset( $_REQUEST['origin'] ) ) {
+		if (
+			$use_request_data &&
+			isset( $_REQUEST['origin'] ) &&
+			is_array( $_REQUEST['origin'] ) &&
+			isset( $_REQUEST['origin']['id'] )
+		) {
 			$label_data['origin']['locationId'] = sanitize_text_field( $_REQUEST['origin']['id'] );
 		}
 
-		if ( isset( $_REQUEST['destination'] ) ) {
+		if (
+			$use_request_data &&
+			isset( $_REQUEST['destination'] ) &&
+			is_array( $_REQUEST['destination'] ) &&
+			isset( $_REQUEST['destination']['id'] )
+		) {
 			$label_data['destination']['locationId'] = sanitize_text_field( $_REQUEST['destination']['id'] );
 		}
 
-		if ( isset( $_REQUEST['items'] ) ) {
+		if ( $use_request_data && isset( $_REQUEST['items'] ) ) {
 			$label_data['items'] = map_deep( $_REQUEST['items'], 'sanitize_text_field' );
 			$order->update_meta_data( 'woo_bg--box-now-items', $label_data['items'] );
 		}
 
-		if ( isset( $_REQUEST['declaredValue'] ) ) {
+		if ( $use_request_data && isset( $_REQUEST['declaredValue'] ) ) {
 			if ( $_REQUEST['declaredValue'] > 0  ) {
 				$total = number_format( sanitize_text_field( $_REQUEST['declaredValue'] ), 2, '.', '' );
 
@@ -375,32 +396,23 @@ class BoxNow {
 			}
 		}
 
-		if ( isset( $_REQUEST[ 'allowReturn' ] ) ) {
+		if ( $use_request_data && isset( $_REQUEST[ 'allowReturn' ] ) ) {
 			$label_data['allowReturn'] = wc_string_to_bool( sanitize_text_field( $_REQUEST[ 'allowReturn' ] ) );
 		}
 
-		$data = self::send_label_to_boxnow( $label_data, $order );
-
-		if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] === 'woo_bg_boxnow_generate_label' ) {
-			wp_send_json_success( $data );
-			wp_die();
-		} else {
-			
-		}
-
-		return $data;
+		return self::send_label_to_boxnow( $label_data, $order );
 	}
 
 	public static function generate_label_ajax( $order_id = '' ) {
 		woo_bg_check_admin_label_actions();
 
-		$order_id = ( isset( $_REQUEST['orderId'] ) ) ? sanitize_text_field( $_REQUEST['orderId'] ) : $order_id;
+		$order_id = ( isset( $_REQUEST['orderId'] ) ) ? absint( $_REQUEST['orderId'] ) : $order_id;
 
 		if ( !$order_id ) {
 			return;
 		}
 
-		wp_send_json_success( self::generate_label( $order_id ) );
+		wp_send_json_success( self::generate_label_for_order( $order_id, true ) );
 		wp_die();
 	}
 
