@@ -82,6 +82,7 @@ class Order {
 					'qty' => $item->get_quantity(),
 					'total' => $total,
 					'vat_rate' => apply_filters( 'woo_bg/admin/export/item_vat', $item_vat_rate, $item, $this->woo_order ),
+					'line_tax' => $item->get_total_tax(),
 				);
 			} else {
 				$total = round( $item->get_subtotal() + $item->get_subtotal_tax(), 2 );
@@ -91,6 +92,7 @@ class Order {
 					'qty' => $item->get_quantity(),
 					'total' => $total,
 					'vat_rate' => apply_filters( 'woo_bg/admin/export/item_vat', $item_vat_rate, $item, $this->woo_order ),
+					'line_tax' => $item->get_total_tax(),
 				);
 			}
 		}
@@ -98,7 +100,6 @@ class Order {
 		foreach ( $this->woo_order->get_items( 'shipping' ) as $item ) {
 			if ( ! $item->get_total() ) {
 				continue;
-				$price = 0;
 			}
 
 			$price = $item->get_total() + $item->get_total_tax();
@@ -141,7 +142,7 @@ class Order {
 			'date_created' => $this->woo_order->get_date_created()->format('Y-m-d'), 
 			'order_document_number' => $this->order_document_number,
 			'date_modified' => $this->woo_order->get_date_modified()->format('Y-m-d'),
-			'total_discount' => apply_filters( 'woo_bg/admin/nra_export/order_total_discount', $this->woo_order->get_total_discount( false ), $this->woo_order ), 
+			'total_discount' => apply_filters( 'woo_bg/admin/nra_export/order_total_discount', $this->woo_order->get_total_discount(), $this->woo_order ), 
 			'payment_method_type' => $this->payment_method_type,
 			'pos_number' => $this->pos_number,
 			'transaction_id' => $this->woo_order->get_transaction_id(), 
