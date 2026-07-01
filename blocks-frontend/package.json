@@ -1,0 +1,15 @@
+{
+	"name": "bulgarisation-for-woocommerce-blocks-frontend",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Dual BGN/EUR price display for the WooCommerce Cart and Checkout blocks.",
+	"license": "GPL-3.0-or-later",
+	"scripts": {
+		"build": "wp-scripts build --webpack-src-dir=src --output-path=build",
+		"start": "wp-scripts start --webpack-src-dir=src --output-path=build",
+		"lint:js": "wp-scripts lint-js src"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^30.0.0"
+	}
+}

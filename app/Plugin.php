@@ -101,6 +101,7 @@ class Plugin {
 
 		if ( woo_bg_get_option( 'apis', 'enable_multi_currency' ) === 'yes' ) {
 			new Front_End\Multi_Currency();
+			new Front_End\Checkout\Blocks();
 		}
 
 		if ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' ) {
