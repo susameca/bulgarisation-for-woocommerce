@@ -33,6 +33,7 @@
     ],
     "include": [
       "app/",
+      "blocks-frontend/build/",
       "dist/",
       "languages/",
       "vendor/",
