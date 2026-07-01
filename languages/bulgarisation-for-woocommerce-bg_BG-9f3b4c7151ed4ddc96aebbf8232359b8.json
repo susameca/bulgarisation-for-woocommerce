@@ -1,0 +1,18 @@
+{
+	"translation-revision-date": "2026-07-02T00:00:00+00:00",
+	"generator": "manually",
+	"source": "blocks-frontend/build/index.js",
+	"domain": "messages",
+	"locale_data": {
+		"messages": {
+			"": {
+				"domain": "messages",
+				"lang": "bg_BG",
+				"plural-forms": "nplurals=2; plural=(n != 1);"
+			},
+			"Rate: 1 EUR = 1.95583 BGN": [
+				"Курс: 1 EUR = 1.95583 BGN"
+			]
+		}
+	}
+}
