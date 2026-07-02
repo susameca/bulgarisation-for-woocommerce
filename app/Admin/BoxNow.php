@@ -109,6 +109,7 @@ class BoxNow {
 						'orderId' => $theorder->get_id(),
 						'allowReturn' => wc_string_to_bool( woo_bg_get_option( 'boxnow_send_from', 'allow_return' ) ),
 						'compartmentSize' => ( isset( $sizes[ $box_size ] ) ) ? $sizes[ $box_size ] : 2,
+						'labelPrintingPromo' => woo_bg_get_label_printing_promo(),
 						'i18n' => self::get_i18n(),
 						'nonce' => wp_create_nonce( 'woo_bg_admin_label' ),
 					) );

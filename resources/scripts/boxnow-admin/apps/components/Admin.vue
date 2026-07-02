@@ -149,6 +149,8 @@
 
 				<div class="order_data_column order_data_column--half">
 					<div class="generated-label" v-if="shipmentStatus">
+						<div class="notice notice-success woo-bg-label-printing-promo" v-html="labelPrintingPromo"></div>
+
 						<div v-for="(iframe, key) in iframes" v-if="iframes.length">
 							<h3>{{i18n.label}}: {{shipmentStatus.parcels[key].id}}</h3>
 
@@ -212,6 +214,7 @@ export default {
 			declaredValue: '',
 			allowReturn: false,
 			message: '',
+			labelPrintingPromo: wooBg_boxnow.labelPrintingPromo,
 			operations : [],
 			boxSize: '',
 			boxSizes: [

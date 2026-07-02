@@ -126,6 +126,7 @@ class Speedy {
 						'testsOptions' => woo_bg_return_array_for_select( woo_bg_get_shipping_tests_options() ),
 						'testOption' => self::get_test_option( $label_data ),
 						'maxParcels' => \Woo_BG\Shipping\Speedy\Method::MAX_PARCELS,
+						'labelPrintingPromo' => woo_bg_get_label_printing_promo(),
 						'i18n' => self::get_i18n(),
 						'nonce' => wp_create_nonce( 'woo_bg_admin_label' ),
 					) );

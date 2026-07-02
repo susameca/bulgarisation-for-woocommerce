@@ -191,6 +191,8 @@
 					<div class="generated-label" v-if="shipmentStatus">
 						<h3>{{i18n.label}}: {{shipmentStatus.wb}}</h3> <br>
 
+						<div class="notice notice-success woo-bg-label-printing-promo" v-html="labelPrintingPromo"></div>
+
 						<iframe id="woo-bg--cvc-label-print" :src="iframeUrl"></iframe>
 					</div>
 				</div><!-- /.order_data_column order_data_column-/-half -->
@@ -271,6 +273,7 @@ export default {
 			streetNumber: '',
 			other: '',
 			message: '',
+			labelPrintingPromo: wooBg_cvc.labelPrintingPromo,
 			i18n: wooBg_cvc.i18n,
 			cookie_data: cloneDeep( wooBg_cvc.cookie_data ),
 			declaredValue: '',

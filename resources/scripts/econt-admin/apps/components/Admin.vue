@@ -377,6 +377,8 @@
 							</span>
 						</div>
 
+						<div class="notice notice-success woo-bg-label-printing-promo" v-html="labelPrintingPromo"></div>
+
 						<iframe id="woo-bg--econt-label-print" :src="iframeUrl"></iframe>
 					</div>
 				</div><!-- /.order_data_column order_data_column-/-half -->
@@ -479,6 +481,7 @@ export default {
 			streetNumber: '',
 			other: '',
 			message: '',
+			labelPrintingPromo: wooBg_econt.labelPrintingPromo,
 			i18n: wooBg_econt.i18n,
 			declaredValue: '',
 			useInvoiceNumber: false,

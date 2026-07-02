@@ -217,6 +217,23 @@ function woo_bg_support_text() {
 	<?php
 }
 
+function woo_bg_get_label_printing_promo() {
+	$url = 'https://iprinter.bg/';
+	$link = sprintf(
+		'<a target="_blank" rel="noopener noreferrer" href="%1$s">%1$s</a>',
+		esc_url( $url )
+	);
+
+	return wp_kses_post(
+		wpautop(
+			sprintf(
+				__( 'Print labels quickly, easily and reliably with a professional solution for everyday work. Get 5%% off with promo code WOOBG5: %s', 'bulgarisation-for-woocommerce' ),
+				$link
+			)
+		)
+	);
+}
+
 function woo_bg_get_shipping_tests_options() {
 	return array(
 		'no' => __( 'No', 'bulgarisation-for-woocommerce' ),
