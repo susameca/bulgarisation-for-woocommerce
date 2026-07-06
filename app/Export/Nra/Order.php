@@ -72,27 +72,34 @@ class Order {
 				continue;
 			}
 			
-			$item_vat_rate = woo_bg_get_order_item_vat_rate( $item, $this->woo_order );
-
+			$item_vat_rate = apply_filters( 
+				'woo_bg/admin/export/item_vat', 
+				woo_bg_get_order_item_vat_rate( $item, $this->woo_order ), 
+				$item, 
+				$this->woo_order 
+			);
+			
 			if ( is_a( $item, 'WC_Order_Item_Fee' ) ) {
 				$total = $item->get_total() + $item->get_total_tax();
-
+				$line_tax = ( wc_tax_enabled() ) ? $item->get_total_tax() : woo_bg_calculate_vat_from_price( $total, $item_vat_rate );
+				
 				$items[] = array(
 					'name' => $item->get_name(),
 					'qty' => $item->get_quantity(),
 					'total' => $total,
-					'vat_rate' => apply_filters( 'woo_bg/admin/export/item_vat', $item_vat_rate, $item, $this->woo_order ),
-					'line_tax' => $item->get_total_tax(),
+					'vat_rate' => $item_vat_rate,
+					'line_tax' => $line_tax,
 				);
 			} else {
 				$total = round( $item->get_subtotal() + $item->get_subtotal_tax(), 2 );
-
+				$line_tax = ( wc_tax_enabled() ) ? $item->get_total_tax() : woo_bg_calculate_vat_from_price( $total, $item_vat_rate );
+				
 				$items[] = array(
 					'name' => $item->get_name(),
 					'qty' => $item->get_quantity(),
 					'total' => $total,
-					'vat_rate' => apply_filters( 'woo_bg/admin/export/item_vat', $item_vat_rate, $item, $this->woo_order ),
-					'line_tax' => $item->get_total_tax(),
+					'vat_rate' => $item_vat_rate,
+					'line_tax' => $line_tax,
 				);
 			}
 		}
