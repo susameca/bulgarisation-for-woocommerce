@@ -63,7 +63,7 @@ class Locker {
 				$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'bulgarisation-for-woocommerce' ), $raw_city, $state );
 			}
 		} else {
-			$lockers = self::$container[ Client::PIGEON_LOCKERS ]->get_lockers( $cities_data['cities'][ $cities_data['city_key'] ]['id'] );
+			$lockers = self::$container[ Client::PIGEON_LOCKERS ]->get_lockers( $cities_data['cities_search_names'][ $cities_data['city_key'] ]['id'] );
 
 			if ( empty( $lockers ) ) {
 				$lockers = [];

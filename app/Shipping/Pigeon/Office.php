@@ -63,7 +63,7 @@ class Office {
 				$args[ 'error' ] = sprintf( __( '%s is not found in %s region.', 'bulgarisation-for-woocommerce' ), $raw_city, $state );
 			}
 		} else {
-			$offices = self::$container[ Client::PIGEON_OFFICES ]->get_offices( $cities_data['cities'][ $cities_data['city_key'] ]['id'] );
+			$offices = self::$container[ Client::PIGEON_OFFICES ]->get_offices( $cities_data['cities_search_names'][ $cities_data['city_key'] ]['id'] );
 
 			if ( empty( $offices ) ) {
 				$offices = [];
