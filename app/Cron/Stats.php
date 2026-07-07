@@ -28,9 +28,12 @@ class Stats {
 			'has_econt' => ( woo_bg_get_option( 'apis', 'enable_econt' ) === 'yes' ),
 			'has_speedy' => ( woo_bg_get_option( 'apis', 'enable_speedy' ) === 'yes' ), 
 			'has_boxnow' => ( woo_bg_get_option( 'apis', 'enable_boxnow' ) === 'yes' ), 
+			'has_pigeon' => ( woo_bg_get_option( 'apis', 'enable_pigeon' ) === 'yes' ), 
 			'valid_boxnow' => ( $container[ Client::BOXNOW ]->get_access_token() && woo_bg_get_option( 'boxnow', 'env' ) === 'live' ), 
 			'has_cvc' => ( woo_bg_get_option( 'apis', 'enable_cvc' ) === 'yes' ),
 			'has_nekorekten' => ( woo_bg_get_option( 'reports', 'enable_nekorekten' ) === 'yes' ),
+			'has_connectix' => ( woo_bg_get_option( 'reports', 'enable_connectix' ) === 'yes' ),
+			'has_nepostop' => ( woo_bg_get_option( 'reports', 'enable_nepostop' ) === 'yes' ),
 			'has_nra' => ( woo_bg_get_option( 'apis', 'enable_documents' ) === 'yes' && woo_bg_get_option( 'invoice', 'nra_n18' ) === 'yes' ),
 			'version' => Plugin::VERSION,
 		] );
