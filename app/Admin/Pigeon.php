@@ -157,7 +157,7 @@ class Pigeon {
 		$cities_data = self::$container[ Client::PIGEON_CITIES ]->get_filtered_cities( $city, $state );
 
 		if ( $cities_data['city_key'] !== false ) {
-			$city_id = $cities_data['cities'][ $cities_data['city_key'] ]['id'];
+			$city_id = $cities_data['cities_search_names'][ $cities_data['city_key'] ]['id'];
 		}
 
 		return $city_id;
