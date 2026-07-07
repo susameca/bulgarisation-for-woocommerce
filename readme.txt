@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 7.0
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 4.0.5
+Stable tag: 4.0.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -120,6 +120,12 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 При работа с тези външни услуги могат да бъдат изпращани данни като: име и адрес на получателя, телефон, имейл, стойност на поръчката, наложен платеж, както и друга информация, необходима за създаване на товарителници и/или проверка на коректността на клиента. Данните се изпращат единствено с цел обработка и доставка на поръчката и проверка за потенциални злоупотреби.
 
 == Changelog ==
+
+= 4.0.6 =
+Pigeon: Fix office/APS lookup
+Add message for label printer
+Invoices: Add filter for wordwrap length
+NRA: Optimize items
 
 = 4.0.5 =
 Fix WooCommerce session on update checkpout
