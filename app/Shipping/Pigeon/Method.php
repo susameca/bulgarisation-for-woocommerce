@@ -317,7 +317,7 @@ class Method extends \WC_Shipping_Method {
 		
 		$raw_city = Transliteration::latin2cyrillic( $this->cookie_data[ 'city' ] );
 		$cities_data = $this->container[ Client::PIGEON_CITIES ]->get_filtered_cities( $raw_city, $this->cookie_data[ 'state' ] ) ;
-		$city_id = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
+		$city_id = $cities_data['cities_search_names'][ $cities_data['city_key'] ][ 'id' ];
 
 		$receiver_address = [
 			'city_id' => $city_id,

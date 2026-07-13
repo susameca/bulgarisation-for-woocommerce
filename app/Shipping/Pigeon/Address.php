@@ -82,7 +82,7 @@ class Address {
 			$args[ 'cities' ] = woo_bg_return_array_for_select( $cities_data['cities_only_names_dropdowns'], 1, array( 'type'=>'city' ) );
 			$args[ 'status' ] = 'invalid-city';
 		} else {
-			$city_id = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
+			$city_id = $cities_data['cities_search_names'][ $cities_data['city_key'] ][ 'id' ];
 
 			$args[ 'streets' ] = woo_bg_return_array_for_select( self::get_streets_for_query( $city_id, '' ), 1, array( 'type' => 'streets' ) );
 			$args[ 'has_any' ] = !empty( self::get_streets_for_query( $city_id, '' ) );
