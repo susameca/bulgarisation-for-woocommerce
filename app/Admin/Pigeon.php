@@ -201,7 +201,10 @@ class Pigeon {
 		if ( $cities_data['city_key'] !== false ) {
 			$city_id = self::get_city_id( $order );
 
-			$streets = woo_bg_return_array_for_select( Address::get_streets_for_query( $city_id, '' ), 1, array( 'type' => 'streets' ) );
+			if ( !( $city_id === false || $city_id === null ) ) {
+				$streets = woo_bg_return_array_for_select( Address::get_streets_for_query( $city_id, '' ), 1, array( 'type' => 'streets' ) );
+			}
+
 		}
 
 		return $streets;
