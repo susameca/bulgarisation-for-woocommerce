@@ -50,15 +50,14 @@ class Address {
 	public static function search_address() {
 		self::$container = woo_bg()->container();
 		$args = [];
-		$query = woo_bg_strip_street_prefix( sanitize_text_field( $_POST['query'] ) );
-		$query = Transliteration::latin2cyrillic( $query );
+		$query = self::normalize_api_query( sanitize_text_field( $_POST['query'] ) );
 
 		$raw_city = Transliteration::latin2cyrillic( sanitize_text_field( $_POST['city'] ) );
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$cities_data = self::$container[ Client::PIGEON_CITIES ]->get_filtered_cities( $raw_city, $raw_state );
 
 		if ( in_array( $cities_data['city'], $cities_data['cities_only_names'] ) ) {
-			$city_id = $cities_data['cities'][ $cities_data['city_key'] ][ 'id' ];
+			$city_id = $cities_data['cities_search_names'][ $cities_data['city_key'] ][ 'id' ];
 			$args[ 'streets' ] = woo_bg_return_array_for_select( self::get_streets_for_query( $city_id, $query ), 0, array( 'type' => 'streets' ) );
 			$args[ 'has_any' ] = !empty( self::get_streets_for_query( $city_id, '' ) );
 			$args[ 'status' ] = 'valid-city';
@@ -103,10 +102,65 @@ class Address {
 
 		if ( !empty( $streets ) ) {
 			$streets = self::$container[ Client::PIGEON_STREETS ]->format_streets( $streets );
+			$streets = self::rank_names( $streets, $query );
 		} else {
 			$streets = [];
 		}
 
 		return $streets;
+	}
+
+	private static function normalize_api_query( $query ) {
+		$query = woo_bg_strip_street_prefix( trim( (string) $query ) );
+		$query = Transliteration::latin2cyrillic( $query );
+
+		return trim( preg_replace( '/[\s\p{Zs}]+/u', ' ', $query ) );
+	}
+
+	private static function normalize_match_text( $text ) {
+		$text = woo_bg_strip_street_prefix( trim( (string) $text ) );
+		$text = mb_strtolower( $text );
+		$text = preg_replace( '/[^\p{L}\p{N}]+/u', ' ', $text );
+
+		return trim( preg_replace( '/\s+/u', ' ', $text ) );
+	}
+
+	private static function rank_names( $names, $query ) {
+		$query = self::normalize_match_text( $query );
+
+		if ( $query === '' ) {
+			return $names;
+		}
+
+		$tokens = explode( ' ', $query );
+		$ranked = [];
+		$order = 0;
+
+		foreach ( $names as $key => $name ) {
+			$normalized_name = self::normalize_match_text( $name );
+			$position = mb_strpos( $normalized_name, $query );
+			$all_tokens_match = true;
+
+			foreach ( $tokens as $token ) {
+				if ( mb_strpos( $normalized_name, $token ) === false ) {
+					$all_tokens_match = false;
+					break;
+				}
+			}
+
+			$rank = $normalized_name === $query ? 0 : ( $position === 0 ? 1 : ( $position !== false ? 2 : ( $all_tokens_match ? 3 : 4 ) ) );
+			$ranked[] = [ 'key' => $key, 'name' => $name, 'rank' => $rank, 'order' => $order++ ];
+		}
+
+		usort( $ranked, function( $a, $b ) {
+			return $a['rank'] === $b['rank'] ? $a['order'] <=> $b['order'] : $a['rank'] <=> $b['rank'];
+		} );
+
+		$sorted = [];
+		foreach ( $ranked as $match ) {
+			$sorted[ $match['key'] ] = $match['name'];
+		}
+
+		return $sorted;
 	}
 }

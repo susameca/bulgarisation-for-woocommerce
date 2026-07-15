@@ -51,16 +51,7 @@ class Address {
 		self::$container = woo_bg()->container();
 		$args = [];
 		$country_id = self::$container[ Client::SPEEDY_COUNTRIES ]->get_country_id( sanitize_text_field( $_POST['country'] ) );
-		$query = '';
-
-		// Strip prefix BEFORE transliteration so both "pl." and "пл." are handled correctly
-		$raw_query = woo_bg_strip_street_prefix( sanitize_text_field( $_POST['query'] ) );
-
-		if ( $country_id === '100' ) {
-			$query = Transliteration::latin2cyrillic( $raw_query );
-		} else {
-			$query = $raw_query;
-		}
+		$query = self::normalize_api_query( sanitize_text_field( $_POST['query'] ), (string) $country_id === '100' );
 
 		$raw_city = sanitize_text_field( $_POST['city'] );
 		$raw_state = sanitize_text_field( $_POST['state'] );
@@ -119,6 +110,7 @@ class Address {
 
 		if ( !empty( $streets ) ) {
 			$streets = self::$container[ Client::SPEEDY_STREETS ]->format_streets( $streets, $city_id, $query );
+			$streets = self::rank_names( $streets, $query );
 		} else {
 			$streets = [];
 		}
@@ -135,6 +127,7 @@ class Address {
 		
 		if ( !empty( $quarters ) ) {
 			$quarters = self::$container[ Client::SPEEDY_QUARTERS ]->format_quarters( $quarters, $city_id, $query );
+			$quarters = self::rank_names( $quarters, $query );
 		} else {
 			$quarters = [];
 		}
@@ -144,11 +137,11 @@ class Address {
 
 	public static function merge_options( $streets, $quarters ) {
 		$test_streets = array_map( function( $street ) {
-			return mb_strtolower( str_replace( ' ', '', $street['label'] ) );
+			return self::normalize_match_text( $street['label'] );
 		}, $streets );
 
 		foreach ( $quarters as $quarter ) {
-			$test_label = mb_strtolower( str_replace( ' ', '', $quarter['label'] ) );
+			$test_label = self::normalize_match_text( $quarter['label'] );
 
 			if ( in_array( $test_label, $test_streets ) ) {				
 				$key = array_search( $test_label, $test_streets );
@@ -159,5 +152,52 @@ class Address {
 		}
 
 		return $streets;
+	}
+
+	private static function normalize_api_query( $query, $transliterate ) {
+		$query = woo_bg_strip_street_prefix( trim( (string) $query ) );
+
+		if ( $transliterate ) {
+			$query = Transliteration::latin2cyrillic( $query );
+		}
+
+		return trim( preg_replace( '/[\s\p{Zs}]+/u', ' ', $query ) );
+	}
+
+	private static function normalize_match_text( $text ) {
+		$text = woo_bg_strip_street_prefix( trim( (string) $text ) );
+		$text = mb_strtolower( $text );
+		$text = preg_replace( '/[^\p{L}\p{N}]+/u', ' ', $text );
+
+		return trim( preg_replace( '/\s+/u', ' ', $text ) );
+	}
+
+	private static function rank_names( $names, $query ) {
+		$query = self::normalize_match_text( $query );
+
+		if ( $query === '' ) {
+			return $names;
+		}
+
+		$ranked = [];
+		$order = 0;
+
+		foreach ( $names as $key => $name ) {
+			$normalized_name = self::normalize_match_text( $name );
+			$position = mb_strpos( $normalized_name, $query );
+			$rank = $normalized_name === $query ? 0 : ( $position === 0 ? 1 : ( $position !== false ? 2 : 3 ) );
+			$ranked[] = [ 'key' => $key, 'name' => $name, 'rank' => $rank, 'order' => $order++ ];
+		}
+
+		usort( $ranked, function( $a, $b ) {
+			return $a['rank'] === $b['rank'] ? $a['order'] <=> $b['order'] : $a['rank'] <=> $b['rank'];
+		} );
+
+		$sorted = [];
+		foreach ( $ranked as $match ) {
+			$sorted[ $match['key'] ] = $match['name'];
+		}
+
+		return $sorted;
 	}
 }

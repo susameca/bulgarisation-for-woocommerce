@@ -122,11 +122,7 @@ class Cities {
 	}
 
 	public function get_filtered_cities( $city, $state, $country_id = 100 ) {
-		if ( $country_id === '100' ) {
-			$city = mb_strtolower(Transliteration::latin2cyrillic($city));
-		} else {
-			$city = mb_strtolower( $city );
-		}
+		$city = $this->normalize_city_name( $city, $country_id );
 
 		$cities = $this->get_cities_by_region( $state, $country_id );
 		$cities_only_names = [];
@@ -136,17 +132,14 @@ class Cities {
 		if ( !empty( $cities ) ) {
 			foreach ( $cities as $temp_city ) {
 				$cities_only_names_dropdowns[] = $temp_city['name'];
-				$temp_city['name'] = mb_strtolower( $temp_city['name'] );
+				$temp_city['name'] = $this->normalize_city_name( $temp_city['name'], $country_id );
 				$cities_only_names[] = $temp_city['name'];
-				$cities_only_names[] = $temp_city['type'] . " " . $temp_city['name'];
 				$cities_search_names[] = $temp_city;
 			}
 		}
 
 		foreach ( $cities_search_names as $searched_key => $key_search_city ) {
-			$name_with_type = $key_search_city['type'] . " " . $key_search_city['name'];
-
-			if ( $city === $name_with_type || $city === $key_search_city['name'] ) {
+			if ( $city === $key_search_city['name'] ) {
 				$city_key = $searched_key;
 				break;
 			}
@@ -160,6 +153,20 @@ class Cities {
 			'cities_only_names_dropdowns' => $cities_only_names_dropdowns,
 			'city_key' => $city_key ?? null,
 		];
+	}
+
+	private function normalize_city_name( $city, $country_id ) {
+		$city = trim( (string) $city );
+
+		if ( (string) $country_id === '100' ) {
+			$city = preg_replace( '/^\s*(?:гр(?:ад)?|с(?:ело)?|gr(?:ad)?|s(?:elo)?)(?:\s*[.\-,:]\s*|\s+)/iu', '', $city );
+			$city = Transliteration::latin2cyrillic( $city );
+		}
+
+		$city = mb_strtolower( $city );
+		$city = preg_replace( '/[\s\p{Zs}]+/u', ' ', $city );
+
+		return trim( $city, " \t\n\r\0\x0B.,-" );
 	}
 
 	public function get_regions( $country_id = 100 ) {

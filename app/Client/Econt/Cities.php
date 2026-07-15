@@ -173,8 +173,8 @@ class Cities {
 		$city = trim( (string) $city );
 
 		if ( $country_code === 'BG' ) {
+			$city = preg_replace( '/^\s*(?:гр(?:ад)?|с(?:ело)?|gr(?:ad)?|s(?:elo)?)(?:\s*[.\-,:]\s*|\s+)/iu', '', $city );
 			$city = Transliteration::latin2cyrillic( $city );
-			$city = preg_replace( '/^\s*(?:гр(?:ад)?|с(?:ело)?)(?:\s*[.\-,:]\s*|\s+)/iu', '', $city );
 		}
 
 		$city = mb_strtolower( $city );

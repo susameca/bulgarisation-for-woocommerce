@@ -159,9 +159,9 @@ class Cities {
 			];
 		}
 
-		$city = mb_strtolower( Transliteration::latin2cyrillic( trim( $query ) ) );
+		$city = $this->normalize_city_name( $query );
 		$state_name = $this->get_state_name( $state );
-		$cities = $this->find_city( $query );
+		$cities = $this->find_city( $city );
 
 		$cities_only_names = [];
 		$cities_search_names = [];
@@ -169,12 +169,12 @@ class Cities {
 		
 		if ( !empty( $cities ) ) {
 			foreach ( $cities as $temp_city ) {
-				if ( $temp_city['district'] !== $state_name ) {
+				if ( $this->normalize_text( $temp_city['district'] ) !== $this->normalize_text( $state_name ) ) {
 					continue;
 				}
 				
 				$cities_only_names_dropdowns[] = $temp_city[ 'name' ];
-				$temp_city[ 'name' ] = mb_strtolower( $temp_city[ 'name' ] );
+				$temp_city[ 'name' ] = $this->normalize_city_name( $temp_city[ 'name' ] );
 				$cities_only_names[] = $temp_city[ 'name' ];
 				$cities_search_names[] = $temp_city;
 			}
@@ -190,6 +190,21 @@ class Cities {
 			'cities_only_names_dropdowns' => $cities_only_names_dropdowns,
 			'city_key' => $city_key,
 		];
+	}
+
+	private function normalize_city_name( $city ) {
+		$city = trim( (string) $city );
+		$city = preg_replace( '/^\s*(?:гр(?:ад)?|с(?:ело)?|gr(?:ad)?|s(?:elo)?)(?:\s*[.\-,:]\s*|\s+)/iu', '', $city );
+		$city = Transliteration::latin2cyrillic( $city );
+
+		return $this->normalize_text( $city );
+	}
+
+	private function normalize_text( $text ) {
+		$text = mb_strtolower( trim( (string) $text ) );
+		$text = preg_replace( '/[\s\p{Zs}]+/u', ' ', $text );
+
+		return trim( $text, " \t\n\r\0\x0B.,-" );
 	}
 
 	public function get_regions( $country_code = 'BG' ) {
