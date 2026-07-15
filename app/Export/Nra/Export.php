@@ -2,7 +2,6 @@
 namespace Woo_BG\Export\Nra;
 
 use Woo_BG\Admin\Tabs\Nra_Tab;
-use Woo_BG\File;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -19,34 +18,31 @@ class Export {
 
 	protected function load_woo_orders() {
 		$timespan = strtotime( 'first day of ' . $this->date . ' ' . wp_timezone_string() ) . '...' . strtotime( 'last day of ' . $this->date . ' 23:59:59 ' . wp_timezone_string() );
-		
-		$orders = apply_filters( 'woo_bg/admin/export/orders', wc_get_orders( array(
+
+		$order_args = array(
 			'date_paid' => $timespan,
 			'status' => apply_filters( 'woo_bg/admin/export/orders_statuses', array( 'wc-completed', 'wc-processing' ) ),
-			'limit' => -1,
-		) ), $this );
-		
-		$refunded_orders = apply_filters( 'woo_bg/admin/export/refunded_orders', wc_get_orders( array(
+		);
+		$refunded_order_args = array(
 			'date_created' => $timespan,
 			'status' => apply_filters( 'woo_bg/admin/export/refunded_orders_statuses', array( 'wc-completed', 'wc-refunded' ) ),
-			'limit' => -1,
-		) ), $this );
+		);
 
 		$this->completed_orders_ids = array();
 		$this->refunded_orders_ids = array();
 
-		foreach ( $orders as $order ) {
+		$this->walk_orders( $order_args, 'woo_bg/admin/export/orders', function( $order ) {
 			if ( 
 				is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || 
 				is_a( $order, 'WC_Order_Refund' )
 			) {
-				continue;
+				return;
 			} else {
 				$this->completed_orders_ids[] = $order->get_id();
 			}
-		}
+		} );
 
-		foreach ( $refunded_orders as $order ) {
+		$this->walk_orders( $refunded_order_args, 'woo_bg/admin/export/refunded_orders', function( $order ) {
 			if ( 
 				is_a( $order, 'Automattic\WooCommerce\Admin\Overrides\OrderRefund' ) || 
 				is_a( $order, 'WC_Order_Refund' )
@@ -63,10 +59,53 @@ class Export {
 					$this->completed_orders_ids[] = $parent_order->get_id();
 				}
 			}
-		}
+		} );
 
 		$this->refunded_orders_ids = array_reverse( array_unique( $this->refunded_orders_ids ) );
 		$this->completed_orders_ids = array_reverse( array_unique( $this->completed_orders_ids ) );
+	}
+
+	protected function walk_orders( $args, $filter, $callback ) {
+		if ( has_filter( $filter ) ) {
+			$orders = apply_filters( $filter, wc_get_orders( array_merge( $args, array( 'limit' => -1 ) ) ), $this );
+
+			foreach ( $orders as $order ) {
+				$callback( $order );
+			}
+
+			return;
+		}
+
+		$page = 1;
+		$limit = (int) apply_filters( 'woo_bg/admin/export/query_batch_size', 100, $this );
+		$limit = max( 1, $limit );
+
+		do {
+			$order_ids = wc_get_orders( array_merge( $args, array(
+				'limit'  => $limit,
+				'page'   => $page,
+				'return' => 'ids',
+			) ) );
+
+			foreach ( $order_ids as $order_id ) {
+				$order = wc_get_order( $order_id );
+
+				if ( $order ) {
+					$callback( $order );
+				}
+
+				unset( $order );
+			}
+
+			$this->flush_runtime_cache();
+			$page++;
+		} while ( count( $order_ids ) === $limit );
+	}
+
+	protected function flush_runtime_cache() {
+		if ( function_exists( 'wp_cache_flush_runtime' ) ) {
+			wp_cache_flush_runtime();
+		}
 	}
 
 	protected function load_options() {
@@ -97,34 +136,58 @@ class Export {
 			'refunded_orders' => [],
 		];
 
-		foreach ( $this->completed_orders_ids as $order_id ) {
-			$order = new Order( wc_get_order( $order_id ), $this->generate_files );
+		foreach ( $this->completed_orders_ids as $index => $order_id ) {
+			$woo_order = wc_get_order( $order_id );
+
+			if ( ! $woo_order ) {
+				continue;
+			}
+
+			$order = new Order( $woo_order, $this->generate_files );
 
 			if ( ! $order->payment_method_type ) {
 				$this->not_included_orders[] = $order->order_id_to_show;
+				unset( $order, $woo_order );
+				$this->maybe_flush_runtime_cache( $index );
 				continue;
 			}
 
 			$order_data = $order->get_order_data();
 
 			if ( empty( $order_data['items'] ) ) {
+				unset( $order, $woo_order, $order_data );
+				$this->maybe_flush_runtime_cache( $index );
 				continue;
 			}
 			
 			$args['orders'][] = $order_data;
+
+			unset( $order, $woo_order, $order_data );
+
+			$this->maybe_flush_runtime_cache( $index );
 		}
 
-		foreach ( $this->refunded_orders_ids as $order_id ) {
+		foreach ( $this->refunded_orders_ids as $index => $order_id ) {
 			$order = wc_get_order( $order_id );
 			
-			if ( method_exists( $order, 'get_refunds' ) ) {
+			if ( $order && method_exists( $order, 'get_refunds' ) ) {
 				$refunded_order = new RefundedOrder( $order, $this->date );
 
 				$args['refunded_orders'][] = $refunded_order->get_order_data();
 			}
+
+			unset( $order, $refunded_order );
+
+			$this->maybe_flush_runtime_cache( $index );
 		}
 
 		return $this->upload_xml( $args );
+	}
+
+	protected function maybe_flush_runtime_cache( $index ) {
+		if ( 0 === ( ( $index + 1 ) % 100 ) ) {
+			$this->flush_runtime_cache();
+		}
 	}
 
 	protected function upload_xml( $args ) {
@@ -178,7 +241,7 @@ class Export {
 		if ( !empty( $this->completed_orders_ids ) || !empty( $this->refunded_orders_ids ) ) {
 			libxml_use_internal_errors(true);
 			$doc = new \DOMDocument();
-			$doc->loadXml( File::get_file( get_attached_file( $attach_id ) ) );
+			$doc->load( get_attached_file( $attach_id ) );
 
 			if ( !$doc->schemaValidate( __DIR__ . '/dex_audit.xsd' ) ) {
 				return wp_list_pluck( libxml_get_errors(), 'message' );
