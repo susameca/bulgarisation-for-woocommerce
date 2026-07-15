@@ -10,11 +10,12 @@ $current_tab_key = array_search( $current_tab, $slugs );
 $current_tab_object = $tabs[ $current_tab_key ];
 ?>
 <div class="wrap woocommerce">
-	<div id="mainform">
+	<div id="mainform" class="woo-bg-settings-layout">
 		<nav class="nav-tab-wrapper woo-nav-tab-wrapper">
+			<div class="woo-bg-settings-title"><?php esc_html_e( 'Bulgarisation', 'bulgarisation-for-woocommerce' ); ?></div>
 			<?php
 			foreach ( $tabs as $tab ) {
-				echo '<a href="' . esc_url( admin_url( 'admin.php?page=woo-bg&tab=' . urlencode( $tab->tab_slug ) ) ) . '" class="nav-tab ';
+				echo '<a href="' . esc_url( admin_url( 'admin.php?page=woo-bg&tab=' . urlencode( $tab->tab_slug ) ) ) . '" class="nav-tab woo-bg-tab--' . esc_attr( sanitize_html_class( $tab->tab_slug ) ) . ' ';
 				if ( $current_tab == $tab->tab_slug ) {
 					echo 'nav-tab-active';
 				}
@@ -22,6 +23,7 @@ $current_tab_object = $tabs[ $current_tab_key ];
 			}
 			?>
 		</nav>
+		<div class="woo-bg-settings-content">
 
 		<?php if ( ! get_option( 'woo_bg_pigeon_express_message_dismiss' ) ): ?>
 			<div class="notice notice-success is-dismissible notice-pigeon-express">
@@ -50,5 +52,6 @@ $current_tab_object = $tabs[ $current_tab_key ];
 			echo wp_kses_post( $current_tab_object->render_tab_html() );
 		}
 		?>
+		</div>
 	</div>
 </div>

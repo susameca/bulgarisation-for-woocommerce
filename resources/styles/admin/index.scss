@@ -56,6 +56,144 @@ i.woo-bg-icon--question { background-image: url(../../images/question-icon.png);
 }
 
 body.woocommerce_page_woo-bg #screen-meta-links { display:none }
+
+body.admin-color-fresh .woo-nav-tab-wrapper { --woo-bg-admin-menu-background: #2c3338; --woo-bg-admin-menu-color: #c3c4c7; --woo-bg-admin-menu-active-background: #2271b1; --woo-bg-admin-menu-active-color: #fff; }
+body.admin-color-blue .woo-nav-tab-wrapper { --woo-bg-admin-menu-background: #4796b3; --woo-bg-admin-menu-color: #e2ecf1; --woo-bg-admin-menu-active-background: #096484; --woo-bg-admin-menu-active-color: #fff; }
+body.admin-color-coffee .woo-nav-tab-wrapper { --woo-bg-admin-menu-background: rgb(70, 64, 60); --woo-bg-admin-menu-color: rgb(205, 203, 201); --woo-bg-admin-menu-active-background: #c7a589; --woo-bg-admin-menu-active-color: #fff; }
+body.admin-color-ectoplasm .woo-nav-tab-wrapper { --woo-bg-admin-menu-background: rgb(65, 50, 86); --woo-bg-admin-menu-color: rgb(203, 197, 211); --woo-bg-admin-menu-active-background: #a3b745; --woo-bg-admin-menu-active-color: #fff; }
+body.admin-color-light .woo-nav-tab-wrapper { --woo-bg-admin-menu-background: #fff; --woo-bg-admin-menu-color: rgb(104, 104, 104); --woo-bg-admin-menu-active-background: #888; --woo-bg-admin-menu-active-color: #fff; }
+body.admin-color-midnight .woo-nav-tab-wrapper { --woo-bg-admin-menu-background: rgb(38, 41, 44); --woo-bg-admin-menu-color: rgb(195, 196, 197); --woo-bg-admin-menu-active-background: #e14d43; --woo-bg-admin-menu-active-color: #fff; }
+body.admin-color-modern .woo-nav-tab-wrapper { --woo-bg-admin-menu-background: rgb(12, 12, 12); --woo-bg-admin-menu-color: rgb(188, 188, 188); --woo-bg-admin-menu-active-background: #3858e9; --woo-bg-admin-menu-active-color: #fff; }
+body.admin-color-ocean .woo-nav-tab-wrapper { --woo-bg-admin-menu-background: rgb(98, 124, 131); --woo-bg-admin-menu-color: rgb(213, 221, 224); --woo-bg-admin-menu-active-background: #9ebaa0; --woo-bg-admin-menu-active-color: #fff; }
+body.admin-color-sunrise .woo-nav-tab-wrapper { --woo-bg-admin-menu-background: rgb(190, 54, 49); --woo-bg-admin-menu-color: rgb(241, 200, 199); --woo-bg-admin-menu-active-background: #dd823b; --woo-bg-admin-menu-active-color: #fff; }
+
+body.woocommerce_page_woo-bg {
+    #wpcontent {
+        padding-left: 0;
+    }
+
+    .wrap.woocommerce {
+        width: calc(100% - 20px);
+        margin: 0 20px 0 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .woo-bg-settings-layout {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+        min-height: calc(100vh - 32px);
+    }
+
+    .woocommerce nav.woo-nav-tab-wrapper {
+        display: flex;
+        flex: 0 0 220px;
+        flex-direction: column;
+        gap: 4px;
+        margin: 0;
+        padding: 8px 0;
+        border: 0;
+        border-radius: 0;
+        background: var(--woo-bg-admin-menu-background, #2c3338);
+        box-sizing: border-box;
+
+        .woo-bg-settings-title {
+            margin: 0 0 4px;
+            padding: 10px 12px;
+            color: var(--woo-bg-admin-menu-color, #f0f0f1);
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .nav-tab {
+            position: relative;
+            float: none;
+            margin: 0;
+            padding: 9px 12px;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            color: var(--woo-bg-admin-menu-color, #f0f0f1);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.3;
+
+            &:hover,
+            &:focus {
+                background: var(--woo-bg-admin-menu-active-background, var(--wp-admin-theme-color, #2271b1));
+                color: var(--woo-bg-admin-menu-active-color, #fff);
+            }
+
+            &.nav-tab-active {
+                background: var(--woo-bg-admin-menu-active-background, var(--wp-admin-theme-color, #2271b1));
+                color: var(--woo-bg-admin-menu-active-color, #fff);
+                font-weight: 600;
+
+                &::after {
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    border: 8px solid transparent;
+                    border-right-color: #f0f0f1;
+                    content: '';
+                    transform: translateY(-50%);
+                }
+            }
+
+            &.woo-bg-tab--pro {
+                padding-right: 58px;
+
+                &::before {
+                    position: absolute;
+                    top: 50%;
+                    right: 10px;
+                    padding: 3px 10px 3px 7px;
+                    background: #dba617;
+                    clip-path: polygon(0 0, 100% 0, 84% 50%, 100% 100%, 0 100%);
+                    color: #1d2327;
+                    content: 'PRO';
+                    font-size: 9px;
+                    font-weight: 700;
+                    letter-spacing: .5px;
+                    line-height: 1;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+    }
+
+    .woo-bg-settings-content {
+        flex: 1 1 auto;
+        min-width: 0;
+        padding-left: 20px;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    body.woocommerce_page_woo-bg {
+        .woo-bg-settings-layout {
+            flex-direction: column;
+            min-height: calc(100vh - 46px);
+        }
+
+        .woo-nav-tab-wrapper,
+        .woo-bg-settings-content {
+            width: 100%;
+        }
+
+        .woo-nav-tab-wrapper {
+            flex-basis: auto;
+
+            .nav-tab-active::after {
+                display: none;
+            }
+        }
+    }
+}
+
 #order_data .order_data_column .form-field.form-field--1-of-3 { width: 32%; margin: 9px 6px 0px 0px; }
 #order_data .order_data_column .form-field.form-field--1-of-2 { width: 48.7%; margin: 9px 6px 0px 0px; }
 #order_data .order_data_column .form-field.form-field--highlight input { background: #eefaf2; border-color: #46a36b; color: #1f6f43; font-weight: 600; }

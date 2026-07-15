@@ -55,9 +55,6 @@ class Settings_Tab extends Base_Tab {
 				new Fields\TrueFalse_Field( 'check_on_checkout', __( 'Check on checkout and disable COD.', 'bulgarisation-for-woocommerce' ), null, null, __( 'Check by phone number on checkout and disable COD payment method.', 'bulgarisation-for-woocommerce' ) . '<br>' . __('<strong>WARNING:</strong> Please notice that if you use Nekorekten.com API, the server has limit of 10 calls per minute.', 'bulgarisation-for-woocommerce') ),
 				new Fields\TrueFalse_Field( 'enable_connectix', __( 'Enable connectix.bg API? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'If yes, you will receive information about the customer from connectix.bg.', 'bulgarisation-for-woocommerce' ) ),
 				new Fields\TrueFalse_Field( 'enable_nepostop', __( 'Enable nepostop.com API? ', 'bulgarisation-for-woocommerce' ), null, null, __( 'If yes, you will receive information about the customer from nepostop.com.', 'bulgarisation-for-woocommerce' ) ),
-			),
-			'checkout' => array(
-				new Fields\TrueFalse_Field( 'alternative_shipping_table', __( 'Alternative shipping options layout ( checkout )', 'bulgarisation-for-woocommerce' ), null, null, __( 'Make shipping options on 2 rows and full width in the checkout table.', 'bulgarisation-for-woocommerce' ) ),
 			)
 		) );
 
@@ -80,9 +77,6 @@ class Settings_Tab extends Base_Tab {
 			'reports' => array(
 				'title' => __( 'Client reports', 'bulgarisation-for-woocommerce' ),
 			),
-			'checkout' => array(
-				'title' => __( 'Checkout Settings', 'bulgarisation-for-woocommerce' ),
-			),
 		) );
 
 		return $titles;
@@ -100,6 +94,7 @@ class Settings_Tab extends Base_Tab {
 			'Woo_BG\Admin\Tabs\Speedy_Tab',
 			'Woo_BG\Admin\Tabs\Pro_Tab',
 			'Woo_BG\Admin\Tabs\Nra_Tab',
+			'Woo_BG\Admin\Tabs\Shipping_Tab',
 			'Woo_BG_Pro\Admin\Tabs\Nekorekten_Com_Tab',
 			'Woo_BG\Admin\Tabs\Multi_Currency_Tab',
 			'Woo_BG\Admin\Tabs\Help_Tab',
