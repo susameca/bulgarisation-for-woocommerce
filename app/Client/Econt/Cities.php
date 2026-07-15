@@ -90,6 +90,10 @@ class Cities {
 		return $this->cities[ $country_code ];
 	}
 
+	public function release_cities( $country_code = 'BG' ) {
+		unset( $this->cities[ $country_code ] );
+	}
+
 	public function get_cities_by_region( $region, $country_code = 'BG' ) {
 		$cities = $this->get_cities( $country_code );
 

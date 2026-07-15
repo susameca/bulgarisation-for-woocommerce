@@ -137,6 +137,10 @@ class Cities {
 		return $this->cities[ $country_code ];
 	}
 
+	public function release_cities( $country_code = 'BG' ) {
+		unset( $this->cities[ $country_code ] );
+	}
+
 	public function get_state_name( $state_code, $country_code = 'BG' ) {
 		$states = $this->get_regions( $country_code );
 

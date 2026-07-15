@@ -79,6 +79,10 @@ class Cities {
 		return $this->cities[ $region ];
 	}
 
+	public function release_cities( $region ) {
+		unset( $this->cities[ $region ] );
+	}
+
 	public function get_formatted_cities( $country_id = '100' ) {
 		$formatted = [];
 		$regions = $this->get_regions( $country_id );
