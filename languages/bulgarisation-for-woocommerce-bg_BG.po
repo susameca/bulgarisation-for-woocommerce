@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Българизация за WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-06 16:26+0000\n"
-"PO-Revision-Date: 2026-07-02 16:06+0000\n"
+"PO-Revision-Date: 2026-07-15 19:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: Български\n"
 "Language: bg_BG\n"
@@ -15,8 +15,8 @@ msgstr ""
 "X-Loco-Version: 2.8.2; wp-6.9.1; php-8.2.29\n"
 "X-Domain: woo-bg"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:124 app/Admin/Tabs/BoxNow_Tab.php:141
-#: app/Admin/Tabs/BoxNow_Tab.php:158
+#: app/Admin/Tabs/BoxNow_Tab.php:128 app/Admin/Tabs/BoxNow_Tab.php:145
+#: app/Admin/Tabs/BoxNow_Tab.php:162
 msgid " to "
 msgstr "до"
 
@@ -49,8 +49,8 @@ msgstr "%s: <span class=\"woocommerce-Price-amount\">%s</span>"
 msgid "(self-declared)"
 msgstr "(самодеклариран)"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:126 app/Admin/Tabs/BoxNow_Tab.php:142
-#: app/Admin/Tabs/BoxNow_Tab.php:160
+#: app/Admin/Tabs/BoxNow_Tab.php:130 app/Admin/Tabs/BoxNow_Tab.php:146
+#: app/Admin/Tabs/BoxNow_Tab.php:164
 msgid "+ Add new row"
 msgstr "+ Добавете нов ред"
 
@@ -93,8 +93,8 @@ msgstr "Имейл на счетоводител"
 msgid "Actions"
 msgstr "Действия"
 
-#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Speedy_Tab.php:89
-#: app/Admin/Tabs/Econt_Tab.php:96
+#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Speedy_Tab.php:95
+#: app/Admin/Tabs/Econt_Tab.php:102
 msgid ""
 "Add additional variations information. Please use this option only if you "
 "want the variation data to be available in the label print and it's missing."
@@ -111,40 +111,40 @@ msgstr "Добавете колона в списъка с поръчки."
 msgid "Add only fields on checkout"
 msgstr "Добави само полета на чекаут"
 
-#: app/Admin/Econt.php:168 app/Admin/Speedy.php:213 app/Admin/Pigeon.php:254
+#: app/Admin/Econt.php:168 app/Admin/Speedy.php:213 app/Admin/Pigeon.php:257
 #: app/Admin/BoxNow.php:144
 msgid "Add Pack"
 msgstr "Добави пакет"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:167
+#: app/Admin/Tabs/Pigeon_Tab.php:171
 msgid "Additional Services"
 msgstr "Допълнителни услуги"
 
 #: app/Admin/CVC.php:140 app/Admin/Econt.php:145 app/Admin/Speedy.php:187
-#: app/Admin/Pigeon.php:229 app/Admin/Tabs/CVC_Tab.php:97
-#: app/Admin/Tabs/Speedy_Tab.php:101 app/Admin/Tabs/Pigeon_Tab.php:97
-#: app/Admin/Tabs/Pigeon_Tab.php:124 app/Admin/Tabs/Econt_Tab.php:138
+#: app/Admin/Pigeon.php:232 app/Admin/Tabs/CVC_Tab.php:97
+#: app/Admin/Tabs/Speedy_Tab.php:107 app/Admin/Tabs/Pigeon_Tab.php:101
+#: app/Admin/Tabs/Pigeon_Tab.php:128 app/Admin/Tabs/Econt_Tab.php:144
 #: app/Shipping/CVC/Method.php:139 app/Shipping/Pigeon/Method.php:169
 #: app/Shipping/Econt/Method.php:149 app/Shipping/Speedy/Method.php:176
 #: app/Front_End/Checkout/Company.php:79
 msgid "Address"
 msgstr "Адрес"
 
-#: app/Admin/Tabs/Speedy_Tab.php:91 app/Admin/Tabs/Pigeon_Tab.php:103
-#: app/Admin/Tabs/Econt_Tab.php:98
+#: app/Admin/Tabs/Speedy_Tab.php:97 app/Admin/Tabs/Pigeon_Tab.php:107
+#: app/Admin/Tabs/Econt_Tab.php:104
 msgid "Adds declared value to the label if payment is COD."
 msgstr ""
 "Добавя \"Обявена стойност\" към товарителницата ако е с \"Наложен платеж\"."
 
-#: app/Admin/Tabs/Pro_Tab.php:58
+#: app/Admin/Tabs/Pro_Tab.php:60
 msgid "Adds nekorekten.com as a provider for client reports."
 msgstr "Добавя nekorekten.com като източник на отзиви за потребителите."
 
-#: app/Admin/Tabs/Speedy_Tab.php:88
+#: app/Admin/Tabs/Speedy_Tab.php:94
 msgid "Administrative fee on price calculations"
 msgstr "Административна такса за изчисляване на цените"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:115
+#: app/Admin/Tabs/BoxNow_Tab.php:119
 msgid ""
 "After you select the option, you must save the settings in order the correct "
 "price settings to be shown."
@@ -160,28 +160,28 @@ msgstr "AJAX грешка"
 msgid "AJAX error during scanning."
 msgstr "AJAX грешка по време на сканирането."
 
-#: app/Admin/Tabs/Pro_Tab.php:62
+#: app/Admin/Tabs/Pro_Tab.php:64
 msgid "Allow automatically filling company info from EIK."
 msgstr ""
 "Добавя възможност за автоматично попълване на данните за фирмата според "
 "въведения ЕИК."
 
-#: app/Admin/Tabs/Pro_Tab.php:55
+#: app/Admin/Tabs/Pro_Tab.php:57
 msgid "Allow automatically update order statuses based on label status."
 msgstr ""
 "Добавя възможност за автоматична смяна на статусите на поръчките спрямо "
 "статуса на товарителницата."
 
-#: app/Admin/BoxNow.php:129 app/Admin/Tabs/BoxNow_Tab.php:93
+#: app/Admin/BoxNow.php:129 app/Admin/Tabs/BoxNow_Tab.php:97
 msgid "Allow returns"
 msgstr "Позволи връщане"
 
-#: app/Admin/Tabs/Pro_Tab.php:49
+#: app/Admin/Tabs/Pro_Tab.php:51
 #| msgid "Allow shipping to Greece and Romania for Econt and Speedy."
 msgid "Allow shipping to Greece and Romania for Econt, BOXNOW and Speedy."
 msgstr "Добавяне на доставки до Гърция и Румъния за Еконт, BOXNOW и Спиди."
 
-#: app/Admin/Tabs/Settings_Tab.php:60
+#: app/Admin/Tabs/Shipping_Tab.php:40
 msgid "Alternative shipping options layout ( checkout )"
 msgstr "Алтернативно оформление на методите за доставка (чекаут)"
 
@@ -205,7 +205,7 @@ msgstr ""
 "Възникна грешка при изчисляване на цената за доставка. Моля, опитайте отново "
 "по-късно."
 
-#: app/Admin/Tabs/BoxNow_Tab.php:157
+#: app/Admin/Tabs/BoxNow_Tab.php:161
 msgid "and"
 msgstr "и"
 
@@ -213,7 +213,7 @@ msgstr "и"
 msgid "API Key"
 msgstr "API ключ"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:185
+#: app/Admin/Tabs/Pigeon_Tab.php:189
 msgid "API Key and API Secret are incorrect."
 msgstr "Невалидни API Key и API Secret."
 
@@ -251,17 +251,17 @@ msgstr "Автомат"
 msgid "Automat locator"
 msgstr "Автомат локатор"
 
-#: app/Admin/Tabs/Speedy_Tab.php:92 app/Admin/Tabs/Pigeon_Tab.php:88
-#: app/Admin/Tabs/Econt_Tab.php:99
+#: app/Admin/Tabs/Speedy_Tab.php:98 app/Admin/Tabs/Pigeon_Tab.php:92
+#: app/Admin/Tabs/Econt_Tab.php:105
 msgid "Automatically calculate box size"
 msgstr "Автоматично пресметнете размера на товарителницата"
 
-#: app/Admin/Tabs/Speedy_Tab.php:92 app/Admin/Tabs/Pigeon_Tab.php:88
-#: app/Admin/Tabs/Econt_Tab.php:99
+#: app/Admin/Tabs/Speedy_Tab.php:98 app/Admin/Tabs/Pigeon_Tab.php:92
+#: app/Admin/Tabs/Econt_Tab.php:105
 msgid "Automatically calculate LxWxH of the box for the parcel."
 msgstr "Автоматично пресметнете ДхШхВ на товарителницата"
 
-#: app/Admin/BoxNow.php:139 app/Admin/Tabs/BoxNow_Tab.php:181
+#: app/Admin/BoxNow.php:139 app/Admin/Tabs/BoxNow_Tab.php:185
 msgid "Automatically pack products to boxes"
 msgstr "Автоматично изчисли размера на кутията и броя на товарителниците"
 
@@ -302,13 +302,13 @@ msgid "Billing to"
 msgstr "Клиент"
 
 #: app/Admin/CVC.php:136 app/Admin/Econt.php:140 app/Admin/Speedy.php:182
-#: app/Admin/Pigeon.php:225 app/Shipping/CVC/Address.php:45
+#: app/Admin/Pigeon.php:228 app/Shipping/CVC/Address.php:45
 #: app/Shipping/Pigeon/Address.php:45 app/Shipping/Econt/Address.php:45
 #: app/Shipping/Speedy/Address.php:45
 msgid "bl. vh. et."
 msgstr "бл. вх. ет. ап."
 
-#: app/functions.php:608
+#: app/functions.php:608 app/Admin/Tabs/BoxNow_Tab.php:15
 msgid "BOX NOW"
 msgstr "BOX NOW"
 
@@ -317,12 +317,7 @@ msgstr "BOX NOW"
 msgid "BOX NOW Delivery"
 msgstr "Доставка с BOX NOW"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:15
-#| msgid "BoxNow Settings"
-msgid "BOX NOW Settings"
-msgstr "BOX NOW настройки"
-
-#: app/Admin/BoxNow.php:138 app/Admin/Tabs/BoxNow_Tab.php:195
+#: app/Admin/BoxNow.php:138 app/Admin/Tabs/BoxNow_Tab.php:199
 msgid "Box size"
 msgstr "Размер на кутията"
 
@@ -330,12 +325,14 @@ msgstr "Размер на кутията"
 msgid "boxnow.bg API Settings"
 msgstr "boxnow.bg API настройки"
 
-#: app/Admin/Admin_Menus.php:52 app/Admin/Admin_Menus.php:53
-#: app/Admin/Admin_Menus.php:65 app/Admin/Admin_Menus.php:95
+#: app/Admin/Admin_Menus.php:83 app/Admin/Admin_Menus.php:84
+#: app/Admin/Admin_Menus.php:96 app/Admin/Admin_Menus.php:126
+#: app/Admin/fragments/tabs.php:15
 msgid "Bulgarisation"
 msgstr "Българизация"
 
 #. Name of the plugin
+#: app/Admin/Admin_Menus.php:35
 msgid "Bulgarisation for WooCommerce"
 msgstr "Българизация за WooCommerce"
 
@@ -352,7 +349,7 @@ msgstr ""
 "Българизация  - Моля прегледайте настройките и ги запазете наново от \"%s\""
 
 #: app/Admin/CVC.php:143 app/Admin/Econt.php:148 app/Admin/Speedy.php:190
-#: app/Admin/Pigeon.php:233
+#: app/Admin/Pigeon.php:236
 msgid "Buyer"
 msgstr "Купувач"
 
@@ -391,20 +388,20 @@ msgstr "По карта"
 msgid "Cargo"
 msgstr "Карго"
 
-#: app/functions.php:50 app/Admin/Tabs/Econt_Tab.php:111
+#: app/functions.php:50 app/Admin/Tabs/Econt_Tab.php:117
 msgid "Cash"
 msgstr "В кеш"
 
 #: app/Admin/CVC.php:132 app/Admin/Econt.php:136 app/Admin/Speedy.php:178
-#: app/Admin/Pigeon.php:221
+#: app/Admin/Pigeon.php:224
 msgid "Cash on delivery"
 msgstr "Наложен платеж"
 
-#: app/Admin/Tabs/Econt_Tab.php:100
+#: app/Admin/Tabs/Econt_Tab.php:106
 msgid "Cash on delivery agreement"
 msgstr "Споразумение за наложен платеж"
 
-#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Speedy_Tab.php:86
+#: app/Admin/Tabs/CVC_Tab.php:84 app/Admin/Tabs/Speedy_Tab.php:92
 msgid "Cash on delivery as PPP."
 msgstr "Наложен платеж с ППП"
 
@@ -412,7 +409,7 @@ msgstr "Наложен платеж с ППП"
 msgid "Cash on delivery orders cannot be split into multiple packets."
 msgstr "С наложен платеж не може да има няколко пакета."
 
-#: app/Admin/Tabs/Speedy_Tab.php:87
+#: app/Admin/Tabs/Speedy_Tab.php:93
 msgid "Cash on delivery with cash receipt."
 msgstr "Наложен платеж с Касова бележка"
 
@@ -420,7 +417,7 @@ msgstr "Наложен платеж с Касова бележка"
 msgid "Cash on delivery with PPP"
 msgstr "Наложен платеж с ППП"
 
-#: app/Admin/Tabs/Pro_Tab.php:46
+#: app/Admin/Tabs/Pro_Tab.php:48
 #| msgid ""
 #| "Second addtion is changing the default radio buttons for shipping methods "
 #| "with more stylish buttons."
@@ -431,7 +428,7 @@ msgstr ""
 "Променя дефолтните радио бутони на шипинг методите с по-стилизирани нормални "
 "бутони."
 
-#: app/Admin/Tabs/Pigeon_Tab.php:108
+#: app/Admin/Tabs/Pigeon_Tab.php:112
 msgid "Charge a fee for COD card payments."
 msgstr "Такса при плащане на наложен платеж с карта (удържа се от изпращача)"
 
@@ -458,12 +455,12 @@ msgstr "Проверени: %1$s | Проблемни: %2$s"
 msgid "Checkout Message"
 msgstr "Съобщение на чекаут"
 
-#: app/Admin/Tabs/Settings_Tab.php:84
+#: app/Admin/Tabs/Shipping_Tab.php:58
 msgid "Checkout Settings"
 msgstr "Настройки на \"Страница за поръчка\""
 
 #: app/Admin/CVC.php:130 app/Admin/Econt.php:134 app/Admin/Speedy.php:176
-#: app/Admin/Pigeon.php:219 app/Admin/BoxNow.php:135
+#: app/Admin/Pigeon.php:222 app/Admin/BoxNow.php:135
 #: app/Shipping/CVC/Address.php:39 app/Shipping/CVC/Office.php:35
 #: app/Shipping/Pigeon/Address.php:39 app/Shipping/Pigeon/Locker.php:36
 #: app/Shipping/Pigeon/Office.php:36 app/Shipping/Econt/Address.php:39
@@ -473,12 +470,12 @@ msgstr "Настройки на \"Страница за поръчка\""
 msgid "Choose"
 msgstr "Избери"
 
-#: app/Admin/Tabs/Speedy_Tab.php:130 app/Admin/Tabs/Pigeon_Tab.php:134
-#: app/Admin/Tabs/Econt_Tab.php:176
+#: app/Admin/Tabs/Speedy_Tab.php:136 app/Admin/Tabs/Pigeon_Tab.php:138
+#: app/Admin/Tabs/Econt_Tab.php:182
 msgid "Choose a city and save in order to show offices."
 msgstr "Избери град и запази за да се покажат офиси."
 
-#: app/Admin/Tabs/Econt_Tab.php:100
+#: app/Admin/Tabs/Econt_Tab.php:106
 msgid "Choose cash on delivery agreement"
 msgstr "Избери споразумение за наложен платеж"
 
@@ -492,8 +489,8 @@ msgstr ""
 msgid "Choose to calculate"
 msgstr "Избери за калкулация"
 
-#: app/Admin/Tabs/CVC_Tab.php:88 app/Admin/Tabs/Speedy_Tab.php:119
-#: app/Admin/Tabs/Pigeon_Tab.php:123 app/Admin/Tabs/Econt_Tab.php:166
+#: app/Admin/Tabs/CVC_Tab.php:88 app/Admin/Tabs/Speedy_Tab.php:125
+#: app/Admin/Tabs/Pigeon_Tab.php:127 app/Admin/Tabs/Econt_Tab.php:172
 msgid "City"
 msgstr "Град"
 
@@ -511,7 +508,7 @@ msgstr "Цъкни за повече информация."
 msgid "Client ID"
 msgstr "Client ID"
 
-#: app/Admin/Tabs/Settings_Tab.php:81
+#: app/Admin/Tabs/Settings_Tab.php:78
 msgid "Client reports"
 msgstr "Отзиви за клиенти"
 
@@ -519,7 +516,7 @@ msgstr "Отзиви за клиенти"
 msgid "Client Secret"
 msgstr "Client Secret"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:108
+#: app/Admin/Tabs/Pigeon_Tab.php:112
 msgid "COD Card Fee"
 msgstr "Позволи плащане с карта на НП"
 
@@ -555,13 +552,9 @@ msgstr "Фирма с регистрация съгл. чл. 113(9) от ЗДД�
 msgid "Compiled by"
 msgstr "Съставил"
 
-#: app/Reports/Providers/Connectix.php:10
+#: app/Admin/Tabs/Connectix_Tab.php:14 app/Reports/Providers/Connectix.php:10
 msgid "Connectix"
 msgstr "Connectix"
-
-#: app/Admin/Tabs/Connectix_Tab.php:14
-msgid "Connectix Settings"
-msgstr "Connectix Настройки"
 
 #: app/Admin/Tabs/Connectix_Tab.php:15
 msgid "Connectix.bg API Settings"
@@ -584,11 +577,11 @@ msgid "Conversion rate message"
 msgstr "Съобщение за обменен курс"
 
 #: app/Admin/CVC.php:148 app/Admin/Econt.php:152 app/Admin/Speedy.php:196
-#: app/Admin/Pigeon.php:237
+#: app/Admin/Pigeon.php:240
 msgid "Copy Label Data"
 msgstr "Копирай данните на товарителницата"
 
-#: app/Admin/Tabs/Econt_Tab.php:107
+#: app/Admin/Tabs/Econt_Tab.php:113
 msgid "Credit"
 msgstr "Кредит"
 
@@ -601,7 +594,7 @@ msgstr "Кредитно известие - Копие"
 msgid "Credit Notice - Original"
 msgstr "Кредитно известие - Оригинал"
 
-#: app/functions.php:547 app/functions.php:604
+#: app/functions.php:547 app/functions.php:604 app/Admin/Tabs/CVC_Tab.php:15
 msgid "CVC"
 msgstr "CVC"
 
@@ -613,10 +606,6 @@ msgstr "CVC - %s"
 #: app/Admin/CVC.php:58
 msgid "CVC Delivery"
 msgstr "Доставкa със CVC "
-
-#: app/Admin/Tabs/CVC_Tab.php:15
-msgid "CVC Settings"
-msgstr "CVC настройки"
 
 #: app/Admin/Tabs/CVC_Tab.php:16
 msgid "cvc.com API Settings"
@@ -634,22 +623,22 @@ msgid "Days added to documents due date."
 msgstr "Брой дни добавени към датата на падеж на фактурата"
 
 #: app/Admin/CVC.php:155 app/Admin/Econt.php:159 app/Admin/Speedy.php:203
-#: app/Admin/Pigeon.php:246 app/Admin/Tabs/Speedy_Tab.php:91
-#: app/Admin/Tabs/Pigeon_Tab.php:103 app/Admin/Tabs/Econt_Tab.php:98
+#: app/Admin/Pigeon.php:249 app/Admin/Tabs/Speedy_Tab.php:97
+#: app/Admin/Tabs/Pigeon_Tab.php:107 app/Admin/Tabs/Econt_Tab.php:104
 msgid "Declared value"
 msgstr "Обявена стойност"
 
 #: app/Admin/CVC.php:128 app/Admin/Econt.php:132 app/Admin/Speedy.php:174
-#: app/Admin/Pigeon.php:217
+#: app/Admin/Pigeon.php:220
 msgid "Default"
 msgstr "По подразбиране"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:195
+#: app/Admin/Tabs/BoxNow_Tab.php:199
 msgid "Default box size"
 msgstr "Размер на кутията по подразбиране"
 
 #: app/Admin/CVC.php:126 app/Admin/Econt.php:130 app/Admin/Speedy.php:172
-#: app/Admin/Pigeon.php:215 app/Admin/BoxNow.php:132
+#: app/Admin/Pigeon.php:218 app/Admin/BoxNow.php:132
 msgid "Delete label"
 msgstr "Изтрий товарителница"
 
@@ -659,7 +648,7 @@ msgid "Delivered shipments: %s ( %s%% )"
 msgstr "Взети пратки: %s ( %s%% )"
 
 #: app/Admin/CVC.php:131 app/Admin/Econt.php:135 app/Admin/Speedy.php:177
-#: app/Admin/Pigeon.php:220
+#: app/Admin/Pigeon.php:223
 msgid "Delivery is payed by"
 msgstr "Доставката се поема от"
 
@@ -669,7 +658,7 @@ msgid "Delivery Type"
 msgstr "Доставка до"
 
 #: app/Admin/CVC.php:141 app/Admin/Econt.php:146 app/Admin/Speedy.php:188
-#: app/Admin/Pigeon.php:231
+#: app/Admin/Pigeon.php:234
 msgid "Delivery type"
 msgstr "Доставка до"
 
@@ -678,12 +667,12 @@ msgid "Demo"
 msgstr "Демо"
 
 #: app/Admin/CVC.php:156 app/Admin/Econt.php:160 app/Admin/Speedy.php:205
-#: app/Admin/Pigeon.php:248
+#: app/Admin/Pigeon.php:251
 msgid "Description"
 msgstr "Описание"
 
 #: app/Admin/CVC.php:153 app/Admin/Econt.php:157 app/Admin/Speedy.php:201
-#: app/Admin/Pigeon.php:244
+#: app/Admin/Pigeon.php:247
 msgid "Details:"
 msgstr "Детайли:"
 
@@ -739,7 +728,7 @@ msgstr "Дата на падеж"
 msgid "Due days"
 msgstr "Брой дни на падеж"
 
-#: app/Admin/Tabs/CVC_Tab.php:83 app/Admin/Tabs/BoxNow_Tab.php:87
+#: app/Admin/Tabs/CVC_Tab.php:83 app/Admin/Tabs/BoxNow_Tab.php:91
 msgid "E-mail"
 msgstr "Имейл"
 
@@ -756,7 +745,7 @@ msgstr "Имейл"
 msgid "E-mail: %s"
 msgstr "Имейл: %s"
 
-#: app/functions.php:600
+#: app/functions.php:600 app/Admin/Tabs/Econt_Tab.php:15
 msgid "Econt"
 msgstr "Еконт"
 
@@ -767,10 +756,6 @@ msgstr "Еконт - "
 #: app/Admin/Econt.php:62
 msgid "Econt Delivery"
 msgstr "Доставка с Еконт"
-
-#: app/Admin/Tabs/Econt_Tab.php:15
-msgid "Econt Settings"
-msgstr "Еконт настройки"
 
 #: app/Admin/Tabs/Econt_Tab.php:16
 msgid "econt.com API Settings"
@@ -967,7 +952,7 @@ msgstr "Въведете предоставения API ключ от nepostop.c
 msgid "Enter the provided token from connectix.bg."
 msgstr "Въведете предоставения токен от connectix.bg."
 
-#: app/Admin/Tabs/Pigeon_Tab.php:124
+#: app/Admin/Tabs/Pigeon_Tab.php:128
 msgid "Enter your address."
 msgstr "Въведете адреса си."
 
@@ -1018,7 +1003,7 @@ msgstr ""
 "Грешка при комуникацията със сървъра за валидиране на ДДС - моля, опитайте "
 "отново"
 
-#: app/Reports/Providers/Connectix.php:43
+#: app/Reports/Providers/Connectix.php:48
 #, php-format
 msgid "Error: %s"
 msgstr "Грешка: %s"
@@ -1028,7 +1013,7 @@ msgid "EU VAT"
 msgstr "ДДС номер"
 
 #: app/Admin/CVC.php:152 app/Admin/Econt.php:156 app/Admin/Speedy.php:200
-#: app/Admin/Pigeon.php:243
+#: app/Admin/Pigeon.php:246
 msgid "Event:"
 msgstr "Събитие:"
 
@@ -1101,7 +1086,7 @@ msgid "Fixed conversion rate:"
 msgstr "Фиксиран обменен курс:"
 
 #: app/Admin/CVC.php:147 app/Admin/Econt.php:151 app/Admin/Speedy.php:195
-#: app/Admin/Pigeon.php:236 app/Shipping/CVC/Method.php:184
+#: app/Admin/Pigeon.php:239 app/Shipping/CVC/Method.php:184
 #: app/Shipping/Pigeon/Method.php:191 app/Shipping/Speedy/Method.php:195
 msgid "Fixed price"
 msgstr "Фиксирана цена"
@@ -1124,7 +1109,7 @@ msgstr "Поправяне..."
 msgid "Footer text"
 msgstr "Текст в края на документа"
 
-#: app/Admin/Tabs/Pro_Tab.php:82
+#: app/Admin/Tabs/Pro_Tab.php:84
 #, php-format
 msgid ""
 "For more information on how to get it, you can find at the plugin %s page."
@@ -1136,8 +1121,8 @@ msgstr ""
 msgid "For single donation as development support you can send at "
 msgstr "За еднократна помощ като подкрепа за развитие, можете да дарите в "
 
-#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Speedy_Tab.php:89
-#: app/Admin/Tabs/Econt_Tab.php:96
+#: app/Admin/Tabs/CVC_Tab.php:86 app/Admin/Tabs/Speedy_Tab.php:95
+#: app/Admin/Tabs/Econt_Tab.php:102
 msgid "Force variations in label"
 msgstr "Принудително добавяне на варияцията в товарителницата"
 
@@ -1150,34 +1135,34 @@ msgstr "Намерени грешки във файла:"
 msgid "Free shipping"
 msgstr "Безплатна доставка"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:176 app/Shipping/CVC/Method.php:176
+#: app/Admin/Tabs/BoxNow_Tab.php:180 app/Shipping/CVC/Method.php:176
 #: app/Shipping/Pigeon/Method.php:183 app/Shipping/Econt/Method.php:171
 #: app/Shipping/Speedy/Method.php:187
 msgid "Free shipping over"
 msgstr "Безплатна доставка над"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:176 app/Shipping/CVC/Method.php:179
+#: app/Admin/Tabs/BoxNow_Tab.php:180 app/Shipping/CVC/Method.php:179
 #: app/Shipping/Pigeon/Method.php:186 app/Shipping/Econt/Method.php:174
 #: app/Shipping/Speedy/Method.php:190
 msgid "Free shipping over total cart price."
 msgstr "Безплатна доставка над сума на количката "
 
-#: app/Admin/Tabs/BoxNow_Tab.php:100 app/Admin/Tabs/BoxNow_Tab.php:132
+#: app/Admin/Tabs/BoxNow_Tab.php:104 app/Admin/Tabs/BoxNow_Tab.php:136
 msgid "From/To in kg"
 msgstr "От/до в кг."
 
-#: app/Admin/Tabs/BoxNow_Tab.php:108 app/Admin/Tabs/BoxNow_Tab.php:167
+#: app/Admin/Tabs/BoxNow_Tab.php:112 app/Admin/Tabs/BoxNow_Tab.php:171
 msgid "From/To kg and Order Total"
 msgstr "От/До в кг и сума на поръчката"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:104 app/Admin/Tabs/BoxNow_Tab.php:147
+#: app/Admin/Tabs/BoxNow_Tab.php:108 app/Admin/Tabs/BoxNow_Tab.php:151
 msgid "From/To Order Total"
 msgstr "От/До сума на поръчката"
 
 #: app/Admin/Tabs/NepoStop_Tab.php:65 app/Admin/Tabs/CVC_Tab.php:137
-#: app/Admin/Tabs/Speedy_Tab.php:151 app/Admin/Tabs/BoxNow_Tab.php:213
-#: app/Admin/Tabs/Connectix_Tab.php:92 app/Admin/Tabs/Pigeon_Tab.php:153
-#: app/Admin/Tabs/Econt_Tab.php:216
+#: app/Admin/Tabs/Speedy_Tab.php:157 app/Admin/Tabs/BoxNow_Tab.php:217
+#: app/Admin/Tabs/Connectix_Tab.php:92 app/Admin/Tabs/Pigeon_Tab.php:157
+#: app/Admin/Tabs/Econt_Tab.php:222
 msgid "General"
 msgstr "Главни"
 
@@ -1195,14 +1180,14 @@ msgid "Generate Invoice"
 msgstr "Генерирай фактура"
 
 #: app/Admin/CVC.php:125 app/Admin/Econt.php:129 app/Admin/Speedy.php:171
-#: app/Admin/Pigeon.php:214 app/Admin/BoxNow.php:131
+#: app/Admin/Pigeon.php:217 app/Admin/BoxNow.php:131
 #: app/Admin/fragments/label-column.php:21
 msgid "Generate label"
 msgstr "Генерирай товарителница."
 
-#: app/Admin/Tabs/CVC_Tab.php:87 app/Admin/Tabs/Speedy_Tab.php:90
-#: app/Admin/Tabs/BoxNow_Tab.php:94 app/Admin/Tabs/Pigeon_Tab.php:87
-#: app/Admin/Tabs/Econt_Tab.php:97
+#: app/Admin/Tabs/CVC_Tab.php:87 app/Admin/Tabs/Speedy_Tab.php:96
+#: app/Admin/Tabs/BoxNow_Tab.php:98 app/Admin/Tabs/Pigeon_Tab.php:91
+#: app/Admin/Tabs/Econt_Tab.php:103
 msgid "Generate label after checkout"
 msgstr "Генерирай товарителница след чекаут"
 
@@ -1237,7 +1222,7 @@ msgstr "Група - Б"
 msgid "Group - G"
 msgstr "Група - Г"
 
-#: app/Admin/Econt.php:166 app/Admin/Speedy.php:211 app/Admin/Pigeon.php:252
+#: app/Admin/Econt.php:166 app/Admin/Speedy.php:211 app/Admin/Pigeon.php:255
 msgid "Height"
 msgstr "Височина"
 
@@ -1245,11 +1230,11 @@ msgstr "Височина"
 msgid "Help"
 msgstr "Помощ"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:175
+#: app/Admin/Tabs/BoxNow_Tab.php:179
 msgid "Hide shipping over cart total price"
 msgstr "Скрий доставката над цена на количката"
 
-#: app/Admin/Tabs/Pro_Tab.php:42
+#: app/Admin/Tabs/Pro_Tab.php:44
 msgid ""
 "Hides most of the unwanted fields as Country, City, State, Postcode, Address "
 "1/2 and in their replacement add one field for city that is a dropdown field "
@@ -1277,7 +1262,7 @@ msgstr "https://autopolis.bg/"
 msgid "ID"
 msgstr "ID"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:107
+#: app/Admin/Tabs/Pigeon_Tab.php:111
 msgid "ID Verification and Document Signature"
 msgstr "Верни данни и подпис върху документ"
 
@@ -1289,7 +1274,7 @@ msgstr "Идентификационен код"
 msgid "Identifier"
 msgstr "Идентификатор"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:175
+#: app/Admin/Tabs/BoxNow_Tab.php:179
 msgid ""
 "If filled will hide the shipping method if the cart total price is over the "
 "sum."
@@ -1322,9 +1307,17 @@ msgid ""
 "If yes, you will receive information about the customer from nepostop.com."
 msgstr "Ако отговорът е да, ще получите информация за клиента от nepostop.com."
 
-#: app/Admin/Tabs/Speedy_Tab.php:103
+#: app/Admin/Tabs/Speedy_Tab.php:109
 msgid "If you choose \"Address\" the profile address will be used."
 msgstr "Ако изберете \"Адрес\" ще се използва адреса от профила."
+
+#. 1: Bulgarisation for WooCommerce, 2: five stars.
+#: app/Admin/Admin_Menus.php:34
+#, php-format
+msgid ""
+"If you like %1$s please leave us a %2$s rating. A huge thanks in advance!"
+msgstr ""
+"Ако харесвате %1$s, дайте ни оценка %2$s. Предварително много благодарим!\n"
 
 #: app/Admin/Tabs/Help_Tab.php:9
 msgid "If you need help"
@@ -1347,7 +1340,7 @@ msgstr ""
 "prices inclusive of tax\". Също отидете на под менюто \"Standard rates\" и "
 "добавете вашето ДДС ( 20% или 9% )."
 
-#: app/Admin/Tabs/Pro_Tab.php:43
+#: app/Admin/Tabs/Pro_Tab.php:45
 msgid ""
 "In addition, you will have separate option to enable Country field if you "
 "want to ship to Greece or Romania."
@@ -1359,7 +1352,7 @@ msgstr ""
 msgid "In percentages"
 msgstr "В проценти"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:242
+#: app/Admin/Tabs/BoxNow_Tab.php:246
 msgid "Incorrect Client ID or Client Secret."
 msgstr "Невалиден  Client ID или Client Secret"
 
@@ -1388,7 +1381,7 @@ msgstr "Копие на фактура"
 msgid "Invoice Copy PDF"
 msgstr "Копие на фактура PDF"
 
-#: app/Admin/Econt.php:161 app/Admin/Tabs/Econt_Tab.php:120
+#: app/Admin/Econt.php:161 app/Admin/Tabs/Econt_Tab.php:126
 msgid "Invoice number"
 msgstr "Номер на фактура"
 
@@ -1409,33 +1402,33 @@ msgstr "IP Държава"
 msgid "Is %s courier?"
 msgstr "%s куриер ли е?"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:123 app/Admin/Tabs/BoxNow_Tab.php:155
+#: app/Admin/Tabs/BoxNow_Tab.php:127 app/Admin/Tabs/BoxNow_Tab.php:159
 msgid "kg"
 msgstr "кг"
 
 #: app/Admin/CVC.php:127 app/Admin/Econt.php:131 app/Admin/Speedy.php:173
-#: app/Admin/Pigeon.php:216 app/Admin/BoxNow.php:133
+#: app/Admin/Pigeon.php:219 app/Admin/BoxNow.php:133
 #: app/Admin/Order/Columns.php:29
 msgid "Label"
 msgstr "Товарителница"
 
 #: app/Admin/CVC.php:142 app/Admin/Econt.php:147 app/Admin/Speedy.php:189
-#: app/Admin/Pigeon.php:232 app/Admin/BoxNow.php:136
+#: app/Admin/Pigeon.php:235 app/Admin/BoxNow.php:136
 msgid "Label data"
 msgstr "Данни за товарителница"
 
 #: app/Shipping/CVC/Method.php:544 app/Shipping/Pigeon/Method.php:644
 #: app/Shipping/Econt/Method.php:731 app/Shipping/Speedy/Method.php:929
-#: app/Shipping/BoxNow/Method.php:514
+#: app/Shipping/BoxNow/Method.php:515
 #, php-format
 msgid "Label number: %s. %s"
 msgstr "Товарителница: %s. %s"
 
-#: app/Admin/BoxNow.php:142 app/Admin/Tabs/BoxNow_Tab.php:193
+#: app/Admin/BoxNow.php:142 app/Admin/Tabs/BoxNow_Tab.php:197
 msgid "Large Box"
 msgstr "Голяма кутия"
 
-#: app/Admin/Econt.php:164 app/Admin/Speedy.php:209 app/Admin/Pigeon.php:250
+#: app/Admin/Econt.php:164 app/Admin/Speedy.php:209 app/Admin/Pigeon.php:253
 msgid "Length"
 msgstr "Дължина"
 
@@ -1443,11 +1436,11 @@ msgstr "Дължина"
 msgid "Level of Warning"
 msgstr "Ниво на предупреждение"
 
-#: app/Admin/Tabs/Pro_Tab.php:125
+#: app/Admin/Tabs/Pro_Tab.php:122
 msgid "License"
 msgstr "Лиценз"
 
-#: app/Admin/Tabs/Pro_Tab.php:107
+#: app/Admin/Tabs/Pro_Tab.php:104
 msgid "License Key"
 msgstr "Лицензен ключ"
 
@@ -1456,11 +1449,11 @@ msgstr "Лицензен ключ"
 msgid "Live"
 msgstr "Реална"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:91
+#: app/Admin/Tabs/BoxNow_Tab.php:95
 msgid "Location"
 msgstr "Локация"
 
-#: app/Admin/Pigeon.php:230
+#: app/Admin/Pigeon.php:233
 msgid "Locker"
 msgstr "Автомат"
 
@@ -1472,11 +1465,11 @@ msgstr "Ниско"
 msgid "Main Company Settings"
 msgstr "Главни настройки на фирмата"
 
-#: app/Admin/Tabs/Settings_Tab.php:78
+#: app/Admin/Tabs/Settings_Tab.php:75
 msgid "Main functionalities"
 msgstr "Главни функционалности"
 
-#: app/Admin/Tabs/Settings_Tab.php:60
+#: app/Admin/Tabs/Shipping_Tab.php:40
 msgid "Make shipping options on 2 rows and full width in the checkout table."
 msgstr "Направете опциите за доставка на 2 реда и с пълна ширина в чекаут."
 
@@ -1497,7 +1490,7 @@ msgstr "Максимална цена, която ще плати клиента
 msgid "Medium"
 msgstr "Средно"
 
-#: app/Admin/BoxNow.php:141 app/Admin/Tabs/BoxNow_Tab.php:189
+#: app/Admin/BoxNow.php:141 app/Admin/Tabs/BoxNow_Tab.php:193
 msgid "Medium Box"
 msgstr "Средна кутия"
 
@@ -1522,8 +1515,8 @@ msgid "MOL: %s"
 msgstr "МОЛ: %s"
 
 #: app/Admin/BoxNow.php:148 app/Admin/Tabs/CVC_Tab.php:81
-#: app/Admin/Tabs/Speedy_Tab.php:84 app/Admin/Tabs/BoxNow_Tab.php:85
-#: app/Admin/Tabs/Econt_Tab.php:94
+#: app/Admin/Tabs/Speedy_Tab.php:90 app/Admin/Tabs/BoxNow_Tab.php:89
+#: app/Admin/Tabs/Econt_Tab.php:100
 msgid "Name"
 msgstr "Име"
 
@@ -1535,17 +1528,13 @@ msgstr "Име"
 msgid "Nearest"
 msgstr "Най-близко"
 
-#: app/Reports/Providers/NepoStop.php:10
+#: app/Admin/Tabs/NepoStop_Tab.php:14 app/Reports/Providers/NepoStop.php:10
 msgid "NepoStop"
 msgstr "NepoStop"
 
 #: app/Admin/Tabs/NepoStop_Tab.php:15
 msgid "NepoStop API Settings"
 msgstr "NepoStop API Настройки"
-
-#: app/Admin/Tabs/NepoStop_Tab.php:14
-msgid "NepoStop Settings"
-msgstr "NepoStop Настройки"
 
 #: app/Admin/Tabs/Nra_Tab.php:85
 msgid "Next Invoice/Credit notice Number"
@@ -1561,7 +1550,7 @@ msgstr "Следващ номер на документи по Н-18"
 msgid "No"
 msgstr "Не"
 
-#: app/Admin/Tabs/Econt_Tab.php:189
+#: app/Admin/Tabs/Econt_Tab.php:195
 msgid "No agreement"
 msgstr "Без споразумение"
 
@@ -1602,11 +1591,11 @@ msgstr "Не са открити проблемни цени."
 msgid "No problematic prices remain."
 msgstr "Няма останали проблемни цени."
 
-#: app/Admin/Tabs/Econt_Tab.php:270
+#: app/Admin/Tabs/Econt_Tab.php:276
 msgid "No profiles was found. Please contact with Econt."
 msgstr "Не бяха намерени профили. Моля свържете се с Еконт."
 
-#: app/Admin/Tabs/Speedy_Tab.php:203
+#: app/Admin/Tabs/Speedy_Tab.php:209
 msgid "No profiles was found. Please contact with Speedy."
 msgstr "Не бяха намерени профили. Моля свържете се със Спиди."
 
@@ -1639,7 +1628,7 @@ msgstr "Не е калкулирано"
 msgid "Not started."
 msgstr "Не е започнато."
 
-#: app/Admin/Pigeon.php:257
+#: app/Admin/Pigeon.php:260
 msgid "Note for courier"
 msgstr "Бележка за куриера"
 
@@ -1648,11 +1637,11 @@ msgid "NRA unique number"
 msgstr "Уникален номер на магазина издаден ви от НАП."
 
 #: app/Admin/CVC.php:139 app/Admin/Econt.php:143 app/Admin/Speedy.php:185
-#: app/Admin/Pigeon.php:228 app/Admin/Tabs/CVC_Tab.php:93
-#: app/Admin/Tabs/CVC_Tab.php:115 app/Admin/Tabs/Speedy_Tab.php:97
-#: app/Admin/Tabs/Speedy_Tab.php:127 app/Admin/Tabs/Pigeon_Tab.php:93
-#: app/Admin/Tabs/Pigeon_Tab.php:131 app/Admin/Tabs/Econt_Tab.php:134
-#: app/Admin/Tabs/Econt_Tab.php:173 app/Shipping/CVC/Method.php:138
+#: app/Admin/Pigeon.php:231 app/Admin/Tabs/CVC_Tab.php:93
+#: app/Admin/Tabs/CVC_Tab.php:115 app/Admin/Tabs/Speedy_Tab.php:103
+#: app/Admin/Tabs/Speedy_Tab.php:133 app/Admin/Tabs/Pigeon_Tab.php:97
+#: app/Admin/Tabs/Pigeon_Tab.php:135 app/Admin/Tabs/Econt_Tab.php:140
+#: app/Admin/Tabs/Econt_Tab.php:179 app/Shipping/CVC/Method.php:138
 #: app/Shipping/Pigeon/Method.php:167 app/Shipping/Econt/Method.php:147
 #: app/Shipping/Speedy/Method.php:174
 msgid "Office"
@@ -1671,7 +1660,7 @@ msgstr "По платежна сметка"
 msgid "Only for companies"
 msgstr "Само за фирми"
 
-#: app/Admin/Tabs/Pro_Tab.php:52
+#: app/Admin/Tabs/Pro_Tab.php:54
 msgid "Option to include order ID in label."
 msgstr ""
 "Възможност за добавяне номера на поръчката в описанието на товарителницата."
@@ -1707,25 +1696,25 @@ msgid "Order Number"
 msgstr "Номер на поръчка"
 
 #: app/functions.php:54 app/functions.php:92 app/Admin/CVC.php:135
-#: app/Admin/Econt.php:139 app/Admin/Speedy.php:181 app/Admin/Pigeon.php:224
+#: app/Admin/Econt.php:139 app/Admin/Speedy.php:181 app/Admin/Pigeon.php:227
 msgid "Other"
 msgstr "Друг"
 
 #: app/Admin/Econt.php:167 app/Admin/Econt.php:175 app/Admin/Speedy.php:212
-#: app/Admin/Pigeon.php:253 app/Admin/BoxNow.php:143
+#: app/Admin/Pigeon.php:256 app/Admin/BoxNow.php:143
 msgid "Pack"
 msgstr "Пакет"
 
 #: app/Admin/CVC.php:133 app/Admin/Econt.php:137 app/Admin/Speedy.php:179
-#: app/Admin/Pigeon.php:222
+#: app/Admin/Pigeon.php:225
 msgid "Pack count"
 msgstr "Брой пакети"
 
-#: app/Admin/Tabs/Econt_Tab.php:124
+#: app/Admin/Tabs/Econt_Tab.php:130
 msgid "Packing list"
 msgstr "Опис"
 
-#: app/Admin/Tabs/Econt_Tab.php:126
+#: app/Admin/Tabs/Econt_Tab.php:132
 msgid "Packing list or invoice number"
 msgstr "Опис или номер на фактура"
 
@@ -1738,7 +1727,7 @@ msgstr "Страница %s от %s"
 msgid "Pallet"
 msgstr "Палет"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:104
+#: app/Admin/Tabs/Pigeon_Tab.php:108
 msgid "Paper Return Receipt"
 msgstr "Обратна разписка (хартия)"
 
@@ -1754,7 +1743,7 @@ msgstr "Парола"
 msgid "Pay by contract"
 msgstr "Плати по договор"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:102
+#: app/Admin/Tabs/Pigeon_Tab.php:106
 msgid "Pay with POS"
 msgstr "Плати с POS"
 
@@ -1779,8 +1768,8 @@ msgstr "Начин на плащане"
 msgid "PDF Files"
 msgstr "PDF документи"
 
-#: app/Admin/Tabs/CVC_Tab.php:82 app/Admin/Tabs/Speedy_Tab.php:85
-#: app/Admin/Tabs/BoxNow_Tab.php:86 app/Admin/Tabs/Econt_Tab.php:95
+#: app/Admin/Tabs/CVC_Tab.php:82 app/Admin/Tabs/Speedy_Tab.php:91
+#: app/Admin/Tabs/BoxNow_Tab.php:90 app/Admin/Tabs/Econt_Tab.php:101
 msgid "Phone"
 msgstr "Телефон"
 
@@ -1798,6 +1787,7 @@ msgid "Physical Weight"
 msgstr "Физическо тегло (кг)"
 
 #: app/functions.php:612 app/Admin/Pigeon.php:65
+#: app/Admin/Tabs/Pigeon_Tab.php:15
 msgid "Pigeon Express"
 msgstr "Pigeon Express"
 
@@ -1808,10 +1798,6 @@ msgstr "Pigeon Express - "
 #: app/Admin/Tabs/Pigeon_Tab.php:16
 msgid "Pigeon Express API Settings"
 msgstr "Pigeon Express API Настройки"
-
-#: app/Admin/Tabs/Pigeon_Tab.php:15
-msgid "PigeonExpress Settings"
-msgstr "Pigeon Express Настройки"
 
 #: app/Invoice/Document/BaseDocument.php:70
 #: app/Invoice/Document/NRARefunded.php:45
@@ -1896,14 +1882,14 @@ msgstr ""
 msgid "Plugin Settings"
 msgstr "Настройки на плъгина"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:102
+#: app/Admin/Tabs/Pigeon_Tab.php:106
 msgid "POS payment available."
 msgstr "Предлага се плащане чрез POS."
 
 #: app/Reports/Providers/Connectix.php:40
-#: app/Reports/Providers/Connectix.php:62
-#: app/Reports/Providers/Connectix.php:74
-#: app/Reports/Providers/Connectix.php:96
+#: app/Reports/Providers/Connectix.php:67
+#: app/Reports/Providers/Connectix.php:79
+#: app/Reports/Providers/Connectix.php:101
 #, php-format
 msgid "Possibility that the shipment will not be picked up: %s"
 msgstr "Възможност пратката да не бъде взета: %s"
@@ -1916,17 +1902,17 @@ msgstr "Съставил документа"
 msgid "Preparing..."
 msgstr "Подготовка..."
 
-#: app/Admin/BoxNow.php:147 app/Admin/Tabs/BoxNow_Tab.php:125
-#: app/Admin/Tabs/BoxNow_Tab.php:143 app/Admin/Tabs/BoxNow_Tab.php:159
+#: app/Admin/BoxNow.php:147 app/Admin/Tabs/BoxNow_Tab.php:129
+#: app/Admin/Tabs/BoxNow_Tab.php:147 app/Admin/Tabs/BoxNow_Tab.php:163
 #: app/Invoice/Document/BaseDocument.php:97
 msgid "Price"
 msgstr "Цена"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:226
+#: app/Admin/Tabs/BoxNow_Tab.php:230
 msgid "Price options"
 msgstr "Настройки на цените"
 
-#: app/Admin/Tabs/BoxNow_Tab.php:112
+#: app/Admin/Tabs/BoxNow_Tab.php:116
 msgid "Price type"
 msgstr "Тип на цените"
 
@@ -1951,7 +1937,7 @@ msgstr ""
 msgid "Print order total after the table. Works only in levs."
 msgstr "Показва общата цена на документа под таблицата."
 
-#: app/Admin/Tabs/Pro_Tab.php:11 app/Admin/Tabs/Pro_Tab.php:31
+#: app/Admin/Tabs/Pro_Tab.php:11 app/Admin/Tabs/Pro_Tab.php:36
 msgid "Pro Addon"
 msgstr "Про добавка"
 
@@ -2000,7 +1986,7 @@ msgstr "Получил"
 msgid "Recommended settings"
 msgstr "Препоръчителни настройки"
 
-#: app/Admin/Pigeon.php:240
+#: app/Admin/Pigeon.php:243
 msgid "Reference number"
 msgstr "Референтен номер"
 
@@ -2053,12 +2039,12 @@ msgstr "Освободено по чл. 3 плащане без ППП"
 msgid "Remove delivery from documents"
 msgstr "Премахване на доставките от документите"
 
-#: app/Admin/Econt.php:169 app/Admin/Speedy.php:214 app/Admin/Pigeon.php:255
+#: app/Admin/Econt.php:169 app/Admin/Speedy.php:214 app/Admin/Pigeon.php:258
 #: app/Admin/BoxNow.php:145
 msgid "Remove Pack"
 msgstr "Премахни пакет"
 
-#: app/Admin/Tabs/Pro_Tab.php:66
+#: app/Admin/Tabs/Pro_Tab.php:68
 msgid "Remove the limit of 100 orders for NRA XML Export for N-18"
 msgstr "Премахва лимита от 100 поръчки за одиторския файл за Наредба Н-18."
 
@@ -2066,15 +2052,15 @@ msgstr "Премахва лимита от 100 поръчки за одитор�
 msgid "Reports"
 msgstr "Отзиви"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:104
+#: app/Admin/Tabs/Pigeon_Tab.php:108
 msgid "Request for a paper receipt"
 msgstr "Заявка за обратна разписка в хартиен формат"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:105
+#: app/Admin/Tabs/Pigeon_Tab.php:109
 msgid "Request for a return receipt in electronic format"
 msgstr "Заявка за обратна разписка в електронен формат"
 
-#: app/Admin/Pigeon.php:256
+#: app/Admin/Pigeon.php:259
 msgid "Return at my expense"
 msgstr "Върни за моя сметка"
 
@@ -2082,18 +2068,18 @@ msgstr "Върни за моя сметка"
 msgid "Return method"
 msgstr "Начин на връщане на сумата"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:106
+#: app/Admin/Tabs/Pigeon_Tab.php:110
 msgid ""
 "Return of original documents from the recipient to the sender after signing."
 msgstr ""
 "Връщане на оригинални документи от получателя към подателя след подписване."
 
-#: app/Admin/Tabs/Pigeon_Tab.php:105
+#: app/Admin/Tabs/Pigeon_Tab.php:109
 msgid "Return Receipt"
 msgstr "Обратна разписка (електронна)"
 
 #: app/functions.php:241 app/Admin/CVC.php:154 app/Admin/Econt.php:158
-#: app/Admin/Speedy.php:202 app/Admin/Pigeon.php:245
+#: app/Admin/Speedy.php:202 app/Admin/Pigeon.php:248
 #: app/Shipping/CVC/Method.php:143 app/Shipping/CVC/Method.php:150
 #: app/Shipping/Pigeon/Method.php:173 app/Shipping/Econt/Method.php:153
 #: app/Shipping/Speedy/Method.php:180
@@ -2145,11 +2131,11 @@ msgstr "Сканиране..."
 msgid "Scanning... page %1$s of %2$s"
 msgstr "Сканиране... страница %1$s от %2$s"
 
-#: app/Admin/Tabs/Pro_Tab.php:70
+#: app/Admin/Tabs/Pro_Tab.php:72
 msgid "Screenshot of the options:"
 msgstr "Скрийншот на настройките:"
 
-#: app/Admin/Tabs/Pro_Tab.php:75
+#: app/Admin/Tabs/Pro_Tab.php:77
 msgid "Screenshots of the checkout:"
 msgstr "Скрийншоти на чекаута:"
 
@@ -2185,32 +2171,32 @@ msgstr "Избери"
 msgid "Select a month for the report"
 msgstr "Изберете месец на извлечението"
 
-#: app/Admin/Tabs/CVC_Tab.php:106 app/Admin/Tabs/Econt_Tab.php:162
+#: app/Admin/Tabs/CVC_Tab.php:106 app/Admin/Tabs/Econt_Tab.php:168
 msgid "Select Address"
 msgstr "Изберете адрес"
 
-#: app/Admin/Tabs/CVC_Tab.php:99 app/Admin/Tabs/Speedy_Tab.php:103
-#: app/Admin/Tabs/Pigeon_Tab.php:99 app/Admin/Tabs/Econt_Tab.php:140
+#: app/Admin/Tabs/CVC_Tab.php:99 app/Admin/Tabs/Speedy_Tab.php:109
+#: app/Admin/Tabs/Pigeon_Tab.php:103 app/Admin/Tabs/Econt_Tab.php:146
 msgid ""
 "Select from where you will send the packages and save to show more options."
 msgstr ""
 "Изберете от къде ще се изпращат пратките и запазете за да се покажат повече "
 "настройки."
 
-#: app/Admin/Tabs/Econt_Tab.php:113
+#: app/Admin/Tabs/Econt_Tab.php:119
 msgid "Select how you will pay for the shipments."
 msgstr "Избери как ще платиш доставките."
 
-#: app/Admin/Tabs/Econt_Tab.php:126
+#: app/Admin/Tabs/Econt_Tab.php:132
 msgid "Select if you want to have packing list or invoice number in the label."
 msgstr ""
 "Избери дали да има опис на продуктите или номер на фактура в товарителницата."
 
-#: app/Admin/Tabs/Speedy_Tab.php:82 app/Admin/Tabs/Econt_Tab.php:92
+#: app/Admin/Tabs/Speedy_Tab.php:88 app/Admin/Tabs/Econt_Tab.php:98
 msgid "Select profile"
 msgstr "Изберете профил"
 
-#: app/Admin/Tabs/Speedy_Tab.php:82 app/Admin/Tabs/Econt_Tab.php:92
+#: app/Admin/Tabs/Speedy_Tab.php:88 app/Admin/Tabs/Econt_Tab.php:98
 msgid ""
 "Select the profile you want to use and save to show or update the other "
 "options."
@@ -2241,7 +2227,7 @@ msgstr ""
 "//login.econt.com/register/\">Еконт доставки</a>."
 
 #: app/Admin/CVC.php:129 app/Admin/Econt.php:133 app/Admin/Speedy.php:175
-#: app/Admin/Pigeon.php:218 app/Admin/BoxNow.php:134
+#: app/Admin/Pigeon.php:221 app/Admin/BoxNow.php:134
 #: app/Shipping/CVC/Address.php:38 app/Shipping/CVC/Office.php:34
 #: app/Shipping/Pigeon/Address.php:38 app/Shipping/Pigeon/Locker.php:35
 #: app/Shipping/Pigeon/Office.php:35 app/Shipping/Econt/Address.php:38
@@ -2255,16 +2241,16 @@ msgstr "Избрано"
 msgid "Send customer notification for delivery."
 msgstr "Изпратете известие на клиента за доставка."
 
-#: app/Admin/Econt.php:163 app/Admin/Speedy.php:208 app/Admin/Pigeon.php:249
+#: app/Admin/Econt.php:163 app/Admin/Speedy.php:208 app/Admin/Pigeon.php:252
 #: app/Admin/BoxNow.php:125 app/Admin/Tabs/CVC_Tab.php:99
-#: app/Admin/Tabs/CVC_Tab.php:147 app/Admin/Tabs/Speedy_Tab.php:103
-#: app/Admin/Tabs/BoxNow_Tab.php:223 app/Admin/Tabs/Pigeon_Tab.php:99
-#: app/Admin/Tabs/Pigeon_Tab.php:163 app/Admin/Tabs/Econt_Tab.php:140
-#: app/Admin/Tabs/Econt_Tab.php:226
+#: app/Admin/Tabs/CVC_Tab.php:147 app/Admin/Tabs/Speedy_Tab.php:109
+#: app/Admin/Tabs/BoxNow_Tab.php:227 app/Admin/Tabs/Pigeon_Tab.php:103
+#: app/Admin/Tabs/Pigeon_Tab.php:167 app/Admin/Tabs/Econt_Tab.php:146
+#: app/Admin/Tabs/Econt_Tab.php:232
 msgid "Send From"
 msgstr "Изпрати от"
 
-#: app/Admin/Tabs/Speedy_Tab.php:161
+#: app/Admin/Tabs/Speedy_Tab.php:167
 msgid "Send From office"
 msgstr "Изпрати от офис"
 
@@ -2290,15 +2276,15 @@ msgstr ""
 "активирано/деактивирано)"
 
 #: app/Admin/CVC.php:144 app/Admin/Econt.php:149 app/Admin/Speedy.php:191
-#: app/Admin/Pigeon.php:234
+#: app/Admin/Pigeon.php:237
 msgid "Sender"
 msgstr "Изпращач"
 
-#: app/Admin/Tabs/Econt_Tab.php:113
+#: app/Admin/Tabs/Econt_Tab.php:119
 msgid "Sender payment type"
 msgstr "Метод на плащане на изпращача"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:106
+#: app/Admin/Tabs/Pigeon_Tab.php:110
 msgid "Service Return Documents"
 msgstr "Обратни документи"
 
@@ -2306,7 +2292,7 @@ msgstr "Обратни документи"
 msgid "Settings"
 msgstr "Настройки"
 
-#: app/Admin/Tabs/Settings_Tab.php:141
+#: app/Admin/Tabs/Settings_Tab.php:136
 msgid "Settings saved successfully!"
 msgstr "Настройките са запазени успешно!"
 
@@ -2316,16 +2302,16 @@ msgid "Settlement"
 msgstr "Населено място"
 
 #: app/Admin/CVC.php:150 app/Admin/Econt.php:154 app/Admin/Speedy.php:198
-#: app/Admin/Pigeon.php:239 app/Admin/BoxNow.php:137
+#: app/Admin/Pigeon.php:242 app/Admin/BoxNow.php:137
 msgid "Shipment status"
 msgstr "Статус на пратката"
 
 #: app/Admin/CVC.php:134 app/Admin/Econt.php:138 app/Admin/Speedy.php:180
-#: app/Admin/Pigeon.php:223
+#: app/Admin/Pigeon.php:226
 msgid "Shipment type"
 msgstr "Тип на товарителницата"
 
-#: app/Shipping/CheckoutLayout.php:16
+#: app/Shipping/CheckoutLayout.php:16 app/Admin/Tabs/Shipping_Tab.php:10
 msgid "Shipping"
 msgstr "Доставка"
 
@@ -2333,7 +2319,7 @@ msgstr "Доставка"
 msgid "Shipping Methods Settings"
 msgstr "Настройки за доставки"
 
-#: app/Export/Nra/Order.php:118 app/Invoice/Order/Order.php:123
+#: app/Export/Nra/Order.php:125 app/Invoice/Order/Order.php:123
 #, php-format
 msgid "Shipping: %s"
 msgstr "Доставка: %s"
@@ -2359,7 +2345,7 @@ msgstr ""
 msgid "SKU"
 msgstr "Код"
 
-#: app/Admin/BoxNow.php:140 app/Admin/Tabs/BoxNow_Tab.php:185
+#: app/Admin/BoxNow.php:140 app/Admin/Tabs/BoxNow_Tab.php:189
 msgid "Small Box"
 msgstr "Малка кутия"
 
@@ -2376,7 +2362,7 @@ msgstr ""
 "Някои от поръчките не бяха добавени, защото метода на плащане не беше "
 "намерен или е изключен. Списък с ид на поръчките: %s"
 
-#: app/functions.php:596
+#: app/functions.php:596 app/Admin/Tabs/Speedy_Tab.php:15
 msgid "Speedy"
 msgstr "Спиди"
 
@@ -2388,10 +2374,6 @@ msgstr "Спиди - %s"
 #: app/Admin/Speedy.php:63
 msgid "Speedy Delivery"
 msgstr "Доставка със Спиди"
-
-#: app/Admin/Tabs/Speedy_Tab.php:15
-msgid "Speedy Settings"
-msgstr "Спиди настройки"
 
 #: app/Admin/Tabs/Speedy_Tab.php:16
 msgid "speedy.bg API Settings"
@@ -2434,19 +2416,19 @@ msgid "Store setting:"
 msgstr "Настройка на магазина:"
 
 #: app/Admin/CVC.php:137 app/Admin/Econt.php:141 app/Admin/Speedy.php:183
-#: app/Admin/Pigeon.php:226 app/Shipping/CVC/Address.php:44
+#: app/Admin/Pigeon.php:229 app/Shipping/CVC/Address.php:44
 #: app/Shipping/Pigeon/Address.php:44 app/Shipping/Econt/Address.php:44
 #: app/Shipping/Speedy/Address.php:44
 msgid "Street number"
 msgstr "Номер на улица"
 
-#: app/Admin/Speedy.php:204 app/Admin/Pigeon.php:247
+#: app/Admin/Speedy.php:204 app/Admin/Pigeon.php:250
 #: app/Shipping/Pigeon/Address.php:46 app/Shipping/Speedy/Address.php:46
 msgid "Street or quarter"
 msgstr "Улица или квартал"
 
 #: app/Admin/CVC.php:138 app/Admin/Econt.php:142 app/Admin/Speedy.php:184
-#: app/Admin/Pigeon.php:227
+#: app/Admin/Pigeon.php:230
 msgid "Street/Quarter"
 msgstr "Улица/Квартал"
 
@@ -2454,7 +2436,7 @@ msgstr "Улица/Квартал"
 msgid "Supporting the development"
 msgstr "Подкрепете разработката"
 
-#: app/Admin/Tabs/Settings_Tab.php:117
+#: app/Admin/Tabs/Settings_Tab.php:112
 msgid "Tab parameter not allowed!"
 msgstr "Този Tab параметър не е разрешен!"
 
@@ -2534,7 +2516,7 @@ msgstr "Целевата цена вече не съвпада."
 msgid "There are no rows to fix."
 msgstr "Няма редове за поправяне."
 
-#: app/Admin/Tabs/Pro_Tab.php:35
+#: app/Admin/Tabs/Pro_Tab.php:37
 msgid ""
 "There is a Pro version of the plugin as an addon ( additional plugin to the "
 "free one )."
@@ -2593,9 +2575,9 @@ msgstr ""
 "Тази опция ще премахне доставките от всички PDF документи и XML одиторски "
 "файл."
 
-#: app/Admin/Tabs/CVC_Tab.php:87 app/Admin/Tabs/Speedy_Tab.php:90
-#: app/Admin/Tabs/BoxNow_Tab.php:94 app/Admin/Tabs/Pigeon_Tab.php:87
-#: app/Admin/Tabs/Econt_Tab.php:97
+#: app/Admin/Tabs/CVC_Tab.php:87 app/Admin/Tabs/Speedy_Tab.php:96
+#: app/Admin/Tabs/BoxNow_Tab.php:98 app/Admin/Tabs/Pigeon_Tab.php:91
+#: app/Admin/Tabs/Econt_Tab.php:103
 msgid ""
 "This option will try to generate your label immediately after user checkout. "
 "Also, will add the tracking number in the order email."
@@ -2612,12 +2594,12 @@ msgstr "Тази поръчка е извън обхвата на ДДС в ЕС
 msgid "This tool scans products and shows only problematic prices."
 msgstr "Този инструмент сканира продукти и показва само проблемни цени."
 
-#: app/Admin/Tabs/Pro_Tab.php:36
+#: app/Admin/Tabs/Pro_Tab.php:40
 msgid "This version of the plugin adds a couple of checkout functionalities:"
 msgstr "Тази версия на плъгина добавя няколко функционалности в чекаут:"
 
 #: app/Admin/CVC.php:151 app/Admin/Econt.php:155 app/Admin/Speedy.php:199
-#: app/Admin/Pigeon.php:242
+#: app/Admin/Pigeon.php:245
 msgid "Time:"
 msgstr "Време:"
 
@@ -2679,18 +2661,18 @@ msgstr "Обща цена"
 msgid "Total shipments: %s"
 msgstr "Общо пратки: %s"
 
-#: app/Export/Nra/Export.php:157
+#: app/Export/Nra/Export.php:220
 #, php-format
 msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr "Всичко: %s | ДДС: %s | Върнати поръчки: %s"
 
 #: app/Shipping/CVC/Method.php:548 app/Shipping/Pigeon/Method.php:648
 #: app/Shipping/Econt/Method.php:735 app/Shipping/Speedy/Method.php:933
-#: app/Shipping/BoxNow/Method.php:518
+#: app/Shipping/BoxNow/Method.php:519
 msgid "Track your order."
 msgstr "Проследи пратката."
 
-#: app/Admin/Pigeon.php:241
+#: app/Admin/Pigeon.php:244
 msgid "Tracking codes"
 msgstr "Kодове за проследяване"
 
@@ -2720,16 +2702,16 @@ msgid "Up"
 msgstr "Нагоре"
 
 #: app/Admin/CVC.php:124 app/Admin/Econt.php:128 app/Admin/Speedy.php:170
-#: app/Admin/Pigeon.php:213
+#: app/Admin/Pigeon.php:216
 msgid "Update label"
 msgstr "Обнови товарителницата"
 
 #: app/Admin/CVC.php:123 app/Admin/Econt.php:127 app/Admin/Speedy.php:169
-#: app/Admin/Pigeon.php:212 app/Admin/BoxNow.php:130
+#: app/Admin/Pigeon.php:215 app/Admin/BoxNow.php:130
 msgid "Update shipment status"
 msgstr "Обнови статуса на пратката"
 
-#: app/Admin/Tabs/Speedy_Tab.php:88
+#: app/Admin/Tabs/Speedy_Tab.php:94
 msgid ""
 "Usage of administrative fee is enabled and configured in client contract. "
 "Ignored if not applicable for user."
@@ -2747,11 +2729,11 @@ msgstr ""
 msgid "Username"
 msgstr "Потребителско име"
 
-#: app/Admin/Tabs/Speedy_Tab.php:198
+#: app/Admin/Tabs/Speedy_Tab.php:204
 msgid "Username and password are incorrect."
 msgstr "Потребителско име и парола са невалидни."
 
-#: app/Admin/Tabs/Econt_Tab.php:262
+#: app/Admin/Tabs/Econt_Tab.php:268
 #, php-format
 msgid ""
 "Username and password are incorrect. Please generate API keys from "
@@ -2799,7 +2781,7 @@ msgstr "ДДС номер да бъде ли задължително поле?"
 msgid "VAT Number: %s"
 msgstr "ДДС номер: %s"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:107
+#: app/Admin/Tabs/Pigeon_Tab.php:111
 msgid "Verify ID and sign documents electronically."
 msgstr "Верни данни и подпис върху документ"
 
@@ -2830,7 +2812,7 @@ msgid ""
 "for electronic services of the NRA."
 msgstr "Уеб адрес на електронния магазин."
 
-#: app/Admin/CVC.php:146 app/Admin/Econt.php:150 app/Admin/Pigeon.php:235
+#: app/Admin/CVC.php:146 app/Admin/Econt.php:150 app/Admin/Pigeon.php:238
 #: app/Admin/BoxNow.php:146
 msgid "Weight"
 msgstr "Тегло"
@@ -2853,7 +2835,7 @@ msgstr "Кога да се създават документите?"
 msgid "When to generate invoices?"
 msgstr "Кога да се създават фактурите?"
 
-#: app/Admin/Econt.php:165 app/Admin/Speedy.php:210 app/Admin/Pigeon.php:251
+#: app/Admin/Econt.php:165 app/Admin/Speedy.php:210 app/Admin/Pigeon.php:254
 msgid "Width"
 msgstr "Широчина"
 
@@ -2878,7 +2860,7 @@ msgstr "Woo BG - Pigeon Express"
 msgid "Woo BG - Speedy"
 msgstr "Woo BG - Спиди"
 
-#: app/Admin/Admin_Menus.php:92
+#: app/Admin/Admin_Menus.php:123
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
@@ -2920,12 +2902,12 @@ msgstr ""
 "Може да научите повече за този проблем <a target=\"_blank\" href=\"%s\">"
 "тук</a>."
 
-#: app/Admin/Tabs/Pro_Tab.php:81
+#: app/Admin/Tabs/Pro_Tab.php:83
 #, php-format
 msgid "You can review a demo at: %s"
 msgstr "Можете да видите демо на: %s"
 
-#: app/Admin/Tabs/Pigeon_Tab.php:168
+#: app/Admin/Tabs/Pigeon_Tab.php:172
 #, php-format
 msgid ""
 "You can see the current prices on the <a href=\"%s\" target=\"_blank\">"
@@ -2942,7 +2924,7 @@ msgstr "Нямате права да генерирате товарителни
 msgid "You do not have permission to access this page."
 msgstr "Нямате разрешение за достъп до тази страница."
 
-#: app/Admin/Speedy.php:918 app/Admin/Pigeon.php:590 app/Admin/BoxNow.php:548
+#: app/Admin/Speedy.php:918 app/Admin/Pigeon.php:593 app/Admin/BoxNow.php:548
 msgid "You do not have permission to perform this action."
 msgstr "Нямате разрешение да извършите това действие."
 
@@ -2973,7 +2955,7 @@ msgstr "Копирахте данните използвани за връзка
 msgid "You just copied the label data used for the Econt API."
 msgstr "Копирахте данните използвани за връзка с Еконт."
 
-#: app/Admin/Pigeon.php:238
+#: app/Admin/Pigeon.php:241
 msgid "You just copied the label data used for the Pigeon Express API."
 msgstr "Копирахте данните използвани за връзка с Pigeon Express."
 
