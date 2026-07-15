@@ -57,7 +57,7 @@ export default {
 	},
 	computed: {
 		apmLocatorUrl() {
-			let url = this.baseIframeUrl + '/popup.html?gps=yes&autoselect=yes&autoclose=yes';
+			let url = this.baseIframeUrl + '/popup.html?' + this.apmLocatorParams;
 			let _this = this;
 
 			setTimeout(function() {
@@ -67,15 +67,28 @@ export default {
 			return url;
 		},
 		baseIframeUrl() {
-			let url = 'https://widget-v5.boxnow.bg';
+			let url = 'https://map.boxnow.bg';
 			
 			if ( this.countryField.val() === 'GR' ) {
-				url = 'https://widget-v5.boxnow.gr';
+				url = 'https://map.boxnow.gr';
 			} else if ( this.countryField.val() === 'CY' ) {
-				url = 'https://widget-v5.boxnow.cy';
+				url = 'https://map.boxnow.cy';
 			}
 			
 			return url;
+		},
+		apmLocatorParams() {
+			let countryCode = this.countryField.val().toLowerCase();
+			let language = countryCode === 'gr' ? 'gr' : countryCode === 'bg' ? 'bg' : 'en';
+
+			return Qs.stringify({
+				countryCode: countryCode,
+				language: language,
+				partnerId: wooBg_boxnow.partnerId,
+				gps: 'yes',
+				autoselect: 'no',
+				autoclose: 'yes',
+			});
 		}
 	},
 	mounted() {
@@ -125,7 +138,7 @@ export default {
 				type:'iframe',
 				midClick: true,
 				iframe: {
-					markup: `<iframe class="mfp-iframe" src="${this.baseIframeUrl}/popup.html?gps=yes&autoselect=yes&autoclose=yes" frameborder="0" allowfullscreen></iframe>`,
+					markup: `<iframe class="mfp-iframe" src="${this.baseIframeUrl}/popup.html?${this.apmLocatorParams}" frameborder="0" allowfullscreen></iframe>`,
 				},
 				callbacks: {
 					open: function(){

@@ -96,7 +96,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
   - BoxNow 
     - https://api.bulgarisation.bg/
     - https://boxnow.bg/en/
-    - https://widget-v5.boxnow.bg/
+    - https://map.boxnow.bg/
     - https://api-production.boxnow.bg/
     - https://api-stage.boxnow.bg/
   - Pigeon Express

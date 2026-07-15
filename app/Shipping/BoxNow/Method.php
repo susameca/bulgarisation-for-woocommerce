@@ -475,7 +475,8 @@ class Method extends \WC_Shipping_Method {
 		);
 
 		wp_localize_script( 'woo-bg-js-boxnow', 'wooBg_boxnow', array(
-			'i18n' => Apm::get_i18n(),
+			'i18n'     => Apm::get_i18n(),
+			'partnerId' => woo_bg()->container()[ Client::BOXNOW ]->get_client_id(),
 		) );
 
 		wp_enqueue_style(
