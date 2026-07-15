@@ -517,8 +517,12 @@ export default {
 				}
 			});
 		} else if ( wooBg_pigeon.cookie_data.type == 'address' ) {
-			if ( typeof wooBg_pigeon.label.pickup_address !== 'undefined' && typeof wooBg_pigeon.label.pickup_address.additional_info !== 'undefined' ) {
-				this.other = wooBg_pigeon.label.pickup_address.additional_info;
+			if ( typeof wooBg_pigeon.label.delivery_address !== 'undefined' && typeof wooBg_pigeon.label.delivery_address.additional_info !== 'undefined' ) {
+				this.other = wooBg_pigeon.label.delivery_address.additional_info;
+			} else if ( typeof wooBg_pigeon.cookie_data.streetNumber !== 'undefined' && wooBg_pigeon.cookie_data.streetNumber ) {
+				this.other = wooBg_pigeon.cookie_data.streetNumber;
+			} else if ( typeof wooBg_pigeon.cookie_data.other !== 'undefined' ) {
+				this.other = wooBg_pigeon.cookie_data.other;
 			}
 
 			this.streets.forEach( function ( street ) {
