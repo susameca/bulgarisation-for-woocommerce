@@ -169,7 +169,8 @@ class Export_Tab extends Base_Tab {
 		header('Content-type: application/zip');
 		header('Content-Disposition: attachment; filename="' . $generated_file['file_name'] . '"');
 		header("Content-length: " . filesize( $generated_file['temp_file'] ) );
-		echo file_get_contents( $generated_file['temp_file'] );
+		readfile( $generated_file['temp_file'] );
+		unlink( $generated_file['temp_file'] );
 		exit;
 	}
 }

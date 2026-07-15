@@ -5,7 +5,7 @@ namespace Woo_BG\Export\Delta;
 defined( 'ABSPATH' ) || exit;
 
 class Export {
-	public $documents, $woo_orders, $date;
+	public $documents = array(), $woo_orders = array(), $order_ids = array(), $date;
 
 	function __construct( $date ) {
 		$this->date = $date;
@@ -13,14 +13,21 @@ class Export {
 	}
 
 	protected function load_woo_orders() {
-		$this->woo_orders = wc_get_orders( array(
+		$this->order_ids = wc_get_orders( array(
 			'date_created' => strtotime( 'first day of ' . $this->date . ' ' . wp_timezone_string() ) . '...' . strtotime( 'last day of ' . $this->date . ' 23:59:59 ' . wp_timezone_string() ),
 			'limit' => -1,
+			'return' => 'ids',
 		) );
 	}
 
 	public function get_file() {
-		foreach ( $this->woo_orders as $key => $order ) {
+		foreach ( $this->order_ids as $key => $order_id ) {
+			$order = wc_get_order( $order_id );
+
+			if ( ! $order ) {
+				continue;
+			}
+
 			$names = [];
 			foreach ( $order->get_items() as $item ) {
 				$names[] = $item->get_name();
@@ -81,6 +88,7 @@ class Export {
 			}
 
 			if ( $order->get_meta( 'woo_bg_refunded_invoice_document' ) ) {
+				$total_due = $order->get_total();
 				$this->documents[] = apply_filters( 'woo_bg/admin/export/microinvest-order', array(
 					'2', 
 					date_i18n( 'd.m.Y', strtotime( $order->get_date_created() ) ),
@@ -100,27 +108,38 @@ class Export {
 					'-1'
 				), $order, $temp_order );
 			}
+
+			unset( $order, $temp_order );
+
+			if ( 0 === ( ( $key + 1 ) % 100 ) && function_exists( 'wp_cache_flush_runtime' ) ) {
+				wp_cache_flush_runtime();
+			}
 		}
 
-		$this->documents = apply_filters( 'woo_bg/admin/delta_export/documents', $this->documents, $this->woo_orders );
+		if ( has_filter( 'woo_bg/admin/delta_export/documents' ) ) {
+			$this->woo_orders = array_filter( array_map( 'wc_get_order', $this->order_ids ) );
+			$this->documents = apply_filters( 'woo_bg/admin/delta_export/documents', $this->documents, $this->woo_orders );
+		}
 
 		return $this->upload_file();
 	}
 
 	protected function upload_file() {
-		if ( !empty( $this->documents ) ) {
-			$rows = array_map( function ( $document ) {
-				return implode('|', $document );
-			}, $this->documents );
-		} else {
-			$rows = [];
+		$name = uniqid( wp_rand(), true );
+		$content = '';
+
+		foreach ( $this->documents as $index => $document ) {
+			if ( $index > 0 ) {
+				$content .= "\n";
+			}
+
+			$content .= implode( '|', $document );
 		}
 
-		$name = uniqid( wp_rand(), true );
-
 		add_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
-		$txt = wp_upload_bits( $name . '.txt', null, implode( "\n", $rows ) );
+		$txt = wp_upload_bits( $name . '.txt', null, $content );
 		remove_filter( 'upload_dir', array( 'Woo_BG\Image_Uploader', 'change_upload_dir' ) );
+		unset( $content );
 
 		if ( is_wp_error( $txt ) ) {
 			return;
