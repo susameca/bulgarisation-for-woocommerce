@@ -715,10 +715,15 @@ function woo_bg_strip_street_prefix( $street ) {
     $prefixes = [
         // Cyrillic prefixes
         'ул.',
+		'ул ',
         'бул.',
+		'бул ',
         'пл.',
+		'пл ',
         'пр.',
+		'пр ',
         'кв.',
+		'кв ',
         'ж.к.',
         'ж.к',
         'жк.',

@@ -51,10 +51,7 @@ class Address {
 		$args = [];
 		$raw_state = sanitize_text_field( $_POST['state'] );
 		$country = sanitize_text_field( $_POST[ 'country' ] );
-		$query = sanitize_text_field( $_POST['query'] );
-		if ( $country == 'BG' ) {
-			$query = Transliteration::latin2cyrillic( $query );
-		}
+		$query = self::normalize_search_text( sanitize_text_field( $_POST['query'] ), $country === 'BG' );
 		$states = self::$container[ Client::ECONT_CITIES ]->get_regions( $country );
 		$state = $states[ $raw_state ];
 		$raw_city = sanitize_text_field( $_POST['city'] );
@@ -129,15 +126,7 @@ class Address {
 		$streets_only_names = ( !empty( $streets['streets'] ) ) ? self::$container[ Client::ECONT_STREETS ]->format_streets( $streets['streets'], $city_id ) : [];
 		unset( $streets );
 
-		if ( !empty( $query ) ) {
-			$streets_only_names = array_filter( $streets_only_names, function( $street ) use ( $query ) {
-				if ( strpos( mb_strtolower( $street ), mb_strtolower( $query ) ) !== false ) {
-					return true;
-				}
-			} );
-		}
-
-		return $streets_only_names;
+		return self::filter_and_rank_names( $streets_only_names, $query );
 	}
 
 	public static function get_quarters_for_query( $query, $city_key, $cities ) {
@@ -150,30 +139,66 @@ class Address {
 		$quarters_only_names = ( !empty( $quarters['quarters'] ) ) ? self::$container[ Client::ECONT_QUARTERS ]->format_quarters( $quarters['quarters'], $city_id ) : [];
 		unset( $quarters );
 
-		if ( !empty( $query ) ) {
-			$quarters_only_names = array_filter( $quarters_only_names, function( $quarter ) use ( $query ) {
-				if ( strpos( mb_strtolower( $quarter ), mb_strtolower( $query ) ) !== false ) {
-					return true;
-				}
-			} );
-		}
-
-		return $quarters_only_names;
+		return self::filter_and_rank_names( $quarters_only_names, $query );
 	}
 
 	public static function get_cities_for_query( $query, $cities ) {
-		$cities_filtered = [];
+		return array_values( self::filter_and_rank_names( $cities, $query ) );
+	}
 
-		if ( !empty( $query ) ) {
-			$cities_filtered = array_filter( $cities, function( $city ) use ( $query ) {
-				if ( strpos( mb_strtolower( $city ), mb_strtolower( $query ) ) !== false ) {
-					return true;
-				}
-			} );
+	private static function normalize_search_text( $text, $transliterate = true ) {
+		$text = woo_bg_strip_street_prefix( trim( (string) $text ) );
 
-			$cities_filtered = array_values( $cities_filtered );
+		if ( $transliterate ) {
+			$text = Transliteration::latin2cyrillic( $text );
 		}
 
-		return $cities_filtered;
+		$text = mb_strtolower( $text );
+		$text = preg_replace( '/[^\p{L}\p{N}]+/u', ' ', $text );
+
+		return trim( preg_replace( '/\s+/u', ' ', $text ) );
+	}
+
+	private static function filter_and_rank_names( $names, $query ) {
+		$query = self::normalize_search_text( $query, false );
+
+		if ( $query === '' ) {
+			return $names;
+		}
+
+		$tokens = explode( ' ', $query );
+		$ranked = [];
+		$order = 0;
+
+		foreach ( $names as $key => $name ) {
+			$normalized_name = self::normalize_search_text( $name, false );
+			$position = mb_strpos( $normalized_name, $query );
+			$all_tokens_match = true;
+
+			foreach ( $tokens as $token ) {
+				if ( mb_strpos( $normalized_name, $token ) === false ) {
+					$all_tokens_match = false;
+					break;
+				}
+			}
+
+			if ( $position === false && !$all_tokens_match ) {
+				continue;
+			}
+
+			$rank = $normalized_name === $query ? 0 : ( $position === 0 ? 1 : ( $position !== false ? 2 : 3 ) );
+			$ranked[] = [ 'key' => $key, 'name' => $name, 'rank' => $rank, 'order' => $order++ ];
+		}
+
+		usort( $ranked, function( $a, $b ) {
+			return $a['rank'] === $b['rank'] ? $a['order'] <=> $b['order'] : $a['rank'] <=> $b['rank'];
+		} );
+
+		$filtered = [];
+		foreach ( $ranked as $match ) {
+			$filtered[ $match['key'] ] = $match['name'];
+		}
+
+		return $filtered;
 	}
 }
