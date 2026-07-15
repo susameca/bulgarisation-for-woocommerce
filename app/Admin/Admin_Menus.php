@@ -31,7 +31,7 @@ class Admin_Menus {
 		if ( $screen && 'woocommerce_page_woo-bg' === $screen->id ) {
 			return sprintf(
 				/* translators: 1: Bulgarisation for WooCommerce, 2: five stars. */
-				__( 'If you like %1$s please leave us a %2$s rating. A huge thanks in advance!', 'woocommerce' ),
+				__( 'If you like %1$s please leave us a %2$s rating. A huge thanks in advance!', 'bulgarisation-for-woocommerce' ),
 				sprintf( '<strong>%s</strong>', esc_html__( 'Bulgarisation for WooCommerce', 'bulgarisation-for-woocommerce' ) ),
 				'<a href="https://wordpress.org/support/plugin/bulgarisation-for-woocommerce/reviews?rate=5#new-post" target="_blank" rel="noopener noreferrer" class="woo-bg-rating-link" aria-label="' . esc_attr__( 'five star', 'woocommerce' ) . '">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
 			);
