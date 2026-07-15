@@ -124,12 +124,10 @@ class Address {
 			self::$container = woo_bg()->container();
 		}
 		
-		$streets = self::$container[ Client::ECONT_STREETS ]->get_streets_by_city( $cities[ $city_key ]['id'] );
-		$streets = ( !empty( $streets['streets'] ) ) ? self::$container[ Client::ECONT_STREETS ]->format_streets( $streets['streets'] ) : [];
-
-		$streets_only_names = array_map( function( $street ) {
-			return $street;
-		}, $streets );
+		$city_id = $cities[ $city_key ]['id'];
+		$streets = self::$container[ Client::ECONT_STREETS ]->get_streets_by_city( $city_id );
+		$streets_only_names = ( !empty( $streets['streets'] ) ) ? self::$container[ Client::ECONT_STREETS ]->format_streets( $streets['streets'], $city_id ) : [];
+		unset( $streets );
 
 		if ( !empty( $query ) ) {
 			$streets_only_names = array_filter( $streets_only_names, function( $street ) use ( $query ) {
@@ -147,12 +145,10 @@ class Address {
 			self::$container = woo_bg()->container();
 		}
 
-		$quarters = self::$container[ Client::ECONT_QUARTERS ]->get_quarters_by_city( $cities[ $city_key ]['id'] );
-		$quarters = ( !empty( $quarters['quarters'] ) ) ? self::$container[ Client::ECONT_QUARTERS ]->format_quarters( $quarters['quarters'] ) : [];
-
-		$quarters_only_names = array_map( function( $quarter ) {
-			return $quarter;
-		}, $quarters );
+		$city_id = $cities[ $city_key ]['id'];
+		$quarters = self::$container[ Client::ECONT_QUARTERS ]->get_quarters_by_city( $city_id );
+		$quarters_only_names = ( !empty( $quarters['quarters'] ) ) ? self::$container[ Client::ECONT_QUARTERS ]->format_quarters( $quarters['quarters'], $city_id ) : [];
+		unset( $quarters );
 
 		if ( !empty( $query ) ) {
 			$quarters_only_names = array_filter( $quarters_only_names, function( $quarter ) use ( $query ) {

@@ -74,7 +74,7 @@ class Address {
 			$quarters = woo_bg_return_array_for_select( self::get_quarters_for_query( $city_id, $query ), 0, array( 'type' => 'quarters' ) );
 
 			$args[ 'streets' ] = self::merge_options( $streets, $quarters );
-			$args[ 'has_any' ] = !empty( array_merge( self::get_quarters_for_query( $city_id, ' ' ), self::get_streets_for_query( $city_id, ' ' ) ) );
+			$args[ 'has_any' ] = !empty( $streets ) || !empty( $quarters );
 		} else {
 			$args[ 'cities' ] = woo_bg_return_array_for_select( $cities_data['cities_only_names'], 1, array( 'type' => 'city' ) );
 		}
@@ -101,7 +101,7 @@ class Address {
 			$quarters = woo_bg_return_array_for_select( self::get_quarters_for_query( $city_id, ' ' ), 1, array( 'type' => 'quarters' ) );
 
 			$args[ 'streets' ] = self::merge_options( $streets, $quarters );
-			$args[ 'has_any' ] = ( !empty( self::get_quarters_for_query( $city_id, ' ' ) ) || !empty( self::get_streets_for_query( $city_id, ' ' ) ) );
+			$args[ 'has_any' ] = !empty( $streets ) || !empty( $quarters );
 			$args[ 'status' ] = 'valid-city';
 		}
 
@@ -118,7 +118,7 @@ class Address {
 		$streets = self::$container[ Client::SPEEDY_STREETS ]->get_streets_by_city( $city_id, $query );
 
 		if ( !empty( $streets ) ) {
-			$streets = self::$container[ Client::SPEEDY_STREETS ]->format_streets( $streets );
+			$streets = self::$container[ Client::SPEEDY_STREETS ]->format_streets( $streets, $city_id, $query );
 		} else {
 			$streets = [];
 		}
@@ -134,7 +134,7 @@ class Address {
 		$quarters = self::$container[ Client::SPEEDY_QUARTERS ]->get_quarters_by_city( $city_id, $query );
 		
 		if ( !empty( $quarters ) ) {
-			$quarters = self::$container[ Client::SPEEDY_QUARTERS ]->format_quarters( $quarters );
+			$quarters = self::$container[ Client::SPEEDY_QUARTERS ]->format_quarters( $quarters, $city_id, $query );
 		} else {
 			$quarters = [];
 		}

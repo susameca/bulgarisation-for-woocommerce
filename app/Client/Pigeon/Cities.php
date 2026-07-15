@@ -30,7 +30,9 @@ class Cities {
 			$data = $this->get_page( $page );
 
 			if ( is_array( $data ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
-				$all_cities = array_merge( $all_cities, $data['data'] );
+				foreach ( $data['data'] as $city ) {
+					$all_cities[] = $city;
+				}
 				$current_page = $data['meta']['current_page'];
 				$total_pages = $data['meta']['last_page'];
 
@@ -39,7 +41,9 @@ class Cities {
 					$data = $this->get_page( $page );
 
 					if ( is_array( $data ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
-						$all_cities = array_merge( $all_cities, $data['data'] );
+						foreach ( $data['data'] as $city ) {
+							$all_cities[] = $city;
+						}
 						$current_page = $data['meta']['current_page'];
 						$total_pages = $data['meta']['last_page'];
 					} else {
@@ -52,6 +56,7 @@ class Cities {
 				$cities = wp_json_encode( [ 'cities' => $all_cities ] );
 				
 				File::put_to_file( $cities_file, $cities );
+				unset( $all_cities, $data );
 			}
 		}
 
@@ -117,6 +122,8 @@ class Cities {
 				return strcmp( $a["label"], $b["label"] );
 			} );
 		}
+
+		unset( $this->cities[ $country_code ], $cities );
 
 		return $formatted;
 	}

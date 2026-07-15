@@ -32,6 +32,7 @@ class Quarters {
 						$quarters = wp_json_encode( $api_call );
 
 						File::put_to_file( $quarters_file, $quarters );
+						unset( $api_call );
 					}
 				}
 			}
@@ -58,11 +59,15 @@ class Quarters {
 		$this->quarters[ $city_id ] = $quarters;
 	}
 
-	public function format_quarters( $quarters ) {
+	public function format_quarters( $quarters, $city_id = null ) {
 		$formatted = [];
 
 		foreach ( $quarters as $qtr ) {
 			$formatted[ 'qtr-' . $qtr['id'] ] = $qtr['name'];
+		}
+
+		if ( null !== $city_id ) {
+			unset( $this->quarters[ $city_id ] );
 		}
 
 		return $formatted;

@@ -12,7 +12,7 @@ class Speedy_Tab extends Base_Tab {
 	public function __construct() {
 		$this->container = woo_bg()->container();
 		$this->tab_name = get_called_class();
-		$this->set_name( __( 'Speedy Settings', 'bulgarisation-for-woocommerce' ) );
+		$this->set_name( __( 'Speedy', 'bulgarisation-for-woocommerce' ) );
 		$this->set_description( __( 'speedy.bg API Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "speedy" );
 
@@ -72,6 +72,12 @@ class Speedy_Tab extends Base_Tab {
 		$fields = apply_filters( 'woo_bg/admin/settings/speedy/fields', $fields );
 
 		$this->set_fields( $fields );
+
+		// On a regular page load only the populated representation is rendered.
+		// Keep the field objects during AJAX saves, where save_value() needs them.
+		if ( ! wp_doing_ajax() ) {
+			$this->fields = array();
+		}
 	}
 
 	public function add_profile_data_fields( $fields ) {

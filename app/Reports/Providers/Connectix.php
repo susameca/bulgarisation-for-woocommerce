@@ -40,6 +40,11 @@ class Connectix extends Provider_Base {
                 $args['reports'] = [ sprintf( __('Possibility that the shipment will not be picked up: %s', 'bulgarisation-for-woocommerce'), $levels[ $result_index ]['label'] ), ];
             }
         } else {
+            if ( is_array( $result ) && isset( $result['message'] ) ) {
+                $result = $result['message'];
+
+            }
+            
             $args['error'] = sprintf( __( 'Error: %s', 'bulgarisation-for-woocommerce' ), $result );
         }
 

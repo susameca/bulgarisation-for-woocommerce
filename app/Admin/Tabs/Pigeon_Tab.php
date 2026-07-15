@@ -12,7 +12,7 @@ class Pigeon_Tab extends Base_Tab {
 	public function __construct() {
 		$this->container = woo_bg()->container();
 		$this->tab_name = get_called_class();
-		$this->set_name( __( 'PigeonExpress Settings', 'bulgarisation-for-woocommerce' ) );
+		$this->set_name( __( 'Pigeon Express', 'bulgarisation-for-woocommerce' ) );
 		$this->set_description( __( 'Pigeon Express API Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "pigeon" );
 
@@ -80,6 +80,10 @@ class Pigeon_Tab extends Base_Tab {
 		$fields = apply_filters( 'woo_bg/admin/settings/pigeon/fields', $fields );
 
 		$this->set_fields( $fields );
+
+		if ( ! wp_doing_ajax() ) {
+			$this->fields = array();
+		}
 	}
 
 	public function add_additional_fields( $fields ) {

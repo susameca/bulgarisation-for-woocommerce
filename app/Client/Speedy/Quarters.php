@@ -33,6 +33,7 @@ class Quarters {
 						$quarters = wp_json_encode( $api_call['complexes'] );
 						
 						File::put_to_file( $quarters_file, $quarters );
+						unset( $api_call );
 					}
 				}
 			}
@@ -61,11 +62,15 @@ class Quarters {
 		$this->quarters[ $city_id ][ $hash ] = $quarters;
 	}
 
-	public function format_quarters( $quarters ) {
+	public function format_quarters( $quarters, $city_id = null, $query = '' ) {
 		$formatted = [];
 
 		foreach ( $quarters as $qtr ) {
 			$formatted[ 'qtr-' . $qtr['id'] ] = $qtr['type'] . " " . woo_bg_title_case_bg( $qtr['name'] );
+		}
+
+		if ( null !== $city_id ) {
+			unset( $this->quarters[ $city_id ][ md5( $query ) ] );
 		}
 
 		return $formatted;

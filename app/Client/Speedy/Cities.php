@@ -45,9 +45,13 @@ class Cities {
 
 				$csv->use_first_row_as_header();
 
-				$cities_by_region = array_filter( $csv->to_array(), function( $city ) use ( $region ) {
-					return ( $city['regionEn'] === $region );
-				} );
+				$cities_by_region = array();
+
+				foreach ( $csv as $city ) {
+					if ( $city['regionEn'] === $region ) {
+						$cities_by_region[] = $city;
+					}
+				}
 
 				$cities_by_region = wp_json_encode( $cities_by_region );
 
@@ -90,6 +94,10 @@ class Cities {
 					);
 				}
 			}
+
+			// The formatted list is all we need here. Keeping the raw data for all
+			// 28 regions roughly doubles the peak memory used by the settings tab.
+			unset( $this->cities[ $region ], $cities );
 		}
 
 		uasort( $formatted, function( $a, $b ) {

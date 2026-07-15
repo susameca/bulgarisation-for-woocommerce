@@ -11,7 +11,7 @@ class NepoStop_Tab extends Base_Tab {
 	public function __construct() {
         $this->container = woo_bg()->container();
         $this->tab_name = get_called_class();
-		$this->set_name( __( 'NepoStop Settings', 'bulgarisation-for-woocommerce' ) );
+		$this->set_name( __( 'NepoStop', 'bulgarisation-for-woocommerce' ) );
 		$this->set_description( __( 'NepoStop API Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "nepostop" );
 

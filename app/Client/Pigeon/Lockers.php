@@ -34,7 +34,9 @@ class Lockers {
 			$data = $this->get_page( $page, $args );
 			
 			if ( isset( $data['success'] ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
-				$all_lockers = array_merge( $all_lockers, $data['data'] );
+				foreach ( $data['data'] as $locker ) {
+					$all_lockers[] = $locker;
+				}
 				$current_page = $data['meta']['current_page'];
 				$total_pages = $data['meta']['last_page'];
 
@@ -43,7 +45,9 @@ class Lockers {
 					$data = $this->get_page( $page, $args );
 
 					if ( isset( $data['success'] ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
-						$all_lockers = array_merge( $all_lockers, $data['data'] );
+						foreach ( $data['data'] as $locker ) {
+							$all_lockers[] = $locker;
+						}
 						$current_page = $data['meta']['current_page'];
 						$total_pages = $data['meta']['last_page'];
 					} else {
@@ -56,6 +60,7 @@ class Lockers {
 				$lockers = wp_json_encode( $all_lockers );
 				
 				File::put_to_file( $lockers_file, $lockers );
+				unset( $all_lockers, $data );
 			}
 		}
 
@@ -87,7 +92,8 @@ class Lockers {
 	}
 
 	public function get_formatted_lockers( $city, $country_code = 'BG' ) {
-		$lockers = $this->get_lockers( str_replace( 'cityID-', '', $city ), $country_code );
+		$city_id = str_replace( 'cityID-', '', $city );
+		$lockers = $this->get_lockers( $city_id, $country_code );
 		$data = [];
 
 		if ( !empty( $lockers ) ) {
@@ -98,6 +104,8 @@ class Lockers {
 				];
 			}
 		}
+
+		unset( $this->lockers[ $city_id ], $lockers );
 
 		return $data;
 	}

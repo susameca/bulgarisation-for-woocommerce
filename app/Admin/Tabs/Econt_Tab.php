@@ -12,7 +12,7 @@ class Econt_Tab extends Base_Tab {
 	public function __construct() {
 		$this->container = woo_bg()->container();
 		$this->tab_name = get_called_class();
-		$this->set_name( __( 'Econt Settings', 'bulgarisation-for-woocommerce' ) );
+		$this->set_name( __( 'Econt', 'bulgarisation-for-woocommerce' ) );
 		$this->set_description( __( 'econt.com API Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "econt" );
 
@@ -80,6 +80,12 @@ class Econt_Tab extends Base_Tab {
 		$fields = apply_filters( 'woo_bg/admin/settings/econt/fields', $fields );
 
 		$this->set_fields( $fields );
+
+		// The rendered page only needs the populated field data. Field objects are
+		// retained for AJAX requests, where save_value() uses them.
+		if ( ! wp_doing_ajax() ) {
+			$this->fields = array();
+		}
 	}
 
 	public function add_profile_data_fields( $fields ) {

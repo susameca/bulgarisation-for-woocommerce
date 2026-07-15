@@ -33,10 +33,12 @@ class Cities {
 						foreach ( $api_call['cities'] as &$city ) {
 							unset( $city[ 'servingOffices' ] );
 						}
+						unset( $city );
 
 						$cities = wp_json_encode( $api_call );
 						
 						File::put_to_file( $cities_file, $cities );
+						unset( $api_call );
 					}
 				}
 			}
@@ -71,6 +73,10 @@ class Cities {
 		uasort( $formatted, function( $a, $b ) {
 			return strcmp( $a["label"], $b["label"] );
 		} );
+
+		// The settings select uses only the compact formatted representation.
+		// Do not retain the complete Econt city records alongside it.
+		unset( $this->cities[ $country_code ], $cities );
 
 		return $formatted;
 	}

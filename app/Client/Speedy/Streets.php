@@ -33,6 +33,7 @@ class Streets {
 						$streets = wp_json_encode( $api_call['streets'] );
 
 						File::put_to_file( $streets_file, $streets );
+						unset( $api_call );
 					}
 				}
 			}
@@ -61,11 +62,15 @@ class Streets {
 		$this->streets[ $city_id ][ $hash ] = $streets;
 	}
 
-	public function format_streets( $streets ) {
+	public function format_streets( $streets, $city_id = null, $query = '' ) {
 		$formatted = [];
 
 		foreach ( $streets as $street ) {
 			$formatted[ 'street-' . $street['id'] ] = $street['type'] . " " . woo_bg_title_case_bg( $street['name'] );
+		}
+
+		if ( null !== $city_id ) {
+			unset( $this->streets[ $city_id ][ md5( $query ) ] );
 		}
 		
 		return $formatted;

@@ -34,6 +34,7 @@ class Offices {
 						$offices = wp_json_encode( $api_call );
 						
 						File::put_to_file( $offices_file, $offices );
+						unset( $api_call );
 					}
 				}
 			}
@@ -61,7 +62,8 @@ class Offices {
 	}
 
 	public function get_formatted_offices( $city, $country_id = 100 ) {
-		$offices = $this->get_offices( str_replace( 'cityID-', '', $city ), $country_id );
+		$city_id = str_replace( 'cityID-', '', $city );
+		$offices = $this->get_offices( $city_id, $country_id );
 		$shops = [];
 		$aps = [];
 
@@ -79,6 +81,8 @@ class Offices {
 				}
 			}
 		}
+
+		unset( $this->offices[ $city_id ], $offices );
 
 		return array( 'shops' => $shops, 'aps' => $aps );
 	}

@@ -12,7 +12,7 @@ class BoxNow_Tab extends Base_Tab {
 	public function __construct() {
 		$this->container = woo_bg()->container();
 		$this->tab_name = get_called_class();
-		$this->set_name( __( 'BOX NOW Settings', 'bulgarisation-for-woocommerce' ) );
+		$this->set_name( __( 'BOX NOW', 'bulgarisation-for-woocommerce' ) );
 		$this->set_description( __( 'boxnow.bg API Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "boxnow" );
 
@@ -78,6 +78,10 @@ class BoxNow_Tab extends Base_Tab {
 		$fields = apply_filters( 'woo_bg/admin/settings/boxnow/fields', $fields );
 
 		$this->set_fields( $fields );
+
+		if ( ! wp_doing_ajax() ) {
+			$this->fields = array();
+		}
 	}
 
 	public function add_send_from_fields( $fields ) {
@@ -250,6 +254,6 @@ class BoxNow_Tab extends Base_Tab {
 	public static function get_from_locations() {
 		$container = woo_bg()->container();
 
-		return array_filter( $container[ Client::BOXNOW_ORIGINS ]->get_formatted_origins() ); 
+		return $container[ Client::BOXNOW_ORIGINS ]->get_formatted_origins();
 	}
 }

@@ -34,7 +34,9 @@ class Offices {
 			$data = $this->get_page( $page, $args );
 			
 			if ( isset( $data['success'] ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
-				$all_offices = array_merge( $all_offices, $data['data'] );
+				foreach ( $data['data'] as $office ) {
+					$all_offices[] = $office;
+				}
 				$current_page = $data['meta']['current_page'];
 				$total_pages = $data['meta']['last_page'];
 
@@ -43,7 +45,9 @@ class Offices {
 					$data = $this->get_page( $page, $args );
 
 					if ( isset( $data['success'] ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
-						$all_offices = array_merge( $all_offices, $data['data'] );
+						foreach ( $data['data'] as $office ) {
+							$all_offices[] = $office;
+						}
 						$current_page = $data['meta']['current_page'];
 						$total_pages = $data['meta']['last_page'];
 					} else {
@@ -56,6 +60,7 @@ class Offices {
 				$offices = wp_json_encode( $all_offices );
 				
 				File::put_to_file( $offices_file, $offices );
+				unset( $all_offices, $data );
 			}
 		}
 
@@ -87,7 +92,8 @@ class Offices {
 	}
 
 	public function get_formatted_offices( $city, $country_code = 'BG' ) {
-		$offices = $this->get_offices( str_replace( 'cityID-', '', $city ), $country_code );
+		$city_id = str_replace( 'cityID-', '', $city );
+		$offices = $this->get_offices( $city_id, $country_code );
 		$data = [];
 
 		if ( !empty( $offices ) ) {
@@ -98,6 +104,8 @@ class Offices {
 				];
 			}
 		}
+
+		unset( $this->offices[ $city_id ], $offices );
 
 		return $data;
 	}

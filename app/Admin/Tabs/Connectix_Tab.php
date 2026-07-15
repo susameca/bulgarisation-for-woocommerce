@@ -11,7 +11,7 @@ class Connectix_Tab extends Base_Tab {
 	public function __construct() {
         $this->container = woo_bg()->container();
         $this->tab_name = get_called_class();
-		$this->set_name( __( 'Connectix Settings', 'bulgarisation-for-woocommerce' ) );
+		$this->set_name( __( 'Connectix', 'bulgarisation-for-woocommerce' ) );
 		$this->set_description( __( 'Connectix.bg API Settings', 'bulgarisation-for-woocommerce' ) );
 		$this->set_tab_slug( "connectix" );
 

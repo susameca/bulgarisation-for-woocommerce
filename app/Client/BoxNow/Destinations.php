@@ -37,6 +37,7 @@ class Destinations {
 					$destinations = wp_json_encode( $api_call['data'] );
 					
 					File::put_to_file( $destinations_file, $destinations );
+					unset( $api_call );
 				}
 			}
 		}
@@ -77,6 +78,9 @@ class Destinations {
 				];
 			}
 		}
+
+		$cache_key = ( !$size ) ? 'all' : $size;
+		unset( $this->destinations[ $cache_key ], $destinations );
 
 		return $data;
 	}

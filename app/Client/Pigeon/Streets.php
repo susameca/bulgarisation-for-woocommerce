@@ -30,7 +30,9 @@ class Streets {
 			$data = $this->get_page( $city_id, $page, $query );
 			
 			if ( isset( $data['success'] ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
-				$all_streets = array_merge( $all_streets, $data['data'] );
+				foreach ( $data['data'] as $street ) {
+					$all_streets[] = $street;
+				}
 				$current_page = $data['meta']['current_page'];
 				$total_pages = $data['meta']['last_page'];
 
@@ -39,7 +41,9 @@ class Streets {
 					$data = $this->get_page( $city_id, $page, $query );
 
 					if ( isset( $data['success'] ) && $data['success'] && isset( $data['data'] ) && is_array( $data['data'] ) ) {
-						$all_streets = array_merge( $all_streets, $data['data'] );
+						foreach ( $data['data'] as $street ) {
+							$all_streets[] = $street;
+						}
 						$current_page = $data['meta']['current_page'];
 						$total_pages = $data['meta']['last_page'];
 					} else {
@@ -52,6 +56,7 @@ class Streets {
 				$streets = wp_json_encode( $all_streets );
 				
 				File::put_to_file( $streets_file, $streets );
+				unset( $all_streets, $data );
 			}
 		}
 

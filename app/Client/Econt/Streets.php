@@ -32,6 +32,7 @@ class Streets {
 						$streets = wp_json_encode( $api_call );
 						
 						File::put_to_file( $streets_file, $streets );
+						unset( $api_call );
 					}
 				}
 			}
@@ -58,11 +59,15 @@ class Streets {
 		$this->streets[ $city_id ] = $streets;
 	}
 
-	public function format_streets( $streets ) {
+	public function format_streets( $streets, $city_id = null ) {
 		$formatted = [];
 
 		foreach ( $streets as $street ) {
 			$formatted[ 'street-' . $street['id'] ] = $street['name'];
+		}
+
+		if ( null !== $city_id ) {
+			unset( $this->streets[ $city_id ] );
 		}
 		
 		return $formatted;

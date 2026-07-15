@@ -31,6 +31,7 @@ class Origins {
 					$origins = wp_json_encode( $api_call['data'] );
 					
 					File::put_to_file( $origins_file, $origins );
+					unset( $api_call );
 				}
 			}
 		}
@@ -70,6 +71,9 @@ class Origins {
 				];
 			}
 		}
+
+		$this->origins = array();
+		unset( $origins );
 
 		return $data;
 	}
