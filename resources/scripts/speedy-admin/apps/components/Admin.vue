@@ -624,7 +624,10 @@ export default {
 			this.paymentBy = this.paymentByTypes[1];
 		}
 
-		if ( typeof( wooBg_speedy.label.service.additionalServices.declaredValue ) !== 'undefined' ) {
+		if ( 
+			typeof( wooBg_speedy.label.service.additionalServices ) !== 'undefined' &&
+			typeof( wooBg_speedy.label.service.additionalServices.declaredValue ) !== 'undefined' 
+		) {
 			this.declaredValue = wooBg_speedy.label.service.additionalServices.declaredValue.amount;
 		}
 

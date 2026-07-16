@@ -94,6 +94,12 @@ class Speedy {
 								if ( isset( $parcel['sizes'] ) ) {
 									$parcel['size'] = $parcel['sizes'];
 									unset( $parcel['sizes'] );
+								} else {
+									$parcel['size'] = array(
+										'depth'  => 17,
+										'width'  => 17,
+										'height' => 17,
+									);
 								}
 							}
 						}
