@@ -95,6 +95,14 @@ class Speedy {
 									$parcel['size'] = $parcel['sizes'];
 									unset( $parcel['sizes'] );
 								}
+
+								if ( ! isset( $parcel['size'] ) || ! is_array( $parcel['size'] ) ) {
+									$parcel['size'] = array(
+										'depth'  => '',
+										'width'  => '',
+										'height' => '',
+									);
+								}
 							}
 						}
 					}
@@ -112,7 +120,20 @@ class Speedy {
 					if ( $theorder->get_payment_method() === 'cod' && !isset( $label_data['service']['additionalServices'] ) ) {
 						$label_data = self::fix_cod_data( $label_data, $theorder );
 					}
-					
+
+					if ( ! empty( $label_data ) ) {
+						if ( ! isset( $label_data['service']['additionalServices'] ) || ! is_array( $label_data['service']['additionalServices'] ) ) {
+							$label_data['service']['additionalServices'] = array();
+						}
+
+						if ( ! isset( $label_data['service']['additionalServices']['declaredValue'] ) ) {
+							$label_data['service']['additionalServices']['declaredValue'] = array(
+								'amount'  => '',
+								'fragile' => false,
+							);
+						}
+					}
+
 					wp_localize_script( 'woo-bg-js-admin', 'wooBg_speedy', array(
 						'label' => $label_data,
 						'shipmentStatus' => $shipment_status,
