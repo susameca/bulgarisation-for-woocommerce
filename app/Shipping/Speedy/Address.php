@@ -42,7 +42,10 @@ class Address {
 			'noResult' => __( 'No results was found for this city', 'bulgarisation-for-woocommerce' ), 
 			'noOptions' => __( 'Start typing street or quarter', 'bulgarisation-for-woocommerce' ), 
 			'streetNumber' => __( 'Street number', 'bulgarisation-for-woocommerce' ), 
-			'blVhEt' => __( 'bl. vh. et.', 'bulgarisation-for-woocommerce' ),
+			'blockNumber' => __( 'Block', 'bulgarisation-for-woocommerce' ),
+			'entranceNumber' => __( 'Entrance', 'bulgarisation-for-woocommerce' ),
+			'floorNumber' => __( 'Floor', 'bulgarisation-for-woocommerce' ),
+			'apartmentNumber' => __( 'Apartment', 'bulgarisation-for-woocommerce' ),
 			'mysticQuarter' => __( 'Street or quarter', 'bulgarisation-for-woocommerce' ),
 		);
 	}

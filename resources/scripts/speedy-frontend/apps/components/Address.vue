@@ -33,24 +33,33 @@
 	    <span slot="placeholder">{{i18n.searchAddress}}</span>
 	  </multiselect>
 
-	  <input 
-	  	class="woo-bg-multiselect--additional-field input-text"
-	  	:placeholder="i18n.mysticQuarter" 
-	  	type="text" 
-	  	v-model="mysticQuarter" 
-	  	v-if="!hasAny"
-	  	@keyup="mysticQuarterChanged"
-	  >
+	  <p class="form-row form-row-wide" v-if="!hasAny">
+		<input 
+			class="input-text"
+			:placeholder="i18n.mysticQuarter" 
+			type="text" 
+			v-model="mysticQuarter" 
+			@keyup="mysticQuarterChanged"
+		>
+	  </p>
 
-	  <!-- Always visible: shows streetNumber by default, switches to bl.vh.et. for quarters -->
-	  <input
-	  	class="woo-bg-multiselect--additional-field input-text"
-	  	:placeholder="isQuarter ? i18n.blVhEt : i18n.streetNumber"
-	  	type="text"
-	  	:value="isQuarter ? other : streetNumber"
-	  	@input="onAdditionalFieldInput"
-	  	@keyup="streetNumberChanged"
-	  >
+	  <div class="woo-bg-speedy-address-details" v-if="hasAny">
+		<p class="form-row">
+			<input class="input-text" :placeholder="i18n.streetNumber" type="text" v-model="streetNumber" @input="addressDetailChanged">
+		</p>
+		<p class="form-row">
+			<input class="input-text" :placeholder="i18n.blockNumber" type="text" v-model="blockNumber" @input="addressDetailChanged">
+		</p>
+		<p class="form-row">
+			<input class="input-text" :placeholder="i18n.entranceNumber" type="text" v-model="entranceNumber" @input="addressDetailChanged">
+		</p>
+		<p class="form-row">
+			<input class="input-text" :placeholder="i18n.floorNumber" type="text" v-model="floorNumber" @input="addressDetailChanged">
+		</p>
+		<p class="form-row">
+			<input class="input-text" :placeholder="i18n.apartmentNumber" type="text" v-model="apartmentNumber" @input="addressDetailChanged">
+		</p>
+	  </div>
 	</div>
 </template>
 
@@ -81,23 +90,16 @@ export default {
 			state: '',
 			city: '',
 			streetNumber: '',
+			blockNumber: '',
+			entranceNumber: '',
+			floorNumber: '',
+			apartmentNumber: '',
 			mysticQuarter: '',
 			other: '',
 			isLoading: false,
 			hasAny: true,
 			document: $( document.body ),
 			i18n: wooBg_speedy_address.i18n,
-		}
-	},
-	watch: {
-		selectedAddress( newAddr ) {
-			if ( newAddr && newAddr.type ) {
-				if ( newAddr.type === 'streets' ) {
-					this.other = '';
-				} else if ( newAddr.type === 'quarters' ) {
-					this.streetNumber = '';
-				}
-			}
 		}
 	},
 	computed: {
@@ -196,6 +198,10 @@ export default {
 				this.state = cloneDeep( localStorageData.state );
 				this.city = cloneDeep( localStorageData.city );
 				this.streetNumber = cloneDeep( localStorageData.streetNumber );
+				this.blockNumber = cloneDeep( localStorageData.blockNumber || '' );
+				this.entranceNumber = cloneDeep( localStorageData.entranceNumber || '' );
+				this.floorNumber = cloneDeep( localStorageData.floorNumber || '' );
+				this.apartmentNumber = cloneDeep( localStorageData.apartmentNumber || '' );
 				this.mysticQuarter = cloneDeep( localStorageData.mysticQuarter );
 				this.other = cloneDeep( localStorageData.other );
 			}
@@ -274,14 +280,7 @@ export default {
 				this.selectedAddress = cloneDeep([]);
 			}
 		},
-		onAdditionalFieldInput( event ) {
-			if ( this.isQuarter ) {
-				this.other = event.target.value;
-			} else {
-				this.streetNumber = event.target.value;
-			}
-		},
-		streetNumberChanged: debounce( function () {
+		addressDetailChanged: debounce( function () {
 			this.setAddress1FieldData();
 			this.setLocalStorageData();
 			
@@ -290,11 +289,16 @@ export default {
 		mysticQuarterChanged: debounce( function () {
 			this.setAddress1FieldData();
 			this.setLocalStorageData();
+			this.document.trigger('update_checkout');
 		}, 2000 ),
 		resetData() {
 			this.city = '';
 			this.selectedAddress = cloneDeep([]);
 			this.streetNumber = '';
+			this.blockNumber = '';
+			this.entranceNumber = '';
+			this.floorNumber = '';
+			this.apartmentNumber = '';
 			this.mysticQuarter = '';
 			this.other = '';
 			localStorage.removeItem( 'woo-bg--speedy-address' );
@@ -314,6 +318,10 @@ export default {
 				state: this.state,
 				city: this.city,
 				streetNumber: this.streetNumber,
+				blockNumber: this.blockNumber,
+				entranceNumber: this.entranceNumber,
+				floorNumber: this.floorNumber,
+				apartmentNumber: this.apartmentNumber,
 				mysticQuarter: this.mysticQuarter,
 				other: this.other,
 				otherField: this.Address2Field.val(),
@@ -332,6 +340,10 @@ export default {
 				state: this.state,
 				city: this.city,
 				streetNumber: this.streetNumber,
+				blockNumber: this.blockNumber,
+				entranceNumber: this.entranceNumber,
+				floorNumber: this.floorNumber,
+				apartmentNumber: this.apartmentNumber,
 				mysticQuarter: this.mysticQuarter,
 				other: this.other,
 			}
@@ -341,12 +353,12 @@ export default {
 		setAddress1FieldData() {
 			let shippingAddress = '';
 
-			if ( this.selectedAddress.type === 'streets' ) {
-				shippingAddress = this.selectedAddress.label + ' ' + this.streetNumber;
-			} else if ( this.selectedAddress.type === 'quarters' ) {
-				shippingAddress = this.selectedAddress.label + ' ' + this.other;
+			let details = [this.streetNumber, this.blockNumber, this.entranceNumber, this.floorNumber, this.apartmentNumber].filter(Boolean).join(' ');
+
+			if ( this.selectedAddress.type === 'streets' || this.selectedAddress.type === 'quarters' ) {
+				shippingAddress = this.selectedAddress.label + ' ' + details;
 			} else {
-				shippingAddress = this.mysticQuarter + ' ' + this.other;
+				shippingAddress = this.mysticQuarter;
 			}
 
 			this.Address1Field.val( shippingAddress );

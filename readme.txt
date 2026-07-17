@@ -5,7 +5,7 @@ Requires at least: 5.3
 Tested up to: 7.0
 Donate link: https://revolut.me/tihomi9gj5
 Requires PHP: 7.4
-Stable tag: 4.0.8
+Stable tag: 4.0.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -121,7 +121,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Changelog ==
 
-= 4.0.8 =
+= 4.0.9 =
 Optimize admin panel appearance and fields
 NRA: Performance optimizations
 Exports: Performance optimizations

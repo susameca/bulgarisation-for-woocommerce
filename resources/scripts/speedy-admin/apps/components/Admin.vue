@@ -134,40 +134,38 @@
 								</multiselect>
 							</p>
 
-							<p class="form-field form-field-wide">
+							<p class="form-field form-field-wide" v-if="!streets.length">
+								<label for="woo-bg-speedy-admin-address-line">{{i18n.mysticQuarter}}:</label>
 								<input 
-									class="woo-bg-multiselect--additional-field"
+									id="woo-bg-speedy-admin-address-line"
+									class="input-text"
 									:placeholder="i18n.mysticQuarter" 
 									type="text" 
 									v-model="cookie_data.mysticQuarter" 
-									v-if="!streets.length"
-								>
-
-								<input 
-									class="woo-bg-multiselect--additional-field"
-									:placeholder="i18n.streetNumber" 
-									type="text" 
-									v-model="streetNumber" 
-									v-if="( street.type && street.type === 'streets' || !streets.length )"
-								>
-
-								<input 
-									class="woo-bg-multiselect--additional-field"
-									:placeholder="i18n.blVhEt" 
-									type="text" 
-									v-model="other" 
-									v-if="( street.type && street.type === 'quarters' || !streets.length )"
 								>
 							</p>
-							<p class="form-field form-field-wide">
-								<input 
-									class="woo-bg-multiselect--additional-field"
-									:placeholder="i18n.blVhEt" 
-									type="text" 
-									v-model="other" 
-									v-if="( street.type && street.type === 'streets' )"
-								>
-							</p>
+							<div class="woo-bg-speedy-address-details clear" v-else>
+								<p class="form-field">
+									<label for="woo-bg-speedy-admin-street-number">{{i18n.streetNumber}}:</label>
+									<input id="woo-bg-speedy-admin-street-number" class="input-text" :placeholder="i18n.streetNumber" type="text" v-model="streetNumber">
+								</p>
+								<p class="form-field">
+									<label for="woo-bg-speedy-admin-block-number">{{i18n.blockNumber}}:</label>
+									<input id="woo-bg-speedy-admin-block-number" class="input-text" :placeholder="i18n.blockNumber" type="text" v-model="blockNumber">
+								</p>
+								<p class="form-field">
+									<label for="woo-bg-speedy-admin-entrance-number">{{i18n.entranceNumber}}:</label>
+									<input id="woo-bg-speedy-admin-entrance-number" class="input-text" :placeholder="i18n.entranceNumber" type="text" v-model="entranceNumber">
+								</p>
+								<p class="form-field">
+									<label for="woo-bg-speedy-admin-floor-number">{{i18n.floorNumber}}:</label>
+									<input id="woo-bg-speedy-admin-floor-number" class="input-text" :placeholder="i18n.floorNumber" type="text" v-model="floorNumber">
+								</p>
+								<p class="form-field">
+									<label for="woo-bg-speedy-admin-apartment-number">{{i18n.apartmentNumber}}:</label>
+									<input id="woo-bg-speedy-admin-apartment-number" class="input-text" :placeholder="i18n.apartmentNumber" type="text" v-model="apartmentNumber">
+								</p>
+							</div>
 						</div>
 
 						<fieldset
@@ -268,7 +266,7 @@
 								{{i18n.description}}:
 							</label>
 
-							<input v-model="labelData.content.contents" type="text">
+							<input class="input-text" v-model="labelData.content.contents" type="text">
 						</p>
 
 						<p class="form-field" style="clear:none">
@@ -276,7 +274,7 @@
 								ref 1:
 							</label>
 
-							<input v-model="labelData.ref1" type="text">
+							<input class="input-text" v-model="labelData.ref1" type="text">
 						</p>
 
 						<p class="form-field" style="float:right; clear:none">
@@ -284,7 +282,7 @@
 								ref 2:
 							</label>
 
-							<input v-model="labelData.ref2" type="text">
+							<input class="input-text" v-model="labelData.ref2" type="text">
 						</p>
 
 						<p class="form-field form-field-wide">
@@ -490,6 +488,10 @@ export default {
 			testOption: '',
 			testsOptions: cloneDeep( wooBg_speedy.testsOptions ),
 			streetNumber: '',
+			blockNumber: '',
+			entranceNumber: '',
+			floorNumber: '',
+			apartmentNumber: '',
 			other: '',
 			message: '',
 			labelPrintingPromo: wooBg_speedy.labelPrintingPromo,
@@ -608,6 +610,10 @@ export default {
 			});
 		} else {
 			this.streetNumber = wooBg_speedy.cookie_data.streetNumber;
+			this.blockNumber = wooBg_speedy.cookie_data.blockNumber || '';
+			this.entranceNumber = wooBg_speedy.cookie_data.entranceNumber || '';
+			this.floorNumber = wooBg_speedy.cookie_data.floorNumber || '';
+			this.apartmentNumber = wooBg_speedy.cookie_data.apartmentNumber || '';
 			this.other = wooBg_speedy.cookie_data.other;
 			this.streets.forEach( function ( street ) {
 				if ( street.orig_key == wooBg_speedy.cookie_data.selectedAddress.orig_key ) {
@@ -782,6 +788,10 @@ export default {
 	    },
 		updateLabel( e ) {
 			e.preventDefault();
+			if ( this.type.id === 'address' && this.streets.length && ![this.streetNumber, this.blockNumber, this.entranceNumber, this.floorNumber, this.apartmentNumber].some(Boolean) ) {
+				this.message = this.i18n.addressDetailRequired;
+				return;
+			}
 
 			this.loading = true;
 			let _this = this;
@@ -795,6 +805,10 @@ export default {
 				office: this.office,
 				street: this.street,
 				streetNumber: this.streetNumber,
+				blockNumber: this.blockNumber,
+				entranceNumber: this.entranceNumber,
+				floorNumber: this.floorNumber,
+				apartmentNumber: this.apartmentNumber,
 				other: this.other,
 				paymentBy: this.paymentBy,
 				testOption: this.testOption,

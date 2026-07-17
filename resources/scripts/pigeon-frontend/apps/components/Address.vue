@@ -33,24 +33,27 @@
 	    <span slot="placeholder">{{i18n.searchAddress}}</span>
 	  </multiselect>
 
-	  <input 
-	  	class="woo-bg-multiselect--additional-field input-text"
-	  	:placeholder="i18n.mysticQuarter" 
-	  	type="text" 
-	  	v-model="mysticQuarter" 
-	  	v-if="!hasAny"
-	  	@keyup="mysticQuarterChanged"
-	  >
+	  <p class="form-row form-row-wide" v-if="!hasAny">
+		<input 
+			class="woo-bg-multiselect--additional-field input-text"
+			:placeholder="i18n.mysticQuarter" 
+			type="text" 
+			v-model="mysticQuarter" 
+			@keyup="mysticQuarterChanged"
+		>
+	  </p>
 
 	  <!-- Always visible: shows streetNumber by default, switches to bl.vh.et. for quarters -->
-	  <input
-	  	class="woo-bg-multiselect--additional-field input-text"
-	  	:placeholder="isQuarter ? i18n.blVhEt : i18n.streetNumber"
-	  	type="text"
-	  	:value="isQuarter ? other : streetNumber"
-	  	@input="onAdditionalFieldInput"
-	  	@keyup="streetNumberChanged"
-	  >
+	  <p class="form-row form-row-wide">
+		<input
+			class="woo-bg-multiselect--additional-field input-text"
+			:placeholder="isQuarter ? i18n.blVhEt : i18n.streetNumber"
+			type="text"
+			:value="isQuarter ? other : streetNumber"
+			@input="onAdditionalFieldInput"
+			@keyup="streetNumberChanged"
+		>
+	  </p>
 	</div>
 </template>
 

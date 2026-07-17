@@ -108,10 +108,9 @@ class Method extends \WC_Shipping_Method {
 			$this->cookie_data['type'] === $this->delivery_type && 
 			( !empty( $chosen_shippings ) && ( $chosen_shippings[0] === $this->id . ':' . $this->instance_id ) ) &&
 			( 
-				( isset( $this->cookie_data['other'] ) && $this->cookie_data['other'] && $this->cookie_data['selectedAddress'] ) || 
-				( isset( $this->cookie_data['streetNumber']) && $this->cookie_data['streetNumber'] && $this->cookie_data['selectedAddress'] ) || 
+				( !empty( $this->cookie_data['selectedAddress'] ) && $this->has_address_detail() ) ||
 				( isset( $this->cookie_data['selectedOffice'] ) && $this->cookie_data['selectedOffice'] ) ||
-				( isset( $this->cookie_data['mysticQuarter'] ) && ( $this->cookie_data['other'] || $this->cookie_data['streetNumber'] ) )
+				( !empty( $this->cookie_data['mysticQuarter'] ) && empty( $this->cookie_data['selectedAddress'] ) )
 			) 
 		) {
 			$request_data = $this->calculate_shipping_price_from_api();
@@ -151,6 +150,16 @@ class Method extends \WC_Shipping_Method {
 
 		// Register the rate
 		$this->add_rate( $rate );
+	}
+
+	private function has_address_detail() {
+		foreach ( array( 'streetNumber', 'blockNumber', 'entranceNumber', 'floorNumber', 'apartmentNumber', 'other' ) as $field ) {
+			if ( !empty( $this->cookie_data[ $field ] ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -374,48 +383,46 @@ class Method extends \WC_Shipping_Method {
 
 		if ( !empty( $this->cookie_data['selectedAddress']['type'] ) && $this->cookie_data['selectedAddress']['type'] === 'streets' ) {
 			$address["streetId"] = str_replace('street-', '', $this->cookie_data['selectedAddress']['orig_key'] );
-			$parts = explode( ',', $this->cookie_data['streetNumber'] );
-			$address["streetNo"] = array_shift( $parts );
-
-			if ( !empty( $parts ) ) {
-				$address["addressNote"] = implode( ' ', $parts );
-			}
+			$this->add_address_details( $address );
 		} else if ( 
 			!empty( $this->cookie_data['selectedAddress']['type'] ) && $this->cookie_data['selectedAddress']['type'] === 'quarters' || 
 			$this->cookie_data['mysticQuarter'] 
 		) {
 			if ( !empty( $this->cookie_data['mysticQuarter'] ) ) {
-				$address["addressNote"] = $this->cookie_data['mysticQuarter'] . ' ' . $this->cookie_data[ 'other' ];
+				$address["addressNote"] = $this->cookie_data['mysticQuarter'];
 			} else {
 				$address["complexId"] = str_replace('qtr-', '', $this->cookie_data['selectedAddress']['orig_key'] );
-
-				if ( !empty( $this->cookie_data[ 'other' ] ) ) {
-					$parts = explode( ' ', $this->cookie_data[ 'other' ] );
-
-					$address["blockNo"] = $parts[0];
-
-					if ( isset( $parts[1] ) ) {
-						$address["entranceNo"] = $parts[1];
-					}
-
-					if ( isset( $parts[2] ) ) {
-						$address["floorNo"] = $parts[2];
-					}
-
-					if ( isset( $parts[3] ) ) {
-						$address["apartmentNo"] = $parts[3];
-					}
-
-					if ( isset( $parts[4] ) ) {
-						unset( $parts[0], $parts[1], $parts[2], $parts[3] );
-
-						$address["addressNote"] = implode( ' ', $parts ) ;
-					}
-				}
+				$this->add_address_details( $address );
 			}
 		}
 
 		return $address;
+	}
+
+	private function add_address_details( &$address ) {
+		$mapping = array(
+			'streetNumber'    => 'streetNo',
+			'blockNumber'     => 'blockNo',
+			'entranceNumber'  => 'entranceNo',
+			'floorNumber'     => 'floorNo',
+			'apartmentNumber' => 'apartmentNo',
+		);
+
+		foreach ( $mapping as $cookie_key => $address_key ) {
+			if ( !empty( $this->cookie_data[ $cookie_key ] ) ) {
+				$address[ $address_key ] = sanitize_text_field( $this->cookie_data[ $cookie_key ] );
+			}
+		}
+
+		// Keep labels created with the previous combined field usable.
+		if ( empty( $this->cookie_data['blockNumber'] ) && !empty( $this->cookie_data['other'] ) ) {
+			$parts = preg_split( '/\s+/', trim( $this->cookie_data['other'] ) );
+			foreach ( array( 'blockNo', 'entranceNo', 'floorNo', 'apartmentNo' ) as $index => $key ) {
+				if ( !empty( $parts[ $index ] ) ) {
+					$address[ $key ] = $parts[ $index ];
+				}
+			}
+		}
 	}
 
 	private function generate_recipient_office_code() {

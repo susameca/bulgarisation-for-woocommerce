@@ -32,21 +32,24 @@
 	    <span slot="placeholder">{{i18n.searchAddress}}</span>
 	  </multiselect>
 
-	  <input 
-	  	class="woo-bg-multiselect--additional-field input-text"
-	  	:placeholder="i18n.streetNumber" 
-	  	type="text" 
-	  	v-model="streetNumber" 
-	  	v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'streets' )"
-	  	@keyup="streetNumberChanged"
-	  >
-	  <input 
-	  	class="woo-bg-multiselect--additional-field input-text"
-	  	:placeholder="i18n.blVhEt" 
-	  	type="text" v-model="other" 
-	  	v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'quarters' )"
-	  	@keyup="streetNumberChanged"
-	  >
+	  <p class="form-row form-row-wide" v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'streets' )">
+		<input 
+			class="woo-bg-multiselect--additional-field input-text"
+			:placeholder="i18n.streetNumber" 
+			type="text" 
+			v-model="streetNumber" 
+			@keyup="streetNumberChanged"
+		>
+	  </p>
+	  <p class="form-row form-row-wide" v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'quarters' )">
+		<input 
+			class="woo-bg-multiselect--additional-field input-text"
+			:placeholder="i18n.blVhEt" 
+			type="text"
+			v-model="other" 
+			@keyup="streetNumberChanged"
+		>
+	  </p>
 	</div>
 </template>
 

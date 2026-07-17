@@ -44,6 +44,12 @@
 			width: 100%; 
 			box-sizing: border-box;
 		}
+
+		.woo-bg-speedy-address-details {
+			display: grid;
+			grid-template-columns: repeat( 5, minmax( 0, 1fr ) );
+			gap: 6px;
+		}
 	}
 }
 
@@ -56,4 +62,8 @@ button.mfp-close {
 
 @media ( max-width: 768px ) {
 	.mfp-iframe-holder .mfp-content { height: 100% }
+
+	#shipping_method .woo-bg--speedy-delivery .woo-bg-speedy-address-details {
+		grid-template-columns: 1fr;
+	}
 }
