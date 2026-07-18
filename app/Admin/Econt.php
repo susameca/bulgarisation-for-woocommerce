@@ -287,12 +287,14 @@ class Econt {
 		$order = wc_get_order( $order_id );
 
 		if ( isset( $shipment_status['label']['shipmentNumber'] ) ) {
+			$shipment_number = $shipment_status['label']['shipmentNumber'];
 			$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::DELETE_LABELS_ENDPOINT, array(
-				'shipmentNumbers' => [ $shipment_status['label']['shipmentNumber'] ]
+				'shipmentNumbers' => [ $shipment_number ]
 			) );
 
 			$order->update_meta_data( 'woo_bg_econt_shipment_status', '' );
 			$order->save();
+			woo_bg_add_label_order_note( $order, 'Econt', 'deleted', $shipment_number );
 		} else {
 			$response = [ 'message' => 'Няма намерена товарителница' ];
 		}
@@ -369,6 +371,7 @@ class Econt {
 	public static function send_label_to_econt( $label, $order_id ) {
 		$data = [];
 		$order = wc_get_order( $order_id );
+		$action = $order->get_meta( 'woo_bg_econt_shipment_status' ) ? 'updated' : 'created';
 
 		$generated_data = self::generate_response( $label, $order_id );
 		$response = $generated_data['response'];
@@ -389,6 +392,7 @@ class Econt {
 			$order->update_meta_data( 'woo_bg_econt_label', $request_body );
 			$order->update_meta_data( 'woo_bg_econt_shipment_status', $response );
 			$order->save();
+			woo_bg_add_label_order_note( $order, 'Econt', $action, $response['label']['shipmentNumber'] );
 
 			self::update_order_shipping_price( $response, $order_id, $label );
 		}

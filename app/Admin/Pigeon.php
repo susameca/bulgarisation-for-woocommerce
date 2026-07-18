@@ -581,6 +581,7 @@ class Pigeon {
 			$order->update_meta_data( 'woo_bg_pigeon_label', $request_body );
 			$order->update_meta_data( 'woo_bg_pigeon_shipment_status', $response );
 			$order->save();
+			woo_bg_add_label_order_note( $order, 'Pigeon Express', 'created', $response['data']['reference_number'] ?? '' );
 		}
 
 		do_action( 'woo_bg/pigeon/after_send_label', $data, $order );
@@ -629,6 +630,7 @@ class Pigeon {
 		$order->update_meta_data( 'woo_bg_pigeon_shipment_status', '' );
 		$order->update_meta_data( 'woo_bg_pigeon_operations', '' );
 		$order->save();
+		woo_bg_add_label_order_note( $order, 'Pigeon Express', 'deleted', $shipment_status['data']['reference_number'] ?? '' );
 		
 		wp_send_json_success( $response );
 		wp_die();

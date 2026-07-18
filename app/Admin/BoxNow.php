@@ -462,6 +462,7 @@ class BoxNow {
 			$order->update_meta_data( 'woo_bg_boxnow_label', $request_body );
 			$order->update_meta_data( 'woo_bg_boxnow_shipment_status', $response );
 			$order->save();
+			woo_bg_add_label_order_note( $order, 'BOX NOW', 'created', wp_list_pluck( $response['parcels'] ?? array(), 'id' ) );
 		}
 
 		do_action( 'woo_bg/boxnow/after_send_label', $data, $order );
@@ -518,6 +519,7 @@ class BoxNow {
 		$order_id = sanitize_text_field( $_REQUEST['orderId'] );
 		$shipment_status = map_deep( $_REQUEST['shipmentStatus'], 'sanitize_text_field' );
 		$order = wc_get_order( $order_id );
+		$parcel_numbers = wp_list_pluck( $shipment_status['parcels'] ?? array(), 'id' );
 		
 		foreach ( $shipment_status['parcels'] as $parcel ) {
 			$response = $container[ Client::BOXNOW ]->api_call( '/api/v1/parcels/' . $parcel['id'] . ":cancel", [] );
@@ -529,6 +531,7 @@ class BoxNow {
 
 		if ( $other_labels = $order->get_meta( 'woo_bg_boxnow_other_labels' ) ) {
 			foreach ( $other_labels as $other_label ) {
+				$parcel_numbers = array_merge( $parcel_numbers, wp_list_pluck( $other_label['shipmentStatus']['parcels'] ?? array(), 'id' ) );
 				foreach ( $other_label['shipmentStatus']['parcels'] as $parcel ) {
 					$response = $container[ Client::BOXNOW ]->api_call( '/api/v1/parcels/' . $parcel['id'] . ":cancel", [] );
 				}
@@ -538,6 +541,7 @@ class BoxNow {
 		}
 
 		$order->save();
+		woo_bg_add_label_order_note( $order, 'BOX NOW', 'deleted', $parcel_numbers );
 		
 		wp_send_json_success( $response );
 		wp_die();

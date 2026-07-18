@@ -11,7 +11,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-17 17:06+0000\n"
+"POT-Creation-Date: 2026-07-18 17:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: bulgarisation-for-woocommerce\n"
@@ -108,7 +108,7 @@ msgstr ""
 msgid "Add only fields on checkout"
 msgstr ""
 
-#: app/Admin/Econt.php:168 app/Admin/Speedy.php:224 app/Admin/Pigeon.php:257
+#: app/Admin/Econt.php:174 app/Admin/Speedy.php:224 app/Admin/Pigeon.php:257
 #: app/Admin/BoxNow.php:144
 msgid "Add Pack"
 msgstr ""
@@ -117,12 +117,12 @@ msgstr ""
 msgid "Additional Services"
 msgstr ""
 
-#: app/Admin/CVC.php:140 app/Admin/Econt.php:145 app/Admin/Speedy.php:198
+#: app/Admin/CVC.php:140 app/Admin/Econt.php:151 app/Admin/Speedy.php:198
 #: app/Admin/Pigeon.php:232 app/Admin/Tabs/CVC_Tab.php:97
 #: app/Admin/Tabs/Speedy_Tab.php:107 app/Admin/Tabs/Pigeon_Tab.php:101
 #: app/Admin/Tabs/Pigeon_Tab.php:128 app/Admin/Tabs/Econt_Tab.php:144
 #: app/Shipping/CVC/Method.php:139 app/Shipping/Pigeon/Method.php:169
-#: app/Shipping/Econt/Method.php:149 app/Shipping/Speedy/Method.php:185
+#: app/Shipping/Econt/Method.php:178 app/Shipping/Speedy/Method.php:185
 #: app/Front_End/Checkout/Company.php:79
 msgid "Address"
 msgstr ""
@@ -196,7 +196,9 @@ msgstr ""
 msgid "and"
 msgstr ""
 
-#: app/Admin/Speedy.php:193 app/Shipping/Speedy/Address.php:48
+#: app/Admin/Econt.php:145 app/Admin/Speedy.php:193
+#: app/Shipping/Econt/Address.php:48 app/Shipping/Econt/Address.php:58
+#: app/Shipping/Speedy/Address.php:48
 msgid "Apartment"
 msgstr ""
 
@@ -232,8 +234,8 @@ msgstr ""
 msgid "APS locator"
 msgstr ""
 
-#: app/Admin/Econt.php:144 app/Admin/Speedy.php:197 app/Admin/BoxNow.php:127
-#: app/Shipping/Econt/Method.php:148 app/Shipping/Speedy/Method.php:184
+#: app/Admin/Econt.php:150 app/Admin/Speedy.php:197 app/Admin/BoxNow.php:127
+#: app/Shipping/Econt/Method.php:177 app/Shipping/Speedy/Method.php:184
 msgid "Automat"
 msgstr ""
 
@@ -294,15 +296,17 @@ msgstr ""
 
 #: app/Admin/CVC.php:136 app/Admin/Econt.php:140 app/Admin/Speedy.php:188
 #: app/Admin/Pigeon.php:228 app/Shipping/CVC/Address.php:45
-#: app/Shipping/Pigeon/Address.php:45 app/Shipping/Econt/Address.php:45
+#: app/Shipping/Pigeon/Address.php:45 app/Shipping/Econt/Address.php:49
 msgid "bl. vh. et."
 msgstr ""
 
-#: app/Admin/Speedy.php:190 app/Shipping/Speedy/Address.php:45
+#: app/Admin/Econt.php:142 app/Admin/Speedy.php:190
+#: app/Shipping/Econt/Address.php:45 app/Shipping/Econt/Address.php:55
+#: app/Shipping/Speedy/Address.php:45
 msgid "Block"
 msgstr ""
 
-#: app/functions.php:608 app/Admin/Tabs/BoxNow_Tab.php:15
+#: app/functions.php:638 app/Admin/Tabs/BoxNow_Tab.php:15
 msgid "BOX NOW"
 msgstr ""
 
@@ -340,7 +344,7 @@ msgid ""
 "again from \"%s\"."
 msgstr ""
 
-#: app/Admin/CVC.php:143 app/Admin/Econt.php:148 app/Admin/Speedy.php:201
+#: app/Admin/CVC.php:143 app/Admin/Econt.php:154 app/Admin/Speedy.php:201
 #: app/Admin/Pigeon.php:236
 msgid "Buyer"
 msgstr ""
@@ -362,7 +366,7 @@ msgstr ""
 msgid "Calculation failed. Please try again."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:182
+#: app/Shipping/Econt/Method.php:211
 msgid "Can be used only in Bulgaria"
 msgstr ""
 
@@ -370,7 +374,7 @@ msgstr ""
 msgid "Card"
 msgstr ""
 
-#: app/Admin/Econt.php:178
+#: app/Admin/Econt.php:184
 msgid "Cargo"
 msgstr ""
 
@@ -553,7 +557,7 @@ msgstr ""
 msgid "Conversion rate message"
 msgstr ""
 
-#: app/Admin/CVC.php:148 app/Admin/Econt.php:152 app/Admin/Speedy.php:207
+#: app/Admin/CVC.php:148 app/Admin/Econt.php:158 app/Admin/Speedy.php:207
 #: app/Admin/Pigeon.php:240
 msgid "Copy Label Data"
 msgstr ""
@@ -571,7 +575,7 @@ msgstr ""
 msgid "Credit Notice - Original"
 msgstr ""
 
-#: app/functions.php:547 app/functions.php:604 app/Admin/Tabs/CVC_Tab.php:15
+#: app/functions.php:577 app/functions.php:634 app/Admin/Tabs/CVC_Tab.php:15
 msgid "CVC"
 msgstr ""
 
@@ -599,7 +603,7 @@ msgstr ""
 msgid "Days added to documents due date."
 msgstr ""
 
-#: app/Admin/CVC.php:155 app/Admin/Econt.php:159 app/Admin/Speedy.php:214
+#: app/Admin/CVC.php:155 app/Admin/Econt.php:165 app/Admin/Speedy.php:214
 #: app/Admin/Pigeon.php:249 app/Admin/Tabs/Speedy_Tab.php:97
 #: app/Admin/Tabs/Pigeon_Tab.php:107 app/Admin/Tabs/Econt_Tab.php:104
 msgid "Declared value"
@@ -630,11 +634,11 @@ msgid "Delivery is payed by"
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:133 app/Shipping/Pigeon/Method.php:162
-#: app/Shipping/Econt/Method.php:142 app/Shipping/Speedy/Method.php:178
+#: app/Shipping/Econt/Method.php:171 app/Shipping/Speedy/Method.php:178
 msgid "Delivery Type"
 msgstr ""
 
-#: app/Admin/CVC.php:141 app/Admin/Econt.php:146 app/Admin/Speedy.php:199
+#: app/Admin/CVC.php:141 app/Admin/Econt.php:152 app/Admin/Speedy.php:199
 #: app/Admin/Pigeon.php:234
 msgid "Delivery type"
 msgstr ""
@@ -643,12 +647,12 @@ msgstr ""
 msgid "Demo"
 msgstr ""
 
-#: app/Admin/CVC.php:156 app/Admin/Econt.php:160 app/Admin/Speedy.php:216
+#: app/Admin/CVC.php:156 app/Admin/Econt.php:166 app/Admin/Speedy.php:216
 #: app/Admin/Pigeon.php:251
 msgid "Description"
 msgstr ""
 
-#: app/Admin/CVC.php:153 app/Admin/Econt.php:157 app/Admin/Speedy.php:212
+#: app/Admin/CVC.php:153 app/Admin/Econt.php:163 app/Admin/Speedy.php:212
 #: app/Admin/Pigeon.php:247
 msgid "Details:"
 msgstr ""
@@ -665,7 +669,7 @@ msgstr ""
 msgid "Do you want a company invoice?"
 msgstr ""
 
-#: app/Admin/Econt.php:176
+#: app/Admin/Econt.php:182
 msgid "Document"
 msgstr ""
 
@@ -674,7 +678,7 @@ msgstr ""
 msgid "Document Copy"
 msgstr ""
 
-#: app/Admin/Econt.php:179
+#: app/Admin/Econt.php:185
 msgid "Document-Pallet"
 msgstr ""
 
@@ -722,11 +726,11 @@ msgstr ""
 msgid "E-mail: %s"
 msgstr ""
 
-#: app/functions.php:600 app/Admin/Tabs/Econt_Tab.php:15
+#: app/functions.php:630 app/Admin/Tabs/Econt_Tab.php:15
 msgid "Econt"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:588
+#: app/Shipping/Econt/Method.php:630
 msgid "Econt - "
 msgstr ""
 
@@ -854,7 +858,7 @@ msgstr ""
 msgid "Enables Speedy Shipping methods."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:182
+#: app/Shipping/Econt/Method.php:211
 msgid ""
 "Enter a fixed price that the users will pay. The remaining will be payed by "
 "you."
@@ -944,7 +948,9 @@ msgstr ""
 msgid "Entered price"
 msgstr ""
 
-#: app/Admin/Speedy.php:191 app/Shipping/Speedy/Address.php:46
+#: app/Admin/Econt.php:143 app/Admin/Speedy.php:191
+#: app/Shipping/Econt/Address.php:46 app/Shipping/Econt/Address.php:56
+#: app/Shipping/Speedy/Address.php:46
 msgid "Entrance"
 msgstr ""
 
@@ -970,7 +976,7 @@ msgstr ""
 msgid "EU VAT"
 msgstr ""
 
-#: app/Admin/CVC.php:152 app/Admin/Econt.php:156 app/Admin/Speedy.php:211
+#: app/Admin/CVC.php:152 app/Admin/Econt.php:162 app/Admin/Speedy.php:211
 #: app/Admin/Pigeon.php:246
 msgid "Event:"
 msgstr ""
@@ -1017,13 +1023,13 @@ msgid ""
 "Download</a>"
 msgstr ""
 
+#: app/Admin/Econt.php:147 app/Shipping/Econt/Method.php:645
+msgid "Fill in at least one of block, entrance, floor or apartment."
+msgstr ""
+
 #: app/Admin/Speedy.php:194
 msgid ""
 "Fill in at least one of street number, block, entrance, floor or apartment."
-msgstr ""
-
-#: app/Admin/Econt.php:147
-msgid "Fill in at least one of block, entrance, floor or apartment."
 msgstr ""
 
 #: app/Admin/ImpossibleVatPrice.php:71
@@ -1043,7 +1049,7 @@ msgstr ""
 msgid "Fixed conversion rate:"
 msgstr ""
 
-#: app/Admin/CVC.php:147 app/Admin/Econt.php:151 app/Admin/Speedy.php:206
+#: app/Admin/CVC.php:147 app/Admin/Econt.php:157 app/Admin/Speedy.php:206
 #: app/Admin/Pigeon.php:239 app/Shipping/CVC/Method.php:184
 #: app/Shipping/Pigeon/Method.php:191 app/Shipping/Speedy/Method.php:204
 msgid "Fixed price"
@@ -1063,7 +1069,9 @@ msgstr ""
 msgid "Fixing..."
 msgstr ""
 
-#: app/Admin/Speedy.php:192 app/Shipping/Speedy/Address.php:47
+#: app/Admin/Econt.php:144 app/Admin/Speedy.php:192
+#: app/Shipping/Econt/Address.php:47 app/Shipping/Econt/Address.php:57
+#: app/Shipping/Speedy/Address.php:47
 msgid "Floor"
 msgstr ""
 
@@ -1096,13 +1104,13 @@ msgid "Free shipping"
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:180 app/Shipping/CVC/Method.php:176
-#: app/Shipping/Pigeon/Method.php:183 app/Shipping/Econt/Method.php:171
+#: app/Shipping/Pigeon/Method.php:183 app/Shipping/Econt/Method.php:200
 #: app/Shipping/Speedy/Method.php:196
 msgid "Free shipping over"
 msgstr ""
 
 #: app/Admin/Tabs/BoxNow_Tab.php:180 app/Shipping/CVC/Method.php:179
-#: app/Shipping/Pigeon/Method.php:186 app/Shipping/Econt/Method.php:174
+#: app/Shipping/Pigeon/Method.php:186 app/Shipping/Econt/Method.php:203
 #: app/Shipping/Speedy/Method.php:199
 msgid "Free shipping over total cart price."
 msgstr ""
@@ -1181,7 +1189,7 @@ msgstr ""
 msgid "Group - G"
 msgstr ""
 
-#: app/Admin/Econt.php:166 app/Admin/Speedy.php:222 app/Admin/Pigeon.php:255
+#: app/Admin/Econt.php:172 app/Admin/Speedy.php:222 app/Admin/Pigeon.php:255
 msgid "Height"
 msgstr ""
 
@@ -1322,7 +1330,7 @@ msgstr ""
 msgid "Invoice Copy PDF"
 msgstr ""
 
-#: app/Admin/Econt.php:161 app/Admin/Tabs/Econt_Tab.php:126
+#: app/Admin/Econt.php:167 app/Admin/Tabs/Econt_Tab.php:126
 msgid "Invoice number"
 msgstr ""
 
@@ -1353,23 +1361,40 @@ msgstr ""
 msgid "Label"
 msgstr ""
 
-#: app/Admin/CVC.php:142 app/Admin/Econt.php:147 app/Admin/Speedy.php:200
+#: app/functions.php:511
+msgid "Label created."
+msgstr ""
+
+#: app/Admin/CVC.php:142 app/Admin/Econt.php:153 app/Admin/Speedy.php:200
 #: app/Admin/Pigeon.php:235 app/Admin/BoxNow.php:136
 msgid "Label data"
 msgstr ""
 
+#: app/functions.php:513
+msgid "Label deleted."
+msgstr ""
+
+#: app/functions.php:529
+#, php-format
+msgid "Label number: %s."
+msgstr ""
+
 #: app/Shipping/CVC/Method.php:544 app/Shipping/Pigeon/Method.php:644
-#: app/Shipping/Econt/Method.php:731 app/Shipping/Speedy/Method.php:936
+#: app/Shipping/Econt/Method.php:789 app/Shipping/Speedy/Method.php:936
 #: app/Shipping/BoxNow/Method.php:515
 #, php-format
 msgid "Label number: %s. %s"
+msgstr ""
+
+#: app/functions.php:512
+msgid "Label updated."
 msgstr ""
 
 #: app/Admin/BoxNow.php:142 app/Admin/Tabs/BoxNow_Tab.php:197
 msgid "Large Box"
 msgstr ""
 
-#: app/Admin/Econt.php:164 app/Admin/Speedy.php:220 app/Admin/Pigeon.php:253
+#: app/Admin/Econt.php:170 app/Admin/Speedy.php:220 app/Admin/Pigeon.php:253
 msgid "Length"
 msgstr ""
 
@@ -1423,7 +1448,7 @@ msgstr ""
 msgid "Mathematically impossible prices"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:179
+#: app/Shipping/Econt/Method.php:208
 msgid "Maximum price payed by the client"
 msgstr ""
 
@@ -1487,7 +1512,7 @@ msgstr ""
 
 #: app/functions.php:63 app/functions.php:239 app/Shipping/CVC/Method.php:148
 #: app/Shipping/CVC/Method.php:159 app/Shipping/CVC/Method.php:170
-#: app/Shipping/Pigeon/Method.php:178 app/Shipping/Econt/Method.php:165
+#: app/Shipping/Pigeon/Method.php:178 app/Shipping/Econt/Method.php:194
 msgid "No"
 msgstr ""
 
@@ -1577,13 +1602,13 @@ msgstr ""
 msgid "NRA unique number"
 msgstr ""
 
-#: app/Admin/CVC.php:139 app/Admin/Econt.php:143 app/Admin/Speedy.php:196
+#: app/Admin/CVC.php:139 app/Admin/Econt.php:149 app/Admin/Speedy.php:196
 #: app/Admin/Pigeon.php:231 app/Admin/Tabs/CVC_Tab.php:93
 #: app/Admin/Tabs/CVC_Tab.php:115 app/Admin/Tabs/Speedy_Tab.php:103
 #: app/Admin/Tabs/Speedy_Tab.php:133 app/Admin/Tabs/Pigeon_Tab.php:97
 #: app/Admin/Tabs/Pigeon_Tab.php:135 app/Admin/Tabs/Econt_Tab.php:140
 #: app/Admin/Tabs/Econt_Tab.php:179 app/Shipping/CVC/Method.php:138
-#: app/Shipping/Pigeon/Method.php:167 app/Shipping/Econt/Method.php:147
+#: app/Shipping/Pigeon/Method.php:167 app/Shipping/Econt/Method.php:176
 #: app/Shipping/Speedy/Method.php:183
 msgid "Office"
 msgstr ""
@@ -1640,7 +1665,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: app/Admin/Econt.php:167 app/Admin/Econt.php:175 app/Admin/Speedy.php:223
+#: app/Admin/Econt.php:173 app/Admin/Econt.php:181 app/Admin/Speedy.php:223
 #: app/Admin/Pigeon.php:256 app/Admin/BoxNow.php:143
 msgid "Pack"
 msgstr ""
@@ -1663,7 +1688,7 @@ msgstr ""
 msgid "Page %s of %s"
 msgstr ""
 
-#: app/Admin/Econt.php:177
+#: app/Admin/Econt.php:183
 msgid "Pallet"
 msgstr ""
 
@@ -1671,7 +1696,7 @@ msgstr ""
 msgid "Paper Return Receipt"
 msgstr ""
 
-#: app/Admin/Econt.php:162
+#: app/Admin/Econt.php:168
 msgid "Partial delivery"
 msgstr ""
 
@@ -1726,7 +1751,7 @@ msgstr ""
 msgid "Physical Weight"
 msgstr ""
 
-#: app/functions.php:612 app/Admin/Pigeon.php:65
+#: app/functions.php:642 app/Admin/Pigeon.php:65
 #: app/Admin/Tabs/Pigeon_Tab.php:15
 msgid "Pigeon Express"
 msgstr ""
@@ -1746,7 +1771,7 @@ msgstr ""
 msgid "Place of transaction"
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:611 app/Shipping/Speedy/Method.php:846
+#: app/Shipping/Econt/Method.php:669 app/Shipping/Speedy/Method.php:846
 #: app/Shipping/BoxNow/Method.php:337
 msgid "Please choose a automat."
 msgstr ""
@@ -1755,11 +1780,11 @@ msgstr ""
 msgid "Please choose a locker."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:603 app/Shipping/Speedy/Method.php:838
+#: app/Shipping/Econt/Method.php:661 app/Shipping/Speedy/Method.php:838
 msgid "Please choose a office."
 msgstr ""
 
-#: app/Shipping/Econt/Method.php:619
+#: app/Shipping/Econt/Method.php:677
 msgid "Please choose address."
 msgstr ""
 
@@ -1772,7 +1797,7 @@ msgid "Please choose an office."
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:458 app/Shipping/Pigeon/Method.php:526
-#: app/Shipping/Econt/Method.php:591 app/Shipping/Speedy/Method.php:828
+#: app/Shipping/Econt/Method.php:648 app/Shipping/Speedy/Method.php:828
 msgid "Please choose delivery option!"
 msgstr ""
 
@@ -1969,7 +1994,7 @@ msgstr ""
 msgid "Remove delivery from documents"
 msgstr ""
 
-#: app/Admin/Econt.php:169 app/Admin/Speedy.php:225 app/Admin/Pigeon.php:258
+#: app/Admin/Econt.php:175 app/Admin/Speedy.php:225 app/Admin/Pigeon.php:258
 #: app/Admin/BoxNow.php:145
 msgid "Remove Pack"
 msgstr ""
@@ -2007,10 +2032,10 @@ msgstr ""
 msgid "Return Receipt"
 msgstr ""
 
-#: app/functions.php:241 app/Admin/CVC.php:154 app/Admin/Econt.php:158
+#: app/functions.php:241 app/Admin/CVC.php:154 app/Admin/Econt.php:164
 #: app/Admin/Speedy.php:213 app/Admin/Pigeon.php:248
 #: app/Shipping/CVC/Method.php:143 app/Shipping/CVC/Method.php:150
-#: app/Shipping/Pigeon/Method.php:173 app/Shipping/Econt/Method.php:153
+#: app/Shipping/Pigeon/Method.php:173 app/Shipping/Econt/Method.php:182
 #: app/Shipping/Speedy/Method.php:189
 msgid "Review and test"
 msgstr ""
@@ -2152,11 +2177,11 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:173 app/Shipping/Econt/Method.php:168
+#: app/Shipping/CVC/Method.php:173 app/Shipping/Econt/Method.php:197
 msgid "Send customer notification for delivery."
 msgstr ""
 
-#: app/Admin/Econt.php:163 app/Admin/Speedy.php:219 app/Admin/Pigeon.php:252
+#: app/Admin/Econt.php:169 app/Admin/Speedy.php:219 app/Admin/Pigeon.php:252
 #: app/Admin/BoxNow.php:125 app/Admin/Tabs/CVC_Tab.php:99
 #: app/Admin/Tabs/CVC_Tab.php:147 app/Admin/Tabs/Speedy_Tab.php:109
 #: app/Admin/Tabs/BoxNow_Tab.php:227 app/Admin/Tabs/Pigeon_Tab.php:103
@@ -2187,7 +2212,7 @@ msgid ""
 "of the above options ( what is enabled/disabled )"
 msgstr ""
 
-#: app/Admin/CVC.php:144 app/Admin/Econt.php:149 app/Admin/Speedy.php:202
+#: app/Admin/CVC.php:144 app/Admin/Econt.php:155 app/Admin/Speedy.php:202
 #: app/Admin/Pigeon.php:237
 msgid "Sender"
 msgstr ""
@@ -2213,7 +2238,7 @@ msgstr ""
 msgid "Settlement"
 msgstr ""
 
-#: app/Admin/CVC.php:150 app/Admin/Econt.php:154 app/Admin/Speedy.php:209
+#: app/Admin/CVC.php:150 app/Admin/Econt.php:160 app/Admin/Speedy.php:209
 #: app/Admin/Pigeon.php:242 app/Admin/BoxNow.php:137
 msgid "Shipment status"
 msgstr ""
@@ -2260,7 +2285,7 @@ msgstr ""
 msgid "Small Box"
 msgstr ""
 
-#: app/Shipping/CVC/Method.php:165 app/Shipping/Econt/Method.php:160
+#: app/Shipping/CVC/Method.php:165 app/Shipping/Econt/Method.php:189
 msgid "SMS notification"
 msgstr ""
 
@@ -2271,7 +2296,7 @@ msgid ""
 "not found or the payment method was disabled. List of orders id's: %s"
 msgstr ""
 
-#: app/functions.php:596 app/Admin/Tabs/Speedy_Tab.php:15
+#: app/functions.php:626 app/Admin/Tabs/Speedy_Tab.php:15
 msgid "Speedy"
 msgstr ""
 
@@ -2330,7 +2355,7 @@ msgstr ""
 msgid "Street number"
 msgstr ""
 
-#: app/Admin/Econt.php:146
+#: app/Admin/Econt.php:146 app/Shipping/Econt/Method.php:643
 msgid "Street number is required."
 msgstr ""
 
@@ -2339,7 +2364,7 @@ msgstr ""
 msgid "Street or quarter"
 msgstr ""
 
-#: app/Admin/CVC.php:138 app/Admin/Econt.php:142 app/Admin/Speedy.php:195
+#: app/Admin/CVC.php:138 app/Admin/Econt.php:148 app/Admin/Speedy.php:195
 #: app/Admin/Pigeon.php:230
 msgid "Street/Quarter"
 msgstr ""
@@ -2444,7 +2469,7 @@ msgid "This client has %s%% undelivered shipments."
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:128 app/Shipping/Pigeon/Method.php:157
-#: app/Shipping/Econt/Method.php:137 app/Shipping/Speedy/Method.php:173
+#: app/Shipping/Econt/Method.php:166 app/Shipping/Speedy/Method.php:173
 #: app/Shipping/BoxNow/Method.php:130
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
@@ -2489,13 +2514,13 @@ msgstr ""
 msgid "This version of the plugin adds a couple of checkout functionalities:"
 msgstr ""
 
-#: app/Admin/CVC.php:151 app/Admin/Econt.php:155 app/Admin/Speedy.php:210
+#: app/Admin/CVC.php:151 app/Admin/Econt.php:161 app/Admin/Speedy.php:210
 #: app/Admin/Pigeon.php:245
 msgid "Time:"
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:126 app/Shipping/Pigeon/Method.php:155
-#: app/Shipping/Econt/Method.php:135 app/Shipping/Speedy/Method.php:171
+#: app/Shipping/Econt/Method.php:164 app/Shipping/Speedy/Method.php:171
 #: app/Shipping/BoxNow/Method.php:128
 msgid "Title"
 msgstr ""
@@ -2558,7 +2583,7 @@ msgid "Total: %s | Total vat: %s | Returned Total: %s"
 msgstr ""
 
 #: app/Shipping/CVC/Method.php:548 app/Shipping/Pigeon/Method.php:648
-#: app/Shipping/Econt/Method.php:735 app/Shipping/Speedy/Method.php:940
+#: app/Shipping/Econt/Method.php:793 app/Shipping/Speedy/Method.php:940
 #: app/Shipping/BoxNow/Method.php:519
 msgid "Track your order."
 msgstr ""
@@ -2695,7 +2720,7 @@ msgid ""
 "for electronic services of the NRA."
 msgstr ""
 
-#: app/Admin/CVC.php:146 app/Admin/Econt.php:150 app/Admin/Pigeon.php:238
+#: app/Admin/CVC.php:146 app/Admin/Econt.php:156 app/Admin/Pigeon.php:238
 #: app/Admin/BoxNow.php:146
 msgid "Weight"
 msgstr ""
@@ -2715,7 +2740,7 @@ msgstr ""
 msgid "When to generate invoices?"
 msgstr ""
 
-#: app/Admin/Econt.php:165 app/Admin/Speedy.php:221 app/Admin/Pigeon.php:254
+#: app/Admin/Econt.php:171 app/Admin/Speedy.php:221 app/Admin/Pigeon.php:254
 msgid "Width"
 msgstr ""
 
@@ -2753,7 +2778,7 @@ msgstr ""
 
 #: app/functions.php:67 app/Shipping/CVC/Method.php:160
 #: app/Shipping/CVC/Method.php:171 app/Shipping/Pigeon/Method.php:179
-#: app/Shipping/Econt/Method.php:166
+#: app/Shipping/Econt/Method.php:195
 msgid "Yes"
 msgstr ""
 
@@ -2791,7 +2816,7 @@ msgstr ""
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: app/Admin/Speedy.php:934 app/Admin/Pigeon.php:593 app/Admin/BoxNow.php:548
+#: app/Admin/Speedy.php:937 app/Admin/Pigeon.php:594 app/Admin/BoxNow.php:552
 msgid "You do not have permission to perform this action."
 msgstr ""
 
@@ -2816,7 +2841,7 @@ msgstr ""
 msgid "You just copied the label data used for the cvc API."
 msgstr ""
 
-#: app/Admin/Econt.php:153
+#: app/Admin/Econt.php:159
 msgid "You just copied the label data used for the Econt API."
 msgstr ""
 

@@ -212,6 +212,7 @@ class CVC {
 		$order->update_meta_data( 'woo_bg_cvc_shipment_status', '' );
 		$order->update_meta_data( 'woo_bg_cvc_actions', '' );
 		$order->save();
+		woo_bg_add_label_order_note( $order, 'CVC', 'deleted', $shipment_status['wb'] ?? '' );
 		
 		wp_send_json_success( $response );
 		wp_die();
@@ -289,6 +290,7 @@ class CVC {
 			$order->update_meta_data( 'woo_bg_cvc_label', $request_body );
 			$order->update_meta_data( 'woo_bg_cvc_shipment_status', $response );
 			$order->save();
+			woo_bg_add_label_order_note( $order, 'CVC', 'created', $response['wb'] ?? '' );
 
 			self::update_order_shipping_price( $response, $order_id );
 		}

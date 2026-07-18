@@ -502,6 +502,36 @@ function woo_bg_is_shipping_enabled() {
 	return $enabled;
 }
 
+function woo_bg_add_label_order_note( $order, $courier, $action, $label_number = '' ) {
+	if ( ! $order instanceof WC_Order ) {
+		return;
+	}
+
+	$actions = array(
+		'created' => __( 'Label created.', 'bulgarisation-for-woocommerce' ),
+		'updated' => __( 'Label updated.', 'bulgarisation-for-woocommerce' ),
+		'deleted' => __( 'Label deleted.', 'bulgarisation-for-woocommerce' ),
+	);
+
+	if ( ! isset( $actions[ $action ] ) ) {
+		return;
+	}
+
+	if ( is_array( $label_number ) ) {
+		$label_number = implode( ', ', array_filter( array_map( 'sanitize_text_field', $label_number ) ) );
+	} else {
+		$label_number = sanitize_text_field( $label_number );
+	}
+
+	$note = sprintf( '%s: %s', sanitize_text_field( $courier ), $actions[ $action ] );
+
+	if ( '' !== $label_number ) {
+		$note .= sprintf( ' ' . __( 'Label number: %s.', 'bulgarisation-for-woocommerce' ), $label_number );
+	}
+
+	$order->add_order_note( $note );
+}
+
 function woo_bg_get_order_label( $order_id ) {
 	$order = wc_get_order( $order_id );
 	$data = [];

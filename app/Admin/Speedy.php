@@ -343,6 +343,7 @@ class Speedy {
 		$order->update_meta_data( 'woo_bg_speedy_shipment_status', '' );
 		$order->update_meta_data( 'woo_bg_speedy_operations', '' );
 		$order->save();
+		woo_bg_add_label_order_note( $order, 'Speedy', 'deleted', $shipment_status['id'] ?? '' );
 		
 		wp_send_json_success( $response );
 		wp_die();
@@ -595,6 +596,7 @@ class Speedy {
 	public static function send_label_to_speedy( $label, $order ) {
 		$data = [];
 		$order_id = $order->get_id();
+		$action = $order->get_meta( 'woo_bg_speedy_shipment_status' ) ? 'updated' : 'created';
 		$generated_data = self::generate_response( $label, $order );
 		$response = $generated_data['response'];
 		$request_body = $generated_data['request_body'];
@@ -613,6 +615,7 @@ class Speedy {
 			$order->update_meta_data( 'woo_bg_speedy_label', $request_body );
 			$order->update_meta_data( 'woo_bg_speedy_shipment_status', $response );
 			$order->save();
+			woo_bg_add_label_order_note( $order, 'Speedy', $action, $response['id'] ?? '' );
 
 			self::update_order_shipping_price( $response, $order_id );
 		}
