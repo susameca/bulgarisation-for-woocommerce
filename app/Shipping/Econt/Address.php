@@ -42,8 +42,54 @@ class Address {
 			'noResult' => __( 'No results was found for this city', 'bulgarisation-for-woocommerce' ), 
 			'noOptions' => __( 'Start typing street or quarter', 'bulgarisation-for-woocommerce' ), 
 			'streetNumber' => __( 'Street number', 'bulgarisation-for-woocommerce' ), 
+			'blockNumber' => __( 'Block', 'bulgarisation-for-woocommerce' ),
+			'entranceNumber' => __( 'Entrance', 'bulgarisation-for-woocommerce' ),
+			'floorNumber' => __( 'Floor', 'bulgarisation-for-woocommerce' ),
+			'apartmentNumber' => __( 'Apartment', 'bulgarisation-for-woocommerce' ),
 			'blVhEt' => __( 'bl. vh. et.', 'bulgarisation-for-woocommerce' ),
 		);
+	}
+
+	public static function format_other( $address_data, $additional_parts = array() ) {
+		$labels = array(
+			'blockNumber'     => __( 'Block', 'bulgarisation-for-woocommerce' ),
+			'entranceNumber'  => __( 'Entrance', 'bulgarisation-for-woocommerce' ),
+			'floorNumber'     => __( 'Floor', 'bulgarisation-for-woocommerce' ),
+			'apartmentNumber' => __( 'Apartment', 'bulgarisation-for-woocommerce' ),
+		);
+		$parts = array();
+
+		foreach ( $labels as $field => $label ) {
+			$value = isset( $address_data[ $field ] ) ? trim( (string) $address_data[ $field ] ) : '';
+
+			if ( $value !== '' ) {
+				$parts[] = $label . ' ' . sanitize_text_field( $value );
+			}
+		}
+
+		// Preserve the old combined field for orders created before the separate fields existed.
+		$legacy_other = isset( $address_data['other'] ) ? trim( (string) $address_data['other'] ) : '';
+		if ( empty( $parts ) && $legacy_other !== '' ) {
+			$parts[] = sanitize_text_field( $legacy_other );
+		}
+
+		foreach ( $additional_parts as $part ) {
+			if ( is_scalar( $part ) && trim( (string) $part ) !== '' ) {
+				$parts[] = sanitize_text_field( $part );
+			}
+		}
+
+		return implode( ', ', $parts );
+	}
+
+	public static function has_structured_details( $address_data ) {
+		foreach ( array( 'blockNumber', 'entranceNumber', 'floorNumber', 'apartmentNumber' ) as $field ) {
+			if ( isset( $address_data[ $field ] ) && trim( (string) $address_data[ $field ] ) !== '' ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public static function search_address() {

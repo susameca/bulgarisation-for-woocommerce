@@ -32,24 +32,27 @@
 	    <span slot="placeholder">{{i18n.searchAddress}}</span>
 	  </multiselect>
 
-	  <p class="form-row form-row-wide" v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'streets' )">
-		<input 
-			class="woo-bg-multiselect--additional-field input-text"
-			:placeholder="i18n.streetNumber" 
-			type="text" 
-			v-model="streetNumber" 
-			@keyup="streetNumberChanged"
-		>
-	  </p>
-	  <p class="form-row form-row-wide" v-if="( selectedAddress && selectedAddress.type && selectedAddress.type === 'quarters' )">
-		<input 
-			class="woo-bg-multiselect--additional-field input-text"
-			:placeholder="i18n.blVhEt" 
-			type="text"
-			v-model="other" 
-			@keyup="streetNumberChanged"
-		>
-	  </p>
+	  <div
+		class="woo-bg-econt-address-details"
+		:class="{ 'woo-bg-econt-address-details--quarter': selectedAddress.type === 'quarters' }"
+		v-if="selectedAddress && selectedAddress.type"
+	  >
+		<p class="form-row" v-if="selectedAddress.type === 'streets'">
+			<input class="input-text" :placeholder="i18n.streetNumber" type="text" v-model="streetNumber" @input="addressDetailChanged">
+		</p>
+		<p class="form-row">
+			<input class="input-text" :placeholder="i18n.blockNumber" type="text" v-model="blockNumber" @input="addressDetailChanged">
+		</p>
+		<p class="form-row">
+			<input class="input-text" :placeholder="i18n.entranceNumber" type="text" v-model="entranceNumber" @input="addressDetailChanged">
+		</p>
+		<p class="form-row">
+			<input class="input-text" :placeholder="i18n.floorNumber" type="text" v-model="floorNumber" @input="addressDetailChanged">
+		</p>
+		<p class="form-row">
+			<input class="input-text" :placeholder="i18n.apartmentNumber" type="text" v-model="apartmentNumber" @input="addressDetailChanged">
+		</p>
+	  </div>
 	</div>
 </template>
 
@@ -83,6 +86,10 @@ export default {
 			state: '',
 			city: '',
 			streetNumber: '',
+			blockNumber: '',
+			entranceNumber: '',
+			floorNumber: '',
+			apartmentNumber: '',
 			other: '',
 			isLoading: false,
 			document: $( document.body ),
@@ -185,8 +192,12 @@ export default {
 				this.addresses = cloneDeep( localStorageData.addresses );
 				this.state = cloneDeep( localStorageData.state );
 				this.city = cloneDeep( localStorageData.city );
-				this.streetNumber = cloneDeep( localStorageData.streetNumber );
-				this.other = cloneDeep( localStorageData.other );
+				this.streetNumber = cloneDeep( localStorageData.streetNumber || '' );
+				this.blockNumber = cloneDeep( localStorageData.blockNumber || '' );
+				this.entranceNumber = cloneDeep( localStorageData.entranceNumber || '' );
+				this.floorNumber = cloneDeep( localStorageData.floorNumber || '' );
+				this.apartmentNumber = cloneDeep( localStorageData.apartmentNumber || '' );
+				this.other = cloneDeep( localStorageData.other || '' );
 			}
 		},
 		asyncFind: debounce( function( query ) {
@@ -256,6 +267,10 @@ export default {
 					_this.selectedAddress = cloneDeep( selectedAddress );
 					if ( clearAdditionaFields ) {
 						_this.streetNumber = '';
+						_this.blockNumber = '';
+						_this.entranceNumber = '';
+						_this.floorNumber = '';
+						_this.apartmentNumber = '';
 						_this.other = '';
 					}
 
@@ -273,9 +288,20 @@ export default {
 				this.cityField.val( option.label );
 				this.addresses = [];
 				this.selectedAddress = cloneDeep([]);
+				return;
 			}
+
+			this.streetNumber = '';
+			this.blockNumber = '';
+			this.entranceNumber = '';
+			this.floorNumber = '';
+			this.apartmentNumber = '';
+			this.other = '';
+			this.setAddress1FieldData();
+			this.setLocalStorageData();
+			this.document.trigger('update_checkout');
 		},
-		streetNumberChanged: debounce( function () {
+		addressDetailChanged: debounce( function () {
 			this.setAddress1FieldData();
 			this.setLocalStorageData();
 
@@ -285,6 +311,10 @@ export default {
 			this.city = '';
 			this.selectedAddress = [];
 			this.streetNumber = '';
+			this.blockNumber = '';
+			this.entranceNumber = '';
+			this.floorNumber = '';
+			this.apartmentNumber = '';
 			this.other = '';
 			localStorage.removeItem( 'woo-bg--econt-address' );
 		},
@@ -308,7 +338,11 @@ export default {
 				state: this.state,
 				city: this.city,
 				streetNumber: this.streetNumber,
-				other: this.other,
+				blockNumber: this.blockNumber,
+				entranceNumber: this.entranceNumber,
+				floorNumber: this.floorNumber,
+				apartmentNumber: this.apartmentNumber,
+				other: this.formatAddressDetails() || this.other,
 				otherField: this.Address2Field.val(),
 				country: this.countryField.val(),
 				payment: $('input[name="payment_method"]:checked').val(),
@@ -325,21 +359,42 @@ export default {
 				state: this.state,
 				city: this.city,
 				streetNumber: this.streetNumber,
+				blockNumber: this.blockNumber,
+				entranceNumber: this.entranceNumber,
+				floorNumber: this.floorNumber,
+				apartmentNumber: this.apartmentNumber,
 				other: this.other,
 			}
 
 			localStorage.setItem( 'woo-bg--econt-address', JSON.stringify( localStorageData ) );
 		},
 		setAddress1FieldData() {
-			let shippingAddress = '';
+			let parts = [];
+			let addressDetails = this.formatAddressDetails();
 
-			if ( this.selectedAddress.type === 'streets' ) {
-				shippingAddress = this.selectedAddress.label + ' ' + this.streetNumber;
-			} else if ( this.selectedAddress.type === 'quarters' ) {
-				shippingAddress = this.selectedAddress.label + ' ' + this.other;
+			if ( !this.selectedAddress || !this.selectedAddress.type ) {
+				this.Address1Field.val( '' );
+				return;
 			}
 
-			this.Address1Field.val( shippingAddress );
+			if ( this.selectedAddress.type === 'streets' ) {
+				parts = [this.selectedAddress.label, this.streetNumber, addressDetails];
+			} else if ( this.selectedAddress.type === 'quarters' ) {
+				parts = [this.selectedAddress.label, addressDetails || this.other];
+			}
+
+			this.Address1Field.val( parts.filter(Boolean).join(' ') );
+		},
+		formatAddressDetails() {
+			return [
+				{ label: this.i18n.blockNumber, value: this.blockNumber },
+				{ label: this.i18n.entranceNumber, value: this.entranceNumber },
+				{ label: this.i18n.floorNumber, value: this.floorNumber },
+				{ label: this.i18n.apartmentNumber, value: this.apartmentNumber },
+			]
+				.filter( detail => String( detail.value ).trim() )
+				.map( detail => detail.label + ' ' + detail.value )
+				.join(', ');
 		},
 		triggerUpdateCheckout() {
 			this.document.trigger('update_checkout');

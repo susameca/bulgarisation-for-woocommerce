@@ -139,6 +139,12 @@ class Econt {
 			'other' => __( 'Other', 'bulgarisation-for-woocommerce' ),
 			'blVhEt' => __( 'bl. vh. et.', 'bulgarisation-for-woocommerce' ),
 			'streetNumber' => __( 'Street number', 'bulgarisation-for-woocommerce' ),
+			'blockNumber' => __( 'Block', 'bulgarisation-for-woocommerce' ),
+			'entranceNumber' => __( 'Entrance', 'bulgarisation-for-woocommerce' ),
+			'floorNumber' => __( 'Floor', 'bulgarisation-for-woocommerce' ),
+			'apartmentNumber' => __( 'Apartment', 'bulgarisation-for-woocommerce' ),
+			'streetNumberRequired' => __( 'Street number is required.', 'bulgarisation-for-woocommerce' ),
+			'quarterDetailRequired' => __( 'Fill in at least one of block, entrance, floor or apartment.', 'bulgarisation-for-woocommerce' ),
 			'streetQuarter' => __( 'Street/Quarter', 'bulgarisation-for-woocommerce' ),
 			'office' => __( 'Office', 'bulgarisation-for-woocommerce' ),
 			'automat' => __( 'Automat', 'bulgarisation-for-woocommerce' ),
@@ -511,7 +517,10 @@ class Econt {
 			$label[ 'receiverDeliveryType' ] = 'door';
 			$cookie_data['selectedAddress'] = map_deep( $_REQUEST['street'], 'sanitize_text_field' );
 			$cookie_data['streetNumber'] = sanitize_text_field( $_REQUEST['streetNumber'] );
-			$cookie_data['other'] = sanitize_text_field( $_REQUEST['other'] );
+			foreach ( array( 'blockNumber', 'entranceNumber', 'floorNumber', 'apartmentNumber' ) as $field ) {
+				$cookie_data[ $field ] = sanitize_text_field( $_REQUEST[ $field ] ?? '' );
+			}
+			$cookie_data['other'] = sanitize_text_field( $_REQUEST['other'] ?? '' );
 
 			$states = $container[ Client::ECONT_CITIES ]->get_regions( $country );
 			$state = $states[ $cookie_data['state'] ];
@@ -530,13 +539,28 @@ class Econt {
 
 			if ( $type === 'streets' ) {
 				$receiver_address['street'] = $cookie_data['selectedAddress']['label'];
-				$receiver_address['num'] = $cookie_data['streetNumber'];
-				if ( $cookie_data['other'] ) {
-					$receiver_address['other'] = $cookie_data['other'];
+				if ( trim( (string) $cookie_data['streetNumber'] ) !== '' ) {
+					$receiver_address['num'] = $cookie_data['streetNumber'];
 				}
 			} else if ( $type === 'quarters' ) {
 				$receiver_address['quarter'] = $cookie_data['selectedAddress']['label'];
-				$receiver_address['other'] = $cookie_data['other'] . " " . $cookie_data[ 'otherField' ];
+			}
+
+			$additional_parts = array();
+			$legacy_other = trim( (string) ( $cookie_data['other'] ?? '' ) );
+			if (
+				$type === 'quarters' ||
+				Address::has_structured_details( $cookie_data ) ||
+				$legacy_other === ''
+			) {
+				$additional_parts[] = $cookie_data['otherField'] ?? '';
+			}
+
+			$other = Address::format_other( $cookie_data, $additional_parts );
+			$cookie_data['other'] = $other;
+
+			if ( $other !== '' ) {
+				$receiver_address['other'] = $other;
 			}
 
 			$label['receiverAddress'] = $receiver_address;

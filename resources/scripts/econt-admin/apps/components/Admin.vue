@@ -133,32 +133,32 @@
 								</multiselect>
 							</p>
 
-							<p class="form-field form-field-wide">
-								<input 
-									class="woo-bg-multiselect--additional-field"
-									:placeholder="i18n.streetNumber" 
-									type="text" 
-									v-model="streetNumber" 
-									v-if="( street.type && street.type === 'streets' )"
-								>
-								
-								<input 
-									class="woo-bg-multiselect--additional-field"
-									:placeholder="i18n.blVhEt" 
-									type="text" 
-									v-model="other" 
-									v-if="( street.type && street.type === 'quarters' )"
-								>
-							</p>
-							<p class="form-field form-field-wide">
-								<input 
-									class="woo-bg-multiselect--additional-field"
-									:placeholder="i18n.blVhEt" 
-									type="text" 
-									v-model="other" 
-									v-if="( street.type && street.type === 'streets' )"
-								>
-							</p>
+							<div
+								class="woo-bg-econt-address-details clear"
+								:class="{ 'woo-bg-econt-address-details--quarter': street.type === 'quarters' }"
+								v-if="street.type"
+							>
+								<p class="form-field" v-if="street.type === 'streets'">
+									<label for="woo-bg-econt-admin-street-number">{{i18n.streetNumber}}:</label>
+									<input id="woo-bg-econt-admin-street-number" class="input-text" :placeholder="i18n.streetNumber" type="text" v-model="streetNumber">
+								</p>
+								<p class="form-field">
+									<label for="woo-bg-econt-admin-block-number">{{i18n.blockNumber}}:</label>
+									<input id="woo-bg-econt-admin-block-number" class="input-text" :placeholder="i18n.blockNumber" type="text" v-model="blockNumber">
+								</p>
+								<p class="form-field">
+									<label for="woo-bg-econt-admin-entrance-number">{{i18n.entranceNumber}}:</label>
+									<input id="woo-bg-econt-admin-entrance-number" class="input-text" :placeholder="i18n.entranceNumber" type="text" v-model="entranceNumber">
+								</p>
+								<p class="form-field">
+									<label for="woo-bg-econt-admin-floor-number">{{i18n.floorNumber}}:</label>
+									<input id="woo-bg-econt-admin-floor-number" class="input-text" :placeholder="i18n.floorNumber" type="text" v-model="floorNumber">
+								</p>
+								<p class="form-field">
+									<label for="woo-bg-econt-admin-apartment-number">{{i18n.apartmentNumber}}:</label>
+									<input id="woo-bg-econt-admin-apartment-number" class="input-text" :placeholder="i18n.apartmentNumber" type="text" v-model="apartmentNumber">
+								</p>
+							</div>
 						</div>
 
 
@@ -479,6 +479,10 @@ export default {
 			testOption: '',
 			testsOptions: cloneDeep( wooBg_econt.testsOptions ),
 			streetNumber: '',
+			blockNumber: '',
+			entranceNumber: '',
+			floorNumber: '',
+			apartmentNumber: '',
 			other: '',
 			message: '',
 			labelPrintingPromo: wooBg_econt.labelPrintingPromo,
@@ -491,6 +495,18 @@ export default {
 	watch: {
 		shipmentType( newValue, oldValue ){
 			this.labelData.shipmentType = newValue.id;
+		},
+		street( newValue, oldValue ) {
+			if ( !oldValue || !oldValue.id || !newValue || newValue.id === oldValue.id ) {
+				return;
+			}
+
+			this.streetNumber = '';
+			this.blockNumber = '';
+			this.entranceNumber = '';
+			this.floorNumber = '';
+			this.apartmentNumber = '';
+			this.other = '';
 		}
 	},
 	computed: {
@@ -604,8 +620,12 @@ export default {
 				}
 			});
 		} else {
-			this.streetNumber = wooBg_econt.cookie_data.streetNumber;
-			this.other = wooBg_econt.cookie_data.other;
+			this.streetNumber = wooBg_econt.cookie_data.streetNumber || '';
+			this.blockNumber = wooBg_econt.cookie_data.blockNumber || '';
+			this.entranceNumber = wooBg_econt.cookie_data.entranceNumber || '';
+			this.floorNumber = wooBg_econt.cookie_data.floorNumber || '';
+			this.apartmentNumber = wooBg_econt.cookie_data.apartmentNumber || '';
+			this.other = wooBg_econt.cookie_data.other || '';
 			this.streets.forEach( function ( street ) {
 				if ( street.id == wooBg_econt.cookie_data.selectedAddress.id ) {
 					_this.street = street;
@@ -693,6 +713,25 @@ export default {
 	    },
 		updateLabel( e ) {
 			e.preventDefault();
+			let quarterDetails = [this.blockNumber, this.entranceNumber, this.floorNumber, this.apartmentNumber];
+			let hasLegacyAddressDetails = !Object.prototype.hasOwnProperty.call( wooBg_econt.cookie_data, 'blockNumber' ) && String( this.other ).trim();
+
+			if ( this.type.id === 'address' && this.street && this.street.type === 'streets' && !String( this.streetNumber ).trim() ) {
+				this.message = this.i18n.streetNumberRequired;
+				return;
+			}
+
+			if (
+				this.type.id === 'address' &&
+				this.street &&
+				this.street.type === 'quarters' &&
+				!hasLegacyAddressDetails &&
+				!quarterDetails.some( value => String( value ).trim() )
+			) {
+				this.message = this.i18n.quarterDetailRequired;
+				return;
+			}
+
 			this.normalizePacks();
 			this.removeLegacyPackDimensions();
 
@@ -709,6 +748,10 @@ export default {
 				office: this.office,
 				street: this.street,
 				streetNumber: this.streetNumber,
+				blockNumber: this.blockNumber,
+				entranceNumber: this.entranceNumber,
+				floorNumber: this.floorNumber,
+				apartmentNumber: this.apartmentNumber,
 				other: this.other,
 				paymentBy: this.paymentBy,
 				testOption: this.testOption,

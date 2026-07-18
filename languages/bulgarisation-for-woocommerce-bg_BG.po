@@ -1086,6 +1086,11 @@ msgstr ""
 "Попълнете поне едно от следните полета: номер на улица, блок, вход, етаж или "
 "апартамент."
 
+#: app/Admin/Econt.php:147
+msgid "Fill in at least one of block, entrance, floor or apartment."
+msgstr ""
+"Попълнете поне едно от следните полета: блок, вход, етаж или апартамент."
+
 #: app/Admin/ImpossibleVatPrice.php:71
 msgid "Fix"
 msgstr "Поправи"
@@ -2443,6 +2448,10 @@ msgstr "Настройка на магазина:"
 #: app/Shipping/Speedy/Address.php:44
 msgid "Street number"
 msgstr "Номер на улица"
+
+#: app/Admin/Econt.php:146
+msgid "Street number is required."
+msgstr "Номерът на улицата е задължителен."
 
 #: app/Admin/Speedy.php:215 app/Admin/Pigeon.php:250
 #: app/Shipping/Pigeon/Address.php:46 app/Shipping/Speedy/Address.php:49

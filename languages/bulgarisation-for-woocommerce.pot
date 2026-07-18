@@ -1022,6 +1022,10 @@ msgid ""
 "Fill in at least one of street number, block, entrance, floor or apartment."
 msgstr ""
 
+#: app/Admin/Econt.php:147
+msgid "Fill in at least one of block, entrance, floor or apartment."
+msgstr ""
+
 #: app/Admin/ImpossibleVatPrice.php:71
 msgid "Fix"
 msgstr ""
@@ -2324,6 +2328,10 @@ msgstr ""
 #: app/Shipping/Pigeon/Address.php:44 app/Shipping/Econt/Address.php:44
 #: app/Shipping/Speedy/Address.php:44
 msgid "Street number"
+msgstr ""
+
+#: app/Admin/Econt.php:146
+msgid "Street number is required."
 msgstr ""
 
 #: app/Admin/Speedy.php:215 app/Admin/Pigeon.php:250

@@ -87,8 +87,7 @@ class Method extends \WC_Shipping_Method {
 			$this->cookie_data['type'] === $this->delivery_type && 
 			( !empty( $chosen_shippings ) && ( $chosen_shippings[0] === $this->id . ':' . $this->instance_id ) ) &&
 			( 
-				( isset( $this->cookie_data['other'] ) && $this->cookie_data['other'] && $this->cookie_data['selectedAddress'] ) || 
-				( isset( $this->cookie_data['streetNumber']) && $this->cookie_data['streetNumber'] && $this->cookie_data['selectedAddress'] ) || 
+				( !empty( $this->cookie_data['selectedAddress'] ) && $this->has_address_detail() ) ||
 				( isset( $this->cookie_data['selectedOffice'] ) && $this->cookie_data['selectedOffice'] ) 
 			) 
 		) {
@@ -124,6 +123,36 @@ class Method extends \WC_Shipping_Method {
 
 		// Register the rate
 		$this->add_rate( $rate );
+	}
+
+	private function has_address_detail() {
+		return self::has_address_detail_data( $this->cookie_data );
+	}
+
+	private static function has_address_detail_data( $cookie_data ) {
+		$structured_fields = array( 'blockNumber', 'entranceNumber', 'floorNumber', 'apartmentNumber' );
+		$type = $cookie_data['selectedAddress']['type'] ?? '';
+
+		if ( $type === 'streets' ) {
+			return isset( $cookie_data['streetNumber'] ) && trim( (string) $cookie_data['streetNumber'] ) !== '';
+		}
+
+		if ( $type !== 'quarters' ) {
+			return false;
+		}
+
+		foreach ( $structured_fields as $field ) {
+			if ( isset( $cookie_data[ $field ] ) && trim( (string) $cookie_data[ $field ] ) !== '' ) {
+				return true;
+			}
+		}
+
+		// Cookies created by the old checkout only contain the combined field.
+		$has_structured_keys = (bool) array_intersect( $structured_fields, array_keys( $cookie_data ) );
+
+		$legacy_other = isset( $cookie_data['other'] ) ? trim( (string) $cookie_data['other'] ) : '';
+
+		return !$has_structured_keys && $legacy_other !== '';
 	}
 
 	/**
@@ -371,30 +400,43 @@ class Method extends \WC_Shipping_Method {
 		unset( $receiver_address['city']['servingOffices'] );
 
 		if ( $type === 'streets' ) {
-			$num_parts = explode( ' ', $this->cookie_data['streetNumber'] );
+			$street_number = trim( (string) ( $this->cookie_data['streetNumber'] ?? '' ) );
+			$num_parts = $street_number === '' ? array() : preg_split( '/\s+/', $street_number );
 			$receiver_address['street'] = $this->cookie_data['selectedAddress']['label'];
-			$receiver_address['num'] = array_shift( $num_parts );
-			$this->cookie_data['other'] = '';
-			$this->cookie_data['streetNumber'] = $receiver_address['num'];
+			$num = !empty( $num_parts ) ? array_shift( $num_parts ) : '';
+			$this->cookie_data['streetNumber'] = $num;
+			$additional_parts = array();
+
+			if ( $num !== '' ) {
+				$receiver_address['num'] = $num;
+			}
 
 			if ( !empty( $num_parts ) ) {
-				$receiver_address['other'] = implode( ' ', $num_parts );
+				$additional_parts[] = implode( ' ', $num_parts );
 			}
 
-			if ( !empty( $this->cookie_data['otherField'] ) ) {
-				if ( isset( $receiver_address['other'] ) ) {
-					$receiver_address['other'] .= $this->cookie_data['otherField'];
-				} else {
-					$receiver_address['other'] = $this->cookie_data['otherField'];
-				}
+			$legacy_other = trim( (string) ( $this->cookie_data['other'] ?? '' ) );
+			if (
+				!empty( $this->cookie_data['otherField'] ) &&
+				( Address::has_structured_details( $this->cookie_data ) || $legacy_other === '' )
+			) {
+				$additional_parts[] = $this->cookie_data['otherField'];
 			}
 
-			if ( isset( $receiver_address['other'] ) ) {
-				$this->cookie_data['other'] = $receiver_address['other'];
+			$other = Address::format_other( $this->cookie_data, $additional_parts );
+			$this->cookie_data['other'] = $other;
+
+			if ( $other !== '' ) {
+				$receiver_address['other'] = $other;
 			}
 		} else if ( $type === 'quarters' ) {
 			$receiver_address['quarter'] = $this->cookie_data['selectedAddress']['label'];
-			$receiver_address['other'] = $this->cookie_data['other'];
+			$other = Address::format_other( $this->cookie_data, array( $this->cookie_data['otherField'] ?? '' ) );
+			$this->cookie_data['other'] = $other;
+
+			if ( $other !== '' ) {
+				$receiver_address['other'] = $other;
+			}
 		}
 
 		return $receiver_address;
@@ -588,7 +630,23 @@ class Method extends \WC_Shipping_Method {
 						$message = array_merge( array( __( 'Econt - ', 'bulgarisation-for-woocommerce' ) ) , woo_bg()->container()[ Client::ECONT ]::add_error_message( $meta_data['errors'] ) );
 						$errors->add( 'validation', implode( ' ', $message ) );
 					} else {
-						$errors->add( 'validation', __( 'Please choose delivery option!', 'bulgarisation-for-woocommerce' ) );
+						$cookie_data = self::get_cookie_data();
+						$address_type = $cookie_data['selectedAddress']['type'] ?? '';
+
+						if (
+							!empty( $cookie_data['type'] ) &&
+							$cookie_data['type'] === 'address' &&
+							!empty( $cookie_data['selectedAddress'] ) &&
+							!self::has_address_detail_data( $cookie_data )
+						) {
+							if ( $address_type === 'streets' ) {
+								$errors->add( 'validation', __( 'Street number is required.', 'bulgarisation-for-woocommerce' ) );
+							} else if ( $address_type === 'quarters' ) {
+								$errors->add( 'validation', __( 'Fill in at least one of block, entrance, floor or apartment.', 'bulgarisation-for-woocommerce' ) );
+							}
+						} else {
+							$errors->add( 'validation', __( 'Please choose delivery option!', 'bulgarisation-for-woocommerce' ) );
+						}
 					}
 				} 
 
