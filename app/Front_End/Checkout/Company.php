@@ -100,31 +100,31 @@ class Company {
 
 		$fields['company'] = array(
 			'label' => __( 'Company', 'bulgarisation-for-woocommerce' ),
-			'show'  => false,
+			'show'  => true,
 			'wrapper_class' => '_billing_address_2_field'
 		);
 
 		$fields['company_mol'] = array(
 			'label' => __( 'MOL', 'bulgarisation-for-woocommerce' ),
-			'show'  => false,
+			'show'  => true,
 			'wrapper_class' => '_billing_address_1_field'
 		);
 
 		$fields['company_eik'] = array(
 			'label' => __( 'EIK', 'bulgarisation-for-woocommerce' ),
-			'show'  => false,
+			'show'  => true,
 			'wrapper_class' => '_billing_address_2_field'
 		);
 
 		$fields['company_settlement'] = array(
 			'label' => __( 'Settlement', 'bulgarisation-for-woocommerce' ),
-			'show'  => false,
+			'show'  => true,
 			'wrapper_class' => '_billing_address_1_field'
 		);
 
 		$fields['company_address'] = array(
 			'label' => __( 'Company Address', 'bulgarisation-for-woocommerce' ),
-			'show'  => false,
+			'show'  => true,
 			'wrapper_class' => '_billing_address_2_field'
 		);
 
