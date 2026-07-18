@@ -69,14 +69,11 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Screenshots ==
 
-1. Страница за експорт
-2. Страница за настройки
-3. Бутони за PDF документи
-4. Колона със статус за клиента
-5. Отзиви в страницата на поръчката
-6. Еконт Настройки
-7. Метод за доставка с Еконт
-8. Избор на метод за доставка
+1. Страница за настройки
+2. Колони на поръчките
+3. Страница на поръчка
+4. Чекаут
+5. Експорти
 
 == External services ==
 
@@ -120,6 +117,12 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 При работа с тези външни услуги могат да бъдат изпращани данни като: име и адрес на получателя, телефон, имейл, стойност на поръчката, наложен платеж, както и друга информация, необходима за създаване на товарителници и/или проверка на коректността на клиента. Данните се изпращат единствено с цел обработка и доставка на поръчката и проверка за потенциални злоупотреби.
 
 == Changelog ==
+= 4.0.10 =
+Speedy: Add additional fields for address
+Econt: Add additional fields for address
+Admin: Add company fields to be visible
+Couriers: Add notes for label create/update/delete
+Speedy, Econt, Pigeon: Optimize address fields html
 
 = 4.0.9 =
 Optimize admin panel appearance and fields
