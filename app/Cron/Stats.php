@@ -7,6 +7,7 @@ defined( 'ABSPATH' ) || exit;
 
 class Stats {
 	const SERVER_URL = 'https://license.bulgarisation.bg/';
+	const ACTIVITY_REQUEST_LOCK = 'woo_bg_activity_request_lock';
 
 	function __construct() {
 		add_action( 'wp', array( __CLASS__, 'cron_schedule' )  );
@@ -46,8 +47,22 @@ class Stats {
 			return;
 		}
 
+		if ( ! self::acquire_activity_request_lock() ) {
+			return;
+		}
+
 		wp_remote_post( self::SERVER_URL . 'wp-json/woo-bg/v1/activity/', [
 			'body' => self::get_args(),
 		] );
+	}
+
+	public static function acquire_activity_request_lock( $force = false ) {
+		if ( ! $force && false !== get_transient( self::ACTIVITY_REQUEST_LOCK ) ) {
+			return false;
+		}
+
+		set_transient( self::ACTIVITY_REQUEST_LOCK, time(), HOUR_IN_SECONDS );
+
+		return true;
 	}
 }
