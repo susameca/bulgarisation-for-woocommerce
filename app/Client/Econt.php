@@ -45,6 +45,31 @@ class Econt {
 		return json_decode( wp_remote_retrieve_body( $request ), 1 );
 	}
 
+	public function label_request( $type, $request_body ) {
+		if ( empty( $this->get_user() ) || empty( $this->get_password() ) ) {
+			return;
+		}
+
+		$api_filters = woo_bg_remove_api_filters();
+
+		try {
+			$request = wp_remote_post( 'https://api.bulgarisation.bg/wp-json/woo-bg/v1/econt/label_request/', array(
+				'body' => array(
+					'client' => esc_url( home_url( '/' ) ),
+					'type' => $type,
+					'env' => $this->get_env(),
+					'user' => $this->get_user(),
+					'password' => $this->get_password(),
+					'request_body' => $request_body,
+				),
+			) );
+		} finally {
+			woo_bg_restore_api_filters( $api_filters );
+		}
+
+		return json_decode( wp_remote_retrieve_body( $request ), 1 );
+	}
+
 	public static function validate_access( $api_call ) {
 		if ( is_array( $api_call ) ) {
 			return !( isset( $api_call['type'] ) && $api_call['type'] == 'ExInvalidParam' );

@@ -288,7 +288,7 @@ class Econt {
 
 		if ( isset( $shipment_status['label']['shipmentNumber'] ) ) {
 			$shipment_number = $shipment_status['label']['shipmentNumber'];
-			$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::DELETE_LABELS_ENDPOINT, array(
+			$response = $container[ Client::ECONT ]->label_request( 'delete', array(
 				'shipmentNumbers' => [ $shipment_number ]
 			) );
 
@@ -863,7 +863,7 @@ class Econt {
 				'label' => $label,
 			), $order );
 
-			$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::UPDATE_LABELS_ENDPOINT, $request_body );
+			$response = $container[ Client::ECONT ]->label_request( 'update', $request_body );
 		} else {
 			unset( $label['shipmentNumber'] );
 			
@@ -872,7 +872,7 @@ class Econt {
 				'mode' => 'create',
 			), $order );
 
-			$response = $container[ Client::ECONT ]->api_call( $container[ Client::ECONT ]::LABELS_ENDPOINT, $request_body );
+			$response = $container[ Client::ECONT ]->label_request( 'create', $request_body );
 		}
 
 		return [

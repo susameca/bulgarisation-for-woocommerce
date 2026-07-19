@@ -253,9 +253,17 @@ class Method extends \WC_Shipping_Method {
 
 		WC()->session->set( 'woo-bg-econt-label' , $request_body );
 
-		$request = $this->container[ Client::ECONT ]->api_call( $this->container[ Client::ECONT ]::LABELS_ENDPOINT, $request_body );
+		$request = $this->container[ Client::ECONT ]->label_request( 'calculate', $request_body );
 
-		if ( 
+		if ( !isset( $request ) ) {
+			$data['errors'] = array(
+				'message' => __( 'Calculation failed. Please try again.', 'bulgarisation-for-woocommerce' ),
+			);
+		} else if ( isset( $request['success'] ) && !$request['success'] && isset( $request['error'] ) ) {
+			$data['errors'] = array(
+				'message' => $request['error'],
+			);
+		} else if (
 			isset( $request['type'] ) && 
 			( 
 				$request['type'] === 'ExInvalidParam' ||
