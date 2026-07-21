@@ -251,7 +251,7 @@ class BoxNow {
 		$default_box_values = [
 			'name' => '',
 			'weight' => 0,
-			'value' => 0,
+			'value' => '0.00',
 			'compartmentSize' => 0,
 		];
 		
@@ -282,7 +282,7 @@ class BoxNow {
 				$items[ $box_count ] = [
 					'name' => '',
 					'weight' => 0,
-					'value' => 0,
+					'value' => '0.00',
 					'compartmentSize' => 0,
 				];
 			}
@@ -312,7 +312,7 @@ class BoxNow {
 			[
 				'name' => '',
 				'weight' => 0,
-				'value' => 0,
+				'value' => '0.00',
 				'compartmentSize' => $sizes[ $box_size ],
 			]
 		];
