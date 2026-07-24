@@ -47,7 +47,7 @@ class Register {
 
 		add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'register_econt_method' ) );
 		add_action( 'woocommerce_after_checkout_validation', array( 'Woo_BG\Shipping\Econt\Method', 'validate_econt_method' ), 20, 2 );
-		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\Econt\Method', 'save_label_data_to_order' ), 20, 2 );
+		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\Econt\Method', 'save_label_data_to_order' ), 200, 2 );
 
 		if ( woo_bg_get_option( 'econt', 'label_after_checkout' ) === 'yes' ) {
 			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\Econt', 'generate_label_after_order_generated' ), 25 );
@@ -70,7 +70,7 @@ class Register {
 
 		add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'register_speedy_method' ) );
 		add_action( 'woocommerce_after_checkout_validation', array( 'Woo_BG\Shipping\Speedy\Method', 'validate_speedy_method' ), 20, 2 );
-		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\Speedy\Method', 'save_label_data_to_order' ), 20, 2 );
+		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\Speedy\Method', 'save_label_data_to_order' ), 200, 2 );
 
 		if ( woo_bg_get_option( 'speedy', 'label_after_checkout' ) === 'yes' ) {
 			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\Speedy', 'generate_label_after_order_generated' ), 25 );
@@ -116,7 +116,7 @@ class Register {
 		new BoxNow_Admin();
 
 		add_action( 'woocommerce_after_checkout_validation', array( 'Woo_BG\Shipping\BoxNow\Method', 'validate_boxnow_method' ), 20, 2 );
-		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\BoxNow\Method', 'save_label_data_to_order' ), 20, 2 );
+		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\BoxNow\Method', 'save_label_data_to_order' ), 200, 2 );
 		
 		if ( woo_bg_get_option( 'boxnow_send_from', 'label_after_checkout' ) === 'yes' ) {
 			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\BoxNow', 'generate_label_after_order_generated' ), 25 );
@@ -141,7 +141,7 @@ class Register {
 
 		add_filter( 'woocommerce_shipping_methods', array( __CLASS__, 'register_pigeon_method' ) );
 		add_action( 'woocommerce_after_checkout_validation', array( 'Woo_BG\Shipping\Pigeon\Method', 'validate_pigeon_method' ), 20, 2 );
-		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\Pigeon\Method', 'save_label_data_to_order' ), 20, 2 );
+		add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Shipping\Pigeon\Method', 'save_label_data_to_order' ), 200, 2 );
 
 		if ( woo_bg_get_option( 'pigeon', 'label_after_checkout' ) === 'yes' ) {
 			add_action( 'woocommerce_checkout_order_processed', array( 'Woo_BG\Admin\Pigeon', 'generate_label_after_order_generated' ), 25 );
