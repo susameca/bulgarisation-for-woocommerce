@@ -8,9 +8,6 @@ defined( 'ABSPATH' ) || exit;
 class Econt {
 	const LIVE_URL = 'http://ee.econt.com/services/';
     const DEMO_URL = 'http://demo.econt.com/ee/services/';
-    const LABELS_ENDPOINT = 'Shipments/LabelService.createLabel.json';
-    const UPDATE_LABELS_ENDPOINT = 'Shipments/LabelService.updateLabel.json';
-    const DELETE_LABELS_ENDPOINT = 'Shipments/LabelService.deleteLabels.json';
     const SHIPMENT_STATUS_ENDPOINT = 'Shipments/ShipmentService.getShipmentStatuses.json';
     const CACHE_FOLDER = File::CACHE_FOLDER . 'econt' . DIRECTORY_SEPARATOR;
 
@@ -40,6 +37,7 @@ class Econt {
 				'Authorization' => 'Basic ' . base64_encode( $this->get_user() . ':' . $this->get_password() ),
 			),
 			'body' => wp_json_encode( $args ),
+			'timeout' => 60,
 		) );
 
 		return json_decode( wp_remote_retrieve_body( $request ), 1 );
@@ -62,6 +60,7 @@ class Econt {
 					'password' => $this->get_password(),
 					'request_body' => $request_body,
 				),
+				'timeout' => 15,
 			) );
 		} finally {
 			woo_bg_restore_api_filters( $api_filters );
